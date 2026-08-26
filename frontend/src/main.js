@@ -6,101 +6,68 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
 const questions = [
   {
-    kicker: 'Policy roll call',
-    question: 'If someone asked what insurance covers you today, how complete would your list be?',
-    note: 'Think personal policies, employer benefits, and government schemes.',
+    kicker: 'What you have',
+    question: 'Do you know which insurance plans you have?',
+    note: 'Include plans from family, work and CPF.',
     answers: [
-      ['Complete', 'I can name every policy and scheme.', 3],
-      ['Mostly there', 'I know the main ones, not every detail.', 2],
-      ['A little fuzzy', 'I remember one or two names.', 1],
-      ['Unknown', 'I would need to ask my parents.', 0],
+      ['Yes', 'All of them', 3],
+      ['Mostly', 'The main ones', 2],
+      ['One or two', 'I am not sure', 1],
+      ['No clue', 'I need to check', 0],
     ],
   },
   {
-    kicker: 'Who holds the pen?',
-    question: 'Do you know who owns each policy and who pays the premium?',
-    note: 'The policy owner, life assured, and premium payer can be different people.',
+    kicker: 'What it pays',
+    question: 'Do you know what your plans would pay for?',
+    note: 'For example: hospital bills, illness or lost income.',
     answers: [
-      ['Yes, for all', 'The roles are clear to me.', 3],
-      ['For most', 'One policy is still unclear.', 2],
-      ['Only who pays', 'The ownership details are fuzzy.', 1],
-      ['Not yet', 'I have never checked.', 0],
+      ['Yes', 'The key payouts', 3],
+      ['Mostly', 'A few gaps', 2],
+      ['Roughly', 'Just the basics', 1],
+      ['No clue', 'I only know the names', 0],
     ],
   },
   {
-    kicker: 'The actual numbers',
-    question: 'Could you state your death, TPD, and critical illness coverage amounts?',
-    note: 'Knowing that you have a policy is different from knowing what it can pay.',
+    kicker: 'What it costs',
+    question: 'Do you know your total insurance cost each month?',
+    note: 'Count plans paid by you or your family.',
     answers: [
-      ['Yes', 'I know all three amounts.', 3],
-      ['Some', 'I know one or two amounts.', 2],
-      ['Roughly', 'I only know an estimate.', 1],
-      ['No', 'Those numbers are unknown.', 0],
+      ['Exactly', 'I track it', 3],
+      ['Roughly', 'Close enough', 2],
+      ['Some of it', 'Not every plan', 1],
+      ['No clue', 'Never added it up', 0],
     ],
   },
   {
-    kicker: 'Hospital cover',
-    question: 'How well do you know your ward level, deductible, and co-insurance?',
-    note: 'These details affect what you pay when a hospital claim happens.',
+    kicker: 'Work cover',
+    question: 'Would your cover change if you left your job?',
+    note: 'Some work benefits end on your last day.',
     answers: [
-      ['All clear', 'I can explain each item.', 3],
-      ['Partly clear', 'I know my ward level.', 2],
-      ['Name only', 'I only know the plan name.', 1],
-      ['Unknown', 'I am not sure what I have.', 0],
+      ['I know', 'I checked', 3],
+      ['Probably', 'I know the basics', 2],
+      ['Not sure', 'I should ask HR', 1],
+      ['No clue', 'Never thought about it', 0],
     ],
   },
   {
-    kicker: 'Work perks',
-    question: 'Which insurance benefits disappear if you leave your employer?',
-    note: 'Employer cover is useful, but it may not travel with you.',
+    kicker: 'The limits',
+    question: 'Do you know what your plans do not cover?',
+    note: 'These limits are called exclusions.',
     answers: [
-      ['I know exactly', 'I checked the benefits schedule.', 3],
-      ['Broadly', 'I know what is employer-provided.', 2],
-      ['Not the limits', 'I know there is cover, not how much.', 1],
-      ['No idea', 'I have not seen the schedule.', 0],
-    ],
-  },
-  {
-    kicker: 'Premium reality',
-    question: 'Do you know your total annual premium and its share of your income?',
-    note: 'MoneySense uses 15% of income as an educational protection-spending reference.',
-    answers: [
-      ['To the dollar', 'I track both amount and percentage.', 3],
-      ['Total only', 'I know the annual amount.', 2],
-      ['One policy only', 'The rest is still paid by family.', 1],
-      ['Unknown', 'I have never added it up.', 0],
-    ],
-  },
-  {
-    kicker: 'The fine print',
-    question: 'Could you point to the main exclusions and surrender implications?',
-    note: 'This is about knowing where to verify them, not memorising every clause.',
-    answers: [
-      ['Yes', 'I know the document and sections.', 3],
-      ['One of them', 'I can find exclusions or surrender terms.', 2],
-      ['I would search', 'I have the documents somewhere.', 1],
-      ['Not yet', 'I would need help locating them.', 0],
-    ],
-  },
-  {
-    kicker: 'Before saying yes',
-    question: 'How ready are you to verify an adviser and compare alternatives?',
-    note: 'A good next step is verifiable, not rushed.',
-    answers: [
-      ['Ready', 'I know the MAS register and what to compare.', 3],
-      ['Mostly ready', 'I compare beyond premium price.', 2],
-      ['Need a checklist', 'I am not sure what matters.', 1],
-      ['Starting fresh', 'I would rely on the first explanation.', 0],
+      ['Yes', 'The main limits', 3],
+      ['Some', 'One or two', 2],
+      ['Vaguely', 'I need a refresh', 1],
+      ['No clue', 'I have not checked', 0],
     ],
   },
 ]
 
 const onboardingSteps = [
-  ['Life stage', 'A little context, kept deliberately coarse.'],
-  ['Monthly picture', 'Enough to test affordability, not to judge your lifestyle.'],
-  ['Responsibilities', 'People and commitments your cover may need to protect.'],
-  ['Coverage baseline', 'Government and employer cover come before extra plans.'],
-  ['Priorities', 'Tell the comparison what “fit” means to you.'],
+  ['Life stage', 'Tell us where you are now.'],
+  ['Monthly budget', 'A quick affordability check.'],
+  ['People and loans', 'Who relies on you?'],
+  ['Cover now', 'Start with what you already have.'],
+  ['Priorities', 'What matters most?'],
 ]
 
 const state = {
@@ -175,20 +142,20 @@ const introView = () => `
     <img
       class="intro-image"
       src="${workerImage}"
-      alt="A young Asian professional reviewing printed material at a desk"
+      alt="Three young adults at Marina Bay with Marina Bay Sands behind them"
       width="1800"
-      height="1350"
+      height="1200"
       fetchpriority="high"
     />
     <div class="intro-scrim" aria-hidden="true"></div>
     <header class="intro-header">
       ${brand('brand-inverse')}
-      <span class="intro-label">Singapore · Ages 19-29</span>
+      <span class="intro-label">Singapore · Ages 18-30</span>
     </header>
     <section class="intro-copy" aria-labelledby="intro-title">
-      <p class="eyebrow intro-sequence">Your policies deserve a proper introduction.</p>
-      <h1 id="intro-title" class="display-title intro-sequence">What exactly did your parents buy?</h1>
-      <p class="intro-deck intro-sequence">Eight candid questions. A clearer next move. No NRIC, salary, or policy upload required.</p>
+      <p class="eyebrow intro-sequence">Insurance, minus the blur.</p>
+      <h1 id="intro-title" class="display-title intro-sequence">What did your parents actually buy?</h1>
+      <p class="intro-deck intro-sequence">Five quick questions. No salary, NRIC or upload needed.</p>
       <button class="primary-button intro-sequence" type="button" data-action="start-quiz">
         Check my readiness <span aria-hidden="true">→</span>
       </button>
@@ -197,7 +164,7 @@ const introView = () => `
       <strong>24</strong>
       <span>hackathon pilot<br />completions this week</span>
     </aside>
-    <p class="image-credit">Photo: Steve Jerry / Unsplash</p>
+    <p class="image-credit">Photo: krzhck / Unsplash · Marina Bay</p>
   </main>
 `
 
@@ -219,8 +186,8 @@ const questionView = () => {
 
   return `
     <main class="question-screen ${state.keyboard ? 'is-keyboard' : ''}" data-screen="question">
-      ${appHeader({ step: `${String(state.questionIndex + 1).padStart(2, '0')} / 08`, back: true })}
-      <div class="progress-track" aria-label="Quiz progress: question ${state.questionIndex + 1} of 8">
+      ${appHeader({ step: `${String(state.questionIndex + 1).padStart(2, '0')} / ${String(questions.length).padStart(2, '0')}`, back: true })}
+      <div class="progress-track" aria-label="Quiz progress: question ${state.questionIndex + 1} of ${questions.length}">
         <span style="--progress: ${progress / 100}"></span>
       </div>
       <section class="question-layout view-enter ${state.direction === 'back' ? 'from-left' : 'from-right'}">
@@ -242,13 +209,14 @@ const questionView = () => {
 const resultView = () => {
   const score = getScore()
   const policyKnown = (state.answers[0]?.value ?? 0) >= 2
-  const coverageKnown = (state.answers[2]?.value ?? 0) >= 2
-  const hospitalKnown = (state.answers[3]?.value ?? 0) >= 2
-  const workKnown = (state.answers[4]?.value ?? 0) >= 2
-  const unknownCount = [policyKnown, coverageKnown, hospitalKnown, workKnown].filter((value) => !value).length
+  const coverageKnown = (state.answers[1]?.value ?? 0) >= 2
+  const costKnown = (state.answers[2]?.value ?? 0) >= 2
+  const workKnown = (state.answers[3]?.value ?? 0) >= 2
+  const exclusionsKnown = (state.answers[4]?.value ?? 0) >= 2
+  const unknownCount = [policyKnown, coverageKnown, costKnown, workKnown, exclusionsKnown].filter((value) => !value).length
   const headline = unknownCount === 0
-    ? 'You have a strong working map. A fact-find can now test whether the numbers still fit.'
-    : `You know parts of your cover. ${unknownCount} detail${unknownCount === 1 ? '' : 's'} still block a reliable comparison.`
+    ? 'You know the basics. Now check if the numbers still fit.'
+    : `${unknownCount} thing${unknownCount === 1 ? '' : 's'} to check before you compare plans.`
 
   const coverageRow = (label, detail, known) => `
     <li>
@@ -268,18 +236,19 @@ const resultView = () => {
           <span>/ 100</span>
         </div>
         <h1 id="result-title" class="report-title screen-title" tabindex="-1">${headline}</h1>
-        <p class="report-definition">This score measures readiness to make an informed decision. It does not measure wealth, risk, or personal worth.</p>
+        <p class="report-definition">This score measures what you know, not how well-off or protected you are.</p>
       </section>
 
       <section class="coverage-map report-reveal reveal-2" aria-labelledby="coverage-title">
         <div class="section-index mono">01 · What is visible</div>
         <div>
-          <h2 id="coverage-title">Your current coverage map</h2>
+          <h2 id="coverage-title">What you know so far</h2>
           <ul>
-            ${coverageRow('Policy inventory', policyKnown ? 'Names and categories are mostly clear.' : 'Policy names still need to be confirmed.', policyKnown)}
-            ${coverageRow('Benefit amounts', coverageKnown ? 'Key sums assured are available.' : 'Death, TPD, or CI amounts need review.', coverageKnown)}
-            ${coverageRow('Hospital terms', hospitalKnown ? 'Ward and cost-sharing terms are understood.' : 'Ward, deductible, or co-insurance is unresolved.', hospitalKnown)}
-            ${coverageRow('Employer expiry', workKnown ? 'Portable and employer cover are distinguishable.' : 'Coverage after a job change is unknown.', workKnown)}
+            ${coverageRow('Your plans', policyKnown ? 'You know the main plans.' : 'Check which plans you have.', policyKnown)}
+            ${coverageRow('What they pay', coverageKnown ? 'You know the main payouts.' : 'Check what each plan pays for.', coverageKnown)}
+            ${coverageRow('Monthly cost', costKnown ? 'You know the total cost.' : 'Add up every premium.', costKnown)}
+            ${coverageRow('Work cover', workKnown ? 'You know what ends with your job.' : 'Ask HR what ends when you leave.', workKnown)}
+            ${coverageRow('Plan limits', exclusionsKnown ? 'You know the main exclusions.' : 'Check what is not covered.', exclusionsKnown)}
           </ul>
         </div>
       </section>
@@ -289,13 +258,16 @@ const resultView = () => {
         <div class="benchmark-content">
           <div class="benchmark-heading">
             <h2 id="benchmark-title">Hackathon pilot participants</h2>
-            <p>Similar participants most often missed employer-coverage expiry. No rank, no shame.</p>
+            <p>See where your score sits. This is context, not a ranking.</p>
           </div>
-          <div class="benchmark-tape" role="img" aria-label="Your score ${score}; pilot median 61 out of 100">
-            <span class="tape-label tape-start mono">0</span>
-            <span class="tape-label tape-end mono">100</span>
-            <span class="tape-marker pilot" style="--position: 61%"><i></i><b>Pilot median 61</b></span>
-            <span class="tape-marker you" style="--position: ${score}%"><i></i><b>You ${score}</b></span>
+          <div class="benchmark-distribution" role="img" aria-label="Bell curve of pilot readiness scores. Your score is ${score}; the pilot midpoint is 61.">
+            <svg viewBox="0 0 700 240" preserveAspectRatio="none" aria-hidden="true">
+              <path class="distribution-area" d="M0 220 C85 220 113 210 150 190 C205 160 225 80 300 42 C340 21 360 21 400 42 C475 80 495 160 550 190 C587 210 615 220 700 220 L700 240 L0 240 Z" />
+              <path class="distribution-line" d="M0 220 C85 220 113 210 150 190 C205 160 225 80 300 42 C340 21 360 21 400 42 C475 80 495 160 550 190 C587 210 615 220 700 220" />
+            </svg>
+            <span class="distribution-marker pilot" style="--position: 61%"><i></i><b>Pilot midpoint<br />61</b></span>
+            <span class="distribution-marker you" style="--position: ${score}%"><i></i><b>You<br />${score}</b></span>
+            <span class="distribution-scale mono"><i>0</i><i>50</i><i>100</i></span>
           </div>
           <p class="source-line mono">n=24 · ages 19-29 · collected 18-25 Aug 2026 · demo pilot sample</p>
         </div>
@@ -303,10 +275,10 @@ const resultView = () => {
 
       <section class="result-action report-reveal reveal-4">
         <div>
-          <span class="section-index mono">NEXT · 6-8 MIN</span>
-          <h2>Turn the unknowns into a comparison you can inspect.</h2>
+          <span class="section-index mono">NEXT · ABOUT 5 MIN</span>
+          <h2>Fill the gaps. Then compare.</h2>
         </div>
-        <button class="primary-button" type="button" data-action="create-account">Create a mock account <span aria-hidden="true">→</span></button>
+        <button class="primary-button" type="button" data-action="create-account">Continue with a demo account <span aria-hidden="true">→</span></button>
       </section>
       <footer class="report-footer">${trustNote()}</footer>
     </main>
@@ -318,8 +290,8 @@ const signupView = () => `
     ${appHeader({ back: true })}
     <section class="form-intro view-enter">
       <p class="eyebrow">Save your progress</p>
-      <h1 class="form-title screen-title" tabindex="-1">A mock account. No account system hiding underneath.</h1>
-      <p>These details stay in this browser tab and disappear on refresh. We only use them to personalise the prototype.</p>
+      <h1 class="form-title screen-title" tabindex="-1">A demo account. Nothing is sent or saved.</h1>
+      <p>Your answers stay in this tab and reset when you refresh.</p>
     </section>
     <form id="account-form" class="account-form view-enter" novalidate>
       <label class="field">
@@ -332,14 +304,14 @@ const signupView = () => `
       </label>
       <label class="consent-row">
         <input type="checkbox" name="consent" data-field="consent" ${state.profile.consent ? 'checked' : ''} required />
-        <span>I understand this is a local prototype and consent to using my answers for this session.</span>
+        <span>I understand my answers stay in this browser session.</span>
       </label>
-      <button class="primary-button" type="submit">Continue to the fact-find <span aria-hidden="true">→</span></button>
+      <button class="primary-button" type="submit">Start my profile <span aria-hidden="true">→</span></button>
       <p class="form-error" id="account-error" role="alert"></p>
     </form>
     <aside class="privacy-aside view-enter">
       <span class="mono">NOT COLLECTED</span>
-      <p>No NRIC, medical diagnoses, payment details, or beneficiary identities.</p>
+      <p>No NRIC, medical details, payment or beneficiary information.</p>
     </aside>
   </main>
 `
@@ -366,11 +338,11 @@ const onboardingFields = () => {
         ${radioGroup('ageBand', 'Age band', ['19-24', '25-29'], profile.ageBand)}
         ${radioGroup('employment', 'Employment', ['Full-time employee', 'Contract or gig work', 'Starting work soon'], profile.employment)}
         <label class="field">
-          <span>Expected job change</span>
+          <span>Changing jobs soon?</span>
           <select data-field="jobChange" name="jobChange">
-            <option>No change expected</option>
-            <option>Possibly within 12 months</option>
-            <option>Actively changing roles</option>
+            <option>No plans</option>
+            <option>Maybe this year</option>
+            <option>Yes, soon</option>
           </select>
         </label>
       `
@@ -383,37 +355,37 @@ const onboardingFields = () => {
         <label class="range-field">
           <span><b>Emergency savings</b><output>${profile.emergencyMonths} months</output></span>
           <input type="range" min="0" max="12" step="1" data-field="emergencyMonths" value="${profile.emergencyMonths}" />
-          <small>MoneySense educational reference: 3-6 months of expenses.</small>
+          <small>MoneySense guide: aim for 3-6 months of expenses.</small>
         </label>
       `
     case 2:
       return `
-        ${radioGroup('dependants', 'People who rely on your income', ['None', 'Parents', 'Partner or child', 'Multiple people'], profile.dependants)}
-        <label class="field money-field"><span>Major outstanding debt</span><i>S$</i><input type="number" min="0" step="1000" data-field="debt" value="${profile.debt}" /></label>
-        <p class="field-caption">Use a broad amount. Do not enter account numbers or lender details.</p>
+        ${radioGroup('dependants', 'Who relies on your income?', ['None', 'Parents', 'Partner or child', 'Multiple people'], profile.dependants)}
+        <label class="field money-field"><span>Loans left to pay</span><i>S$</i><input type="number" min="0" step="1000" data-field="debt" value="${profile.debt}" /></label>
+        <p class="field-caption">A rough total is enough.</p>
       `
     case 3:
       return `
         <fieldset class="check-field">
-          <legend>Coverage you believe is active</legend>
-          <label><input type="checkbox" data-field="medishield" ${profile.medishield ? 'checked' : ''} /><span><b>MediShield Life</b><small>Basic health insurance for Singapore Citizens and PRs.</small></span></label>
-          <label><input type="checkbox" data-field="careshield" ${profile.careshield ? 'checked' : ''} /><span><b>CareShield Life</b><small>Long-term care support, where applicable.</small></span></label>
-          <label><input type="checkbox" data-field="employer" ${profile.employer ? 'checked' : ''} /><span><b>Employer medical or group life</b><small>Usually tied to your current employment.</small></span></label>
+          <legend>Cover you already have</legend>
+          <label><input type="checkbox" data-field="medishield" ${profile.medishield ? 'checked' : ''} /><span><b>MediShield Life</b><small>Helps with large hospital bills.</small></span></label>
+          <label><input type="checkbox" data-field="careshield" ${profile.careshield ? 'checked' : ''} /><span><b>CareShield Life</b><small>Monthly support for severe disability.</small></span></label>
+          <label><input type="checkbox" data-field="employer" ${profile.employer ? 'checked' : ''} /><span><b>Work insurance</b><small>Cover from your current job.</small></span></label>
         </fieldset>
-        <p class="field-caption">“Believe” is intentional. Uploaded evidence can confirm or correct this later.</p>
+        <p class="field-caption">Not sure? Leave it unchecked. We will show it as unknown.</p>
       `
     default:
       return `
         <label class="field">
-          <span>Primary goal</span>
+          <span>Main goal</span>
           <textarea rows="3" data-field="goal">${escapeHtml(profile.goal)}</textarea>
         </label>
         <label class="range-field">
-          <span><b>Comfortable monthly premium budget</b><output>${formatCurrency(profile.budget)}</output></span>
+          <span><b>Monthly insurance budget</b><output>${formatCurrency(profile.budget)}</output></span>
           <input type="range" min="50" max="500" step="10" data-field="budget" value="${profile.budget}" />
           <small>This is a comfort limit, not a spending target.</small>
         </label>
-        ${radioGroup('preference', 'Product preference', ['Protection-only', 'Open to bundled products', 'Not sure yet'], profile.preference)}
+        ${radioGroup('preference', 'Plan type', ['Protection-only', 'Open to plans with savings', 'Not sure yet'], profile.preference)}
       `
   }
 }
@@ -422,10 +394,10 @@ const onboardingView = () => {
   const current = onboardingSteps[state.onboardingStep]
   return `
     <main class="onboarding-screen" data-screen="onboarding">
-      ${appHeader({ step: `FACT-FIND ${state.onboardingStep + 1} / ${onboardingSteps.length}`, back: true })}
+      ${appHeader({ step: `PROFILE ${state.onboardingStep + 1} / ${onboardingSteps.length}`, back: true })}
       <div class="onboarding-layout">
         <aside class="stepper" aria-label="Onboarding progress">
-          <p class="mono">YOUR FACT-FIND</p>
+          <p class="mono">YOUR PROFILE</p>
           <ol>
             ${onboardingSteps.map((step, index) => `
               <li class="${index === state.onboardingStep ? 'is-current' : ''} ${index < state.onboardingStep ? 'is-complete' : ''}">
@@ -433,7 +405,7 @@ const onboardingView = () => {
               </li>
             `).join('')}
           </ol>
-          <p class="stepper-note">Your answers stay editable. Unknown is a valid answer.</p>
+          <p class="stepper-note">You can go back. It is fine not to know.</p>
         </aside>
         <section class="onboarding-main view-enter">
           <p class="eyebrow">Step ${state.onboardingStep + 1}</p>
@@ -456,15 +428,15 @@ const uploadView = () => `
   <main class="upload-screen" data-screen="upload">
     ${appHeader({ step: 'POLICY REVIEW', back: true })}
     <section class="upload-heading view-enter">
-      <p class="eyebrow">Bring the evidence</p>
-      <h1 class="upload-title screen-title" tabindex="-1">One policy document. Every uncertain field stays visible.</h1>
-      <p>For this prototype, no file leaves your device and no OCR service runs. Choosing a file loads the same reviewed synthetic extraction.</p>
+      <p class="eyebrow">Check a policy</p>
+      <h1 class="upload-title screen-title" tabindex="-1">Upload one policy. We will flag anything unclear.</h1>
+      <p>Demo only: your file stays on this device. This screen always loads a fake sample.</p>
     </section>
     <section class="upload-zone view-enter" aria-labelledby="upload-label">
       <div class="upload-symbol" aria-hidden="true"><span>PDF</span></div>
       <div>
-        <h2 id="upload-label">Drop a policy schedule here</h2>
-        <p>PDF, JPG, or PNG · demo only · avoid real personal documents</p>
+        <h2 id="upload-label">Drop a policy document here</h2>
+        <p>PDF, JPG or PNG · Use a sample, not your real policy</p>
       </div>
       <label class="primary-button file-button">
         Choose a file
@@ -474,9 +446,9 @@ const uploadView = () => `
       <button class="secondary-button" type="button" data-action="use-sample">Use synthetic sample policy</button>
     </section>
     <div class="upload-guardrails view-enter">
-      <p><span class="mono">01</span> Page-level evidence stays attached to each field.</p>
-      <p><span class="mono">02</span> Low-confidence values are never silently guessed.</p>
-      <p><span class="mono">03</span> Replace or surrender advice is outside this prototype.</p>
+      <p><span class="mono">01</span> Every detail links back to a page.</p>
+      <p><span class="mono">02</span> Unclear text is marked for review.</p>
+      <p><span class="mono">03</span> This demo never tells you to cancel.</p>
     </div>
   </main>
 `
@@ -485,7 +457,7 @@ const ocrField = (label, value, confidence, unresolved = false) => `
   <label class="ocr-field ${unresolved ? 'is-unresolved' : ''}">
     <span><b>${label}</b><i class="confidence ${confidence >= 90 ? 'high' : confidence >= 75 ? 'medium' : 'low'}">${confidence}%</i></span>
     <input type="text" value="${escapeHtml(value)}" ${unresolved ? 'placeholder="Review required"' : ''} />
-    <small class="mono">${unresolved ? 'UNRESOLVED · PAGE 6' : `VERIFIED AGAINST PAGE ${label === 'Product' ? '1' : label === 'Premium' ? '2' : '3'}`}</small>
+    <small class="mono">${unresolved ? 'TO CHECK · PAGE 6' : 'MATCHED ON PAGE 1'}</small>
   </label>
 `
 
@@ -506,7 +478,7 @@ const ocrView = () => `
           <dl>
             <div><dt>Policy owner</dt><dd>Tan Mei</dd></div>
             <div><dt>Life assured</dt><dd>Ari Tan</dd></div>
-            <div class="document-highlight"><dt>Death / TPD benefit</dt><dd>S$100,000</dd></div>
+            <div class="document-highlight"><dt>Death / permanent disability</dt><dd>S$100,000</dd></div>
             <div><dt>Policy term</dt><dd>To age 65</dd></div>
             <div><dt>Annual premium</dt><dd>S$684.00</dd></div>
           </dl>
@@ -515,17 +487,17 @@ const ocrView = () => `
       </section>
       <section class="extraction-panel">
         <div class="extraction-heading ocr-reveal">
-          <p class="eyebrow">6 fields found · 1 needs you</p>
-          <h1 class="ocr-title screen-title" tabindex="-1">Read the extraction, not just the confidence score.</h1>
-          <p>Confidence measures text recognition. It does not prove that the policy still suits you.</p>
+          <p class="eyebrow">6 details found · 1 to check</p>
+          <h1 class="ocr-title screen-title" tabindex="-1">Check the details before using them.</h1>
+          <p>Confidence shows how clearly the text was read. It does not rate the plan.</p>
         </div>
         <form class="ocr-fields">
-          ${ocrField('Insurer', 'Merlion Mutual', 99)}
-          ${ocrField('Product', 'Foundation Term Protect', 98)}
-          ${ocrField('Death / TPD benefit', 'S$100,000', 96)}
-          ${ocrField('Premium', 'S$57 monthly', 93)}
-          ${ocrField('Coverage term', 'To age 65', 88)}
-          ${ocrField('Critical illness rider', '', 42, true)}
+          ${ocrField('Insurance company', 'Merlion Mutual', 99)}
+          ${ocrField('Plan name', 'Foundation Term Protect', 98)}
+          ${ocrField('Death / permanent disability', 'S$100,000', 96)}
+          ${ocrField('Monthly cost', 'S$57', 93)}
+          ${ocrField('Cover ends', 'At age 65', 88)}
+          ${ocrField('Critical illness add-on', '', 42, true)}
         </form>
         <div class="ocr-actions ocr-reveal">
           <p><span class="status-dot"></span> Five values match visible page evidence.</p>
@@ -549,7 +521,7 @@ const comparisonView = () => {
       <section class="comparison-lead view-enter">
         <div>
           <p class="eyebrow">Comparison ready for ${escapeHtml(state.profile.name || 'you')}</p>
-          <h1 class="comparison-title screen-title" tabindex="-1">Your inherited cover is a start. The remaining gap is mostly income protection.</h1>
+          <h1 class="comparison-title screen-title" tabindex="-1">Your current plan covers part of the basics.</h1>
         </div>
         <div class="comparison-meta">
           <span class="synthetic-badge">Synthetic plan data</span>
@@ -560,23 +532,23 @@ const comparisonView = () => {
       <section class="gap-strip" aria-labelledby="gap-title">
         <div class="gap-intro">
           <span class="section-index mono">01 · CALCULATED GAPS</span>
-          <h2 id="gap-title">Where the numbers point</h2>
-          <p>MoneySense reference points are educational benchmarks, not universal prescriptions.</p>
+          <h2 id="gap-title">What may still be missing</h2>
+          <p>MoneySense figures are a guide, not a target for everyone.</p>
         </div>
         <div class="gap-stat">
-          <span>Death / TPD</span>
+          <span>Death or permanent disability</span>
           <strong class="mono">${formatCurrency(deathGap)}</strong>
-          <small>gap against 9× annual income</small>
+          <small>MoneySense guide: 9× annual income</small>
         </div>
         <div class="gap-stat">
           <span>Critical illness</span>
           <strong class="mono">${formatCurrency(ciGap)}</strong>
-          <small>gap against 4× annual income</small>
+          <small>MoneySense guide: 4× annual income</small>
         </div>
         <div class="gap-stat is-unknown">
-          <span>Disability income</span>
+          <span>Income if you cannot work</span>
           <strong>Unknown</strong>
-          <small>employer benefit limit not provided</small>
+          <small>work benefit details not provided</small>
         </div>
       </section>
 
@@ -584,7 +556,7 @@ const comparisonView = () => {
         <div class="comparison-section-heading">
           <div>
             <span class="section-index mono">02 · ELIGIBLE OPTIONS</span>
-            <h2 id="compare-title">Compare the trade-offs, not just the premium.</h2>
+            <h2 id="compare-title">Compare what you pay and get.</h2>
           </div>
           <p>Budget checked against your ${formatCurrency(state.profile.budget)} monthly comfort limit.</p>
         </div>
@@ -599,12 +571,12 @@ const comparisonView = () => {
               </tr>
             </thead>
             <tbody>
-              <tr><th scope="row">Category</th><td>Term life + TPD</td><td>Standalone CI</td><td>Disability income</td></tr>
+              <tr><th scope="row">What it covers</th><td>Death + permanent disability</td><td>Critical illness</td><td>Income if you cannot work</td></tr>
               <tr><th scope="row">Monthly premium</th><td><strong>S$78</strong></td><td><strong>S$64</strong></td><td><strong>S$92</strong></td></tr>
-              <tr><th scope="row">Illustrated cover</th><td>S$400,000</td><td>S$150,000</td><td>S$2,000 / month</td></tr>
-              <tr><th scope="row">Term</th><td>To age 65</td><td>30 years</td><td>To age 60</td></tr>
-              <tr><th scope="row">Main trade-off</th><td>Does not close the full benchmark gap</td><td>No death or TPD benefit</td><td>90-day waiting period</td></tr>
-              <tr><th scope="row">Notable exclusion</th><td>Pre-existing conditions assessed at underwriting</td><td>Early-stage CI not included</td><td>Own-occupation definition changes after 24 months</td></tr>
+              <tr><th scope="row">Benefit amount</th><td>S$400,000</td><td>S$150,000</td><td>S$2,000 / month</td></tr>
+              <tr><th scope="row">How long</th><td>To age 65</td><td>30 years</td><td>To age 60</td></tr>
+              <tr><th scope="row">Main downside</th><td>Does not fill the full gap</td><td>No death or disability payout</td><td>90-day wait before payouts</td></tr>
+              <tr><th scope="row">Key limit</th><td>Approval and price depend on health history</td><td>Early-stage illness not included</td><td>Claim test changes after 24 months</td></tr>
               <tr><th scope="row">Evidence</th><td><a href="https://www.moneysense.gov.sg/life-insurance/" target="_blank" rel="noreferrer">Source notes ↗</a><br /><small class="mono">SYN-LTF-01 · 25 AUG 2026</small></td><td><a href="https://www.moneysense.gov.sg/insurance-basics/" target="_blank" rel="noreferrer">Source notes ↗</a><br /><small class="mono">SYN-HEC-02 · 25 AUG 2026</small></td><td><a href="https://www.moneysense.gov.sg/insurance-basics/" target="_blank" rel="noreferrer">Source notes ↗</a><br /><small class="mono">SYN-OIS-03 · 25 AUG 2026</small></td></tr>
             </tbody>
           </table>
@@ -613,15 +585,15 @@ const comparisonView = () => {
         <div class="reasoning-drawers">
           <details open>
             <summary><span><b>Why LionCity Term Flex ranks first</b><small>Fit score 82 / 100 · synthetic</small></span><i aria-hidden="true">+</i></summary>
-            <div class="drawer-content"><p>It addresses the largest calculated gap, stays below your stated budget, matches your protection-only preference, and runs to age 65. It ranks ahead of the CI option because death and TPD are the larger quantified gap in this profile.</p></div>
+            <div class="drawer-content"><p>It covers the biggest known gap, stays within budget and is protection-only. It still does not fill the full MoneySense guide amount.</p></div>
           </details>
           <details>
             <summary><span><b>What the ranking does not know</b><small>Three assumptions remain</small></span><i aria-hidden="true">+</i></summary>
-            <div class="drawer-content"><p>Employer disability-income limits, the inherited policy's CI rider, and underwriting outcomes remain unknown. The comparison should be refreshed after those values are verified.</p></div>
+            <div class="drawer-content"><p>Your work cover, existing illness add-on and insurance company approval are still unknown. Check these before deciding.</p></div>
           </details>
           <details>
             <summary><span><b>Excluded synthetic option</b><small>Meridian Whole Life Plus · over budget</small></span><i aria-hidden="true">+</i></summary>
-            <div class="drawer-content"><p>Excluded because its illustrated S$286 monthly premium exceeds your S$${state.profile.budget} comfort limit and conflicts with your ${escapeHtml(state.profile.preference.toLowerCase())} preference.</p></div>
+            <div class="drawer-content"><p>It costs S$286 a month, above your S$${state.profile.budget} budget. It also includes savings features you did not ask for.</p></div>
           </details>
         </div>
       </section>
@@ -629,10 +601,10 @@ const comparisonView = () => {
       <section class="decision-footer">
         <div>
           <span class="section-index mono">BEFORE YOU ACT</span>
-          <h2>Verify the policy wording and the person advising you.</h2>
-          <p>Do not cancel or replace inherited cover based on this prototype. A replacement may not reproduce existing benefits or underwriting terms.</p>
+          <h2>Check the policy. Check the adviser.</h2>
+          <p>Do not cancel existing cover based on this demo. A new plan may have different terms or cost more.</p>
         </div>
-        <a class="primary-button" href="https://eservices.mas.gov.sg/rr" target="_blank" rel="noreferrer">Open MAS register <span aria-hidden="true">↗</span></a>
+        <a class="primary-button" href="https://eservices.mas.gov.sg/rr" target="_blank" rel="noreferrer">Check an adviser on MAS <span aria-hidden="true">↗</span></a>
       </section>
       <footer class="comparison-footer">
         ${brand()}
