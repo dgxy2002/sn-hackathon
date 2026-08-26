@@ -1,0 +1,168 @@
+# E06 Backlog - Insurance Retrieval and RAG
+
+**Epic:** [E06 - Insurance Retrieval and RAG](../epics/E06-insurance-retrieval-and-rag.md)
+**Owner:** Darren
+
+## E06-T01 - Approve the POC insurance source set
+
+| Field | Value |
+|---|---|
+| Status | Ready |
+| Priority | P1 |
+| Size | S |
+| Depends on | E05-T01 |
+
+**User story:** As the product team, we need a narrow permitted source set so product evidence is lawful, current, and reviewable.
+
+**Requirements:** URS-NFR-001, URS-NFR-004; PRD-FR-007, PRD-NFR-003, PRD-NFR-009.
+
+**Acceptance criteria:**
+
+- [ ] One product category and at least two providers are selected.
+- [ ] Each source records owner, URL, retrieval method, terms or robots decision, and review date.
+- [ ] Official and provider sources are preferred over aggregators.
+- [ ] The demo does not depend on live scraping.
+
+## E06-T02 - Ingest normalized insurance products and evidence
+
+| Field | Value |
+|---|---|
+| Status | Ready |
+| Priority | P1 |
+| Size | L |
+| Depends on | E06-T01, E08-T01 |
+
+**User story:** As the decision engine, I need versioned insurance plans and evidence spans so comparisons use known product terms rather than embedded UI text.
+
+**Requirements:** URS-FR-010, URS-FR-011, URS-FR-016, URS-FR-020, URS-NFR-004, URS-NFR-011, URS-NFR-012; PRD-FR-007, PRD-FR-017, PRD-FR-021, PRD-NFR-003, PRD-NFR-008, PRD-NFR-011, PRD-NFR-015.
+
+**Acceptance criteria:**
+
+- [ ] At least two providers in the selected category are normalized.
+- [ ] Plan, provider, version, effective date, retrieval date, and synthetic status are present.
+- [ ] Benefits, premiums, exclusions, and eligibility retain source evidence where available.
+- [ ] Scrape or ingest outcomes are logged.
+
+## E06-T03 - Implement filtered semantic retrieval
+
+| Field | Value |
+|---|---|
+| Status | Ready |
+| Priority | P1 |
+| Size | L |
+| Depends on | E06-T02 |
+
+**User story:** As the decision engine, I need small relevant evidence records for a user need and category so prompts remain grounded and inspectable.
+
+**Requirements:** URS-FR-010, URS-FR-011, URS-FR-015, URS-FR-017, URS-FR-020, URS-NFR-007, URS-NFR-010; PRD-FR-008, PRD-FR-018, PRD-FR-021, PRD-NFR-005, PRD-NFR-010, PRD-NFR-015, PRD-NFR-017.
+
+**Acceptance criteria:**
+
+- [ ] Documents are chunked and embedded with versioned metadata.
+- [ ] Category and eligibility filters run before vector similarity.
+- [ ] Results include evidence span, source URL, date, and score.
+- [ ] Unsupported or stale queries return an explicit no-evidence result.
+
+## E06-T04 - Evaluate retrieval quality and citation coverage
+
+| Field | Value |
+|---|---|
+| Status | Ready |
+| Priority | P1 |
+| Size | M |
+| Depends on | E06-T03 |
+
+**User story:** As a reviewer, I need fixed retrieval tests so we can prove that shown product facts come from expected sources.
+
+**Requirements:** URS-FR-011, URS-FR-015, URS-FR-018, URS-FR-019, URS-NFR-004, URS-NFR-013; PRD-FR-008, PRD-FR-018, PRD-NFR-003, PRD-NFR-015, PRD-NFR-016.
+
+**Acceptance criteria:**
+
+- [ ] Reviewed queries and expected sources are written before execution.
+- [ ] At least 90% contain the expected source in the top five.
+- [ ] One hundred percent of displayed product claims carry citation and date.
+- [ ] Failed and unsupported cases are included in the report.
+
+## E06-T05 - Enforce evidence version and freshness policy
+
+| Field | Value |
+|---|---|
+| Status | Ready |
+| Priority | P1 |
+| Size | M |
+| Depends on | E06-T02, E06-T03 |
+
+**User story:** As a reviewer, I need stale and conflicting product evidence identified before recommendation use so old terms do not appear current.
+
+**Requirements:** URS-FR-016, URS-FR-020, URS-NFR-004, URS-NFR-012; PRD-FR-017, PRD-FR-018, PRD-NFR-003, PRD-NFR-011, PRD-NFR-015.
+
+**Acceptance criteria:**
+
+- [ ] Products and chunks retain source, product version, effective date, retrieval date, hash, and verification state.
+- [ ] Superseded versions remain auditable but are excluded from current retrieval by default.
+- [ ] A configurable freshness rule labels stale evidence and prevents unsupported recommendation claims.
+- [ ] Conflicting source versions produce a warning or no-evidence result rather than silent merging.
+- [ ] Every displayed claim can be traced to the selected evidence version.
+
+## E06-T06 - Run retrieval on local PostgreSQL and pgvector
+
+| Field | Value |
+|---|---|
+| Status | Ready |
+| Priority | P1 |
+| Size | L |
+| Depends on | E06-T03, E10-T06 |
+
+**User story:** As a developer, I need evidence retrieval to work entirely in the local Docker Compose stack before any managed AWS database is introduced.
+
+**Requirements:** URS-FR-017, URS-FR-021, URS-NFR-010, URS-NFR-015, URS-NFR-016, URS-NFR-017; PRD-FR-018, PRD-FR-026, PRD-NFR-017, PRD-NFR-020, PRD-NFR-021.
+
+**Acceptance criteria:**
+
+- [ ] PostgreSQL migrations enable pgvector and create versioned product, evidence, chunk, and scrape-log storage.
+- [ ] The backend API queries the Compose database rather than a cloud-only endpoint.
+- [ ] Metadata, filter, and full-text retrieval work when embeddings or an external provider are unavailable.
+- [ ] Health checks report database and index readiness.
+- [ ] Retrieval contract tests pass against both database and fixture adapters.
+
+## E06-T07 - Document and verify the RDS and S3 migration
+
+| Field | Value |
+|---|---|
+| Status | Ready |
+| Priority | P1 |
+| Size | M |
+| Depends on | E06-T06, E10-T07 |
+
+**User story:** As a deployment owner, I need local data adapters mapped to AWS managed services so migration changes configuration rather than retrieval behavior.
+
+**Requirements:** URS-FR-024, URS-NFR-015, URS-NFR-016, URS-NFR-017; PRD-FR-029, PRD-NFR-019, PRD-NFR-020, PRD-NFR-021.
+
+**Acceptance criteria:**
+
+- [ ] Local PostgreSQL/pgvector maps to private RDS PostgreSQL with the same migrations and extension requirements.
+- [ ] Permitted local snapshots map to a private versioned S3 bucket with lifecycle rules.
+- [ ] Database and object-store secrets map from `.env` names to Secrets Manager task injection.
+- [ ] Migration, rollback, connection-pool, backup, and restore assumptions are documented.
+- [ ] Evidence and retrieval contracts remain unchanged.
+
+## E06-T08 - Expose approved catalogue exploration
+
+| Field | Value |
+|---|---|
+| Status | Ready |
+| Priority | P1 |
+| Size | M |
+| Depends on | E06-T05, E10-T04 |
+
+**User story:** As a user, I need to explore eligible alternatives beyond the initial shortlist while staying inside the approved, evidence-backed catalogue.
+
+**Requirements:** URS-FR-028, URS-FR-029, URS-NFR-004, URS-NFR-019; PRD-FR-033, PRD-FR-034, PRD-FR-035, PRD-NFR-003, PRD-NFR-015.
+
+**Acceptance criteria:**
+
+- [ ] A typed search accepts structured product, affordability, eligibility, and comparison filters rather than arbitrary source URLs.
+- [ ] Only approved catalogue versions and permitted synthetic fixtures are searched.
+- [ ] Results preserve eligibility, exclusions, source spans, effective or retrieval date, freshness, and synthetic status.
+- [ ] Stale, conflicting, missing, and no-evidence outcomes are explicit and cannot become cited facts.
+- [ ] Temporary comparison membership is distinguished from a deterministic E07 recommendation.
