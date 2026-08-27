@@ -1,0 +1,748 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Singlife",
+    "source_file": "Singlife/Medical & Life Insurance/Maternity Insurance/Singlife Maternity Care.md",
+    "source_filename": "Singlife Maternity Care.md",
+    "document_type": "brochure",
+    "content_sha256": "6540b141fd4cd56091fc876d9d88a780f4a74a59cae86888c918e3cbc2027e09",
+    "local_markdown_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Maternity Insurance/Singlife Maternity Care.md",
+    "local_pdf_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Maternity Insurance/Singlife Maternity Care.pdf"
+  },
+  "extraction": {
+    "document_summary": "Singlife Maternity Care is a Singapore Life (Singlife) single-premium, 3-year maternity plan designed to cover the mother and the child for expenses/financial assistance arising from pregnancy complications and newborn-related conditions. For the mother, it provides coverage for “Death” and specified “Pregnancy complications,” each with a cover limit of 100% of sum assured, plus “Hospital care” with a cover limit of 1% of sum assured for each day of hospitalisation, capped at up to 30 days (subject to a separate rule that the hospital care benefit ends when 30% of the sum assured is paid or when the contract term ends—whichever is earlier). For the child, it similarly covers death, congenital illnesses, and hospital care (1% per day up to 30 days), and adds coverage for severe neonatal jaundice outpatient phototherapy (1% per day up to 30 days), stem cell transplant surgery (50% of sum assured), and developmental delay (10% of sum assured). It is purchasable within the application pregnancy window (13 to 36 weeks) and subject to eligibility ages (18 to 45 ANB).",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Benefit schedule includes many listed conditions but the payout limit row is partially formatted, requiring reliance on the clearly stated Important Notes for stem cell transplant (50% of sum assured) and developmental delay (10% of sum assured).",
+      "Some limit text for child benefits (e.g., stem cell treatment row) appears inconsistently formatted, so numeric parsing is supplemented by the Important Notes section.",
+      "Underwriting method/medical screening for the maternity plan itself is not stated; only the option to buy a new whole life plan for the child without medical underwriting is described."
+    ],
+    "policies": [
+      {
+        "company": "Singlife",
+        "policy_name": "Singlife Maternity Care",
+        "aliases": [
+          "Singlife Maternity Care1"
+        ],
+        "quick_summary": "A single-premium 3-year maternity plan covering the mother and child for pregnancy complications, congenital illnesses, and hospitalisation-related expenses, with additional child benefits for outpatient phototherapy (severe neonatal jaundice), stem cell transplant surgery, and developmental delay. Mother/child “Death” and “Pregnancy complications/ Congenital illnesses” are covered at 100% of sum assured, while hospital/phototherapy care is covered at 1% of sum assured per day up to 30 days, subject to a hospital-care end rule for the mother (30% of sum assured paid or contract term ends). Child stem cell transplant pays 50% of sum assured; developmental delay pays 10% of sum assured.",
+        "category": "maternity",
+        "policy_type": "maternity",
+        "plan_tier": null,
+        "target_customer": "Pregnant women (mum-to-be) and their child/children",
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "Mother: death, pregnancy complications, hospital care",
+          "Child(ren): death, congenital illnesses, hospital care",
+          "Child(ren): outpatient phototherapy for severe neonatal jaundice",
+          "Child(ren): stem cell transplant surgery (for transplant surgery only)",
+          "Child(ren): developmental delay"
+        ],
+        "currency_options": [
+          "S$"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": 18,
+        "max_entry_age": 45,
+        "max_coverage_age": null,
+        "entry_age_basis": "age_next_birthday",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "Applicant must be between 18 and 45 years old (both ages inclusive) and within 13 to 36 weeks (both weeks inclusive) of pregnancy at the time of application.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": 3,
+        "renewable": null,
+        "coverage_term_description": "A single-premium, three-year plan.",
+        "premium_payment_term_description": "One-time premium (single-premium).",
+        "premium_frequencies": [
+          "single-premium"
+        ],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": false,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "Hospital care benefit ends when 30% of the sum assured is paid or when the contract term ends—whichever is earlier",
+          "Hospital care benefit ends when 30% of the sum assured is paid or when the contract term ends—whichever is earlier (as stated for the Hospital care benefits(s) for the Mother (or child))"
+        ],
+        "important_caveats": [
+          "As stated: “This refers to the Hospital care benefits(s) for the Mother (or child). The Hospital care benefit(s) will end when 30% of the sum assured is paid or when the contract term ends – whichever is earlier.”",
+          "Child stem cell transplant and developmental delay benefits end when the stated percentage of sum assured is paid or when the contract term ends—whichever is earlier.",
+          "The brochure states the policy has “no savings or investment feature”, and therefore there is no cash value if the policy ends or ends prematurely.",
+          "A separate option exists within 90 days from the birth of an insured child to buy a new whole life plan for the insured child without medical underwriting, subject to stated maximum total death/TI/TPD benefit amounts and a “pre-existing conditions” restriction."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [],
+        "benefits": [
+          {
+            "benefit_name": "Mother Death Benefit",
+            "benefit_category": "Death",
+            "benefit_level": "base",
+            "benefit_description": "Pays financial assistance for death of the insured mother under the mother’s coverage (Coverage (a) Death).",
+            "trigger_description": "Mother’s death.",
+            "covered_conditions": [
+              "Death (Coverage (a) Death) for the mother"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "100% of sum assured",
+            "payout_description": "Cover limit: 100% of sum assured (for mother’s Death).",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "|     |   Death (b)  Pregnancy complications (c)  Hospital care",
+                "line_start": 42,
+                "line_end": 42,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Cover limit 100% of 100% of 1% of sum assured for each day of hospitalisation,",
+                "line_start": 47,
+                "line_end": 66,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Mother Pregnancy Complications Benefit",
+            "benefit_category": "Pregnancy complications",
+            "benefit_level": "base",
+            "benefit_description": "Provides financial assistance for covered pregnancy complications listed under the mother’s benefits schedule (Coverage (b) Pregnancy complications).",
+            "trigger_description": "Diagnosis/happening of one of the listed pregnancy complications during the coverage period.",
+            "covered_conditions": [
+              "Abruptio Placentae",
+              "Amniotic Fluid Embolism",
+              "Disseminated Intravascular Coagulation",
+              "Fatty Liver of Pregnancy",
+              "HELLP Syndrome (Haemolysis, elevated liver enzymes, low platelet count)",
+              "Placenta Increta/Percreta",
+              "Postpartum Haemorrhage requiring Hysterectomy",
+              "Pre-Eclampsia or Eclampsia",
+              "Still Birth",
+              "Uterine Rupture",
+              "Puerperal Pyrexia",
+              "Pulmonary Embolism",
+              "Repair of 4th Degree Perineal Tear",
+              "Septic Pelvic Thrombophlebitis",
+              "Surgical Site Infection following Caesarian Section",
+              "Uterine Infection or Transfusion Due to Retained Placenta Following Childbirth"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "100% of sum assured",
+            "payout_description": "Cover limit: 100% of sum assured for mother’s pregnancy complications (as shown by the benefits schedule cover limit row).",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "Multiple claims can also be made for a wide range of conditions including post-birth anaemia, hand, foot and mouth disease and phototherapy for severe neonatal jaundice.",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure states there are 10 types of pregnancy complications covered.",
+            "evidence": [
+              {
+                "quote": "You can purchase a new whole life plan for your baby7",
+                "line_start": 18,
+                "line_end": 37,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "There’s no need to overthink things. Be covered for 10 types of pregnancy complications",
+                "line_start": 2,
+                "line_end": 21,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "|     |   Abruptio Placentae",
+                "line_start": 24,
+                "line_end": 43,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Cover limit 100% of 100% of 1% of sum assured for each day of hospitalisation,",
+                "line_start": 47,
+                "line_end": 66,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Mother Hospital Care Benefit",
+            "benefit_category": "Hospital care",
+            "benefit_level": "base",
+            "benefit_description": "Pays based on hospitalisation due to covered illnesses and pregnancy complications under the mother’s hospital care benefit (Coverage (c) Hospital care).",
+            "trigger_description": "Hospitalisation due to illnesses and pregnancy complications (as described for Mum and baby in the benefits overview).",
+            "covered_conditions": [
+              "Hospital care for pregnancy complications (Coverage (c) Hospital care)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "daily_income",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "1% of sum assured for each day of hospitalisation",
+            "payout_description": "Cover limit: 1% of sum assured for each day of hospitalisation, up to 30 days (per contract term). Also: the Hospital care benefit(s) will end when 30% of the sum assured is paid or when the contract term ends—whichever is earlier.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Ends when 30% of the sum assured is paid or when the contract term ends—whichever is earlier.",
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Receive financial assistance in the event of hospitalisation due to illnesses and pregnancy complications3.",
+                "line_start": 5,
+                "line_end": 24,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Cover limit 100% of 100% of 1% of sum assured for each day of hospitalisation,",
+                "line_start": 47,
+                "line_end": 66,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "up to 30 days (per contract term)",
+                "line_start": 48,
+                "line_end": 67,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The Hospital care benefit(s) will end when 30% of the sum assured is paid or when the contract term ends – whichever is earlier.",
+                "line_start": 145,
+                "line_end": 164,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Child Death Benefit",
+            "benefit_category": "Death",
+            "benefit_level": "base",
+            "benefit_description": "Provides financial assistance for the insured child’s death under the child’s benefits schedule (Coverage (a) Death).",
+            "trigger_description": "Child’s death.",
+            "covered_conditions": [
+              "Death (Coverage (a) Death) for the child"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "100% of sum assured",
+            "payout_description": "Cover limit: 100% of sum assured (for child’s Death).",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Child’s Benefits Table",
+                "line_start": 54,
+                "line_end": 73,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Coverage (a) Death (b) Congenital illnesses (c) Hospital care",
+                "line_start": 55,
+                "line_end": 74,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Cover limit 100% of 100% of 1% of sum assured for each day of hospitalisation,",
+                "line_start": 47,
+                "line_end": 66,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Child Congenital Illnesses Benefit",
+            "benefit_category": "Congenital illnesses",
+            "benefit_level": "base",
+            "benefit_description": "Provides financial assistance for covered congenital illnesses listed under the child’s benefits schedule (Coverage (b) Congenital illnesses).",
+            "trigger_description": "Diagnosis of one of the covered congenital illnesses.",
+            "covered_conditions": [
+              "Absence of Two Limbs",
+              "Anal Atresia",
+              "Atrial Septal Defect",
+              "Biliary Atresia",
+              "Cerebral Palsy",
+              "Cleft Lip and Cleft Palate",
+              "Club Foot",
+              "Congenital Blindness",
+              "Congenital Cataract",
+              "Congenital Deafness",
+              "Congenital Diaphragmatic Hernia",
+              "Congenital Hypertrophic Pyloric Stenosis",
+              "Development Dysplasia of the Hip",
+              "Down’s Syndrome",
+              "Infantile Hydrocephalus",
+              "Patent Ductus Arteriosus",
+              "Retinopathy of Prematurity",
+              "Spina Bifida",
+              "Tetralogy of Fallot",
+              "Trancheo-esophageal Fistula or Esophageal Atresia",
+              "Transposition of The Great Vessels",
+              "Truncus Arteriosus",
+              "Ventricular Septal Defect"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "100% of sum assured",
+            "payout_description": "Cover limit: 100% of sum assured (for child’s congenital illnesses).",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure states the plan covers 23 congenital illnesses.",
+            "evidence": [
+              {
+                "quote": "Be covered for 10 types of pregnancy complications, 23 congenital illnesses",
+                "line_start": 2,
+                "line_end": 21,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Coverage (a) Death (b) Congenital illnesses (c) Hospital care",
+                "line_start": 55,
+                "line_end": 74,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "|     |   Absence of Two Limbs",
+                "line_start": 75,
+                "line_end": 75,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Cover limit 100% of 100% of 1% of sum assured for each day of hospitalisation,",
+                "line_start": 47,
+                "line_end": 66,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Child Hospital Care Benefit",
+            "benefit_category": "Hospital care",
+            "benefit_level": "base",
+            "benefit_description": "Pays for hospitalisation for covered newborn-related medical conditions under the child’s hospital care benefit (Coverage (c) Hospital care).",
+            "trigger_description": "Hospitalisation due to congenital illnesses and newborn-related medical conditions (as described for Mum and baby benefits).",
+            "covered_conditions": [
+              "Hospital care for congenital illnesses (Coverage (c) Hospital care)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "daily_income",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "1% of sum assured for each day of hospitalisation",
+            "payout_description": "Cover limit: 1% of sum assured for each day of hospitalisation, up to 30 days (per contract term). The Hospital care benefit(s) will end when 30% of the sum assured is paid or when the contract term ends—whichever is earlier.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Ends when 30% of the sum assured is paid or when the contract term ends—whichever is earlier.",
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Receive financial assistance in the event of hospitalisation due to illnesses and pregnancy complications3.",
+                "line_start": 5,
+                "line_end": 24,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Cover limit 100% of 100% of 1% of sum assured for each day of hospitalisation,",
+                "line_start": 47,
+                "line_end": 66,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "up to 30 days (per contract term)",
+                "line_start": 48,
+                "line_end": 67,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The Hospital care benefit(s) will end when 30% of the sum assured is paid or when the contract term ends – whichever is earlier.",
+                "line_start": 145,
+                "line_end": 164,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Outpatient phototherapy (severe neonatal jaundice) Benefit",
+            "benefit_category": "Newborn treatment - outpatient phototherapy",
+            "benefit_level": "base",
+            "benefit_description": "Provides a one-time/benefit payout for outpatient phototherapy treatment due to severe neonatal jaundice (in the child’s benefits schedule).",
+            "trigger_description": "Outpatient phototherapy treatment due to severe neonatal jaundice.",
+            "covered_conditions": [
+              "Outpatient phototherapy treatment due to severe neonatal jaundice"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "daily_income",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "1% of sum assured for each day of hospitalisation (as stated for outpatient phototherapy in the schedule)",
+            "payout_description": "Cover limit: 1% of sum assured for each day of hospitalisation, up to 30 days (per contract term).",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The schedule includes this under Child’s Benefits Table (cont’d).",
+            "evidence": [
+              {
+                "quote": "Child’s Benefits Table (cont’d)",
+                "line_start": 86,
+                "line_end": 105,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Outpatient phototherapy treatment due to severe neonatal jaundice",
+                "line_start": 90,
+                "line_end": 109,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Cover limit 1% of 10% of 10% of sum assured for each day of hospitalisation,",
+                "line_start": 110,
+                "line_end": 110,
+                "quote_token_coverage": 0.9333
+              },
+              {
+                "quote": "up to 30 days (per contract term)",
+                "line_start": 48,
+                "line_end": 67,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          },
+          {
+            "benefit_name": "Stem cell transplant surgery Benefit (for transplant surgery only)",
+            "benefit_category": "Newborn - stem cell transplant",
+            "benefit_level": "base",
+            "benefit_description": "Pays when the insured child requires stem cell transplant surgery and has started the process of injection or extraction of stem cells.",
+            "trigger_description": "Stem cell transplant surgery has been required and the process of injection or extraction of stem cells has started.",
+            "covered_conditions": [
+              "Stem cell transplant surgery (for transplant surgery only)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "50% of the sum assured",
+            "payout_description": "Singapore Life Ltd. will pay 50% of the sum assured; this benefit will end when 50% of the sum assured is paid or when the contract term ends—whichever is earlier.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "When the process of injection or extraction of stem cells has started (for stem cell transplant surgery requirement).",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Ends when 50% of the sum assured is paid or when the contract term ends—whichever is earlier.",
+            "geographic_scope": null,
+            "notes": "The brochure states this is a one-time payout if your child requires stem cell transplant surgery.",
+            "evidence": [
+              {
+                "quote": "Receive a one-time payout if your child requires stem cell transplant surgery5",
+                "line_start": 15,
+                "line_end": 34,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Singapore Life Ltd. will pay 50% of the sum assured, if the insured child requires stem cell transplant surgery and has started the process of injection or extraction of stem cells.",
+                "line_start": 150,
+                "line_end": 169,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "This benefit will end when 50% of the sum assured is paid or when the contract term ends – whichever is earlier.",
+                "line_start": 150,
+                "line_end": 169,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Developmental delay Benefit",
+            "benefit_category": "Newborn - developmental delay",
+            "benefit_level": "base",
+            "benefit_description": "Pays when the insured child shows developmental delay as defined in the brochure (inability to walk without aid for two metres and inability to speak simple words by 28 months).",
+            "trigger_description": "Child shows developmental delay as confirmed by a paediatrician at the actual attained age of 28 months.",
+            "covered_conditions": [
+              "Developmental delay (as defined: walking without aid for two metres; or speaking simple words such as “papa”, “mama”)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "10% of the sum assured",
+            "payout_description": "Singapore Life Ltd. will pay 10% of the sum assured for developmental delay; this benefit will end when 10% of the sum assured is paid or when the contract term ends—whichever is earlier.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Based on inability to perform specified tasks by actual attained age of 28 months (from date of birth).",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Ends when 10% of the sum assured is paid or when the contract term ends—whichever is earlier.",
+            "geographic_scope": null,
+            "notes": "The brochure also mentions “developmental delay” under child benefits and defines it in Important Notes.",
+            "evidence": [
+              {
+                "quote": "Receive a one-time payout if your child requires stem cell transplant surgery5 or shows developmental delay6.",
+                "line_start": 15,
+                "line_end": 34,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Singapore Life Ltd. will pay 10% of the sum assured if the insured child shows developmental delay.",
+                "line_start": 152,
+                "line_end": 171,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "This benefit will end when 10% of the sum assured is paid or when the contract term ends – whichever is earlier.",
+                "line_start": 153,
+                "line_end": 172,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Developmental delay of the insured child refers to the inability to perform either of the following tasks by the actual attained age of 28 months",
+                "line_start": 154,
+                "line_end": 173,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "Singlife Maternity Care\nA single-premium, three-year plan",
+            "line_start": 1,
+            "line_end": 2,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "The applicant for Singlife Maternity Care must be between 18 and 45 years old (both ages inclusive) and be within 13 to 36 weeks (both weeks inclusive) of pregnancy at the time of application.",
+            "line_start": 142,
+            "line_end": 161,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Cover limit 100% of 100% of 1% of sum assured for each day of hospitalisation, up to 30 days (per contract term)",
+            "line_start": 66,
+            "line_end": 67,
+            "quote_token_coverage": 0.999
+          }
+        ],
+        "extraction_confidence": "medium",
+        "review_notes": [
+          "No separately marketed base plan tiers/options were explicitly identified in the brochure; only a worked illustration and a single example coverage amount (S$10,000) were provided.",
+          "Outpatient phototherapy payout limit row formatting is inconsistent; benefit is extracted using the schedule line and the “severe neonatal jaundice” trigger, but the numeric basis is recorded with low confidence."
+        ],
+        "slug": "singlife-singlife-maternity-care"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 35,
+    "evidence_warnings": [],
+    "requires_human_review": true
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_0dbd449fa7c3c100016a8f22df372087d0b84a8ba6939128c6",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:32:02.556518+00:00",
+    "usage": {
+      "input_tokens": 6913,
+      "output_tokens": 7438,
+      "total_tokens": 14351,
+      "reasoning_tokens": 604,
+      "estimated_cost_usd": 0.0106801
+    }
+  }
+}

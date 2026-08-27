@@ -1,0 +1,312 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Great Eastern",
+    "source_file": "Great Eastern/Personal Accident Insurance/GREAT Golden Protector.md",
+    "source_filename": "GREAT Golden Protector.md",
+    "document_type": "brochure",
+    "content_sha256": "da8344f4e84c96f62c6a925e249dc3d90ebc164c3d94aba3b6eeae965ba2f04e",
+    "local_markdown_path": "backend/scraper/insurance/Great Eastern/Personal Accident Insurance/GREAT Golden Protector.md",
+    "local_pdf_path": "backend/scraper/insurance/Great Eastern/Personal Accident Insurance/GREAT Golden Protector.pdf"
+  },
+  "extraction": {
+    "document_summary": "Great Eastern “GREAT Golden Protector” is a personal accident insurance product focused on accidents occurring on public transportation or in a private car. It highlights a payout of “up to 300%” and specifies “Receive 3 times the payout upon Accidental Death or Permanent Disablement caused by an accident on public transportation or a private car”. For hospitalisation, it provides “a cash benefit of up to S$200 per day,” and it also states that this hospital cash “covers hospital stays due to Dengue Fever or other Infectious Diseases.” The brochure also mentions a discount feature—“25% off premiums on 2nd life assured”—for Singapore Citizens/PRs when adding a spouse as the 2nd life assured via a financial representative, but this is not the core coverage mechanism.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "The brochure content provided is partial and does not include the full Table of Benefits details/amounts.",
+      "Many fields required by the schema (e.g., entry ages, exact benefit formulas/limits, benefit waiting periods) are not stated in the provided text."
+    ],
+    "policies": [
+      {
+        "company": "Great Eastern",
+        "policy_name": "GREAT Golden Protector",
+        "aliases": [],
+        "quick_summary": "Personal accident insurance with enhanced payout (3 times) for accidental death/permanent disablement caused by accidents on public transportation or a private car, and hospital cash of up to S$200/day (including dengue and other infectious diseases). Discount for adding a spouse as 2nd life assured via financial representative is also mentioned (25% off premiums). Based on provided brochure excerpts only; full terms not included here—values in table appear incomplete in the excerpted content provided to this system output format context. See evidence quotes for what is extractable from the supplied text.",
+        "category": "personal_accident",
+        "policy_type": "personal_accident",
+        "plan_tier": null,
+        "target_customer": "not_stated",
+        "structure": "base_plan",
+        "participation": "not_stated",
+        "coverage_scope": [
+          "Accidental Death caused by an accident on public transportation or a private car",
+          "Permanent Disablement caused by an accident on public transportation or a private car",
+          "Hospitalisation cash benefit up to S$200 per day (including dengue fever or other infectious diseases)"
+        ],
+        "currency_options": [
+          "S$"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": null,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": "Singapore Citizens and Permanent Residents (PRs); if not a Singapore Citizen or PR, must meet certain residency requirements before applying or renewing.",
+        "occupation_classes": [],
+        "eligibility_notes": "All ages specified refer to age next birthday.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": null,
+        "premium_payment_term_description": null,
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "Policy may be terminated in accordance with the free-look provision (if any) after purchasing the policy"
+        ],
+        "important_caveats": [
+          "25% family discount on premiums on 2nd life assured is exclusive and only available when signing up via a financial representative; not valid for online application.",
+          "The brochure states that it is protected up to specified limits by SDIC."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "not_stated (no explicit plan tiers shown in provided excerpt)",
+            "plan_code": null,
+            "description": "The provided excerpt does not show named plan tiers. It only states headline benefit levels (e.g., up to 300% payout and up to S$200 daily hospital cash).",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Accidental Death / Permanent Disablement enhanced payout (3x for public transportation/private car)",
+                "payout_type": "lump_sum",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "3 times the payout",
+                "payout_description": "Receive 3 times the payout upon Accidental Death or Permanent Disablement caused by an accident on public transportation or a private car.",
+                "payout_currency": null,
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "The excerpt also states an overall 'up to 300% payout' but does not map the enhancement precisely to a base payout amount.",
+                "evidence": [
+                  {
+                    "quote": "Receive 3 times the payout upon Accidental Death or Permanent Disablement caused by an accident on public transportation or a private car",
+                    "line_start": 1,
+                    "line_end": 12,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Daily Hospital Cash benefit (up to S$200 per day)",
+                "payout_type": "daily_income",
+                "payout_value": 200,
+                "payout_unit": "per_day",
+                "payout_basis": "up to S$200 per day",
+                "payout_description": "In the event of hospitalisation, get a cash benefit of up to S$200 per day.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Brochure states this also covers dengue fever or other infectious diseases hospital stays.",
+                "evidence": [
+                  {
+                    "quote": "In the event of hospitalisation, you will get\na cash benefit of up to S$200 per day",
+                    "line_start": 1,
+                    "line_end": 13,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Infectious diseases (e.g., Dengue Fever) hospital stay coverage under hospital cash",
+                "payout_type": "daily_income",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "included within hospital cash benefit",
+                "payout_description": "Hospital cash benefit also covers hospital stays due to Dengue Fever or other Infectious Diseases.",
+                "payout_currency": null,
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "which also covers hospital stays due to Dengue Fever\nor other Infectious Diseases.",
+                    "line_start": 1,
+                    "line_end": 14,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Dislocations/Burns Beneﬁt (table label present; amount not provided in excerpt)",
+                "payout_type": null,
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": null,
+                "payout_description": "Dislocations/Burns Beneﬁt is listed in the table of benefits, but the excerpt does not provide the benefit amount/formula.",
+                "payout_currency": null,
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Only the label 'Dislocations/Burns Beneﬁt' is visible in the excerpted text.",
+                "evidence": [
+                  {
+                    "quote": "Dislocations/Burns Beneﬁt.",
+                    "line_start": 27,
+                    "line_end": 46,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Post-Hospitalisation Aftercare Beneﬁt (table label present; amount not provided in excerpt)",
+                "payout_type": null,
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": null,
+                "payout_description": "Post-Hospitalisation Aftercare Beneﬁt is listed in the table of benefits, but the excerpt does not provide the benefit amount/formula.",
+                "payout_currency": null,
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Only the label 'Post-Hospitalisation Aftercare Beneﬁt' is visible in the excerpted text.",
+                "evidence": [
+                  {
+                    "quote": "Post-Hospitalisation Aftercare Beneﬁt4",
+                    "line_start": 58,
+                    "line_end": 77,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Table of beneﬁts",
+                "line_start": 36,
+                "line_end": 55,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "benefits": [],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "Receive 3 times the payout upon Accidental Death or Permanent Disablement caused by an accident on public transportation or a private car",
+            "line_start": 1,
+            "line_end": 12,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "In the event of hospitalisation, you will get\na cash benefit of up to S$200 per day",
+            "line_start": 1,
+            "line_end": 13,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "high",
+        "review_notes": [
+          "Provided excerpt does not include the full Table of Benefits values; therefore many benefit amounts/conditions beyond headline limits cannot be extracted."
+        ],
+        "slug": "great-eastern-great-golden-protector"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 8,
+    "evidence_warnings": [],
+    "requires_human_review": true
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_092e0c8d67403fea016a8f1fdaf6d087d08f5aa16f21718369",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:18:37.997696+00:00",
+    "usage": {
+      "input_tokens": 4447,
+      "output_tokens": 2843,
+      "total_tokens": 7290,
+      "reasoning_tokens": 149,
+      "estimated_cost_usd": 0.00444315
+    }
+  }
+}

@@ -1,0 +1,271 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Great Eastern",
+    "source_file": "Great Eastern/Critical Illness Insurance/GREAT Term 2.md",
+    "source_filename": "GREAT Term 2.md",
+    "document_type": "brochure",
+    "content_sha256": "607ee966d15806277ab72b26abeb7bee98710c4e6143104e2bff38dfcf619b6a",
+    "local_markdown_path": "backend/scraper/insurance/Great Eastern/Critical Illness Insurance/GREAT Term 2.md",
+    "local_pdf_path": "backend/scraper/insurance/Great Eastern/Critical Illness Insurance/GREAT Term 2.pdf"
+  },
+  "extraction": {
+    "document_summary": "Great Eastern’s GREAT Term 2 is a regular premium, non-participating term insurance plan that provides coverage for death and terminal illness. It is designed with level premiums throughout the policy term. The brochure positions the base plan as low-cost protection for keeping your family covered if an unexpected event occurs. For critical illness strengthening, it highlights the add-on option of “Complete Living Care Rider 2,” which covers critical illness stages (early, intermediate and late stage) and can pay a lump sum of up to S$350,000 per claim for early or intermediate stage critical illness (accelerated from the basic plan and subject to the rider’s sum assured). A key limitation mentioned is that the product has no savings/investment feature, so there is no cash value if the policy ends or is terminated prematurely. The brochure also states a Conversion Privilege to convert the term plan and eligible rider(s) into a life policy with cash value (once, before the next-birthday age 70 anniversary).",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "The brochure text contains formatting issues and incomplete table/line context (e.g., amounts near “TPD Benefit Rider 2” appear without clear definitions).",
+      "Some rider names are referenced, but detailed terms for several mentioned optional riders (e.g., accident/waiver riders) are not explicitly provided in extractable form.",
+      "Age/entry/term/premium-payment specifics are largely missing beyond “level premiums throughout the policy term” and “all ages specified refer to age next birthday.”"
+    ],
+    "policies": [
+      {
+        "company": "Great Eastern",
+        "policy_name": "GREAT Term 2",
+        "aliases": [],
+        "quick_summary": "A regular premium, non-participating term plan providing death and terminal illness coverage with level premiums. Optional add-on critical illness and disability/accident/premium waiver riders are mentioned, and eligible policies may be converted (once) to a cash-value life policy without further health assessments up to the next-birthday age 70 anniversary (Conversion Privilege). The brochure also states the term plan itself has no cash value if terminated prematurely because it has no savings/investment feature (subject to the conversion privilege). Billed as low cost and designed for family financial security.",
+        "category": "life",
+        "policy_type": "term_life",
+        "plan_tier": null,
+        "target_customer": "not_stated",
+        "structure": "base_plan",
+        "participation": "non_participating",
+        "coverage_scope": [
+          "death",
+          "terminal illness"
+        ],
+        "currency_options": [
+          "SGD"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": null,
+        "entry_age_basis": "age_next_birthday",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "Eligible when GREAT Term 2 is taken up with Living Care Rider 2 and/or Complete Living Care Rider 2 (conversion privilege statement references this eligibility context for the riders mentioned).",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": null,
+        "premium_payment_term_description": null,
+        "premium_frequencies": [
+          "regular premium"
+        ],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": "non-participating",
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "The policy terminates (explicitly stated for the rider example context)",
+          "Policy ends/terminated prematurely results in no cash value for this product (brochure statement)"
+        ],
+        "important_caveats": [
+          "This advertisement states the product has no savings/investment feature; therefore there is no cash value if the policy ends or is terminated prematurely.",
+          "Conversion Privilege can only be exercised once (full or partial conversion) and not later than the policy anniversary on which the life assured’s next birthday is 70 years old."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [],
+        "benefits": [
+          {
+            "benefit_name": "Death and terminal illness",
+            "benefit_category": "life_and_terminal_illness",
+            "benefit_level": "base",
+            "benefit_description": "Provides coverage for death and terminal illness under GREAT Term 2.",
+            "trigger_description": "Death and terminal illness (as described for the term plan coverage).",
+            "covered_conditions": [
+              "Death",
+              "Terminal illness"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": null,
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "not_stated",
+            "notes": "The brochure does not specify payout amounts or mechanics for death/terminal illness within the extract.",
+            "evidence": [
+              {
+                "quote": "Designed to safeguard your family’s financial security, our term plan provides coverage for\ndeath and terminal illness at a low cost.",
+                "line_start": 1,
+                "line_end": 14,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [
+          {
+            "name": "Complete Living Care Rider 2",
+            "description": "Add-on critical illness coverage for all stages of critical illness—early, intermediate and late stage.",
+            "rider_type": "critical_illness",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "The brochure notes eligibility context for Conversion Privilege when GREAT Term 2 is taken up with Living Care Rider 2 and/or Complete Living Care Rider 2.",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": "The brochure states that premiums are not guaranteed for Complete Living Care Rider 2 and may be adjusted based on future experience.",
+            "evidence": [
+              {
+                "quote": "Strengthen your protection with Complete Living Care Rider 2, which provides well-rounded\ncoverage for all stages  of critical illness—early, intermediate and late stage, or consider just a\nlate stage critical illness rider to suit your needs.",
+                "line_start": 1,
+                "line_end": 19,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Premiums are not guaranteed for Complete Living Care Rider 2 and may be adjusted based on future experience.",
+                "line_start": 73,
+                "line_end": 92,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Living Care Rider 2",
+            "description": "A critical illness rider referenced in eligibility context for conversion privilege (details not provided in the extract).",
+            "rider_type": "critical_illness",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "Eligible when GREAT Term 2 is taken up with Living Care Rider 2 and/or Complete Living Care Rider 2.",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": "The extract does not provide specific coverage/stage details for Living Care Rider 2.",
+            "evidence": [
+              {
+                "quote": "ǁ  Eligible when GREAT Term 2 is taken up with Living Care Rider 2 and/or Complete Living Care Rider 2. Terms and conditions apply.",
+                "line_start": 71,
+                "line_end": 90,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "name": "TPD Benefit Rider 2",
+            "description": "Total and permanent disability (TPD) benefit rider referenced as part of the example; the extract does not state payout formula/conditions beyond a fragmentary bullet list.",
+            "rider_type": "disability_income",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "Referenced in the brochure example where a person signs up for coverage including TPD Benefit Rider 2.",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": "The extract includes fragments: 'for all stages of critical illness' near the rider, and bullets about the rider terminating after the claim and basic sum assured revision, but the scope is not clearly tied to TPD in the provided text.",
+            "evidence": [
+              {
+                "quote": "TPD Benefit Rider 2, providing\n\nprotection and receives a 5% premium discount on the GREAT Term 2 planǁ.",
+                "line_start": 30,
+                "line_end": 49,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          }
+        ],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "GREAT Term 2 was created with this in mind. This regular premium, non-participating\nterm plan provides customisable coverage to support you and your family’s needs.",
+            "line_start": 1,
+            "line_end": 8,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Designed to safeguard your family’s financial security, our term plan provides coverage for\ndeath and terminal illness at a low cost.",
+            "line_start": 1,
+            "line_end": 14,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "With level premiums throughout the policy term, it helps\nyou keep protection in place while managing everyday financial responsibilities with confidence.",
+            "line_start": 1,
+            "line_end": 15,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "You have the option to seamlessly convert  your term plan and eligible rider(s) to a life policy with\ncash value, with no further health assessments required.",
+            "line_start": 7,
+            "line_end": 26,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "This advertisement has not been reviewed by the Monetary Authority of Singapore.",
+            "line_start": 79,
+            "line_end": 98,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "As this product has no savings or investment feature, there is no cash value if the policy ends or is terminated prematurely.",
+            "line_start": 90,
+            "line_end": 109,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "medium",
+        "review_notes": [
+          "Critical illness payout information (up to S$350,000 per claim for early/intermediate stage) is described in the brochure text but is explicitly tied to rider coverage mechanics (accelerated from the basic plan and subject to the rider’s sum assured). It is therefore captured only at rider benefit detail level in this extraction output.",
+          "The extract contains fragmented text around TPD Benefit Rider 2 and rider termination/revision bullets; insufficient context prevents reliably extracting TPD benefit mechanics."
+        ],
+        "slug": "great-eastern-great-term-2"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 11,
+    "evidence_warnings": [],
+    "requires_human_review": true
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_0a042fc09d7b3751016a8f1ee7c15087d0a2126cb2c2356791",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:14:33.887315+00:00",
+    "usage": {
+      "input_tokens": 4862,
+      "output_tokens": 2757,
+      "total_tokens": 7619,
+      "reasoning_tokens": 252,
+      "estimated_cost_usd": 0.00441865
+    }
+  }
+}

@@ -1,0 +1,1364 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Great Eastern",
+    "source_file": "Great Eastern/Health Insurance/GREAT Hospital Cash.md",
+    "source_filename": "GREAT Hospital Cash.md",
+    "document_type": "brochure",
+    "content_sha256": "24c560eca0b93b177ebfd3c93d6fab07ee48d6deb7e4e22d0fbcb91902adbb3d",
+    "local_markdown_path": "backend/scraper/insurance/Great Eastern/Health Insurance/GREAT Hospital Cash.md",
+    "local_pdf_path": "backend/scraper/insurance/Great Eastern/Health Insurance/GREAT Hospital Cash.pdf"
+  },
+  "extraction": {
+    "document_summary": "GREAT Hospital Cash is a standalone health insurance plan that pays cash benefits when the Life Assured is hospitalised for illness or injury, and when additional intensive care, post-surgery, or (for some plans) day surgery events occur. The core cash mechanic is: if hospitalisation lasts for 12 consecutive hours or longer (or involves room-and-board charges), you receive a Daily Hospital Cash Benefit. The daily amount depends on the plan tier: Plan A pays S$100/day, Plan B S$200/day, Plan C S$400/day, and Plan D S$600/day, with coverage “up to 730 days per Hospitalisation”. If the Life Assured is in ICU, an extra Daily Hospital Cash Benefit applies up to 60 days (“Additional Daily Hospital Cash Benefit - Intensive Care Unit”). The plan also includes a Get Well Benefit: hospitalisation lump sum of up to S$1,800 per hospitalisation (at least 3 days of room-and-board charges), plus a separate post-surgery lump sum (excluding day surgery) up to S$1,800. It further provides Emergency Accidental Outpatient reimbursement of up to S$100/200/400/600 per period of insurance, but treatment must be given within 72 hours of the accident.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Brochure contains clear benefit names, plan tiers (Plan A–D), and multiple numeric benefit caps.",
+      "Some underwriting/eligibility fields (e.g., entry ages) are not stated beyond “All ages specified refer to age next birthday”.",
+      "The document provides definitions for hospitalisation requirements and limits (12 hours / room & board; ICU limit of 60 days; illness/injury daily benefit up to 730 days)."
+    ],
+    "policies": [
+      {
+        "company": "Great Eastern",
+        "policy_name": "GREAT Hospital Cash",
+        "aliases": [],
+        "quick_summary": "GREAT Hospital Cash pays cash for hospitalisation after a minimum qualifying period (12 hours or room & board charges), with higher payouts for ICU and additional lump sums for qualifying hospitalisation and surgery-related events. It also reimburses certain emergency outpatient treatment following an accident. The plan is offered in four tiers (Plan A–D), with Daily Hospital Cash Benefit ranging from S$100/day to S$600/day and Get Well Benefit amounts up to S$1,800 per hospitalisation (subject to the stated conditions and limits). Day surgery has separate (lower) lump sum amounts. ICU cash is capped at 60 days per hospitalisation.",
+        "category": "health",
+        "policy_type": "hospital_cash",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "Illness/Injury hospitalisation cash payouts after minimum qualifying hospitalisation time",
+          "Additional cash for ICU hospitalisation (up to stated limit)",
+          "Lump sum Get Well Benefit for hospitalisation with at least 3 days of room & board charges",
+          "Lump sum Get Well Benefit for post-surgery (excluding day surgery)",
+          "Lump sum Get Well Benefit for day surgery",
+          "Emergency accidental outpatient medical treatment reimbursement (reimbursement basis) after accident"
+        ],
+        "currency_options": [
+          "S$"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": null,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "All ages specified refer to age next birthday.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": null,
+        "premium_payment_term_description": null,
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": "Subject to the terms of renewal.",
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [],
+        "important_caveats": [
+          "Hospitalisation must meet the stated definition (12 consecutive hours or longer; or room and board charge) and must be considered Medically Necessary.",
+          "Emergency accidental outpatient treatment must be given within 72 hours of the occurrence of the accident.",
+          "Post-Surgery Get Well Benefit excludes day surgery.",
+          "ICU Additional Daily Hospital Cash Benefit is payable each ICU day up to a maximum period of 60 days for each hospitalisation; ICU beyond 60 days is treated as a normal ward for benefit purposes."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "Plan A",
+            "plan_code": null,
+            "description": "Daily Hospital Cash: S$100/day for illness/injury; Additional ICU Daily Hospital Cash: S$200/day; Get Well Benefit - Hospitalisation: S$300; Get Well Benefit - Post-Surgery (excluding day surgery): S$300; Get Well Benefit - Day Surgery: S$100; Emergency Accidental Outpatient reimbursement: up to S$100 per period of insurance.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Daily Hospital Cash Benefit – Illness / Injury",
+                "payout_type": "daily_income",
+                "payout_value": 100,
+                "payout_unit": "day",
+                "payout_basis": "per day",
+                "payout_description": "Up to 730 days per Hospitalisation (Plan A level).",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Qualifying hospitalisation requirement stated separately for the plan.",
+                "evidence": [
+                  {
+                    "quote": "Daily Hospital Cash Benet – Illness / Injury: (Up to 730 days per Hospitalisation^)\n100\nper day\nPlan A",
+                    "line_start": 84,
+                    "line_end": 88,
+                    "quote_token_coverage": 0.996
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Additional Daily Hospital Cash Benefit – Intensive Care Unit (ICU)",
+                "payout_type": "daily_income",
+                "payout_value": 200,
+                "payout_unit": "day",
+                "payout_basis": "per day",
+                "payout_description": "Up to 60 days per Hospitalisation (Plan A level).",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "ICU beyond 60 days treated as normal ward per document.",
+                "evidence": [
+                  {
+                    "quote": "Additional Daily Hospital Cash Benet - Intensive Care Unit\n(Up to 60 days per Hospitalisation^)\n200\nper day\n400\nper dayB 800\nper day\n1,200\nper day",
+                    "line_start": 89,
+                    "line_end": 108,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Get Well Beneﬁt - Hospitalisation",
+                "payout_type": "lump_sum",
+                "payout_value": 300,
+                "payout_unit": null,
+                "payout_basis": "per Hospitalisation",
+                "payout_description": "Lump sum cash benefit, per Hospitalisation for which at least 3 days of room and board charges are incurred.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "At least 3 days of room and board charges incurred.",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Get Well Benet - Hospitalisation\n(Lump sum cash beneﬁt, per Hospitalisation for which\nat least 3 days of room and board charges are incurred)\n300 600C 1,200 1,800",
+                    "line_start": 93,
+                    "line_end": 112,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Get Well Beneﬁt - Post-Surgery, excluding Day Surgery",
+                "payout_type": "lump_sum",
+                "payout_value": 300,
+                "payout_unit": null,
+                "payout_basis": "per Hospitalisation",
+                "payout_description": "Lump sum cash benefit, per Hospitalisation (excluding Day Surgery).",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Excluding Day Surgery.",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Get Well Benet - Post-Surgery, excluding\nDay Surgery\n(Lump sum cash beneﬁt, per Hospitalisation^) \n300 600D 1,200 1,800",
+                    "line_start": 97,
+                    "line_end": 116,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Get Well Beneﬁt - Day Surgery",
+                "payout_type": "lump_sum",
+                "payout_value": 100,
+                "payout_unit": null,
+                "payout_basis": "per Day Surgery setting",
+                "payout_description": "Lump sum cash beneﬁt, per Day Surgery setting.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Get Well Benet - Day Surgery\n(Lump sum cash beneﬁt, per Day Surgery setting)\n100 200E 400 600",
+                    "line_start": 99,
+                    "line_end": 118,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Emergency Accidental Outpatient Beneﬁt",
+                "payout_type": "reimbursement",
+                "payout_value": 100,
+                "payout_unit": null,
+                "payout_basis": "per Period of Insurance",
+                "payout_description": "Reimbursement basis, up to Plan A level per Period of Insurance.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Treatment must be given within 72 hours of the occurrence of the accident (stated for outpatient treatment).",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Emergency Accidental Outpatient Benet\n(on reimbursement basis, per Period of Insurance)\nUp to 100 Up to 200F Up to 400 Up to 600",
+                    "line_start": 101,
+                    "line_end": 120,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": "Plan levels extracted from the Table of Benefits section.",
+            "evidence": [
+              {
+                "quote": "Choose from four plan types to suit your budget and needs:\nDaily Hospital Cash Benet – Illness / Injury\n(Up to 730 days per Hospitalisation^)\n100\nper day\nPlan A",
+                "line_start": 69,
+                "line_end": 88,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Plan B",
+            "plan_code": null,
+            "description": "Daily Hospital Cash: S$200/day for illness/injury; Additional ICU Daily Hospital Cash: S$400/day; Get Well Benefit - Hospitalisation: S$600; Get Well Benefit - Post-Surgery (excluding day surgery): S$600; Get Well Benefit - Day Surgery: S$200; Emergency Accidental Outpatient reimbursement: up to S$200 per period of insurance.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Daily Hospital Cash Benefit – Illness / Injury",
+                "payout_type": "daily_income",
+                "payout_value": 200,
+                "payout_unit": "day",
+                "payout_basis": "per day",
+                "payout_description": "Up to 730 days per Hospitalisation (Plan B level).",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Qualifying hospitalisation requirement stated separately for the plan.",
+                "evidence": [
+                  {
+                    "quote": "Daily Hospital Cash Benet – Illness / Injury\n(Up to 730 days per Hospitalisation^)\n200\nper day\nPlan B",
+                    "line_start": 84,
+                    "line_end": 91,
+                    "quote_token_coverage": 0.993
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Additional Daily Hospital Cash Benefit – Intensive Care Unit (ICU)",
+                "payout_type": "daily_income",
+                "payout_value": 400,
+                "payout_unit": "day",
+                "payout_basis": "per day",
+                "payout_description": "Up to 60 days per Hospitalisation (Plan B level).",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "ICU beyond 60 days treated as normal ward per document.",
+                "evidence": [
+                  {
+                    "quote": "Additional Daily Hospital Cash Benet - Intensive Care Unit\n(Up to 60 days per Hospitalisation^)\n200\nper day\n400\nper dayB 800\nper day\n1,200\nper day",
+                    "line_start": 89,
+                    "line_end": 108,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Get Well Beneﬁt - Hospitalisation",
+                "payout_type": "lump_sum",
+                "payout_value": 600,
+                "payout_unit": null,
+                "payout_basis": "per Hospitalisation",
+                "payout_description": "Lump sum cash benefit, per Hospitalisation for which at least 3 days of room and board charges are incurred.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "At least 3 days of room and board charges incurred.",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Get Well Benet - Hospitalisation\n(Lump sum cash beneﬁt, per Hospitalisation for which\nat least 3 days of room and board charges are incurred)\n300 600C 1,200 1,800",
+                    "line_start": 93,
+                    "line_end": 112,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Get Well Beneﬁt - Post-Surgery, excluding Day Surgery",
+                "payout_type": "lump_sum",
+                "payout_value": 600,
+                "payout_unit": null,
+                "payout_basis": "per Hospitalisation",
+                "payout_description": "Lump sum cash benefit, per Hospitalisation (excluding Day Surgery).",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Excluding Day Surgery.",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Get Well Benet - Post-Surgery, excluding\nDay Surgery\n(Lump sum cash beneﬁt, per Hospitalisation^) \n300 600D 1,200 1,800",
+                    "line_start": 97,
+                    "line_end": 116,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Get Well Beneﬁt - Day Surgery",
+                "payout_type": "lump_sum",
+                "payout_value": 200,
+                "payout_unit": null,
+                "payout_basis": "per Day Surgery setting",
+                "payout_description": "Lump sum cash beneﬁt, per Day Surgery setting.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Get Well Benet - Day Surgery\n(Lump sum cash beneﬁt, per Day Surgery setting)\n100 200E 400 600",
+                    "line_start": 99,
+                    "line_end": 118,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Emergency Accidental Outpatient Beneﬁt",
+                "payout_type": "reimbursement",
+                "payout_value": 200,
+                "payout_unit": null,
+                "payout_basis": "per Period of Insurance",
+                "payout_description": "Reimbursement basis, up to Plan B level per Period of Insurance.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Treatment must be given within 72 hours of the occurrence of the accident (stated for outpatient treatment).",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Emergency Accidental Outpatient Benet\n(on reimbursement basis, per Period of Insurance)\nUp to 100 Up to 200F Up to 400 Up to 600",
+                    "line_start": 101,
+                    "line_end": 120,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": "Plan levels extracted from the Table of Benefits section.",
+            "evidence": [
+              {
+                "quote": "Daily Hospital Cash Benet – Illness / Injury\n(Up to 730 days per Hospitalisation^)\n200\nper day\nPlan B",
+                "line_start": 84,
+                "line_end": 91,
+                "quote_token_coverage": 0.993
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Plan C",
+            "plan_code": null,
+            "description": "Daily Hospital Cash: S$400/day for illness/injury; Additional ICU Daily Hospital Cash: S$800/day; Get Well Benefit - Hospitalisation: S$1,200; Get Well Benefit - Post-Surgery (excluding day surgery): S$1,200; Get Well Benefit - Day Surgery: S$400; Emergency Accidental Outpatient reimbursement: up to S$400 per period of insurance.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Daily Hospital Cash Benefit – Illness / Injury",
+                "payout_type": "daily_income",
+                "payout_value": 400,
+                "payout_unit": "day",
+                "payout_basis": "per day",
+                "payout_description": "Up to 730 days per Hospitalisation (Plan C level).",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Daily Hospital Cash Benet – Illness / Injury\n(Up to 730 days per Hospitalisation^)\n400\nper day\nPlan C",
+                    "line_start": 84,
+                    "line_end": 96,
+                    "quote_token_coverage": 0.988
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Additional Daily Hospital Cash Benefit – Intensive Care Unit (ICU)",
+                "payout_type": "daily_income",
+                "payout_value": 800,
+                "payout_unit": "day",
+                "payout_basis": "per day",
+                "payout_description": "Up to 60 days per Hospitalisation (Plan C level).",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Additional Daily Hospital Cash Benet - Intensive Care Unit\n(Up to 60 days per Hospitalisation^)\n200\nper day\n400\nper dayB 800\nper day\n1,200\nper day",
+                    "line_start": 89,
+                    "line_end": 108,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Get Well Beneﬁt - Hospitalisation",
+                "payout_type": "lump_sum",
+                "payout_value": 1200,
+                "payout_unit": null,
+                "payout_basis": "per Hospitalisation",
+                "payout_description": "Lump sum cash benefit, per Hospitalisation for which at least 3 days of room and board charges are incurred.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "At least 3 days of room and board charges incurred.",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Get Well Benet - Hospitalisation\n(Lump sum cash beneﬁt, per Hospitalisation for which\nat least 3 days of room and board charges are incurred)\n300 600C 1,200 1,800",
+                    "line_start": 93,
+                    "line_end": 112,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Get Well Beneﬁt - Post-Surgery, excluding Day Surgery",
+                "payout_type": "lump_sum",
+                "payout_value": 1200,
+                "payout_unit": null,
+                "payout_basis": "per Hospitalisation",
+                "payout_description": "Lump sum cash benefit, per Hospitalisation (excluding Day Surgery).",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Excluding Day Surgery.",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Get Well Benet - Post-Surgery, excluding\nDay Surgery\n(Lump sum cash beneﬁt, per Hospitalisation^) \n300 600D 1,200 1,800",
+                    "line_start": 97,
+                    "line_end": 116,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Get Well Beneﬁt - Day Surgery",
+                "payout_type": "lump_sum",
+                "payout_value": 400,
+                "payout_unit": null,
+                "payout_basis": "per Day Surgery setting",
+                "payout_description": "Lump sum cash beneﬁt, per Day Surgery setting.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Get Well Benet - Day Surgery\n(Lump sum cash beneﬁt, per Day Surgery setting)\n100 200E 400 600",
+                    "line_start": 99,
+                    "line_end": 118,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Emergency Accidental Outpatient Beneﬁt",
+                "payout_type": "reimbursement",
+                "payout_value": 400,
+                "payout_unit": null,
+                "payout_basis": "per Period of Insurance",
+                "payout_description": "Reimbursement basis, up to Plan C level per Period of Insurance.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Treatment must be given within 72 hours of the occurrence of the accident (stated for outpatient treatment).",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Emergency Accidental Outpatient Benet\n(on reimbursement basis, per Period of Insurance)\nUp to 100 Up to 200F Up to 400 Up to 600",
+                    "line_start": 101,
+                    "line_end": 120,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": "Plan levels extracted from the Table of Benefits section.",
+            "evidence": [
+              {
+                "quote": "Daily Hospital Cash Benet – Illness / Injury\n(Up to 730 days per Hospitalisation^)\n400\nper day\nPlan C",
+                "line_start": 84,
+                "line_end": 96,
+                "quote_token_coverage": 0.988
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Plan D",
+            "plan_code": null,
+            "description": "Daily Hospital Cash: S$600/day for illness/injury; Additional ICU Daily Hospital Cash: S$1,200/day; Get Well Benefit - Hospitalisation: S$1,800; Get Well Benefit - Post-Surgery (excluding day surgery): S$1,800; Get Well Benefit - Day Surgery: S$600; Emergency Accidental Outpatient reimbursement: up to S$600 per period of insurance.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Daily Hospital Cash Benefit – Illness / Injury",
+                "payout_type": "daily_income",
+                "payout_value": 600,
+                "payout_unit": "day",
+                "payout_basis": "per day",
+                "payout_description": "Up to 730 days per Hospitalisation (Plan D level).",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "400\nper day\nPlan C\n600\nper day\nPlan D",
+                    "line_start": 117,
+                    "line_end": 123,
+                    "quote_token_coverage": 0.894
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Additional Daily Hospital Cash Benefit – Intensive Care Unit (ICU)",
+                "payout_type": "daily_income",
+                "payout_value": 1200,
+                "payout_unit": "day",
+                "payout_basis": "per day",
+                "payout_description": "Up to 60 days per Hospitalisation (Plan D level).",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Additional Daily Hospital Cash Benet - Intensive Care Unit\n(Up to 60 days per Hospitalisation^)\n200\nper day\n400\nper dayB 800\nper day\n1,200\nper day",
+                    "line_start": 89,
+                    "line_end": 108,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Get Well Beneﬁt - Hospitalisation",
+                "payout_type": "lump_sum",
+                "payout_value": 1800,
+                "payout_unit": null,
+                "payout_basis": "per Hospitalisation",
+                "payout_description": "Lump sum cash benefit, per Hospitalisation for which at least 3 days of room and board charges are incurred.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "At least 3 days of room and board charges incurred.",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Get Well Benet - Hospitalisation\n(Lump sum cash beneﬁt, per Hospitalisation for which\nat least 3 days of room and board charges are incurred)\n300 600C 1,200 1,800",
+                    "line_start": 93,
+                    "line_end": 112,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Get Well Beneﬁt - Post-Surgery, excluding Day Surgery",
+                "payout_type": "lump_sum",
+                "payout_value": 1800,
+                "payout_unit": null,
+                "payout_basis": "per Hospitalisation",
+                "payout_description": "Lump sum cash beneﬁt, per Hospitalisation (excluding Day Surgery).",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Excluding Day Surgery.",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Get Well Benet - Post-Surgery, excluding\nDay Surgery\n(Lump sum cash beneﬁt, per Hospitalisation^) \n300 600D 1,200 1,800",
+                    "line_start": 97,
+                    "line_end": 116,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Get Well Beneﬁt - Day Surgery",
+                "payout_type": "lump_sum",
+                "payout_value": 600,
+                "payout_unit": null,
+                "payout_basis": "per Day Surgery setting",
+                "payout_description": "Lump sum cash beneﬁt, per Day Surgery setting.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Get Well Benet - Day Surgery\n(Lump sum cash beneﬁt, per Day Surgery setting)\n100 200E 400 600",
+                    "line_start": 99,
+                    "line_end": 118,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Emergency Accidental Outpatient Beneﬁt",
+                "payout_type": "reimbursement",
+                "payout_value": 600,
+                "payout_unit": null,
+                "payout_basis": "per Period of Insurance",
+                "payout_description": "Reimbursement basis, up to Plan D level per Period of Insurance.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Treatment must be given within 72 hours of the occurrence of the accident (stated for outpatient treatment).",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Emergency Accidental Outpatient Benet\n(on reimbursement basis, per Period of Insurance)\nUp to 100 Up to 200F Up to 400 Up to 600",
+                    "line_start": 101,
+                    "line_end": 120,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": "Plan levels extracted from the Table of Benefits section.",
+            "evidence": [
+              {
+                "quote": "Get Well Benet - Hospitalisation\n(Lump sum cash beneﬁt, per Hospitalisation for which\nat least 3 days of room and board charges are incurred)\n300 600C 1,200 1,800",
+                "line_start": 93,
+                "line_end": 112,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Daily Hospital Cash Benefit – Illness / Injury",
+            "benefit_category": "hospital_cash",
+            "benefit_level": "base",
+            "benefit_description": "Pays a daily cash amount when the Life Assured is hospitalised for illness or injury, after the qualifying hospitalisation requirement is met.",
+            "trigger_description": "Hospitalisation for illness or injury meeting the stated hospitalisation definition; hospitalisation refers to medically necessary confinement in a hospital or at home under Virtual Hospital Ward admission by a Restructured Hospital.",
+            "covered_conditions": [
+              "Hospitalisation for 12 consecutive hours or longer; or for which a room and board charge is made in connection with such confinement.",
+              "Hospitalisation must be considered Medically Necessary. "
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "daily_income",
+            "payout_value": null,
+            "payout_unit": "day",
+            "payout_basis": "per day during qualifying hospitalisation",
+            "payout_description": "Benefit amount depends on plan tier (Plan A–D). Up to 730 days per Hospitalisation.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 730,
+            "limit_type": "days per hospitalisation",
+            "claim_frequency": "per hospitalised day (subject to limits)",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Assurance of hospital cash payouts after 12 hours.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "not_stated",
+            "notes": "Daily Hospital Cash Benefit – Illness / Injury is shown as a plan-tier per-day amount in the table; exact plan amounts are captured in plans.",
+            "evidence": [
+              {
+                "quote": "Receive up to S$600 per day when you are hospitalised for 12 hours^ or longer.",
+                "line_start": 1,
+                "line_end": 19,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Daily Hospital Cash Benet – Illness / Injury:\n(Up to 730 days per Hospitalisation^)",
+                "line_start": 84,
+                "line_end": 85,
+                "quote_token_coverage": 0.999
+              },
+              {
+                "quote": "^ Hospitalisation refers to conﬁnement of the Life Assured in a Hospital or at home under Virtual Hospital Ward admission by a\nRestructured Hospital, which must be considered Medically Necessary and:\n (a) for 12 consecutive hours or longer; or (b) for which a room and board charge is made in connection with such conﬁnement.",
+                "line_start": 13,
+                "line_end": 32,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Additional Daily Hospital Cash Benefit – Intensive Care Unit (ICU)",
+            "benefit_category": "hospital_cash",
+            "benefit_level": "base",
+            "benefit_description": "Pays an additional daily cash amount for each day the Life Assured undergoes hospitalisation in an ICU (in addition to the daily hospital cash).",
+            "trigger_description": "ICU hospitalisation due to illness or injury, subject to the ICU daily limit per hospitalisation.",
+            "covered_conditions": [
+              "Hospitalisation in an ICU due to an illness or injury.",
+              "ICU hospitalisation day count limit applies."
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "daily_income",
+            "payout_value": null,
+            "payout_unit": "day",
+            "payout_basis": "per ICU hospitalisation day",
+            "payout_description": "Additional daily benefit is payable up to 60 days for each hospitalisation; ICU beyond 60 days treated as normal ward.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 60,
+            "limit_type": "days per hospitalisation",
+            "claim_frequency": "per ICU day (subject to limits)",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "not_stated",
+            "notes": "Plan-tier ICU additional daily amounts are captured in plans.",
+            "evidence": [
+              {
+                "quote": "You will also receive\nan additional payout of up to S$1,200\n#\nper day if you are warded in the Intensive Care Unit (ICU).",
+                "line_start": 3,
+                "line_end": 22,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Additional Daily Hospital Cash Benet - Intensive Care Unit\n(Up to 60 days per Hospitalisation^)\n200\nper day",
+                "line_start": 84,
+                "line_end": 103,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "# Additional Daily Hospital Cash Beneﬁt - Intensive Care Unit (ICU) will be payable for each day that the life assured undergoes\nhospitalisation in an ICU due to an illness or injury, up to a maximum period of 60 days for each hospitalisation.\nFor such hospitalisation in an ICU beyond 60 days, we will treat such hospitalisation as that in a normal ward.",
+                "line_start": 16,
+                "line_end": 35,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Get Well Beneﬁt - Hospitalisation",
+            "benefit_category": "hospital_cash",
+            "benefit_level": "base",
+            "benefit_description": "Pays a lump sum per hospitalisation when at least 3 days of room and board charges are incurred.",
+            "trigger_description": "A hospitalisation where at least 3 days of room and board charges are incurred.",
+            "covered_conditions": [
+              "At least 3 days of room and board charges incurred for the hospitalisation."
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "per Hospitalisation",
+            "payout_description": "Lump sum cash benefit, with plan-tier amounts.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "per qualifying hospitalisation",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "At least 3 days of room and board charges incurred.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "not_stated",
+            "notes": "Plan-tier lump sum amounts are captured in plans.",
+            "evidence": [
+              {
+                "quote": "To extend our support for your recovery, you will get an additional lump sum of up to S$1,800 with\nat least 3 days of hospitalisation",
+                "line_start": 5,
+                "line_end": 24,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Get Well Benet - Hospitalisation\n(Lump sum cash beneﬁt, per Hospitalisation for which\nat least 3 days of room and board charges are incurred)\n300 600C 1,200 1,800",
+                "line_start": 93,
+                "line_end": 112,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Get Well Beneﬁt - Post-Surgery, excluding Day Surgery",
+            "benefit_category": "hospital_cash",
+            "benefit_level": "base",
+            "benefit_description": "Pays a lump sum per hospitalisation when surgery is needed after qualifying hospitalisation, excluding day surgery.",
+            "trigger_description": "Surgery is needed, excluding day surgery, during the relevant hospitalisation.",
+            "covered_conditions": [
+              "Surgery needed.",
+              "Excludes day surgery."
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "per Hospitalisation",
+            "payout_description": "Separate lump sum benefit for post-surgery (excluding day surgery), with plan-tier amounts.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "per qualifying hospitalisation (per hospitalisation trigger)",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "not_stated",
+            "notes": "The brochure states surgery benefit excludes day surgery.",
+            "evidence": [
+              {
+                "quote": "and another payout of up to S$1,800 if surgery‡ is needed.",
+                "line_start": 5,
+                "line_end": 24,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "‡  Excluding day surgery, and subject to terms and conditions.",
+                "line_start": 17,
+                "line_end": 36,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Get Well Benet - Post-Surgery, excluding\nDay Surgery\n(Lump sum cash beneﬁt, per Hospitalisation^) \n300 600D 1,200 1,800",
+                "line_start": 97,
+                "line_end": 116,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Get Well Beneﬁt - Day Surgery",
+            "benefit_category": "hospital_cash",
+            "benefit_level": "base",
+            "benefit_description": "Pays a lump sum per day surgery setting (as listed separately from post-surgery excluding day surgery).",
+            "trigger_description": "Day surgery setting occurs during the policy period, as defined by the plan benefit table.",
+            "covered_conditions": [
+              "Day surgery setting (benefit is explicitly separate from post-surgery excluding day surgery)."
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "per Day Surgery setting",
+            "payout_description": "Lump sum cash benefit per day surgery setting, with plan-tier amounts.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "per day surgery setting",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "not_stated",
+            "notes": "Plan-tier amounts are captured in plans.",
+            "evidence": [
+              {
+                "quote": "Get Well Benet - Day Surgery\n(Lump sum cash beneﬁt, per Day Surgery setting)\n100 200E 400 600",
+                "line_start": 99,
+                "line_end": 118,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Emergency Accidental Outpatient Beneﬁt",
+            "benefit_category": "health",
+            "benefit_level": "base",
+            "benefit_description": "Reimburses outpatient medical treatment costs when the treatment is due to injury at the Accident and Emergency (A&E) department in a hospital, up to a plan-specific limit.",
+            "trigger_description": "Outpatient medical treatment due to injury at A&E in a hospital (reimbursement basis).",
+            "covered_conditions": [
+              "Treatment must be given within 72 hours of the occurrence of the accident.",
+              "Outpatient medical treatment due to injury at the Accident and Emergency (A&E) department (A&E) in a hospital."
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "reimbursement",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "per Period of Insurance",
+            "payout_description": "On reimbursement basis; up to plan-tier maximum per Period of Insurance.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "not_stated",
+            "notes": "The document does not state the reimbursement percentage; it states a cap (up to S$...).",
+            "evidence": [
+              {
+                "quote": "In addition, get reimbursed with up to S$600 when you seek outpatient medical treatment* due to\ninjury at the Accident and Emergency department (A&E) in a hospital.",
+                "line_start": 1,
+                "line_end": 13,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "* Treatment must be given within 72 hours of the occurrence of the accident.",
+                "line_start": 10,
+                "line_end": 29,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Emergency Accidental Outpatient Benet\n(on reimbursement basis, per Period of Insurance)\nUp to 100 Up to 200F Up to 400 Up to 600",
+                "line_start": 101,
+                "line_end": 120,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "GREAT Hospital Cash comes in handy as it complements your existing health\ncoverage with up to S$600 Daily Hospital Cash Benefit and up to S$1,800 Get Well Benefit.",
+            "line_start": 1,
+            "line_end": 11,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Assurance of hospital cash payouts after 12 hours^",
+            "line_start": 1,
+            "line_end": 18,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Enjoy up to a lifetime of hospitalisation coverage†",
+            "line_start": 25,
+            "line_end": 25,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Up to S$600 when you seek outpatient medical treatment* due to injury at the Accident and Emergency department (A&E) in a hospital.",
+            "line_start": 1,
+            "line_end": 13,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "high",
+        "review_notes": [
+          "No explicit policy entry/age limits, underwriting method, or benefit eligibility exclusions were stated in the brochure text provided.",
+          "Premium amounts are presented in a table by entry age and are not extracted as plan claims/benefits; only benefit limits/payout mechanics were captured."
+        ],
+        "slug": "great-eastern-great-hospital-cash"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 47,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_054a19501a282042016a8f1f14396c87d08c3c074cbf2ecd4c",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:16:10.259976+00:00",
+    "usage": {
+      "input_tokens": 5891,
+      "output_tokens": 10220,
+      "total_tokens": 16111,
+      "reasoning_tokens": 265,
+      "estimated_cost_usd": 0.0139532
+    }
+  }
+}

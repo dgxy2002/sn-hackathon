@@ -1,0 +1,313 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Great Eastern",
+    "source_file": "Great Eastern/Travel Insurance/GREAT TravelCare.md",
+    "source_filename": "GREAT TravelCare.md",
+    "document_type": "brochure",
+    "content_sha256": "cd28c3f2613154267a119bb4512810b6730078244a6d2d5069ae13f5a24a2d5e",
+    "local_markdown_path": "backend/scraper/insurance/Great Eastern/Travel Insurance/GREAT TravelCare.md",
+    "local_pdf_path": "backend/scraper/insurance/Great Eastern/Travel Insurance/GREAT TravelCare.pdf"
+  },
+  "extraction": {
+    "document_summary": "The provided brochure content appears heavily corrupted/garbled (e.g., many characters encoded as “(cid:...)”), making most benefit names and dollar amounts unreadable. However, several eligibility/structure fragments remain partially identifiable, including an overall travel duration statement (“up to 45 days each trip.”), age cut-offs (“Child or adult below 70 years old” and “Adult 70 years old and above”), and a cost-share style line (“Co-payment”). The text also includes insurer contact/regulatory footer information and a version/date marker (“Information correct as at 12 February 2026.”). Because the core coverage benefits and their payout mechanics are not clearly extractable, this knowledge base entry is limited to the few reliably readable facts.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Brochure text is largely corrupted with placeholder tokens like “(cid:...)”, preventing reliable extraction of benefit names, coverage descriptions, and most monetary limits.",
+      "Only a small number of eligibility/duration fragments and cost-sharing wording are readable.",
+      "Many table headings and figures are not legible enough to map to specific benefits without guessing."
+    ],
+    "policies": [
+      {
+        "company": "Great Eastern",
+        "policy_name": "GREAT TravelCare",
+        "aliases": [
+          "GREAT TravelCare"
+        ],
+        "quick_summary": "A Great Eastern travel insurance product with coverage available up to an overall trip duration of “up to 45 days each trip.” Eligibility is segmented by age groups (below 70 vs 70 and above). The document also contains a “Co-payment” line suggesting shared cost mechanics, but specific benefit triggers and payout amounts are not readable in the provided corrupted text extract. Detailed plan-level benefit limits for “Gold” and “Platinum” are present in the original brochure but are not extractable here due to corruption/illegible figures. Therefore, only high-level eligibility/duration and cost-share wording can be recorded from this source.",
+        "category": "travel",
+        "policy_type": "travel",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_stated",
+        "coverage_scope": [
+          "Travel insurance coverage for trips up to “up to 45 days each trip.”"
+        ],
+        "currency_options": [
+          "SGD"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": null,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "Age-based entry categories are shown: “Child or adult below 70 years old” and “Adult 70 years old and above”.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Trip duration shown as “up to 45 days each trip.”",
+        "premium_payment_term_description": "not_stated",
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [],
+        "important_caveats": [
+          "Most benefit names, triggers, and monetary limits for travel coverages and plan tiers (including Gold/Platinum) are not readable in the provided corrupted markdown extract, so only limited facts are captured."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "Gold",
+            "plan_code": null,
+            "description": "A plan tier labelled “Gold” appears in the brochure tables, but specific plan benefit amounts/limits are not legible in the provided extract.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "not_stated",
+            "coverage_term_description": "not_stated",
+            "premium_payment_term_description": "not_stated",
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "(cid:52) (cid:57) Footnote/heading area not readable due to corruption",
+                "line_start": null,
+                "line_end": null,
+                "quote_token_coverage": 0.3263
+              }
+            ],
+            "extraction_confidence": "low"
+          },
+          {
+            "plan_name": "Platinum",
+            "plan_code": null,
+            "description": "A plan tier labelled “Platinum” appears in the brochure tables, but specific plan benefit amounts/limits are not legible in the provided extract.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "not_stated",
+            "coverage_term_description": "not_stated",
+            "premium_payment_term_description": "not_stated",
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "(cid:52) (cid:57) Footnote/heading area not readable due to corruption",
+                "line_start": null,
+                "line_end": null,
+                "quote_token_coverage": 0.3263
+              }
+            ],
+            "extraction_confidence": "low"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Trip duration (each trip)",
+            "benefit_category": "travel_scope",
+            "benefit_level": "base",
+            "benefit_description": "The document states the travel insurance applies for trips with a maximum duration of “up to 45 days each trip.”",
+            "trigger_description": null,
+            "covered_conditions": [
+              "Trip length limited to “up to 45 days each trip.”"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "Trip length limit",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "up to 45 days each",
+                "line_start": 220,
+                "line_end": 239,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          },
+          {
+            "benefit_name": "Co-payment (cost-sharing)",
+            "benefit_category": "health_cost_sharing",
+            "benefit_level": "base",
+            "benefit_description": "A “Co-payment” line is shown, indicating some form of shared cost mechanism.",
+            "trigger_description": null,
+            "covered_conditions": [
+              "Co-payment applies (exact benefit context not readable)."
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "not_stated",
+            "payout_description": "Co-payment wording present; percentage/value not reliably extractable from corrupted text.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Co-payment:",
+                "line_start": null,
+                "line_end": null,
+                "quote_token_coverage": 0.0
+              }
+            ],
+            "extraction_confidence": "low"
+          }
+        ],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "up to 45 days each trip.",
+            "line_start": 221,
+            "line_end": 240,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Child or adult below 70 years old",
+            "line_start": 183,
+            "line_end": 202,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Adult 70 years old and above",
+            "line_start": 189,
+            "line_end": 208,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Co-payment:",
+            "line_start": null,
+            "line_end": null,
+            "quote_token_coverage": 0.0
+          },
+          {
+            "quote": "Information correct as at 12 February 2026.",
+            "line_start": 266,
+            "line_end": 285,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Greateasternlife.com",
+            "line_start": 271,
+            "line_end": 290,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "low",
+        "review_notes": [
+          "Only a few non-numerical facts (trip duration, age segmentation, and presence of “Co-payment” wording) are reliably extractable from this corrupted markdown.",
+          "Gold and Platinum tier names appear but their plan-specific benefit amounts/limits are not readable; plan-specific benefit_amounts are therefore left empty rather than inferred."
+        ],
+        "slug": "great-eastern-great-travelcare"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 10,
+    "evidence_warnings": [
+      "Could not resolve evidence quote for GREAT TravelCare/policy",
+      "Could not resolve evidence quote for GREAT TravelCare/plans",
+      "Could not resolve evidence quote for GREAT TravelCare/plans",
+      "Could not resolve evidence quote for GREAT TravelCare/benefits"
+    ],
+    "requires_human_review": true
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_068a896f8af75d14016a8f20339fb087d08d3f89f6b5c689ad",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:20:11.466266+00:00",
+    "usage": {
+      "input_tokens": 37260,
+      "output_tokens": 2131,
+      "total_tokens": 39391,
+      "reasoning_tokens": 279,
+      "estimated_cost_usd": 0.01011575
+    }
+  }
+}

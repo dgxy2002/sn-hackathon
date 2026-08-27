@@ -37,7 +37,9 @@ CREATE TYPE policy_category AS ENUM (
   'home',
   'endowment',
   'investment_linked',
-  'disability'
+  'disability',
+  'long_term_care',
+  'maternity'
 );
 
 CREATE TYPE policy_type AS ENUM (
@@ -55,7 +57,15 @@ CREATE TYPE policy_type AS ENUM (
   'motor',
   'home_contents',
   'maid',
-  'disability_income'
+  'disability_income',
+  'hospital_cash',
+  'international_health',
+  'cancer_only',
+  'long_term_care',
+  'careshield_supplement',
+  'eldershield_supplement',
+  'dementia',
+  'maternity'
 );
 
 CREATE TYPE ward_class AS ENUM (
@@ -67,6 +77,82 @@ CREATE TYPE coverage_type AS ENUM (
   'claims_based',     -- premium adjusts based on past claims
   'fixed_benefit',    -- fixed payout regardless of actual cost
   'percentage'        -- percentage of actual bill
+);
+
+CREATE TYPE product_structure AS ENUM (
+  'base_plan',
+  'rider',
+  'package'
+);
+
+CREATE TYPE participation_type AS ENUM (
+  'participating',
+  'non_participating',
+  'not_applicable',
+  'not_stated'
+);
+
+CREATE TYPE age_basis AS ENUM (
+  'age_last_birthday',
+  'age_next_birthday',
+  'not_stated'
+);
+
+CREATE TYPE underwriting_type AS ENUM (
+  'full',
+  'simplified',
+  'guaranteed_acceptance',
+  'none',
+  'not_stated'
+);
+
+CREATE TYPE policy_document_type AS ENUM (
+  'policy_wording',
+  'product_summary',
+  'brochure',
+  'factsheet',
+  'website',
+  'guide',
+  'other'
+);
+
+CREATE TYPE extraction_status AS ENUM (
+  'pending',
+  'complete',
+  'partial',
+  'needs_review',
+  'failed'
+);
+
+CREATE TYPE confidence_level AS ENUM (
+  'high',
+  'medium',
+  'low'
+);
+
+CREATE TYPE benefit_level AS ENUM (
+  'base',
+  'optional',
+  'rider',
+  'service'
+);
+
+CREATE TYPE payout_type AS ENUM (
+  'lump_sum',
+  'reimbursement',
+  'daily_income',
+  'weekly_income',
+  'monthly_income',
+  'premium_waiver',
+  'service',
+  'other'
+);
+
+CREATE TYPE benefit_relationship AS ENUM (
+  'accelerated',
+  'additional',
+  'standalone',
+  'unknown'
 );
 
 CREATE TYPE card_type AS ENUM (
@@ -132,10 +218,19 @@ CREATE TABLE policies (
 
   -- Identity
   name                    TEXT NOT NULL,        -- 'AIA HealthShield Gold Max A'
+  slug                    TEXT NOT NULL UNIQUE, -- stable external ID, e.g. 'aia-healthshield-gold-max-a'
   short_code              TEXT,                 -- 'HSGMA' (internal reference)
   category                policy_category NOT NULL,
   type                    policy_type NOT NULL,
   plan_tier               TEXT,                 -- 'Premier', 'Plus', 'Standard', 'A', 'B', etc.
+  quick_summary           TEXT,                 -- neutral 2-3 sentence product summary
+  quick_summary_evidence  TEXT,                 -- source text used to produce the summary
+  quick_summary_confidence confidence_level,
+  target_customer         TEXT,                 -- only when explicitly stated by a source
+  structure               product_structure NOT NULL DEFAULT 'base_plan',
+  participation           participation_type NOT NULL DEFAULT 'not_stated',
+  coverage_scope          TEXT[] NOT NULL DEFAULT '{}', -- individual, family, worldwide, Singapore-only
+  currency_options        TEXT[] NOT NULL DEFAULT '{}', -- ISO 4217 codes such as SGD, USD
 
   -- Availability
   is_active               BOOLEAN DEFAULT true,
@@ -145,6 +240,10 @@ CREATE TABLE policies (
   min_entry_age           INT,                  -- minimum age to buy (years)
   max_entry_age           INT,                  -- maximum age to buy
   max_coverage_age        INT,                  -- age coverage ends (e.g. 99, 100)
+  entry_age_basis         age_basis NOT NULL DEFAULT 'not_stated',
+  residency_requirements  TEXT,
+  occupation_classes      TEXT[] NOT NULL DEFAULT '{}',
+  eligibility_notes       TEXT,
 
   -- Coverage limits (top-level; granular detail in policy_coverage)
   annual_limit            NUMERIC(14,2),        -- SGD
@@ -154,6 +253,24 @@ CREATE TABLE policies (
   -- For term life / CI products
   term_years              INT,                  -- null = whole-of-life or renewable annually
   renewable               BOOLEAN,
+  coverage_term_description TEXT,               -- preserves non-numeric wording such as 'to age 99'
+  premium_payment_term_description TEXT,
+  premium_frequencies     TEXT[] NOT NULL DEFAULT '{}', -- monthly, quarterly, annual, single
+  premium_guaranteed      BOOLEAN,
+  renewal_basis           TEXT,
+  underwriting            underwriting_type NOT NULL DEFAULT 'not_stated',
+  medical_exam_required   BOOLEAN,
+
+  -- Savings / participating-policy mechanics
+  cash_value_available    BOOLEAN,
+  surrender_value_available BOOLEAN,
+  bonuses_or_dividends    TEXT,
+
+  -- Cross-policy mechanics
+  free_look_period_days   INT,
+  grace_period_days       INT,
+  policy_termination_events TEXT[] NOT NULL DEFAULT '{}',
+  important_caveats       TEXT[] NOT NULL DEFAULT '{}',
 
   -- For Integrated Shield Plans
   ward_class              ward_class,           -- highest ward class covered
@@ -173,14 +290,66 @@ CREATE TABLE policies (
   last_scraped_at         TIMESTAMPTZ,
   is_verified             BOOLEAN DEFAULT false,-- human-reviewed flag
   data_hash               TEXT,                 -- MD5 of scraped content; detect stale rows
+  extraction_status       extraction_status NOT NULL DEFAULT 'pending',
+  extraction_confidence   confidence_level,
+  extraction_notes        TEXT,
 
   created_at              TIMESTAMPTZ DEFAULT now(),
-  updated_at              TIMESTAMPTZ DEFAULT now()
+  updated_at              TIMESTAMPTZ DEFAULT now(),
+
+  CONSTRAINT policies_entry_age_range CHECK (
+    min_entry_age IS NULL OR max_entry_age IS NULL OR min_entry_age <= max_entry_age
+  ),
+  CONSTRAINT policies_nonnegative_ages CHECK (
+    COALESCE(min_entry_age, 0) >= 0
+    AND COALESCE(max_entry_age, 0) >= 0
+    AND COALESCE(max_coverage_age, 0) >= 0
+  )
 );
 
 
 -- -----------------------------------------------------------------------------
--- 3c. Policy premiums  (age-banded pricing table)
+-- 3c. Policy documents
+-- One policy may have multiple brochures, summaries and policy wordings.
+-- Extracted facts in the tables below point back to one of these sources.
+-- -----------------------------------------------------------------------------
+CREATE TABLE policy_documents (
+  id                      UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  policy_id               UUID NOT NULL REFERENCES policies(id) ON DELETE CASCADE,
+
+  document_type           policy_document_type NOT NULL,
+  title                   TEXT,
+  language_code           TEXT NOT NULL DEFAULT 'en',
+  version_label           TEXT,
+  document_date           DATE,
+  source_url              TEXT,
+  source_type             data_source,
+  local_pdf_path          TEXT,
+  local_markdown_path     TEXT,
+  content_hash            TEXT,                 -- SHA-256 preferred; enables duplicate detection
+  is_primary              BOOLEAN NOT NULL DEFAULT false,
+
+  extraction_method       TEXT,                 -- e.g. 'markitdown_mcp', 'ocr_then_markitdown_mcp'
+  extraction_status       extraction_status NOT NULL DEFAULT 'pending',
+  extraction_confidence   confidence_level,
+  extraction_notes        TEXT,
+  retrieved_at            TIMESTAMPTZ,
+
+  created_at              TIMESTAMPTZ DEFAULT now(),
+  updated_at              TIMESTAMPTZ DEFAULT now(),
+
+  CONSTRAINT policy_documents_has_location CHECK (
+    source_url IS NOT NULL OR local_pdf_path IS NOT NULL OR local_markdown_path IS NOT NULL
+  )
+);
+
+ALTER TABLE policies
+  ADD COLUMN quick_summary_source_document_id UUID
+  REFERENCES policy_documents(id) ON DELETE SET NULL;
+
+
+-- -----------------------------------------------------------------------------
+-- 3d. Policy premiums  (age-banded pricing table)
 -- Separate rows for each age / gender / citizenship band.
 -- -----------------------------------------------------------------------------
 CREATE TABLE policy_premiums (
@@ -211,12 +380,75 @@ CREATE TABLE policy_premiums (
 
 
 -- -----------------------------------------------------------------------------
--- 3d. Policy coverage  (per-benefit breakdown)
--- One row per named benefit within a policy.
+-- 3e. Policy plans / tiers
+-- One row per named option within a policy, such as Basic, Gold, Platinum,
+-- Plan 1, Private Hospital, Standard or Plus. A separately marketed product
+-- remains a policies row; this table is for variants sharing that product.
+-- -----------------------------------------------------------------------------
+CREATE TABLE policy_plans (
+  id                      UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  policy_id               UUID NOT NULL REFERENCES policies(id) ON DELETE CASCADE,
+  source_document_id      UUID REFERENCES policy_documents(id) ON DELETE SET NULL,
+
+  name                    TEXT NOT NULL,
+  code                    TEXT,
+  description             TEXT,
+  applies_to              TEXT NOT NULL DEFAULT 'base_policy',
+  -- 'base_policy' or 'rider'; linked_rider_name identifies the rider when set
+  linked_rider_name       TEXT,
+  display_order           INT,
+  is_default              BOOLEAN,
+
+  ward_class              ward_class,
+  currency                TEXT,                 -- ISO 4217, e.g. SGD or USD
+  minimum_sum_assured     NUMERIC(14,2),
+  maximum_sum_assured     NUMERIC(14,2),
+  annual_limit            NUMERIC(14,2),
+  lifetime_limit          NUMERIC(14,2),
+  policy_year_limit       NUMERIC(14,2),
+  deductible_sgd          NUMERIC(10,2),
+  co_insurance_pct        NUMERIC(5,2),
+  co_insurance_cap_sgd    NUMERIC(10,2),
+
+  eligibility_notes       TEXT,
+  coverage_term_description TEXT,
+  premium_payment_term_description TEXT,
+  notes                   TEXT,
+  source_evidence         TEXT,
+  source_location         TEXT,
+  extraction_confidence   confidence_level,
+  extraction_notes        TEXT,
+
+  created_at              TIMESTAMPTZ DEFAULT now(),
+  updated_at              TIMESTAMPTZ DEFAULT now(),
+
+  UNIQUE NULLS NOT DISTINCT (policy_id, name, applies_to, linked_rider_name),
+  CONSTRAINT policy_plans_nonnegative_amounts CHECK (
+    COALESCE(minimum_sum_assured, 0) >= 0
+    AND COALESCE(maximum_sum_assured, 0) >= 0
+    AND COALESCE(annual_limit, 0) >= 0
+    AND COALESCE(lifetime_limit, 0) >= 0
+    AND COALESCE(policy_year_limit, 0) >= 0
+  ),
+  CONSTRAINT policy_plans_sum_assured_range CHECK (
+    minimum_sum_assured IS NULL OR maximum_sum_assured IS NULL
+    OR minimum_sum_assured <= maximum_sum_assured
+  ),
+  CONSTRAINT policy_plans_coinsurance_range CHECK (
+    co_insurance_pct IS NULL OR co_insurance_pct BETWEEN 0 AND 100
+  )
+);
+
+
+-- -----------------------------------------------------------------------------
+-- 3f. Policy coverage  (one row per extracted benefit)
+-- Keep the insurer's wording while also storing normalized fields for comparison.
 -- -----------------------------------------------------------------------------
 CREATE TABLE policy_coverage (
   id                      UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   policy_id               UUID NOT NULL REFERENCES policies(id) ON DELETE CASCADE,
+  source_document_id      UUID REFERENCES policy_documents(id) ON DELETE SET NULL,
+  rider_id                UUID,                  -- FK added after policy_riders is created
 
   benefit_name            TEXT NOT NULL,
   -- e.g. 'Inpatient & Day Surgery', 'Intensive Care Unit', 'Organ Transplant',
@@ -224,43 +456,146 @@ CREATE TABLE policy_coverage (
 
   benefit_category        TEXT,
   -- 'inpatient', 'outpatient', 'surgical', 'cancer', 'mental_health', etc.
+  benefit_level           benefit_level NOT NULL DEFAULT 'base',
+  benefit_description     TEXT,
+  trigger_description     TEXT,
+  covered_conditions      TEXT[] NOT NULL DEFAULT '{}',
+  condition_stages        TEXT[] NOT NULL DEFAULT '{}', -- early, intermediate, late/severe, pre-early
 
   coverage_type           coverage_type,
+  payout_type             payout_type,
+  payout_value            NUMERIC(14,4),
+  payout_unit             TEXT,                 -- SGD, percent_of_sum_assured, days, months, etc.
+  payout_basis            TEXT,                 -- sum assured, incurred bill, daily rate, monthly benefit
+  payout_description      TEXT,                 -- preserves formulas that do not fit scalar columns
+  minimum_payout_amount   NUMERIC(14,2),
+  maximum_payout_amount   NUMERIC(14,2),
+  payout_currency         TEXT,
   limit_amount            NUMERIC(14,2),        -- SGD; null if as_charged with no cap
   limit_type              TEXT,
   -- 'per_day' | 'per_admission' | 'per_year' | 'lifetime' | 'per_disability'
+
+  claim_frequency         TEXT,                 -- once, per condition, per accident, recurring, unlimited
+  maximum_claims          INT,
+  benefit_relationship    benefit_relationship NOT NULL DEFAULT 'unknown',
+  reduces_base_sum_assured BOOLEAN,
 
   deductible_sgd          NUMERIC(10,2),        -- excess the insured pays first
   co_insurance_pct        NUMERIC(5,2),         -- % of bill after deductible (e.g. 10.00)
   co_insurance_cap_sgd    NUMERIC(10,2),        -- cap on co-insurance (stop-loss)
 
+  waiting_period_days     INT,
+  survival_period_days    INT,
+  deferment_period_days   INT,
+  benefit_start_description TEXT,
+  benefit_expiry_age      INT,
+  benefit_expiry_description TEXT,
+  geographic_scope        TEXT,
+
   covered                 BOOLEAN DEFAULT true, -- false = explicitly excluded here
   notes                   TEXT,
+  source_evidence         TEXT,                 -- exact supporting text; required by ingestion workflow
+  source_location         TEXT,                 -- page, section, or Markdown line range
+  extraction_confidence   confidence_level,
+  extraction_notes        TEXT,
 
-  created_at              TIMESTAMPTZ DEFAULT now()
+  created_at              TIMESTAMPTZ DEFAULT now(),
+  updated_at              TIMESTAMPTZ DEFAULT now(),
+
+  CONSTRAINT policy_coverage_percentage_range CHECK (
+    co_insurance_pct IS NULL OR co_insurance_pct BETWEEN 0 AND 100
+  ),
+  CONSTRAINT policy_coverage_nonnegative_periods CHECK (
+    COALESCE(waiting_period_days, 0) >= 0
+    AND COALESCE(survival_period_days, 0) >= 0
+    AND COALESCE(deferment_period_days, 0) >= 0
+  ),
+  CONSTRAINT policy_coverage_nonnegative_claims CHECK (
+    maximum_claims IS NULL OR maximum_claims >= 0
+  )
 );
 
 
 -- -----------------------------------------------------------------------------
--- 3e. Policy exclusions
+-- 3g. Plan-specific benefit / claim amounts
+-- A benefit is defined once in policy_coverage. This table preserves the amount
+-- or limit for each plan tier without duplicating the benefit definition.
+-- -----------------------------------------------------------------------------
+CREATE TABLE policy_plan_benefits (
+  id                      UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  plan_id                 UUID NOT NULL REFERENCES policy_plans(id) ON DELETE CASCADE,
+  benefit_id              UUID NOT NULL REFERENCES policy_coverage(id) ON DELETE CASCADE,
+  source_document_id      UUID REFERENCES policy_documents(id) ON DELETE SET NULL,
+
+  payout_type             payout_type,
+  payout_value            NUMERIC(14,4),
+  payout_unit             TEXT,
+  payout_basis            TEXT,
+  payout_description      TEXT,
+  payout_currency         TEXT,
+  minimum_payout_amount   NUMERIC(14,2),
+  maximum_payout_amount   NUMERIC(14,2),
+  limit_amount            NUMERIC(14,2),
+  limit_type              TEXT,
+  claim_frequency         TEXT,
+  maximum_claims          INT,
+  benefit_relationship    benefit_relationship NOT NULL DEFAULT 'unknown',
+  reduces_base_sum_assured BOOLEAN,
+  waiting_period_days     INT,
+  survival_period_days    INT,
+  deferment_period_days   INT,
+  conditions              TEXT,
+  notes                   TEXT,
+
+  source_evidence         TEXT,
+  source_location         TEXT,
+  extraction_confidence   confidence_level,
+  extraction_notes        TEXT,
+
+  created_at              TIMESTAMPTZ DEFAULT now(),
+  updated_at              TIMESTAMPTZ DEFAULT now(),
+
+  UNIQUE (plan_id, benefit_id),
+  CONSTRAINT policy_plan_benefits_nonnegative_periods CHECK (
+    COALESCE(waiting_period_days, 0) >= 0
+    AND COALESCE(survival_period_days, 0) >= 0
+    AND COALESCE(deferment_period_days, 0) >= 0
+  ),
+  CONSTRAINT policy_plan_benefits_nonnegative_claims CHECK (
+    maximum_claims IS NULL OR maximum_claims >= 0
+  )
+);
+
+
+-- -----------------------------------------------------------------------------
+-- 3h. Policy exclusions
 -- -----------------------------------------------------------------------------
 CREATE TABLE policy_exclusions (
-  id          UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  policy_id   UUID NOT NULL REFERENCES policies(id) ON DELETE CASCADE,
-  exclusion   TEXT NOT NULL,
-  category    TEXT,
+  id                      UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  policy_id               UUID NOT NULL REFERENCES policies(id) ON DELETE CASCADE,
+  source_document_id      UUID REFERENCES policy_documents(id) ON DELETE SET NULL,
+  benefit_id              UUID REFERENCES policy_coverage(id) ON DELETE CASCADE,
+  exclusion               TEXT NOT NULL,
+  category                TEXT,
   -- 'pre_existing_condition' | 'cosmetic' | 'dental' | 'pregnancy' |
   -- 'war_terrorism' | 'self_inflicted' | 'congenital'
-  created_at  TIMESTAMPTZ DEFAULT now()
+  applies_to                TEXT,                -- policy-wide, named benefit, rider, activity, occupation
+  source_evidence           TEXT,
+  source_location           TEXT,
+  extraction_confidence     confidence_level,
+  extraction_notes          TEXT,
+  created_at                TIMESTAMPTZ DEFAULT now(),
+  updated_at                TIMESTAMPTZ DEFAULT now()
 );
 
 
 -- -----------------------------------------------------------------------------
--- 3f. Policy riders  (optional add-ons)
+-- 3i. Policy riders  (optional add-ons)
 -- -----------------------------------------------------------------------------
 CREATE TABLE policy_riders (
   id                  UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   policy_id           UUID NOT NULL REFERENCES policies(id) ON DELETE CASCADE,
+  source_document_id  UUID REFERENCES policy_documents(id) ON DELETE SET NULL,
 
   name                TEXT NOT NULL,
   description         TEXT,
@@ -270,10 +605,25 @@ CREATE TABLE policy_riders (
 
   is_cash_only        BOOLEAN,      -- true = cannot pay with MediSave
   indicative_premium  NUMERIC(10,2),-- approx annual premium (age-dependent; store as guide)
+  eligibility         TEXT,
+  coverage_term_description TEXT,
+  premium_payment_term_description TEXT,
+  includes_premium_waiver BOOLEAN,
   notes               TEXT,
+  source_evidence     TEXT,
+  source_location     TEXT,
+  extraction_confidence confidence_level,
+  extraction_notes    TEXT,
 
-  created_at          TIMESTAMPTZ DEFAULT now()
+  created_at          TIMESTAMPTZ DEFAULT now(),
+  updated_at          TIMESTAMPTZ DEFAULT now(),
+
+  UNIQUE (policy_id, name)
 );
+
+ALTER TABLE policy_coverage
+  ADD CONSTRAINT policy_coverage_rider_id_fkey
+  FOREIGN KEY (rider_id) REFERENCES policy_riders(id) ON DELETE CASCADE;
 
 
 -- =============================================================================
@@ -424,11 +774,31 @@ CREATE INDEX idx_policies_type        ON policies (type);
 CREATE INDEX idx_policies_category    ON policies (category);
 CREATE INDEX idx_policies_ward_class  ON policies (ward_class);
 CREATE INDEX idx_policies_active      ON policies (is_active, available_to_new);
+CREATE INDEX idx_policies_extraction  ON policies (extraction_status, extraction_confidence);
+CREATE INDEX idx_policies_summary_document ON policies (quick_summary_source_document_id);
+CREATE INDEX idx_policies_scope       ON policies USING GIN (coverage_scope);
+CREATE INDEX idx_policies_currencies  ON policies USING GIN (currency_options);
 
+CREATE INDEX idx_policy_documents_policy ON policy_documents (policy_id);
+CREATE INDEX idx_policy_documents_type   ON policy_documents (document_type);
+CREATE INDEX idx_policy_documents_hash   ON policy_documents (content_hash);
+CREATE UNIQUE INDEX idx_policy_documents_primary
+  ON policy_documents (policy_id)
+  WHERE is_primary = true;
 CREATE INDEX idx_premiums_policy_age  ON policy_premiums (policy_id, age_next_birthday);
+CREATE INDEX idx_policy_plans_policy  ON policy_plans (policy_id);
+CREATE INDEX idx_policy_plans_document ON policy_plans (source_document_id);
+CREATE INDEX idx_plan_benefits_plan   ON policy_plan_benefits (plan_id);
+CREATE INDEX idx_plan_benefits_benefit ON policy_plan_benefits (benefit_id);
 CREATE INDEX idx_coverage_policy      ON policy_coverage (policy_id);
+CREATE INDEX idx_coverage_document    ON policy_coverage (source_document_id);
+CREATE INDEX idx_coverage_category    ON policy_coverage (benefit_category);
+CREATE INDEX idx_coverage_conditions  ON policy_coverage USING GIN (covered_conditions);
+CREATE INDEX idx_coverage_stages      ON policy_coverage USING GIN (condition_stages);
 CREATE INDEX idx_exclusions_policy    ON policy_exclusions (policy_id);
+CREATE INDEX idx_exclusions_category  ON policy_exclusions (category);
 CREATE INDEX idx_riders_policy        ON policy_riders (policy_id);
+CREATE INDEX idx_riders_type          ON policy_riders (rider_type);
 
 -- ── Credit cards ─────────────────────────────────────────────────────────────
 CREATE INDEX idx_cards_bank           ON credit_cards (bank);
@@ -466,8 +836,11 @@ CREATE INDEX idx_scrape_next_due      ON scrape_logs (next_scrape_due);
 
 ALTER TABLE insurers            ENABLE ROW LEVEL SECURITY;
 ALTER TABLE policies            ENABLE ROW LEVEL SECURITY;
+ALTER TABLE policy_documents    ENABLE ROW LEVEL SECURITY;
 ALTER TABLE policy_premiums     ENABLE ROW LEVEL SECURITY;
+ALTER TABLE policy_plans        ENABLE ROW LEVEL SECURITY;
 ALTER TABLE policy_coverage     ENABLE ROW LEVEL SECURITY;
+ALTER TABLE policy_plan_benefits ENABLE ROW LEVEL SECURITY;
 ALTER TABLE policy_exclusions   ENABLE ROW LEVEL SECURITY;
 ALTER TABLE policy_riders       ENABLE ROW LEVEL SECURITY;
 ALTER TABLE credit_cards        ENABLE ROW LEVEL SECURITY;
@@ -477,8 +850,11 @@ ALTER TABLE scrape_logs         ENABLE ROW LEVEL SECURITY;
 -- Public read access for reference / product data
 CREATE POLICY "public_read_insurers"    ON insurers        FOR SELECT USING (true);
 CREATE POLICY "public_read_policies"    ON policies        FOR SELECT USING (is_active = true);
+CREATE POLICY "public_read_policy_documents" ON policy_documents FOR SELECT USING (true);
 CREATE POLICY "public_read_premiums"    ON policy_premiums FOR SELECT USING (true);
+CREATE POLICY "public_read_policy_plans" ON policy_plans FOR SELECT USING (true);
 CREATE POLICY "public_read_coverage"    ON policy_coverage FOR SELECT USING (true);
+CREATE POLICY "public_read_plan_benefits" ON policy_plan_benefits FOR SELECT USING (true);
 CREATE POLICY "public_read_exclusions"  ON policy_exclusions FOR SELECT USING (true);
 CREATE POLICY "public_read_riders"      ON policy_riders   FOR SELECT USING (true);
 CREATE POLICY "public_read_cards"       ON credit_cards    FOR SELECT USING (is_active = true);
@@ -597,8 +973,32 @@ CREATE TRIGGER trg_policies_updated_at
   BEFORE UPDATE ON policies
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 
+CREATE TRIGGER trg_policy_documents_updated_at
+  BEFORE UPDATE ON policy_documents
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
 CREATE TRIGGER trg_premiums_updated_at
   BEFORE UPDATE ON policy_premiums
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER trg_policy_plans_updated_at
+  BEFORE UPDATE ON policy_plans
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER trg_policy_coverage_updated_at
+  BEFORE UPDATE ON policy_coverage
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER trg_policy_plan_benefits_updated_at
+  BEFORE UPDATE ON policy_plan_benefits
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER trg_policy_exclusions_updated_at
+  BEFORE UPDATE ON policy_exclusions
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at();
+
+CREATE TRIGGER trg_policy_riders_updated_at
+  BEFORE UPDATE ON policy_riders
   FOR EACH ROW EXECUTE FUNCTION update_updated_at();
 
 CREATE TRIGGER trg_cards_updated_at
@@ -618,10 +1018,11 @@ CREATE TRIGGER trg_chunks_updated_at
 -- INSURANCE
 --   insurers
 --     └── policies
+--           ├── policy_documents    (brochures, summaries, wording + extraction provenance)
 --           ├── policy_premiums     (age-banded pricing)
---           ├── policy_coverage     (per-benefit limits, deductibles, co-insurance)
---           ├── policy_exclusions
---           └── policy_riders
+--           ├── policy_coverage     (normalized benefits + payout and evidence fields)
+--           ├── policy_exclusions   (policy- or benefit-level exclusions + evidence)
+--           └── policy_riders       (optional add-ons + evidence)
 --
 -- CREDIT CARDS
 --   credit_cards                    (one row per card; JSONB for variable details)

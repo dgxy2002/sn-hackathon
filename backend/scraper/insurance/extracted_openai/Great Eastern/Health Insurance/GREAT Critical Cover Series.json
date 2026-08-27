@@ -1,0 +1,197 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Great Eastern",
+    "source_file": "Great Eastern/Health Insurance/GREAT Critical Cover Series.md",
+    "source_filename": "GREAT Critical Cover Series.md",
+    "document_type": "brochure",
+    "content_sha256": "004bdbcc929e53a5c9121ba5be59e6ea1140d9d6a705eafe39a35fd47626b946",
+    "local_markdown_path": "backend/scraper/insurance/Great Eastern/Health Insurance/GREAT Critical Cover Series.md",
+    "local_pdf_path": "backend/scraper/insurance/Great Eastern/Health Insurance/GREAT Critical Cover Series.pdf"
+  },
+  "extraction": {
+    "document_summary": "GREAT Critical Cover Series by Great Eastern is presented as a health insurance product focused on critical illness coverage that can continue beyond a first payout, including protection “over and over again” for recurring critical illnesses. The brochure emphasizes that some critical illnesses can recur and may raise the risk of developing a second or third critical illness, and the product is positioned to help manage financial impact from repeated episodes. The document includes several important “Important Notes” clarifications, including that all ages are “age next birthday,” and that it has “no savings or investment feature,” so “there is no cash value if the policy ends or is terminated prematurely.” It also notes figures are illustrative and “not a contract of insurance,” with terms specified in the policy contract.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "The provided Markdown contains only high-level marketing statements and Important Notes; it does not state the critical illness benefit structure, claim mechanics (e.g., number of claims supported, recurrence/waiting/survival rules), policy term, coverage limits, or eligibility/underwriting requirements.",
+      "No plan tiers/options, benefit amounts, deductibles, co-insurance, age ranges, or renewal rules are specified in the text provided."
+    ],
+    "policies": [
+      {
+        "company": "Great Eastern",
+        "policy_name": "GREAT Critical Cover Series",
+        "aliases": [
+          "Critical Cover Series"
+        ],
+        "quick_summary": "Critical illness coverage intended to pay repeatedly for recurring critical illnesses beyond the first claim. No savings/investment feature, and the document provides only general marketing descriptions plus Important Notes without technical coverage details or limits in the provided text extract. Ages refer to age next birthday; figures are illustrative and terms are in the policy contract; protected up to specified limits by SDIC (per brochure). There is no stated entry/max age, term length, claim limits, or payout amounts in the provided content excerpt, so specific benefit mechanics cannot be reliably extracted.",
+        "category": "critical_illness",
+        "policy_type": "critical_illness",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "Critical illness coverage that continues over and over again beyond a first claim (as described in marketing text)"
+        ],
+        "currency_options": [],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": null,
+        "entry_age_basis": "age_next_birthday",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": null,
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": null,
+        "premium_payment_term_description": null,
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": false,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [],
+        "important_caveats": [
+          "This is described as an advertisement/general information; it is not a contract of insurance and the precise terms are in the policy contract."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [],
+        "benefits": [
+          {
+            "benefit_name": "Recurring critical illness coverage (beyond first claim)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Marketing describes critical illness protection that continues beyond the first claim, i.e., protection “over and over” when critical illnesses recur.",
+            "trigger_description": "When a critical illness strikes again and/or recurs after an earlier critical illness claim (as described).",
+            "covered_conditions": [
+              "Critical illness (generic, not enumerated in provided text)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": null,
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "No specific number of repeat claims, recurrence definitions, waiting/survival, or benefit amount mechanics are stated in the provided text.",
+            "evidence": [
+              {
+                "quote": "Critical illnesses have a tendency\ntto strike again and again.",
+                "line_start": 1,
+                "line_end": 11,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "GREAT Critical Cover\nprotects you over and over.",
+                "line_start": 1,
+                "line_end": 13,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Critical Cover protectsyou over and over again, beyond your first claim",
+                "line_start": 5,
+                "line_end": 7,
+                "quote_token_coverage": 0.9071
+              }
+            ],
+            "extraction_confidence": "low"
+          }
+        ],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "G RE AT\nCritical Cover Series\nCritical illness coverage that continues\nover and over again, beyond your first claim",
+            "line_start": 1,
+            "line_end": 7,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Important Notes\nAll ages specified refer to age next birthday.",
+            "line_start": 4,
+            "line_end": 23,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "As this product has no savings or investment feature, there is no cash value if the policy ends or is terminated\nprematurely.",
+            "line_start": 10,
+            "line_end": 29,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "The above is for general information only. It is not a contract of insurance. The precise terms and conditions of this\ninsurance plan are specified in the policy contract.",
+            "line_start": 8,
+            "line_end": 27,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Protected up to specified limits by SDIC",
+            "line_start": 14,
+            "line_end": 33,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "low",
+        "review_notes": [
+          "Provided extract does not include critical illness definitions, payout amounts, claim limits (number of repeats), recurrence rules, term length, or eligibility/underwriting details; only the product concept and general Important Notes are extractable."
+        ],
+        "slug": "great-eastern-great-critical-cover-series"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 8,
+    "evidence_warnings": [],
+    "requires_human_review": true
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_053d3faba6d1ae4a016a8f1f080fa087d0b83ec29d52226e6a",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:15:00.221756+00:00",
+    "usage": {
+      "input_tokens": 4208,
+      "output_tokens": 1580,
+      "total_tokens": 5788,
+      "reasoning_tokens": 31,
+      "estimated_cost_usd": 0.0028166
+    }
+  }
+}

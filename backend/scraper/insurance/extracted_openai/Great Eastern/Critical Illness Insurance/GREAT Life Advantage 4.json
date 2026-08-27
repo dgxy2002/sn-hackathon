@@ -1,0 +1,460 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Great Eastern",
+    "source_file": "Great Eastern/Critical Illness Insurance/GREAT Life Advantage 4.md",
+    "source_filename": "GREAT Life Advantage 4.md",
+    "document_type": "brochure",
+    "content_sha256": "f0568ecf37155f73a0a3c46e46c7acbbafb8fd7fe5d36d360faf5fc90b6cac81",
+    "local_markdown_path": "backend/scraper/insurance/Great Eastern/Critical Illness Insurance/GREAT Life Advantage 4.md",
+    "local_pdf_path": "backend/scraper/insurance/Great Eastern/Critical Illness Insurance/GREAT Life Advantage 4.pdf"
+  },
+  "extraction": {
+    "document_summary": "Great Eastern’s GREAT Life Advantage 4 is described as a whole-of-life, regular premium investment-linked (ILP) plan that aims to provide “lifetime protection against Death, Total and Permanent Disability and Terminal Illness.” The brochure also states that you can enhance coverage with “optional riders” that provide extra financial support for critical illness at “early, intermediate and critical stages,” but it does not provide rider names or specific payout amounts for these critical illness stages in the provided text. The plan includes a Child Cover Benefit that automatically covers your child(ren) and pays a S$20,000 payout for a “major life-impacting event.” Coverage chosen is guaranteed for the first 10 years. The policy offers flexibility to increase coverage at “eight life’s milestone events” without medical assessment, and allows single premium top-ups and withdrawals. Investment options include three GreatLink Dynamic Portfolios—Secure, Balanced, and Growth—with equity exposure ranges stated for each.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "A large portion of the provided Markdown appears corrupted/garbled, reducing confidence for extracting age/limits/premium mechanics beyond what remains readable.",
+      "Critical illness protection is mentioned as optional riders at early/intermediate/critical stages, but no rider names and no explicit benefit amounts are clearly stated in the provided text.",
+      "Some numerical details beyond S$100/month and the Child Cover Benefit S$20,000 are unreadable in the provided material."
+    ],
+    "policies": [
+      {
+        "company": "Great Eastern",
+        "policy_name": "GREAT Life Advantage 4",
+        "aliases": [
+          "GREAT Life Advantage 4 (GLA4)"
+        ],
+        "quick_summary": "Whole-of-life regular premium investment-linked plan providing lifetime protection against Death, Total and Permanent Disability (TPD) and Terminal Illness, with optional critical-illness rider protection at early, intermediate and critical stages (rider names and payout amounts not stated). Includes Child Cover Benefit of S$20,000 and guarantees chosen coverage for the first 10 years; offers coverage increases at eight life milestone events without medical assessment and allows single premium top-ups/withdrawals. Investment choices include GreatLink Dynamic Portfolios (Secure/Balanced/Growth).",
+        "category": "life",
+        "policy_type": "investment_linked",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_stated",
+        "coverage_scope": [
+          "Death",
+          "Total and Permanent Disability (TPD)",
+          "Terminal Illness",
+          "Child Cover Benefit (child(ren) major life-impacting event)"
+        ],
+        "currency_options": [
+          "S$"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": null,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "Coverage can be increased at eight life’s milestone events without medical assessment (for those events).",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Whole life coverage; coverage chosen is guaranteed for the first 10 years.",
+        "premium_payment_term_description": "Regular premium.",
+        "premium_frequencies": [
+          "monthly (stated as “S$100 a month”)"
+        ],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [],
+        "important_caveats": [
+          "The brochure mentions optional critical illness protection via riders at early/intermediate/critical stages, but no rider names or specific payout amounts are stated in the provided text.",
+          "The investment-linked portion uses GreatLink Dynamic Portfolios (Secure/Balanced/Growth), and the brochure includes risk-level statements for the portfolios (high degree of risk for Balanced/Growth)."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "Secure Portfolio (GreatLink Dynamic Portfolio)",
+            "plan_code": null,
+            "description": "GreatLink Dynamic Portfolio “Secure Portfolio” selection with stated equity exposure “ranging from 10–30%” and fixed income exposure “ranging from 60–90%” (dynamic management described).",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "“Secure Portfolio”",
+                "line_start": 59,
+                "line_end": 59,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "“equity exposure ranging from 10-30% and fixed income exposure ranging from 60-90%”",
+                "line_start": 67,
+                "line_end": 72,
+                "quote_token_coverage": 0.995
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "Balanced Portfolio (GreatLink Dynamic Portfolio)",
+            "plan_code": null,
+            "description": "GreatLink Dynamic Portfolio “Balanced Portfolio” selection with stated equity exposure “ranging from 30–70%” and fixed income exposure “ranging from 30–70%” (dynamic management described).",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "“Balanced Portfolio”",
+                "line_start": 59,
+                "line_end": 59,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "“equity exposure ranging from 30-70% and fixed income exposure ranging from 30-70%”",
+                "line_start": 67,
+                "line_end": 72,
+                "quote_token_coverage": 0.995
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "Growth Portfolio (GreatLink Dynamic Portfolio)",
+            "plan_code": null,
+            "description": "GreatLink Dynamic Portfolio “Growth Portfolio” selection with stated equity exposure “ranging from 50–100%” and fixed income exposure “ranging from 0–50%” (dynamic management described).",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "“Growth Portfolio”",
+                "line_start": 59,
+                "line_end": 59,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "“equity exposure ranging from 50-100% and fixed income exposure ranging from 0-50%”",
+                "line_start": 67,
+                "line_end": 72,
+                "quote_token_coverage": 0.995
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Death protection (whole life protection)",
+            "benefit_category": "death",
+            "benefit_level": "base",
+            "benefit_description": "The plan provides whole life coverage with lifetime protection against Death (payout amount not stated in provided text).",
+            "trigger_description": "Death during coverage.",
+            "covered_conditions": [
+              "Death"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "Payout mechanics/amount not stated in provided text.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure states “whole life coverage” and “lifetime protection” against Death, but does not specify the benefit amount in the provided text.",
+            "evidence": [
+              {
+                "quote": "“provides lifetime protection against Death, Total and Permanent Disability and Terminal Illness.”",
+                "line_start": 9,
+                "line_end": 10,
+                "quote_token_coverage": 0.999
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Total and Permanent Disability (TPD) protection (whole life protection)",
+            "benefit_category": "disability",
+            "benefit_level": "base",
+            "benefit_description": "The plan provides whole life coverage with lifetime protection against Total and Permanent Disability (TPD) (payout amount not stated in provided text).",
+            "trigger_description": "Total and Permanent Disability (TPD) during coverage.",
+            "covered_conditions": [
+              "Total and Permanent Disability (TPD)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "Payout mechanics/amount not stated in the provided text.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "“provides lifetime protection against Death, Total and Permanent Disability and Terminal Illness.”",
+                "line_start": 9,
+                "line_end": 10,
+                "quote_token_coverage": 0.999
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Terminal Illness protection (whole life protection)",
+            "benefit_category": "life",
+            "benefit_level": "base",
+            "benefit_description": "The plan provides whole life coverage with lifetime protection against Terminal Illness (payout amount not stated in provided text).",
+            "trigger_description": "Terminal Illness during coverage.",
+            "covered_conditions": [
+              "Terminal Illness"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "Payout mechanics/amount not stated in the provided text.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "“provides lifetime protection against Death, Total and Permanent Disability and Terminal Illness.”",
+                "line_start": 9,
+                "line_end": 10,
+                "quote_token_coverage": 0.999
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Child Cover Benefit",
+            "benefit_category": "life",
+            "benefit_level": "base",
+            "benefit_description": "Automatically covers your child and future children with a S$20,000 payout upon a “major life-impacting event” (as described).",
+            "trigger_description": "Child encounters a major life-impacting event.",
+            "covered_conditions": [
+              "Major life-impacting event (for child)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 20000,
+            "payout_unit": null,
+            "payout_basis": "Fixed payout described in brochure.",
+            "payout_description": "S$20,000 payout.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Your child, and any future children, are automatically covered under your plan.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure provides the payout amount and trigger wording, but not further details such as eligibility ages or the exact definition of “major life-impacting event.”",
+            "evidence": [
+              {
+                "quote": "“Child Cover Benefit⁷”",
+                "line_start": 35,
+                "line_end": 35,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "“provides a S$20,000 payout if your child encounters a major life-impacting event .”",
+                "line_start": 37,
+                "line_end": 37,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "“GREAT Life Advantage 4 offers a comprehensive protection solution with whole life coverage and optional critical illness protection in one plan.”",
+            "line_start": 6,
+            "line_end": 7,
+            "quote_token_coverage": 0.999
+          },
+          {
+            "quote": "“whole of life, regularpremium investment-linked plan provides lifetime protection against Death, Total and Permanent Disability and Terminal Illness.”",
+            "line_start": 7,
+            "line_end": 9,
+            "quote_token_coverage": 0.998
+          },
+          {
+            "quote": "“Guaranteed protection for the first 10 years”",
+            "line_start": 25,
+            "line_end": 25,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "“Your child, and any future children, are automatically covered under your plan with the Child Cover Benefit which provides a S$20,000 payout”",
+            "line_start": 36,
+            "line_end": 37,
+            "quote_token_coverage": 0.999
+          },
+          {
+            "quote": "“You can enhance your coverage with optional riders that offer extra financial support against critical illness at early, intermediate and critical stages.”",
+            "line_start": 10,
+            "line_end": 11,
+            "quote_token_coverage": 0.999
+          }
+        ],
+        "extraction_confidence": "medium",
+        "review_notes": [
+          "Critical illness coverage is described as optional riders at early/intermediate/critical stages, but no rider names, plan codes, or benefit amounts are stated clearly in the provided text, so no separate rider objects or rider plans were created.",
+          "Only clearly stated base benefits (Death/TPD/Terminal Illness and Child Cover Benefit) were extracted with explicit evidence."
+        ],
+        "slug": "great-eastern-great-life-advantage-4"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 16,
+    "evidence_warnings": [],
+    "requires_human_review": true
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_0e7c637c234b7df1016a8f1ec90eb087d08a97d47e9724e439",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:14:15.505653+00:00",
+    "usage": {
+      "input_tokens": 5432,
+      "output_tokens": 4202,
+      "total_tokens": 9634,
+      "reasoning_tokens": 359,
+      "estimated_cost_usd": 0.0063389
+    }
+  }
+}

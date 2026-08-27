@@ -1,0 +1,1330 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "AIA",
+    "source_file": "AIA/Health/AIA HealthShield Gold Max.md",
+    "source_filename": "AIA HealthShield Gold Max.md",
+    "document_type": "brochure",
+    "content_sha256": "0aadcc3ab282f402e6490baca0d6ce8189c0c6db7dd1be2526ef81104b89f0be",
+    "local_markdown_path": "backend/scraper/insurance/AIA/Health/AIA HealthShield Gold Max.md",
+    "local_pdf_path": "backend/scraper/insurance/AIA/Health/AIA HealthShield Gold Max.pdf"
+  },
+  "extraction": {
+    "document_summary": "AIA HealthShield Gold Max is an AIA integrated shield plan (MediShield Life plus an additional private insurance coverage portion) designed to cover hospitalisation and many related inpatient/outpatient costs. It is offered with three plan tiers for ward entitlements: Max A (private standard ward or lower), Max B (A-class ward or lower), and Max B Lite (4-bedder or B1-class ward or lower). The brochure states high limits including “up to S$2 million per year” and “unlimited lifetime claim amount”, plus “guaranteed lifetime coverage.” Key mechanics include deductibles and co-insurance for eligible hospital bills and extended pre-/post-hospitalisation coverage (up to 13 months before/after hospitalisation, subject to the plan type). It also adds outpatient cancer benefits and a separate “extra cover for 30 critical illnesses per policy year” (up to S$100,000 for Max A; S$75,000 Max B; S$50,000 Max B Lite). A material caveat is that certain benefits are payable only on the plan’s stated ward/conditions (e.g., overseas treatment and specific outpatient limits) and the brochure notes that some exclusions apply (full list in policy contracts).",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Brochure provides extensive benefit tables and explicit numeric limits by plan tier (Max A / Max B / Max B Lite and Standard plan for public hospitals).",
+      "Riders/add-ons are explicitly named as “add-on” (AIA Max VitalHealth Pro) and “Optional” add-ons within it (Cancer Care Pro, Emergency Care Pro).",
+      "Some underwriting/eligibility fields (entry age range, residency requirements, occupation classes, underwriting method) are not stated.",
+      "Some coverage mechanics reference footnotes (pre-existing conditions, pro-ration, deductible/co-insurance structure), but do not fully quantify every scenario in this brochure excerpt.",
+      "No explicit premium amounts are provided; premium-related fields are mostly described qualitatively (e.g., “no premium increase after claims”, “premium capped/co-payment” for add-on)."
+    ],
+    "policies": [
+      {
+        "company": "AIA",
+        "policy_name": "AIA HealthShield Gold Max",
+        "aliases": [
+          "AIA HealthShield Gold (HSG) Max",
+          "AIA HealthShield Gold Max A",
+          "AIA HealthShield Gold Max B",
+          "AIA HealthShield Gold Max B Lite"
+        ],
+        "quick_summary": "AIA HealthShield Gold Max is an Integrated Shield Plan (MediShield Life + AIA private insurance portion) with “guaranteed lifetime coverage” and “unlimited lifetime claim amount.” It is sold in ward-entitlement tiers (Max A / Max B / Max B Lite) and is structured around hospitalisation and surgical benefits with pre- and post-hospitalisation coverage (including up to 13 months before/after hospitalisation depending on plan and admission context). It also includes specified inpatient extras (e.g., hospice inpatient palliative care, psychiatric treatment, pregnancy complications and congenital abnormalities subject to waiting periods) and outpatient benefits such as cancer-related treatments. A key limitation noted is that some benefits are only payable when conditions are met (e.g., overseas arrangement, and the brochure states certain psychiatric-related diagnoses make these benefits not payable).",
+        "category": "health",
+        "policy_type": "integrated_shield_plan",
+        "plan_tier": null,
+        "target_customer": "not_stated",
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "Hospitalisation and surgical benefits",
+          "Pre-hospitalisation / pre-surgery benefits",
+          "Post-hospitalisation benefits",
+          "Hospice inpatient palliative care",
+          "Community hospital charges",
+          "Inpatient psychiatric treatment and post-hospitalisation psychiatric treatment",
+          "Outpatient benefits including radiotherapy/renal dialysis/erythropoietin/immunosuppressants/long-term parenteral nutrition and cancer treatment items",
+          "Final expense benefit",
+          "Waiver of one year’s premium upon total and permanent disability",
+          "Extra cover for 30 critical illnesses per policy year",
+          "Congenital abnormalities benefits",
+          "Living donor organ transplant benefits",
+          "Medical treatment outside Singapore benefits (subject to conditions)",
+          "Cell, tissue and gene therapy and Proton beam therapy (as stated in the benefit tables)",
+          "Outpatient and home-based treatments such as NPWT/rTMS/PDHM/HBOT/OPAT/home ventilation and respiratory support (as stated)"
+        ],
+        "currency_options": [
+          "SGD"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": 75,
+        "max_coverage_age": null,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": null,
+        "annual_limit": 2000000,
+        "lifetime_limit": null,
+        "policy_year_limit": 2000000,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Guaranteed lifetime coverage",
+        "premium_payment_term_description": "not_stated",
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": "not_stated",
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [],
+        "important_caveats": [
+          "Premiums are not guaranteed; the insurer may review/increase with age upon renewal (as stated in Terms and Conditions).",
+          "Some benefits have waiting periods (e.g., pregnancy complications and congenital abnormalities, living donor organ transplant).",
+          "The brochure states that certain psychiatric-condition diagnoses make related benefits not payable.",
+          "Pro-ration may apply for private hospital bills or public hospital A/B1-class ward bills under MediShield Life (noted in the brochure note).",
+          "Value-added services (e.g., Teladoc/AIA Vitality partner services) are not contractual insurance benefits and may be withdrawn (general note)."
+        ],
+        "ward_class": "private",
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "AIA HealthShield Gold Max A",
+            "plan_code": null,
+            "description": "Private hospital (private hospital ward entitlement: standard room or lower). Includes higher limits such as extra cover for 30 critical illnesses per policy year up to S$100,000.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": "private",
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": 2000000,
+            "lifetime_limit": null,
+            "policy_year_limit": 2000000,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "not_stated",
+            "coverage_term_description": "Guaranteed lifetime coverage and unlimited lifetime claim amount (as described for the product overall).",
+            "premium_payment_term_description": "Premiums are not guaranteed; may increase with age upon renewal.",
+            "benefit_amounts": [
+              {
+                "benefit_name": "Extra cover for 30 critical illnesses benefit",
+                "payout_type": null,
+                "payout_value": 100000,
+                "payout_unit": "per policy year",
+                "payout_basis": null,
+                "payout_description": "Extra cover for 30 critical illnesses benefit (per policy year)",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Value stated for plan tier A in the benefit table.",
+                "evidence": [
+                  {
+                    "quote": "Extra cover for 30 critical  illnesses benefit per policy year23 per policy year per policy year",
+                    "line_start": 428,
+                    "line_end": 430,
+                    "quote_token_coverage": 0.998
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Congenital abnormalities benefits (female insured’s biological child)",
+                "payout_type": null,
+                "payout_value": 20000,
+                "payout_unit": "per lifetime",
+                "payout_basis": null,
+                "payout_description": "Up to S$20,000 per lifetime (for female insured’s biological child)",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 20000,
+                "limit_type": "lifetime",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Also states from birth16 and additional per-child amounts for the insured and per child.",
+                "evidence": [
+                  {
+                    "quote": "Congenital abnormalities benefits | Up to 20,000 per lifetime  | Up to 16,000 per lifetime  | Up to 12,000 per lifetime",
+                    "line_start": 322,
+                    "line_end": 323,
+                    "quote_token_coverage": 0.999
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Living donor organ transplant benefits (insured)",
+                "payout_type": null,
+                "payout_value": 60000,
+                "payout_unit": "per organ transplant",
+                "payout_basis": null,
+                "payout_description": "60,000 per organ transplant (insured as a living donor)",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 60000,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Insured (as a living donor) donating an organ16 | 60,000               | 40,000               | 20,000               |",
+                    "line_start": 330,
+                    "line_end": 331,
+                    "quote_token_coverage": 0.999
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": "Plan tier A is explicitly listed as Max A and tied to private hospital standard room entitlement and higher critical-illness extra cover limit.",
+            "evidence": [
+              {
+                "quote": "AIA HealthShield Gold A Max VitalHealth Pro A’s exclusive add-ons",
+                "line_start": 87,
+                "line_end": 102,
+                "quote_token_coverage": 0.985
+              },
+              {
+                "quote": "Three plans tailored to your healthcare needs: ... A Max ... For stay in any standard ward in a private hospital",
+                "line_start": 61,
+                "line_end": 65,
+                "quote_token_coverage": 0.996
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "AIA HealthShield Gold Max B",
+            "plan_code": null,
+            "description": "Public hospital (A-class ward or lower). Includes extra cover for 30 critical illnesses per policy year up to S$75,000.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": "A",
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": 2000000,
+            "lifetime_limit": null,
+            "policy_year_limit": 2000000,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "not_stated",
+            "coverage_term_description": "Guaranteed lifetime coverage and unlimited lifetime claim amount (as described for the product overall).",
+            "premium_payment_term_description": "Premiums are not guaranteed; may increase with age upon renewal.",
+            "benefit_amounts": [
+              {
+                "benefit_name": "Extra cover for 30 critical illnesses benefit",
+                "payout_type": null,
+                "payout_value": 75000,
+                "payout_unit": "per policy year",
+                "payout_basis": null,
+                "payout_description": "Extra cover for 30 critical illnesses benefit (per policy year)",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Value stated for plan tier B in the benefit table.",
+                "evidence": [
+                  {
+                    "quote": "Extra cover for 30 critical  illnesses benefit per policy year23 per policy year per policy year",
+                    "line_start": 428,
+                    "line_end": 430,
+                    "quote_token_coverage": 0.998
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Congenital abnormalities benefits (female insured’s biological child)",
+                "payout_type": null,
+                "payout_value": 16000,
+                "payout_unit": "per lifetime",
+                "payout_basis": null,
+                "payout_description": "Up to S$16,000 per lifetime (for female insured’s biological child)",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 16000,
+                "limit_type": "lifetime",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Congenital abnormalities benefits | Up to 20,000 per lifetime  | Up to 16,000 per lifetime  | Up to 12,000 per lifetime",
+                    "line_start": 322,
+                    "line_end": 323,
+                    "quote_token_coverage": 0.999
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Living donor organ transplant benefits (insured)",
+                "payout_type": null,
+                "payout_value": 40000,
+                "payout_unit": "per organ transplant",
+                "payout_basis": null,
+                "payout_description": "40,000 per organ transplant (insured as a living donor)",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 40000,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Insured (as a living donor) donating an organ16 | 60,000               | 40,000               | 20,000               |",
+                    "line_start": 330,
+                    "line_end": 331,
+                    "quote_token_coverage": 0.999
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": "Plan tier B is explicitly listed as Max B and tied to public hospital A-class ward entitlement and critical-illness extra cover limit.",
+            "evidence": [
+              {
+                "quote": "For stay in A-class ward or lower in a public hospital",
+                "line_start": 64,
+                "line_end": 65,
+                "quote_token_coverage": 0.999
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "AIA HealthShield Gold Max B Lite",
+            "plan_code": null,
+            "description": "Public hospital (B1-class ward or lower, including 4-bedder). Includes extra cover for 30 critical illnesses per policy year up to S$50,000.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": "B1",
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": 2000000,
+            "lifetime_limit": null,
+            "policy_year_limit": 2000000,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "not_stated",
+            "coverage_term_description": "Guaranteed lifetime coverage and unlimited lifetime claim amount (as described for the product overall).",
+            "premium_payment_term_description": "Premiums are not guaranteed; may increase with age upon renewal.",
+            "benefit_amounts": [
+              {
+                "benefit_name": "Extra cover for 30 critical illnesses benefit",
+                "payout_type": null,
+                "payout_value": 50000,
+                "payout_unit": "per policy year",
+                "payout_basis": null,
+                "payout_description": "Extra cover for 30 critical illnesses benefit (per policy year)",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Value stated for plan tier B Lite in the benefit table.",
+                "evidence": [
+                  {
+                    "quote": "Extra cover for 30 critical  illnesses benefit per policy year23 per policy year per policy year",
+                    "line_start": 428,
+                    "line_end": 430,
+                    "quote_token_coverage": 0.998
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Congenital abnormalities benefits (female insured’s biological child)",
+                "payout_type": null,
+                "payout_value": 12000,
+                "payout_unit": "per lifetime",
+                "payout_basis": null,
+                "payout_description": "Up to S$12,000 per lifetime (for female insured’s biological child)",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 12000,
+                "limit_type": "lifetime",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Congenital abnormalities benefits | Up to 20,000 per lifetime  | Up to 16,000 per lifetime  | Up to 12,000 per lifetime",
+                    "line_start": 322,
+                    "line_end": 323,
+                    "quote_token_coverage": 0.999
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Living donor organ transplant benefits (insured)",
+                "payout_type": null,
+                "payout_value": 20000,
+                "payout_unit": "per organ transplant",
+                "payout_basis": null,
+                "payout_description": "20,000 per organ transplant (insured as a living donor)",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 20000,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Insured (as a living donor) donating an organ16 | 60,000               | 40,000               | 20,000               |",
+                    "line_start": 330,
+                    "line_end": 331,
+                    "quote_token_coverage": 0.999
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": "Plan tier B Lite is explicitly listed as Max B Lite and tied to public hospital B1-class ward or lower (including 4-bedder) and the lowest critical-illness extra cover limit.",
+            "evidence": [
+              {
+                "quote": "For stay in 4-bedder B1-class ward or lower in a public hospital",
+                "line_start": 64,
+                "line_end": 65,
+                "quote_token_coverage": 0.999
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "AIA HealthShield Gold Max Standard plan (Public hospitals: B1-class ward or lower)",
+            "plan_code": null,
+            "description": "A separate standard plan benefit table shown for public hospitals with hospital ward entitlement (B1-class ward or lower), including inpatient daily room and board (2,250/day) and other outpatient/cancer limits and deductible/co-insurance figures.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": "B1",
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": 2000,
+            "co_insurance_pct": 10,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "not_stated",
+            "coverage_term_description": "Maximum coverage period stated as Lifetime (within this standard plan table).",
+            "premium_payment_term_description": "not_stated",
+            "benefit_amounts": [
+              {
+                "benefit_name": "Daily room and board charges (public hospitals)",
+                "payout_type": null,
+                "payout_value": 2250,
+                "payout_unit": "per day",
+                "payout_basis": null,
+                "payout_description": "Daily room and board charges in public hospitals (standard plan)",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "The standard plan table states 2,250 per day and higher limits by 300 for the first two days of inpatient stay for ICU charges.",
+                "evidence": [
+                  {
+                    "quote": "2,250 per day",
+                    "line_start": 488,
+                    "line_end": 507,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Daily intensive care unit (ICU) charges (public hospitals)",
+                "payout_type": null,
+                "payout_value": 6850,
+                "payout_unit": "per day",
+                "payout_basis": null,
+                "payout_description": "Daily intensive care unit charges in public hospitals (standard plan)",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Also states limits higher by 300 for first two days of inpatient stay.",
+                "evidence": [
+                  {
+                    "quote": "6,850 per day",
+                    "line_start": 492,
+                    "line_end": 511,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Deductible (per policy year)",
+                "payout_type": null,
+                "payout_value": 2000,
+                "payout_unit": "per policy year",
+                "payout_basis": null,
+                "payout_description": "Deductible (per policy year) for C-class ward in the standard plan table",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 2000,
+                "limit_type": "deductible per policy year",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "C-class ward",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "C-class ward 1,500\nB2/B2+-class ward 2,000\nB1-class ward 2,500",
+                    "line_start": 608,
+                    "line_end": 627,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              }
+            ],
+            "notes": "This tier appears as a separate named ‘Standard plan’ benefit table within the brochure for public hospitals; this extract also shows deductible and co-insurance figures and ‘Maximum coverage period Lifetime’ for that table.",
+            "evidence": [
+              {
+                "quote": "Benefits of AIA HealthShield Gold Max Standard Plan",
+                "line_start": 480,
+                "line_end": 499,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Maximum coverage period Lifetime",
+                "line_start": 619,
+                "line_end": 638,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Hospital ward entitlement - maximum annual hospitalisation/surgical limit",
+            "benefit_category": "hospitalisation",
+            "benefit_level": "base",
+            "benefit_description": "Brochure states a high policy limit “up to S$2 million per year” and “unlimited lifetime claim amount” under AIA HealthShield Gold Max.",
+            "trigger_description": "Not stated as a specific insured event; applies to hospitalisation/surgical benefits within policy limit mechanics.",
+            "covered_conditions": [
+              "Hospitalisation and surgical benefits (as described within the plan benefit tables)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": 2000000,
+            "payout_unit": "per year",
+            "payout_basis": null,
+            "payout_description": "Up to S$2 million per year limit and unlimited lifetime claim amount (as stated for the product).",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 2000000,
+            "limit_type": "annual",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "Singapore and overseas as per other benefit sections",
+            "notes": "The brochure also states pro-ration may apply under MediShield Life for certain private/public ward bills.",
+            "evidence": [
+              {
+                "quote": "High policy limit of up to S$2 million per year",
+                "line_start": 36,
+                "line_end": 55,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Guaranteed lifetime coverage and unlimited lifetime claim amount2",
+                "line_start": 38,
+                "line_end": 57,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Pre-hospitalisation / pre-surgery benefit",
+            "benefit_category": "hospitalisation",
+            "benefit_level": "base",
+            "benefit_description": "Pre-hospitalisation benefit with durations stated in the benefit table; varies by whether treated by an AIA preferred provider or where hospitalised (private/public).",
+            "trigger_description": "Pre-hospitalisation/pre-surgery associated with hospitalisation.",
+            "covered_conditions": [
+              "Not stated as a specific diagnosis; applies to eligible hospitalisation and surgical context."
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "As charged14 (per table)",
+            "payout_description": "Pre-hospitalisation benefit is stated as ‘As charged’ with timing limits (e.g., ‘within 100 days before hospitalisation if treated by an AIA preferred provider’ and also 13 months timing depending on plan context).",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "Singapore (per plan context)",
+            "notes": "Exact day/month windows differ by plan and whether a preferred provider is involved, as shown in the benefit table.",
+            "evidence": [
+              {
+                "quote": "2.  Pre-hospitalisation benefit or 13 months before  in public hospital  (within 100 days before\n  hospitalisation if treated  by an AIA preferred  provider12)                 |",
+                "line_start": 298,
+                "line_end": 302,
+                "quote_token_coverage": 0.996
+              },
+              {
+                "quote": "within 100 days before\n  hospitalisation",
+                "line_start": 298,
+                "line_end": 298,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Post-hospitalisation benefits (including extended post-hospitalisation for 30 critical illnesses)",
+            "benefit_category": "hospitalisation",
+            "benefit_level": "base",
+            "benefit_description": "Post-hospitalisation benefits after hospitalisation, including an extended post-hospitalisation treatment for 30 critical illnesses.",
+            "trigger_description": "Post-hospitalisation treatment; extended coverage for specified critical illnesses after the hospitalisation ends.",
+            "covered_conditions": [
+              "30 critical illnesses (as referenced for extension)",
+              "Post-hospitalisation treatment generally"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "As charged14 (per table)",
+            "payout_description": "Includes ‘Extended post-hospitalisation treatment for 30 critical illnesses (100 days after the hospitalisation ends)’.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 100000,
+            "limit_type": "per policy year (for extra cover)",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "Singapore (per plan context)",
+            "notes": "The critical-illness extra cover amount is separately specified in the benefit table.",
+            "evidence": [
+              {
+                "quote": "Extended post-hospitalisation treatment  for 30 critical illnesses (100 days after the hospitalisation15 ends)",
+                "line_start": 316,
+                "line_end": 317,
+                "quote_token_coverage": 0.999
+              },
+              {
+                "quote": "Extra cover for 30 critical illnesses benefit per policy year23 per policy year per policy year",
+                "line_start": 428,
+                "line_end": 430,
+                "quote_token_coverage": 0.998
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Hospice inpatient palliative care",
+            "benefit_category": "hospitalisation",
+            "benefit_level": "base",
+            "benefit_description": "Hospice inpatient palliative care benefit, with daily limits and also stated in the inpatient benefit table.",
+            "trigger_description": "When the insured receives hospice inpatient palliative care.",
+            "covered_conditions": [
+              "Hospice inpatient palliative care"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": 560,
+            "payout_unit": "per day (general)",
+            "payout_basis": null,
+            "payout_description": "Hospice inpatient palliative care (general) and (specialised) daily limits are shown for the Standard plan section.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "Singapore (per plan context)",
+            "notes": "Plan Max A/B/B Lite inpatient hospice limits are shown as ‘As charged14’ in one table excerpt, while the Standard plan excerpt gives fixed daily limits.",
+            "evidence": [
+              {
+                "quote": "Hospice inpatient palliative care\n  (general) 560 per day\n• Hospice inpatient palliative care (specialised) 760 per day",
+                "line_start": 530,
+                "line_end": 549,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Hospice inpatient palliative care",
+                "line_start": 41,
+                "line_end": 60,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Inpatient psychiatric treatment and post-hospitalisation psychiatric treatment",
+            "benefit_category": "mental_health",
+            "benefit_level": "base",
+            "benefit_description": "Covers inpatient psychiatric treatment and post-hospitalisation psychiatric treatment, with fixed per-policy-year limits and post-hospitalisation time window.",
+            "trigger_description": "Insured receives psychiatric treatment in-hospital and/or post-hospitalisation within specified days.",
+            "covered_conditions": [
+              "Psychiatric treatment (in-hospital and post-hospitalisation)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": 5000,
+            "payout_unit": "per policy year (in-hospital)",
+            "payout_basis": null,
+            "payout_description": "In-hospital psychiatric treatment limit and post-hospitalisation psychiatric treatment limit are shown by plan tier.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 5000,
+            "limit_type": "per policy year",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "not_stated",
+            "notes": "The brochure’s footnotes state these benefits are not payable if the insured is diagnosed and hospitalised due to a psychiatric condition.",
+            "evidence": [
+              {
+                "quote": "9.  Psychiatric treatment benefits\n  In-hospital psychiatric treatment\n   Post-hospitalisation psychiatric treatment\n|     | 5,000 per policy year | 4,000 per policy year | 3,500 per policy year |",
+                "line_start": 356,
+                "line_end": 360,
+                "quote_token_coverage": 0.996
+              },
+              {
+                "quote": "These benefits are not payable if the insured is diagnosed and hospitalised due to a psychiatric condition.",
+                "line_start": 803,
+                "line_end": 822,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Congenital abnormalities benefits (waiting period applies)",
+            "benefit_category": "maternity",
+            "benefit_level": "base",
+            "benefit_description": "Congenital abnormalities benefit with per-child lifetime limits and stated waiting period; covers female insured’s biological child and a benefit for the insured.",
+            "trigger_description": "Eligible congenital abnormalities occur for the insured/child.",
+            "covered_conditions": [
+              "Congenital abnormalities"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "The table shows congenital abnormalities benefits up to certain amounts per lifetime by plan tier and mentions ‘from birth16’. The brochure states a 10-month waiting period for congenital abnormalities and that eligible expenses incurred during the first 24 months from date of birth of the child will be reimbursed.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 20000,
+            "limit_type": "lifetime (for Max A shown)",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Eligible expenses during first 24 months from date of birth will be reimbursed (per waiting period note).",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "not_stated",
+            "notes": "Waiting is expressed as months/years in footnote; no day-based number provided.",
+            "evidence": [
+              {
+                "quote": "10 months waiting period for congenital abnormalities benefit.",
+                "line_start": 834,
+                "line_end": 853,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Congenital abnormalities benefits\n|     | Up to 20,000 per lifetime  | Up to 16,000 per lifetime  | Up to 12,000 per lifetime",
+                "line_start": 304,
+                "line_end": 323,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Living donor organ transplant benefits (insured)",
+            "benefit_category": "transplant",
+            "benefit_level": "base",
+            "benefit_description": "Benefit when the insured donates an organ as a living donor (with per-organ fixed amounts by plan tier).",
+            "trigger_description": "The insured donates an organ as a living donor.",
+            "covered_conditions": [
+              "Living donor organ transplant benefits (insured as a living donor)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": 60000,
+            "payout_unit": "per organ transplant (Max A)",
+            "payout_basis": null,
+            "payout_description": "60,000 per organ transplant for the insured under Max A; 40,000 under Max B; 20,000 under Max B Lite.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 60000,
+            "limit_type": "per organ transplant",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "not_stated",
+            "notes": "A waiting period note is also provided for living donor organ transplant benefit.",
+            "evidence": [
+              {
+                "quote": "Living donor organ transplant benefits\n  Insured (as a living donor) donating an organ16\n|     | 60,000               | 40,000               | 20,000               |",
+                "line_start": 312,
+                "line_end": 331,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "24 months waiting period for living donor organ transplant benefit.",
+                "line_start": 836,
+                "line_end": 855,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Outpatient psychiatric exclusion for psychiatric-diagnosis hospitalisation",
+            "benefit_category": "exclusion",
+            "benefit_level": "base",
+            "benefit_description": "Brochure states that certain benefits are not payable if the insured is diagnosed and hospitalised due to a psychiatric condition.",
+            "trigger_description": "Diagnosis and hospitalisation due to a psychiatric condition.",
+            "covered_conditions": [
+              "psychiatric condition (as described in footnote)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "No benefits payable if the insured is diagnosed and hospitalised due to a psychiatric condition (applies to outpatient? stated as ‘These benefits’ in footnote for psychiatric-related items).",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "not_stated",
+            "notes": "This is captured as benefit non-payability rather than a full list of exclusions.",
+            "evidence": [
+              {
+                "quote": "These benefits are not payable if the insured is diagnosed and hospitalised due to a psychiatric condition.",
+                "line_start": 803,
+                "line_end": 822,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [
+          {
+            "name": "AIA Max VitalHealth Pro A",
+            "description": "Add-on to AIA HealthShield Gold Max A. It covers/offsets co-insurance incurred under AIA HealthShield Gold Max and/or Cancer Care Pro, adds an immediate family accommodation benefit, post-hospitalisation alternative medicine and home nursing, home palliative care, non-listed cell/tissue/gene therapy, and early detection screening (colonoscopy and mammogram) plus Teladoc personal medical case management.",
+            "rider_type": "add-on",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "AIA Max VitalHealth Pro A must be in-force for a minimum of 2 years for preventive care screening (per footnote).",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": "Brochure also specifies co-payment mechanics: 5% co-payment for every claim, capped at S$6,000 per policy year under certain conditions (preferred provider, pre-authorisation certificate, or emergency A&E referral).",
+            "evidence": [
+              {
+                "quote": "AIA Max VitalHealth Pro A covers the co-insurance incurred under AIA HealthShield Gold Max",
+                "line_start": 643,
+                "line_end": 648,
+                "quote_token_coverage": 0.995
+              },
+              {
+                "quote": "There will be a 5% co-payment for every claim, capped at 6,000 per policy year if:",
+                "line_start": 633,
+                "line_end": 652,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Early- detection screening11\nMammogram for women aged 40 – 69\n(once every 2 years)",
+                "line_start": 665,
+                "line_end": 684,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "AIA Max VitalHealth Pro B",
+            "description": "Add-on plan for public hospitals (A-class ward) that covers co-insurance incurred under AIA HealthShield Gold Max and/or Cancer Protect (cancer drug treatments on CDL and cancer drug services) and provides accommodation, post-hospitalisation alternative medicine/home nursing and cancer outpatient add-on benefits with specified limits.",
+            "rider_type": "add-on",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "not_stated",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": "Provides 5% co-payment for every claim capped at S$6,000 per policy year under conditions; includes accommodation and home nursing with different per-day/per-policy-year caps than Pro A.",
+            "evidence": [
+              {
+                "quote": "AIA Max VitalHealth Pro B AIA Max VitalHealth Pro B Lite",
+                "line_start": 713,
+                "line_end": 732,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "There will be a 5% co-payment for every claim,\ncapped at 6,000 per policy year if:",
+                "line_start": 633,
+                "line_end": 652,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Post-hospitalisation home nursing5\n  300 per day",
+                "line_start": 761,
+                "line_end": 762,
+                "quote_token_coverage": 0.999
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "AIA Max VitalHealth Pro B Lite",
+            "description": "Add-on plan for public hospitals with B1-class ward or lower entitlement; includes a 5% co-payment capped at S$6,000 per policy year under specified conditions and provides reduced accommodation/home nursing and cancer outpatient limits compared to Pro B.",
+            "rider_type": "add-on",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "not_stated",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": "The table shows Pro B Lite home nursing and post-hospitalisation alternative medicine benefit caps and Nil for personal medical case management.",
+            "evidence": [
+              {
+                "quote": "AIA Max VitalHealth Pro B Lite",
+                "line_start": 73,
+                "line_end": 92,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Post-hospitalisation home nursing5\n|     | 200 per day  |",
+                "line_start": 761,
+                "line_end": 762,
+                "quote_token_coverage": 0.999
+              },
+              {
+                "quote": "Personal medical case\nmanagement (Teladoc) | Yes | Nil",
+                "line_start": 779,
+                "line_end": 780,
+                "quote_token_coverage": 0.999
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Cancer Care Pro (optional add-on within VitalHealth Pro A)",
+            "description": "Optional add-on (within AIA Max VitalHealth Pro A) to get higher outpatient cancer coverage including cancer drug treatments not under the Cancer Drug List (CDL) with specified multiples of MediShield Life limits for one primary cancer and per policy year caps.",
+            "rider_type": "optional add-on",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "not_stated",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": "The brochure states cancer drug services and outpatient cancer coverage; values shown include ‘16x MSHL monthly limit for one primary cancer’ and ‘10x MSHL yearly limit for one primary cancer’, plus non-CDL cancer drug treatments not under CDL at up to S$200K/policy year for the table shown.",
+            "evidence": [
+              {
+                "quote": "Optional: Cancer Care Pro",
+                "line_start": 675,
+                "line_end": 694,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "16x MSHL for one primary cancer per month",
+                "line_start": 678,
+                "line_end": 697,
+                "quote_token_coverage": 0.875
+              },
+              {
+                "quote": "10x MSHL for one primary cancer per policy year",
+                "line_start": 685,
+                "line_end": 704,
+                "quote_token_coverage": 0.8889
+              },
+              {
+                "quote": "Cancer drug treatments (non-CDL)8 ... 200,000 per policy year",
+                "line_start": 710,
+                "line_end": 711,
+                "quote_token_coverage": 0.999
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Emergency Care Pro (optional add-on within VitalHealth Pro A)",
+            "description": "Optional add-on (within AIA Max VitalHealth Pro A) providing emergency outpatient treatment due to accident, ambulance service, outpatient treatment for HFMD/dengue fever, and emergency medical evacuation & repatriation, with specified caps.",
+            "rider_type": "optional add-on",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "not_stated",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": "Emergency outpatient post A&E treatment and ambulance service have stated caps and timing (e.g., within 30 days from emergency outpatient treatment due to accident).",
+            "evidence": [
+              {
+                "quote": "Optional: Emergency Care Pro",
+                "line_start": 693,
+                "line_end": 712,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Emergency outpatient treatment due to accident\n2,000 per policy year",
+                "line_start": 696,
+                "line_end": 715,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Post A&E treatment ... within 30 days from emergency outpatient treatment due to accident",
+                "line_start": 716,
+                "line_end": 718,
+                "quote_token_coverage": 0.998
+              },
+              {
+                "quote": "Emergency medical\n50,000 per policy year\nevacuation & repatriation",
+                "line_start": 705,
+                "line_end": 724,
+                "quote_token_coverage": 0.8889
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "exclusions": [
+          {
+            "exclusion": "Some exclusions apply (full list in policy contracts).",
+            "category": "general",
+            "applies_to": "not_stated",
+            "notes": "The brochure advises that certain conditions such as pre-existing conditions may result in no benefits payable, and that the full list is in the policy contracts; this is not a detailed exclusion list in the excerpt.",
+            "evidence": [
+              {
+                "quote": "There are certain conditions such as pre-existing conditions, whereby no benefits will be payable.",
+                "line_start": 792,
+                "line_end": 811,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "exclusion": "Psychiatric-condition hospitalisation non-payment (for the referenced benefits).",
+            "category": "psychiatric",
+            "applies_to": "the benefits described as ‘These benefits’ in the benefit table footnote for psychiatric-related coverage",
+            "notes": "The brochure explicitly states these benefits are not payable when the insured is diagnosed and hospitalised due to a psychiatric condition.",
+            "evidence": [
+              {
+                "quote": "These benefits are not payable if the insured is diagnosed and hospitalised due to a psychiatric condition.",
+                "line_start": 803,
+                "line_end": 822,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "source_evidence": [
+          {
+            "quote": "AIA HealthShield Gold Max is a MediSave-approved Integrated Shield Plan that comprises MediShield Life administered by the Central Provident Fund Board and an additional private insurance coverage portion administered by AIA.",
+            "line_start": 897,
+            "line_end": 916,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Guaranteed lifetime coverage and unlimited lifetime claim amount2",
+            "line_start": 38,
+            "line_end": 57,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "High policy limit of up to S$2 million per year",
+            "line_start": 36,
+            "line_end": 55,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Three plans tailored to your healthcare needs: AIA HealthShield Gold A ... For stay in any standard ward in a private hospital ... AIA HealthShield Gold A Max B ... For stay in A-class ward or lower in a public hospital ... AIA HealthShield Gold A Max B Lite ... For stay in 4-bedder B1-class ward or lower in a public hospital",
+            "line_start": 61,
+            "line_end": 77,
+            "quote_token_coverage": 0.984
+          },
+          {
+            "quote": "Extra cover for 30 critical illnesses benefit per policy year23 per policy year per policy year",
+            "line_start": 428,
+            "line_end": 430,
+            "quote_token_coverage": 0.998
+          },
+          {
+            "quote": "No change in premiums after a claim1",
+            "line_start": 35,
+            "line_end": 54,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Maximum coverage period Lifetime",
+            "line_start": 619,
+            "line_end": 638,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "high",
+        "review_notes": [
+          "VitalHealth Pro is treated as an add-on/rider to the base integrated shield plan per the brochure wording (“AIA Max VitalHealth Pro … Add-on”).",
+          "Where the brochure provides multiple different benefit tables (e.g., ‘Benefits of AIA HealthShield Gold Max Standard Plan’), the extraction captures the explicitly named ‘Standard plan’ as a separate plan option to avoid collapsing distinct tier tables.",
+          "Some numeric deductible/co-insurance figures are shown in the ‘Standard plan’ tables; deductible/co-insurance mechanics for Max A/B/B Lite are described but not fully quantified for every ward class in this excerpt."
+        ],
+        "slug": "aia-aia-healthshield-gold-max"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 59,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_000c19c2413d1606016a8f1bbb24a887d0a064795768973c35",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:02:46.153331+00:00",
+    "usage": {
+      "input_tokens": 15055,
+      "output_tokens": 10315,
+      "total_tokens": 25370,
+      "reasoning_tokens": 737,
+      "estimated_cost_usd": 0.01590475
+    }
+  }
+}

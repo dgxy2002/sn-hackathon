@@ -1,0 +1,1722 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "AIA",
+    "source_file": "AIA/Travel & Lifestyle/AIA Elite HomeCare.md",
+    "source_filename": "AIA Elite HomeCare.md",
+    "document_type": "brochure",
+    "content_sha256": "f328924d45f2dc2bd0bc0829d5601fde51f072d06aa1c5cc3a517e759c58de52",
+    "local_markdown_path": "backend/scraper/insurance/AIA/Travel & Lifestyle/AIA Elite HomeCare.md",
+    "local_pdf_path": "backend/scraper/insurance/AIA/Travel & Lifestyle/AIA Elite HomeCare.pdf"
+  },
+  "extraction": {
+    "document_summary": "AIA Elite HomeCare is a home insurance plan (with building and household contents cover) that also extends protection to certain events worldwide when you travel. It is described as a “first-loss policy”, so the brochure states AIA will compensate accordingly if the home is not insured for its full value. Cover is offered in three named tiers: Standard, Comprehensive, and Executive. For example, Building coverage is S$80,000 (Standard), S$120,000 (Comprehensive) and S$260,000 (Executive), while Contents coverage is S$16,000 / S$24,000 / S$37,000. The plan also provides worldwide personal liability up to S$500,000 across all tiers, and Worldwide Accidental Death benefit of S$20,000 (with Double Indemnity for Accidental Death of S$40,000 for certain causes within the building). Worldwide medical reimbursement for accidents is shown as S$250 across tiers, and a “5-Year Premium Waiver” is indicated as “Yes” for all tiers if Death/TPD occurs.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "The brochure provides a clear tier table for Standard/Comprehensive/Executive with many specific benefit limits and sub-limits.",
+      "Some benefit-limit values are embedded in fragmented table formatting; nonetheless, the numeric amounts and tier mapping are mostly explicit.",
+      "Eligibility for the medical reimbursement/accidental death benefit is explicitly described as age-based for the insured and spouse/legal child."
+    ],
+    "policies": [
+      {
+        "company": "AIA",
+        "policy_name": "AIA Elite HomeCare",
+        "aliases": [],
+        "quick_summary": "Home insurance with building and contents coverage, extended worldwide items/accidents/travel-related benefits, plus worldwide personal liability, accidental death and medical reimbursement, and a 5-year premium waiver option after Death/Total Permanent Disability. Offered in Standard, Comprehensive, and Executive tiers with different building/contents limits and an indicated annual premium per tier (inclusive of 9% GST). Described as a first-loss policy with compensation adjusted for underinsurance (no penalty for underinsurance). Deductibles apply on most claims except specified categories (e.g., fire and certain accident benefits).",
+        "category": "home",
+        "policy_type": "home_contents",
+        "plan_tier": null,
+        "target_customer": "not_stated",
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "Building (property insured) and specified extensions (e.g., accidental breakage of fixed glass other than principal perils)",
+          "Household contents and personal property against insured Principal Perils",
+          "Worldwide unscheduled/scheduled personal valuables for specified categories",
+          "Worldwide personal liability for bodily injury/property damage to third parties (legal liability)",
+          "Worldwide medical reimbursement for accidents",
+          "Worldwide accidental death and double indemnity for accidental death (within the building, for certain causes)",
+          "Accidental breakage/other specified incidents (e.g., replacement of locks and keys due to Principal Perils, credit card/ATM misuse due to loss or theft)",
+          "Travel-related items (e.g., travelling baggage; payment in excess of airline compensation)",
+          "Alternative accommodation and loss of rent (with stated maxima)"
+        ],
+        "currency_options": [
+          "SGD"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": null,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "Worldwide Medical Reimbursement for Accidents and Worldwide Accidental Death benefit eligibility is limited by age and student status as stated.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": null,
+        "premium_payment_term_description": null,
+        "premium_frequencies": [
+          "annual"
+        ],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [],
+        "important_caveats": [
+          "First-loss policy: compensation is adjusted if you do not insure the home for its full value (no penalty for underinsurance).",
+          "Deductible applies on all claims except for specific categories listed (e.g., fire; Worldwide Accident Medical Reimbursement; Worldwide Accidental Death Benefit; Double Indemnity for Accidental Death Benefit).",
+          "The brochure states there are exclusions such as deliberate/wilful act, negligence, and self-destruction where no benefits will be payable (full list in policy contract)."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "Standard",
+            "plan_code": null,
+            "description": "Standard tier of AIA Elite HomeCare. Building limit S$80,000; Contents limit S$16,000; Additional contents coverage up to 5% of minimum S$80,000 building coverage (shown as S$4,000); worldwide personal liability S$500,000; worldwide medical reimbursement for accidents S$250; worldwide accidental death benefit S$20,000; double indemnity for accidental death S$40,000; annual premium shown as S$172.31 (inclusive of 9% GST).",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Building",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Limit shown in Benefits table",
+                "payout_description": "Building cover limit",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 80000,
+                "limit_type": "benefit_limit",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Building extension includes accidental breakage of fixed glass (other than as a result of any Principal Perils), loss of rent (max. S$250 per day), and emergency entry due to forced entry for a life-threatening emergency involving the insured and immediate family.",
+                "evidence": [
+                  {
+                    "quote": "Building1 80,000 120,000 260,000",
+                    "line_start": 7,
+                    "line_end": 26,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Loss of rent",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Max per day stated",
+                "payout_description": "Loss of rent maximum per day",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 250,
+                "limit_type": "per_day_max",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Loss of rent (max. S$250 per day) ",
+                    "line_start": 38,
+                    "line_end": 39,
+                    "quote_token_coverage": 0.999
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Additional contents coverage (up to 5% of minimum S$80,000 building coverage)",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Limit shown as Additional contents coverage",
+                "payout_description": "Additional contents coverage limit",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 4000,
+                "limit_type": "benefit_limit",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Shown as (up to 5% of minimum S$80,000 building coverage).",
+                "evidence": [
+                  {
+                    "quote": "Additional contents coverage 4,000 6,000",
+                    "line_start": 51,
+                    "line_end": 51,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Contents",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Limit shown in Benefits table",
+                "payout_description": "Contents cover limit",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 16000,
+                "limit_type": "benefit_limit",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Contents cover also extended to specific items and sub-limits listed in the brochure.",
+                "evidence": [
+                  {
+                    "quote": "Contents1 16,000 24,000 | 37,000 |",
+                    "line_start": 54,
+                    "line_end": 54,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Worldwide Unscheduled/ Scheduled Personal Valuables (limit)",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Limit shown as Worldwide Unscheduled/Scheduled Personal Valuables1",
+                "payout_description": "Worldwide personal valuables cover limit (unscheduled/scheduled)",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 2000,
+                "limit_type": "benefit_limit",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Worldwide Unscheduled/          | 2,000 2,000   | 2,000  |",
+                    "line_start": 81,
+                    "line_end": 100,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Worldwide Personal Liability (limit)",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Legal liability limit shown in table",
+                "payout_description": "Limit for compensation for bodily injury or property damage to third party",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 500000,
+                "limit_type": "benefit_limit",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Shown as 500,000 across all tiers.",
+                "evidence": [
+                  {
+                    "quote": "Worldwide Personal Liability  When held legally liable to pay  | compensation for causing bodily 500,000 | 500,000 | 500,000",
+                    "line_start": 123,
+                    "line_end": 142,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Worldwide Medical Reimbursement for Accidents",
+                "payout_type": "reimbursement",
+                "payout_value": 250,
+                "payout_unit": "SGD",
+                "payout_basis": "Limit shown in table",
+                "payout_description": "Medical reimbursement for accidents (extended to spouse and children subject to eligibility)",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Worldwide Medical Reimbursement for Accidents2",
+                    "line_start": 128,
+                    "line_end": 147,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Worldwide Accidental Death Benefit",
+                "payout_type": "lump_sum",
+                "payout_value": 20000,
+                "payout_unit": "SGD",
+                "payout_basis": "Limit shown in table",
+                "payout_description": "Accidental death benefit (extended to spouse and children subject to eligibility)",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Worldwide Accidental Death Benefit2",
+                    "line_start": 134,
+                    "line_end": 153,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Double Indemnity for Accidental Death Benefit",
+                "payout_type": "lump_sum",
+                "payout_value": 40000,
+                "payout_unit": "SGD",
+                "payout_basis": "Limit shown in table",
+                "payout_description": "Double indemnity for accidental death where demise due to fire, lightning, theft or robbery within the building",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Double Indemnity for Accidental Death Benefit",
+                    "line_start": 140,
+                    "line_end": 159,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "5-Year Premium Waiver",
+                "payout_type": "premium_waiver",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Indicated as Yes across tiers",
+                "payout_description": "Premium waived for the next 5 years upon Death/Total Permanent Disability",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Death/Total Permanent Disability",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "5-Year Premium Waiver",
+                    "line_start": 147,
+                    "line_end": 166,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Annual Premium (inclusive of 9% GST)",
+                "payout_type": "other",
+                "payout_value": 172.31,
+                "payout_unit": "SGD",
+                "payout_basis": "Annual Premium row in table",
+                "payout_description": "Annual premium for Standard tier",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Annual Premium",
+                    "line_start": 153,
+                    "line_end": 172,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "low"
+              }
+            ],
+            "notes": "Some sub-limit amounts (e.g., Mobile phones S$150, Laptops S$1,200, Handheld computer S$300; scheduled personal valuables sub-items) are included in the document but were not all mapped into this plan-specific benefit_amounts list.",
+            "evidence": [
+              {
+                "quote": "Annual Premium",
+                "line_start": 153,
+                "line_end": 172,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "Comprehensive",
+            "plan_code": null,
+            "description": "Comprehensive tier of AIA Elite HomeCare. Building limit S$120,000; Contents limit S$24,000; Additional contents coverage up to 5% of minimum S$80,000 building coverage (shown as S$6,000); worldwide personal liability S$500,000; worldwide medical reimbursement for accidents S$250; worldwide accidental death benefit S$20,000; double indemnity for accidental death S$40,000; annual premium shown as S$235.79 (inclusive of 9% GST).",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Building",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Limit shown in Benefits table",
+                "payout_description": "Building cover limit",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 120000,
+                "limit_type": "benefit_limit",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Building1 80,000 120,000 260,000",
+                    "line_start": 7,
+                    "line_end": 26,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Contents",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Limit shown in Benefits table",
+                "payout_description": "Contents cover limit",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 24000,
+                "limit_type": "benefit_limit",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Contents1 16,000 24,000 | 37,000 |",
+                    "line_start": 54,
+                    "line_end": 54,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Additional contents coverage",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Additional contents coverage limit",
+                "payout_description": "Additional contents coverage limit",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 6000,
+                "limit_type": "benefit_limit",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Shown as up to 5% of minimum S$80,000 building coverage.",
+                "evidence": [
+                  {
+                    "quote": "Additional contents coverage 4,000 6,000",
+                    "line_start": 51,
+                    "line_end": 51,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Annual Premium (inclusive of 9% GST)",
+                "payout_type": "other",
+                "payout_value": 235.79,
+                "payout_unit": "SGD",
+                "payout_basis": "Annual Premium row in table",
+                "payout_description": "Annual premium for Comprehensive tier",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "172.31 235.79 | 406.96 |",
+                    "line_start": 154,
+                    "line_end": 173,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "172.31 235.79 | 406.96 |",
+                "line_start": 154,
+                "line_end": 173,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "Executive",
+            "plan_code": null,
+            "description": "Executive tier of AIA Elite HomeCare. Building limit S$260,000; Contents limit S$37,000; Additional contents coverage shown as S$13,000; worldwide personal liability S$500,000; worldwide medical reimbursement for accidents S$250; worldwide accidental death benefit S$20,000; double indemnity for accidental death S$40,000; annual premium shown as S$406.96 (inclusive of 9% GST).",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Building",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Limit shown in Benefits table",
+                "payout_description": "Building cover limit",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 260000,
+                "limit_type": "benefit_limit",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Building1 80,000 120,000 260,000",
+                    "line_start": 7,
+                    "line_end": 26,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Contents",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Limit shown in Benefits table",
+                "payout_description": "Contents cover limit",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 37000,
+                "limit_type": "benefit_limit",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Contents1 16,000 24,000 | 37,000 |",
+                    "line_start": 54,
+                    "line_end": 54,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Additional contents coverage",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Additional contents coverage limit",
+                "payout_description": "Additional contents coverage limit",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 13000,
+                "limit_type": "benefit_limit",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Shown as Additional contents coverage up to 5% of minimum building coverage.",
+                "evidence": [
+                  {
+                    "quote": "Additional contents coverage  (up to 5% of minimum S$80,000 building coverage) 13,000",
+                    "line_start": 51,
+                    "line_end": 53,
+                    "quote_token_coverage": 0.998
+                  }
+                ],
+                "extraction_confidence": "low"
+              },
+              {
+                "benefit_name": "Annual Premium (inclusive of 9% GST)",
+                "payout_type": "other",
+                "payout_value": 406.96,
+                "payout_unit": "SGD",
+                "payout_basis": "Annual Premium row in table",
+                "payout_description": "Annual premium for Executive tier",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "172.31 235.79 | 406.96 |",
+                    "line_start": 154,
+                    "line_end": 173,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "172.31 235.79 | 406.96 |",
+                "line_start": 154,
+                "line_end": 173,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Building (property) loss or damage due to Principal Perils",
+            "benefit_category": "building",
+            "benefit_level": "base",
+            "benefit_description": "Compensation for loss or damage to the Building caused by Principal Perils, with extensions including accidental breakage of fixed glass (other than as a result of any Principal Perils), loss of rent and emergency entry for forced entry by police/civil defence/ambulance due to a life-threatening emergency involving the insured and immediate family.",
+            "trigger_description": "Loss or damage to the Building caused by Principal Perils; and specified extensions (e.g., accidental breakage of fixed glass other than as a result of Principal Perils; forced entry for life-threatening emergency).",
+            "covered_conditions": [
+              "Fire and subterranean fire, lightning and thunderbolt, explosion, aircraft or other aerial devices or articles dropped",
+              "Impact with the Buildings and/or Contents by any road vehicle (not belonging to or not under insured control)",
+              "Burglary/robbery/theft (subject to unoccupied period condition as defined)",
+              "Hurricane/cyclone/typhoon/windstorm including flood/sea overflow caused by such events (excluding subsidence/landslip)",
+              "Riots/civil commotion/acts of strikes or locked-out workers",
+              "Malicious damage or vandalism",
+              "Earthquake or volcanic eruption",
+              "Flood including overflow of sea caused by earthquake/volcanic eruption/hurricane/cyclone/typhoon/windstorm/force majeure"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "other",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Building benefit limit per tier",
+            "payout_description": "Building benefit limit depends on tier",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 80000,
+            "limit_type": "tier_limit_noted_per_plan",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure provides different Building limits for Standard/Comprehensive/Executive.",
+            "evidence": [
+              {
+                "quote": "We will compensate against loss or damage to the Building caused by any of the Principal Perils.",
+                "line_start": 11,
+                "line_end": 30,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Loss of rent (max per day)",
+            "benefit_category": "rental_expenses",
+            "benefit_level": "base",
+            "benefit_description": "Covers loss of rent as an extension under Building coverage.",
+            "trigger_description": "Loss or damage to the Building caused by Principal Perils (as extension).",
+            "covered_conditions": [
+              "Loss of rent as stated extension"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "other",
+            "payout_value": 250,
+            "payout_unit": "SGD",
+            "payout_basis": "Max S$250 per day",
+            "payout_description": "Maximum loss of rent per day",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 250,
+            "limit_type": "per_day_max",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Loss of rent (max. S$250 16,000 24,000 52,000",
+                "line_start": 19,
+                "line_end": 38,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          },
+          {
+            "benefit_name": "Emergency entry for forced entry (life-threatening emergency)",
+            "benefit_category": "emergency_entry",
+            "benefit_level": "base",
+            "benefit_description": "Covers emergency entry for loss or damage caused to the building in the event of forced entry by police, civil defence or ambulance services due to a life-threatening emergency involving the insured and insured’s immediate family.",
+            "trigger_description": "Forced entry by police/civil defence/ambulance due to a life-threatening emergency involving the insured and immediate family.",
+            "covered_conditions": [
+              "Forced entry by police, civil defence or ambulance services",
+              "Life-threatening emergency involving the insured and immediate family"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "other",
+            "payout_value": 300,
+            "payout_unit": "SGD",
+            "payout_basis": "S$300 shown for Standard/Comprehensive/Executive",
+            "payout_description": "Limit for emergency entry",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Emergency entry for loss or damage caused to the building in the event of forced entry by police, civil defence or ambulance services due to a life-threatening emergency involving the insured and insured’s immediate family 300 300 300",
+                "line_start": 40,
+                "line_end": 47,
+                "quote_token_coverage": 0.993
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Contents (household contents and personal property) loss or damage due to Principal Perils",
+            "benefit_category": "contents",
+            "benefit_level": "base",
+            "benefit_description": "Compensation for loss or damage to household contents and personal property caused by insured Principal Perils, with multiple extensions and sub-limits (e.g., temporarily removed by professional movers; frozen food due to breakdown of deep freeze; accidental death or theft of pedigree pets; locks and keys; unscheduled personal valuables; alternative accommodation).",
+            "trigger_description": "Loss or damage to household contents and personal property caused by any insured Principal Perils.",
+            "covered_conditions": [
+              "Principal Perils (as defined)",
+              "Temporarily removed by professional movers (extension described)",
+              "Frozen food loss due to breakdown of deep freeze unit (extension described)",
+              "Pedigree pets accidental death or theft (extension described)",
+              "Replacement of damaged locks and keys due to Principal Perils (extension described)",
+              "Alternative accommodation (max. S$250 per day) (extension described)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "other",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Contents limit per tier",
+            "payout_description": "Contents benefit limit depends on tier",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 16000,
+            "limit_type": "tier_limit_noted_per_plan",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure provides specific sub-limits for each tier.",
+            "evidence": [
+              {
+                "quote": "We will compensate against loss or damage to household contents and personal property caused by any insured Principal Perils.",
+                "line_start": 41,
+                "line_end": 60,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Frozen food loss due to breakdown of deep freeze unit",
+            "benefit_category": "contents",
+            "benefit_level": "base",
+            "benefit_description": "Loss or damage to frozen food due to breakdown of deep freeze unit.",
+            "trigger_description": "Breakdown of deep freeze unit.",
+            "covered_conditions": [
+              "Loss or damage to frozen food due to breakdown of deep freeze unit"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "other",
+            "payout_value": 250,
+            "payout_unit": "SGD",
+            "payout_basis": "Limit shown",
+            "payout_description": "Frozen food loss sub-limit",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Loss or damage to frozen  | 250 250 | 250 |",
+                "line_start": 48,
+                "line_end": 67,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Accidental death or theft of pedigree pets",
+            "benefit_category": "contents",
+            "benefit_level": "base",
+            "benefit_description": "Covers accidental death or theft of pedigree pets.",
+            "trigger_description": "Accidental death or theft of pedigree pets.",
+            "covered_conditions": [
+              "Accidental death of pedigree pets",
+              "Theft of pedigree pets"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "other",
+            "payout_value": 500,
+            "payout_unit": "SGD",
+            "payout_basis": "Limit shown",
+            "payout_description": "Pedigree pet accidental death or theft sub-limit",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Accidental death or theft of  | 500 500 | 500 |",
+                "line_start": 52,
+                "line_end": 71,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Replacement of damaged locks and keys due to Principal Perils",
+            "benefit_category": "contents",
+            "benefit_level": "base",
+            "benefit_description": "Replacement of damaged locks and keys due to Principal Perils.",
+            "trigger_description": "Damaged locks and keys due to Principal Perils.",
+            "covered_conditions": [
+              "Replacement of damaged locks and keys due to Principal Perils"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "other",
+            "payout_value": 250,
+            "payout_unit": "SGD",
+            "payout_basis": "Limit shown",
+            "payout_description": "Locks and keys replacement sub-limit",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Replacement of damaged  locks and keys due to Principal Perils 250 250 250",
+                "line_start": 74,
+                "line_end": 77,
+                "quote_token_coverage": 0.997
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Unscheduled personal valuables damaged by Principal Perils within the building",
+            "benefit_category": "personal_valuables",
+            "benefit_level": "base",
+            "benefit_description": "Unscheduled personal valuables damaged by Principal Perils within the building, with specified maxima for cash/cashcard and per item for other personal valuables.",
+            "trigger_description": "Personal valuables damaged by Principal Perils within the building.",
+            "covered_conditions": [
+              "Unscheduled personal valuables damaged by Principal Perils within building",
+              "Cash/cashcard maximum S$500",
+              "Other personal valuables maximum S$2,500 per item"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "other",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Max cash/cashcard and per-item cap stated; tier limits shown for the line.",
+            "payout_description": "Unscheduled valuables sub-limit depends on tier; includes item caps for cash/cashcard and other valuables",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 8000,
+            "limit_type": "tier_limit_noted_per_plan",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "For Standard/Comprehensive/Executive the line shows 8,000 / 12,000 / 18,500.",
+            "evidence": [
+              {
+                "quote": "Unscheduled personal  valuables damaged by Principal Perils within building (max. S$500 for cash/cashcard; max. S$2,500 per item for other personal valuables) 8,000 12,000 | 18,500 |",
+                "line_start": 78,
+                "line_end": 85,
+                "quote_token_coverage": 0.993
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Alternative accommodation (max S$250 per day)",
+            "benefit_category": "alternative_accommodation",
+            "benefit_level": "base",
+            "benefit_description": "Alternative accommodation up to a maximum per day.",
+            "trigger_description": "As an extension under Contents coverage (triggered by loss or damage to contents or building caused by Principal Perils as stated in the plan narrative).",
+            "covered_conditions": [
+              "Alternative accommodation (max. S$250 per day)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "other",
+            "payout_value": 250,
+            "payout_unit": "SGD",
+            "payout_basis": "max. S$250 per day stated",
+            "payout_description": "Alternative accommodation maximum per day",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 250,
+            "limit_type": "per_day_max",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The Alternative accommodation limit line shows totals of S$3,200 / S$4,800 / S$7,400 with an overall max per day of S$250.",
+            "evidence": [
+              {
+                "quote": "Alternative accommodation  | 3,200 4,800 | 7,400 | (max. S$250 per day)",
+                "line_start": 86,
+                "line_end": 88,
+                "quote_token_coverage": 0.998
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Mobile technology coverage - mobile phones (loss/damage within building or theft in securely locked vehicle worldwide)",
+            "benefit_category": "mobile_technology",
+            "benefit_level": "base",
+            "benefit_description": "Worldwide mobile phones coverage for loss or damage of the following items within the building caused by Principal Perils or loss due to theft within a securely locked vehicle worldwide.",
+            "trigger_description": "Loss/damage within building caused by Principal Perils OR theft within securely locked vehicle worldwide.",
+            "covered_conditions": [
+              "Mobile phones: loss or damage within building caused by Principal Perils",
+              "Mobile phones: loss due to theft within a securely locked vehicle worldwide"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "other",
+            "payout_value": 150,
+            "payout_unit": "SGD",
+            "payout_basis": "Limit shown",
+            "payout_description": "Mobile phones sub-limit",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "worldwide (as described for theft in securely locked vehicle)",
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "- Mobile phones               | 150  150      | 150    |",
+                "line_start": 78,
+                "line_end": 97,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Worldwide Personal Valuables - unscheduled/scheduled personal valuables (limit)",
+            "benefit_category": "personal_valuables",
+            "benefit_level": "base",
+            "benefit_description": "Coverage for all-risk physical loss or damage to Personal Valuables (worldwide unscheduled/scheduled), including listed categories such as jewellery, cash/cashcards, wallets, watches, works of art, antiques, photographic/video cameras and standard accessories.",
+            "trigger_description": "All-risk physical loss or damage to Personal Valuables.",
+            "covered_conditions": [
+              "All-risk physical loss or damage to Personal Valuables",
+              "Coverage categories listed in 'Worldwide Unscheduled/Scheduled Personal Valuables coverage includes...'"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "as_charged",
+            "payout_type": "other",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Limit shown in table",
+            "payout_description": "Personal valuables benefit limit depends on tier",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 2000,
+            "limit_type": "tier_limit_noted_per_plan",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "worldwide (as named Worldwide Unscheduled/Scheduled Personal Valuables)",
+            "notes": "The brochure notes extension payouts under Building/Contents/WUPV will be deducted from respective benefit limit.",
+            "evidence": [
+              {
+                "quote": "We will compensate against all risk of physical loss or damage to Personal Valuables.",
+                "line_start": 85,
+                "line_end": 104,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Worldwide Personal Liability (legal liability for bodily injury or property damage to third party)",
+            "benefit_category": "liability",
+            "benefit_level": "base",
+            "benefit_description": "When held legally liable to pay compensation for causing bodily injury or property damage to third party, as stated with a limit.",
+            "trigger_description": "Legal liability to pay compensation for bodily injury or property damage to third party.",
+            "covered_conditions": [
+              "Bodily injury to third party",
+              "Property damage to third party"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "other",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Limit shown",
+            "payout_description": "Limit for compensation for bodily injury/property damage to third party",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 500000,
+            "limit_type": "benefit_limit",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "worldwide (as named)",
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Worldwide Personal Liability When held legally liable to pay compensation for causing bodily 500,000",
+                "line_start": 140,
+                "line_end": 142,
+                "quote_token_coverage": 0.998
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Worldwide Medical Reimbursement for Accidents",
+            "benefit_category": "accident_medical",
+            "benefit_level": "base",
+            "benefit_description": "Medical reimbursement for accidents extended to spouse and children subject to eligibility criteria.",
+            "trigger_description": "Accidents (medical reimbursement) as per plan.",
+            "covered_conditions": [
+              "Accidents",
+              "Eligibility as described in the note"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "reimbursement",
+            "payout_value": 250,
+            "payout_unit": "SGD",
+            "payout_basis": "Limit shown",
+            "payout_description": "Worldwide medical reimbursement limit",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "worldwide (as named)",
+            "notes": "Eligibility: insured and spouse below 65; legal child at least 1 year old, under 24 years, full-time student and unmarried.",
+            "evidence": [
+              {
+                "quote": "Worldwide Medical Reimbursement for Accidents2",
+                "line_start": 128,
+                "line_end": 147,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "(extended to spouse and children)",
+                "line_start": 132,
+                "line_end": 151,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "This benefit covers the insured and spouse who are below 65 years old or any legal child who is at least 1 year old, under 24 years, full-time student and unmarried.",
+                "line_start": 207,
+                "line_end": 226,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Worldwide Accidental Death Benefit",
+            "benefit_category": "accidental_death",
+            "benefit_level": "base",
+            "benefit_description": "Accidental death benefit extended to spouse and children subject to stated eligibility criteria.",
+            "trigger_description": "Accidental death.",
+            "covered_conditions": [
+              "Accidental death",
+              "Eligibility as described in the note"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 20000,
+            "payout_unit": "SGD",
+            "payout_basis": "Limit shown in table",
+            "payout_description": "Accidental death benefit amount",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "worldwide (as named)",
+            "notes": "Eligibility per note: insured and spouse below 65; legal child age criteria and student/unmarried status.",
+            "evidence": [
+              {
+                "quote": "Worldwide Accidental Death Benefit2",
+                "line_start": 134,
+                "line_end": 153,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "20,000 20,000 20,000",
+                "line_start": 154,
+                "line_end": 154,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "This benefit covers the insured and spouse who are below 65 years old or any legal child who is at least 1 year old, under 24 years, full-time student and unmarried.",
+                "line_start": 207,
+                "line_end": 226,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Double Indemnity for Accidental Death Benefit",
+            "benefit_category": "accidental_death",
+            "benefit_level": "base",
+            "benefit_description": "Double indemnity for accidental death where the insured's demise is due to fire, lightning, theft or robbery within the building.",
+            "trigger_description": "Insured’s demise due to fire, lightning, theft or robbery within the building.",
+            "covered_conditions": [
+              "Fire",
+              "Lightning",
+              "Theft",
+              "Robbery",
+              "All within the building"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 40000,
+            "payout_unit": "SGD",
+            "payout_basis": "Limit shown in table",
+            "payout_description": "Double indemnity amount for qualifying accidental death causes",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure also states this category is excluded from the deductible rule (i.e., deductible does not apply) via the deductible paragraph.",
+            "evidence": [
+              {
+                "quote": "In the event of the insured’s demise due to fire, lightning, theft or robbery within the building",
+                "line_start": 160,
+                "line_end": 165,
+                "quote_token_coverage": 0.995
+              },
+              {
+                "quote": "Double Indemnity for Accidental Death Benefit",
+                "line_start": 140,
+                "line_end": 159,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Double Indemnity for Accidental Death Benefit.",
+                "line_start": 200,
+                "line_end": 219,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "5-Year Premium Waiver",
+            "benefit_category": "premium_waiver",
+            "benefit_level": "base",
+            "benefit_description": "Waives premium for the next 5 years in the event of Death/Total Permanent Disability.",
+            "trigger_description": "Death/Total Permanent Disability.",
+            "covered_conditions": [
+              "Death",
+              "Total Permanent Disability"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "premium_waiver",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Next 5 years premium waived (shown as Yes for all tiers)",
+            "payout_description": "Premium waived for the next 5 years",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Waiver applies for next 5 years",
+            "geographic_scope": null,
+            "notes": "The benefit is indicated as “Yes” across Standard, Comprehensive and Executive.",
+            "evidence": [
+              {
+                "quote": "5-Year Premium Waiver",
+                "line_start": 147,
+                "line_end": 166,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "In the event of Death/Total Permanent Disability, the premium will be waived for the next 5 years",
+                "line_start": 167,
+                "line_end": 171,
+                "quote_token_coverage": 0.996
+              },
+              {
+                "quote": "Yes Yes | Yes",
+                "line_start": 149,
+                "line_end": 168,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [],
+        "exclusions": [
+          {
+            "exclusion": "Deliberate/wilful act",
+            "category": "general_exclusion",
+            "applies_to": "base_policy",
+            "notes": "Brochure states exclusions such as deliberate/wilful act where no benefits will be payable (full list in policy contract).",
+            "evidence": [
+              {
+                "quote": "There are certain exclusions, such as the deliberate/wilful act, negligence and self-destruction, whereby no benefits will be payable.",
+                "line_start": 178,
+                "line_end": 179,
+                "quote_token_coverage": 0.999
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "exclusion": "Negligence",
+            "category": "general_exclusion",
+            "applies_to": "base_policy",
+            "notes": "Brochure states exclusions such as negligence where no benefits will be payable (full list in policy contract).",
+            "evidence": [
+              {
+                "quote": "There are certain exclusions, such as the deliberate/wilful act, negligence and self-destruction, whereby no benefits will be payable.",
+                "line_start": 178,
+                "line_end": 179,
+                "quote_token_coverage": 0.999
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "exclusion": "Self-destruction",
+            "category": "general_exclusion",
+            "applies_to": "base_policy",
+            "notes": "Brochure states exclusions such as self-destruction where no benefits will be payable (full list in policy contract).",
+            "evidence": [
+              {
+                "quote": "There are certain exclusions, such as the deliberate/wilful act, negligence and self-destruction, whereby no benefits will be payable.",
+                "line_start": 178,
+                "line_end": 179,
+                "quote_token_coverage": 0.999
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "source_evidence": [
+          {
+            "quote": "AIA Elite HomeCare is more than your average home insurance plan.",
+            "line_start": 1,
+            "line_end": 10,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "With four tiers of protection to choose from, the plan can be tailored to your unique needs.",
+            "line_start": 1,
+            "line_end": 19,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "In addition, this is a first-loss policy, so if you choose not to insure your home for its full value, we will compensate you accordingly, with no penalty for underinsurance.",
+            "line_start": 2,
+            "line_end": 21,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "There is a deductible of S$100 or 5%, whichever is higher, of the claim amount on all claims except for loss or damage due to fire, Worldwide Accident Medical Reimbursement, Worldwide Accidental Death Benefit and Double Indemnity for Accidental Death Benefit.",
+            "line_start": 216,
+            "line_end": 219,
+            "quote_token_coverage": 0.9726
+          }
+        ],
+        "extraction_confidence": "high",
+        "review_notes": [
+          "The brochure mentions four tiers, but the benefits table shown lists Standard/Comprehensive/Executive; no explicit fourth tier name/amount is present in the provided Markdown.",
+          "Some numeric rows appear fragmented (e.g., loss of rent line). Where mapping was ambiguous, numeric extraction confidence is set to medium/low."
+        ],
+        "slug": "aia-aia-elite-homecare"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 53,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_03ae21881c070a3d016a8f1d7adc4887d09ca4c80a4e22d616",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:10:04.462308+00:00",
+    "usage": {
+      "input_tokens": 6482,
+      "output_tokens": 15295,
+      "total_tokens": 21777,
+      "reasoning_tokens": 304,
+      "estimated_cost_usd": 0.02041515
+    }
+  }
+}

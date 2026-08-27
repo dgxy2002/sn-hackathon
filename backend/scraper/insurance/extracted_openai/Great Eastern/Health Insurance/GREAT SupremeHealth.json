@@ -1,0 +1,121 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Great Eastern",
+    "source_file": "Great Eastern/Health Insurance/GREAT SupremeHealth.md",
+    "source_filename": "GREAT SupremeHealth.md",
+    "document_type": "brochure",
+    "content_sha256": "7302ada970917badfc7fe14e12a908b67c66339dc9e6802244f5cc3ab12ccb3f",
+    "local_markdown_path": "backend/scraper/insurance/Great Eastern/Health Insurance/GREAT SupremeHealth.md",
+    "local_pdf_path": "backend/scraper/insurance/Great Eastern/Health Insurance/GREAT SupremeHealth.pdf"
+  },
+  "extraction": {
+    "document_summary": "The document excerpt discusses how GREAT TotalCare 2 plans are structured to complement GREAT SupremeHealth. It states that the “Annual Benefit Limit” for GREAT TotalCare 2 is in addition to (i.e., layered on top of) the “Annual Benefit Limit of GREAT SupremeHealth,” implying stacked coverage caps across the two products. The excerpt also references that GREAT TotalCare 2 includes items such as lifetime assistance for post-stroke outpatient and rehabilitation care, a Home Health Care Benefit, and worldwide non-emergency medical/surgical treatment flexibility in certain TotalCare 2 tiers—while noting that the full benefit list and limits are found in the GREAT TotalCare 2 benefit schedule and also references the “GREAT TotalCare Plus 2 rider.” However, the excerpt does not itself provide SupremeHealth’s standalone benefit schedule, benefit limits, waiting periods, claim mechanics, or eligibility details.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "The provided Markdown is an incomplete excerpt and does not contain the substantive benefit schedule for GREAT SupremeHealth.",
+      "Multiple sections appear truncated (e.g., “Out-Of-Pocket expenses” and “Premium for GTC2 plan” are cut off).",
+      "SupremeHealth-specific figures (annual/lifetime limits, deductibles, age/ward class eligibility) are not stated in the excerpt."
+    ],
+    "policies": [
+      {
+        "company": "Great Eastern",
+        "policy_name": "GREAT SupremeHealth",
+        "aliases": [],
+        "quick_summary": "GREAT SupremeHealth is referenced as the base health insurance plan whose Annual Benefit Limit is complemented by GREAT TotalCare 2. The excerpt states that TotalCare 2’s Annual Benefit Limit is in addition to SupremeHealth’s Annual Benefit Limit. No further SupremeHealth-specific coverage benefits, limits, or eligibility terms are provided in the excerpted text. The excerpt also notes SDIC protection up to specified limits (without specifying SupremeHealth details). In this document fragment, the main actionable point about SupremeHealth is the layered relationship of Annual Benefit Limits with TotalCare 2.",
+        "category": "health",
+        "policy_type": "direct_purchase_insurance",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [],
+        "currency_options": [],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": null,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": null,
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": null,
+        "premium_payment_term_description": null,
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [],
+        "important_caveats": [
+          "This excerpt only states the relationship of Annual Benefit Limits between GREAT TotalCare 2 and GREAT SupremeHealth; it does not provide SupremeHealth’s benefit schedule."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [],
+        "benefits": [],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "The Annual Benefit Limit of GREAT TotalCare 2 is in addition to the Annual Benefit Limit of GREAT SupremeHealth",
+            "line_start": 1,
+            "line_end": 20,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "GREAT TotalCare 2 plans are designed to complement the benefits offered under GREAT SupremeHealth plans.",
+            "line_start": 119,
+            "line_end": 138,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Protected up to specified limits by SDIC.",
+            "line_start": 123,
+            "line_end": 142,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "medium",
+        "review_notes": [
+          "No SupremeHealth-specific benefit items/limits are present in the excerpt; only the layer relationship of Annual Benefit Limits with TotalCare 2 is stated."
+        ],
+        "slug": "great-eastern-great-supremehealth"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 3,
+    "evidence_warnings": [],
+    "requires_human_review": true
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_06ce0aa8ef60b4a3016a8f1f24ebd487d099549ea0359f59fd",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:15:25.652471+00:00",
+    "usage": {
+      "input_tokens": 4603,
+      "output_tokens": 1059,
+      "total_tokens": 5662,
+      "reasoning_tokens": 72,
+      "estimated_cost_usd": 0.00224435
+    }
+  }
+}

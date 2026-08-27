@@ -1,0 +1,818 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Singlife",
+    "source_file": "Singlife/Medical & Life Insurance/Critical Illness Insurance/Find Your Critical Illness Plan.md",
+    "source_filename": "Find Your Critical Illness Plan.md",
+    "document_type": "brochure",
+    "content_sha256": "c8b7d2bace432cfb64ac74c5efcb4c69c49054a51188662fbeba8301d4f2ee06",
+    "local_markdown_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Critical Illness Insurance/Find Your Critical Illness Plan.md",
+    "local_pdf_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Critical Illness Insurance/Find Your Critical Illness Plan.pdf"
+  },
+  "extraction": {
+    "document_summary": "Singlife Multipay Critical Illness II is a multipayout critical illness insurance plan covering 135 critical illness conditions across early, intermediate and severe stages, with continued protection through multiple payouts (including recurrence). It pays: (1) 100% of sum assured for one eligible early/intermediate condition in one lump sum; (2) 100% of sum assured for severe stage conditions (one claim per CI Group), with a stated overall Critical Illness Benefit cap of 600% of sum assured; (3) recurrent payouts after the Critical Illness Benefit has ceased—150% of sum assured per eligible recurrent claim (up to 2 claims, 300% total). A first severe-stage diagnosis also triggers premium waiver. Additional “special benefits” can add 20% of sum assured per eligible item/condition with a cap of S$25,000 (or equivalent currency) per life, and an Advance Care Option can add another 75% of sum assured (and terminates the Recurrent Critical Illness Benefit). Coverage term is selectable from 10 years up to age 99 (in one-year intervals) and can be taken in SGD, USD, GBP, EUR, AUD or HKD. The brochure also states there is no savings/investment feature, hence no cash value if the policy ends.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Brochure contains clear benefit mechanics, payout percentages, caps, waiting periods, and recurrence claim limits.",
+      "Detailed lists of covered conditions are referenced but not provided; the brochure points to the Product Summary for full lists.",
+      "Underwriting details, precise premium payment term, and free-look/grace period are not stated in this extract.",
+      "Some benefit sub-clauses are embedded as “Important Notes” and give necessary constraints (e.g., ICU in Singapore admission, claim counts, benefit cessation triggers)."
+    ],
+    "policies": [
+      {
+        "company": "Singlife",
+        "policy_name": "Singlife Multipay Critical Illness II",
+        "aliases": [
+          "Singlife Multipay Critical Illness II"
+        ],
+        "quick_summary": "Multipay critical illness plan with early/intermediate and severe-stage lump-sum payouts (100% of sum assured per stage/CI Group, subject to overall Critical Illness Benefit cap of 600%), plus a separate recurrent illness component paying 150% per eligible recurrent claim (up to two claims; 300% total). Premiums are waived upon the first severe stage diagnosis, and additional “special benefits” can pay extra 20% of sum assured (capped at S$25,000 per life). An Advance Care Option can add an extra 75% of sum assured and terminates the recurrent component. Coverage term selectable from 10 years to age 99 and currency choices include SGD, USD, GBP, EUR, AUD, HKD.",
+        "category": "critical_illness",
+        "policy_type": "critical_illness",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "Critical Illness Benefit: Early, Intermediate and Severe Stage critical illnesses (135 conditions across stages, subject to covered condition list)",
+          "Recurrent Critical Illness Benefit: specified severe-stage conditions and recurrences after CI Benefit has ceased",
+          "Special Benefits (additional 20% of sum assured, subject to cap and eligibility per condition/item)",
+          "Premium waiver upon first severe stage critical illness diagnosis",
+          "Death payout during coverage period"
+        ],
+        "currency_options": [
+          "SGD",
+          "USD",
+          "GBP",
+          "EUR",
+          "AUD",
+          "HKD"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 99,
+        "entry_age_basis": "age_next_birthday",
+        "residency_requirements": "ICU stay of 4 days or more (due to illness or accident) must be in one hospital admission in Singapore for the Intensive Care Unit benefit.",
+        "occupation_classes": [],
+        "eligibility_notes": "All ages mentioned refer to age next birthday. Full eligibility rules and complete list of covered illnesses are stated in the Product Summary (not in this extract).",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Choice of coverage term from 10 years up to age 99 (in one-year intervals).",
+        "premium_payment_term_description": null,
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": false,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "Critical Illness Benefit ceases once 600% of the sum assured is fully paid out",
+          "Critical Illness Benefit ceases when the Advance Care Option is successfully exercised under the Policy (earlier cessation stated for Recurrent benefit termination and notes)",
+          "Recurrent Critical Illness Benefit ceases once 300% of the sum assured is fully paid out, or when Advance Care Option is successfully exercised, whichever is earlier",
+          "Some benefit components (e.g., Special Benefit, Intensive Care Unit benefit) state cessation triggers tied to claim date, policy anniversary age (e.g., 85) and/or policy expiry (see important notes)"
+        ],
+        "important_caveats": [
+          "The brochure states the product has no savings/investment feature; there is no cash value if the policy ends or is terminated prematurely.",
+          "Complete list of covered critical illnesses is referenced but not provided in this extract; the Product Summary is required for details.",
+          "Recurrence payouts apply only after the Critical Illness Benefit has ceased and subject to waiting/survival period rules (waiting periods are partially stated).",
+          "Advance Care Option adds an extra 75% of sum assured but terminates the Recurrent Critical Illness Benefit once exercised."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "Coverage term: 10 years to age 99 (in one-year intervals)",
+            "plan_code": null,
+            "description": "Plan term selection for the base policy: choose a coverage term from 10 years up to age 99 (in one-year intervals).",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": null,
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "Full term rules not provided beyond the selectable range stated.",
+            "coverage_term_description": "Choice of coverage term from 10 years up to age 99 (in one-year intervals).",
+            "premium_payment_term_description": null,
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "You have a choice of coverage term from 10 years up to age 99 (in one-year intervals), and SGD, USD, GBP, EUR, AUD or HKD",
+                "line_start": 93,
+                "line_end": 95,
+                "quote_token_coverage": 0.9595
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Critical Illness Benefit (Early & Intermediate stage)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Upon diagnosis of any one of the specified Early or Intermediate Stage critical illnesses covered under this benefit, 100% of the sum assured is payable in one lump sum. Only one claim is allowed for the Early and Intermediate Stage of each CI Group covered; payout is subject to the total amount payable under Critical Illness Benefit.",
+            "trigger_description": "Diagnosis of any one of the 75 Early or Intermediate Stage Critical Illnesses covered under the Critical Illness Benefit.",
+            "covered_conditions": [
+              "Any one of the Early or Intermediate Stage Critical Illnesses covered (complete list in Product Summary; not included here)"
+            ],
+            "condition_stages": [
+              "early",
+              "intermediate"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 100,
+            "payout_unit": "% of sum assured",
+            "payout_basis": "Sum Assured",
+            "payout_description": "100% of the Sum Assured in one lump sum per eligible claim, subject to overall CI Benefit payout limits and CI Group claim rules.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 600,
+            "limit_type": "Maximum total Critical Illness Benefit payout (percentage of sum assured) stated as a cap for the overall Critical Illness Benefit.",
+            "claim_frequency": "Only one claim is allowed for the Early and Intermediate Stage of each CI Group covered.",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Payout is payable upon diagnosis during the coverage period (coverage period described by selected term).",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Benefit shall cease once the Critical Illness Benefit is terminated.",
+            "geographic_scope": null,
+            "notes": "Brochure states waiting and survival periods apply to this benefit; waiting period between two early/intermediate CI Benefit claims and between severe-to-early etc. described as 1-year in the CI Benefit section.",
+            "evidence": [
+              {
+                "quote": "Upon diagnosis of any one of the 75 Early or Intermediate Stage Critical Illnesses covered",
+                "line_start": 107,
+                "line_end": 111,
+                "quote_token_coverage": 0.996
+              },
+              {
+                "quote": "If the Life Assured is diagnosed with any one of the Early or Intermediate Stage Critical Illnesses covered, 100% of the Sum Assured will be payable in one lump sum.",
+                "line_start": 238,
+                "line_end": 257,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Only one claim is allowed for the Early and Intermediate Stage of each CI Group covered. The payout of this benefit is subject to the total amount payable under Critical Illness Benefit.",
+                "line_start": 240,
+                "line_end": 259,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Please take note of the following waiting periods: 1) Under Critical Illness (CI) Benefit, there is no waiting period from an Early and Intermediate Stage CI Benefit claim to a Severe Stage CI Benefit claim. There is a one-year waiting period: • Between two Early and Intermediate Stage CI Benefit claims;",
+                "line_start": 118,
+                "line_end": 137,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Critical Illness Benefit (Severe stage)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Upon diagnosis of any one of the Severe Stage critical illnesses covered under the Critical Illness Benefit, 100% of the sum assured is payable in one lump sum (subject to CI Group claim limit and the overall Critical Illness Benefit cap). Severe stage includes 60 specified severe stage critical illnesses covered under this benefit, and only one claim is allowed per Severe Stage of each CI Group covered.",
+            "trigger_description": "Diagnosis of any one of the 60 Severe Stage Critical Illnesses covered under the Critical Illness Benefit.",
+            "covered_conditions": [
+              "Any one of the Severe Stage critical illnesses covered (complete list in Product Summary; not included here)"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 100,
+            "payout_unit": "% of sum assured",
+            "payout_basis": "Sum Assured",
+            "payout_description": "100% of the Sum Assured in one lump sum per eligible severe-stage diagnosis, subject to overall CI Benefit payout limits and claim rules.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 600,
+            "limit_type": "Maximum total Critical Illness Benefit payout (percentage of sum assured) cap stated as 600%.",
+            "claim_frequency": "Only one claim is allowed for the Severe Stage of each CI Group covered.",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Payout upon diagnosis during coverage period.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Benefit shall cease once the Critical Illness Benefit is terminated.",
+            "geographic_scope": null,
+            "notes": "Brochure states waiting and survival periods apply; waiting period rules within CI Benefit include 1-year between two severe-stage CI claims and from severe-to-early/intermediate.",
+            "evidence": [
+              {
+                "quote": "Upon diagnosis of any one of the 60 Severe Stage Critical Illnesses covered",
+                "line_start": 124,
+                "line_end": 127,
+                "quote_token_coverage": 0.997
+              },
+              {
+                "quote": "If the Life Assured is diagnosed with any one of the Severe Stage Critical Illnesses covered, 100% of the Sum Assured will be paid out in one lump sum.",
+                "line_start": 242,
+                "line_end": 261,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Only one claim is allowed for the Severe Stage of each CI Group covered.",
+                "line_start": 243,
+                "line_end": 262,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "This benefit shall cease once the Critical Illness Benefit is terminated.",
+                "line_start": 240,
+                "line_end": 259,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Critical Illness Benefit provides coverage for Early, Intermediate and Severe Stage Critical Illness. Upon the diagnosis of the first Severe Stage Critical Illness under the Critical Illness Benefit, all future premiums for the Policy will be waived. The total amount payable under Critical Illness Benefit shall not exceed 600% of the Sum Assured. This benefit shall cease once 600% of the Sum Assured is fully paid out",
+                "line_start": 237,
+                "line_end": 256,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Please take note of the following waiting periods: 1) Under Critical Illness (CI) Benefit, there is no waiting period from an Early and Intermediate Stage CI Benefit claim to a Severe Stage CI Benefit claim. There is a one-year waiting period: • Between two Severe Stage CI Benefit claims;",
+                "line_start": 135,
+                "line_end": 138,
+                "quote_token_coverage": 0.997
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Recurrent Critical Illness Benefit",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "After the Critical Illness Benefit has ceased, provides payout per eligible recurrent claim at 150% of sum assured, up to two claims (maximum total 300% of the sum assured). Applies only to specified severe-stage conditions and their recurrences covered under this benefit; only one claim is payable per diagnosis.",
+            "trigger_description": "Upon diagnosis of any one of the Recurrent Critical Illnesses covered under this benefit, or re-diagnosed major cancer / recurrent heart attack / recurrent stroke with permanent neurological deficit / repeated open-heart heart valve surgery / repeated coronary artery by-pass surgery (as specified severe-stage items listed under this benefit).",
+            "covered_conditions": [
+              "Any one of the specified Recurrent Critical Illnesses covered under this benefit (complete list in Product Summary; some examples listed in this extract)"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": 150,
+            "payout_unit": "% of sum assured",
+            "payout_basis": "Sum Assured",
+            "payout_description": "150% of the Sum Assured per eligible recurrent claim; up to 2 claims allowed; total up to 300% of the Sum Assured.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 300,
+            "limit_type": "Maximum total recurrent payout as a percentage of sum assured",
+            "claim_frequency": "Up to 2 claims allowed (see brochure table and important notes).",
+            "maximum_claims": 2,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Applies if the Life Assured is diagnosed with eligible Recurrent Critical Illnesses covered under this benefit, provided Critical Illness Benefit has ceased.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "The benefit will cease once 300% of the Sum Assured is fully paid out, or when the Advance Care Option is successfully exercised (whichever is earlier). Waiting periods and a survival period apply.",
+            "geographic_scope": null,
+            "notes": "Under the Recurrent Critical Illness Benefit, a two-year waiting period applies between two Recurrent Critical Illness Benefit claims.",
+            "evidence": [
+              {
+                "quote": "Recurrent Critical Illness Benefit",
+                "line_start": 76,
+                "line_end": 95,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Recurrent Critical Illness Benefit11",
+                "line_start": 82,
+                "line_end": 101,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Payout per claim Upon diagnosis of the following: Payout per claim",
+                "line_start": 84,
+                "line_end": 103,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "100% waiting period of the Sum Assured",
+                "line_start": 263,
+                "line_end": 264,
+                "quote_token_coverage": 0.999
+              },
+              {
+                "quote": "After the Critical Illness Benefit has ceased",
+                "line_start": 87,
+                "line_end": 106,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Please take note of the following waiting periods: 2) Under the Recurrent Critical Illness Benefit, there is a two-year waiting period between two Recurrent Critical Illness Benefit claims.",
+                "line_start": 135,
+                "line_end": 140,
+                "quote_token_coverage": 0.995
+              },
+              {
+                "quote": "Recurrent Critical Illness Benefit pays 150% of the Sum Assured per eligible claim, up to two claims (maximum total 300% of the Sum Assured).",
+                "line_start": 207,
+                "line_end": 226,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Premium waiver upon first severe stage diagnosis",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Upon diagnosis of the first Severe Stage Critical Illness under the Critical Illness Benefit, all future premiums for the Policy will be waived.",
+            "trigger_description": "Diagnosis of the first Severe Stage Critical Illness under the Critical Illness Benefit.",
+            "covered_conditions": [
+              "Any one of the Severe Stage Critical Illnesses under the Critical Illness Benefit (complete list in Product Summary)"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "premium_waiver",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "Waiver of all future premiums after the first severe-stage diagnosis (future premiums).",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Triggered at the diagnosis of the first severe stage critical illness under the Critical Illness Benefit.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure also states premiums waived upon first severe stage diagnosis covered under the Critical Illness Benefit.",
+            "evidence": [
+              {
+                "quote": "And with premiums waived upon your first severe stage diagnosis covered under the Critical Illness Benefit, you can focus fully on recovery, not costs.",
+                "line_start": 51,
+                "line_end": 54,
+                "quote_token_coverage": 0.997
+              },
+              {
+                "quote": "Upon the diagnosis of the first Severe Stage Critical Illness under the Critical Illness Benefit, all future premiums for the Policy will be waived.",
+                "line_start": 236,
+                "line_end": 255,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Advance Care Option (extra payout and termination of recurrent benefit)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "optional",
+            "benefit_description": "Advance Care Option can be exercised if the Life Assured is diagnosed with an eligible severe-stage critical illness for the first time. If successfully exercised, an additional 75% of the sum assured will be payable in one lump sum; and the Recurrent Critical Illness Benefit shall cease. Survival period is applicable to this option.",
+            "trigger_description": "Diagnosis of any one of the eligible Severe Stage Critical Illnesses specified under this option for the first time.",
+            "covered_conditions": [
+              "Eligible Severe Stage Critical Illnesses specified under the Advance Care Option (complete eligibility list not provided in this extract)"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": 75,
+            "payout_unit": "% of sum assured",
+            "payout_basis": "Sum Assured",
+            "payout_description": "Additional 75% of the Sum Assured payable in one lump sum if the option is successfully exercised.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Available upon first-time diagnosis of eligible eligible severe-stage critical illness under this option.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Recurrent Critical Illness Benefit terminates once the Advance Care Option is exercised (brochure example and important note).",
+            "geographic_scope": null,
+            "notes": "The brochure states that the Recurrent Critical Illness Benefit is terminated once the Advance Care Option is exercised.",
+            "evidence": [
+              {
+                "quote": "With the Advance Care Option, you can convert your Recurrent Critical Illness Benefit into an extra payout3, if your first severe stage critical illness diagnosis is for one of the 6 specified conditions.",
+                "line_start": 94,
+                "line_end": 97,
+                "quote_token_coverage": 0.997
+              },
+              {
+                "quote": "You may exercise the Advance Care Option if the Life Assured is diagnosed with any one of the eligible Severe Stage Critical Illnesses specified under this option for the first time.",
+                "line_start": 215,
+                "line_end": 234,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "If this option is successfully exercised, an additional 75% of the Sum Assured will be payable in one lump sum; and the Recurrent Critical Illness Benefit shall cease.",
+                "line_start": 216,
+                "line_end": 235,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "^The Recurrent Critical Illness Benefit is terminated once the Advance Care Option is exercised.",
+                "line_start": 195,
+                "line_end": 214,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Intensive Care Unit (ICU) extra payout",
+            "benefit_category": "critical_illness",
+            "benefit_level": "optional",
+            "benefit_description": "Additional 20% of the sum assured (up to S$25,000) per life for an ICU stay of four days or more in one hospital admission. Must be confirmed as Necessary Medical Treatment in Singapore and must be for illness or accident. This benefit allows only one claim and ceases on claim date, policy anniversary when life assured turns 85, or policy expiry, whichever is earliest.",
+            "trigger_description": "ICU stay of four days or more in one hospital admission (due to illness or accident) in Singapore, confirmed as Necessary Medical Treatment.",
+            "covered_conditions": [
+              "ICU stay of 4 days or more (due to illness or accident) confirmed as Necessary Medical Treatment in Singapore"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": 20,
+            "payout_unit": "% of sum assured",
+            "payout_basis": "Sum Assured",
+            "payout_description": "Additional 20% of sum assured, capped at S$25,000 (or equivalent currency) per life.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 25000,
+            "limit_type": "Cap per life for Intensive Care Unit extra payout",
+            "claim_frequency": "Only one claim is allowed under this benefit.",
+            "maximum_claims": 1,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Claim upon ICU stay of 4 days or more in one admission in Singapore confirmed as Necessary Medical Treatment.",
+            "benefit_expiry_age": 85,
+            "benefit_expiry_description": "Benefit ceases on claim date, or on the Policy Anniversary in which the Life Assured is 85 years old, or upon expiry of the Policy, whichever is earliest.",
+            "geographic_scope": "Singapore requirement for ICU stay (must be in one hospital admission in Singapore).",
+            "notes": "The brochure states ICU in ICU will not be considered as Necessary Medical Treatment if life assured can be safely and adequately treated in any other facility; waiting period and survival period are applicable.",
+            "evidence": [
+              {
+                "quote": "Get an additional 20% of your sum assured (up to S$25,000) per life for any of the following:",
+                "line_start": 66,
+                "line_end": 67,
+                "quote_token_coverage": 0.999
+              },
+              {
+                "quote": "• Intensive Care Unit (ICU) stay of four days or more in one hospital admission5;",
+                "line_start": 52,
+                "line_end": 71,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Only one claim is allowed under this benefit.",
+                "line_start": 217,
+                "line_end": 236,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The Intensive Care Unit (ICU) stay of 4 days or more (due to illness or accident) must be in one hospital admission in Singapore and must be confirmed as Necessary Medical Treatment.",
+                "line_start": 224,
+                "line_end": 243,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "A stay in ICU will not be considered as Necessary Medical Treatment if the Life Assured can be safely and adequately treated in any other facility.",
+                "line_start": 225,
+                "line_end": 244,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "This benefit shall cease on the date on which a claim is made, on the Policy Anniversary in which the Life Assured is 85 years old, or upon the expiry of the Policy, whichever is earliest.",
+                "line_start": 219,
+                "line_end": 238,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Surgical removal of borderline/benign tumour with suspected malignancy (extra payout)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "optional",
+            "benefit_description": "Additional 20% of the sum assured (up to S$25,000) per life for surgical removal of a borderline malignant tumour or benign tumour (with suspected malignancy). This benefit is described as part of special conditions eligible for additional 20% of sum assured (cap applies per life). Only one claim is allowed under this benefit.",
+            "trigger_description": "Surgical removal of a borderline malignant tumour or benign tumour (with suspected malignancy).",
+            "covered_conditions": [
+              "Surgical removal of a borderline malignant tumour",
+              "Surgical removal of a benign tumour (with suspected malignancy)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": 20,
+            "payout_unit": "% of sum assured",
+            "payout_basis": "Sum Assured",
+            "payout_description": "Additional 20% of sum assured (cap up to S$25,000) per life; described as part of special benefits.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 25000,
+            "limit_type": "Cap per life (or equivalent currency) for the special condition payout",
+            "claim_frequency": "Only one claim is allowed under this benefit (per important notes language).",
+            "maximum_claims": 1,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Surgical removal triggering event for a tumour as described.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure references Waiting period and survival period as applicable and notes definitions of Benign Tumour (suspected malignancy) requiring surgical excision and Borderline Malignant Tumour in Product Summary.",
+            "evidence": [
+              {
+                "quote": "Get an additional 20% of your sum assured (up to S$25,000) per life for any of the following:",
+                "line_start": 66,
+                "line_end": 67,
+                "quote_token_coverage": 0.999
+              },
+              {
+                "quote": "• Surgical removal of a borderline malignant tumour",
+                "line_start": 49,
+                "line_end": 68,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "or benign tumour (with suspected malignancy)4;",
+                "line_start": 50,
+                "line_end": 69,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Only one claim is allowed under this benefit.",
+                "line_start": 217,
+                "line_end": 236,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "This benefit shall cease on the date on which a claim is made, on the Policy Anniversary in which the Life Assured is 85 years old, or upon the expiry of the Policy, whichever is earliest.",
+                "line_start": 219,
+                "line_end": 238,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Special Benefit: additional 20% per covered condition (with suspected malignancy/tumour or other special conditions)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "optional",
+            "benefit_description": "An additional 20% of sum assured is payable for each covered condition under the Special Benefit (34 covered conditions), capped at S$25,000 (or equivalent currency) per life per condition. Only one claim is payable for each condition and a maximum of six claims is allowed under this benefit. This benefit ceases on the sixth claim date, on policy anniversary where life assured is 18 or 85 years old (based on covered conditions), or upon expiry of the policy, whichever is earliest.",
+            "trigger_description": "Diagnosis of one of the 34 conditions covered under the Special Benefit; payout is per condition.",
+            "covered_conditions": [
+              "Any one of the 34 conditions covered under the Special Benefit"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": 20,
+            "payout_unit": "% of sum assured",
+            "payout_basis": "Sum Assured",
+            "payout_description": "Additional 20% of the Sum Assured per condition, capped at S$25,000 (or equivalent currency) per life per condition.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 25000,
+            "limit_type": "Cap per life per condition under the Special Benefit",
+            "claim_frequency": "Only one claim payable per condition; maximum of six claims allowed under this benefit.",
+            "maximum_claims": 6,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Payable on diagnosis of a condition covered under the Special Benefit.",
+            "benefit_expiry_age": 18,
+            "benefit_expiry_description": "Ceases on Policy Anniversary in which the Life Assured is 18 or 85 years old (based on covered conditions), or on sixth claim date, or on policy expiry (whichever earliest).",
+            "geographic_scope": null,
+            "notes": "Brochure says waiting period (for specific conditions) and survival period are applicable.",
+            "evidence": [
+              {
+                "quote": "Get an additional 20% of your sum assured (up to S$25,000) per life for any of the following:",
+                "line_start": 66,
+                "line_end": 67,
+                "quote_token_coverage": 0.999
+              },
+              {
+                "quote": "• Diagnosis of one of the 34 covered conditions under the Special Benefit6 (payout is per condition).",
+                "line_start": 72,
+                "line_end": 74,
+                "quote_token_coverage": 0.998
+              },
+              {
+                "quote": "If the Life Assured is diagnosed with any one of the 34 conditions covered, an additional 20% of the Sum Assured will be payable, capped at S$25,000 (or equivalent currency) per life per condition.",
+                "line_start": 229,
+                "line_end": 248,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Only one claim is payable for each condition and a maximum of six claims is allowed under this benefit.",
+                "line_start": 229,
+                "line_end": 248,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "This benefit shall cease on the date on which the sixth claim is made, on the Policy Anniversary in which the Life Assured is 18 or 85 years old (based on covered conditions), or upon the expiry of the Policy, whichever is earliest.",
+                "line_start": 231,
+                "line_end": 250,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Death payout during coverage period",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "If the Life Assured dies during the coverage period, a lump-sum payout of S$5,000 is made to help with medical bills or funeral expenses.",
+            "trigger_description": "Death during the coverage period.",
+            "covered_conditions": [
+              "Death during coverage period"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 5000,
+            "payout_unit": "SGD",
+            "payout_basis": null,
+            "payout_description": "Lump-sum payout of S$5,000 upon death during coverage period.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "standalone",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Payable if the Life Assured dies during the coverage period.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "Brochure does not state currency conversion for this death payout.",
+            "evidence": [
+              {
+                "quote": "Payout upon death",
+                "line_start": 63,
+                "line_end": 82,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "If you die during the coverage period, a lump-sum payout of S$5,000 will be made to help with medical bills or funeral expenses.",
+                "line_start": 84,
+                "line_end": 90,
+                "quote_token_coverage": 0.994
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "Singlife Multipay Critical Illness II",
+            "line_start": 1,
+            "line_end": 9,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Be it early, intermediate or severe stage, you’re covered across 135 conditions with continued protection after diagnosis, backed by multiple payouts.",
+            "line_start": 40,
+            "line_end": 46,
+            "quote_token_coverage": 0.994
+          },
+          {
+            "quote": "Get an additional 20% of your sum assured (up to S$25,000) per life",
+            "line_start": 66,
+            "line_end": 67,
+            "quote_token_coverage": 0.999
+          },
+          {
+            "quote": "This policy is underwritten by Singapore Life Ltd.",
+            "line_start": 248,
+            "line_end": 267,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "As this product has no savings or investment feature, there is no cash value if the policy ends or if the policy is terminated prematurely.",
+            "line_start": 253,
+            "line_end": 272,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "high",
+        "review_notes": [
+          "Condition lists (135 conditions; 75 early/intermediate; 60 severe; 34 special conditions; and the 6 specified severe conditions for Advance Care Option) are referenced but not enumerated in this extract; details are stated to be in the Product Summary.",
+          "Recurrent Critical Illness Benefit payout mechanics are stated; the extract includes a table with 2-year waiting period between recurrent claims and important notes specifying the 150% per claim up to 2 claims (300% total)."
+        ],
+        "slug": "singlife-singlife-multipay-critical-illness-ii"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 47,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_0f945ea84244e348016a8f20e4755887d0a6e7a248f7d90e76",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:23:53.338590+00:00",
+    "usage": {
+      "input_tokens": 7983,
+      "output_tokens": 8747,
+      "total_tokens": 16730,
+      "reasoning_tokens": 271,
+      "estimated_cost_usd": 0.01253035
+    }
+  }
+}

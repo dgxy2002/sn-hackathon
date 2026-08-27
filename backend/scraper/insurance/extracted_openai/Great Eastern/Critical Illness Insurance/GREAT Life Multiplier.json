@@ -1,0 +1,791 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Great Eastern",
+    "source_file": "Great Eastern/Critical Illness Insurance/GREAT Life Multiplier.md",
+    "source_filename": "GREAT Life Multiplier.md",
+    "document_type": "brochure",
+    "content_sha256": "86b476b789fd68d3d4c3d540e6b43ef0f6d74b4c501c51b5d0c09c0cd99073fb",
+    "local_markdown_path": "backend/scraper/insurance/Great Eastern/Critical Illness Insurance/GREAT Life Multiplier.md",
+    "local_pdf_path": "backend/scraper/insurance/Great Eastern/Critical Illness Insurance/GREAT Life Multiplier.pdf"
+  },
+  "extraction": {
+    "document_summary": "Great Eastern “GREAT Life Multiplier” is a life insurance solution used as the base for critical illness coverage via an optional “Critical Illness Multiplier Rider (E&I)” (early & intermediate stage and critical stage). The rider uses a multiplier to scale the insured critical illness benefit, with examples shown: for Lola, the early/intermediate portion is “S$30,000 (multiplied 5 times to S$150,000 until age 75)” and the critical-stage portion is “S$50,000 (multiplied 5 times to S$250,000 until age 75)”; for Mike, the same structure is “S$30,000 (multiplied 10 times to S$300,000 until age 65)” and “S$50,000 (multiplied 10 times to S$500,000 until age 65).” A “Parent Care Rider” provides age-related-condition coverage without medical assessment for parents (example mentions Severe Dementia/Alzheimer’s), and a “Payer Benefit Enhanced (CI) Rider” waives future premiums upon a critical illness diagnosis (as stated). The brochure also mentions “Special Benefits” under the CI Multiplier Rider (E&I) paying “25% of the rider sum assured” (up to six claims).",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Key product mechanics such as precise coverage term, detailed definitions, and underwriting rules are not fully present in the provided text (many parts are truncated).",
+      "Some fields are inferable only via examples; where the brochure does not explicitly generalize, values are recorded only in the plan/option descriptions backed by the examples shown.",
+      "Certain rider descriptions (e.g., exact wording of premium waiver trigger/limits) are truncated, so only the explicitly visible parts are extracted."
+    ],
+    "policies": [
+      {
+        "company": "Great Eastern",
+        "policy_name": "GREAT Life Multiplier",
+        "aliases": [
+          "Great Life Multiplier"
+        ],
+        "quick_summary": "Base participating life plan that provides a Death Benefit, with optional riders including Critical Illness Multiplier Rider (E&I), Parent Care Rider (age-related conditions without medical assessment), Payer Benefit Enhanced (CI) Rider (premium waiver on critical illness diagnosis), and CI Multiplier “Special Benefits” paying 25% of rider sum assured (up to six claims). Beneficiary access is referenced, subject to a nomination condition. Limited pay applies to the base plan and critical illness rider(s), not the Parent Care Rider (per the text). Age is stated as “age next birthday”. All ages specified refer to age next birthday.",
+        "category": "critical_illness",
+        "policy_type": "critical_illness",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "participating",
+        "coverage_scope": [
+          "Death Benefit under GREAT Life Multiplier",
+          "Critical illness benefits under Critical Illness Multiplier Rider (E&I) for early/intermediate stage and critical stage critical illnesses (as illustrated)",
+          "Parent Benefit under Parent Care Rider for age-related conditions (as illustrated)",
+          "Special Benefits under Critical Illness Multiplier Rider (E&I) (as illustrated)"
+        ],
+        "currency_options": [
+          "SGD"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": null,
+        "entry_age_basis": "age_next_birthday",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "Guaranteed coverage for parents for specified age-related conditions without medical assessment is described, but the full eligibility/criteria are not fully shown in the provided text.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": null,
+        "premium_payment_term_description": "Limited pay option is applicable to the base plan and critical illness rider(s) (Parent Care Rider excluded).",
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": "Non-guaranteed bonuses illustrated based on the Illustrated Investment Rate of Return (IIRR) of the participating fund at 4.25% p.a.",
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [],
+        "important_caveats": [
+          "Beneficiary access is subject to the policyholder not having made any nomination under the Beneficiary Access clause.",
+          "Pre-existing conditions are excluded.",
+          "Special Benefits, Juvenile Benefit or Senior Benefit payout described as 25% of rider sum assured without reducing the basic sum assured of the GREAT Life Multiplier plan and its riders (as stated)."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "5x multiplier (until age 75) — early/intermediate and critical stage examples",
+            "plan_code": null,
+            "description": "Illustrated example where early/intermediate stage critical illness benefit is S$30,000 multiplied 5 times to S$150,000 until age 75; critical stage critical illness benefit is S$50,000 multiplied 5 times to S$250,000 until age 75. Special Benefit references and rider/base reductions are described in the example narrative.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "Example states multiplier is “until age 75”.",
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Critical Illness Benefit under Critical Illness Multiplier Rider (E&I) — early/intermediate stage (multiplied benefit)",
+                "payout_type": "lump_sum",
+                "payout_value": 150000,
+                "payout_unit": "SGD",
+                "payout_basis": "Example: S$30,000 multiplied 5 times",
+                "payout_description": "Early and intermediate stage critical illnesses (example).",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Illustration only as presented in the document narrative.",
+                "evidence": [
+                  {
+                    "quote": "covering early and intermediate stage critical illnesses:\n\nS$30,000 (multiplied 5 times to S$150,000 until age 75)",
+                    "line_start": 26,
+                    "line_end": 45,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Critical Illness Benefit under Critical Illness Multiplier Rider (E&I) — critical stage (multiplied benefit)",
+                "payout_type": "lump_sum",
+                "payout_value": 250000,
+                "payout_unit": "SGD",
+                "payout_basis": "Example: S$50,000 multiplied 5 times",
+                "payout_description": "Critical stage critical illnesses (example).",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Illustration only as presented in the document narrative.",
+                "evidence": [
+                  {
+                    "quote": "covering critical stage critical illnesses:\n  \nS$50,000 (multiplied 5 times to S$250,000 until age 75)",
+                    "line_start": 29,
+                    "line_end": 48,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "S$500,000 until she turns age 75. To ensure his parents have financial support if diagnosed with",
+                "line_start": 20,
+                "line_end": 39,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "10x multiplier (until age 65) — early/intermediate and critical stage examples",
+            "plan_code": null,
+            "description": "Illustrated example where early/intermediate stage critical illness benefit is S$30,000 multiplied 10 times to S$300,000 until age 65; critical stage critical illness benefit is S$50,000 multiplied 10 times to S$500,000 until age 65.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "Example states multiplier is “until age 65”.",
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Critical Illness Benefit under Critical Illness Multiplier Rider (E&I) — early/intermediate stage (multiplied benefit)",
+                "payout_type": "lump_sum",
+                "payout_value": 300000,
+                "payout_unit": "SGD",
+                "payout_basis": "Example: S$30,000 multiplied 10 times",
+                "payout_description": "Early and intermediate stage critical illnesses (example).",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Illustration only as presented in the document narrative.",
+                "evidence": [
+                  {
+                    "quote": "covering early and intermediate stage\n\ncritical illnesses:\n\nS$30,000 (multiplied 10 times to S$300,000 until age 65)",
+                    "line_start": 82,
+                    "line_end": 101,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Critical Illness Benefit under Critical Illness Multiplier Rider (E&I) — critical stage (multiplied benefit)",
+                "payout_type": "lump_sum",
+                "payout_value": 500000,
+                "payout_unit": "SGD",
+                "payout_basis": "Example: S$50,000 multiplied 10 times",
+                "payout_description": "Critical stage critical illnesses (example).",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Illustration only as presented in the document narrative.",
+                "evidence": [
+                  {
+                    "quote": "covering critical stage critical illnesses:\n\nS$50,000 (multiplied 10 times to S$500,000 until age 65)",
+                    "line_start": 86,
+                    "line_end": 105,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "His Critical Illness Multiplier Rider coverage is reduced to S$20,000 (multiplied to S$200,000 until age 65)",
+                "line_start": 91,
+                "line_end": 110,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Death Benefit under GREAT Life Multiplier",
+            "benefit_category": "death",
+            "benefit_level": "base",
+            "benefit_description": "Upon the policyholder passing on, beneficiaries receive the Death Benefit under GREAT Life Multiplier (illustrated). Non-guaranteed amounts are illustrated based on participating fund performance.",
+            "trigger_description": "Policyholder passes on.",
+            "covered_conditions": [],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "Death Benefit payable (illustration mentions a non-guaranteed figure at IIRR 3.00% p.a.).",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure states Death Benefit is illustrated and non-guaranteed bonuses vary with the participating fund performance.",
+            "evidence": [
+              {
+                "quote": "Mike passes on. His beneficiaries receive the Death Benefit",
+                "line_start": 101,
+                "line_end": 120,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The non-guaranteed benefits are illustrated based on the Illustrated Investment Rate of Return (IIRR) of the participating fund at\n4.25% p.a.. At an IIRR of 3.00% p.a., the non-guaranteed bonuses would be S$24,260, and the Death Benefit payable would be\nS$74,260.",
+                "line_start": 123,
+                "line_end": 142,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Critical Illness Benefit under Critical Illness Multiplier Rider (E&I) — early and intermediate stage critical illnesses (multiplied)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "rider",
+            "benefit_description": "Covers early and intermediate stage critical illnesses with a multiplier to scale the payout amount (illustrated amounts differ by multiplier level).",
+            "trigger_description": "Diagnosis of an early and/or intermediate stage critical illness (as illustrated).",
+            "covered_conditions": [],
+            "condition_stages": [
+              "pre_early",
+              "early",
+              "intermediate"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": "SGD",
+            "payout_basis": "Multiplied from S$30,000 example",
+            "payout_description": "Example: S$30,000 multiplied to S$150,000 (5x) or S$300,000 (10x) until age 75/65 respectively.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "Illustrated examples are shown for Lola (5x until age 75) and Mike (10x until age 65).",
+            "evidence": [
+              {
+                "quote": "covering early and intermediate stage critical illnesses:\n\nS$30,000 (multiplied 5 times to S$150,000 until age 75)",
+                "line_start": 26,
+                "line_end": 45,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "covering early and intermediate stage\n\ncritical illnesses:\n\nS$30,000 (multiplied 10 times to S$300,000 until age 65)",
+                "line_start": 82,
+                "line_end": 101,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Claim for Critical Illness Benefit under Critical Illness Multiplier Rider (E&I)",
+                "line_start": 47,
+                "line_end": 66,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Critical Illness Benefit under Critical Illness Multiplier Rider (E&I) — critical stage critical illnesses (multiplied)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "rider",
+            "benefit_description": "Covers critical stage critical illnesses with a multiplier to scale the payout amount (illustrated amounts differ by multiplier level).",
+            "trigger_description": "Diagnosis of a critical stage critical illness (as illustrated).",
+            "covered_conditions": [],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": "SGD",
+            "payout_basis": "Multiplied from S$50,000 example",
+            "payout_description": "Example: S$50,000 multiplied to S$250,000 (5x) or S$500,000 (10x) until age 75/65 respectively.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "Illustrated examples are shown for Lola (5x until age 75) and Mike (10x until age 65).",
+            "evidence": [
+              {
+                "quote": "covering critical stage critical illnesses:\n  \nS$50,000 (multiplied 5 times to S$250,000 until age 75)",
+                "line_start": 29,
+                "line_end": 48,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "covering critical stage critical illnesses:\n\nS$50,000 (multiplied 10 times to S$500,000 until age 65)",
+                "line_start": 86,
+                "line_end": 105,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Claim for Critical Illness Benefit under Critical Illness Multiplier Rider (E&I)",
+                "line_start": 47,
+                "line_end": 66,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Parent Benefit under Parent Care Rider (age-related conditions, guaranteed coverage without medical assessment)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "rider",
+            "benefit_description": "Provides Parent Benefit for age-related conditions such as Alzheimer’s Disease and Severe Dementia. The brochure states guaranteed coverage for these age-related conditions without medical assessment for parents at the point of coverage (as described).",
+            "trigger_description": "Diagnosis of an age-related condition such as Alzheimer’s Disease or Severe Dementia/Severe Dementia (as stated).",
+            "covered_conditions": [
+              "Alzheimer’s Disease",
+              "Severe Dementia"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": "SGD",
+            "payout_basis": "Parent Care Rider coverage reduced/illustrated in examples; exact benefit amount rules not fully shown.",
+            "payout_description": null,
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Guaranteed coverage for age-related conditions without medical assessment at point of coverage (as stated).",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure also mentions the Parent Care Rider is not covered by limited pay (per the limited pay note).",
+            "evidence": [
+              {
+                "quote": "Ensure your parents receive the care they deserve with the Parent Care Rider. This add-on benefit\nprovides guaranteed coverage for age-related conditions2 such as Alzheimer’s Disease/ Severe\nassessment for your parents at the point of coverage. It offers immediate financial support and",
+                "line_start": 12,
+                "line_end": 31,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "with many specifically\n\ndeficit in critical",
+                "line_start": 1,
+                "line_end": 16,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Claim for Parent Benefit under Parent Care Rider",
+                "line_start": 46,
+                "line_end": 65,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          },
+          {
+            "benefit_name": "Special Benefits under Critical Illness Multiplier Rider (E&I) (25% of rider sum assured, up to six claims)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "rider",
+            "benefit_description": "Each Special Benefit (the document also mentions Juvenile Benefit or Senior Benefit in the same payout rule sentence) provides a payout equivalent to 25% of the rider sum assured, without reducing the basic sum assured of the GREAT Life Multiplier plan and its riders. Up to six claims can be made for different covered ... (the remainder is truncated).",
+            "trigger_description": "Trigger for each Special Benefit is not fully specified in the visible text; the document asserts the payout equivalence and claim cap.",
+            "covered_conditions": [],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": 25,
+            "payout_unit": "percent",
+            "payout_basis": "25% of the rider sum assured",
+            "payout_description": "Payout equivalent to 25% of rider sum assured.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": 6,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": false,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The text explicitly says this Special Benefit payout is without reducing basic sum assured of the GREAT Life Multiplier plan and its riders.",
+            "evidence": [
+              {
+                "quote": "Each Special Benefit, Juvenile Benefit or Senior Benefit provides a payout equivalent to 25% of the rider sum assured, without\nreducing the basic sum assured of the GREAT Life Multiplier plan and its riders. Up to six claims can be made for different covered",
+                "line_start": 115,
+                "line_end": 134,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Claim for Special Benefits under Critical Illness Multiplier Rider (E&I)",
+                "line_start": 104,
+                "line_end": 123,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Premium waiver under Payer Benefit Enhanced (CI) Rider (waives all future premiums on critical illness diagnosis)",
+            "benefit_category": "disability_or_premium_waiver",
+            "benefit_level": "rider",
+            "benefit_description": "The Payer Benefit Enhanced (CI) Rider waives all future premiums if the payer is diagnosed with a critical illness (trigger wording is truncated but states premium waiver).",
+            "trigger_description": "Diagnosed with a critical illness (as stated).",
+            "covered_conditions": [
+              "critical illness"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": "premium_waiver",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Waives all future premiums (as stated).",
+            "payout_description": "Premium waiver benefit.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "Exact critical illness definition/criteria and whether premium waiver continues for a fixed period are not shown in the provided text.",
+            "evidence": [
+              {
+                "quote": "Benefit Enhanced (CI) Rider, which waives all future premiums if you're diagnosed with a critical",
+                "line_start": 14,
+                "line_end": 33,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Payer Benefit Enhanced (CI) Rider",
+                "line_start": 31,
+                "line_end": 50,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          }
+        ],
+        "riders": [
+          {
+            "name": "Critical Illness Multiplier Rider (E&I)",
+            "description": "Optional rider providing coverage for early/intermediate stage and critical stage critical illnesses, using a multiplier. The brochure also references “Special Benefits” under this rider and illustrates multiplied benefit amounts until age 75 or age 65 depending on the scenario.",
+            "rider_type": "critical_illness",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": "Illustrations show benefit multiplied “until age 75” or “until age 65”.",
+            "premium_payment_term_description": "Limited pay option is applicable to the base plan and critical illness rider(s).",
+            "includes_premium_waiver": null,
+            "notes": "Example shows coverage reduced to S$20,000 multiplied to S$100,000/S$200,000 depending on scenario for Parent Care rider illustration narrative (the excerpt is partially truncated, so reduction mechanics are not fully mapped).",
+            "evidence": [
+              {
+                "quote": "The Critical Illness Mulitplier Rider (E&I) also includes additional Special Benefits",
+                "line_start": 56,
+                "line_end": 75,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "covering early and intermediate stage critical illnesses:\n\nS$30,000 (multiplied 5 times to S$150,000 until age 75)",
+                "line_start": 26,
+                "line_end": 45,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "covering critical stage critical illnesses:\n  \nS$50,000 (multiplied 5 times to S$250,000 until age 75)",
+                "line_start": 29,
+                "line_end": 48,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Claim for Critical Illness Benefit under Critical Illness Multiplier Rider (E&I)",
+                "line_start": 47,
+                "line_end": 66,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "name": "Parent Care Rider",
+            "description": "Add-on benefit providing guaranteed coverage for age-related conditions such as Alzheimer’s Disease and Severe Dementia, without medical assessment for parents at the point of coverage.",
+            "rider_type": "long_term_care",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "Guaranteed coverage for age-related conditions without medical assessment for parents at point of coverage (as stated).",
+            "coverage_term_description": null,
+            "premium_payment_term_description": "Limited pay option does not apply to the Parent Care Rider (per the limited pay note).",
+            "includes_premium_waiver": null,
+            "notes": "The parent benefit amount and claim mechanics are not fully specified in the excerpt.",
+            "evidence": [
+              {
+                "quote": "Ensure your parents receive the care they deserve with the Parent Care Rider. This add-on benefit\nprovides guaranteed coverage for age-related conditions2 such as Alzheimer’s Disease/ Severe",
+                "line_start": 10,
+                "line_end": 29,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "assessment for your parents at the point of coverage. It offers immediate financial support and",
+                "line_start": 12,
+                "line_end": 31,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Claim for Parent Benefit under Parent Care Rider",
+                "line_start": 46,
+                "line_end": 65,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The limited pay option is applicable to the base plan and critical illness rider(s).  It does not apply to the Parent Care Rider, which is a",
+                "line_start": 117,
+                "line_end": 136,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          },
+          {
+            "name": "Payer Benefit Enhanced (CI) Rider",
+            "description": "Rider that waives all future premiums if you’re diagnosed with a critical illness (exact continuation terms not shown).",
+            "rider_type": "critical_illness",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": true,
+            "notes": "Trigger wording is truncated in the excerpt; only the premium waiver statement is extracted.",
+            "evidence": [
+              {
+                "quote": "Payer Benefit Enhanced (CI) Rider",
+                "line_start": 31,
+                "line_end": 50,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Benefit Enhanced (CI) Rider, which waives all future premiums if you're diagnosed with a critical",
+                "line_start": 14,
+                "line_end": 33,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          }
+        ],
+        "exclusions": [
+          {
+            "exclusion": "Pre-existing conditions are excluded",
+            "category": "pre_existing_conditions",
+            "applies_to": "overall policy/riders (as stated generally)",
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Excluding pre-existing conditions. Other terms and conditions apply.",
+                "line_start": 112,
+                "line_end": 131,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "source_evidence": [
+          {
+            "quote": "Claim for Death Benefit under GREAT Life Multiplier",
+            "line_start": 49,
+            "line_end": 68,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "The Critical Illness Mulitplier Rider (E&I) also includes additional Special Benefits",
+            "line_start": 56,
+            "line_end": 75,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "With our first-ever beneficiary access feature, your nominated beneficiary will be able to access",
+            "line_start": 60,
+            "line_end": 79,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Subject to the policyholder not having made any nomination under the Beneficiary Access clause.",
+            "line_start": 110,
+            "line_end": 129,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "medium",
+        "review_notes": [
+          "Document excerpts include multiple illustrative scenarios (Lola age 30 and Mike age 30, but not fully consistent for generalization); extracted dollar figures are treated as example plan-specific amounts as shown.",
+          "Several critical definitions, payout steps, and eligibility/underwriting details are truncated; only explicit statements were captured.",
+          "Because the brochure excerpt does not clearly specify the base product’s exact insurance subtype, classification remains limited to the critical-illness-with-riders context explicitly shown."
+        ],
+        "slug": "great-eastern-great-life-multiplier"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 36,
+    "evidence_warnings": [],
+    "requires_human_review": true
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_0e047eeee7ea1882016a8f1ed36d5c87d08d1b1c488be3f5a2",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:14:48.065583+00:00",
+    "usage": {
+      "input_tokens": 5202,
+      "output_tokens": 7999,
+      "total_tokens": 13201,
+      "reasoning_tokens": 551,
+      "estimated_cost_usd": 0.01103915
+    }
+  }
+}

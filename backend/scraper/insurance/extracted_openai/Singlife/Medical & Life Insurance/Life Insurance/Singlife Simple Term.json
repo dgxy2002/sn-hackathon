@@ -1,0 +1,875 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Singlife",
+    "source_file": "Singlife/Medical & Life Insurance/Life Insurance/Singlife Simple Term.md",
+    "source_filename": "Singlife Simple Term.md",
+    "document_type": "brochure",
+    "content_sha256": "061b7249474e61719624755be483ec90354b0ed1d0de51cc933a8547476b6df6",
+    "local_markdown_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Life Insurance/Singlife Simple Term.md",
+    "local_pdf_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Life Insurance/Singlife Simple Term.pdf"
+  },
+  "extraction": {
+    "document_summary": "Singlife Simple Term is a yearly renewable term life insurance plan that pays a lump sum if the life assured dies, becomes terminally ill, or is diagnosed with total and permanent disability. Coverage can be chosen from S$150,000 to S$500,000, and the brochure states continuous protection can be obtained by renewing yearly until age 86. Premiums are non-guaranteed and renewal premiums increase with age (the example also states a minimum premium “as low as S$0.371 per day” for a defined age/sex/smoking profile). The plan is offered with optional named riders: Personal Accident Cover and Critical Illness Cover (2025). The PA rider shown includes ADDB at S$100,000 (100% of rider sum assured) for specified loss of sight criteria and pays additional amounts for “Double ADDB” when conditions are met; the Critical Illness rider shown pays the chosen sum assured if diagnosed with any of 36 severe-stage critical illnesses covered, and terminates after a critical illness payout.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Clear identification of the base product name: Singlife Simple Term.",
+      "Key product mechanics stated: yearly renewable term; lump sum on death/terminal illness/TPD; renewal until age 86.",
+      "Riders are explicitly named: Personal Accident Cover and Critical Illness Cover (2025).",
+      "Some detailed benefit amounts are only described in footnotes/illustration (e.g., ADDB, reimbursement cap, simple fracture amount), so extracted rider benefit details are limited to what the document states.",
+      "No explicit underwriting/medical examination requirements are provided beyond “few health questions” for online purchase; underwriting type therefore left as not_stated."
+    ],
+    "policies": [
+      {
+        "company": "Singlife",
+        "policy_name": "Singlife Simple Term",
+        "aliases": [
+          "Simple Term"
+        ],
+        "quick_summary": "Singlife Simple Term is a yearly renewable term life insurance plan that provides a lump-sum payout on death, terminal illness, or total and permanent disability. You can choose your coverage amount from S$150,000 to S$500,000, and the brochure states you can maintain protection by renewing annually until age 86. Premiums increase with age at each renewal date and are non-guaranteed. The brochure also states the plan offers add-on riders, including Personal Accident Cover and Critical Illness Cover (2025), to broaden protection beyond the base life/terminal illness/TPD payout. The brochure states there is no cash value if the policy ends or is terminated prematurely.",
+        "category": "life",
+        "policy_type": "term_life",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "Death benefit (lump sum)",
+          "Terminal Illness benefit (lump sum)",
+          "Total and Permanent Disability benefit (lump sum)"
+        ],
+        "currency_options": [
+          "SGD"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 86,
+        "entry_age_basis": "age_next_birthday",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "Online purchase requires answering a few health questions (the brochure does not state the eligibility age limits for general entry).",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": true,
+        "coverage_term_description": "Yearly renewable term life insurance plan; continuous protection via yearly renewal until you’re 86 years old.",
+        "premium_payment_term_description": "Yearly renewable (premium paid at purchase/renewal).",
+        "premium_frequencies": [
+          "daily",
+          "annual"
+        ],
+        "premium_guaranteed": null,
+        "renewal_basis": "Renewal premium is based on the life assured’s age at the policy renewal date and premium increases with age; rates are non-guaranteed.",
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": false,
+        "surrender_value_available": false,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "Critical Illness Cover (2025) rider terminates after the critical illness benefit payout (rider-level).",
+          "As stated: if the policy ends or is terminated prematurely, there is no cash value (base policy-level termination not further specified)."
+        ],
+        "important_caveats": [
+          "Premium rates are non-guaranteed and renewal premiums increase with age.",
+          "The brochure states the plan has no savings/investment feature and there is no cash value if the policy ends or is terminated prematurely.",
+          "Rider terms and conditions apply; for details refer to the riders’ respective Product Summaries."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "S$150,000 coverage",
+            "plan_code": null,
+            "description": "Minimum coverage choice stated for Singlife Simple Term: from S$150,000.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": 150000,
+            "maximum_sum_assured": 150000,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "Yearly renewable term life insurance plan; continuous protection via yearly renewal until age 86.",
+            "premium_payment_term_description": "Yearly renewal premiums are non-guaranteed and increase with age.",
+            "benefit_amounts": [],
+            "notes": "Coverage amount options are stated as “from S$150,000 to S$500,000 or anything in between”; only the endpoints are explicitly quantified in the brochure text.",
+            "evidence": [
+              {
+                "quote": "You can get coverage from S$150,000 to S$500,000 or anything in between – the choice is yours.",
+                "line_start": 19,
+                "line_end": 21,
+                "quote_token_coverage": 0.998
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "S$500,000 coverage",
+            "plan_code": null,
+            "description": "Maximum coverage choice stated for Singlife Simple Term: up to S$500,000.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": 500000,
+            "maximum_sum_assured": 500000,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "Yearly renewable term life insurance plan; continuous protection via yearly renewal until age 86.",
+            "premium_payment_term_description": "Yearly renewal premiums are non-guaranteed and increase with age.",
+            "benefit_amounts": [],
+            "notes": "The brochure also provides an example using S$500,000 sum assured, but does not state a guaranteed benefit amount beyond lump sum of the sum assured.",
+            "evidence": [
+              {
+                "quote": "You can get coverage from S$150,000 to S$500,000 or anything in between – the choice is yours.",
+                "line_start": 19,
+                "line_end": 21,
+                "quote_token_coverage": 0.998
+              },
+              {
+                "quote": "Andy chooses Singlife Simple Term with S$500,000 sum assured and adds the Personal Accident (PA) Cover and Critical Illness Cover (2025) riders, with a S$100,000 sum assured each.",
+                "line_start": 49,
+                "line_end": 51,
+                "quote_token_coverage": 0.998
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Personal Accident Cover - ADDB lump sum S$100,000",
+            "plan_code": null,
+            "description": "PA rider shown with Accidental Death and Dismemberment Benefit (ADDB) pays a lump sum of S$100,000 (100% of rider’s sum assured) for permanent and total loss of sight in one eye, plus additional 100% if Double ADDB conditions are met.",
+            "applies_to": "rider",
+            "linked_rider_name": "Personal Accident Cover",
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": 100000,
+            "maximum_sum_assured": 100000,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Accidental Death and Dismemberment Benefit (ADDB) - lump sum",
+                "payout_type": "lump_sum",
+                "payout_value": 100000,
+                "payout_unit": "SGD",
+                "payout_basis": "100% of rider’s sum assured",
+                "payout_description": "Payout of a lump sum for permanent and total loss of sight in one eye (as specified).",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "standalone",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Permanent and total loss of sight in one eye (per stated ADDB description).",
+                "notes": "The brochure states ADDB will not be renewed at end of policy year if total claim amount for ADDB for the policy year is equal to or more than 100% of the rider’s sum assured.",
+                "evidence": [
+                  {
+                    "quote": "Accidental Death and Dismemberment Benefit (ADDB) pays out a lump sum of S$100,000 (100% of rider’s sum assured) for permanent and total loss of sight in one eye.",
+                    "line_start": 83,
+                    "line_end": 102,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Double ADDB (as pedestrian) - additional 100%",
+                "payout_type": "lump_sum",
+                "payout_value": 100000,
+                "payout_unit": "SGD",
+                "payout_basis": "Additional 100% of the payable amount for the ADDB claim",
+                "payout_description": "If Double ADDB Requirements are met, an additional 100% of the payable ADDB amount is paid for the ADDB claim.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "additional",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Double ADDB Requirements met, including circumstances such as being in public transport, being a pedestrian, in a fire in specified locations, or traveling as a fare-paying passenger on a commercial plane or on a cruise ship with at least one night’s stay on board the cruise ship (and additional conditions for ages 16 and below).",
+                "notes": "Also states that Double ADDB pays an additional 100% of the payable amount for the ADDB claim if conditions below are met.",
+                "evidence": [
+                  {
+                    "quote": "If we pay a claim on Accidental Death and Dismemberment Benefit (ADDB), we will pay an additional 100% of the payable amount for the ADDB claim if the conditions of the Double ADDB Requirements below are met.",
+                    "line_start": 87,
+                    "line_end": 106,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": "The PA rider examples/footnotes provide the ADDB amount for a particular illustration (S$100,000). The brochure does not state alternative PA rider sum assured options in numeric form beyond “ranging from S$100,000 to S$500,000”.",
+            "evidence": [
+              {
+                "quote": "Accidental Death and Dismemberment Benefit (ADDB) pays out a lump sum of S$100,000 (100% of rider’s sum assured) for permanent and total loss of sight in one eye.",
+                "line_start": 83,
+                "line_end": 102,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Double ADDB (as pedestrian)5 : S$100,000",
+                "line_start": 71,
+                "line_end": 71,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Personal Accident Cover3 – covers you for accident-related injuries or death, with sum assured ranging from S$100,000 to S$500,000",
+                "line_start": 36,
+                "line_end": 40,
+                "quote_token_coverage": 0.996
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "Personal Accident Cover - Accidental Medical Reimbursement up to S$5,000 per policy year",
+            "plan_code": null,
+            "description": "PA rider Accidental Medical Reimbursement Benefit is based on actual claim amount incurred, up to S$5,000 (5% of rider’s sum assured) per policy year.",
+            "applies_to": "rider",
+            "linked_rider_name": "Personal Accident Cover",
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": 5000,
+            "lifetime_limit": null,
+            "policy_year_limit": 5000,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Accidental Medical Reimbursement Benefit",
+                "payout_type": "reimbursement",
+                "payout_value": 5000,
+                "payout_unit": "SGD",
+                "payout_basis": "based on actual claim amount incurred, up to S$5,000 (5% of rider’s sum assured) per policy year",
+                "payout_description": "Reimbursement for accidental medical expenses, capped at S$5,000 per policy year.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": 5000,
+                "limit_amount": 5000,
+                "limit_type": "per_policy_year",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "standalone",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Brochure illustration assumes Andy incurred S$5,000 medical expenses due to the accident.",
+                "evidence": [
+                  {
+                    "quote": "The Accidental Medical Reimbursement Benefit is based on the actual claim amount incurred, up to S$5,000 (5% of rider’s sum assured) per policy year.",
+                    "line_start": 108,
+                    "line_end": 127,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": "S$5,000 cap is explicitly stated, and described as 5% of rider’s sum assured; the document does not specify reimbursement beyond this cap.",
+            "evidence": [
+              {
+                "quote": "The Accidental Medical Reimbursement Benefit is based on the actual claim amount incurred, up to S$5,000 (5% of rider’s sum assured) per policy year.",
+                "line_start": 108,
+                "line_end": 127,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Personal Accident Cover - Simple Fracture Benefit lump sum S$1,250",
+            "plan_code": null,
+            "description": "PA rider Simple Fracture Benefit pays a lump sum of S$1,250 (1.25% of rider’s sum assured) for simple fracture in the example (fractured left arm).",
+            "applies_to": "rider",
+            "linked_rider_name": "Personal Accident Cover",
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Simple Fracture Benefit",
+                "payout_type": "lump_sum",
+                "payout_value": 1250,
+                "payout_unit": "SGD",
+                "payout_basis": "1.25% of rider’s sum assured",
+                "payout_description": "Lump-sum payout for simple fracture (illustration: simple fracture in Andy’s left arm).",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "standalone",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Simple fracture (as described in the footnote).",
+                "notes": "The brochure provides a specific payout amount in the illustration/footnote; it does not provide other benefit amounts for other rider sum assured levels beyond the stated percentage relationship.",
+                "evidence": [
+                  {
+                    "quote": "Simple Fracture Benefit pays out a lump sum of S$1,250 (1.25% of rider’s sum assured) for simple fracture in Andy’s left arm.",
+                    "line_start": 110,
+                    "line_end": 129,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": "The brochure does not state the range of simple fracture payouts; it states the relationship to rider’s sum assured and an example value.",
+            "evidence": [
+              {
+                "quote": "Simple Fracture Benefit pays out a lump sum of S$1,250 (1.25% of rider’s sum assured) for simple fracture in Andy’s left arm.",
+                "line_start": 110,
+                "line_end": 129,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Personal Accident Cover - Daily Accidental Hospital Income Benefit S$3,000",
+            "plan_code": null,
+            "description": "PA rider Daily Accidental Hospital Income Benefit (30 days’ hospitalisation) shown with a payout amount of S$3,000 in the illustration (daily rate not stated in text).",
+            "applies_to": "rider",
+            "linked_rider_name": "Personal Accident Cover",
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Daily Accidental Hospital Income Benefit",
+                "payout_type": "daily_income",
+                "payout_value": 3000,
+                "payout_unit": "SGD",
+                "payout_basis": "30 days’ hospitalisation (as shown)",
+                "payout_description": "Daily accidental hospital income benefit for 30 days’ hospitalisation (illustration).",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "standalone",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Only the illustrative total payout for 30 days is stated; the document does not explicitly provide the per-day rate in the provided text.",
+                "evidence": [
+                  {
+                    "quote": "Daily Accidental Hospital Income Benefit (30 days’ hospitalisation) | : S$3,000",
+                    "line_start": 77,
+                    "line_end": 78,
+                    "quote_token_coverage": 0.999
+                  }
+                ],
+                "extraction_confidence": "medium"
+              }
+            ],
+            "notes": "Extracted as an illustration-based benefit amount; the text does not provide a general formula or rate.",
+            "evidence": [
+              {
+                "quote": "Daily Accidental Hospital Income Benefit (30 days’ hospitalisation) | : S$3,000",
+                "line_start": 77,
+                "line_end": 78,
+                "quote_token_coverage": 0.999
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "Personal Accident Cover - Physiotherapy Benefit S$500",
+            "plan_code": null,
+            "description": "PA rider physiotherapy benefit shown with payout amount of S$500 in the illustration (simple fracture).",
+            "applies_to": "rider",
+            "linked_rider_name": "Personal Accident Cover",
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Physiotherapy Benefit",
+                "payout_type": "service",
+                "payout_value": 500,
+                "payout_unit": "SGD",
+                "payout_basis": "as shown for the illustration",
+                "payout_description": "Physiotherapy benefit payout (illustration).",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "standalone",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Physiotherapy benefit for the illustration scenario involving a simple fracture.",
+                "notes": "The provided text does not state a general formula; extracted numeric value is from the illustration.",
+                "evidence": [
+                  {
+                    "quote": "Physiotherapy Benefit | : S$500",
+                    "line_start": 79,
+                    "line_end": 79,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              }
+            ],
+            "notes": "Extracted from the illustrative table; general terms not provided in the supplied text.",
+            "evidence": [
+              {
+                "quote": "Physiotherapy Benefit : S$500",
+                "line_start": 79,
+                "line_end": 79,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "Critical Illness Cover (2025) - lump sum S$50,000 to S$350,000",
+            "plan_code": null,
+            "description": "CI rider pays the chosen sum assured of S$50,000 to S$350,000 if diagnosed with any of the 36 severe-stage critical illnesses covered, including cancer and stroke; terminates after critical illness benefit payout.",
+            "applies_to": "rider",
+            "linked_rider_name": "Critical Illness Cover (2025)",
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": 50000,
+            "maximum_sum_assured": 350000,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Critical Illness Cover (2025) - critical illness lump sum",
+                "payout_type": "lump_sum",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "pays your chosen sum assured",
+                "payout_description": "If diagnosed with any of the 36 severe-stage critical illnesses covered, pays the chosen sum assured (range stated).",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": 50000,
+                "maximum_payout_amount": 350000,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "standalone",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Diagnosis of any of the 36 severe-stage critical illnesses covered, including cancer and stroke.",
+                "notes": "Brochure states the rider will terminate after the critical illness benefit payout.",
+                "evidence": [
+                  {
+                    "quote": "Critical Illness Cover (2025)3 – pays out your chosen sum assured of S$50,000 to S$350,000 should you be diagnosed with any of the 36 severe-stage critical illnesses covered, including cancer and stroke",
+                    "line_start": 41,
+                    "line_end": 46,
+                    "quote_token_coverage": 0.995
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": "Numeric range for chosen sum assured is explicitly stated; the document does not enumerate each critical illness.",
+            "evidence": [
+              {
+                "quote": "Critical Illness Cover (2025)3 – pays out your chosen sum assured of S$50,000 to S$350,000 should you be diagnosed with any of the 36 severe-stage critical illnesses covered, including cancer and stroke",
+                "line_start": 41,
+                "line_end": 46,
+                "quote_token_coverage": 0.995
+              },
+              {
+                "quote": "The Critical Illness Cover (2025) rider will terminate after the critical illness benefit payout.",
+                "line_start": 111,
+                "line_end": 130,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Death benefit (lump sum)",
+            "benefit_category": "life",
+            "benefit_level": "base",
+            "benefit_description": "Pays a lump sum of the sum assured if you die.",
+            "trigger_description": "Death",
+            "covered_conditions": [
+              "Death"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "lump sum of the sum assured (sum assured range stated for base coverage)",
+            "payout_description": "Lump sum payout if death occurs while covered.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "standalone",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure states the base plan pays a lump sum in event of death, terminal illness or total and permanent disability, but does not restate the payout amount formula beyond that it is “the sum assured”.",
+            "evidence": [
+              {
+                "quote": "Singlife Simple Term is a yearly renewable term life insurance plan that pays a lump sum in the event of death, Terminal Illness or Total and Permanent Disability.",
+                "line_start": 1,
+                "line_end": 16,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "We’ll make a lump-sum payout of the sum assured if you die; become terminally ill or diagnosed with total and permanent disability.",
+                "line_start": 32,
+                "line_end": 37,
+                "quote_token_coverage": 0.995
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Terminal Illness benefit (lump sum)",
+            "benefit_category": "life",
+            "benefit_level": "base",
+            "benefit_description": "Pays a lump sum of the sum assured if the life assured becomes terminally ill.",
+            "trigger_description": "Terminal Illness",
+            "covered_conditions": [
+              "Terminal Illness"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "lump sum of the sum assured",
+            "payout_description": "Lump sum payout if terminal illness occurs while covered.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "standalone",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Singlife Simple Term is a yearly renewable term life insurance plan that pays a lump sum in the event of death, Terminal Illness or Total and Permanent Disability.",
+                "line_start": 1,
+                "line_end": 16,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "We’ll make a lump-sum payout of the sum assured if you die; become terminally ill or diagnosed with total and permanent disability.",
+                "line_start": 32,
+                "line_end": 37,
+                "quote_token_coverage": 0.995
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Total and Permanent Disability benefit (lump sum)",
+            "benefit_category": "disability",
+            "benefit_level": "base",
+            "benefit_description": "Pays a lump sum of the sum assured if diagnosed with total and permanent disability.",
+            "trigger_description": "Total and Permanent Disability",
+            "covered_conditions": [
+              "Total and Permanent Disability"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "lump sum of the sum assured",
+            "payout_description": "Lump sum payout if total and permanent disability occurs while covered.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "standalone",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Singlife Simple Term is a yearly renewable term life insurance plan that pays a lump sum in the event of death, Terminal Illness or Total and Permanent Disability.",
+                "line_start": 1,
+                "line_end": 16,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "We’ll make a lump-sum payout of the sum assured if you die; become terminally ill or diagnosed with total and permanent disability.",
+                "line_start": 32,
+                "line_end": 37,
+                "quote_token_coverage": 0.995
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [
+          {
+            "name": "Personal Accident Cover",
+            "description": "Covers you for accident-related injuries or death, with sum assured ranging from S$100,000 to S$500,000. (In the brochure, the illustration and footnotes describe ADDB, Double ADDB requirements, Accidental Medical Reimbursement, Simple Fracture Benefit, Daily Accidental Hospital Income, and Physiotherapy Benefit as part of the rider.)",
+            "rider_type": "personal_accident",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": "Brochure states ADDB will not be renewed at the end of the policy year if the total claim amount for ADDB for the policy year is equal to or more than 100% of the rider’s sum assured. Double ADDB pays additional 100% if specific circumstances are met.",
+            "evidence": [
+              {
+                "quote": "Personal Accident Cover3 – covers you for accident-related injuries or death, with sum assured ranging from S$100,000 to S$500,000",
+                "line_start": 36,
+                "line_end": 40,
+                "quote_token_coverage": 0.996
+              },
+              {
+                "quote": "The Personal Accident Cover will not be renewed at the end of the policy year if the total claim amount for ADDB for the policy year is equal to or more than 100% of the rider’s sum assured.",
+                "line_start": 85,
+                "line_end": 104,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Critical Illness Cover (2025)",
+            "description": "Pays out your chosen sum assured of S$50,000 to S$350,000 should you be diagnosed with any of the 36 severe-stage critical illnesses covered, including cancer and stroke. The rider terminates after the critical illness benefit payout.",
+            "rider_type": "critical_illness",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Critical Illness Cover (2025)3 – pays out your chosen sum assured of S$50,000 to S$350,000 should you be diagnosed with any of the 36 severe-stage critical illnesses covered, including cancer and stroke",
+                "line_start": 41,
+                "line_end": 46,
+                "quote_token_coverage": 0.995
+              },
+              {
+                "quote": "The Critical Illness Cover (2025) rider will terminate after the critical illness benefit payout.",
+                "line_start": 111,
+                "line_end": 130,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "Singlife Simple Term is a yearly renewable term life insurance plan that pays a lump sum in the event of death, Terminal Illness or Total and Permanent Disability.",
+            "line_start": 1,
+            "line_end": 16,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "You can get coverage from S$150,000 to S$500,000 or anything in between – the choice is yours.",
+            "line_start": 19,
+            "line_end": 21,
+            "quote_token_coverage": 0.998
+          },
+          {
+            "quote": "Never have to worry about not being covered. You can get continuous protection until you’re 86 years old by simply renewing your plan yearly2.",
+            "line_start": 25,
+            "line_end": 28,
+            "quote_token_coverage": 0.997
+          },
+          {
+            "quote": "Critical Illness Cover (2025)3 – pays out your chosen sum assured of S$50,000 to S$350,000 should you be diagnosed with any of the 36 severe-stage critical illnesses covered, including cancer and stroke",
+            "line_start": 41,
+            "line_end": 46,
+            "quote_token_coverage": 0.995
+          },
+          {
+            "quote": "Personal Accident Cover3 – covers you for accident-related injuries or death, with sum assured ranging from S$100,000 to S$500,000",
+            "line_start": 36,
+            "line_end": 40,
+            "quote_token_coverage": 0.996
+          }
+        ],
+        "extraction_confidence": "high",
+        "review_notes": [
+          "No explicit list of exclusions is provided in the supplied text; only a general “terms and conditions apply” and some rider-specific conditions are stated for Double ADDB and payout triggers.",
+          "Underwriting details are limited to “few health questions”; underwriting type is left as not_stated.",
+          "Rider benefit amounts (other than the CI sum assured range) are extracted only where explicitly stated (footnotes and illustration table)."
+        ],
+        "slug": "singlife-singlife-simple-term"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 34,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_085a6fa25a73ad2b016a8f22a8f71887d0ae64ff046a9eb492",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:31:11.297394+00:00",
+    "usage": {
+      "input_tokens": 6134,
+      "output_tokens": 6771,
+      "total_tokens": 12905,
+      "reasoning_tokens": 0,
+      "estimated_cost_usd": 0.00969055
+    }
+  }
+}

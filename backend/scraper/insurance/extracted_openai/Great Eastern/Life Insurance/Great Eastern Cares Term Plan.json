@@ -1,0 +1,379 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Great Eastern",
+    "source_file": "Great Eastern/Life Insurance/Great Eastern Cares Term Plan.md",
+    "source_filename": "Great Eastern Cares Term Plan.md",
+    "document_type": "brochure",
+    "content_sha256": "1e261044914a50213abf5d93911380fe305b59c7e134a3e809a79d6284b66297",
+    "local_markdown_path": "backend/scraper/insurance/Great Eastern/Life Insurance/Great Eastern Cares Term Plan.md",
+    "local_pdf_path": "backend/scraper/insurance/Great Eastern/Life Insurance/Great Eastern Cares Term Plan.pdf"
+  },
+  "extraction": {
+    "document_summary": "Great Eastern Cares Term Plan is an affordable term life insurance product focused on providing basic protection for death and terminal illness. The brochure states it is offered exclusively through selected charities and non-profit organisations, and is designed to help dependants with financial support in the event of the life assured’s demise. Cover can be chosen from S$100,000 to S$300,000, and policy terms are selectable either “up to age 85” or “up to age 100”. The plan pays a lump sum for covered events; for example, a S$200,000 coverage with a policy term up to age 100 pays S$200,000 as a lump sum if death occurs (illustration). It is stated to have no savings/investment feature, so there is no cash value if terminated early.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "The brochure provides high-level product features (coverage range, term up to age 85/100, lump-sum payout) but does not include detailed underwriting rules, exact benefit definitions for terminal illness, exclusions list, grace period, or free-look period.",
+      "Some figures are presented as marketing/illustration (e.g., “S$120 a year” and the example premium/payout) without confirming guaranteed limits or full rate tables."
+    ],
+    "policies": [
+      {
+        "company": "Great Eastern",
+        "policy_name": "Great Eastern Cares Term Plan",
+        "aliases": [],
+        "quick_summary": "Affordable term life insurance with basic protection against death and terminal illness, with coverage chosen from S$100,000 to S$300,000 and term options up to age 85 or up to age 100; pays a lump sum for covered events. Offered via selected charities and non-profit organisations; no savings/investment feature and no cash value if terminated early (per brochure). Their example shows S$200,000 coverage paying a S$200,000 lump sum on death during the term (illustration). Additionally stated as protected up to SDIC limits and subject to policy contract terms/exclusions (not provided). \\n\"All ages specified refer to age next birthday.\"",
+        "category": "life",
+        "policy_type": "term_life",
+        "plan_tier": null,
+        "target_customer": "Singaporeans (as stated) and beneficiaries supported via selected charities/non-profit organisations (as described).",
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "Death",
+          "Terminal illness"
+        ],
+        "currency_options": [
+          "SGD"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 100,
+        "entry_age_basis": "age_next_birthday",
+        "residency_requirements": "Singaporeans (as stated).",
+        "occupation_classes": [],
+        "eligibility_notes": "Exclusively offered to selected charities and non-profit organisations (as stated).",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Choose coverage term up to age 85 or up to age 100 (ages specified as age next birthday).",
+        "premium_payment_term_description": "Premiums payable for entire policy term (example shown for a policy term up to age 100: premiums payable for entire policy term).",
+        "premium_frequencies": [
+          "annual"
+        ],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": false,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [],
+        "important_caveats": [
+          "As stated, the product has no savings or investment feature, so there is no cash value if the policy ends or is terminated prematurely.",
+          "The brochure notes that terms, conditions and exclusions are specified in the policy contract."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "Coverage term up to age 85",
+            "plan_code": null,
+            "description": "Policy term option: coverage term of up to age 85.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": 100000,
+            "maximum_sum_assured": 300000,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "Decide between coverage terms of up to age 85 or up to age 100.",
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Lump sum payout (Death/Terminal illness)",
+                "payout_type": "lump_sum",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "selected coverage amount (within S$100,000 to S$300,000 range as stated)",
+                "payout_description": "Brochure states basic protection against death and terminal illness, and provides an example lump sum payout equal to the chosen coverage.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Exact payout wording for terminal illness and death is not fully specified in the brochure beyond being a lump sum for the event (example given only for death).",
+                "evidence": [
+                  {
+                    "quote": "Get basic protection against death and terminal illness.",
+                    "line_start": 3,
+                    "line_end": 22,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Decide between coverage terms of up to age 85 or up to age 100 to best suit your needs.",
+                "line_start": 8,
+                "line_end": 27,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Coverage term up to age 100",
+            "plan_code": null,
+            "description": "Policy term option: coverage term of up to age 100.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": 100000,
+            "maximum_sum_assured": 300000,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "Decide between coverage terms of up to age 85 or up to age 100.",
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Lump sum payout (Death)",
+                "payout_type": "lump_sum",
+                "payout_value": 200000,
+                "payout_unit": "SGD",
+                "payout_basis": "example selected coverage amount",
+                "payout_description": "When the insured passes away during the term, the plan pays a lump sum equal to the selected coverage amount (illustration shown).",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Illustrative example only.",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "When Michael passes away at age 50, his plan pays a lump sum payout of S$200,000.",
+                    "line_start": 31,
+                    "line_end": 50,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "He signs up for Great Eastern Cares Term Plan with a S$200,000 coverage and a policy term of up to age 100.",
+                "line_start": 19,
+                "line_end": 38,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "When Michael passes away at age 50, his plan pays a lump sum payout of S$200,000.",
+                "line_start": 31,
+                "line_end": 50,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Lump sum payout (Death)",
+            "benefit_category": "death",
+            "benefit_level": "base",
+            "benefit_description": "The plan provides a lump sum payout upon death, shown in the brochure as equal to the selected coverage amount.",
+            "trigger_description": "Death during the policy term (illustrated by death at age 50 in an example).",
+            "covered_conditions": [
+              "Death"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 200000,
+            "payout_unit": "SGD",
+            "payout_basis": "selected coverage amount (illustrative example uses S$200,000 coverage)",
+            "payout_description": "Example states a lump sum payout of S$200,000 when death occurs.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "Singapore (implied by 'Singaporeans’ insurance needs' but geographic scope for benefit is not explicitly stated).",
+            "notes": "Illustration only; brochure does not provide the general formula beyond the example.",
+            "evidence": [
+              {
+                "quote": "When Michael passes away at age 50, his plan pays a lump sum payout of S$200,000.",
+                "line_start": 31,
+                "line_end": 50,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Lump sum payout (Terminal illness)",
+            "benefit_category": "terminal_illness",
+            "benefit_level": "base",
+            "benefit_description": "The plan is described as providing basic protection against terminal illness.",
+            "trigger_description": "Terminal illness (exact definition and payout mechanics are not detailed in the brochure beyond the product statement).",
+            "covered_conditions": [
+              "Terminal illness"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": null,
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "Brochure states the plan covers terminal illness but does not state whether the terminal-illness payout is a lump sum, nor any waiting periods or definitions.",
+            "evidence": [
+              {
+                "quote": "Get basic protection against death and terminal illness.",
+                "line_start": 3,
+                "line_end": 22,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          }
+        ],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "Great Eastern Cares Term Plan is specially designed to keep term life insurance at its most affordable to support Singaporeans’ insurance needs through our selected charities and non-proﬁt organisations.",
+            "line_start": 1,
+            "line_end": 16,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Get basic protection against death and terminal illness.",
+            "line_start": 3,
+            "line_end": 22,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Choose your desired insurance coverage starting from S$100,000 to S$300,000 to plan for the financial support of your dependants.",
+            "line_start": 7,
+            "line_end": 26,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Decide between coverage terms of up to age 85 or up to age 100 to best suit your needs.",
+            "line_start": 8,
+            "line_end": 27,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "As this product has no savings or investment feature, there is no cash value if the policy ends or is terminated prematurely.",
+            "line_start": 49,
+            "line_end": 68,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "All ages specified refer to age next birthday.",
+            "line_start": 40,
+            "line_end": 59,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "medium",
+        "review_notes": [
+          "No explicit underwriting standard (full/simplified/GA) is stated; captured as not_stated.",
+          "No exclusions list, free-look period, grace period, or SDIC coverage limit details are provided beyond general disclaimers and 'Protected up to specified limits by SDIC.'"
+        ],
+        "slug": "great-eastern-great-eastern-cares-term-plan"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 13,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_0e26cdc9e82b317d016a8f1f9a779487d0b6146169b1e3410f",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:17:37.976337+00:00",
+    "usage": {
+      "input_tokens": 4531,
+      "output_tokens": 3644,
+      "total_tokens": 8175,
+      "reasoning_tokens": 375,
+      "estimated_cost_usd": 0.0054612
+    }
+  }
+}

@@ -1,0 +1,287 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Great Eastern",
+    "source_file": "Great Eastern/Life Insurance/Prestige Legacy Index.md",
+    "source_filename": "Prestige Legacy Index.md",
+    "document_type": "brochure",
+    "content_sha256": "c98dafe0c8285dae91a368c776c67e116c63215510b7773697aa16bb8ef9efe9",
+    "local_markdown_path": "backend/scraper/insurance/Great Eastern/Life Insurance/Prestige Legacy Index.md",
+    "local_pdf_path": "backend/scraper/insurance/Great Eastern/Life Insurance/Prestige Legacy Index.pdf"
+  },
+  "extraction": {
+    "document_summary": "Great Eastern “Prestige Legacy Index” is a Singapore life insurance plan that combines lifetime protection with index-linked wealth-building via Index Account(s). The document states protection is “up to 13 times2 the premium paid” and that investment returns are based on selected global indices with “a guaranteed minimum floor rate of 0% p.a.” It highlights a “guaranteed crediting rate of 4.20% p.a. for the first year,” then thereafter uses a prevailing rate “with a guaranteed minimum crediting rate of 2.00% p.a.” depending on index performance, caps and participation. For flexible premiums, it references “loyalty crediting rate” awarded under conditions, and a terminal illness/death benefit paid when death or terminal illness occurs before/after the policy anniversary after the 121st birthday. A key caveat is that “All figures are illustrated” and results depend on index performance and product terms in the policy contract.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Several sections appear truncated/garbled (e.g., “choose from 4 premium” and participation/percentage figures are not readable in full).",
+      "No explicit underwriting, entry age range, free-look/grace period, surrender/cash value, or limit amounts are stated in clear text.",
+      "The death/terminal illness benefit trigger is partially stated (timing vs 121st birthday anniversary), but exact payout formula/amount is not provided."
+    ],
+    "policies": [
+      {
+        "company": "Great Eastern",
+        "policy_name": "Prestige Legacy Index",
+        "aliases": [
+          "Great Eastern Prestige Legacy Index"
+        ],
+        "quick_summary": "Index-linked Great Eastern life insurance with Index Account(s) credited by global index performance (0% floor), including a guaranteed 4.20% crediting rate in year 1 and 2.00% guaranteed minimum thereafter. Lifetime protection includes a Death or Terminal Illness Benefit, with payment logic tied to whether death/terminal illness occurs before or after the policy anniversary after age 121. Premiums can be single premium or flexible premiums (5 or 10 years planned). Key limitations include illustration-only figures and index-credited mechanics subject to participation/caps and product terms in the policy contract.",
+        "category": "life",
+        "policy_type": "investment_linked",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_stated",
+        "coverage_scope": [
+          "Death or Terminal Illness Benefit",
+          "Index Account(s) credited by underlying global index performance (with 0% floor and guaranteed minimum crediting rates)"
+        ],
+        "currency_options": [
+          "not_stated"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": null,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": "not_stated",
+        "occupation_classes": [],
+        "eligibility_notes": "not_stated",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Lifetime protection is described as “lifetime protection of up to 13 times2 the premium paid” and terminal illness timing refers to “the policy anniversary after the life assured’s 121st birthday.”",
+        "premium_payment_term_description": "The document states premiums can be “a single premium or flexible premiums”, and that flexible premiums refer to “planned premium amount payable during the selected premium payment term of 5 or 10 years.”",
+        "premium_frequencies": [
+          "single premium",
+          "annual (for flexible premiums, shown as planned annual premium in illustration)"
+        ],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": "not_stated",
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [],
+        "important_caveats": [
+          "Figures shown are for illustration only and subject to rounding.",
+          "Index Account(s) crediting is calculated based on underlying index performance, subject to applicable cap rates, participation rates and a 0% p.a. floor rate (plus a loyalty crediting rate if any).",
+          "The precise terms and conditions are specified in the policy contract."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [],
+        "benefits": [
+          {
+            "benefit_name": "Death or Terminal Illness Benefit",
+            "benefit_category": "life_protection",
+            "benefit_level": "base",
+            "benefit_description": "Provides a death benefit and terminal illness benefit, with different applicability depending on whether death/terminal illness occurs before or on/after the policy anniversary after the life assured’s 121st birthday.",
+            "trigger_description": "If the life assured dies or is diagnosed with terminal illness before the policy anniversary after the life assured’s 121st birthday; and if death/terminal illness occurs on or after the policy anniversary after the life assured’s 121st birthday.",
+            "covered_conditions": [
+              "Death",
+              "Terminal illness diagnosis"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "Specific payout amount/formula is not provided in the supplied extract; only the timing conditions around the policy anniversary after age 121 are stated.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The extract provides the terminal illness/death timing trigger relative to the policy anniversary after age 121 but does not include the payout formula.",
+            "evidence": [
+              {
+                "quote": "Death or Terminal Illness Benefit",
+                "line_start": 26,
+                "line_end": 45,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "If the life assured dies or is diagnosed with terminal illness before the policy anniversary after the life assured’s 121st birthday, ",
+                "line_start": 30,
+                "line_end": 49,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "the life assured dies or is diagnosed with terminal illness on or after the policy anniversary after the life assured’s 121st birthday,",
+                "line_start": 32,
+                "line_end": 51,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Index Account(s) crediting mechanics (0% floor; guaranteed minimums; loyalty crediting)",
+            "benefit_category": "investment_crediting",
+            "benefit_level": "base",
+            "benefit_description": "Index Account(s) crediting is based on underlying global index performance, with a 0% per annum floor rate and guaranteed minimum crediting rates. Loyalty crediting rate may apply for flexible premium policies under specified conditions.",
+            "trigger_description": "Index Account(s) crediting occurs based on underlying index performance over the crediting period, subject to cap and participation rates and a 0% floor; loyalty crediting rate (if any) may be added.",
+            "covered_conditions": [
+              "Underlying index performance",
+              "Loyalty crediting rate eligibility for flexible premiums"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "Document specifies a guaranteed crediting rate of 4.20% p.a. for the first year and a guaranteed minimum crediting rate of 2.00% p.a. thereafter; it also states crediting is calculated from index performance subject to cap/participation and a 0% floor plus loyalty crediting rate (if any).",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "First-year guarantee applies as stated: “4.20% p.a. in the 1st year.”",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "This is captured as an extractable benefit-like crediting mechanic because the document provides explicit guaranteed crediting rate and floor terms.",
+            "evidence": [
+              {
+                "quote": "Choose from a selection of global indices and benefit from",
+                "line_start": 7,
+                "line_end": 26,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "with a guaranteed minimum floor rate of 0% p.a. to",
+                "line_start": 9,
+                "line_end": 28,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Benefit from a guaranteed crediting rate of 4.20% p.a. for the first year.",
+                "line_start": 12,
+                "line_end": 31,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Thereafter, the rate will be based on the prevailing rate determined by Great Eastern, with a guaranteed minimum crediting rate of 2.00% p.a..",
+                "line_start": 13,
+                "line_end": 32,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The crediting rate for the Index Account(s) is calculated based on the performance of the underlying index, subject to the underlying index's applicable cap rates, applicable participation rates and a 0% p.a. floor rate, plus a loyalty crediting rate (if any).",
+                "line_start": 110,
+                "line_end": 129,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "For flexible premium policies, the loyalty crediting rate will be awarded provided that the total planned premiums have been",
+                "line_start": 28,
+                "line_end": 47,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "Lifetime protection of up to 13 times2 the premium paid",
+            "line_start": 1,
+            "line_end": 2,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Invest with either a single premium or flexible premiums",
+            "line_start": 1,
+            "line_end": 4,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Based on your risk tolerance and financial aspirations, you can choose from 4 premium",
+            "line_start": 1,
+            "line_end": 8,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Choose from a selection of global indices and benefit from",
+            "line_start": 7,
+            "line_end": 26,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Death or Terminal Illness Benefit",
+            "line_start": 26,
+            "line_end": 45,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "medium",
+        "review_notes": [
+          "Participation/cap/participation-rate “4 premium” options are mentioned but the exact plan/option names and amounts are not readable in the provided extract; therefore no plan tier objects were created.",
+          "Terminal illness/death payout amount/formula is not present in the extract; only the timing condition relative to age 121 is captured."
+        ],
+        "slug": "great-eastern-prestige-legacy-index"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 14,
+    "evidence_warnings": [],
+    "requires_human_review": true
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_053481257df7968b016a8f1fc6d1bc87d0940fcf3bf6cce802",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:18:18.973181+00:00",
+    "usage": {
+      "input_tokens": 4947,
+      "output_tokens": 2945,
+      "total_tokens": 7892,
+      "reasoning_tokens": 345,
+      "estimated_cost_usd": 0.00467065
+    }
+  }
+}

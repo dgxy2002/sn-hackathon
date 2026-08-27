@@ -1,0 +1,620 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "AIA",
+    "source_file": "AIA/Health/AIA Ultimate Critical Cover.md",
+    "source_filename": "AIA Ultimate Critical Cover.md",
+    "document_type": "brochure",
+    "content_sha256": "ab0f6b3ead3c186b657458a20cb9467b6d15b4ac91dd1eca8ce7ccd27a05ac23",
+    "local_markdown_path": "backend/scraper/insurance/AIA/Health/AIA Ultimate Critical Cover.md",
+    "local_pdf_path": "backend/scraper/insurance/AIA/Health/AIA Ultimate Critical Cover.pdf"
+  },
+  "extraction": {
+    "document_summary": "AIA Ultimate Critical Cover (UCC) is a Singapore life insurance critical illness plan that provides multi-stage critical illness protection across early, intermediate and major stages, with a “Ultimate Reset Benefit” that resets coverage to 100% of the coverage amount every 12 months after the last critical illness claim. The brochure states “unlimited claims” applies to major-stage critical illnesses, with only one claim payable per stage and the total across all stages of the same critical illness capped at 100% of the coverage amount. For early and intermediate stages, it describes a maximum claim limit of 500% of coverage amount across early/intermediate stage claims, and eligibility is “covered for 150 medical conditions” across stages. The policy terminates after the death or accidental death benefit is paid. Riders mentioned include an enhancer (Ultimate Relapse Benefit and Catastrophic Critical Illness Benefit) and optional premium waiver/payor benefit riders that waive future premiums upon specified diagnoses or death/disability.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Brochure contains clear core mechanics (unlimited claims for major stage, Ultimate Reset Benefit, relapse and catastrophic benefits via an enhancer, and death/accidental death payouts).",
+      "Exact entry age limits, premium terms/frequencies, underwriting basis, and detailed exclusions are not specified in a structured way; exclusions are described only generically.",
+      "The list of covered critical illnesses is provided by table, but individual benefit amounts for each condition are not itemized beyond specific notes (e.g., Angioplasty cap and relapse waiting period)."
+    ],
+    "policies": [
+      {
+        "company": "AIA",
+        "policy_name": "AIA Ultimate Critical Cover (UCC)",
+        "aliases": [
+          "UCC"
+        ],
+        "quick_summary": "Critical illness plan with coverage reset every 12 months and “unlimited claims” for major-stage critical illnesses; offers death (5%) and accidental death (100%) benefits. Coverage term can be selected up to age 65, 75, or 85. Ultimate Relapse and Catastrophic Critical Illness features are described as an enhancer/add-on for UCC customers (not part of base benefits). Only one claim per stage and stage/coverage caps apply; policy terminates after death or accidental death payout is made, and a relapse rider has a 2-year waiting period described in the brochure terms section (rider linkage). Pre-existing conditions are mentioned as excluded with no benefit payable.",
+        "category": "critical_illness",
+        "policy_type": "critical_illness",
+        "plan_tier": null,
+        "target_customer": "not_stated",
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "Critical illnesses across early, intermediate and major stages",
+          "Reset of coverage amount every 12 months",
+          "Death benefit",
+          "Accidental death benefit"
+        ],
+        "currency_options": [
+          "SGD",
+          "S$"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 65,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": "not_stated",
+        "occupation_classes": [],
+        "eligibility_notes": "Covered until age 65, 75 or 85, subject to selected coverage term.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Choose preferred coverage term of up to age 65, 75, or 85.",
+        "premium_payment_term_description": "not_stated",
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "Terminates after the death benefit or accidental death benefit is paid out"
+        ],
+        "important_caveats": [
+          "Unlimited claims apply to major stage of critical illnesses; only one claim payable for each stage and total across all stages for the same critical illness shall not exceed 100% of the coverage amount.",
+          "Early and intermediate stage critical illnesses have a maximum claim limit of 500% of coverage amount.",
+          "Ultimate Reset Benefit resets to 100% only if the UCC policy is in force 12 months after the last critical illness claim.",
+          "Pre-existing conditions are mentioned as excluded with no benefits payable; waiting/survival periods are applicable (details not provided in structured form)."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "Coverage term up to age 65",
+            "plan_code": null,
+            "description": "Coverage term option: up to age 65.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "not_stated",
+            "coverage_term_description": "Choose your preferred coverage term of up to age 65.",
+            "premium_payment_term_description": "not_stated",
+            "benefit_amounts": [
+              {
+                "benefit_name": "Ultimate Reset Benefit (coverage reset every 12 months)",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": null,
+                "payout_description": "Resets current coverage amount to 100% of coverage amount every 12 months if policy in force 12 months after last critical illness claim.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": "every 12 months (subject to conditions)",
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "100% of your coverage amount reset every 12 months2",
+                    "line_start": 21,
+                    "line_end": 40,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Choose your preferred coverage term of up to age 65, 75, or 85, whichever best suits your needs.",
+                "line_start": 33,
+                "line_end": 52,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Coverage term up to age 75",
+            "plan_code": null,
+            "description": "Coverage term option: up to age 75.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "not_stated",
+            "coverage_term_description": "Choose your preferred coverage term of up to age 75.",
+            "premium_payment_term_description": "not_stated",
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Choose your preferred coverage term of up to age 65, 75, or 85, whichever best suits your needs.",
+                "line_start": 33,
+                "line_end": 52,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Coverage term up to age 85",
+            "plan_code": null,
+            "description": "Coverage term option: up to age 85.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "not_stated",
+            "coverage_term_description": "Choose your preferred coverage term of up to age 85.",
+            "premium_payment_term_description": "not_stated",
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Choose your preferred coverage term of up to age 65, 75, or 85, whichever best suits your needs.",
+                "line_start": 33,
+                "line_end": 52,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Critical Illness Benefit (multi-stage; major stage unlimited claims)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Provides claims across early, intermediate and major stages for covered critical illnesses, with a reset mechanism and stage/coverage caps described in terms. Unlimited claims apply to major-stage of critical illnesses.",
+            "trigger_description": "Diagnosis of a covered critical illness in early, intermediate, or major stage.",
+            "covered_conditions": [
+              "Covered critical illnesses (150 medical conditions across early, intermediate and major stage; specific list provided in brochure table)"
+            ],
+            "condition_stages": [
+              "pre_early",
+              "intermediate",
+              "late_or_severe"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "coverage amount (stage payout described via caps/limits rather than a single numeric payout in brochure text)",
+            "payout_description": "Brochure terms state: unlimited claims apply to major stage; only one claim payable for each stage; total amounts payable for all stages of a critical illness shall not exceed 100% of coverage amount; maximum claim limit of 500% of coverage amount applies to early and intermediate stage critical illnesses.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 100,
+            "limit_type": "percentage of coverage amount (across all stages of a critical illness)",
+            "claim_frequency": "unlimited for major stage (subject to one claim per stage)",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "In Singapore (brochure shows \"ONLY claims for major stages\" and other line \"IN SINGAPORE\" in context of payout mechanics; detailed geographic scope not otherwise specified).",
+            "notes": "Brochure note: Only 10% of coverage amount is paid out for 'Angioplasty & Other Invasive Treatment for Coronary Artery' with a cap at S$25,000 (applies to that specific condition, per note).",
+            "evidence": [
+              {
+                "quote": "Ultimate Reset Benefit Benefit ensures your coverage fully resets every 12 months2 from the last claim. With this benefit, you are covered against different critical illnesses with unlimited & ONLY claims for major stages1.",
+                "line_start": 41,
+                "line_end": 46,
+                "quote_token_coverage": 0.9344
+              },
+              {
+                "quote": "Unlimited claims1. 100% coverage reset.",
+                "line_start": 18,
+                "line_end": 37,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "1 Unlimited claims apply to major stage of critical illnesses. Only one claim is payable for each stage of a critical illness. The total amounts payable for all stages of a critical illness shall not exceed 100% of the coverage amount. Maximum claim limit of 500% of coverage amount applies to early and intermediate stage of critical illnesses.",
+                "line_start": 368,
+                "line_end": 387,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Note: Only 10% of coverage amount is paid out for Angioplasty & Other Invasive Treatment for Coronary Artery, with a cap at S$25,000.",
+                "line_start": 361,
+                "line_end": 380,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Ultimate Reset Benefit (coverage reset to 100% every 12 months)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Resets the current coverage amount back to 100% of the original coverage amount after 12 months from the last critical illness claim, provided the policy is in force.",
+            "trigger_description": "Time passing 12 months after last critical illness claim while the policy is in force.",
+            "covered_conditions": [
+              "Covers future critical illness claims through reset (does not specify a particular diagnosis trigger beyond last claim timing)."
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "other",
+            "payout_value": 100,
+            "payout_unit": "percentage of coverage amount",
+            "payout_basis": "coverage amount",
+            "payout_description": "Current coverage amount is reset to 100% of coverage amount.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "every 12 months (subject to policy in force)",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "not_stated",
+            "notes": "The brochure terms specify the reset occurs if the UCC policy is in force 12 months after the last critical illness claim.",
+            "evidence": [
+              {
+                "quote": "100% of your coverage amount reset every 12 months2",
+                "line_start": 21,
+                "line_end": 40,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The current coverage amount will be reset to 100% of the coverage amount if the UCC policy is in force 12 months after the last critical illness claim.",
+                "line_start": 370,
+                "line_end": 389,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Death Benefit",
+            "benefit_category": "death",
+            "benefit_level": "base",
+            "benefit_description": "In the event of death, loved ones receive 5% of the coverage amount.",
+            "trigger_description": "Death while policy is in force.",
+            "covered_conditions": [
+              "Death"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": 5,
+            "payout_unit": "percentage of coverage amount",
+            "payout_basis": "coverage amount",
+            "payout_description": "Beneficiaries receive 5% of the coverage amount on death.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "once (implied by termination after payout)",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "not_stated",
+            "notes": "Brochure terms say the UCC policy will terminate after the death benefit or accidental death benefit is paid out.",
+            "evidence": [
+              {
+                "quote": "In the unfortunate event of death4, your loved ones will receive 5% of the coverage amount.",
+                "line_start": 39,
+                "line_end": 58,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The UCC policy will terminate after the death benefit or accidental death benefit is paid out.",
+                "line_start": 374,
+                "line_end": 393,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Accidental Death Benefit",
+            "benefit_category": "death",
+            "benefit_level": "base",
+            "benefit_description": "In the event of accidental death, loved ones receive 100% of the coverage amount.",
+            "trigger_description": "Accidental death while policy is in force.",
+            "covered_conditions": [
+              "Accidental death"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": 100,
+            "payout_unit": "percentage of coverage amount",
+            "payout_basis": "coverage amount",
+            "payout_description": "Beneficiaries receive 100% of the coverage amount on accidental death.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "once (implied by termination after payout)",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "not_stated",
+            "notes": "Brochure terms say the UCC policy will terminate after the death benefit or accidental death benefit is paid out.",
+            "evidence": [
+              {
+                "quote": "Should accidental death occur, they will receive 100% of the coverage amount.",
+                "line_start": 40,
+                "line_end": 59,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The UCC policy will terminate after the death benefit or accidental death benefit is paid out.",
+                "line_start": 374,
+                "line_end": 393,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [
+          {
+            "name": "UCC Enhancer",
+            "description": "Enhancer additionally provides the Ultimate Relapse Benefit and Catastrophic Critical Illness Benefit. It is described as exclusively available only to AIA Ultimate Critical Cover (UCC) customers.",
+            "rider_type": "critical_illness_enhancer",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "Exclusively available only to AIA Ultimate Critical Cover (UCC) customers (as stated).",
+            "coverage_term_description": "not_stated",
+            "premium_payment_term_description": "not_stated",
+            "includes_premium_waiver": null,
+            "notes": "Relapse benefit has a 2-year waiting period and pays lower of 50% of coverage amount or current coverage amount (can claim up to 100% of coverage amount). Catastrophic benefit pays an additional 100% of coverage amount regardless of any claims made previously and does not reduce UCC coverage amount.",
+            "evidence": [
+              {
+                "quote": "Exclusively available only to AIA Ultimate Critical Cover (UCC) customers, the UCC Enhancer additionally provides you with the Ultimate Relapse Benefit and Catastrophic Critical Illness Benefit.",
+                "line_start": 46,
+                "line_end": 65,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Early Critical Protector Waiver of Premium (II)",
+            "description": "Optional premium waiver rider for your UCC and eligible riders (if any). Future premiums are waived upon diagnosis of any of the covered early, intermediate, or major stage critical illnesses (149 conditions listed).",
+            "rider_type": "premium_waiver",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "Waives future premiums of your AIA Ultimate Critical Cover (UCC) and eligible riders (if any).",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": true,
+            "notes": "The brochure lists 149 early/intermediate/major stage critical illnesses for this rider.",
+            "evidence": [
+              {
+                "quote": "Future premiums of your AIA Ultimate Critical Cover (UCC) and eligible riders (if any) will be waived, upon diagnosis of any of the covered: • 149 early, intermediate, or major stage critical illnesses with Early Critical Protector Waiver of Premium (II) rider;",
+                "line_start": 82,
+                "line_end": 101,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Critical Protector Waiver of Premium (II)",
+            "description": "Optional premium waiver rider. Future premiums are waived upon diagnosis of any of 72 major critical illnesses listed.",
+            "rider_type": "premium_waiver",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "Waives future premiums of your AIA Ultimate Critical Cover (UCC) and eligible riders (if any).",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": true,
+            "notes": "Brochure specifies 72 major critical illnesses covered for this rider.",
+            "evidence": [
+              {
+                "quote": "Future premiums of your AIA Ultimate Critical Cover (UCC) and eligible riders (if any) will be waived, upon diagnosis of any of the covered: • 72 major critical illnesses with Critical Protector Waiver of Premium (II) rider",
+                "line_start": 97,
+                "line_end": 102,
+                "quote_token_coverage": 0.995
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Early Critical Protector Payor Benefit (II) rider",
+            "description": "Optional rider to secure your child’s plan premium waiver upon the specified conditions, including your passing with this rider and certain diagnoses.",
+            "rider_type": "payor_benefit/premium_waiver",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "Waives future premiums of your child’s AIA Ultimate Critical Cover (UCC) and eligible riders (if any) until the child’s 25th birthday or end of the premium waiver rider term (whichever is earlier), upon diagnosis of listed conditions or upon your passing with this rider.",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": true,
+            "notes": "The brochure lists waiver triggers: 149 early/intermediate/major stage critical illnesses, total and permanent disability, or your passing with Early Critical Protector Payor Benefit (II) rider.",
+            "evidence": [
+              {
+                "quote": "We will waive future premiums of your child’s AIA Ultimate Critical Cover (UCC) and eligible riders (if any) until your child’s 25th birthday or the end of your premium waiver rider term (whichever is earlier) upon diagnosis of any of the covered: • 149 early, intermediate, or major stage critical illnesses, total and permanent disability, or upon your passing with Early Critical Protector Payor Benefit (II) rider;",
+                "line_start": 92,
+                "line_end": 111,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Payor Benefit rider",
+            "description": "Optional rider to secure your child’s plan premium waiver upon your passing or diagnosis of disability.",
+            "rider_type": "payor_benefit/premium_waiver",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "Waives future premiums of your child’s AIA Ultimate Critical Cover (UCC) and eligible riders (if any) until the child’s 25th birthday or end of the premium waiver rider term (whichever is earlier) upon your passing or your diagnosis of disability.",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": true,
+            "notes": "Brochure explicitly describes waiver triggers for this rider.",
+            "evidence": [
+              {
+                "quote": "• Upon your passing or diagnosis of disability, with Payor Benefit rider",
+                "line_start": 94,
+                "line_end": 113,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "exclusions": [
+          {
+            "exclusion": "Pre-existing conditions",
+            "category": "pre_existing_conditions",
+            "applies_to": "base_policy",
+            "notes": "The brochure states there are exclusions such as pre-existing conditions, whereby no benefits will be payable. Specific list and definitions are not provided in the excerpt.",
+            "evidence": [
+              {
+                "quote": "Important Notes:\nThere are exclusions such as pre-existing conditions, whereby no benefits will be payable.",
+                "line_start": 383,
+                "line_end": 402,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "source_evidence": [
+          {
+            "quote": "AIA Ultimate Critical Cover (UCC) protects you across multiple critical illnesses in the early, intermediate and major stages with 100% of your coverage amount reset every 12 months2.",
+            "line_start": 21,
+            "line_end": 40,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "With this benefit, you are covered against different critical illnesses with unlimited & ONLY claims for major stages1.",
+            "line_start": 27,
+            "line_end": 46,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Future premiums of your AIA Ultimate Critical Cover (UCC) and eligible riders (if any) will be waived, upon diagnosis of any of the covered",
+            "line_start": 80,
+            "line_end": 99,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "high",
+        "review_notes": [
+          "UCC Enhancer and the named premium waiver/payor riders were treated as riders because the brochure presents them as optional riders for UCC customers/child plans.",
+          "Angioplasty & Other Invasive Treatment for Coronary Artery has a specific payout note (10% of coverage amount, cap S$25,000) included under base critical illness payout mechanics.",
+          "Teladoc Health and WhiteCoat programs are described as not contractual benefits (not modelled as insurance benefits)."
+        ],
+        "slug": "aia-aia-ultimate-critical-cover-ucc"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 23,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_08d1c76fe1d894b6016a8f1cb5163487d0980d72cbcafd9c0f",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:05:49.668195+00:00",
+    "usage": {
+      "input_tokens": 9863,
+      "output_tokens": 6300,
+      "total_tokens": 16163,
+      "reasoning_tokens": 208,
+      "estimated_cost_usd": 0.0098476
+    }
+  }
+}
