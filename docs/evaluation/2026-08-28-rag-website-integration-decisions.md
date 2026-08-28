@@ -19,6 +19,10 @@ Two working slices exist but are not connected:
 
 The extraction report was generated on 26 August 2026 and the database work is recent. Those timestamps establish processing recency only. They do not establish when policy terms became effective or whether a brochure remains the provider's current contractual source.
 
+## Implementation outcome - later 28 August 2026
+
+The verified state above records the boundary when this decision was made. Commit `90aab4b0bbd3ace43d24e562eb2aa9ca7c60ac90` subsequently connected E10 to E06, made local PostgreSQL the accepted cached adapter, retained Supabase as optional, added the deterministic non-embedding fallback, and exercised read-only evidence through the browser. The same implementation added the eligibility-gated comparison contract and a neutral synthetic fixture, but no real product passed the Phase 3B gate. Source approval, structured date/version enrichment, fixed retrieval evaluation, and every Phase 6 gate remain open.
+
 ## Approved decisions
 
 ### Real-product usage
@@ -156,7 +160,7 @@ These items remain incomplete and must not be implied by recent ingestion:
 - Product-effective dates and auditable superseded versions.
 - Complete premium, eligibility, exclusion, and policy-wording coverage.
 - Stable evidence identity when a policy's chunk set is replaced.
-- Fixed retrieval evaluation and deterministic non-embedding fallback.
-- Local PostgreSQL/pgvector adapter and Docker Compose acceptance.
+- Fixed retrieval evaluation against predeclared reviewed queries.
+- Optional object-store acceptance and the later RDS/S3 migration mapping.
 - Public-use compliance, security, and operational hardening under E09.
 - Ranking-eligible product coverage and formal DEC-004 approval for Phase 6.

@@ -46,7 +46,7 @@
 - [x] Presentation-only actions visibly focus or reshape the page without changing canonical decision versions.
 - [ ] Phase 3B presentation tools add or remove only comparison-eligible real products, preserve neutral ordering and cited fields, and leave canonical versions unchanged.
 - [ ] Profile, canonical comparison, and extracted-policy changes show a before/after proposal and cannot apply without confirmation.
-- [x] Confirmed changes produce versioned inputs, a deterministic E07 rerun, one coherent summary revision, highlighted deltas, and undo.
+- [x] Supported confirmed budget changes produce versioned inputs, a deterministic E07 rerun, one coherent summary revision, highlighted deltas, and undo; other profile fields and extraction corrections remain open.
 - [x] Model output cannot execute arbitrary code, selectors, coordinates, SQL, unregistered tools, or outside-corpus source searches.
 - [ ] Conversation, action, evidence, confirmation, revision, model, prompt, tool, formulation, and ruleset versions are replayable within the POC session.
 - [ ] Normal Q&A, cached-plan exploration with evidence states, presentation change, profile change, extraction correction, cancellation, undo, stale evidence, no evidence, invalid action, and dependency failure scenarios pass.

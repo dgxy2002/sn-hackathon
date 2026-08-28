@@ -93,7 +93,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P0 |
 | Size | M |
 | Depends on | E04-T03, E10-T06 |

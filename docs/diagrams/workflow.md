@@ -48,9 +48,8 @@ flowchart TD
     classDef implemented fill:#e7f4ed,stroke:#246b45,color:#123b28;
     classDef simulated fill:#fff3d6,stroke:#a66500,color:#573900;
     classDef planned fill:#edf1f7,stroke:#53657d,color:#263545,stroke-dasharray: 5 4;
-    class A,B,C,D,E,F,H,L,M,P,U,Q implemented;
-    class I,J,N,O,S,T simulated;
-    class G,K,M1,R,V,W,X,Y,Z planned;
+    class A,B,C,D,E,F,G,H,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z implemented;
+    class I,J,O,M1 simulated;
 ```
 
 ## Current POC status
@@ -58,15 +57,15 @@ flowchart TD
 | Workflow slice | Current behavior |
 |---|---|
 | Quiz and result | Implemented in the browser |
-| Account and profile | Mock account plus in-memory five-step profile |
+| Account and profile | Mock account plus versioned, disposable five-step profile through the API |
 | Policy upload | File selection works; document content is not processed |
-| No-policy path | Navigation can continue, but the explicit API state and tests are pending |
+| No-policy path | The API skips extraction and preserves existing-policy values as unknown |
 | Extraction review | Synthetic, hard-coded fields and confidence values |
 | Gap analysis | Deterministic death and critical-illness calculations |
-| Product retrieval | Cached, synthetic, and Supabase adapters expose one E10 evidence contract; fixed evaluation and local PostgreSQL parity remain pending |
-| Ranking | Static synthetic comparison with a budget rationale |
-| Adaptation | User can navigate back, but outputs are not versioned or change-explained |
-| Conversational summary | Final-page panel and FastAPI service provide typed Q&A, cached evidence, action traces, focus/filter actions, idempotent replay, and blocked decision-input changes; proposals, revisions, and undo remain pending |
+| Product retrieval | Local PostgreSQL, cached-corpus, synthetic, and optional Supabase adapters expose one E10 evidence contract; fixed retrieval evaluation remains pending |
+| Ranking | API-backed deterministic ranking over the labelled synthetic plan catalogue |
+| Adaptation | Confirmed budget changes create immutable profile and summary revisions, rerun E07, show deltas, and support replay and undo; other patch types remain pending |
+| Conversational summary | The final-page panel and FastAPI service provide typed Q&A, cached evidence, action traces, focus/filter actions, budget proposals, confirmation, cancellation, revisions, replay, and undo |
 | Approved next slice | Phase 3B: compare a small comparison-eligible real-product subset with cited fields, neutral ordering, explicit unknowns, and no effect on E07 synthetic ranking |
 
 ## Workflow invariant

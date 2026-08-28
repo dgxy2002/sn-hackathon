@@ -191,10 +191,10 @@
 
 | Field | Value |
 |---|---|
-| Status | In progress |
+| Status | Done |
 | Priority | P1 |
 | Size | M |
-| Depends on | E06-T09, E10-T04 |
+| Depends on | E06-T09 contract, E10-T04 |
 
 **User story:** As the website, I need one typed endpoint for selected real-product evidence so comparison rendering cannot invent fields or mutate recommendation state.
 
@@ -209,4 +209,4 @@
 - [x] Invalid selection, stale/conflicting evidence, missing comparison evidence, timeout, and dependency failure return typed outcomes.
 - [x] Contract tests prove that the endpoint cannot call E07 or create profile, recommendation, proposal, or summary-revision records.
 
-**Current evidence:** The endpoint and synthetic fixture mode are complete and contract-tested. The ticket remains in progress until E06-T09 provides an approved real-product subset.
+**Evidence:** The endpoint, synthetic fixture mode, configured-evidence rejection gates, canonical-isolation checks, and contract tests are complete. This closes the E10 transport contract only; E06-T09 still owns approval of a real comparison-eligible subset, and E08-T10 owns Phase 3B browser acceptance.

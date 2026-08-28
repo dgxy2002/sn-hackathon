@@ -2,15 +2,19 @@
 
 ## Scope
 
-This record covers the completed local fixture/runtime path across E01, E03-E08,
-and E10-E12. It accepts the synthetic decision path, local PostgreSQL evidence,
-neutral synthetic evidence comparison, and confirmed summary revisions. It does
-not approve real-product comparison or ranking, the draft E07 formulation,
-OpenRouter behavior, source reuse, or production use.
+This record accepts specific local fixture/runtime slices spanning E01, E03-E08,
+and E10-E12; it does not close those epics. The accepted slices are the synthetic
+decision path, local PostgreSQL evidence, neutral synthetic evidence comparison,
+the bounded fixture invocation path, an idle singleton scraper lease, and
+confirmed budget summary revisions. E04 extraction remains simulated, no
+insurance source is approved for E05 fetching, and live OpenRouter orchestration
+is not exercised. This record does not approve real-product comparison or
+ranking, the draft E07 formulation, source reuse, or production use.
 
 | Field | Value |
 |---|---|
 | Evaluator | Tim implementation pass using pytest, Docker Compose, API checks, and Playwright |
+| Repository revision | `90aab4b0bbd3ace43d24e562eb2aa9ca7c60ac90` |
 | Contract version | `1.0.0` |
 | Frontend | Vite 8.2.2 production build behind unprivileged Nginx |
 | Backend | FastAPI on Python 3.11 |

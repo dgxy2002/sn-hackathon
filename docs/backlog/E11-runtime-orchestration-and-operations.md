@@ -153,7 +153,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | L |
 | Depends on | E10-T08, E11-T03, E11-T05 |

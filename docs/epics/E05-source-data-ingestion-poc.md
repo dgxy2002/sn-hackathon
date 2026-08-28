@@ -5,7 +5,7 @@
 | Primary owner | Darren |
 | Priority | P1 |
 | Status | In progress |
-| Outcome | One continuously running scraper keeps approved insurer offerings fresh through a reusable fetch, parse, normalize, version, and PostgreSQL-upsert pipeline. |
+| Outcome | Target: one continuously running scraper keeps approved insurer offerings fresh through a reusable fetch, parse, normalize, version, and PostgreSQL-upsert pipeline; the current worker holds a singleton lease and waits because no insurance source is approved for fetching. |
 
 ## Scope
 

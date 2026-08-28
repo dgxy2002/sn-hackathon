@@ -44,6 +44,7 @@
 - [x] Budget, duration, preference, and scenario constraints exclude before ranking.
 - [x] Weighted fit components are returned for eligible plans.
 - [x] Missing critical data can produce no recommendation.
+- [ ] E07-T06 approves the formulation version before this draft ruleset is treated as complete.
 
 **Current evidence:** [`backend/app/decision_support.py`](../../backend/app/decision_support.py), the versioned [`rules.json`](../../backend/fixtures/decision/rules.json) and [`plans.json`](../../backend/fixtures/decision/plans.json), and contract tests. The implementation remains in progress because E07-T06 approval is a completion gate.
 
@@ -51,7 +52,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P0 |
 | Size | M |
 | Depends on | E07-T02, E06-T03 |
@@ -134,7 +135,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | M |
 | Depends on | E07-T02, E07-T03, E07-T06 |

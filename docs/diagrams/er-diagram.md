@@ -1,6 +1,6 @@
 # ER Diagram
 
-## Implemented core RAG schema
+## Implemented Supabase RAG schema
 
 ```mermaid
 erDiagram
@@ -113,7 +113,7 @@ erDiagram
     }
 ```
 
-This is the core of [`backend/scraper/supabase_schema.sql`](../../backend/scraper/supabase_schema.sql), which the current ingestion and retrieval CLIs consume through Supabase/PostgREST. The diagram omits some normalized support tables for readability. It does not imply that the same schema is wired into E10 or the website.
+This is the core of [`backend/scraper/supabase_schema.sql`](../../backend/scraper/supabase_schema.sql), which the optional ingestion and retrieval CLIs consume through Supabase/PostgREST. The diagram omits some normalized support tables for readability. The local E10 application uses the separate schema below.
 
 ## Provenance relationships
 
@@ -131,6 +131,47 @@ flowchart LR
 ```
 
 The solid relationships in the ER diagram are enforced foreign keys with cascading deletes. `document_chunks.source_id` and `scrape_logs.linked_id` are polymorphic logical references and are not database foreign keys.
+
+## Implemented local POC evidence and scraper schema
+
+```mermaid
+erDiagram
+    SOURCE_REGISTRY ||--o{ EVIDENCE_RECORDS : governs
+    SOURCE_REGISTRY ||--o{ SCRAPER_RUNTIME : schedules
+
+    SOURCE_REGISTRY {
+        TEXT source_id PK
+        TEXT source_url
+        TEXT approval_state
+        TEXT owner_name
+        DATE review_date
+        TIMESTAMPTZ next_scrape_due
+        INT consecutive_failures
+        TIMESTAMPTZ last_success_at
+        TIMESTAMPTZ last_failure_at
+    }
+
+    SCRAPER_RUNTIME {
+        TEXT worker_name PK
+        TEXT state
+        TEXT lease_owner
+        TIMESTAMPTZ last_heartbeat
+        JSONB details
+    }
+
+    EVIDENCE_RECORDS {
+        TEXT evidence_id PK
+        TEXT policy_id
+        TEXT provider
+        TEXT product
+        TEXT category
+        TEXT field_name
+        JSONB payload
+        TSVECTOR search_document
+    }
+```
+
+[`backend/docker/postgres-init.sql`](../../backend/docker/postgres-init.sql) creates these tables and the pgvector extension for Docker Compose. Runtime migrations load the committed corpus into `evidence_records`; the scraper uses a PostgreSQL advisory lock plus `scraper_runtime` heartbeat state. The diagram shows logical governance and scheduling relationships because the current tables do not declare foreign keys between them.
 
 ## Approved read-only evidence contract
 
@@ -221,9 +262,9 @@ erDiagram
 
 Products enter this contract only when their comparison gate passes. Provider/product ordering is fixed after user selection. Canonical references are returned unchanged to make isolation testable; Phase 3B does not create a recommendation or summary revision.
 
-## Proposed POC runtime model
+## Implemented runtime contracts and proposed SQL persistence
 
-The E10 repository contract adds disposable synthetic workflow state without claiming that these tables already exist.
+E10-E12 implement these disposable synthetic workflow concepts through current-session repositories and typed contracts. The SQL tables below remain a proposed durable persistence model and are not created by the current PostgreSQL migration.
 
 ```mermaid
 erDiagram
@@ -379,10 +420,10 @@ erDiagram
 
 - The current RAG CLIs actively consume [`backend/scraper/supabase_schema.sql`](../../backend/scraper/supabase_schema.sql) through hosted Supabase/PostgREST. Hosted database contents still depend on the configured environment and are not a website-integration claim.
 - [`backend/scraper/credit_card_schema.sql`](../../backend/scraper/credit_card_schema.sql) is a standalone subset for `credit_cards` and `scrape_logs`.
-- User accounts, profile versions, extraction jobs, recommendations, conversations, action proposals, summary revisions, and run events are absent from the current SQL and shown separately as a proposed POC repository model.
+- User accounts, profile versions, extraction jobs, recommendations, conversations, action proposals, summary revisions, and run events remain absent from the current SQL. Their contracts and current-session behavior are implemented, while the diagram above shows a proposed durable repository model.
 - Conversation and revision records are synthetic-only current-session state by default. They retain typed content and version lineage, not raw document bytes, hidden model reasoning, or executable page instructions.
 - Presentation-only revisions may retain the same recommendation run; confirmed decision-input or extraction changes reference a fresh deterministic recommendation run. Parent and undo fields are logical self-references.
-- The first E10/E06 integration adapter may use the existing Supabase path, with a schema-identical deterministic fixture adapter for fallback. E10 still targets local PostgreSQL/pgvector in Docker Compose; the same migrations later target RDS PostgreSQL/pgvector.
+- E10/E06 use local PostgreSQL/pgvector by default, with optional Supabase, cached-corpus, and deterministic fixture adapters behind the same contract. The local migrations later map to RDS PostgreSQL/pgvector.
 - Phase 3B comparison records are projections over evidence, not E07 recommendation rows. A later Phase 6 ranked pilot may reference real products only after ranking-eligibility and DEC-004 gates pass.
 - Permitted source snapshots may use local S3-compatible storage and later Amazon S3; uploaded user document bytes are not persisted by default.
 - Production identity and user-data controls remain in [E09](../epics/E09-productionisation-and-security.md).

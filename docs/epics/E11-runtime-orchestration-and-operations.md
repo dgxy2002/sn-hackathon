@@ -4,7 +4,7 @@
 |---|---|
 | Primary owner | Jana |
 | Priority | P0 |
-| Status | Planned |
+| Status | In progress |
 | Outcome | A bounded local-first runtime coordinates typed capability calls, OpenRouter model work, and one continuously running scraper while remaining deployable to AWS through configuration. |
 
 ## Scope

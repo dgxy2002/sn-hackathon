@@ -1,8 +1,8 @@
 # Local Docker Compose Topology
 
-## Current interim topology
+## Accepted local topology
 
-The implemented website and API now share a typed read-only evidence service. The credential-free cached adapter is the demonstrated default; Supabase remains an optional live adapter and local PostgreSQL retrieval remains the target.
+The implemented website and API share a typed read-only evidence service. Runtime migrations load the committed corpus into local PostgreSQL, which is the demonstrated credential-free adapter. Supabase remains optional.
 
 ```mermaid
 flowchart LR
@@ -15,9 +15,9 @@ flowchart LR
     Corpus[79 cached brochures]
     Cached[Deterministic cached adapter]
     Live[Optional Supabase adapter]
-    OpenAI[OpenAI API]
     Supabase[(Hosted Supabase<br/>PostgreSQL and pgvector)]
-    LocalDB[(Compose PostgreSQL<br/>pgvector initialized, adapter pending)]
+    LocalDB[(Compose PostgreSQL<br/>pgvector and evidence records)]
+    Scraper[Singleton scraper<br/>lease and heartbeat]
 
     Browser --> Web
     Web --> API
@@ -26,17 +26,17 @@ flowchart LR
     API --> Evidence
     Evidence --> Cached
     Cached --> Corpus
+    Evidence --> LocalDB
     Evidence --> Live
-    Live --> OpenAI
     Live --> Supabase
-    API -. adapter not implemented .-> LocalDB
+    Scraper -->|waits without approved sources| LocalDB
 ```
 
-The dotted local-database path is not implemented. Compose initializes pgvector, but backend health deliberately reports the database as not configured while cached evidence remains active. Provider credentials stay server-side, adapter mode is returned in contracts, and read-only evidence cannot change E07's synthetic ranking.
+The local-database path and scraper lease were accepted on 28 August 2026. Provider credentials stay server-side, adapter mode is returned in contracts, and read-only evidence cannot change E07's synthetic ranking. No cached source is approved for live fetching or real-product comparison.
 
-## Target local topology
+## Remaining configured-service topology
 
-This is the required POC runtime target. Web, backend, and PostgreSQL containers are implemented; database retrieval, the continuous scraper, and optional object storage remain planned.
+Web, backend, scraper, PostgreSQL retrieval, and fixture workflows are implemented. This diagram adds the still-pending configured OpenRouter and optional object-store paths.
 
 ```mermaid
 flowchart TB

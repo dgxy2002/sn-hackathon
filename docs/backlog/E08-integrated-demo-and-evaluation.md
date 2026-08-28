@@ -134,7 +134,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P0 |
 | Size | M |
 | Depends on | E04-T05, E05-T05, E06-T06, E10-T06, E11-T05 |

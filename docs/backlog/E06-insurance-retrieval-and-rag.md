@@ -97,7 +97,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | M |
 | Depends on | E06-T02, E06-T03 |
@@ -165,7 +165,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | M |
 | Depends on | E06-T05, E10-T04 |
@@ -188,7 +188,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | M |
 | Depends on | E06-T01, E06-T02, E06-T05 |

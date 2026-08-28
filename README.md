@@ -2,7 +2,8 @@
 
 CoverCheck SG is a local-first insurance-readiness POC. The browser journey and
 comparison remain visibly synthetic. Its final-page panel calls a typed FastAPI
-agent that can search read-only evidence from 79 cached insurer brochures,
+agent that can search read-only evidence from 79 cached brochure documents,
+representing 71 normalized policy products after deduplication,
 propose a budget change, rerun the deterministic result after confirmation, and
 replay or undo the revision. Local PostgreSQL is the default cached adapter; an
 optional Supabase adapter uses the same response contract.

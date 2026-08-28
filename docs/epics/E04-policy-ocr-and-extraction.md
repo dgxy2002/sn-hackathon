@@ -5,7 +5,7 @@
 | Primary owner | Tim |
 | Priority | P1 |
 | Status | In progress |
-| Outcome | OpenRouter `5.6 Luna` converts a synthetic policy document into reviewable structured fields with confidence and page evidence. |
+| Outcome | Target: the configured OpenRouter document adapter converts a synthetic policy document into reviewable structured fields with confidence and page evidence; the accepted current path is simulated while the exact model slug remains unresolved. |
 
 ## Scope
 

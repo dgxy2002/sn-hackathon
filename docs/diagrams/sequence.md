@@ -1,6 +1,6 @@
 # Sequence Diagram
 
-## Current browser and fixture-API sequence
+## Initial browser and fixture-API sequence - 2026-08-26
 
 ```mermaid
 sequenceDiagram
@@ -43,9 +43,9 @@ sequenceDiagram
     SPA-->>User: Show answer and focus or filter the summary
 ```
 
-Conversation messages leave the browser in the current sequence. Profile data, document bytes, evidence-search requests, and recommendation requests do not; the fixture agent never queries Darren's RAG store.
+This records the initial fixture slice accepted on 26 August 2026. At that point, conversation messages left the browser but profile, evidence-search, and recommendation requests did not. The later integrated sequence below supersedes it as the current runtime.
 
-## First read-only RAG integration sequence
+## Initial read-only RAG integration design
 
 ```mermaid
 sequenceDiagram
@@ -74,7 +74,7 @@ sequenceDiagram
     SPA-->>User: Read-only answer or broad catalogue exploration
 ```
 
-This first slice searches all cached records but does not treat every record as approved. It keeps `document_as_of_date`, `product_effective_date`, and `retrieved_at` distinct, labels weak or stale evidence, and cannot change the E07 synthetic recommendation. It intentionally uses the existing Supabase adapter first; local PostgreSQL/pgvector remains the approved target.
+This design introduced the direct E10/E06 read path without treating every cached record as approved. The accepted implementation now uses local PostgreSQL as the default adapter, retains Supabase as optional, keeps the three date types distinct, and cannot change the E07 synthetic recommendation.
 
 ## Phase 3B real-product evidence-comparison sequence
 
@@ -104,7 +104,9 @@ sequenceDiagram
 
 Phase 3B may follow the direct read-only integration before E11 exists. Discovery relevance can help the user find products, but the comparison uses provider/product ordering and contains no fit score, recommendation badge, or suitability claim.
 
-## Target local Docker Compose sequence
+## Accepted fixture runtime and pending OpenRouter sequence
+
+The local API, PostgreSQL evidence path, deterministic E07 engine, invocation coordinator, and run events are implemented. In the sequence below, the OpenRouter extraction and explanation calls remain pending; fixture mode supplies the same typed boundaries without a provider credential.
 
 ```mermaid
 sequenceDiagram
@@ -164,9 +166,9 @@ sequenceDiagram
     end
 ```
 
-The local sequence runs in Docker Compose and uses `.env` configuration. Every transition validates its schema, every loop is bounded, and the deterministic decision result is immutable before the OpenRouter explanation call. The same backend image and contract later run on ECS Fargate; Bedrock or AgentCore may be added only as optional adapters.
+The accepted fixture sequence runs in Docker Compose and uses `.env` configuration. The tested coordinator validates transitions and preserves the deterministic result. Full loop-limit acceptance, live OpenRouter behavior, and the later ECS Fargate mapping remain open; Bedrock or AgentCore may be added only as optional adapters.
 
-## Target conversational summary sequence
+## Current budget-revision sequence and remaining patch types
 
 ```mermaid
 sequenceDiagram
@@ -231,3 +233,5 @@ sequenceDiagram
 ```
 
 Read-only E06 retrieval and Phase 3B comparison may bypass E11 but not E10 schema validation, comparison-eligibility, or evidence-state rules. Consequential actions enter E11 and select only registered typed tools. Before the separately approved Phase 6 path, model output cannot execute page code or coordinates, search outside the cached E06 corpus, bypass confirmation, place real retrieved products into E07 ranking, or directly author profile versions, extracted values, eligibility, rankings, or displayed decision numbers. Phase 6 still uses E07 deterministically and never lets the model author rank.
+
+The proposal, confirmation, cancellation, deterministic rerun, revision, replay, and undo sequence is accepted for budget changes. Goal, dependant, preference, declared-coverage, and extraction-field changes remain pending and must use the same confirmation boundary before they are claimed.

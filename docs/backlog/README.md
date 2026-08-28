@@ -29,10 +29,12 @@ This folder contains the executable backlog for the CoverCheck SG POC. Each tick
 | [E08 - Integrated Demo and Evaluation](E08-integrated-demo-and-evaluation.md) | Tim | P0 | In progress | 11 |
 | [E09 - Productionisation and Security](E09-productionisation-and-security.md) | Tim | P3 | Deferred | 5 |
 | [E10 - Backend API and POC Persistence](E10-backend-api-and-poc-persistence.md) | Tim | P0 | In progress | 9 |
-| [E11 - Runtime Orchestration and Operations](E11-runtime-orchestration-and-operations.md) | Jana | P0 | Planned | 8 |
+| [E11 - Runtime Orchestration and Operations](E11-runtime-orchestration-and-operations.md) | Jana | P0 | In progress | 8 |
 | [E12 - Conversational Summary Agent](E12-conversational-summary-agent.md) | Tim | P1 | In progress | 6 |
 
 ## Execution order
+
+Current checkpoint: direct E10/E06 retrieval, local PostgreSQL, the bounded fixture coordinator, the singleton scraper lease, and the budget proposal/revision path are implemented. The numbered sequence remains the dependency plan; source governance, real Phase 3B acceptance, live OpenRouter work, full evaluation, AWS, and E09 remain open.
 
 1. Freeze E03 profile semantics, the no-policy state, and E10 shared contracts.
 2. Approve the E07 grounded formulation before implementing deterministic ranking.
