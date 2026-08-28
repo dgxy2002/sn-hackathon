@@ -1,11 +1,21 @@
 # Project Plan: Singapore Insurance Readiness Guide
 
-**Planning date:** 25 August 2026  
-**MVP deadline:** Friday, 28 August 2026  
-**Audience:** First-time working adults in Singapore, primarily ages 19-29  
+**Planning date:** 25 August 2026
+**MVP deadline:** Friday, 28 August 2026
+**Audience:** First-time working adults in Singapore, primarily ages 19-29
 **Working mission:** Help young adults understand inherited insurance, identify coverage gaps, and compare suitable options with evidence they can verify.
 
-This document organizes the requirements in [the IGNITE brief](docs/IGNITE-Agentic-AI-Hackathon-Training-Session.md) and [the initial project notes](docs/SimplyNext%20Hackathon%202026.md). It is a plan only; it does not implement any system.
+This document organizes the requirements in [the IGNITE brief](IGNITE-Agentic-AI-Hackathon-Training-Session.md) and [the initial project notes](SimplyNext%20Hackathon%202026.md). It is a plan only; it does not implement any system.
+
+## Delivery Documentation
+
+- [User Requirements Specification](urs/URS.md): user outcomes, constraints, and acceptance statements.
+- [Product Requirements Document](prd/PRD.md): prioritized product behavior, success measures, and requirement traceability.
+- [Epic register](epics/README.md): ownership, priority, status, repository evidence, and DOD.
+- [Backlog register](backlog/README.md): implementation tickets grouped by epic.
+- [Technical diagrams](diagrams/README.md): architecture, workflow, sequence, and ER diagrams.
+
+The current delivery posture is a hackathon POC. Productionisation and security hardening are tracked as a low-priority, deferred epic; baseline safeguards for secrets, synthetic-data labels, and the educational-not-advice boundary still apply.
 
 ## 1. Problem Definition
 
@@ -55,6 +65,7 @@ The product is an **insurance-readiness education and comparison assistant**. It
 3. See protection gaps and affordable plan categories.
 4. Compare plan evidence and understand why an option may fit.
 5. Know what to verify before speaking to or buying from an authorized provider.
+6. Ask follow-up questions, explore approved alternatives, and safely revise the final comparison as their inputs change.
 
 ### Trust boundary
 
@@ -82,6 +93,7 @@ Only authorized firms and individuals may give financial advice on life insuranc
 - Synthetic plan catalogue and reviewed synthetic user profiles for correctness tests.
 - A small, cited real-product retrieval collection for the RAG demonstration.
 - Recommendation reasons, alternatives, assumptions, and source citations.
+- A visible final-page conversational agent that operates typed tools, explores only approved plans, previews consequential changes, and dynamically updates the comparison after confirmation and deterministic recalculation.
 - Evaluation dashboard or report suitable for the deck and video.
 
 **Out of scope:**
@@ -91,6 +103,7 @@ Only authorized firms and individuals may give financial advice on life insuranc
 - Exhaustive coverage of every Singapore insurer and product.
 - Production identity, payment, or sensitive medical-data workflows.
 - Peer rankings based on invented or statistically weak population data.
+- Screenshot-coordinate computer use, arbitrary page code, open-web plan search, or direct model-authored recommendation values.
 - Autonomous email to an adviser. Treat this as post-MVP and require explicit user approval.
 
 ## 3. User Journey
@@ -105,13 +118,19 @@ flowchart LR
     F[Structured user and policy profile]
     G[Gap analysis and plan comparison]
     H[Evidence-backed explanation]
-    I[Review, update, or verify an adviser]
+    I[Ask follow-ups and explore approved plans]
+    J{Change decision inputs?}
+    K[Preview and confirm]
+    L[Deterministic rerun and summary revision]
+    M[Undo, continue, or verify an adviser]
 
     A --> B --> C --> D
     D --> E --> F
     D --> F
-    F --> G --> H --> I
-    I -. Circumstances change .-> D
+    F --> G --> H --> I --> J
+    J -- No --> M
+    J -- Yes --> K --> L --> I
+    M -. Circumstances change .-> D
 ```
 
 ### Stage 1: Curiosity quiz
@@ -196,9 +215,9 @@ Peer comparison is an engagement experiment, not evidence of suitability.
 - Never fabricate peer data for a live claim. Mock data must be visibly labelled.
 - Measure whether the comparison improves follow-through without increasing anxiety or reducing comprehension.
 
-## 5. Four Agent Systems
+## 5. Four Capability Systems and Summary Agent
 
-The four systems should remain short and single-purpose. Orchestration is a coordination layer, not a fifth user-facing agent.
+The four domain systems should remain short and single-purpose. The conversational summary agent is a visible operator over their typed contracts, while orchestration remains the bounded execution layer rather than another source of financial logic.
 
 ```mermaid
 flowchart LR
@@ -208,21 +227,26 @@ flowchart LR
     I[Information system]
     D[Decision-support system]
     O[Recommendation with reasons and citations]
-    F[User feedback or changed goals]
+    C[Conversational summary agent]
+    F[Question, exploration, or proposed change]
 
     U --> X --> P
     U --> P
     I --> D
-    P --> D --> O
-    O --> F --> P
+    P --> D --> O --> C
+    C --> F
+    F --> I
+    F --> P
+    F --> X
+    D --> C
 ```
 
 ### Information system: Darren
 
 **Job:** Retrieve, summarize, and explain current plan information from provider sources.
 
-**Inputs:** Normalized query, user need, product category, effective date.  
-**Outputs:** Small typed evidence records with source URL, provider, product, field, value, effective/retrieved date, and quoted passage.  
+**Inputs:** Normalized query, user need, product category, effective date.
+**Outputs:** Small typed evidence records with source URL, provider, product, field, value, effective/retrieved date, and quoted passage.
 **Must not:** Invent missing product terms, silently merge product versions, or make the final recommendation.
 
 Planned components:
@@ -237,8 +261,8 @@ Planned components:
 
 **Job:** Convert uploaded policy documents into a structured policy record.
 
-**Inputs:** PDF/image plus consent and document type.  
-**Outputs:** Extracted fields, page/region evidence, per-field confidence, warnings, and unresolved fields.  
+**Inputs:** PDF/image plus consent and document type.
+**Outputs:** Extracted fields, page/region evidence, per-field confidence, warnings, and unresolved fields.
 **Must not:** Guess low-confidence values or send unnecessary personal data to an LLM.
 
 Target fields:
@@ -249,14 +273,14 @@ Target fields:
 - Coverage term/maturity and riders.
 - Exclusions, deductibles/co-insurance, and surrender implications where present.
 
-"UnlimitedOCR by Baidu" could not be verified as a product name. Confirm whether the intended technology is **PaddleOCR** or another Baidu service before the deck names it.
+The original brief proposed a dedicated Baidu OCR product, but the current POC decision supersedes that proposal: use the configured OpenRouter `5.6 Luna` document adapter and retain a fixture fallback. Do not name an unverified OCR product in the deck.
 
 ### Decision-support system: Deborah
 
 **Job:** Match a complete user profile to eligible synthetic plans and explain why.
 
-**Inputs:** Versioned user profile, normalized plan records, and explicit scoring policy.  
-**Outputs:** Gap analysis, excluded plans with reason codes, ranked eligible plans, trade-offs, assumptions, confidence, and evidence IDs.  
+**Inputs:** Versioned user profile, normalized plan records, and explicit scoring policy.
+**Outputs:** Gap analysis, excluded plans with reason codes, ranked eligible plans, trade-offs, assumptions, confidence, and evidence IDs.
 **Must not:** Allow an LLM to decide eligibility or numerical coverage gaps by itself.
 
 Use a hybrid decision method:
@@ -271,11 +295,21 @@ Use a hybrid decision method:
 
 **Job:** Build the user profile, identify missing information, personalize explanations, and update results as goals change.
 
-**Inputs:** Quiz responses, onboarding answers, extracted policy record, and prior user-approved profile state.  
-**Outputs:** Versioned profile, missing-field questions, readiness score, explanation preferences, and change history.  
+**Inputs:** Quiz responses, onboarding answers, extracted policy record, and prior user-approved profile state.
+**Outputs:** Versioned profile, missing-field questions, readiness score, explanation preferences, and change history.
 **Must not:** Infer sensitive facts such as age, health, dependants, or income from free text when they can be asked directly.
 
 Adaptation should be visible: changing a goal, dependant, budget, or policy must update the gap analysis and explain what changed.
+
+### Conversational summary agent: Tim
+
+**Job:** Answer contextual questions and visibly operate the final page through allowlisted typed tools.
+
+**Inputs:** Current conversation, profile, extraction, recommendation, approved catalogue, evidence, summary revision, and user request.
+**Outputs:** Cited answer, typed action trace, optional change proposal, confirmation state, and validated summary revision with delta and undo lineage.
+**Must not:** Browse arbitrary sources, execute model-authored code or coordinates, alter decision inputs without confirmation, or author canonical calculations, eligibility, or rankings.
+
+Presentation actions such as focusing evidence, sorting, filtering, or temporarily comparing an approved alternative may apply immediately. Profile, canonical comparison, and reviewed extraction changes must show old and proposed values, wait for confirmation, create immutable input versions, and rerun the deterministic decision-support system before the summary changes.
 
 ## 6. Shared Data Contracts
 
@@ -311,23 +345,45 @@ Freeze these contracts before agents are integrated.
 - evidence IDs for every product claim
 - token/tool/iteration metrics for evaluation
 
-## 7. AWS and Technical Plan
+### Conversation and summary revision
 
-Based on the training brief, the forgotten second AWS component is most likely **Amazon Bedrock AgentCore Runtime**. Confirm this with the organizer, but plan on the following:
+- conversation, session, message, proposal, action, run, and revision IDs
+- active profile, extraction, catalogue, recommendation, formulation, ruleset, evidence, model, prompt, and tool versions
+- user request, supported intent, allowlisted tool and target, status, and affected summary regions
+- confirmation requirement and outcome plus old, proposed, and applied values
+- cited answer, visible before/after delta, undo lineage, and terminal error
+- bounded current-session context without raw document bytes, hidden reasoning, or executable page instructions
 
-- **Amazon Bedrock:** Foundation-model access through a fixed model ID.
-- **Claude Haiku 4.5:** Brief's default global-profile model; verify account and region access.
-- **Claude Sonnet 4.5:** Single-region alternative if required and available.
-- **Amazon Bedrock AgentCore Runtime:** Deploy and serve the agent entrypoint.
-- **Local contract:** An `@app.entrypoint` handler exposed for local testing at `POST localhost:8080` as shown in the brief.
-- **AgentCore Observability:** Trace model calls, tool calls, latency, errors, and iteration count if time permits.
-- **RAG/vector store:** Darren selects the smallest AWS-compatible option after confirming available credits and access. Amazon Bedrock Knowledge Bases is a candidate, not a confirmed requirement.
-- **Authentication:** Mock for MVP; Amazon Cognito/AgentCore Identity is post-MVP unless already provisioned.
+## 7. Local-First and AWS Technical Plan
 
-Engineering constraints from the brief:
+The POC must run locally before AWS deployment work begins.
 
-- Keep model IDs in constants.
+**Local default:**
+
+- Docker Compose starts the web container, backend API container, exactly one continuously running scraper container, PostgreSQL with pgvector, and optional S3-compatible object storage.
+- Local configuration and secrets come from an uncommitted `.env`; `.env.example` contains safe placeholders only.
+- OpenRouter `5.6 Luna` is selected through `LLM_PROVIDER`, `OPENROUTER_MODEL`, and `DOCUMENT_AI_PROVIDER` configuration for language tasks and policy PDF/image ingestion, OCR, and extraction. Confirm the exact OpenRouter model slug before implementation.
+- The backend exposes versioned profile, extraction, evidence, recommendation, invocation, conversation, proposal, confirmation, summary-revision, undo, and run-inspection contracts.
+- PostgreSQL full-text and metadata retrieval provide the deterministic local baseline; optional semantic embeddings remain behind a provider adapter.
+
+**Later AWS swap:**
+
+- Push the same tested web, API, and scraper images to Amazon ECR.
+- Run web and API as ECS Fargate services behind an Application Load Balancer.
+- Run the scraper as one ECS Fargate service with desired count one and a database-backed singleton lease.
+- Replace local PostgreSQL/pgvector with Amazon RDS for PostgreSQL and local S3-compatible storage with Amazon S3.
+- Inject secrets from AWS Secrets Manager and non-secret configuration from ECS task definitions or Parameter Store using the same environment-variable names.
+- Send container logs and health/freshness metrics to CloudWatch.
+- Use private subnets for API, scraper, and RDS; route outbound provider and approved-source calls through controlled VPC egress.
+- Amazon Bedrock and AgentCore are optional future provider/runtime adapters, deferred until credits and organizer requirements are confirmed.
+
+Engineering constraints:
+
+- Resolve provider and model IDs from validated environment configuration and record the resolved values per run.
 - Treat `allowed_tools` as a security boundary.
+- Validate each conversational tool's schema, target, base version, preconditions, idempotency, confirmation state, and permitted summary regions.
+- Apply navigation and temporary presentation actions immediately; require explicit confirmation for decision-input and reviewed-extraction changes.
+- Let E07 alone calculate gaps, eligibility, fit, ranking, and canonical summary values after a confirmed change.
 - Bound every agent loop with a hard state counter.
 - Return small typed tool results; keep large documents out of prompts.
 - Capture token use on every response.
@@ -351,6 +407,10 @@ Engineering constraints from the brief:
 | Explanation | Recommendations with reason, trade-off, and assumptions | 100% |
 | Reliability | First-pass schema validation | At least 95% |
 | Reliability | Agent loops exceeding configured cap | 0 |
+| Conversation | Executed actions that use registered schema-valid tools | 100% |
+| Conversation | Decision-input or reviewed-extraction mutations applied without confirmation | 0 |
+| Conversation | Applied revisions consistent with one deterministic result version | 100% |
+| Conversation | Applied revisions successfully replayed and undone in frozen scenarios | 100% |
 
 Use at least 20 synthetic profiles spanning:
 
@@ -364,9 +424,9 @@ Use at least 20 synthetic profiles spanning:
 
 Deborah and a second reviewer should write the expected plan category and reasons **before** running the agent. This is the ground truth; the model must not grade itself.
 
-### OCR efficiency experiment
+### OpenRouter policy-extraction experiment
 
-Show the dedicated OCR path in the video against a multimodal-LLM baseline using the same 3-5 representative pages.
+Show the configured OpenRouter policy-extraction path in the video using the same 3-5 representative synthetic pages used by the evaluation fixtures.
 
 Measure:
 
@@ -377,7 +437,7 @@ Measure:
 - Amount of source text passed into the recommendation context.
 - Manual corrections required.
 
-Do not claim token or cost savings until this test is run. OCR itself may not use tokens, so report compute/API cost separately from downstream LLM tokens.
+Do not claim accuracy, token, or cost improvements until this test is run. Report document-extraction usage separately from downstream explanation usage.
 
 ## 9. Team Plan to Friday
 
@@ -406,6 +466,7 @@ Do not claim token or cost savings until this test is run. OCR itself may not us
 - Run all 20 ground-truth profiles.
 - Run the OCR baseline experiment.
 - Capture schema pass rate, tool success, completion, tokens, latency, loop count, retrieval, and recommendation metrics.
+- Integrate E12 contextual Q&A, approved-plan exploration, confirmed change, visible revision delta, replay, and undo after the deterministic path passes.
 - Freeze demo data and prepare failure fallbacks.
 
 **Exit gate:** One rehearsable end-to-end scenario and one changed-goal adaptation scenario both pass.
@@ -430,8 +491,8 @@ Do not claim token or cost savings until this test is run. OCR itself may not us
 | 1:30-2:15 | Upload a sample policy and show OCR fields/confidence. | Extraction acts; compare OCR baseline metrics. |
 | 2:15-3:00 | Retrieve current plan evidence with sources. | Information agent uses grounded data. |
 | 3:00-3:45 | Show fit, exclusions, reasons, and trade-offs. | Decision support is deterministic and explainable. |
-| 3:45-4:15 | Change a goal or add a dependant; show the result update. | Visible adaptation. |
-| 4:15-5:00 | Present measured accuracy, cost, and next step. | Benefits and technical quality. |
+| 3:45-4:30 | Ask for a lower-budget alternative; show the live typed-action trace, preview and confirm the budget change, then highlight the recalculated comparison delta. | Visible, bounded agent operation with deterministic adaptation. |
+| 4:30-5:00 | Undo the revision and present measured accuracy, grounding, confirmation, replay, latency, and cost. | Reversibility and technical quality. |
 
 Keep a preloaded scenario and recorded fallback. Do not depend on live scraping during the judged demo.
 
@@ -443,6 +504,7 @@ Keep a preloaded scenario and recorded fallback. Do not depend on live scraping 
 | "Unbiased" becomes an unsupported claim | Publish source coverage, scoring rules, commercial relationships, and known omissions. Use "evidence-backed" until independently audited. |
 | Fear-based FOMO harms trust | Compare readiness constructively, label samples, test emotional response, and never shame users. |
 | LLM recommendation is inconsistent | Use deterministic rules and calculations; restrict LLM to questions and explanations. |
+| Conversational agent exceeds its authority or leaves a partial update | Use allowlisted typed tools, confirmation for decision inputs, immutable versions, atomic revision application, loop caps, replay, and undo. |
 | Product data becomes stale | Store source/effective/retrieval dates, version records, and refuse unsupported claims. |
 | Scraping breaches terms or robots policy | Maintain an approved source list and cache only permitted content; prefer official/public structured sources. |
 | OCR leaks personal data | Minimize fields, redact before external processing, obtain consent, and use synthetic documents in the demo. |
@@ -460,6 +522,8 @@ The MVP is ready when:
 - Every plan claim has a source, date, and synthetic/real label.
 - Recommendation eligibility is reproducible from visible rules.
 - A changed user goal visibly changes the result for a stated reason.
+- The final-page agent answers with evidence, visibly operates only registered typed tools, and searches only the approved catalogue.
+- Decision-input and reviewed-extraction changes require confirmation and produce one deterministic, highlighted, reversible summary revision.
 - All loops are bounded and key run metrics are logged.
 - The README can start the demonstrated build from a clean environment.
 - The deck reports measured results, not aspirational percentages.
@@ -469,8 +533,8 @@ The MVP is ready when:
 
 Resolve these before implementation diverges:
 
-1. Confirm whether the required stack is **Amazon Bedrock plus Amazon Bedrock AgentCore Runtime**.
-2. Confirm the exact OCR product meant by "UnlimitedOCR by Baidu."
+1. Confirm the exact OpenRouter model slug represented by **5.6 Luna**.
+2. Confirm whether Amazon Bedrock or AgentCore remains a judged requirement; otherwise keep both as deferred adapters.
 3. Obtain the original source for the 26% Gen Z claim or remove it entirely.
 4. Decide whether real-product recommendations are shown in the demo or whether real retrieval and synthetic recommendation remain visibly separate.
 5. Decide the minimum pilot cohort and consent language for peer comparison.

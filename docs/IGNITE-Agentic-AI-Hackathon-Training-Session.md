@@ -1,8 +1,8 @@
 # IGNITE Agentic AI Hackathon 2026
 
-> **Theme:** Fueling Tomorrow's Changemakers  
-> **Source:** [IGNITE Agentic AI Hackathon Functional Training Session](IGNITE_Agentic_AI_Hackathon_Functional_Training_Session_3_24_Aug.pdf)  
-> **Organizations shown on the cover:** SimplifyNext, NUS Centre for Future-ready Graduates, Nanyang Technological University Singapore, Singapore Management University, and Singapore University of Technology and Design.  
+> **Theme:** Fueling Tomorrow's Changemakers
+> **Source:** [IGNITE Agentic AI Hackathon Functional Training Session](IGNITE_Agentic_AI_Hackathon_Functional_Training_Session_3_24_Aug.pdf)
+> **Organizations shown on the cover:** SimplifyNext, NUS Centre for Future-ready Graduates, Nanyang Technological University Singapore, Singapore Management University, and Singapore University of Technology and Design.
 > **Copyright:** Copyright (c) 2026 SimplifyNext.
 
 > **Cover visual (PDF page 1):** A neon-lit futuristic city frames a white title panel. The image establishes a technology-and-transformation theme; it does not add procedural content.

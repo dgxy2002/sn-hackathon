@@ -1,0 +1,18 @@
+# Local configuration and secrets
+.env
+**/.env
+**/.env.*
+!**/.env.example
+
+# Editor-local configuration
+.vscode/
+
+# Python
+**/.venv/
+**/__pycache__/
+**/.pytest_cache/
+*.py[cod]
+
+# Frontend
+**/node_modules/
+**/dist/

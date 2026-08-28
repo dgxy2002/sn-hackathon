@@ -1,3 +1,5 @@
+> **Historical scoping input:** This file preserves the original project notes. Current runtime, provider, and extraction decisions are defined in [PLAN.md](PLAN.md), [URS.md](urs/URS.md), and [PRD.md](prd/PRD.md). Docker Compose, OpenRouter `5.6 Luna`, and local PostgreSQL/pgvector supersede the Bedrock-first and dedicated-OCR assumptions below.
+
 Now read and understand both requirements and initial project scoping in full.
 
 Here is what I envision the final project to be:
@@ -9,31 +11,31 @@ Next there will be an account creation step. Users can sign up to the web-app to
 This entire project is in the context of Singapore so keep the scope as such. Target audience is first-time working adults. From the CNA article linked it mentions 1/4 of Gen-Z still rely on their parents insurance plan and do not know what their coverage is. Our goal is to improve the financial literacy while preventing people from going through the pain or potentially getting scammed/keeping their best interests at heart in an unbiased manner as compared to talking to an FA.
 
 There are 4 agent systems as outlined:
-Information  
-\- Agents that help with choices by analyzing data and recommending actions  
-\- Our FA agent has to scrape sites from the different insurance providers and make accurate comparisons of their plans between one another  
+Information
+\- Agents that help with choices by analyzing data and recommending actions
+\- Our FA agent has to scrape sites from the different insurance providers and make accurate comparisons of their plans between one another
 \- Possibly implement a RAG system (Darren can do this?) to store the scraped information from FA sites
 
-Extraction  
-\- Agents (not really, it'll be ML for us) agents that convert unstructured content into structured, actionable data.  
-\- Our FA agent will use UnlimitedOCR by Baidu (Show the token/cost savings of using a dedicated OCR module vs throwing it to ChatGPT to process PDF vs converted Markdown files)  
+Extraction
+\- Agents (not really, it'll be ML for us) agents that convert unstructured content into structured, actionable data.
+\- Our FA agent will use UnlimitedOCR by Baidu (Show the token/cost savings of using a dedicated OCR module vs throwing it to ChatGPT to process PDF vs converted Markdown files)
 \- Tim can handle this
 
-Decision-Support  
-\- Agents that help with choices by analyzing data and recommending actions  
-\- Our FA agent will recommend plans to users based on their needs  
+Decision-Support
+\- Agents that help with choices by analyzing data and recommending actions
+\- Our FA agent will recommend plans to users based on their needs
 \- Deborah can do this as your intern touched on this type of system?
 
-Personalized  
-\- Agents that customize responses based on semantic and episodic context  
-\- More \*importantly\* our FA agent has to do information gathering/understand the user needs explicitly as insufficient/generalised info is helpful to no-one  
+Personalized
+\- Agents that customize responses based on semantic and episodic context
+\- More \*importantly\* our FA agent has to do information gathering/understand the user needs explicitly as insufficient/generalised info is helpful to no-one
 \- Jana will do this, more related to prompt tweaking/orchestrating the agent
 
 Do not build any of these systems.
 
 Overall just understand the problem and help me plan it out such that it is clear and concise. I currently have the raw thoughts I want you to help me organise it.
 
-**Problem Context:** While many young working adults take over legacy insurance policies purchased by their parents, **1 in 4 Gen Zs in Singapore (26%)** remain financially unprepared—lacking adequate life insurance and long-term planning. Without clear visibility, young adults risk paying for outdated family policies that no longer fit their individual budget or independent life goals. 
+**Problem Context:** While many young working adults take over legacy insurance policies purchased by their parents, **1 in 4 Gen Zs in Singapore (26%)** remain financially unprepared—lacking adequate life insurance and long-term planning. Without clear visibility, young adults risk paying for outdated family policies that no longer fit their individual budget or independent life goals.
 **
 How Might We:** Help first-time working adults seamlessly transition from inherited parental plans to an independent, objective financial portfolio tailored to their personal circumstances?
 
@@ -41,7 +43,7 @@ How Might We:** Help first-time working adults seamlessly transition from inheri
 
 **How Might We:** Help first-time working adults seamlessly transition from inherited parental plans to an independent, objective financial portfolio tailored to their personal circumstances?
 
-shift the independent, objective financial portfolio tailored to their personal circumstances? to the front to be able to add proof, 
+shift the independent, objective financial portfolio tailored to their personal circumstances? to the front to be able to add proof,
 
 must use aws bedrock and ??? (sry i forgor)
 
