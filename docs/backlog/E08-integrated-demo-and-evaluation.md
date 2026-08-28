@@ -7,7 +7,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P0 |
 | Size | M |
 | Depends on | E03-T02, E04-T02, E10-T02 |
@@ -18,8 +18,8 @@
 
 **Acceptance criteria:**
 
-- [ ] Profile, extraction, evidence, plan, recommendation, event, error, and run-metric schemas are versioned by E10.
-- [ ] Complete, incomplete, invalid, no-evidence, dependency-failure, and changed-profile fixtures are committed.
+- [x] Profile, extraction, evidence, plan, recommendation, event, error, and run-metric schemas are versioned by E10.
+- [x] Complete, incomplete, invalid, no-evidence, dependency-failure, and changed-profile fixtures are committed.
 - [ ] E03, E04, E06, E07, E10, and E11 owners validate their boundaries against the same schema versions.
 - [ ] Fixture ground truth identifies reviewer, review date, source, and limitations.
 - [ ] Contract changes require an explicit version update and renewed acceptance.
@@ -28,7 +28,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P0 |
 | Size | L |
 | Depends on | E08-T01, E10-T05, E11-T05 |
@@ -39,11 +39,11 @@
 
 **Acceptance criteria:**
 
-- [ ] The frontend can call E10 without embedded capability fixtures on the normal integration path.
+- [x] The frontend can call E10 without embedded capability fixtures on the normal integration path.
 - [x] Read-only RAG is available through E10 across applicable website contexts and cannot alter E07 synthetic recommendation inputs or results.
-- [ ] E11 invokes only allowed extraction, profile, retrieval, and decision tools.
+- [x] E11 invokes only allowed extraction, profile, retrieval, and decision tools.
 - [ ] One normal and one changed-goal scenario return schema-valid results.
-- [ ] Live, cached, simulated, synthetic, approved, unverified, stale, and unknown evidence states are visibly distinguished where applicable.
+- [x] Live, cached, simulated, synthetic, approved, unverified, stale, and unknown evidence states are visibly distinguished where applicable.
 - [ ] Missing-information, no-evidence, and dependency-failure outcomes render without presenting a recommendation.
 
 ## E08-T03 - Capture agent and evaluation metrics
@@ -87,13 +87,13 @@
 - [ ] A clean environment completes the changed-goal scenario.
 - [x] No synthetic data is presented as real.
 
-**Current evidence:** `bash scripts/verify-poc.sh` passes the backend contracts, frontend production build, and Compose configuration. The [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md) records the first frontend/API path; the [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md) records the containerized cached-evidence path and its remaining integration gaps.
+**Current evidence:** `scripts/verify-poc.sh`, 38 backend tests, and the frontend production build pass. The [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md) records policy, no-policy, proposal, confirmation, cancellation, replay, undo, and mobile paths. Changed-goal and live-provider scenarios remain open.
 
 ## E08-T05 - Rehearse and record the five-minute demo
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P0 |
 | Size | S |
 | Depends on | E08-T04 |
@@ -146,9 +146,9 @@
 **Acceptance criteria:**
 
 - [ ] One documented Docker Compose command starts healthy web, backend, one scraper, PostgreSQL/pgvector, and configured local object-store services.
-- [ ] A fresh environment initializes schemas and synthetic fixtures without manual repair.
+- [x] A fresh environment initializes schemas and synthetic fixtures without manual repair.
 - [ ] Normal, no-policy, changed-goal, OpenRouter-unavailable fallback, and stale-source scenarios pass.
-- [ ] No real secret is required for fixture mode and no secret reaches the browser or logs.
+- [x] No real secret is required for fixture mode and no secret reaches the browser or logs.
 - [ ] Shutdown preserves intended database/object-store volumes and terminates application processes cleanly.
 
 ## E08-T08 - Review AWS deployment readiness
@@ -194,7 +194,7 @@
 - [ ] Fixture and configured OpenRouter modes use the same schemas and disclose adapter, model, prompt, tool, formulation, ruleset, and catalogue versions.
 - [ ] No model self-grades its own conversational or page-changing output.
 
-**Current evidence:** The [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md) and [`backend/tests/test_conversations.py`](../../backend/tests/test_conversations.py) cover grounded Q&A, presentation focus/filtering, idempotent replay, blocked decision-input change, dependency failure, and stale revision. The remaining declared scenarios and model-mode metrics are untested.
+**Current evidence:** The [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md), the [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md), and backend tests cover grounded Q&A, presentation changes, confirmed and cancelled budget changes, deterministic rerun, replay, undo, idempotency, dependency failure, and stale revision. Extraction correction, loop-cap, complete scenario metrics, and model mode remain untested.
 
 ## E08-T10 - Accept Phase 3B real-product evidence comparison
 
@@ -217,6 +217,8 @@
 - [ ] Discovery-result permutations always produce provider/product comparison ordering after the same user selection.
 - [ ] Before and after profile, E07 catalogue, recommendation, and summary-revision contracts are byte-equivalent for presentation-only comparison actions.
 - [ ] Desktop, mobile, keyboard, screen-reader, reduced-motion, cached-adapter, and fixture-adapter scenarios pass.
+
+**Current evidence:** The neutral comparison contract, canonical-isolation tests, fixture rendering, and mobile layout are complete. This ticket remains ready because no real-product subset has passed E06-T09 source and field gates.
 
 ## E08-T11 - Evaluate the Phase 6 real-product ranked pilot
 

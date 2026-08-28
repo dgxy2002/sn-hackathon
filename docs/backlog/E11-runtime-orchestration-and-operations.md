@@ -7,7 +7,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P0 |
 | Size | S |
 | Depends on | E04-T02, E10-T06 |
@@ -28,7 +28,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | Done |
 | Priority | P0 |
 | Size | L |
 | Depends on | E10-T02, E11-T01 |
@@ -39,17 +39,17 @@
 
 **Acceptance criteria:**
 
-- [ ] `POST /invocations` accepts the versioned invocation contract in the backend container.
-- [ ] States cover validation, optional extraction review, profile completion, retrieval, decision, explanation, and terminal outcomes.
-- [ ] The no-policy branch skips extraction and preserves existing-policy fields as unknown.
-- [ ] Missing information, no evidence, no eligible plan, dependency failure, and completion are explicit states.
-- [ ] Every state validates input and output before transition.
+- [x] `POST /invocations` accepts the versioned invocation contract in the backend container.
+- [x] States cover validation, optional extraction review, profile completion, retrieval, decision, explanation, and terminal outcomes.
+- [x] The no-policy branch skips extraction and preserves existing-policy fields as unknown.
+- [x] Missing information, no evidence, no eligible plan, dependency failure, and completion are explicit states.
+- [x] Every state validates input and output before transition.
 
 ## E11-T03 - Enforce tool policy, loop caps, and adapter fallback
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P0 |
 | Size | M |
 | Depends on | E10-T04, E11-T02 |
@@ -164,10 +164,10 @@
 
 **Acceptance criteria:**
 
-- [ ] The coordinator resolves supported intents and invokes only registered, schema-valid read, presentation, proposal, deterministic-rerun, revision, and undo tools.
-- [ ] Tool policy validates target, preconditions, base versions, idempotency, confirmation, allowed summary regions, loop cap, and terminal state.
-- [ ] Model output is never executed as HTML, JavaScript, selectors, coordinates, SQL, arbitrary URLs, or undeclared tool properties.
-- [ ] Ordered events expose intent, tool, target, status, evidence count, confirmation state, affected regions, versions, latency, tokens, cost, and errors without hidden reasoning.
+- [x] The coordinator resolves supported intents and invokes only registered, schema-valid read, presentation, proposal, deterministic-rerun, revision, and undo tools.
+- [x] Tool policy validates target, preconditions, base versions, idempotency, confirmation, allowed summary regions, loop cap, and terminal state.
+- [x] Model output is never executed as HTML, JavaScript, selectors, coordinates, SQL, arbitrary URLs, or undeclared tool properties.
+- [x] Ordered events expose intent, tool, target, status, evidence count, confirmation state, affected regions, versions, latency, tokens, cost, and errors without hidden reasoning.
 - [ ] Fixture and configured OpenRouter adapters support identical normal, unsupported, stale, conflict, timeout, provider-failure, and loop-limit scenarios.
 
 Read-only questions and cached-catalogue exploration may call the typed E10/E06 evidence service without entering this coordinator. Any proposal, canonical input change, deterministic rerun, summary revision, replay, or undo remains within E11's bounded tool policy.

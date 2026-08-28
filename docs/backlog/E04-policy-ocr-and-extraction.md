@@ -51,7 +51,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | L |
 | Depends on | E04-T02, E03-T02, E08-T01 |
@@ -105,10 +105,12 @@
 **Acceptance criteria:**
 
 - [ ] OpenRouter and fixture adapters return the same versioned extraction schema.
-- [ ] Adapter mode is selected by environment configuration and returned in API output.
-- [ ] The backend container health report includes extraction-provider readiness without exposing credentials.
-- [ ] Fixture mode completes when OpenRouter is unavailable and is visibly labelled simulated.
+- [x] Adapter mode is selected by environment configuration and returned in API output.
+- [x] The backend container health report includes extraction-provider readiness without exposing credentials.
+- [x] Fixture mode completes when OpenRouter is unavailable and is visibly labelled simulated.
 - [ ] The same backend image contract is documented for ECS Fargate.
+
+**Current evidence:** The [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md) verifies the containerized fixture path. OpenRouter parity and ECS documentation remain open.
 
 ## E04-T06 - Support confirmed extraction-field corrections
 

@@ -2,9 +2,10 @@
 
 CoverCheck SG is a local-first insurance-readiness POC. The browser journey and
 comparison remain visibly synthetic. Its final-page panel calls a typed FastAPI
-agent that can also search read-only evidence from 79 cached insurer brochures.
-The credential-free cached adapter is the default; an optional Supabase adapter
-uses the same response contract.
+agent that can search read-only evidence from 79 cached insurer brochures,
+propose a budget change, rerun the deterministic result after confirmation, and
+replay or undo the revision. Local PostgreSQL is the default cached adapter; an
+optional Supabase adapter uses the same response contract.
 
 Real-product evidence remains read-only and cannot alter the synthetic plan
 ranking. The approved bridge, evidence-state rules, provider split, date
@@ -44,8 +45,8 @@ using a non-default frontend port, add its exact origin to `ALLOWED_ORIGINS` in
 
 ## Docker Compose demo
 
-Docker Compose starts the built web app, cached-evidence API, and a healthy
-PostgreSQL 16 instance with pgvector enabled. No cloud credential is required.
+Docker Compose starts the built web app, cached-evidence API, singleton scraper
+worker, and PostgreSQL 16 with pgvector enabled. No cloud credential is required.
 
 ```bash
 cp .env.example .env
@@ -64,10 +65,10 @@ docker compose down
 Use `docker compose down --volumes` only when the local PostgreSQL volume should
 also be removed.
 
-The Compose PostgreSQL service currently proves container and pgvector startup
-only. The API intentionally reports its database dependency as not configured
-and uses the committed cached corpus; local PostgreSQL retrieval, migrations,
-the singleton scraper loop, and optional object storage remain pending epics.
+The backend queries the Compose database for cached evidence. Runtime migrations
+load the committed corpus idempotently, and the database-backed singleton scraper
+waits when no approved source is due. Optional object storage remains unconfigured.
+No cached source is approved for live fetching or real-product comparison.
 
 Run the focused backend checks with:
 
@@ -90,7 +91,8 @@ OpenAI for offline brochure extraction and embeddings; this is separate from
 the configured OpenRouter boundary for user-document and orchestration work.
 
 Supabase remains the optional live adapter. Local PostgreSQL/pgvector retrieval
-remains the required POC target and is not implied by the Compose bootstrap.
+is the accepted local POC path; source permission and real-product Phase 3B
+eligibility remain separate gates.
 
 Never place provider, database, or object-store secrets in the frontend or in
 version control. The exact `OPENROUTER_MODEL` value remains blank until project

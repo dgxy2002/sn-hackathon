@@ -53,6 +53,7 @@ class Settings:
     orchestration_mode: CapabilityMode
     conversation_mode: CapabilityMode
     database_configured: bool
+    database_url: str | None = field(repr=False)
     object_store_configured: bool
     openrouter_configured: bool
     supabase_url: str | None = field(repr=False)
@@ -75,6 +76,7 @@ class Settings:
             values.get("OPENAI_KEY", "").strip()
             or values.get("OPENAI_API_KEY", "").strip()
         )
+        database_url = values.get("DATABASE_URL", "").strip()
 
         settings = cls(
             app_env=values.get("APP_ENV", "development").strip(),
@@ -94,9 +96,9 @@ class Settings:
                 values.get("CONVERSATION_MODE", "simulated"), "CONVERSATION_MODE"
             ),
             database_configured=bool(
-                values.get("DATABASE_URL", "").strip()
-                or (supabase_url and supabase_service_role_key)
+                database_url or (supabase_url and supabase_service_role_key)
             ),
+            database_url=database_url or None,
             object_store_configured=bool(
                 values.get("OBJECT_STORE_ENDPOINT", "").strip()
                 and values.get("OBJECT_STORE_BUCKET", "").strip()

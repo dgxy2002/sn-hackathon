@@ -15,6 +15,10 @@ from .config import CapabilityMode
 from .contracts import (
     CONTRACT_VERSION,
     EvidenceRecord,
+    EvidenceComparisonField,
+    EvidenceComparisonProduct,
+    EvidenceComparisonRequest,
+    EvidenceComparisonResponse,
     EvidenceSearchRequest,
     EvidenceSearchResponse,
     EvidenceState,
@@ -119,6 +123,14 @@ class EvidenceAdapter(Protocol):
     mode: CapabilityMode
 
     def search(self, request: EvidenceSearchRequest) -> list[EvidenceRecord]: ...
+
+    def records_for_products(self, product_ids: list[str]) -> list[EvidenceRecord]: ...
+
+
+class EvidenceComparisonEligibilityError(ValueError):
+    def __init__(self, reasons: dict[str, list[str]]) -> None:
+        super().__init__("One or more products failed the evidence comparison gate")
+        self.reasons = reasons
 
 
 @dataclass(frozen=True)
@@ -459,6 +471,156 @@ class LocalCorpusEvidenceAdapter:
                 break
         return selected
 
+    def records_for_products(self, product_ids: list[str]) -> list[EvidenceRecord]:
+        selected = set(product_ids)
+        return [
+            document.record
+            for document in self._documents
+            if document.record.policy_id in selected
+        ]
+
+
+class PostgresEvidenceAdapter:
+    mode: CapabilityMode = "cached"
+
+    def __init__(
+        self,
+        database_url: str,
+        corpus_path: Path = DEFAULT_CORPUS,
+        *,
+        max_age_days: int = 365,
+    ) -> None:
+        self._database_url = database_url
+        corpus = LocalCorpusEvidenceAdapter(corpus_path, max_age_days=max_age_days)
+        records = [document.record for document in corpus._documents]
+        try:
+            import psycopg
+
+            with psycopg.connect(self._database_url) as connection:
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        """
+                        CREATE TABLE IF NOT EXISTS evidence_records (
+                            evidence_id TEXT PRIMARY KEY,
+                            policy_id TEXT NOT NULL,
+                            provider TEXT NOT NULL,
+                            product TEXT NOT NULL,
+                            category TEXT NOT NULL,
+                            field_name TEXT NOT NULL,
+                            payload JSONB NOT NULL,
+                            search_document TSVECTOR GENERATED ALWAYS AS (
+                                to_tsvector(
+                                    'simple',
+                                    provider || ' ' || product || ' ' || category || ' ' ||
+                                    field_name || ' ' || coalesce(payload ->> 'section_title', '') ||
+                                    ' ' || coalesce(payload ->> 'value', '')
+                                )
+                            ) STORED
+                        )
+                        """
+                    )
+                    cursor.execute(
+                        "CREATE INDEX IF NOT EXISTS evidence_records_search_idx "
+                        "ON evidence_records USING GIN (search_document)"
+                    )
+                    cursor.executemany(
+                        """
+                        INSERT INTO evidence_records (
+                            evidence_id, policy_id, provider, product, category,
+                            field_name, payload
+                        ) VALUES (%s, %s, %s, %s, %s, %s, %s::jsonb)
+                        ON CONFLICT (evidence_id) DO UPDATE SET
+                            policy_id = EXCLUDED.policy_id,
+                            provider = EXCLUDED.provider,
+                            product = EXCLUDED.product,
+                            category = EXCLUDED.category,
+                            field_name = EXCLUDED.field_name,
+                            payload = EXCLUDED.payload
+                        """,
+                        [
+                            (
+                                record.evidence_id,
+                                record.policy_id,
+                                record.provider,
+                                record.product,
+                                record.category,
+                                record.field,
+                                json.dumps(record.model_dump(mode="json")),
+                            )
+                            for record in records
+                        ],
+                    )
+        except Exception as error:
+            raise EvidenceDependencyError(
+                f"Local PostgreSQL evidence initialization failed: {error}"
+            ) from error
+
+    def search(self, request: EvidenceSearchRequest) -> list[EvidenceRecord]:
+        import psycopg
+
+        query_terms = _tokens(request.query)
+        if not query_terms:
+            return []
+        tsquery = " | ".join(query_terms)
+        conditions = ["search_document @@ to_tsquery('simple', %s)"]
+        where_parameters: list[Any] = [tsquery]
+        if request.filters.provider:
+            conditions.append("lower(provider) = lower(%s)")
+            where_parameters.append(request.filters.provider)
+        if request.filters.category:
+            conditions.append("lower(category) = lower(%s)")
+            where_parameters.append(request.filters.category)
+        if request.filters.product:
+            conditions.append("product ILIKE %s")
+            where_parameters.append(f"%{request.filters.product}%")
+        statement = f"""
+            SELECT payload,
+                   ts_rank_cd(search_document, to_tsquery('simple', %s)) AS rank
+            FROM evidence_records
+            WHERE {' AND '.join(conditions)}
+            ORDER BY rank DESC, provider, product, evidence_id
+            LIMIT %s
+        """
+        parameters = [tsquery, *where_parameters, request.max_results * 8]
+        try:
+            with psycopg.connect(self._database_url) as connection:
+                with connection.cursor() as cursor:
+                    cursor.execute(statement, parameters)
+                    rows = cursor.fetchall()
+        except Exception as error:
+            raise EvidenceDependencyError(f"Local PostgreSQL search failed: {error}") from error
+
+        selected: list[EvidenceRecord] = []
+        seen_policies: set[str] = set()
+        for payload, rank in rows:
+            record = EvidenceRecord.model_validate(payload)
+            if record.policy_id in seen_policies:
+                continue
+            score = min(1.0, max(0.0, float(rank)))
+            if score < request.threshold:
+                continue
+            seen_policies.add(record.policy_id)
+            selected.append(record.model_copy(update={"similarity": round(score, 6)}))
+            if len(selected) == request.max_results:
+                break
+        return selected
+
+    def records_for_products(self, product_ids: list[str]) -> list[EvidenceRecord]:
+        import psycopg
+
+        try:
+            with psycopg.connect(self._database_url) as connection:
+                with connection.cursor() as cursor:
+                    cursor.execute(
+                        "SELECT payload FROM evidence_records WHERE policy_id = ANY(%s)",
+                        (product_ids,),
+                    )
+                    return [EvidenceRecord.model_validate(row[0]) for row in cursor.fetchall()]
+        except Exception as error:
+            raise EvidenceDependencyError(
+                f"Local PostgreSQL comparison lookup failed: {error}"
+            ) from error
+
 
 class FixtureEvidenceAdapter:
     def __init__(self, mode: CapabilityMode = "synthetic") -> None:
@@ -474,31 +636,115 @@ class FixtureEvidenceAdapter:
                 section_title="Synthetic comparison fixture",
                 value="Illustrative term protection within the demo budget.",
                 source_file="synthetic-fixture",
-                source_approval="unverified",
-                evidence_state="unknown",
-                freshness_status="unknown",
+                source_approval="approved",
+                evidence_state="approved",
+                freshness_status="current",
+                document_as_of_date=date(2026, 8, 28),
+                document_version="fixture-v1",
                 synthetic=True,
                 extraction_confidence=None,
                 similarity=1,
-                provenance={"lineage": "deterministic-synthetic-fixture"},
+                provenance={
+                    "lineage": "deterministic-synthetic-fixture",
+                    "normalized_value": 400000,
+                    "unit": "SGD lump sum",
+                },
             ),
             EvidenceRecord(
-                evidence_id="SYN-HEC-EVIDENCE",
+                evidence_id="SYN-LCC-BENEFIT",
+                policy_id="synthetic-lioncity-critical-cover",
+                provider="LionCity Mutual",
+                product="LionCity Critical Cover",
+                category="critical_illness",
+                field="benefit",
+                section_title="Synthetic comparison fixture",
+                value="Illustrative critical-illness benefit of S$120,000.",
+                source_file="synthetic-fixture",
+                source_approval="approved",
+                evidence_state="approved",
+                freshness_status="current",
+                document_as_of_date=date(2026, 8, 28),
+                document_version="fixture-v1",
+                synthetic=True,
+                extraction_confidence=None,
+                similarity=1,
+                provenance={
+                    "lineage": "deterministic-synthetic-fixture",
+                    "normalized_value": 120000,
+                    "unit": "SGD lump sum",
+                },
+            ),
+            EvidenceRecord(
+                evidence_id="SYN-LCC-PREMIUM",
+                policy_id="synthetic-lioncity-critical-cover",
+                provider="LionCity Mutual",
+                product="LionCity Critical Cover",
+                category="critical_illness",
+                field="premium",
+                section_title="Synthetic comparison fixture",
+                value="Illustrative premium of S$58 per month.",
+                source_file="synthetic-fixture",
+                source_approval="approved",
+                evidence_state="approved",
+                freshness_status="current",
+                document_as_of_date=date(2026, 8, 28),
+                document_version="fixture-v1",
+                synthetic=True,
+                extraction_confidence=None,
+                similarity=1,
+                provenance={
+                    "lineage": "deterministic-synthetic-fixture",
+                    "normalized_value": 58,
+                    "unit": "SGD/month",
+                },
+            ),
+            EvidenceRecord(
+                evidence_id="SYN-HEC-BENEFIT",
                 policy_id="synthetic-harbour-essential-ci",
                 provider="Harbour Life",
                 product="Harbour Essential CI",
                 category="critical_illness",
-                field="overview",
+                field="benefit",
                 section_title="Synthetic comparison fixture",
-                value="Illustrative critical-illness option used only in the demo comparison.",
+                value="Illustrative critical-illness benefit of S$150,000.",
                 source_file="synthetic-fixture",
-                source_approval="unverified",
-                evidence_state="unknown",
-                freshness_status="unknown",
+                source_approval="approved",
+                evidence_state="approved",
+                freshness_status="current",
+                document_as_of_date=date(2026, 8, 28),
+                document_version="fixture-v1",
                 synthetic=True,
                 extraction_confidence=None,
                 similarity=1,
-                provenance={"lineage": "deterministic-synthetic-fixture"},
+                provenance={
+                    "lineage": "deterministic-synthetic-fixture",
+                    "normalized_value": 150000,
+                    "unit": "SGD lump sum",
+                },
+            ),
+            EvidenceRecord(
+                evidence_id="SYN-HEC-PREMIUM",
+                policy_id="synthetic-harbour-essential-ci",
+                provider="Harbour Life",
+                product="Harbour Essential CI",
+                category="critical_illness",
+                field="premium",
+                section_title="Synthetic comparison fixture",
+                value="Illustrative premium of S$64 per month.",
+                source_file="synthetic-fixture",
+                source_approval="approved",
+                evidence_state="approved",
+                freshness_status="current",
+                document_as_of_date=date(2026, 8, 28),
+                document_version="fixture-v1",
+                synthetic=True,
+                extraction_confidence=None,
+                similarity=1,
+                provenance={
+                    "lineage": "deterministic-synthetic-fixture",
+                    "normalized_value": 64,
+                    "unit": "SGD/month",
+                },
             ),
         ]
 
@@ -510,6 +756,10 @@ class FixtureEvidenceAdapter:
             if query_terms & set(_tokens(f"{record.product} {record.category} {record.value}"))
         ]
         return matches[: request.max_results]
+
+    def records_for_products(self, product_ids: list[str]) -> list[EvidenceRecord]:
+        selected = set(product_ids)
+        return [record for record in self._records if record.policy_id in selected]
 
 
 class SupabaseEvidenceAdapter:
@@ -623,6 +873,11 @@ class SupabaseEvidenceAdapter:
             )
         return records
 
+    def records_for_products(self, product_ids: list[str]) -> list[EvidenceRecord]:
+        raise EvidenceDependencyError(
+            "Live comparison requires the approved comparison projection"
+        )
+
 
 class EvidenceService:
     def __init__(self, adapter: EvidenceAdapter) -> None:
@@ -644,6 +899,142 @@ class EvidenceService:
             contract_version=CONTRACT_VERSION,
         )
 
+    def records_for_products(self, product_ids: list[str]) -> list[EvidenceRecord]:
+        return self._adapter.records_for_products(product_ids)
+
+
+COMPARISON_FIELDS = (
+    ("premium", "Premium"),
+    ("benefit", "Benefit"),
+    ("eligibility", "Eligibility"),
+    ("exclusion", "Exclusions"),
+    ("term", "Term"),
+)
+
+
+class EvidenceComparisonService:
+    def __init__(
+        self,
+        evidence: EvidenceService,
+        fixture_evidence: EvidenceService | None = None,
+    ) -> None:
+        self._evidence = evidence
+        self._fixture_evidence = fixture_evidence
+
+    def compare(self, request: EvidenceComparisonRequest) -> EvidenceComparisonResponse:
+        service = (
+            self._fixture_evidence
+            if request.comparison_mode == "synthetic_fixture"
+            else self._evidence
+        )
+        if service is None:
+            raise EvidenceDependencyError("Synthetic comparison fixture is unavailable")
+        records = service.records_for_products(request.product_ids)
+        grouped = {
+            product_id: [record for record in records if record.policy_id == product_id]
+            for product_id in request.product_ids
+        }
+        gate_failures = {
+            product_id: self._gate_reasons(product_records)
+            for product_id, product_records in grouped.items()
+            if self._gate_reasons(product_records)
+        }
+        categories = {
+            product_records[0].category
+            for product_records in grouped.values()
+            if product_records
+        }
+        if len(categories) > 1:
+            gate_failures["selection"] = ["MIXED_CATEGORY_SELECTION"]
+        if gate_failures:
+            raise EvidenceComparisonEligibilityError(gate_failures)
+
+        products = [self._product(product_records) for product_records in grouped.values()]
+        products.sort(key=lambda item: (item.provider.casefold(), item.product.casefold()))
+        return EvidenceComparisonResponse(
+            run_id=f"comparison-{uuid4()}",
+            mode=service.mode,
+            canonical_references=request.canonical_references,
+            products=products,
+            warnings=[
+                "This is a neutral evidence comparison, not a recommendation or suitability assessment.",
+                "Unknown fields were not inferred.",
+            ],
+        )
+
+    @staticmethod
+    def _gate_reasons(records: list[EvidenceRecord]) -> list[str]:
+        if not records:
+            return ["PRODUCT_NOT_FOUND"]
+        reasons: list[str] = []
+        if any(record.source_approval != "approved" for record in records):
+            reasons.append("SOURCE_REUSE_NOT_APPROVED")
+        if any(record.evidence_state != "approved" for record in records):
+            reasons.append("EVIDENCE_NOT_APPROVED")
+        if any(record.freshness_status != "current" for record in records):
+            reasons.append("EVIDENCE_NOT_CURRENT")
+        if not records[0].synthetic and any(record.source_url is None for record in records):
+            reasons.append("AUTHORITATIVE_URL_MISSING")
+        if any(
+            record.document_as_of_date is None and record.product_effective_date is None
+            for record in records
+        ):
+            reasons.append("SOURCE_DATE_MISSING")
+        if any(record.document_version is None for record in records):
+            reasons.append("DOCUMENT_VERSION_MISSING")
+        return reasons
+
+    @staticmethod
+    def _product(records: list[EvidenceRecord]) -> EvidenceComparisonProduct:
+        first = records[0]
+        fields = []
+        for key, label in COMPARISON_FIELDS:
+            matches = [record for record in records if record.field == key]
+            if not matches:
+                fields.append(EvidenceComparisonField(key=key, label=label, state="unknown"))
+                continue
+            record = matches[0]
+            if record.product_effective_date is not None:
+                date_type = "product_effective_date"
+                date_value = record.product_effective_date
+            elif record.document_as_of_date is not None:
+                date_type = "document_as_of_date"
+                date_value = record.document_as_of_date
+            elif record.retrieved_at is not None:
+                date_type = "retrieved_at"
+                date_value = record.retrieved_at
+            else:
+                date_type = "unknown"
+                date_value = None
+            fields.append(
+                EvidenceComparisonField(
+                    key=key,
+                    label=label,
+                    state="available",
+                    value=record.value,
+                    normalized_value=record.provenance.get("normalized_value"),
+                    unit=record.provenance.get("unit"),
+                    evidence_ids=[item.evidence_id for item in matches],
+                    source_url=record.source_url,
+                    source_approval=record.source_approval,
+                    evidence_state=record.evidence_state,
+                    freshness_status=record.freshness_status,
+                    date_type=date_type,
+                    date_value=date_value,
+                    document_version=record.document_version,
+                )
+            )
+        return EvidenceComparisonProduct(
+            product_id=first.policy_id,
+            provider=first.provider,
+            product=first.product,
+            category=first.category,
+            eligibility="comparison_eligible",
+            gate_reasons=["SYNTHETIC_COMPARISON_FIXTURE"] if first.synthetic else [],
+            synthetic=first.synthetic,
+            fields=fields,
+        )
+
 
 def create_evidence_service(
     mode: CapabilityMode,
@@ -654,6 +1045,7 @@ def create_evidence_service(
     supabase_url: str | None = None,
     service_key: str | None = None,
     openai_key: str | None = None,
+    database_url: str | None = None,
 ) -> EvidenceService:
     if mode == "live":
         if not (supabase_url and service_key and openai_key):
@@ -666,10 +1058,18 @@ def create_evidence_service(
             max_age_days=max_age_days,
         )
     elif mode == "cached":
-        adapter = LocalCorpusEvidenceAdapter(
-            Path(corpus_path).expanduser().resolve() if corpus_path else DEFAULT_CORPUS,
-            max_age_days=max_age_days,
-        )
+        cached_path = Path(corpus_path).expanduser().resolve() if corpus_path else DEFAULT_CORPUS
+        if database_url:
+            adapter = PostgresEvidenceAdapter(
+                database_url,
+                cached_path,
+                max_age_days=max_age_days,
+            )
+        else:
+            adapter = LocalCorpusEvidenceAdapter(
+                cached_path,
+                max_age_days=max_age_days,
+            )
     else:
         adapter = FixtureEvidenceAdapter(mode)
     return EvidenceService(adapter)

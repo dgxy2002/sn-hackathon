@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Approved documentation direction; implementation pending |
+| Status | Contract and synthetic fixture implemented; real-product entry gates pending |
 | Decision date | 28 August 2026 |
 | Scope | Introduce real-product comparison at the earliest safe point while preserving the synthetic E07 recommendation boundary |
 | Governing decision | Extends the [RAG and website integration decision](2026-08-28-rag-website-integration-decisions.md); does not change `docs/PLAN.md` |
@@ -86,12 +86,14 @@ Phase 6 begins only after:
 
 | Mode | Earliest pipeline point | Current status |
 |---|---|---|
-| Synthetic ranked mode | Existing E07 POC surface | Visible now; static and not yet at full E07 DOD |
+| Synthetic ranked mode | Existing E07 POC surface | API-backed and visible now; formulation approval and full E07 evaluation remain pending |
 | Real-product evidence comparison | Phase 3B, after the pilot subset passes its source and field evidence gates | Next comparison milestone |
 | Real-product ranked mode | Phase 6, after Phase 5 acceptance, E07 validation, ranking-eligible product data, and explicit DEC-004/compliance approval | Not approved for the current POC |
 | Public real-product ranked mode | After Phase 6 plus E09 legal, privacy, security, regulatory, and operational approval | Deferred |
 
 No calendar date is asserted until owners size the incomplete source-governance, product-field, E07, and evaluation work. Passing Phase 3B alone does not authorize Phase 6.
+
+The [integrated runtime and browser acceptance](2026-08-28-integrated-runtime-browser-acceptance.md) verifies the neutral comparison contract, synthetic browser fixture, canonical isolation, responsive rendering, and rejection of configured cached products that fail the gate. It does not accept a real-product Phase 3B subset.
 
 ## Ownership and implementation path
 

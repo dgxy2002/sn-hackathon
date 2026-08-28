@@ -14,6 +14,7 @@ RUN python -m pip install --upgrade pip \
     && python -m pip install -r requirements.txt
 
 COPY backend/app ./app
+COPY backend/fixtures ./fixtures
 COPY backend/scraper/insurance ./scraper/insurance
 
 RUN chown -R covercheck:covercheck /app

@@ -32,15 +32,15 @@
 
 - [`frontend/src/main.js`](../../frontend/src/main.js) already provides the complete simulated user journey.
 - [`frontend/package.json`](../../frontend/package.json) provides a successful production build command.
-- [`compose.yaml`](../../compose.yaml) builds a healthy web/API slice and initializes PostgreSQL with pgvector without claiming that the cached adapter queries it.
+- [`compose.yaml`](../../compose.yaml) builds healthy web, API, scraper, and PostgreSQL/pgvector services; the backend queries the local database for cached evidence.
 - The [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md) records the successful containerized conversation and read-only evidence flow.
 - [`docs/PLAN.md`](../PLAN.md) defines shared contracts, AWS assumptions, acceptance metrics, and the five-minute demo story.
 
 ## Definition of done
 
-- [ ] The four capability outputs and API routes validate against frozen shared contracts.
+- [x] The four capability outputs and API routes validate against frozen shared contracts.
 - [ ] One end-to-end scenario and one changed-goal scenario complete without manual data repair.
-- [ ] The demo visibly distinguishes live, cached, synthetic, and simulated data.
+- [x] The demo visibly distinguishes live, cached, synthetic, and simulated data.
 - [x] All 71 cached real-product records are searchable with approval/evidence state, and explored products remain visibly separate from synthetic recommendations.
 - [ ] A small comparison-eligible subset passes Phase 3B field-citation, neutral-ordering, canonical-isolation, and browser acceptance tests.
 - [ ] Any Phase 6 real-product ranked pilot passes independent deterministic correctness, abstention, stability, explanation-fidelity, and safeguard tests before enablement.
@@ -49,9 +49,11 @@
 - [ ] Model and tool runs report token, latency, cost, retry, iteration, and error metrics.
 - [x] A clean setup follows the README and the frontend build succeeds.
 - [ ] One documented Docker Compose command starts healthy web, API, scraper, PostgreSQL/pgvector, and configured local object-store services.
-- [ ] The normal and no-policy scenarios pass through the containerized API.
+- [x] The normal and no-policy scenarios pass through the containerized API.
 - [ ] An AWS readiness check maps the same image digests and environment contract to ECR/ECS, RDS, S3, Secrets Manager, and CloudWatch.
 - [ ] The five-minute demo is rehearsed twice and has a recorded fallback.
+
+**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md). Changed-goal, live-model metrics, real Phase 3B acceptance, AWS review, and demo rehearsal remain open.
 
 ## POC boundary
 

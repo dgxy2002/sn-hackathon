@@ -28,7 +28,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | M |
 | Depends on | E03-T01 |
@@ -39,16 +39,16 @@
 
 **Acceptance criteria:**
 
-- [ ] A schema defines profile version, as-of date, consent, field values, provenance, and unknown state.
-- [ ] Representative complete and incomplete fixtures validate against the schema.
-- [ ] Absence and zero are represented differently.
+- [x] A schema defines profile version, as-of date, consent, field values, provenance, and unknown state.
+- [x] Representative complete and incomplete fixtures validate against the schema.
+- [x] Absence and zero are represented differently.
 - [ ] E07 and E08 owners approve the contract.
 
 ## E03-T03 - Ask focused missing-field questions
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | Done |
 | Priority | P1 |
 | Size | M |
 | Depends on | E03-T02 |
@@ -59,16 +59,16 @@
 
 **Acceptance criteria:**
 
-- [ ] Decision-critical fields are declared by the decision ruleset.
-- [ ] Missing critical values produce targeted questions.
-- [ ] Unknown policy terms remain unknown after follow-up.
-- [ ] The flow can return an insufficient-data state.
+- [x] Decision-critical fields are declared by the decision ruleset.
+- [x] Missing critical values produce targeted questions.
+- [x] Unknown policy terms remain unknown after follow-up.
+- [x] The flow can return an insufficient-data state.
 
 ## E03-T04 - Re-run and explain material profile changes
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | M |
 | Depends on | E03-T02, E07-T02, E08-T02 |
@@ -80,15 +80,15 @@
 **Acceptance criteria:**
 
 - [ ] Goal, budget, dependant, and policy changes create a new profile version.
-- [ ] Material changes rerun gap and plan analysis.
-- [ ] The output identifies changed inputs and their effect.
+- [x] Material changes rerun gap and plan analysis.
+- [x] The output identifies changed inputs and their effect.
 - [ ] At least three synthetic change scenarios pass.
 
 ## E03-T05 - Complete Financial Needs Analysis profile coverage
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | M |
 | Depends on | E03-T02 |
@@ -120,17 +120,17 @@
 
 **Acceptance criteria:**
 
-- [ ] The profile contract represents `has_current_policy: false` separately from missing or unknown policy details.
-- [ ] The coordinator bypasses extraction when no policy is supplied.
-- [ ] Existing-policy values remain unknown and no synthetic coverage is added.
-- [ ] Gap and recommendation services return assumptions, focused questions, or insufficient data as defined by the formulation.
+- [x] The profile contract represents `has_current_policy: false` separately from missing or unknown policy details.
+- [x] The coordinator bypasses extraction when no policy is supplied.
+- [x] Existing-policy values remain unknown and no synthetic coverage is added.
+- [x] Gap and recommendation services return assumptions, focused questions, or insufficient data as defined by the formulation.
 - [ ] API tests cover policy supplied, no policy, unknown policy status, and changed policy status through the local backend container.
 
 ## E03-T07 - Support confirmed versioned profile patches
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | M |
 | Depends on | E03-T02, E10-T08 |
@@ -141,8 +141,10 @@
 
 **Acceptance criteria:**
 
-- [ ] A profile patch contains the base version, changed fields, old values, proposed values, reason, and affected calculations.
+- [x] A profile patch contains the base version, changed fields, old values, proposed values, reason, and affected calculations.
 - [ ] Budget, goal, dependant, preference, declared-coverage, and other decision-input changes require confirmation.
-- [ ] Validation preserves explicit unknown values and rejects stale, disallowed, or conflicting patches.
-- [ ] Confirmation creates a new immutable profile version; cancellation leaves the active version unchanged.
-- [ ] Applied and rejected proposals retain typed audit events without hidden model reasoning.
+- [x] Validation preserves explicit unknown values and rejects stale, disallowed, or conflicting patches.
+- [x] Confirmation creates a new immutable profile version; cancellation leaves the active version unchanged.
+- [x] Applied and rejected proposals retain typed audit events without hidden model reasoning.
+
+**Current evidence:** The [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md) verifies the no-policy path and confirmed/cancelled budget patches. Goal, dependant, preference, and declared-coverage proposal generation remain open.

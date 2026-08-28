@@ -44,6 +44,11 @@ Open `http://localhost:4173`, complete the synthetic journey, then choose
 
 ## Unmet coverage
 
+This section records the state at the time of this smoke test. The later
+[integrated runtime and browser acceptance](2026-08-28-integrated-runtime-browser-acceptance.md)
+closes PostgreSQL retrieval, complete Compose topology, and revision-flow items
+listed below; source approval and live-provider gates remain open.
+
 - Source approval, authoritative URLs, effective dates, premiums, eligibility,
   exclusions, and source-permission review remain incomplete across the corpus.
 - The PostgreSQL container does not yet store or retrieve evidence; the API uses

@@ -38,10 +38,12 @@
 - [x] The interface adapts to desktop and mobile layouts.
 - [x] Synthetic recommendations and the educational boundary are visible.
 - [x] `npm --prefix frontend run build` completes successfully.
-- [ ] The final page renders typed agent progress, proposals, confirmations, changed regions, replay, and undo without executing model-authored markup or selectors.
-- [ ] Read-only RAG results render across applicable views with citations, distinct date fields, evidence state, and no visual implication that an explored real product is recommended.
+- [x] The final page renders typed agent progress, proposals, confirmations, changed regions, replay, and undo without executing model-authored markup or selectors.
+- [x] Read-only RAG results render across applicable views with citations, distinct date fields, evidence state, and no visual implication that an explored real product is recommended.
 - [ ] Phase 3B evidence mode compares two to four eligible real products with neutral ordering, cited cells, explicit unknowns, and no recommendation signals or canonical-state changes.
-- [ ] Dynamic summary states remain responsive, keyboard operable, visibly focused, and compatible with reduced motion.
+- [x] Dynamic summary states remain responsive, keyboard operable, visibly focused, and compatible with reduced motion.
+
+**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md). The neutral browser surface currently proves the contract with explicitly labelled synthetic fixtures; no real product has passed the Phase 3B gate.
 
 ## POC boundary
 

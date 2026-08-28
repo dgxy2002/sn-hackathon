@@ -33,6 +33,10 @@ services:
       RECOMMENDATION_MODE: simulated
       ORCHESTRATION_MODE: simulated
       CONVERSATION_MODE: simulated
+      DATABASE_URL: postgresql://covercheck:${POSTGRES_PASSWORD:-covercheck-local-only}@postgres:5432/covercheck
+    depends_on:
+      postgres:
+        condition: service_healthy
     ports:
       - "${API_PORT:-8000}:8000"
     healthcheck:
@@ -40,6 +44,29 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
+    restart: unless-stopped
+
+  scraper:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    command: ["python", "-m", "app.scraper_worker"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://covercheck:${POSTGRES_PASSWORD:-covercheck-local-only}@postgres:5432/covercheck
+      SCRAPE_INTERVAL_SECONDS: ${SCRAPE_INTERVAL_SECONDS:-86400}
+      SCRAPE_LEASE_TTL_SECONDS: ${SCRAPE_LEASE_TTL_SECONDS:-900}
+      SCRAPE_SOURCE_ALLOWLIST: ${SCRAPE_SOURCE_ALLOWLIST:-}
+      SCRAPE_TIMEOUT_SECONDS: ${SCRAPE_TIMEOUT_SECONDS:-20}
+      SCRAPE_DELAY_SECONDS: ${SCRAPE_DELAY_SECONDS:-1}
+      SCRAPE_MAX_RETRIES: ${SCRAPE_MAX_RETRIES:-3}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import os, psycopg; connection=psycopg.connect(os.environ['DATABASE_URL']); count=connection.execute(\"SELECT count(*) FROM scraper_runtime WHERE worker_name='continuous-scraper' AND state IN ('running','degraded') AND last_heartbeat > now() - interval '2 minutes'\").fetchone()[0]; connection.close(); raise SystemExit(0 if count == 1 else 1)"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
     restart: unless-stopped
 
   postgres:

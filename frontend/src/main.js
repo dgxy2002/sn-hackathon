@@ -2,9 +2,16 @@ import './style.css'
 import workerImage from './assets/covercheck-worker.jpg'
 import {
   ApiError,
+  compareEvidence,
   createClientId,
   createConversation,
+  decideProposal,
+  fetchReplay,
+  invokeCoverCheck,
+  reviewExtraction,
   sendConversationMessage,
+  submitExtraction,
+  undoRevision,
 } from './api.js'
 
 const app = document.querySelector('#app')
@@ -84,6 +91,19 @@ const state = {
   direction: 'forward',
   keyboard: false,
   fileName: '',
+  runtime: {
+    status: 'idle',
+    error: '',
+    profile: null,
+    extraction: null,
+    recommendation: null,
+  },
+  evidenceComparison: {
+    status: 'idle',
+    error: '',
+    products: [],
+    warnings: [],
+  },
   profile: {
     name: 'Ari',
     email: '',
@@ -110,6 +130,10 @@ const state = {
     actions: [],
     comparisonFilter: 'all',
     pendingFocus: '',
+    pendingProposal: null,
+    latestDelta: null,
+    replay: [],
+    canUndo: false,
     error: '',
     abortController: null,
     suggestedPrompts: [
@@ -157,6 +181,137 @@ const formatEvidenceDate = (value) => {
     year: 'numeric',
     timeZone: 'UTC',
   }).format(new Date(Date.UTC(year, month - 1, day)))
+}
+
+const profileField = (value, stateName = 'present') => ({
+  state: stateName,
+  value,
+  provenance: {
+    source: 'user',
+    recorded_at: new Date().toISOString(),
+    source_ref: 'covercheck-browser-onboarding',
+  },
+})
+
+const buildVersionedProfile = (hasCurrentPolicy) => {
+  const dependantCount = {
+    None: 0,
+    Parents: 1,
+    'Partner or child': 1,
+    'Multiple people': 2,
+  }[state.profile.dependants] ?? 0
+  const preference = state.profile.preference === 'Protection-only'
+    ? 'protection-only'
+    : state.profile.preference === 'Open to plans with savings'
+      ? 'savings-linked'
+      : 'unsure'
+  const unknown = () => profileField(null, 'unknown')
+
+  return {
+    schema_id: 'covercheck.profile',
+    contract_version: '1.0.0',
+    profile_id: 'browser-demo-profile',
+    version: 1,
+    as_of_date: new Date().toISOString().slice(0, 10),
+    consent: state.profile.consent,
+    data: {
+      life_stage: profileField(state.profile.ageBand),
+      employment_status: profileField(state.profile.employment),
+      goal: profileField(state.profile.goal),
+      target_amount: unknown(),
+      target_date: unknown(),
+      monthly_income: profileField(Number(state.profile.income)),
+      monthly_expenses: profileField(Number(state.profile.expenses)),
+      emergency_savings_months: profileField(Number(state.profile.emergencyMonths)),
+      dependant_count: profileField(dependantCount),
+      dependant_support_years: profileField(0),
+      liabilities: profileField(Number(state.profile.debt)),
+      has_current_policy: profileField(hasCurrentPolicy),
+      existing_death_cover: hasCurrentPolicy ? profileField(100000) : unknown(),
+      existing_ci_cover: hasCurrentPolicy ? profileField(50000) : unknown(),
+      government_cover: profileField([
+        ...(state.profile.medishield ? ['MediShield Life'] : []),
+        ...(state.profile.careshield ? ['CareShield Life'] : []),
+      ]),
+      employer_cover: profileField(Boolean(state.profile.employer)),
+      monthly_budget: profileField(Number(state.profile.budget)),
+      product_preference: profileField(preference),
+    },
+  }
+}
+
+async function prepareComparison(hasCurrentPolicy) {
+  if (state.runtime.status === 'planning') return
+  const controller = new AbortController()
+  state.runtime.status = 'planning'
+  state.runtime.error = ''
+  render({ focus: false, preserveScroll: true })
+
+  try {
+    const profile = buildVersionedProfile(hasCurrentPolicy)
+    let extraction = null
+    if (hasCurrentPolicy) {
+      const submitted = await submitExtraction('policy-term-001', controller.signal)
+      extraction = await reviewExtraction(
+        submitted.extraction_id,
+        {
+          expected_version: submitted.version,
+          fields: submitted.fields.map((field) => ({
+            ...field,
+            reviewed_value: field.original_value,
+          })),
+        },
+        controller.signal,
+      )
+    }
+    const invocation = await invokeCoverCheck({
+      schema_id: 'covercheck.invocation',
+      contract_version: '1.0.0',
+      invocation_id: createClientId(),
+      profile,
+      extraction_id: extraction?.extraction_id || null,
+    }, controller.signal)
+    state.runtime.profile = invocation.profile
+    state.runtime.extraction = invocation.extraction
+    state.runtime.recommendation = invocation.recommendation
+    state.runtime.status = invocation.state
+    state.agent.activeRevisionId = 'summary-v1'
+    state.agent.conversationId = ''
+    state.agent.pendingProposal = null
+    state.agent.latestDelta = null
+    state.agent.replay = []
+    state.agent.canUndo = false
+
+    if (invocation.recommendation) {
+      const comparison = await compareEvidence({
+        product_ids: [
+          'synthetic-lioncity-critical-cover',
+          'synthetic-harbour-essential-ci',
+        ],
+        comparison_mode: 'synthetic_fixture',
+        canonical_references: {
+          profile_id: invocation.profile.profile_id,
+          profile_version: invocation.profile.version,
+          catalogue_version: invocation.recommendation.catalogue_version,
+          recommendation_id: invocation.recommendation.recommendation_id,
+          revision_id: state.agent.activeRevisionId,
+        },
+      }, controller.signal)
+      state.evidenceComparison = {
+        status: comparison.status,
+        error: '',
+        products: comparison.products,
+        warnings: comparison.warnings,
+      }
+    }
+    navigate('comparison')
+  } catch (error) {
+    state.runtime.status = 'failed'
+    state.runtime.error = error instanceof ApiError
+      ? error.message
+      : 'The local backend is unavailable. The comparison was not created.'
+    render({ focus: false, preserveScroll: true })
+  }
 }
 
 const actionTargetLabels = {
@@ -235,10 +390,49 @@ const agentActionView = (action, index) => `
   </details>
 `
 
+const proposalView = () => {
+  const proposal = state.agent.pendingProposal
+  if (!proposal) return ''
+  const patch = proposal.patch
+  return `
+    <section class="agent-proposal" aria-labelledby="proposal-title">
+      <span class="mono">CONFIRMATION REQUIRED</span>
+      <h3 id="proposal-title">Change ${escapeHtml(patch.field_name.replaceAll('_', ' '))}?</h3>
+      <p>${escapeHtml(String(patch.old_value))} → ${escapeHtml(String(patch.proposed_value))}</p>
+      <small>${escapeHtml(patch.reason)}</small>
+      <div>
+        <button type="button" data-action="confirm-proposal" data-proposal-id="${escapeHtml(proposal.proposal_id)}">Confirm and recalculate</button>
+        <button type="button" data-action="cancel-proposal" data-proposal-id="${escapeHtml(proposal.proposal_id)}">Cancel</button>
+      </div>
+    </section>
+  `
+}
+
+const revisionView = () => {
+  const delta = state.agent.latestDelta
+  if (!delta) return ''
+  const inputChanges = delta.changed_inputs
+    .map((change) => `${change.field_name}: ${change.old_value} → ${change.new_value}`)
+    .join(' · ')
+  const gapChanges = delta.changed_gaps
+    .map((change) => `${change.gap_type}: ${formatCurrency(change.old_amount)} → ${formatCurrency(change.new_amount)}`)
+    .join(' · ')
+
+  return `
+    <section class="agent-delta" aria-live="polite">
+      <span class="mono">REVISION APPLIED</span>
+      <p>${escapeHtml(inputChanges || 'Profile updated')}</p>
+      ${gapChanges ? `<small>${escapeHtml(gapChanges)}</small>` : ''}
+      <small>${delta.ranking_changed ? 'Ranking changed.' : 'Ranking stayed the same.'}</small>
+    </section>
+  `
+}
+
 const agentView = () => {
   const statusLabels = {
     idle: 'Ready',
     planning: 'Planning safe actions',
+    waiting_for_confirmation: 'Waiting for confirmation',
     completed: 'Completed',
     unsupported: 'Stopped safely',
     cancelled: 'Cancelled',
@@ -268,6 +462,8 @@ const agentView = () => {
         </div>
         <div class="agent-messages" aria-live="polite">${messages}</div>
         ${state.agent.error ? `<p class="agent-error" role="alert">${escapeHtml(state.agent.error)}</p>` : ''}
+        ${proposalView()}
+        ${revisionView()}
         <form class="agent-composer" id="agent-form">
           <label class="sr-only" for="agent-message">Ask CoverCheck about this summary</label>
           <textarea id="agent-message" name="message" rows="2" maxlength="1000" placeholder="Ask why, inspect assumptions, or filter the table" required ${isBusy ? 'disabled' : ''}></textarea>
@@ -275,6 +471,15 @@ const agentView = () => {
             ? '<button class="agent-stop" type="button" data-action="stop-agent">Stop</button>'
             : '<button class="agent-send" type="submit">Send <span aria-hidden="true">↗</span></button>'}
         </form>
+        ${state.agent.conversationId ? `
+          <div class="revision-controls">
+            <button type="button" data-action="show-replay">Show replay</button>
+            <button type="button" data-action="undo-revision" ${state.agent.canUndo ? '' : 'disabled'}>Undo last confirmed change</button>
+          </div>
+          ${state.agent.replay.length ? `<ol class="replay-list">${state.agent.replay.map((item) => `
+            <li><span class="mono">${String(item.sequence).padStart(2, '0')}</span>${escapeHtml(item.event_type.replaceAll('_', ' '))}</li>
+          `).join('')}</ol>` : ''}
+        ` : ''}
         <p class="agent-boundary">Typed actions only · evidence labels preserve source state and unknown dates · cached real products never enter the synthetic ranking.</p>
       </div>
       <aside class="agent-trace" aria-labelledby="trace-title">
@@ -625,6 +830,7 @@ const uploadView = () => `
       </label>
       <span class="or-label mono">OR</span>
       <button class="secondary-button" type="button" data-action="use-sample">Use synthetic sample policy</button>
+      <button class="text-button" type="button" data-action="no-policy">I do not have a policy</button>
     </section>
     <div class="upload-guardrails view-enter">
       <p><span class="mono">01</span> Every detail links back to a page.</p>
@@ -682,20 +888,95 @@ const ocrView = () => `
         </form>
         <div class="ocr-actions ocr-reveal">
           <p><span class="status-dot"></span> Five values match visible page evidence.</p>
-          <button class="primary-button" type="button" data-action="confirm-extraction">Confirm and compare <span aria-hidden="true">→</span></button>
+          <button class="primary-button" type="button" data-action="confirm-extraction" ${state.runtime.status === 'planning' ? 'disabled' : ''}>${state.runtime.status === 'planning' ? 'Running checks…' : 'Confirm and compare <span aria-hidden="true">→</span>'}</button>
+          ${state.runtime.error ? `<p class="form-error" role="alert">${escapeHtml(state.runtime.error)}</p>` : ''}
         </div>
       </section>
     </div>
   </main>
 `
 
+const planPresentation = {
+  'synthetic-lioncity-term-flex': ['LionCity Term Flex', 'Term life', 'S$400,000', 'To age 65', 78],
+  'synthetic-harbour-essential-ci': ['Harbour Essential CI', 'Critical illness', 'S$150,000', '30 years', 64],
+  'synthetic-orchid-income-shield': ['Orchid Income Shield', 'Disability income', 'S$2,000 / month', 'To age 60', 92],
+  'synthetic-meridian-whole-life-plus': ['Meridian Whole Life Plus', 'Whole life', 'S$350,000', 'Whole life', 286],
+}
+
+const comparisonTable = (evaluations) => {
+  const visible = evaluations.map((evaluation) => ({
+    evaluation,
+    details: planPresentation[evaluation.plan_id] || [evaluation.plan_id, 'Unknown', 'Unknown', 'Unknown', 0],
+  }))
+  const row = (label, value) => `<tr><th scope="row">${label}</th>${visible.map(value).join('')}</tr>`
+
+  return `
+    <table class="plan-table">
+      <thead><tr><th scope="col">Compare</th>${visible.map(({ evaluation, details }) => `
+        <th scope="col" class="${evaluation.rank === 1 ? 'recommended' : ''}">
+          ${evaluation.rank === 1 ? '<span>Closest fit</span>' : ''}${escapeHtml(details[0])}
+        </th>
+      `).join('')}</tr></thead>
+      <tbody>
+        ${row('What it covers', ({ details }) => `<td>${escapeHtml(details[1])}</td>`)}
+        ${row('Monthly premium', ({ details }) => `<td><strong>${formatCurrency(details[4])}</strong></td>`)}
+        ${row('Benefit amount', ({ details }) => `<td>${escapeHtml(details[2])}</td>`)}
+        ${row('How long', ({ details }) => `<td>${escapeHtml(details[3])}</td>`)}
+        ${row('Fit score', ({ evaluation }) => `<td>${evaluation.score === null ? 'Not scored' : `${Math.round(evaluation.score * 100)} / 100`}</td>`)}
+        ${row('Trade-offs', ({ evaluation }) => `<td>${escapeHtml(evaluation.trade_offs.join(', ') || 'None recorded')}</td>`)}
+        ${row('Evidence', ({ evaluation }) => `<td><small class="mono">${escapeHtml(evaluation.evidence_ids.join(' · '))}</small></td>`)}
+      </tbody>
+    </table>
+  `
+}
+
+const neutralEvidenceView = () => {
+  if (!state.evidenceComparison.products.length) {
+    return `<p class="comparison-empty">${escapeHtml(state.evidenceComparison.error || 'No eligible evidence comparison is available.')}</p>`
+  }
+  const fieldValue = (product, key) => product.fields.find((field) => field.key === key)?.value || 'Unknown'
+
+  return `
+    <div class="evidence-comparison-grid">
+      ${state.evidenceComparison.products.map((product) => `
+        <article>
+          <span class="mono">${product.synthetic ? 'SYNTHETIC FIXTURE' : 'REAL CACHED EVIDENCE'} · ${escapeHtml(product.eligibility)}</span>
+          <h3>${escapeHtml(product.product)}</h3>
+          <p>${escapeHtml(product.provider)}</p>
+          <dl>
+            <div><dt>Benefit</dt><dd>${escapeHtml(fieldValue(product, 'benefit'))}</dd></div>
+            <div><dt>Premium</dt><dd>${escapeHtml(fieldValue(product, 'premium'))}</dd></div>
+          </dl>
+          <details>
+            <summary>Inspect evidence lineage</summary>
+            <p class="mono">${escapeHtml(product.fields.flatMap((field) => field.evidence_ids).join(' · '))}</p>
+          </details>
+        </article>
+      `).join('')}
+    </div>
+    <p class="comparison-warning">${escapeHtml(state.evidenceComparison.warnings.join(' '))}</p>
+  `
+}
+
 const comparisonView = () => {
-  const annualIncome = Number(state.profile.income || 4200) * 12
-  const deathTarget = annualIncome * 9
-  const ciTarget = annualIncome * 4
-  const deathGap = Math.max(0, deathTarget - 100000)
-  const ciGap = Math.max(0, ciTarget - 50000)
+  const recommendation = state.runtime.recommendation
+  const gapByType = Object.fromEntries((recommendation?.gaps || []).map((gap) => [gap.gap_type, gap]))
+  const deathGap = gapByType.death?.gap_amount || 0
+  const ciGap = gapByType.critical_illness?.gap_amount || 0
   const criticalIllnessOnly = state.agent.comparisonFilter === 'critical-illness'
+  const eligible = (recommendation?.evaluations || [])
+    .filter((evaluation) => evaluation.eligible)
+    .sort((left, right) => left.rank - right.rank)
+    .filter((evaluation) => (
+      !criticalIllnessOnly || planPresentation[evaluation.plan_id]?.[1] === 'Critical illness'
+    ))
+  const excluded = (recommendation?.evaluations || []).find((evaluation) => !evaluation.eligible)
+  const closest = eligible[0]
+  const closestName = planPresentation[closest?.plan_id]?.[0] || 'No eligible plan'
+  const closestScore = closest?.score === null || closest?.score === undefined
+    ? 'Not scored'
+    : `${Math.round(closest.score * 100)} / 100`
+  const hasCurrentPolicy = state.runtime.profile?.data.has_current_policy.value
 
   return `
     <main class="comparison-screen" data-screen="comparison">
@@ -703,11 +984,11 @@ const comparisonView = () => {
       <section class="comparison-lead view-enter">
         <div>
           <p class="eyebrow">Comparison ready for ${escapeHtml(state.profile.name || 'you')}</p>
-          <h1 class="comparison-title screen-title" tabindex="-1">Your current plan covers part of the basics.</h1>
+          <h1 class="comparison-title screen-title" tabindex="-1">${hasCurrentPolicy ? 'Your current plan covers part of the basics.' : 'Start with the largest known protection gaps.'}</h1>
         </div>
         <div class="comparison-meta">
           <span class="synthetic-badge">Synthetic plan data</span>
-          <span class="mono">PROFILE V1 · RULESET 2026.08</span>
+          <span class="mono">PROFILE V${state.runtime.profile?.version || 1} · RULESET ${escapeHtml(recommendation?.ruleset_version || 'UNAVAILABLE')}</span>
         </div>
       </section>
 
@@ -715,22 +996,22 @@ const comparisonView = () => {
         <div class="gap-intro">
           <span class="section-index mono">01 · CALCULATED GAPS</span>
           <h2 id="gap-title">What may still be missing</h2>
-          <p>MoneySense figures are a guide, not a target for everyone.</p>
+          <p>Draft deterministic formulation; independent policy review is still pending.</p>
         </div>
         <div class="gap-stat">
           <span>Death or permanent disability</span>
           <strong class="mono">${formatCurrency(deathGap)}</strong>
-          <small>MoneySense guide: 9× annual income</small>
+          <small>${escapeHtml(gapByType.death?.reason_code || 'No calculation available')}</small>
         </div>
         <div class="gap-stat">
           <span>Critical illness</span>
           <strong class="mono">${formatCurrency(ciGap)}</strong>
-          <small>MoneySense guide: 4× annual income</small>
+          <small>${escapeHtml(gapByType.critical_illness?.reason_code || 'No calculation available')}</small>
         </div>
         <div class="gap-stat is-unknown">
-          <span>Income if you cannot work</span>
+          <span>Assumptions still active</span>
           <strong>Unknown</strong>
-          <small>work benefit details not provided</small>
+          <small>${escapeHtml(recommendation?.assumptions.join(', ') || 'none')}</small>
         </div>
       </section>
 
@@ -746,41 +1027,34 @@ const comparisonView = () => {
           </div>
         </div>
         <div class="table-wrap" tabindex="0" aria-label="Scrollable plan comparison table">
-          <table class="plan-table${criticalIllnessOnly ? ' is-ci-filtered' : ''}">
-            <thead>
-              <tr>
-                <th scope="col">Compare</th>
-                <th scope="col" class="recommended"><span>Closest fit</span>LionCity Term Flex</th>
-                <th scope="col">Harbour Essential CI</th>
-                <th scope="col">Orchid Income Shield</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><th scope="row">What it covers</th><td>Death + permanent disability</td><td>Critical illness</td><td>Income if you cannot work</td></tr>
-              <tr><th scope="row">Monthly premium</th><td><strong>S$78</strong></td><td><strong>S$64</strong></td><td><strong>S$92</strong></td></tr>
-              <tr><th scope="row">Benefit amount</th><td>S$400,000</td><td>S$150,000</td><td>S$2,000 / month</td></tr>
-              <tr><th scope="row">How long</th><td>To age 65</td><td>30 years</td><td>To age 60</td></tr>
-              <tr><th scope="row">Main downside</th><td>Does not fill the full gap</td><td>No death or disability payout</td><td>90-day wait before payouts</td></tr>
-              <tr><th scope="row">Key limit</th><td>Approval and price depend on health history</td><td>Early-stage illness not included</td><td>Claim test changes after 24 months</td></tr>
-              <tr><th scope="row">Evidence</th><td><a href="https://www.moneysense.gov.sg/life-insurance/" target="_blank" rel="noreferrer">Source notes ↗</a><br /><small class="mono">SYN-LTF-01 · 25 AUG 2026</small></td><td><a href="https://www.moneysense.gov.sg/insurance-basics/" target="_blank" rel="noreferrer">Source notes ↗</a><br /><small class="mono">SYN-HEC-02 · 25 AUG 2026</small></td><td><a href="https://www.moneysense.gov.sg/insurance-basics/" target="_blank" rel="noreferrer">Source notes ↗</a><br /><small class="mono">SYN-OIS-03 · 25 AUG 2026</small></td></tr>
-            </tbody>
-          </table>
+          ${comparisonTable(eligible)}
         </div>
 
         <div class="reasoning-drawers">
           <details id="ranking-reason" tabindex="-1" open>
-            <summary><span><b>Why LionCity Term Flex ranks first</b><small>Fit score 82 / 100 · synthetic</small></span><i aria-hidden="true">+</i></summary>
-            <div class="drawer-content"><p>It covers the biggest known gap, stays within budget and is protection-only. It still does not fill the full MoneySense guide amount.</p></div>
+            <summary><span><b>Why ${escapeHtml(closestName)} ranks first</b><small>Fit score ${closestScore} · synthetic</small></span><i aria-hidden="true">+</i></summary>
+            <div class="drawer-content"><p>${escapeHtml(closest?.reason_codes.join(', ') || 'No eligible plan was returned.')}</p></div>
           </details>
           <details id="ranking-assumptions" tabindex="-1">
-            <summary><span><b>What the ranking does not know</b><small>Three assumptions remain</small></span><i aria-hidden="true">+</i></summary>
-            <div class="drawer-content"><p>Your work cover, existing illness add-on and insurance company approval are still unknown. Check these before deciding.</p></div>
+            <summary><span><b>What the ranking does not know</b><small>${recommendation?.assumptions.length || 0} assumptions remain</small></span><i aria-hidden="true">+</i></summary>
+            <div class="drawer-content"><p>${escapeHtml(recommendation?.assumptions.join(' ') || 'No assumptions recorded.')}</p></div>
           </details>
           <details>
-            <summary><span><b>Excluded synthetic option</b><small>Meridian Whole Life Plus · over budget</small></span><i aria-hidden="true">+</i></summary>
-            <div class="drawer-content"><p>It costs S$286 a month, above your S$${state.profile.budget} budget. It also includes savings features you did not ask for.</p></div>
+            <summary><span><b>Excluded synthetic option</b><small>${escapeHtml(planPresentation[excluded?.plan_id]?.[0] || 'None')} · deterministic gate</small></span><i aria-hidden="true">+</i></summary>
+            <div class="drawer-content"><p>${escapeHtml(excluded?.exclusions.join(', ') || 'No plan was excluded.')}</p></div>
           </details>
         </div>
+      </section>
+
+      <section class="evidence-comparison-section" aria-labelledby="evidence-comparison-title">
+        <div class="comparison-section-heading">
+          <div>
+            <span class="section-index mono">03 · NEUTRAL EVIDENCE VIEW</span>
+            <h2 id="evidence-comparison-title">Compare product facts without a winner.</h2>
+          </div>
+          <p>This separate Phase 3B view uses labelled synthetic evidence. It cannot alter the ranked recommendation.</p>
+        </div>
+        ${neutralEvidenceView()}
       </section>
 
       ${agentView()}
@@ -874,7 +1148,12 @@ async function askAgent(message) {
 
   try {
     if (!state.agent.conversationId) {
-      const conversation = await createConversation(state.agent.activeRevisionId, controller.signal)
+      const conversation = await createConversation(
+        state.agent.activeRevisionId,
+        state.runtime.profile,
+        state.runtime.recommendation,
+        controller.signal,
+      )
       state.agent.conversationId = conversation.conversation_id
       state.agent.suggestedPrompts = conversation.suggested_prompts
     }
@@ -895,6 +1174,7 @@ async function askAgent(message) {
     })
     state.agent.actions.push(...response.actions)
     state.agent.status = response.state
+    state.agent.pendingProposal = response.proposal
     applyAgentActions(response.actions)
   } catch (error) {
     if (error.name === 'AbortError') {
@@ -910,6 +1190,72 @@ async function askAgent(message) {
     state.agent.abortController = null
     render({ focus: false, preserveScroll: true })
   }
+}
+
+async function decideAgentProposal(proposalId, decision) {
+  if (!proposalId || !state.agent.conversationId || state.agent.status === 'planning') return
+  state.agent.status = 'planning'
+  state.agent.error = ''
+  render({ focus: false, preserveScroll: true })
+
+  try {
+    const response = await decideProposal(
+      state.agent.conversationId,
+      proposalId,
+      decision,
+      {
+        client_request_id: createClientId(),
+        expected_revision_id: state.agent.activeRevisionId,
+      },
+    )
+    state.agent.pendingProposal = null
+    state.agent.status = response.state
+    if (response.revision) {
+      state.agent.activeRevisionId = response.active_revision_id
+      state.agent.latestDelta = response.revision.delta
+      state.agent.canUndo = true
+      state.runtime.profile = response.revision.profile
+      state.runtime.recommendation = response.revision.recommendation
+      state.profile.budget = response.revision.profile.data.monthly_budget.value
+    }
+  } catch (error) {
+    state.agent.status = 'failed'
+    state.agent.error = error instanceof ApiError ? error.message : 'The proposal decision failed.'
+  }
+  render({ focus: false, preserveScroll: true })
+}
+
+async function showReplay() {
+  if (!state.agent.conversationId) return
+  try {
+    const replay = await fetchReplay(state.agent.conversationId)
+    state.agent.replay = replay.events
+    state.agent.error = ''
+  } catch (error) {
+    state.agent.error = error instanceof ApiError ? error.message : 'Replay is unavailable.'
+  }
+  render({ focus: false, preserveScroll: true })
+}
+
+async function undoAgentRevision() {
+  if (!state.agent.conversationId || !state.agent.canUndo) return
+  try {
+    const response = await undoRevision(state.agent.conversationId, {
+      client_request_id: createClientId(),
+      expected_revision_id: state.agent.activeRevisionId,
+    })
+    state.agent.activeRevisionId = response.active_revision_id
+    state.agent.latestDelta = response.restored_revision.delta
+    state.agent.canUndo = false
+    state.agent.status = 'completed'
+    state.runtime.profile = response.restored_revision.profile
+    state.runtime.recommendation = response.restored_revision.recommendation
+    state.profile.budget = response.restored_revision.profile.data.monthly_budget.value
+  } catch (error) {
+    state.agent.status = 'failed'
+    state.agent.error = error instanceof ApiError ? error.message : 'The revision could not be undone.'
+  }
+  render({ focus: false, preserveScroll: true })
 }
 
 function navigate(view, direction = 'forward', keyboard = false) {
@@ -1055,7 +1401,12 @@ app.addEventListener('click', (event) => {
     state.fileName = 'Inherited_Policy_Sample.pdf'
     navigate('ocr')
   }
-  if (action === 'confirm-extraction') navigate('comparison')
+  if (action === 'no-policy') void prepareComparison(false)
+  if (action === 'confirm-extraction') void prepareComparison(true)
+  if (action === 'confirm-proposal') void decideAgentProposal(control.dataset.proposalId, 'confirm')
+  if (action === 'cancel-proposal') void decideAgentProposal(control.dataset.proposalId, 'cancel')
+  if (action === 'show-replay') void showReplay()
+  if (action === 'undo-revision') void undoAgentRevision()
   if (action === 'clear-agent-filter') {
     state.agent.comparisonFilter = 'all'
     state.agent.pendingFocus = 'plan-comparison'
@@ -1071,6 +1422,16 @@ app.addEventListener('click', (event) => {
     state.agent.messages = []
     state.agent.actions = []
     state.agent.comparisonFilter = 'all'
+    state.agent.pendingProposal = null
+    state.agent.latestDelta = null
+    state.agent.replay = []
+    state.agent.canUndo = false
+    state.runtime.status = 'idle'
+    state.runtime.error = ''
+    state.runtime.profile = null
+    state.runtime.extraction = null
+    state.runtime.recommendation = null
+    state.evidenceComparison = { status: 'idle', error: '', products: [], warnings: [] }
     navigate('intro')
   }
 })

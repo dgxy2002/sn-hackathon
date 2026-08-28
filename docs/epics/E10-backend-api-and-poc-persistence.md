@@ -40,18 +40,20 @@ E10 owns transport, schema validation, repositories, and common errors. It does 
 ## Definition of done
 
 - [x] A documented command starts the backend and `GET /health` and `GET /v1/capabilities` report version and adapter modes.
-- [ ] Docker Compose starts the API with healthy PostgreSQL/pgvector and optional local object-store dependencies.
+- [x] Docker Compose starts the API with healthy PostgreSQL/pgvector and optional local object-store dependencies.
 - [x] `.env.example` documents `APP_ENV`, `DATABASE_URL`, object-store settings, `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`, provider modes, and scrape freshness settings without real secrets.
-- [ ] Profile, extraction, evidence-search, recommendation, invocation, conversation, proposal-confirmation, summary-revision, undo, and run-inspection routes publish versioned schemas and typed errors.
+- [x] Profile, extraction, evidence-search, recommendation, invocation, conversation, proposal-confirmation, summary-revision, undo, and run-inspection routes publish versioned schemas and typed errors.
 - [x] `POST /v1/evidence/search` returns the same read-only contract from Supabase and fixture adapters, including source approval, evidence state, distinct date fields, provenance, and explicit no-evidence outcomes.
-- [ ] `POST /v1/evidence/compare` returns a neutral comparison contract for selected eligible products and proves that no profile, E07 catalogue, recommendation, or revision state changed.
-- [ ] Complete, incomplete, invalid, no-evidence, and dependency-failure fixtures pass API contract tests.
-- [ ] Anonymous synthetic sessions can retain profile versions, extraction corrections, recommendation results, conversations, action traces, summary revisions, and run events for replay and undo.
-- [ ] Repeated mutating requests follow documented idempotency rules and do not create duplicate active records.
+- [x] `POST /v1/evidence/compare` returns a neutral comparison contract for selected eligible products and proves that no profile, E07 catalogue, recommendation, or revision state changed.
+- [x] Complete, incomplete, invalid, no-evidence, and dependency-failure fixtures pass API contract tests.
+- [x] Anonymous synthetic sessions can retain profile versions, extraction corrections, recommendation results, conversations, action traces, summary revisions, and run events for replay and undo.
+- [x] Repeated mutating requests follow documented idempotency rules and do not create duplicate active records.
 - [ ] Uploaded document bytes are deleted after extraction by default and the POC stores no real customer data.
-- [ ] The frontend can complete the normal fixture scenario through the API rather than embedded view data.
+- [x] The frontend can complete the normal fixture scenario through the API rather than embedded view data.
 - [ ] The AWS mapping injects secrets through Secrets Manager and swaps only endpoints and adapters for ECS, RDS, and S3.
 - [x] The API image exposes health checks, handles termination, logs to stdout/stderr, and runs as non-root where practical.
+
+**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md). Object storage remains optional and unconfigured; AWS adapter deployment remains open.
 
 ## POC boundary
 

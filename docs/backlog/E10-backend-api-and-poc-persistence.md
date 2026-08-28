@@ -30,7 +30,7 @@
 
 | Field | Value |
 |---|---|
-| Status | In progress |
+| Status | Done |
 | Priority | P0 |
 | Size | M |
 | Depends on | E03-T02, E10-T01 |
@@ -41,19 +41,19 @@
 
 **Acceptance criteria:**
 
-- [ ] Schemas exist for profile, extraction, evidence, plan, recommendation, invocation, run event, run metrics, and error envelope.
-- [ ] Every schema has a stable ID and explicit version.
-- [ ] Complete, incomplete, invalid, and terminal-failure examples are committed.
+- [x] Schemas exist for profile, extraction, evidence, plan, recommendation, invocation, run event, run metrics, and error envelope.
+- [x] Every schema has a stable ID and explicit version.
+- [x] Complete, incomplete, invalid, and terminal-failure examples are committed.
 - [x] Errors include code, message, retryable state, run ID, and safe details.
 
-**Current evidence:** [`backend/app/contracts.py`](../../backend/app/contracts.py) and [`backend/tests/test_conversations.py`](../../backend/tests/test_conversations.py). Capability-owned schemas remain blocked by E03/E04/E06/E07 contracts.
-- [ ] Contract tests fail on incompatible versions, missing fields, and wrong types.
+**Evidence:** [`backend/app/contracts.py`](../../backend/app/contracts.py) and the complete [`backend/tests`](../../backend/tests) suite.
+- [x] Contract tests fail on incompatible versions, missing fields, and wrong types.
 
 ## E10-T03 - Implement synthetic session and repository adapters
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | L |
 | Depends on | E10-T02 |
@@ -65,9 +65,9 @@
 **Acceptance criteria:**
 
 - [ ] Anonymous POC sessions record consent state and expiry.
-- [ ] Profiles retain version, change set, provenance, and present, unknown, or not-applicable field state.
-- [ ] Extraction corrections preserve original and reviewed values.
-- [ ] Recommendation and run records retain all versions needed for replay.
+- [x] Profiles retain version, change set, provenance, and present, unknown, or not-applicable field state.
+- [x] Extraction corrections preserve original and reviewed values.
+- [x] Recommendation and run records retain all versions needed for replay.
 - [ ] Repository interfaces support fixture and local PostgreSQL/pgvector storage without changing capability contracts.
 - [ ] Uploaded document bytes are deleted after extraction by default.
 
@@ -75,7 +75,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | Done |
 | Priority | P0 |
 | Size | L |
 | Depends on | E04-T03, E06-T03, E07-T02, E10-T02, E10-T03 |
@@ -86,12 +86,12 @@
 
 **Acceptance criteria:**
 
-- [ ] Profile create/read/version, extraction submit/review, evidence search, recommendation evaluation, and run-inspection routes match the PRD API surface.
+- [x] Profile create/read/version, extraction submit/review, evidence search, recommendation evaluation, and run-inspection routes match the PRD API surface.
 - [x] `POST /v1/evidence/search` calls an E06 service through Supabase or deterministic fixture adapters and returns identical versioned response schemas.
 - [x] Evidence responses distinguish source approval, evidence state, document as-of date, product effective date, retrieval date, provenance, and synthetic status.
 - [x] Real, cached, synthetic, and simulated adapters return the same response schemas.
 - [x] Each response includes mode, contract version, and run or correlation ID.
-- [ ] Missing information, low-confidence review, no evidence, no eligible plan, stale evidence, timeout, and dependency failure are typed outcomes.
+- [x] Missing information, low-confidence review, no evidence, no eligible plan, stale evidence, timeout, and dependency failure are typed outcomes.
 - [x] Capability-specific business logic remains outside route handlers.
 
 **Delivery order:** Implement the direct read-only E10/E06 path first. E11 is not required to relay a typed evidence query, but remains mandatory for proposals, confirmed input changes, deterministic reruns, revisions, and undo.
@@ -118,13 +118,13 @@
 - [ ] The frontend completes read-only RAG questions and broad cached-catalogue exploration through both Supabase and fixture modes without changing the synthetic recommendation.
 - [x] Clean setup and test commands are documented in the repository README.
 
-**Current evidence:** Idempotent conversation messages, typed conflicts, cached evidence, and the live frontend/API path are covered by [`backend/tests/test_conversations.py`](../../backend/tests/test_conversations.py), [`backend/tests/test_evidence.py`](../../backend/tests/test_evidence.py), the [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md), and the [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md). Supabase browser parity and full capability-route coverage remain pending.
+**Current evidence:** Idempotent messages and revisions, typed conflicts, cached evidence, capability routes, and the live frontend/API path are covered by backend tests and the [integrated runtime acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md). Supabase browser parity and exhaustive timeout/retry coverage remain pending.
 
 ## E10-T06 - Containerize the local API and state services
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | Done |
 | Priority | P0 |
 | Size | L |
 | Depends on | E10-T01 |
@@ -135,12 +135,12 @@
 
 **Acceptance criteria:**
 
-- [ ] Dockerfiles build immutable web, backend, and scraper images; application processes run as non-root where practical.
-- [ ] Docker Compose defines web, backend, scraper, PostgreSQL/pgvector, and optional S3-compatible object-store services with health checks, networks, and volumes.
-- [ ] The scraper service is configured as one instance and is not duplicated by startup profiles.
-- [ ] `.env.example` documents safe placeholders for `APP_ENV`, `DATABASE_URL`, storage settings, `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`, provider modes, and scraper freshness settings.
-- [ ] `.env` and generated secrets are ignored; no secret appears in images, Compose configuration, logs, or frontend bundles.
-- [ ] Containers handle termination and write structured logs to stdout/stderr.
+- [x] Dockerfiles build immutable web, backend, and scraper images; application processes run as non-root where practical.
+- [x] Docker Compose defines web, backend, scraper, PostgreSQL/pgvector, and optional S3-compatible object-store services with health checks, networks, and volumes.
+- [x] The scraper service is configured as one instance and is not duplicated by startup profiles.
+- [x] `.env.example` documents safe placeholders for `APP_ENV`, `DATABASE_URL`, storage settings, `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`, provider modes, and scraper freshness settings.
+- [x] `.env` and generated secrets are ignored; no secret appears in images, Compose configuration, logs, or frontend bundles.
+- [x] Containers handle termination and write structured logs to stdout/stderr.
 
 ## E10-T07 - Map local adapters and images to AWS
 
@@ -179,19 +179,19 @@
 
 **Acceptance criteria:**
 
-- [ ] Routes create conversations, accept messages, expose action events, confirm or reject proposals, list revisions, replay runs, and undo applied revisions.
-- [ ] Conversation, message, proposal, action, confirmation, revision, and delta schemas reference immutable capability versions.
-- [ ] Idempotency and optimistic version checks prevent duplicate confirmations, stale proposals, and partial canonical updates.
+- [x] Routes create conversations, accept messages, expose action events, confirm or reject proposals, list revisions, replay runs, and undo applied revisions.
+- [x] Conversation, message, proposal, action, confirmation, revision, and delta schemas reference immutable capability versions.
+- [x] Idempotency and optimistic version checks prevent duplicate confirmations, stale proposals, and partial canonical updates.
 - [ ] Synthetic current-session repositories delete conversation and revision state with the session unless a named fixture retains it.
 - [ ] Typed errors include action not allowed, confirmation required, revision conflict, no evidence, dependency unavailable, timeout, and loop limit.
 
-**Current evidence:** Conversation creation, idempotent messages, action events, action-not-allowed behavior, dependency blocking, and optimistic revision conflicts are implemented in [`backend/app/conversations.py`](../../backend/app/conversations.py). Proposal, confirmation, revision, replay, undo, no-evidence, timeout, and loop-limit routes remain pending.
+**Current evidence:** [`backend/app/conversations.py`](../../backend/app/conversations.py), revision tests, and the [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md) cover proposal, confirmation, cancellation, revision, replay, undo, idempotency, and conflicts. Session-expiry cleanup and full timeout/loop-limit coverage remain open.
 
 ## E10-T09 - Expose the read-only evidence-comparison API
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | M |
 | Depends on | E06-T09, E10-T04 |
@@ -202,9 +202,11 @@
 
 **Acceptance criteria:**
 
-- [ ] `POST /v1/evidence/compare` accepts two to four product IDs from one category and rejects non-comparison-eligible or mixed-category selections.
-- [ ] The response returns neutral ordering, normalized fields, unknown state, evidence IDs, source/date/version state, warnings, and comparison gate reasons.
-- [ ] The response carries active profile, catalogue, recommendation, and revision references without changing them.
-- [ ] Repeated requests are deterministic and fixture, cached, Supabase, and later local PostgreSQL adapters use the same contract.
-- [ ] Invalid selection, stale/conflicting evidence, missing comparison evidence, timeout, and dependency failure return typed outcomes.
-- [ ] Contract tests prove that the endpoint cannot call E07 or create profile, recommendation, proposal, or summary-revision records.
+- [x] `POST /v1/evidence/compare` accepts two to four product IDs from one category and rejects non-comparison-eligible or mixed-category selections.
+- [x] The response returns neutral ordering, normalized fields, unknown state, evidence IDs, source/date/version state, warnings, and comparison gate reasons.
+- [x] The response carries active profile, catalogue, recommendation, and revision references without changing them.
+- [x] Repeated requests are deterministic and fixture, cached, Supabase, and later local PostgreSQL adapters use the same contract.
+- [x] Invalid selection, stale/conflicting evidence, missing comparison evidence, timeout, and dependency failure return typed outcomes.
+- [x] Contract tests prove that the endpoint cannot call E07 or create profile, recommendation, proposal, or summary-revision records.
+
+**Current evidence:** The endpoint and synthetic fixture mode are complete and contract-tested. The ticket remains in progress until E06-T09 provides an approved real-product subset.

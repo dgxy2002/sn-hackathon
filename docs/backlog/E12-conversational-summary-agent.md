@@ -18,11 +18,11 @@
 
 **Acceptance criteria:**
 
-- [ ] Schemas define conversation, message, intent, tool plan, action event, proposal, confirmation, summary revision, delta, and undo lineage.
-- [ ] Read, presentation, decision-input, extraction-field, and deterministic-result actions have explicit confirmation and ownership rules.
+- [x] Schemas define conversation, message, intent, tool plan, action event, proposal, confirmation, summary revision, delta, and undo lineage.
+- [x] Read, presentation, decision-input, extraction-field, and deterministic-result actions have explicit confirmation and ownership rules.
 - [x] Supported summary regions and typed tool targets are allowlisted.
 
-**Current evidence:** [`backend/app/contracts.py`](../../backend/app/contracts.py), [`backend/app/conversations.py`](../../backend/app/conversations.py), and the frontend action map in [`frontend/src/main.js`](../../frontend/src/main.js). Proposal, confirmation, revision, delta, undo, and cross-owner acceptance remain pending.
+**Current evidence:** [`backend/app/contracts.py`](../../backend/app/contracts.py), [`backend/app/conversations.py`](../../backend/app/conversations.py), and the frontend action map in [`frontend/src/main.js`](../../frontend/src/main.js). Cross-owner acceptance remains pending.
 - [ ] Idle, planning, acting, waiting-for-confirmation, completed, unsupported, cancelled, and failed states are defined.
 - [ ] E03, E04, E06, E07, E10, and E11 owners accept their contract boundaries.
 
@@ -30,7 +30,7 @@
 
 | Field | Value |
 |---|---|
-| Status | In progress |
+| Status | Done |
 | Priority | P1 |
 | Size | L |
 | Depends on | E01-T05, E12-T01 |
@@ -45,9 +45,9 @@
 - [x] Expandable action items show tool, target, status, evidence count, and affected summary region without exposing hidden model reasoning.
 - [x] The page visibly focuses, expands, sorts, filters, or adds temporary comparison content as presentation actions complete.
 - [x] New and changed regions have stable layout, visible focus, reduced-motion behavior, and screen-reader announcements.
-- [ ] Loading, confirmation, unsupported, failure, completed, replay, and undo controls are keyboard operable.
+- [x] Loading, confirmation, unsupported, failure, completed, replay, and undo controls are keyboard operable.
 
-**Current evidence:** [`frontend/src/api.js`](../../frontend/src/api.js), [`frontend/src/main.js`](../../frontend/src/main.js), [`frontend/src/style.css`](../../frontend/src/style.css), and the [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md). Confirmation, replay, and undo controls remain pending.
+**Evidence:** [`frontend/src/api.js`](../../frontend/src/api.js), [`frontend/src/main.js`](../../frontend/src/main.js), [`frontend/src/style.css`](../../frontend/src/style.css), and the [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md).
 
 ## E12-T03 - Integrate contextual answers and plan exploration
 
@@ -64,13 +64,13 @@
 
 **Acceptance criteria:**
 
-- [ ] Follow-up questions retain the active profile, recommendation, evidence, and prior-turn context within the session cap.
+- [x] Follow-up questions retain the active profile, recommendation, evidence, and prior-turn context within the session cap.
 - [x] Search is restricted to E06 cached catalogue records and returns approval, unverified, stale, unknown, and no-evidence states explicitly.
 - [ ] Alternative plans retain eligibility, evidence spans, source, document as-of date, product effective date, retrieval date, freshness, and synthetic labels.
 - [x] Real-product alternatives remain read-only and can be explored without entering or changing E07 synthetic ranking.
 - [x] Every factual answer links to evidence or is visibly labelled synthetic, unknown, or unsupported.
 
-**Current evidence:** [`backend/app/evidence.py`](../../backend/app/evidence.py), [`backend/app/conversations.py`](../../backend/app/conversations.py), [`frontend/src/main.js`](../../frontend/src/main.js), and the [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md). Structured affordability and eligibility filters, temporary comparison columns, Supabase browser parity, and consequential revision paths remain pending.
+**Current evidence:** [`backend/app/evidence.py`](../../backend/app/evidence.py), [`backend/app/conversations.py`](../../backend/app/conversations.py), [`frontend/src/main.js`](../../frontend/src/main.js), and the [integrated runtime acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md). Structured affordability and eligibility filters, real-product comparison selection, and Supabase browser parity remain pending.
 
 **Delivery order:** Read-only questions and catalogue exploration call the typed E10/E06 evidence service directly. E11 remains required for the consequential proposal, confirmation, deterministic-rerun, revision, replay, and undo path in E12-T04 and E12-T05.
 
@@ -78,7 +78,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | L |
 | Depends on | E03-T07, E04-T06, E07-T07, E10-T08, E11-T08, E12-T02 |
@@ -90,16 +90,16 @@
 **Acceptance criteria:**
 
 - [ ] Profile, canonical comparison, and extracted-field proposals identify old, proposed, unknown, and unchanged values.
-- [ ] The user can confirm or cancel before any canonical input version changes.
-- [ ] Confirmation creates versioned inputs and invokes E07 rather than accepting model-authored calculations or rankings.
-- [ ] The page updates all affected summary regions from one validated revision and highlights before/after deltas.
-- [ ] Stale proposals, conflicts, validation failures, and interrupted runs cannot partially update the canonical summary.
+- [x] The user can confirm or cancel before any canonical input version changes.
+- [x] Confirmation creates versioned inputs and invokes E07 rather than accepting model-authored calculations or rankings.
+- [x] The page updates all affected summary regions from one validated revision and highlights before/after deltas.
+- [x] Stale proposals, conflicts, validation failures, and interrupted runs cannot partially update the canonical summary.
 
 ## E12-T05 - Add replay, undo, and feature evaluation
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | M |
 | Depends on | E08-T09, E12-T03, E12-T04 |
@@ -110,8 +110,8 @@
 
 **Acceptance criteria:**
 
-- [ ] Applied summary revisions expose a clear undo action and revision lineage.
-- [ ] Undo restores or deterministically recalculates the prior coherent profile, extraction, recommendation, and summary state.
+- [x] Applied summary revisions expose a clear undo action and revision lineage.
+- [x] Undo restores or deterministically recalculates the prior coherent profile, extraction, recommendation, and summary state.
 - [ ] A replay view shows ordered intents, tools, evidence, confirmations, reruns, revisions, metrics, and terminal outcome.
 - [ ] Predeclared scenarios cover Q&A, plan exploration, presentation change, confirmed and cancelled changes, extraction correction, undo, stale evidence, invalid action, dependency failure, and loop cap.
 - [ ] Conversation and revision state is removed with the POC session unless retained as a named synthetic fixture.

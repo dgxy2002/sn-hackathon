@@ -42,14 +42,68 @@ export const createClientId = () => {
   return `client-${Date.now()}-${Math.random().toString(16).slice(2)}`
 }
 
-export const createConversation = (activeRevisionId, signal) => request('/v1/conversations', {
+export const submitExtraction = (fixtureId, signal) => request('/v1/extractions', {
   method: 'POST',
-  body: JSON.stringify({ active_revision_id: activeRevisionId }),
+  body: JSON.stringify({ fixture_id: fixtureId }),
+  signal,
+})
+
+export const reviewExtraction = (extractionId, body, signal) => request(
+  `/v1/extractions/${encodeURIComponent(extractionId)}/review`,
+  {
+    method: 'POST',
+    body: JSON.stringify(body),
+    signal,
+  },
+)
+
+export const invokeCoverCheck = (body, signal) => request('/v1/invocations', {
+  method: 'POST',
+  body: JSON.stringify(body),
+  signal,
+})
+
+export const compareEvidence = (body, signal) => request('/v1/evidence/compare', {
+  method: 'POST',
+  body: JSON.stringify(body),
+  signal,
+})
+
+export const createConversation = (activeRevisionId, profile, recommendation, signal) => request('/v1/conversations', {
+  method: 'POST',
+  body: JSON.stringify({
+    active_revision_id: activeRevisionId,
+    profile,
+    recommendation,
+  }),
   signal,
 })
 
 export const sendConversationMessage = (conversationId, body, signal) => request(
   `/v1/conversations/${encodeURIComponent(conversationId)}/messages`,
+  {
+    method: 'POST',
+    body: JSON.stringify(body),
+    signal,
+  },
+)
+
+export const decideProposal = (conversationId, proposalId, decision, body, signal) => request(
+  `/v1/conversations/${encodeURIComponent(conversationId)}/proposals/${encodeURIComponent(proposalId)}/${decision}`,
+  {
+    method: 'POST',
+    body: JSON.stringify(body),
+    signal,
+  },
+)
+
+export const fetchReplay = (conversationId, signal) => request(
+  `/v1/conversations/${encodeURIComponent(conversationId)}/replay`,
+  { signal },
+)
+
+export const undoRevision = (conversationId, body, signal) => request(
+  `/v1/conversations/${encodeURIComponent(conversationId)}/undo`,
   {
     method: 'POST',
     body: JSON.stringify(body),

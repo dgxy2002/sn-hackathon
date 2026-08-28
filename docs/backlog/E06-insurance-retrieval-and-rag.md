@@ -121,7 +121,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | Done |
 | Priority | P1 |
 | Size | L |
 | Depends on | E06-T03, E10-T06 |
@@ -132,19 +132,19 @@
 
 **Acceptance criteria:**
 
-- [ ] PostgreSQL migrations enable pgvector and create versioned product, evidence, chunk, and scrape-log storage.
-- [ ] The backend API queries the Compose database rather than a cloud-only endpoint.
-- [ ] Metadata, filter, and full-text retrieval work when embeddings or an external provider are unavailable.
-- [ ] Health checks report database and index readiness.
-- [ ] Retrieval contract tests pass against both database and fixture adapters.
+- [x] PostgreSQL migrations enable pgvector and create versioned product, evidence, chunk, and scrape-log storage.
+- [x] The backend API queries the Compose database rather than a cloud-only endpoint.
+- [x] Metadata, filter, and full-text retrieval work when embeddings or an external provider are unavailable.
+- [x] Health checks report database and index readiness.
+- [x] Retrieval contract tests pass against both database and fixture adapters.
 
-**Delivery note:** The first read-only website integration may use the existing Supabase/PostgREST implementation behind E10's evidence adapter plus a deterministic fixture fallback. This temporary delivery path does not complete this ticket or change the approved local PostgreSQL/pgvector target in [`docs/PLAN.md`](../PLAN.md).
+**Evidence:** [`backend/app/evidence.py`](../../backend/app/evidence.py), [`compose.yaml`](../../compose.yaml), and the [integrated runtime acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md), which records a live database dependency and 1,777 local evidence rows.
 
 ## E06-T07 - Document and verify the RDS and S3 migration
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | M |
 | Depends on | E06-T06, E10-T07 |
@@ -182,7 +182,7 @@
 - [ ] Stale, conflicting, missing, and no-evidence outcomes are explicit and cannot become cited facts.
 - [x] Real-product exploration remains read-only and is distinguished from deterministic E07 synthetic recommendations.
 
-**Current evidence:** [`backend/app/evidence.py`](../../backend/app/evidence.py), [`backend/app/contracts.py`](../../backend/app/contracts.py), [`backend/tests/test_evidence.py`](../../backend/tests/test_evidence.py), and the [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md). Affordability and structured eligibility filters, complete source governance, local PostgreSQL parity, and fixed retrieval evaluation remain pending.
+**Current evidence:** [`backend/app/evidence.py`](../../backend/app/evidence.py), [`backend/app/contracts.py`](../../backend/app/contracts.py), [`backend/tests/test_evidence.py`](../../backend/tests/test_evidence.py), and the [integrated runtime acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md). Affordability and structured eligibility filters, complete source governance, and fixed retrieval evaluation remain pending.
 
 ## E06-T09 - Build the comparison-eligible product projection
 
@@ -200,8 +200,10 @@
 **Acceptance criteria:**
 
 - [ ] A pilot subset of at least two products in one category has approved reuse, authoritative URLs, unambiguous identities, and non-stale/non-conflicting evidence state.
-- [ ] Each product records separate searchable, comparison-eligible, and ranking-eligible states plus machine-readable gate reasons.
-- [ ] Comparison fields use stable keys and normalized units for benefits, premiums, eligibility, exclusions, term, and other available facts.
-- [ ] Every populated field resolves to evidence, source, document/version state, and date type; missing fields remain `Unknown`.
-- [ ] Comparison eligibility requires only the approved evidence-mode gates and does not imply ranking eligibility or suitability.
-- [ ] Records outside the pilot subset remain searchable evidence and cannot enter the comparison projection.
+- [x] Each product records separate searchable, comparison-eligible, and ranking-eligible states plus machine-readable gate reasons.
+- [x] Comparison fields use stable keys and normalized units for benefits, premiums, eligibility, exclusions, term, and other available facts.
+- [x] Every populated field resolves to evidence, source, document/version state, and date type; missing fields remain `Unknown`.
+- [x] Comparison eligibility requires only the approved evidence-mode gates and does not imply ranking eligibility or suitability.
+- [x] Records outside the pilot subset remain searchable evidence and cannot enter the comparison projection.
+
+**Current evidence:** The projection and rejection reasons are implemented and contract-tested. The live gate check in the [integrated runtime acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md) confirms that cached products remain blocked; source approval for the first real pilot subset is the remaining acceptance item.

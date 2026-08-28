@@ -1,0 +1,54 @@
+[
+  {
+    "plan_id": "synthetic-lioncity-term-flex",
+    "catalogue_version": "2026.08.1",
+    "name": "LionCity Term Flex",
+    "category": "Term life",
+    "monthly_premium": 78.0,
+    "benefits": [
+      {"benefit_type": "death", "amount": 400000.0, "term_years": 40}
+    ],
+    "preferences": ["protection-only"],
+    "synthetic": true,
+    "evidence_ids": ["SYN-LTF-01"]
+  },
+  {
+    "plan_id": "synthetic-harbour-essential-ci",
+    "catalogue_version": "2026.08.1",
+    "name": "Harbour Essential CI",
+    "category": "Critical illness",
+    "monthly_premium": 64.0,
+    "benefits": [
+      {"benefit_type": "critical_illness", "amount": 150000.0, "term_years": 30}
+    ],
+    "preferences": ["protection-only"],
+    "synthetic": true,
+    "evidence_ids": ["SYN-HEC-02"]
+  },
+  {
+    "plan_id": "synthetic-orchid-income-shield",
+    "catalogue_version": "2026.08.1",
+    "name": "Orchid Income Shield",
+    "category": "Disability income",
+    "monthly_premium": 92.0,
+    "benefits": [
+      {"benefit_type": "disability_income", "amount": 2000.0, "term_years": 35}
+    ],
+    "preferences": ["protection-only"],
+    "synthetic": true,
+    "evidence_ids": ["SYN-OIS-03"]
+  },
+  {
+    "plan_id": "synthetic-meridian-whole-life-plus",
+    "catalogue_version": "2026.08.1",
+    "name": "Meridian Whole Life Plus",
+    "category": "Whole life",
+    "monthly_premium": 286.0,
+    "benefits": [
+      {"benefit_type": "death", "amount": 350000.0, "term_years": 50}
+    ],
+    "preferences": ["savings-linked"],
+    "synthetic": true,
+    "evidence_ids": ["SYN-MWL-04"]
+  }
+]

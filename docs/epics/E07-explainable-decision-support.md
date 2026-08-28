@@ -27,7 +27,7 @@
 
 ## Repository evidence
 
-- [`frontend/src/main.js`](../../frontend/src/main.js) calculates death and critical-illness gaps and renders a static three-plan synthetic comparison.
+- [`backend/app/decision_support.py`](../../backend/app/decision_support.py) calculates deterministic gaps, exclusions, fit, and ranking from versioned fixtures; [`frontend/src/main.js`](../../frontend/src/main.js) renders the returned contract.
 - [`docs/PLAN.md`](../PLAN.md) defines the hybrid decision method, recommendation contract, and reviewed synthetic-profile evaluation.
 
 ## Definition of done
@@ -35,17 +35,19 @@
 - [x] The POC displays calculated gaps, synthetic alternatives, assumptions, and at least one exclusion reason.
 - [ ] A versioned formulation document defines sourced formulas, variables, units, unknown handling, affordability, hard exclusions, duplicate coverage, replacement risk, weighted fit, reason codes, and worked examples.
 - [ ] The formulation has a named reviewer, approval date, and change history; ranking cannot be released without approval.
-- [ ] Plans and rules are data-driven rather than embedded in view markup.
+- [x] Plans and rules are data-driven rather than embedded in view markup.
 - [ ] Hard constraints produce zero violations across at least 20 reviewed synthetic profiles.
 - [ ] At least 90% of top plan categories agree with ground truth written before execution.
 - [ ] Every output includes fit components, trade-offs, missing data, confidence, and evidence IDs.
-- [ ] Insufficient evidence or profile data can return no recommendation.
-- [ ] Existing government, employer, and private coverage is considered without double counting.
-- [ ] Replacement and underwriting risks are flagged without recommending cancellation or surrender.
-- [ ] Every recommendation records the formulation and ruleset versions used.
-- [ ] Confirmed changes rerun the same formulation and return one coherent delta; undo restores or recalculates a complete prior result rather than patching displayed values.
-- [ ] Real-product ranked mode remains disabled until Phase 3B acceptance, all synthetic E07 correctness gates, ranking-eligible product data, predeclared E08 tests, and explicit DEC-004/compliance approval pass.
+- [x] Insufficient evidence or profile data can return no recommendation.
+- [x] Existing government, employer, and private coverage is considered without double counting.
+- [x] Replacement and underwriting risks are flagged without recommending cancellation or surrender.
+- [x] Every recommendation records the formulation and ruleset versions used.
+- [x] Confirmed changes rerun the same formulation and return one coherent delta; undo restores or recalculates a complete prior result rather than patching displayed values.
+- [x] Real-product ranked mode remains disabled until Phase 3B acceptance, all synthetic E07 correctness gates, ranking-eligible product data, predeclared E08 tests, and explicit DEC-004/compliance approval pass.
 - [ ] Once approved for the internal pilot, real-product ranking is deterministic, versioned, independently evaluated, and able to abstain without model-authored repairs.
+
+**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md). The ruleset remains a draft implementation: independent formulation approval and the 20-profile correctness evaluation are still required.
 
 ## POC boundary
 

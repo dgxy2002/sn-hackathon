@@ -39,11 +39,13 @@
 
 **Acceptance criteria:**
 
-- [ ] Plans and rules are separate versioned data fixtures.
-- [ ] Gap and affordability formulas are deterministic.
-- [ ] Budget, duration, preference, and scenario constraints exclude before ranking.
-- [ ] Weighted fit components are returned for eligible plans.
-- [ ] Missing critical data can produce no recommendation.
+- [x] Plans and rules are separate versioned data fixtures.
+- [x] Gap and affordability formulas are deterministic.
+- [x] Budget, duration, preference, and scenario constraints exclude before ranking.
+- [x] Weighted fit components are returned for eligible plans.
+- [x] Missing critical data can produce no recommendation.
+
+**Current evidence:** [`backend/app/decision_support.py`](../../backend/app/decision_support.py), the versioned [`rules.json`](../../backend/fixtures/decision/rules.json) and [`plans.json`](../../backend/fixtures/decision/plans.json), and contract tests. The implementation remains in progress because E07-T06 approval is a completion gate.
 
 ## E07-T03 - Produce grounded explanation contract
 
@@ -61,9 +63,9 @@
 **Acceptance criteria:**
 
 - [ ] The decision contract contains rank, reason codes, exclusions, trade-offs, assumptions, confidence, and evidence IDs.
-- [ ] Explanation generation cannot change rank, eligibility, or numerical values.
-- [ ] Unsupported evidence is omitted or labelled.
-- [ ] The educational boundary and synthetic status remain visible.
+- [x] Explanation generation cannot change rank, eligibility, or numerical values.
+- [x] Unsupported evidence is omitted or labelled.
+- [x] The educational boundary and synthetic status remain visible.
 
 ## E07-T04 - Validate decision correctness on reviewed profiles
 
@@ -144,10 +146,12 @@
 **Acceptance criteria:**
 
 - [ ] The service accepts versioned profile, extraction, catalogue, evidence, formulation, and ruleset references plus an optional prior result.
-- [ ] The same versioned inputs reproduce the same gaps, eligibility, fit, ranking, assumptions, and reason codes.
+- [x] The same versioned inputs reproduce the same gaps, eligibility, fit, ranking, assumptions, and reason codes.
 - [ ] A typed delta identifies changed inputs, calculations, eligibility, ranking, comparison rows, assumptions, citations, and explanation facts.
 - [ ] Insufficient or stale evidence yields focused questions, warnings, or no recommendation rather than inferred values.
-- [ ] Undo recalculates or restores a coherent prior result and never patches individual displayed numbers directly.
+- [x] Undo recalculates or restores a coherent prior result and never patches individual displayed numbers directly.
+
+**Current evidence:** The [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md) verifies deterministic budget rerun and coherent undo. Broader version references and full delta coverage remain open.
 
 ## E07-T08 - Enable the gated real-product ranked pilot
 

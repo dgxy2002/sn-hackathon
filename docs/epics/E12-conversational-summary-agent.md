@@ -42,11 +42,11 @@
 
 - [x] The final summary includes an accessible `Ask CoverCheck` panel with suggested prompts, follow-up context, and visible trust boundaries.
 - [x] The agent answers current-summary questions and explores all cached plans with dated citations, approval/evidence state, freshness status, and explicit unsupported outcomes.
-- [ ] An expandable action trace shows planning, tools, affected page regions, confirmations, deterministic reruns, completion, and failures.
+- [x] An expandable action trace shows planning, tools, affected page regions, confirmations, deterministic reruns, completion, and failures.
 - [x] Presentation-only actions visibly focus or reshape the page without changing canonical decision versions.
 - [ ] Phase 3B presentation tools add or remove only comparison-eligible real products, preserve neutral ordering and cited fields, and leave canonical versions unchanged.
 - [ ] Profile, canonical comparison, and extracted-policy changes show a before/after proposal and cannot apply without confirmation.
-- [ ] Confirmed changes produce versioned inputs, a deterministic E07 rerun, one coherent summary revision, highlighted deltas, and undo.
+- [x] Confirmed changes produce versioned inputs, a deterministic E07 rerun, one coherent summary revision, highlighted deltas, and undo.
 - [x] Model output cannot execute arbitrary code, selectors, coordinates, SQL, unregistered tools, or outside-corpus source searches.
 - [ ] Conversation, action, evidence, confirmation, revision, model, prompt, tool, formulation, and ruleset versions are replayable within the POC session.
 - [ ] Normal Q&A, cached-plan exploration with evidence states, presentation change, profile change, extraction correction, cancellation, undo, stale evidence, no evidence, invalid action, and dependency failure scenarios pass.
@@ -56,4 +56,4 @@
 
 The agent operates only within CoverCheck's typed application capabilities and cached catalogue. Real-product RAG is read-only and cannot enter or alter E07's synthetic ranking; records that are not approved or current remain visibly labelled. The agent cannot browse arbitrary websites, transact, contact advisers, purchase, replace, surrender, or recommend cancelling insurance. Conversation and revision history is disposable with the current synthetic POC session unless retained as a named evaluation fixture.
 
-The [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md) verifies the current read-only catalogue slice. Proposals, confirmed changes, deterministic reruns, replay, and undo remain open.
+The [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md) verifies the read-only catalogue slice. The [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md) verifies budget proposals, confirmation, cancellation, deterministic reruns, replay, and undo. Other profile fields, extraction corrections, real-product Phase 3B tools, and OpenRouter mode remain open.

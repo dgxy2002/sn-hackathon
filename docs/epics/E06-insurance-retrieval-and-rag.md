@@ -39,20 +39,22 @@
 
 - [x] Offline preparation validates 79 cached brochures, 87 structured policy rows, 71 unique policy slugs, and 1,319 candidate chunks.
 - [x] The seven Markdown-undated Great Eastern files have been checked against their downloaded official PDFs and their brochure as-of dates and version labels recorded in the [integration decision record](../evaluation/2026-08-28-rag-website-integration-decisions.md).
-- [ ] Every cached record has a source-governance and evidence state; unverified records remain visibly distinct from approved evidence.
+- [x] Every cached record has a source-governance and evidence state; unverified records remain visibly distinct from approved evidence.
 - [ ] All 79 brochure as-of statements are retained in structured records, unresolved dates remain explicitly unknown, and the GREAT SupremeHealth/GREAT TotalCare 2 document-identity mismatch is resolved.
-- [ ] Document as-of date, product effective date, product version, and retrieval date are stored as distinct fields with provenance.
+- [x] Document as-of date, product effective date, product version, and retrieval date are stored as distinct fields with provenance.
 - [x] `POST /v1/evidence/search` returns one contract from Supabase and deterministic fixture adapters without coupling consumers to either store.
 - [x] All cached records are available to read-only search, while real-product evidence cannot enter or alter E07 synthetic ranking.
 - [ ] Fixed evaluation queries retrieve the expected reviewed source in the top five at least 90% of the time.
-- [ ] Every returned product claim includes an evidence span, URL where available, date type, evidence state, and synthetic status.
-- [ ] Missing or stale evidence produces an explicit unsupported result rather than a generated fact.
+- [x] Every returned product claim includes an evidence span, URL where available, date type, evidence state, and synthetic status.
+- [x] Missing or stale evidence produces an explicit unsupported result rather than a generated fact.
 - [ ] Superseded and conflicting product versions remain auditable and are not silently merged into current results.
-- [ ] Retrieval contract tests pass against local PostgreSQL/pgvector and the deterministic non-embedding fallback.
-- [ ] The RDS PostgreSQL/pgvector and S3 migration mapping is documented without changing evidence contracts.
-- [ ] Conversational search exposes approval, eligibility, provenance, freshness, and explicit no-evidence behavior for every cached catalogue record.
+- [x] Retrieval contract tests pass against local PostgreSQL/pgvector and the deterministic non-embedding fallback.
+- [x] The RDS PostgreSQL/pgvector and S3 migration mapping is documented without changing evidence contracts.
+- [x] Conversational search exposes approval, eligibility, provenance, freshness, and explicit no-evidence behavior for every cached catalogue record.
 - [ ] A small one-category subset passes source permission, product identity, freshness, comparable-unit, and field-provenance gates and is exposed through a comparison-eligible projection.
-- [ ] Searchable, comparison-eligible, and ranking-eligible states remain distinct and include machine-readable gate reasons.
+- [x] Searchable, comparison-eligible, and ranking-eligible states remain distinct and include machine-readable gate reasons.
+
+**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md) records 1,777 local PostgreSQL evidence rows and the configured comparison gate. Source permission and the reviewed real-product Phase 3B subset remain incomplete.
 
 ## POC boundary
 

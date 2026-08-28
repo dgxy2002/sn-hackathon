@@ -53,17 +53,19 @@ stateDiagram-v2
 ## Definition of done
 
 - [ ] Docker Compose starts healthy backend, scraper, database, and configured local object-store services without AWS access.
-- [ ] The invocation contract accepts a versioned request and returns final state, result, ordered events, and run metrics.
-- [ ] Only declared tools execute, every result validates before transition, and raw documents remain outside explanation prompts.
-- [ ] Conversational tool policy validates action schema, target, base version, preconditions, idempotency, confirmation, allowed summary regions, and terminal state.
-- [ ] Model output never executes as page code, selectors, coordinates, SQL, arbitrary URLs, or direct canonical decision values.
+- [x] The invocation contract accepts a versioned request and returns final state, result, ordered events, and run metrics.
+- [x] Only declared tools execute, every result validates before transition, and raw documents remain outside explanation prompts.
+- [x] Conversational tool policy validates action schema, target, base version, preconditions, idempotency, confirmation, allowed summary regions, and terminal state.
+- [x] Model output never executes as page code, selectors, coordinates, SQL, arbitrary URLs, or direct canonical decision values.
 - [ ] Every loop and retry path has a tested cap with `LOOP_LIMIT_REACHED` as a terminal failure.
 - [ ] OpenRouter calls record provider, exact model slug, prompt version, tokens, latency, estimated cost, and outcome.
-- [ ] Explanation uses the immutable E07 decision contract and cannot mutate rank, eligibility, evidence, or numbers.
-- [ ] Live, cached, synthetic, and simulated adapters emit the same contracts and visible mode labels.
+- [x] Explanation uses the immutable E07 decision contract and cannot mutate rank, eligibility, evidence, or numbers.
+- [x] Live, cached, synthetic, and simulated adapters emit the same contracts and visible mode labels.
 - [ ] Exactly one scraper loop runs, retains a database lease, records source freshness, and recovers from bounded failures.
 - [ ] The AWS topology maps images to ECR/ECS, PostgreSQL to RDS, snapshots to S3, secrets to Secrets Manager, and logs/metrics/alarms to CloudWatch.
 - [ ] Normal, no-policy, missing-information, no-evidence, dependency-failure, changed-goal, and stale-source scenarios reach their expected terminal states.
+
+**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md). OpenRouter telemetry, loop-limit acceptance, full scraper freshness cycles, changed-goal coverage, and AWS topology acceptance remain open.
 
 ## POC boundary
 

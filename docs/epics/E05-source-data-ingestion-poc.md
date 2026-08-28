@@ -39,12 +39,12 @@
 - [x] Records can be upserted through the Supabase REST API.
 - [x] Source, retrieval time, raw details, and scrape outcomes can be retained.
 - [x] Schema and dependency setup are committed with the scraper.
-- [ ] The scraper image runs one healthy continuous process in Docker Compose and shuts down cleanly.
-- [ ] A database lease prevents two scraper loops from processing due work concurrently.
+- [x] The scraper image runs one healthy continuous process in Docker Compose and shuts down cleanly.
+- [x] A database lease prevents two scraper loops from processing due work concurrently.
 - [ ] Each cycle records source hash, version, outcome, retry state, freshness, and `next_scrape_due`.
 - [ ] An insurance-specific approved source passes the continuous pipeline into local PostgreSQL.
 - [ ] The ECS target specifies one Fargate task, Secrets Manager injection, controlled egress, and CloudWatch health and freshness alarms.
 
 ## POC boundary
 
-The implemented source is a credit-card site, so the completed items prove only the ingestion pattern. Insurance-specific acquisition, the continuous runtime, and PostgreSQL migration remain incomplete; retrieval from the resulting data belongs to E06.
+The original implemented source is a credit-card site. The insurance worker lifecycle, PostgreSQL lease, and idle behavior are operational, but no insurance source is approved for fetching, so insurance-specific acquisition and complete per-source lifecycle evidence remain incomplete; retrieval from cached data belongs to E06. See the [integrated runtime acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md).

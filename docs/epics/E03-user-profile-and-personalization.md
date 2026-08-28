@@ -32,16 +32,18 @@
 
 ## Definition of done
 
-- [ ] A versioned profile contract identifies value, source, and unknown status for decision-critical fields.
+- [x] A versioned profile contract identifies value, source, and unknown status for decision-critical fields.
 - [x] The UI collects the minimum POC profile through a multi-step form.
 - [ ] The profile covers all decision-relevant Financial Needs Analysis sections defined in the plan, with conditional risk questions only when needed.
-- [ ] Missing decision-critical fields trigger a focused question or an insufficient-data result.
-- [ ] The profile API distinguishes present, unknown, not-applicable, and explicitly no-current-policy states.
-- [ ] A user can skip policy upload and reach analysis without fabricated coverage values.
+- [x] Missing decision-critical fields trigger a focused question or an insufficient-data result.
+- [x] The profile API distinguishes present, unknown, not-applicable, and explicitly no-current-policy states.
+- [x] A user can skip policy upload and reach analysis without fabricated coverage values.
 - [ ] Changing a goal, budget, dependant, or policy reruns the analysis and explains what changed.
-- [ ] A conversational profile patch shows old and proposed values, rejects stale versions, requires confirmation, and creates an immutable active version.
+- [x] A conversational profile patch shows old and proposed values, rejects stale versions, requires confirmation, and creates an immutable active version.
 - [ ] Profile contract tests pass through the local backend container and use the same contract intended for ECS.
 - [ ] At least three synthetic profiles follow meaningfully different paths.
+
+**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md). Confirmed conversational mutation is currently limited to monthly budget; the broader goal, dependant, preference, and policy-change requirement remains open.
 
 ## POC boundary
 

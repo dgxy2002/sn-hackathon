@@ -34,12 +34,14 @@
 
 - [x] The POC UI accepts a file selection or synthetic sample and displays extracted-field states.
 - [ ] At least three representative synthetic policy documents are processed through the configured OpenRouter adapter.
-- [ ] Every extracted field includes confidence and page or region provenance.
+- [x] Every extracted field includes confidence and page or region provenance.
 - [ ] Low-confidence or absent values remain unresolved and can be corrected by the user.
 - [ ] Conversational corrections retain field provenance, reject stale or unsupported patches, and cannot create a reviewed extraction version before confirmation.
-- [ ] The fixture adapter returns the same schema and is visibly labelled as simulated.
+- [x] The fixture adapter returns the same schema and is visibly labelled as simulated.
 - [ ] The demo reports field accuracy, latency, token use, estimated cost, context size, and manual corrections with provider and exact model slug.
-- [ ] The extraction capability passes health, termination, and contract checks in the local backend container.
+- [x] The extraction capability passes health, termination, and contract checks in the local backend container.
+
+**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md). OpenRouter selection, live extraction metrics, and user-applied field correction remain open.
 
 ## POC boundary
 

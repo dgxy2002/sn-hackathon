@@ -70,7 +70,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | Done |
 | Priority | P1 |
 | Size | M |
 | Depends on | E05-T03, E10-T06 |
@@ -81,17 +81,17 @@
 
 **Acceptance criteria:**
 
-- [ ] A scraper image runs one long-lived loop and handles termination cleanly.
-- [ ] Docker Compose configures exactly one scraper service instance.
-- [ ] `.env.example` documents source allowlist, freshness interval, timeout, delay, retry, and database settings.
-- [ ] Each cycle identifies due approved sources and sleeps or waits without busy polling when none are due.
-- [ ] Health behavior distinguishes running, degraded, stale, and failed states.
+- [x] A scraper image runs one long-lived loop and handles termination cleanly.
+- [x] Docker Compose configures exactly one scraper service instance.
+- [x] `.env.example` documents source allowlist, freshness interval, timeout, delay, retry, and database settings.
+- [x] Each cycle identifies due approved sources and sleeps or waits without busy polling when none are due.
+- [x] Health behavior distinguishes running, degraded, stale, and failed states.
 
 ## E05-T05 - Enforce singleton lease and freshness lifecycle
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | L |
 | Depends on | E05-T04, E06-T01 |
@@ -102,7 +102,7 @@
 
 **Acceptance criteria:**
 
-- [ ] A database-backed lease prevents concurrent active scraper loops even if two processes start.
+- [x] A database-backed lease prevents concurrent active scraper loops even if two processes start.
 - [ ] The lifecycle is due-source selection, fetch, parse, normalize, hash/version, upsert, optional index, log, and `next_scrape_due` update.
 - [ ] Unchanged content does not create a new active version.
 - [ ] Failures use bounded exponential backoff and retain the prior verified version.

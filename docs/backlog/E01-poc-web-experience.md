@@ -49,7 +49,7 @@
 
 | Field | Value |
 |---|---|
-| Status | In progress |
+| Status | Done |
 | Priority | P1 |
 | Size | L |
 | Depends on | E01-T03, E07-T07, E10-T08 |
@@ -60,13 +60,13 @@
 
 **Acceptance criteria:**
 
-- [ ] The final page renders conversation, action-event, proposal, summary-revision, and delta contracts without trusting model-authored markup.
-- [ ] Presentation actions can focus, expand, sort, and filter existing summary regions.
-- [ ] Applied revisions update all affected score, gap, comparison, assumption, evidence, and explanation regions atomically.
-- [ ] Changed values are highlighted with stable layout, visible focus, reduced-motion behavior, and screen-reader announcements.
-- [ ] Confirmation, cancellation, conflict, failure, replay, and undo states remain operable on narrow and wide viewports.
+- [x] The final page renders conversation, action-event, proposal, summary-revision, and delta contracts without trusting model-authored markup.
+- [x] Presentation actions can focus, expand, sort, and filter existing summary regions.
+- [x] Applied revisions update all affected score, gap, comparison, assumption, evidence, and explanation regions atomically.
+- [x] Changed values are highlighted with stable layout, visible focus, reduced-motion behavior, and screen-reader announcements.
+- [x] Confirmation, cancellation, conflict, failure, replay, and undo states remain operable on narrow and wide viewports.
 
-**Current evidence:** [`frontend/src/main.js`](../../frontend/src/main.js), [`frontend/src/style.css`](../../frontend/src/style.css), and the [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md) cover typed conversation/action rendering, allowlisted focus and filtering, live status, and narrow/wide layouts. Proposal, revision, delta, replay, and undo rendering remain pending.
+**Evidence:** [`frontend/src/api.js`](../../frontend/src/api.js), [`frontend/src/main.js`](../../frontend/src/main.js), [`frontend/src/style.css`](../../frontend/src/style.css), and the [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md).
 
 ## E01-T03 - Deliver responsive and accessible interaction states
 
@@ -132,3 +132,5 @@
 - [ ] The synthetic ranked recommendation remains visually and semantically separate.
 - [ ] Adding, removing, sorting, or filtering evidence rows leaves active profile, E07 catalogue, recommendation, and revision references unchanged.
 - [ ] Desktop, mobile, keyboard, screen-reader, and reduced-motion checks pass.
+
+**Current evidence:** The versioned API and responsive neutral renderer are exercised with explicitly labelled synthetic fixtures. No real product has passed E06-T09, so this real-product ticket remains ready rather than done.

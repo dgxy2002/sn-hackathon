@@ -1789,6 +1789,72 @@ a {
   line-height: 1.65;
 }
 
+.evidence-comparison-section {
+  padding: 100px 6vw;
+  border-top: 1px solid var(--line-strong);
+  background: #e8eadf;
+}
+
+.evidence-comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid var(--line-strong);
+  background: white;
+}
+
+.evidence-comparison-grid article {
+  min-width: 0;
+  padding: 30px;
+  border-right: 1px solid var(--line-strong);
+}
+
+.evidence-comparison-grid article:last-child {
+  border-right: 0;
+}
+
+.evidence-comparison-grid h3 {
+  margin: 20px 0 4px;
+  font-family: var(--display);
+  font-size: 28px;
+}
+
+.evidence-comparison-grid article > p,
+.evidence-comparison-grid dd {
+  color: var(--muted);
+}
+
+.evidence-comparison-grid dl {
+  display: grid;
+  gap: 14px;
+  margin: 28px 0;
+}
+
+.evidence-comparison-grid dl div {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 16px;
+}
+
+.evidence-comparison-grid dt,
+.evidence-comparison-grid dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+
+.evidence-comparison-grid summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.comparison-warning,
+.comparison-empty {
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
 /* Conversational summary agent */
 .agent-workspace {
   display: grid;
@@ -1857,6 +1923,11 @@ a {
 .agent-state.is-planning {
   border-color: #9eb2ff;
   color: #c8d3ff;
+}
+
+.agent-state.is-waiting_for_confirmation {
+  border-color: #f2d48c;
+  color: #f2d48c;
 }
 
 .agent-state.is-unsupported,
@@ -2055,6 +2126,72 @@ a {
   background: #2b2020;
   color: #ffcbc5;
   line-height: 1.5;
+}
+
+.agent-proposal,
+.agent-delta {
+  margin: 18px 0;
+  padding: 18px;
+  border: 1px solid #697178;
+  background: #24282c;
+}
+
+.agent-proposal h3,
+.agent-proposal p,
+.agent-delta p {
+  margin: 8px 0;
+}
+
+.agent-proposal small,
+.agent-delta small {
+  display: block;
+  color: #afb5b9;
+  line-height: 1.5;
+}
+
+.agent-proposal > div,
+.revision-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.agent-proposal button,
+.revision-controls button {
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #737b81;
+  border-radius: 3px;
+  background: transparent;
+  color: white;
+}
+
+.agent-proposal button:first-child {
+  border-color: #9eb2ff;
+  background: var(--cobalt);
+}
+
+.revision-controls button:disabled {
+  opacity: 0.4;
+}
+
+.replay-list {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0;
+  padding: 14px 0;
+  border-top: 1px solid #3d4145;
+  border-bottom: 1px solid #3d4145;
+  list-style: none;
+}
+
+.replay-list li {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 12px;
+  color: #c4c9cc;
+  font-size: 11px;
 }
 
 .agent-composer {
@@ -2635,6 +2772,24 @@ a {
 
   .comparison-section {
     padding: 68px 20px;
+  }
+
+  .evidence-comparison-section {
+    padding: 68px 20px;
+  }
+
+  .evidence-comparison-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .evidence-comparison-grid article {
+    padding: 24px 20px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .evidence-comparison-grid article:last-child {
+    border-bottom: 0;
   }
 
   .comparison-section-heading {
