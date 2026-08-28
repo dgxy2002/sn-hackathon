@@ -1,0 +1,889 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "AIA",
+    "source_file": "AIA/Life Insurance/AIA Guaranteed Protect Plus (IV).md",
+    "source_filename": "AIA Guaranteed Protect Plus (IV).md",
+    "document_type": "brochure",
+    "content_sha256": "17f5faf4e3976974a1a4822d8eba79938342647d1c554578f1979b384da0b85c",
+    "local_markdown_path": "backend/scraper/insurance/AIA/Life Insurance/AIA Guaranteed Protect Plus (IV).md",
+    "local_pdf_path": "backend/scraper/insurance/AIA/Life Insurance/AIA Guaranteed Protect Plus (IV).pdf"
+  },
+  "extraction": {
+    "document_summary": "AIA Guaranteed Protect Plus (IV) is a long-term life insurance plan that provides death and total & permanent disability (TPD) protection, with a “multiplier” feature to boost coverage up to 5 times. You can choose a multiplier cut-off age of 65 or 75; after that cut-off, the coverage amount is reduced back to the basic coverage amount (e.g., 5X coverage ends and returns to S$100,000 in the example). Protection also includes accumulated cash value with potential (non-guaranteed) bonuses. Premiums can be paid for a limited term of 15, 20 or 25 years, after which benefits continue. The plan also offers options during events: defer premiums for 12 consecutive months upon involuntary retrenchment, and an Income Drawdown Facility that lets you take 50% or 100% of coverage as cash value into annual payouts for 10 years. AIA Vitality integration may add “PowerUp Dollar” free additional coverage (up to 37.5%).",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Brochure contains sufficient structural information on base benefits (death, TPD), multiplier mechanics, premium term choices, cash value/bonuses, and event-based options (premium deferral, income drawdown).",
+      "Some mechanics refer to other product summaries (e.g., critical illness lists and exclusions) without reproducing full details here, so critical illness benefit conditions cannot be fully extracted as covered_conditions.",
+      "No explicit free-look period, grace period, or exact guaranteed cash value schedule is stated; only general statements about cash value and non-guaranteed bonuses appear.",
+      "The plan includes premium discount and PowerUp Dollar rules tied to AIA Vitality; amounts are described in terms of percentages/caps but not as a standalone payable benefit amount within the base product section."
+    ],
+    "policies": [
+      {
+        "company": "AIA",
+        "policy_name": "AIA Guaranteed Protect Plus (IV)",
+        "aliases": [
+          "GPP (IV)"
+        ],
+        "quick_summary": "Long-term life insurance with death and TPD protection, boosted via a coverage multiplier (up to 5X) with a cut-off age of 65 or 75, plus accumulated cash value and potential bonuses. Offers limited-payment premiums (15/20/25 years) and event-based options such as premium deferral for 12 months (upon involuntary retrenchment) and an Income Drawdown Facility (50% or 100% of coverage into 10 annual cash payouts). Coverage reduces after the multiplier cut-off age and death/TPD cease at specified ages (death to 100, TPD to 70). Eligibility integration with AIA Vitality may provide additional free coverage via PowerUp Dollar (up to 150% of base PowerUp Dollar).",
+        "category": "life",
+        "policy_type": "whole_life",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_stated",
+        "coverage_scope": [
+          "Death",
+          "Total and Permanent Disability (TPD)"
+        ],
+        "currency_options": [
+          "SGD",
+          "S$"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 100,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": null,
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Death coverage and TPD coverage have specific cessation ages; death coverage ceases at age 100 and TPD ceases at age 70.",
+        "premium_payment_term_description": "Premiums can be paid over 15, 20 or 25 years; after completion of premium payments, you continue to enjoy benefits.",
+        "premium_frequencies": [
+          "not_stated"
+        ],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": true,
+        "surrender_value_available": true,
+        "bonuses_or_dividends": "Potential bonuses are mentioned; bonuses are non-guaranteed and depend on experience of AIA’s participating fund, and annual bonuses form part of guaranteed benefits once declared and credited.",
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "On reaching multiplier cut-off age of 65 or 75, the coverage amount is reduced to the basic coverage amount (multiplier ends).",
+          "Death coverage ceases at age 100."
+        ],
+        "important_caveats": [
+          "Premium deferment option refers to Premium Pass Option and can only be exercised once after the 3rd policy year in the event of Involuntary Retrenchment, provided the policy is in force and premiums have been fully paid for the first three years.",
+          "Income Drawdown Facility can only be utilised once after the multiplier cut-off age of 65/75 or end of premium term (whichever is later) before age 85.",
+          "Flexibility to purchase another whole life or endowment policy with no further medical questions asked is stated to be option-based and can only be exercised once and will cease at age 55.",
+          "Critical illness expansion and the lists/exclusions for critical illnesses/special conditions are referenced to other product summaries."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "2X multiplier (basic S$100,000 boosts to S$300,000 total boosted amount in illustration)",
+            "plan_code": null,
+            "description": "Choose a 2X multiplier to boost basic coverage; multiplier ends at the preferred multiplier cut-off age of 65 or 75, after which coverage reduces to the basic coverage amount.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "Illustrated for those who want a balance between protection and savings.",
+            "coverage_term_description": "Boosted coverage applies until preferred multiplier cut-off age of 65 or 75, then coverage reduces to basic amount.",
+            "premium_payment_term_description": "Limited time premiums: 15, 20 or 25 years.",
+            "benefit_amounts": [
+              {
+                "benefit_name": "Death and TPD boosted coverage (multiplier)",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "basic coverage amount x multiplier",
+                "payout_description": "Illustration shows a 2X multiplier leading to a total boosted amount of S$200,000 when basic coverage is S$100,000. Multiplier cut-off age reduces coverage to the basic amount.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "The brochure provides multiplier mechanics table with example values; it also states the multiplier can be boosted up to 5 times and ends at multiplier cut-off age 65 or 75.",
+                "evidence": [
+                  {
+                    "quote": "For those who want to save more while having some level of protection.\n2X\n... S$200,000",
+                    "line_start": 43,
+                    "line_end": 46,
+                    "quote_token_coverage": 0.997
+                  }
+                ],
+                "extraction_confidence": "medium"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "With its unique multiplier feature, it gives you the ability to boost your coverage up to 5 times",
+                "line_start": 1,
+                "line_end": 20,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "3X multiplier",
+            "plan_code": null,
+            "description": "Multiplier boosts coverage up to 3X; reduced back to basic at multiplier cut-off age of 65 or 75.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "Illustrated for those who want to maintain a balance between both protection and savings.",
+            "coverage_term_description": "Boosted coverage applies until preferred multiplier cut-off age of 65 or 75, then coverage reduces to basic amount.",
+            "premium_payment_term_description": "Limited time premiums: 15, 20 or 25 years.",
+            "benefit_amounts": [
+              {
+                "benefit_name": "Death and TPD boosted coverage (multiplier)",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "basic coverage amount x multiplier",
+                "payout_description": "Illustration table shows 3X multiplier leading to total boosted amount S$300,000 when basic coverage amount is S$100,000. Multiplier cut-off age reduces coverage to the basic amount.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "The brochure includes a multiplier table using an assumed S$100,000 coverage amount.",
+                "evidence": [
+                  {
+                    "quote": "3X For those who want to\nmaintain a balance between S$100,000 S$300,000\nboth protection and savings.",
+                    "line_start": 23,
+                    "line_end": 42,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Upon reaching the preferred multiplier cut-off age of 65 or 75, the coverage amount will be\nreduced to S$100,000.",
+                "line_start": 29,
+                "line_end": 48,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "5X multiplier",
+            "plan_code": null,
+            "description": "Multiplier boosts coverage up to 5X; reduced back to basic at multiplier cut-off age of 65 or 75.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "Illustrated for those with high protection needs.",
+            "coverage_term_description": "Boosted coverage applies until preferred multiplier cut-off age of 65 or 75, then coverage reduces to basic amount.",
+            "premium_payment_term_description": "Limited time premiums: 15, 20 or 25 years.",
+            "benefit_amounts": [
+              {
+                "benefit_name": "Death and TPD boosted coverage (multiplier)",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "basic coverage amount x multiplier",
+                "payout_description": "Illustration table shows 5X multiplier leading to total boosted amount S$500,000 when basic coverage amount is S$100,000. Multiplier cut-off age reduces coverage to the basic amount.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Multiplier table uses an assumed coverage amount of S$100,000.",
+                "evidence": [
+                  {
+                    "quote": "For those with high protection\n5X needs, the 5X multiplier coverage\nwill give you much needed S$500,000\nfinancial security",
+                    "line_start": 20,
+                    "line_end": 39,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Upon reaching the preferred multiplier cut-off age of 65 or 75, the coverage amount will be\nreduced to S$100,000.",
+                "line_start": 29,
+                "line_end": 48,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "15-year premium payment term",
+            "plan_code": null,
+            "description": "Premium payments can be made for 15 years; after completion, you continue to enjoy plan benefits.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": null,
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": "Premium payments over 15 years.",
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "you can stay confident with greater protection as you make your way\nacross different life stages.\n\nPay premiums for a limited time only\nHave more control over your long-term finances with premium payments over\nyour choice of 15, 20 or 25 years.",
+                "line_start": 31,
+                "line_end": 50,
+                "quote_token_coverage": 0.8415
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "20-year premium payment term",
+            "plan_code": null,
+            "description": "Premium payments can be made for 20 years; after completion, you continue to enjoy plan benefits.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": null,
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": "Premium payments over 20 years.",
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Pay premiums for a limited time only\nHave more control over your long-term finances with premium payments over\nyour choice of 15, 20 or 25 years.",
+                "line_start": 32,
+                "line_end": 51,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "25-year premium payment term",
+            "plan_code": null,
+            "description": "Premium payments can be made for 25 years; after completion, you continue to enjoy plan benefits.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": null,
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": "Premium payments over 25 years.",
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Pay premiums for a limited time only\nHave more control over your long-term finances with premium payments over\nyour choice of 15, 20 or 25 years.",
+                "line_start": 32,
+                "line_end": 51,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Critical Protector Life (IV) rider (73 major stage critical illnesses, 150 multi-stage critical illnesses and 15 special",
+            "plan_code": null,
+            "description": "Optional critical illness coverage that covers listed critical illnesses and special conditions (numbers stated in brochure).",
+            "applies_to": "rider",
+            "linked_rider_name": "Critical Protector Life (IV)",
+            "is_default": null,
+            "ward_class": null,
+            "currency": null,
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "Brochure says you can choose Critical Protector Life (IV) coverage and waive future premiums with critical protector waiver; full details are in respective product summaries.",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Enhance your protection with critical illness coverage6\nCovers 73 major stage Covers 150 multi-stage critical\ncritical illnesses illnesses and 15 special conditions7",
+                "line_start": 52,
+                "line_end": 71,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "Early Critical Protector Life (IV) rider (same boosted coverage)",
+            "plan_code": null,
+            "description": "Optional early critical illness coverage with same boosted coverage for 150 multi-stage critical illnesses and 15 special conditions (numbers stated).",
+            "applies_to": "rider",
+            "linked_rider_name": "Early Critical Protector Life (IV)",
+            "is_default": null,
+            "ward_class": null,
+            "currency": null,
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "Stated to enjoy the same boosted coverage in basic plan when chosen as Early Critical Protector Life (IV).",
+            "premium_payment_term_description": null,
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Early Critical Protector Life (IV)\nEnjoy the Critical Protector Life (IV) Early Critical Protector\nsame boosted\nPlus, choose to waive future premiums with:\nin your\nbasic plan\nCritical Protector Early Critical Protector",
+                "line_start": 74,
+                "line_end": 85,
+                "quote_token_coverage": 0.989
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Death benefit (boosted coverage with multiplier and Vitality PowerUp Dollar)",
+            "benefit_category": "death",
+            "benefit_level": "base",
+            "benefit_description": "Provides coverage for death, with a boosted coverage amount determined by the chosen multiplier until the multiplier cut-off age (65 or 75). Total death benefit may include additional coverage from AIA Vitality PowerUp Dollar.",
+            "trigger_description": "Payment upon death (and potentially when a benefit fully accelerates the death benefit is referenced for PowerUp Dollar timing).",
+            "covered_conditions": [
+              "Death"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "boosted coverage amount and may include PowerUp Dollar additional coverage",
+            "payout_description": "Boosted coverage is reduced to basic coverage at the preferred multiplier cut-off age of 65 or 75.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": 100,
+            "benefit_expiry_description": "Coverage for death will cease at age 100.",
+            "geographic_scope": null,
+            "notes": "PowerUp Dollar is paid upon earliest occurrence of death or payment of any benefits that fully accelerate the death benefit (TPD or CI).",
+            "evidence": [
+              {
+                "quote": "Safeguard your family’s future with coverage for death and total and permanent\ndisability1 (TPD) for yourself.",
+                "line_start": 9,
+                "line_end": 28,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "TPD benefit (boosted coverage with Vitality PowerUp Dollar timing)",
+            "benefit_category": "disability",
+            "benefit_level": "base",
+            "benefit_description": "Provides coverage for total and permanent disability (TPD), with boosted coverage amount determined by the chosen multiplier until the multiplier cut-off age.",
+            "trigger_description": "Payment upon diagnosis/occurrence of TPD.",
+            "covered_conditions": [
+              "Total and Permanent Disability (TPD)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "boosted coverage amount (multiplier) for TPD",
+            "payout_description": "TPD coverage ends at age 70.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": 70,
+            "benefit_expiry_description": "Coverage for TPD will cease at age 70.",
+            "geographic_scope": null,
+            "notes": "PowerUp Dollar becomes payable upon earliest occurrence of death or payment of any benefits that fully accelerate the death benefit (TPD or CI).",
+            "evidence": [
+              {
+                "quote": "Safeguard your family’s future with coverage for death and total and permanent\ndisability1 (TPD) for yourself.",
+                "line_start": 9,
+                "line_end": 28,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Accumulated cash value and non-guaranteed bonuses",
+            "benefit_category": "savings",
+            "benefit_level": "base",
+            "benefit_description": "Plan provides stable cash value accumulated over time, and potential bonuses.",
+            "trigger_description": "Bonuses are credited based on participating fund experience; cash value accumulates over time.",
+            "covered_conditions": [],
+            "condition_stages": [],
+            "coverage_type": null,
+            "payout_type": "other",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "Bonuses are non-guaranteed and depend on experience of AIA’s participating fund; annual bonuses form part of guaranteed benefits once declared and credited.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": null,
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "Brochure also says cash value continues to grow and plan matures; exact maturity benefit amounts are illustrated, not stated as guaranteed.",
+            "evidence": [
+              {
+                "quote": "This plan also provides stable cash value that is accumulated\nover time.",
+                "line_start": 3,
+                "line_end": 22,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Premium deferral (Premium Pass Option) upon involuntary retrenchment",
+            "benefit_category": "policy_maintenance",
+            "benefit_level": "base",
+            "benefit_description": "Option to defer premium payment for 12 consecutive months if involuntarily retrenched.",
+            "trigger_description": "Involuntary retrenchment.",
+            "covered_conditions": [
+              "Involuntary retrenchment"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": "service",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "Defer premium payment for 12 consecutive months.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": null,
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": 365,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "Can only be exercised once after the 3rd policy year; policy must be in force and premiums must have been fully paid for the first three years.",
+            "evidence": [
+              {
+                "quote": "Defer payment3 of premium\nHave the option to defer premium payment for 12 consecutive months\nif you’re involuntarily retrenched, ensuring the continuity of your plan.",
+                "line_start": 41,
+                "line_end": 60,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Income Drawdown Facility (cash value drawdown and 10-year annual cash payouts)",
+            "benefit_category": "policy_withdrawal",
+            "benefit_level": "base",
+            "benefit_description": "Option to utilise 50% or 100% of your coverage amount for cash value and receive annual cash payouts for 10 years.",
+            "trigger_description": "Available after multiplier cut-off age of 65/75 or end of premium term (whichever is later), before age 85.",
+            "covered_conditions": [],
+            "condition_stages": [],
+            "coverage_type": null,
+            "payout_type": "daily_income",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "50% or 100% of coverage amount utilised into cash value",
+            "payout_description": "Annual cash payouts for 10 years to supplement retirement income. Can only be utilised once.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": 1,
+            "benefit_relationship": null,
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Facility must be utilised before age 85 (per terms).",
+            "geographic_scope": null,
+            "notes": "The brochure notes: 'If he chooses to utilise 50% of the coverage amount, the coverage amount will be reduced by S$150,000 until age 100' in illustration; this is not stated as general guaranteed wording for all cases.",
+            "evidence": [
+              {
+                "quote": "Encash for payouts4\nHave the flexibility to utilise 50% or 100% of your coverage amount for\nits cash value and receive annual cash payouts for 10 years to supplement\nyour retirement income.",
+                "line_start": 45,
+                "line_end": 64,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "AIA Vitality PowerUp Dollar (additional coverage at no cost; increases/decreases with status; cap at 150%)",
+            "benefit_category": "coverage_extension",
+            "benefit_level": "base",
+            "benefit_description": "Additional insurance coverage (“PowerUp Dollar”) based on AIA Vitality status, which may increase, decrease, or remain the same each year after the first year.",
+            "trigger_description": "AIA Vitality status at 45 days before each policy anniversary.",
+            "covered_conditions": [],
+            "condition_stages": [],
+            "coverage_type": null,
+            "payout_type": "other",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "percentage of base PowerUp Dollar (10%/15%/25% based on GPP (IV) multiplier) and previous year's PowerUp Dollar amount",
+            "payout_description": "You can get up to 37.5% free additional insurance coverage in the first year (PowerUp Dollar). PowerUp Dollar can increase/decrease/remain same from second year onwards depending on AIA Vitality status at 45 days before the policy anniversary; capped at 150% of base PowerUp Dollar.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": null,
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "PowerUp Dollar becomes guaranteed for rest of policy duration upon the later of (a) multiplier cut-off age; or (b) 15 years from commencement.",
+            "geographic_scope": null,
+            "notes": "PowerUp Dollar is paid upon earliest occurrence of death or payment of any benefits that fully accelerate the death benefit (TPD or CI).",
+            "evidence": [
+              {
+                "quote": "Get up to 37.5%8 free additional insurance coverage\n(also known as PowerUp Dollar9)",
+                "line_start": 84,
+                "line_end": 103,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [
+          {
+            "name": "Early Critical Protector Life (IV)",
+            "description": "Early critical illness coverage option stated to cover 150 multi-stage critical illnesses and 15 special conditions; brochure states it is available with the same boosted coverage in your basic plan.",
+            "rider_type": "critical_illness",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": "Brochure references critical illness lists/definitions and applicable exclusions in the respective product summaries.",
+            "evidence": [
+              {
+                "quote": "Enhance your protection with critical illness coverage6\nCovers 73 major stage Covers 150 multi-stage critical\ncritical illnesses illnesses and 15 special conditions7",
+                "line_start": 52,
+                "line_end": 71,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "name": "Critical Protector Life (IV)",
+            "description": "Critical illness coverage option stated to cover 73 major stage critical illnesses.",
+            "rider_type": "critical_illness",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": "Full lists and applicable exclusions are referenced to the respective product summaries.",
+            "evidence": [
+              {
+                "quote": "Covers 73 major stage Covers 150 multi-stage critical\ncritical illnesses illnesses and 15 special conditions7",
+                "line_start": 52,
+                "line_end": 71,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "name": "Critical Protector Waiver of Premium (II)",
+            "description": "Waiver of future premiums upon diagnosis of any of the covered critical illnesses (stated as covered 72 major stage critical illnesses).",
+            "rider_type": "disability_income",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": true,
+            "notes": "Brochure says with Early Critical Protector Payor (II), future premiums of your child’s AIA Guaranteed Protect Plus (IV) plan and eligible riders (if any) will be waived up to his/her 25th birthday should you be diagnosed with any of the 149 multi-stage critical illnesses, TPD, or upon your passing.",
+            "evidence": [
+              {
+                "quote": "Plus, choose to waive future premiums with:\nin your\nbasic plan\nCritical Protector Early Critical Protector\nWaiver of Premium (II) Waiver of Premium (II)\nUpon diagnosis of any of\nthe covered 72 major stage the covered 149 multi-stage\ncritical illnesses critical illnesses",
+                "line_start": 77,
+                "line_end": 84,
+                "quote_token_coverage": 0.993
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "name": "Early Critical Protector Waiver of Premium (II) / Early Critical Protector Payor (II)",
+            "description": "Waiver of premiums for the child’s policy if the parent payor is diagnosed with covered multi-stage critical illnesses, TPD, or dies; waived up to the child’s 25th birthday (as stated).",
+            "rider_type": "disability_income",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": true,
+            "notes": "Full details are referenced to respective product summaries.",
+            "evidence": [
+              {
+                "quote": "What’s more, with Early Critical Protector Payor (II), future premiums of your child’s\nAIA Guaranteed Protect Plus (IV) plan and eligible riders (if any) will be waived up to his/her\n25th birthday should you be diagnosed with any of the 149 multi-stage critical illnesses, total\nand permanent disability, or upon your passing.",
+                "line_start": 69,
+                "line_end": 88,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "exclusions": [
+          {
+            "exclusion": "No benefits payable for certain conditions such as pre-existing conditions (details not listed in this brochure)",
+            "category": "pre_existing_conditions",
+            "applies_to": "base_policy",
+            "notes": "Brochure states there are certain conditions such as pre-existing conditions whereby no benefits will be payable, and that waiting period and survival period are applicable.",
+            "evidence": [
+              {
+                "quote": "There are certain conditions such as pre-existing conditions, whereby no benefits will be payable.",
+                "line_start": 205,
+                "line_end": 224,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "exclusion": "Critical illness coverage exclusions are not reproduced in this brochure; refer to the respective critical illness product summaries",
+            "category": "critical_illness_exclusions",
+            "applies_to": "riders",
+            "notes": "The brochure instructs that critical illness lists and applicable exclusions are specified in the critical illness and waiver product summaries.",
+            "evidence": [
+              {
+                "quote": "Refer to the respective Early Critical Protector Life (IV), Critical Protector Life (IV), Critical Protector\nWaiver of Premium (II), and Early Critical Protector Waiver of Premium (II) product summaries for\nthe list of covered critical illnesses, special conditions, and other details including definitions and\napplicable exclusions.",
+                "line_start": 221,
+                "line_end": 240,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "source_evidence": [
+          {
+            "quote": "AIA Guaranteed Protect Plus (IV) is designed as a single\nsolution that offers wider coverage for your protection needs.\nWith its unique multiplier feature, it gives you the ability to\nboost your coverage up to 5 times while ensuring affordability.\nThis plan also provides stable cash value that is accumulated\nover time.",
+            "line_start": 3,
+            "line_end": 22,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Safeguard your family’s future with coverage for death and total and permanent\ndisability1 (TPD) for yourself.",
+            "line_start": 9,
+            "line_end": 28,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Upon reaching the preferred multiplier cut-off age of 65 or 75, the coverage amount will be\nreduced to S$100,000.",
+            "line_start": 29,
+            "line_end": 48,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "high",
+        "review_notes": [
+          "Classification set to whole_life based on long-lasting protection and death/TPD cessation ages stated; the brochure does not explicitly label the base product as whole life or endowment.",
+          "Multiplier options (2X/3X/5X) are captured as plan tiers using the brochure’s assumed S$100,000 illustration; exact available multiplier selections are not enumerated beyond 'up to 5 times'.",
+          "Critical illness and waiver elements are treated as riders because the brochure explicitly refers to adding the 'Early Critical Protector Life (IV) rider' in the example, and it separately names Critical Protector/Early Critical Protector products.",
+          "PowerUp Dollar and premium discount rules are extracted as features/coverage extension; no standalone premium amounts or guaranteed additional coverage amounts are stated beyond caps/percentages."
+        ],
+        "slug": "aia-aia-guaranteed-protect-plus-iv"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 26,
+    "evidence_warnings": [
+      "Evidence quote mismatch for AIA Guaranteed Protect Plus (IV)/plans at lines 31-50"
+    ],
+    "requires_human_review": true
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_0ffad4defef01461016a8f1cc7db0087d0969f9992b7b28690",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:06:16.153446+00:00",
+    "usage": {
+      "input_tokens": 8078,
+      "output_tokens": 9395,
+      "total_tokens": 17473,
+      "reasoning_tokens": 378,
+      "estimated_cost_usd": 0.01335935
+    }
+  }
+}

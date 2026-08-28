@@ -1,0 +1,546 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Great Eastern",
+    "source_file": "Great Eastern/Life Insurance/Get Term Life Insurance DIRECT - GREAT Term.md",
+    "source_filename": "Get Term Life Insurance DIRECT - GREAT Term.md",
+    "document_type": "brochure",
+    "content_sha256": "fe52b258e430ccc021a9db9f9613ff3fd36cf0017c9d480bfd7d319d9a5ddbcf",
+    "local_markdown_path": "backend/scraper/insurance/Great Eastern/Life Insurance/Get Term Life Insurance DIRECT - GREAT Term.md",
+    "local_pdf_path": "backend/scraper/insurance/Great Eastern/Life Insurance/Get Term Life Insurance DIRECT - GREAT Term.pdf"
+  },
+  "extraction": {
+    "document_summary": "Great Eastern DIRECT – GREAT Term is a Direct Purchase Insurance term life plan providing protection for Death, Terminal Illness, and Total and Permanent Disability (TPD) for a fixed coverage period. You can choose either (1) DIRECT – GREAT Term: a 20-year term plan or coverage until age 65, or (2) DIRECT – GREAT 5yr Term: a five-year term that is renewable for the same sum assured up to age 80, with each renewal period lasting five years. Premiums are guaranteed and the premium payment term follows the chosen policy term. The plan itself has no savings/investment features. The brochure also allows attaching a DIRECT – GREAT Critical Care rider (or 5yr Critical Care rider), which accelerates the rider’s basic sum assured upon diagnosis of specified critical illnesses, with a separate maximum CI benefit cap of S$3,000,000 across all policies/riders. TPD is capped at S$5,000,000 across all policies/riders issued by the Company on the same life assured.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "The document is mostly feature-level text; payout amounts for base Death/Terminal Illness/TPD are not explicitly stated (except for TPD cap and CI rider mechanics).",
+      "No underwriting, medical exam, free-look, grace period, or exact definition of benefit payment for Death/Terminal Illness is provided beyond definitions.",
+      "Some structured formatting is missing (e.g., no clear tables of plan benefits/premiums), limiting extraction to what is explicitly described."
+    ],
+    "policies": [
+      {
+        "company": "Great Eastern",
+        "policy_name": "DIRECT – GREAT Term",
+        "aliases": [
+          "Get Term Life Insurance DIRECT - GREAT Term"
+        ],
+        "quick_summary": "Direct Purchase Insurance term plan (20-year term or until age 65) / renewable 5-year term up to age 80, covering Death, Terminal Illness, and Total and Permanent Disability (TPD) with guaranteed premiums. Can be enhanced with a Critical Care rider (Accelerated lump sum for specified critical illnesses; rider then terminates). No cash value if the policy ends/terminates early, per brochure statement; key caps apply to TPD and Critical Illness benefits across policies/riders on the same life assured, and sum assured is capped for all direct purchase insurance plans under the brochure’s terms statement.",
+        "category": "life",
+        "policy_type": "term_life",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_stated",
+        "coverage_scope": [
+          "Death",
+          "Terminal Illness",
+          "Total and Permanent Disability (TPD)"
+        ],
+        "currency_options": [],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 80,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "All ages specified refer to age next birthday.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": true,
+        "coverage_term_description": "Choose either a fixed term up to 20 years or until age 65; alternatively choose a 5-year term that is renewable for the same sum assured up to age 80 next birthday, with renewal terms of five years.",
+        "premium_payment_term_description": "The premium payment term will follow the chosen policy term.",
+        "premium_frequencies": [],
+        "premium_guaranteed": true,
+        "renewal_basis": "For DIRECT – GREAT 5yr Term, renewable for the same sum assured up to age 80 next birthday of the life assured; each renewal term is five years.",
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": false,
+        "surrender_value_available": false,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "For the Critical Care rider, the rider terminates after a critical illness claim and accelerated amount is paid (base policy termination events are not stated)."
+        ],
+        "important_caveats": [
+          "As this product has no savings or investment feature, there is no cash value if the policy ends or is terminated prematurely.",
+          "Terminal illness and TPD definitions reference evidence/medical examiner and require diagnosis criteria as stated; full exclusions are referenced as being in the policy contract.",
+          "Subject to maximum TPD benefit of S$5,000,000 on all policies and riders issued by the Company on the same Life Assured.",
+          "Sum assured is capped at S$400,000 for all direct purchase insurance plans."
+        ],
+        "ward_class": null,
+        "is_dpi": true,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "DIRECT – GREAT Term (20-year term plan or until age 65)",
+            "plan_code": null,
+            "description": "Fixed coverage term: either 20 years or up to age 65. Premium payment term follows the chosen policy term; premium is guaranteed.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": null,
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": 400000,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "All ages specified refer to age next birthday.",
+            "coverage_term_description": "Choose covered with a 20-year term plan or until age 65.",
+            "premium_payment_term_description": "Premium payment term will follow the chosen policy term.",
+            "benefit_amounts": [
+              {
+                "benefit_name": "TPD (capped) ",
+                "payout_type": null,
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": null,
+                "payout_description": "TPD maximum benefit is subject to a maximum TPD Benefit of S$5,000,000 on all policies and riders issued by the Company on the same Life Assured; TPD only applicable if TPD occurs before the policy anniversary on which the Life Assured is age 65 next birthday.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 5000000,
+                "limit_type": "TPD maximum benefit cap (across policies/riders on same life assured)",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "No explicit TPD payment amount is stated for the base policy beyond the cap and applicability before age 65 next birthday.",
+                "evidence": [
+                  {
+                    "quote": "Subject to a maximum TPD Beneﬁt of S$5,000,000 on all policies and riders issued by the Company on the same Life Assured.",
+                    "line_start": 21,
+                    "line_end": 40,
+                    "quote_token_coverage": 1.0
+                  },
+                  {
+                    "quote": "The TPD beneﬁt is only applicable if TPD occurs before the policy anniversary on which the Life Assured is age 65 next birthday.",
+                    "line_start": 22,
+                    "line_end": 41,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": "This plan description corresponds to the DIRECT – GREAT Term fixed term option described in the brochure.",
+            "evidence": [
+              {
+                "quote": "With DIRECT – GREAT Term, you can choose to be covered with a 20-year term plan or until age 65.",
+                "line_start": 1,
+                "line_end": 7,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "DIRECT – GREAT 5yr Term (renewable 5-year coverage up to age 80)",
+            "plan_code": null,
+            "description": "Five-year term plan; renewable for the same sum assured up to age 80 next birthday. Each renewal term is five years.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": null,
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": 400000,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "All ages specified refer to age next birthday.",
+            "coverage_term_description": "Renewable every 5 years up to age 80 next birthday of the life assured.",
+            "premium_payment_term_description": "The premium payment term will follow the chosen policy term.",
+            "benefit_amounts": [
+              {
+                "benefit_name": "TPD (capped) ",
+                "payout_type": null,
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": null,
+                "payout_description": "TPD maximum benefit is subject to a maximum TPD Benefit of S$5,000,000 on all policies and riders issued by the Company on the same Life Assured; TPD only applicable if TPD occurs before the policy anniversary on which the Life Assured is age 65 next birthday.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 5000000,
+                "limit_type": "TPD maximum benefit cap (across policies/riders on same life assured)",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "No explicit TPD payment amount is stated for the base policy beyond the cap and applicability before age 65 next birthday.",
+                "evidence": [
+                  {
+                    "quote": "Subject to a maximum TPD Beneﬁt of S$5,000,000 on all policies and riders issued by the Company on the same Life Assured.",
+                    "line_start": 21,
+                    "line_end": 40,
+                    "quote_token_coverage": 1.0
+                  },
+                  {
+                    "quote": "The TPD beneﬁt is only applicable if TPD occurs before the policy anniversary on which the Life Assured is age 65 next birthday.",
+                    "line_start": 22,
+                    "line_end": 41,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": "This plan description corresponds to the DIRECT – GREAT 5yr Term renewable option described in the brochure.",
+            "evidence": [
+              {
+                "quote": "With DIRECT – GREAT 5yr Term, you can have a ﬁve-year term plan which is renewable for the same sum assured up to age 80 next birthday of the life assured.",
+                "line_start": 1,
+                "line_end": 11,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Terminal Illness benefit (base)",
+            "benefit_category": "terminal_illness",
+            "benefit_level": "base",
+            "benefit_description": "Pays under the protection for Terminal Illness as covered by the base plan, where Terminal Illness refers to a conclusive diagnosis expected to result in death within 12 months of diagnosis.",
+            "trigger_description": "Conclusive diagnosis expected to result in death within 12 months of diagnosis; diagnosed by a registered medical practitioner and supported by evidence acceptable to the Company.",
+            "covered_conditions": [
+              "Terminal Illness (as defined)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "Brochure does not explicitly state the payout amount/mechanism for the base Terminal Illness coverage.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure states exclusions exist and refers to the policy contract for the full list.",
+            "evidence": [
+              {
+                "quote": "Terminal Illness refers to a conclusive diagnosis of an illness that is expected to result in the death of the Life Assured within 12 months of the diagnosis.",
+                "line_start": 7,
+                "line_end": 26,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Terminal illness must be diagnosed by a registered medical practitioner and must be supported by evidence acceptable to the Company.",
+                "line_start": 8,
+                "line_end": 27,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Please refer to the policy contract for the full list of exclusions.",
+                "line_start": 8,
+                "line_end": 27,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Protection against Death, Terminal Illness and Total and Permanent Disability .",
+                "line_start": 1,
+                "line_end": 14,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Total and Permanent Disability (TPD) benefit (base)",
+            "benefit_category": "disability",
+            "benefit_level": "base",
+            "benefit_description": "TPD coverage where the Life Assured is totally unable to engage in any occupation/business/activity for income/remuneration/profit with continuous disability for at least 6 consecutive months and deemed permanent (no possibility of improvement in foreseeable future); or suffers total and irrecoverable loss of use of specified sight/limbs.",
+            "trigger_description": "TPD occurs due to accident or sickness and meets either the total disablement criteria (including at least 6 consecutive months and deemed permanent) or the specified loss of use criteria.",
+            "covered_conditions": [
+              "TPD (as defined - occupational inability)",
+              "TPD (as defined - total and irrecoverable loss of use)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "Brochure does not explicitly state the payout amount/mechanism for the base TPD coverage, but it states TPD maximum benefit and age-65-next-birthday applicability.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 5000000,
+            "limit_type": "TPD maximum benefit cap across policies/riders on the same Life Assured",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": 65,
+            "benefit_expiry_description": "TPD benefit only applicable if TPD occurs before the policy anniversary on which the Life Assured is age 65 next birthday.",
+            "geographic_scope": null,
+            "notes": "TPD definition includes a 6-consecutive-month continuation requirement and a medical examiner permanence assessment, as stated.",
+            "evidence": [
+              {
+                "quote": "Total and Permanent Disability (TPD) refers to:",
+                "line_start": 10,
+                "line_end": 29,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "(a) The Life Assured, due to accident or sickness, is disabled to such an extent as to be rendered totally unable to engage in any occupation, business or activity for income, remuneration or proﬁt; and the disability must continue uninterrupted for at least 6 consecutive months from the time when the disability started; and the disability must, in the view of a medical examiner appointed by the Company, be deemed permanent with no possibility of improvement in the foreseeable future;",
+                "line_start": 14,
+                "line_end": 33,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "(b) The Life Assured, due to accident or sickness, suffers total and irrecoverable loss of use of:",
+                "line_start": 15,
+                "line_end": 34,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Subject to a maximum TPD Beneﬁt of S$5,000,000 on all policies and riders issued by the Company on the same Life Assured.",
+                "line_start": 21,
+                "line_end": 40,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The TPD beneﬁt is only applicable if TPD occurs before the policy anniversary on which the Life Assured is age 65 next birthday.",
+                "line_start": 22,
+                "line_end": 41,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Protection against Death, Terminal Illness and Total and Permanent Disability .",
+                "line_start": 1,
+                "line_end": 14,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Death benefit (base)",
+            "benefit_category": "death",
+            "benefit_level": "base",
+            "benefit_description": "Death coverage is included in the base protection of DIRECT – GREAT Term.",
+            "trigger_description": "Death of the Life Assured while coverage is in-force (exact payment mechanics not stated in the brochure excerpt).",
+            "covered_conditions": [
+              "Death"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "Brochure excerpt does not specify the payout amount/mechanism for the base Death benefit.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure lists Death as a protected risk but does not provide further contractual payout details in the provided text.",
+            "evidence": [
+              {
+                "quote": "Protection against Death, Terminal Illness  and Total and Permanent Disability  .",
+                "line_start": 1,
+                "line_end": 14,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          }
+        ],
+        "riders": [
+          {
+            "name": "DIRECT – GREAT Critical Care rider",
+            "description": "On diagnosis of one of the 30 critical illnesses (except for Angioplasty & Other Invasive Treatment for Coronary Artery), the basic sum assured will be accelerated and paid in one lump sum; the rider then terminates. For Angioplasty, 10% of the rider sum assured (up to S$25,000 per Life Assured) is payable for the treatment, and after a claim is paid, the balance continues with reduced premiums. No benefit for Angioplasty for subsequent treatments under this and any other policies and riders covering Angioplasty.",
+            "rider_type": "critical_illness",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "You can attach DIRECT – GREAT Critical Care to DIRECT – GREAT Term.",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": "No benefit under this rider for certain specified conditions if diagnosis is made within 90 days from the date of commencement of this rider, or from the date of any reinstatement.",
+            "evidence": [
+              {
+                "quote": "You can attach DIRECT – GREAT Critical Care to DIRECT – GREAT Term.",
+                "line_start": 38,
+                "line_end": 57,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "On diagnosis of one of the 30 critical illnesses (except for Angioplasty & Other Invasive Treatment for Coronary Artery), the basic sum assured will be accelerated and paid in one lump sum. This rider will then be terminated.",
+                "line_start": 26,
+                "line_end": 45,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "For Angioplasty & Other Invasive Treatment for Coronary Artery (“Angioplasty”), the basic sum assured equal to 10% of the rider sum assured (up to a maximum of S$25,000 per Life Assured) will be payable if the Life Assured undergoes a treatment.",
+                "line_start": 29,
+                "line_end": 48,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "No benefit for Angioplasty will be payable for subsequent treatments under this and any other policies and riders covering Angioplasty.",
+                "line_start": 32,
+                "line_end": 51,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "No beneﬁt under this rider will be payable for Heart Attack of Speciﬁed Severity, Major Cancer, Coronary Artery By-pass Surgery or Angioplasty & Other Invasive Treatment for Coronary Artery if the diagnosis is made within 90 days from the date of commencement of this rider, or from the date of any reinstatement.",
+                "line_start": 35,
+                "line_end": 54,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "DIRECT – GREAT 5yr Critical Care rider",
+            "description": "Critical care rider compatible with DIRECT – GREAT 5yr Term. Includes accelerated lump sum payout for specified critical illnesses (with exclusions for Angioplasty mechanics and a 90-day diagnosis non-benefit period for certain conditions as stated). The rider then terminates after payment for most listed critical illnesses.",
+            "rider_type": "critical_illness",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "You can attach DIRECT – GREAT 5yr Critical Care to DIRECT – GREAT 5yr Term.",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": "The brochure excerpt describes the critical care rider mechanics generically for DIRECT – GREAT Critical Care/5yr Critical Care.",
+            "evidence": [
+              {
+                "quote": "You can attach DIRECT – GREAT 5yr Critical Care to DIRECT – GREAT 5yr Term.",
+                "line_start": 39,
+                "line_end": 58,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "DIRECT - GREAT Critical Care/ 5yr Critical Care rider. On diagnosis of one of the 30 critical illnesses (except for Angioplasty & Other Invasive Treatment for Coronary Artery), the basic sum assured will be accelerated and paid in one lump sum. This rider will then be terminated.",
+                "line_start": 26,
+                "line_end": 45,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "With DIRECT – GREAT Term, you can choose to be covered with a 20-year term plan or until age 65.",
+            "line_start": 1,
+            "line_end": 7,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "With DIRECT – GREAT 5yr Term, you can have a ﬁve-year term plan which is renewable for the same sum assured up to age 80 next birthday of the life assured.",
+            "line_start": 1,
+            "line_end": 11,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Subject to a maximum TPD Beneﬁt of S$5,000,000 on all policies and riders issued by the Company on the same Life Assured.",
+            "line_start": 21,
+            "line_end": 40,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "As this product has no savings or investment feature, there is no cash value if the policy ends or is terminated prematurely.",
+            "line_start": 48,
+            "line_end": 67,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "medium",
+        "review_notes": [
+          "Base Death and Terminal Illness payment amount/mechanism is not explicitly stated in the provided excerpt; only risk inclusion and Terminal Illness definition are provided."
+        ],
+        "slug": "great-eastern-direct-great-term"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 28,
+    "evidence_warnings": [],
+    "requires_human_review": true
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_0106ea946ba81735016a8f1f76536c87d08589496068c52e62",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:17:15.136723+00:00",
+    "usage": {
+      "input_tokens": 4965,
+      "output_tokens": 5736,
+      "total_tokens": 10701,
+      "reasoning_tokens": 348,
+      "estimated_cost_usd": 0.008163
+    }
+  }
+}

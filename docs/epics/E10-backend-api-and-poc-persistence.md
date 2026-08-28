@@ -4,7 +4,7 @@
 |---|---|
 | Primary owner | Tim |
 | Priority | P0 |
-| Status | Planned |
+| Status | In progress |
 | Outcome | Every frontend and model-assisted capability can be invoked through a containerized local API with validated contracts, typed failures, portable PostgreSQL/object-store adapters, and disposable synthetic POC state. |
 
 ## Scope
@@ -30,9 +30,9 @@ E10 owns transport, schema validation, repositories, and common errors. It does 
 
 ## Definition of done
 
-- [ ] A documented command starts the backend and `GET /health` and `GET /v1/capabilities` report version and adapter modes.
+- [x] A documented command starts the backend and `GET /health` and `GET /v1/capabilities` report version and adapter modes.
 - [ ] Docker Compose starts the API with healthy PostgreSQL/pgvector and optional local object-store dependencies.
-- [ ] `.env.example` documents `APP_ENV`, `DATABASE_URL`, object-store settings, `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`, provider modes, and scrape freshness settings without real secrets.
+- [x] `.env.example` documents `APP_ENV`, `DATABASE_URL`, object-store settings, `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`, provider modes, and scrape freshness settings without real secrets.
 - [ ] Profile, extraction, evidence-search, recommendation, invocation, conversation, proposal-confirmation, summary-revision, undo, and run-inspection routes publish versioned schemas and typed errors.
 - [ ] Complete, incomplete, invalid, no-evidence, and dependency-failure fixtures pass API contract tests.
 - [ ] Anonymous synthetic sessions can retain profile versions, extraction corrections, recommendation results, conversations, action traces, summary revisions, and run events for replay and undo.

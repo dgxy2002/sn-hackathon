@@ -7,7 +7,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | M |
 | Depends on | E07-T03, E10-T02 |
@@ -20,7 +20,9 @@
 
 - [ ] Schemas define conversation, message, intent, tool plan, action event, proposal, confirmation, summary revision, delta, and undo lineage.
 - [ ] Read, presentation, decision-input, extraction-field, and deterministic-result actions have explicit confirmation and ownership rules.
-- [ ] Supported summary regions and typed tool targets are allowlisted.
+- [x] Supported summary regions and typed tool targets are allowlisted.
+
+**Current evidence:** [`backend/app/contracts.py`](../../backend/app/contracts.py), [`backend/app/conversations.py`](../../backend/app/conversations.py), and the frontend action map in [`frontend/src/main.js`](../../frontend/src/main.js). Proposal, confirmation, revision, delta, undo, and cross-owner acceptance remain pending.
 - [ ] Idle, planning, acting, waiting-for-confirmation, completed, unsupported, cancelled, and failed states are defined.
 - [ ] E03, E04, E06, E07, E10, and E11 owners accept their contract boundaries.
 
@@ -28,7 +30,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | L |
 | Depends on | E01-T05, E12-T01 |
@@ -39,11 +41,13 @@
 
 **Acceptance criteria:**
 
-- [ ] The summary page includes `Ask CoverCheck`, suggested prompts, message history, composer, stop action, and current agent state.
-- [ ] Expandable action items show tool, target, status, evidence count, and affected summary region without exposing hidden model reasoning.
-- [ ] The page visibly focuses, expands, sorts, filters, or adds temporary comparison content as presentation actions complete.
-- [ ] New and changed regions have stable layout, visible focus, reduced-motion behavior, and screen-reader announcements.
+- [x] The summary page includes `Ask CoverCheck`, suggested prompts, message history, composer, stop action, and current agent state.
+- [x] Expandable action items show tool, target, status, evidence count, and affected summary region without exposing hidden model reasoning.
+- [x] The page visibly focuses, expands, sorts, filters, or adds temporary comparison content as presentation actions complete.
+- [x] New and changed regions have stable layout, visible focus, reduced-motion behavior, and screen-reader announcements.
 - [ ] Loading, confirmation, unsupported, failure, completed, replay, and undo controls are keyboard operable.
+
+**Current evidence:** [`frontend/src/api.js`](../../frontend/src/api.js), [`frontend/src/main.js`](../../frontend/src/main.js), [`frontend/src/style.css`](../../frontend/src/style.css), and the [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md). Confirmation, replay, and undo controls remain pending.
 
 ## E12-T03 - Integrate contextual answers and plan exploration
 

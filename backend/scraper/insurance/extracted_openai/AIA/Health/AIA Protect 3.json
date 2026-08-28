@@ -1,0 +1,657 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "AIA",
+    "source_file": "AIA/Health/AIA Protect 3.md",
+    "source_filename": "AIA Protect 3.md",
+    "document_type": "brochure",
+    "content_sha256": "d1b82f29bd92cbb314b647e40acbc1b5386a77b88429c6f28db1772629d56352",
+    "local_markdown_path": "backend/scraper/insurance/AIA/Health/AIA Protect 3.md",
+    "local_pdf_path": "backend/scraper/insurance/AIA/Health/AIA Protect 3.pdf"
+  },
+  "extraction": {
+    "document_summary": "AIA Protect 3 is a critical illness insurance plan designed to cover Singapore’s top 3 critical illnesses—Cancer, Heart Attack, and Stroke—with coverage split into early, intermediate, and major stages. The plan also adds a gender-specific benefit for major stage gender-specific cancers from the 3rd policy year. Buyers choose a coverage level of S$100K, S$200K, or S$300K and the coverage is stated to continue up to age 85. A key payout mechanic is a one-time claim-free cashback of 25% of the coverage amount paid on the policy anniversary on or after age 65, or 15 years from policy start, whichever is later. For major stage gender cancers, the brochure illustrates a base major stage critical illness benefit of S$300,000 plus an additional 15% (S$45,000) for a total of S$345,000. The brochure states “simple sign-ups, no medical checks” (via answering 4 questions) and that value-added medical services are not contractual benefits.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Payout mechanics are partially quantified: cashback (25%) and the gender-specific major stage cancer add-on (15%) are explicit; base CI stage payout amounts for early/intermediate are not stated.",
+      "Exclusions are mentioned only generically (e.g., pre-existing conditions), but specific excluded circumstances are not listed."
+    ],
+    "policies": [
+      {
+        "company": "AIA",
+        "policy_name": "AIA Protect 3",
+        "aliases": [
+          "AIA PROTECT 3"
+        ],
+        "quick_summary": "Critical illness plan with early/intermediate/major stage coverage for Cancer, Heart Attack and Stroke, plus an extra 15% payout for major stage gender-specific cancers from the 3rd policy year. Offers claim-free 25% coverage cashback on/after age 65 or 15 years (whichever later) and coverage up to age 85 with options for S$100K/S$200K/S$300K coverage levels. Sign-up is stated as no medical checks (4 questions). Fixed premiums option available from age 70 (not guaranteed). Value-added services are not contractual benefits and may be withdrawn by partners/AIA at discretion where stated in the brochure.",
+        "category": "critical_illness",
+        "policy_type": "critical_illness",
+        "plan_tier": null,
+        "target_customer": "Working Singaporeans seeking critical illness coverage against cancer, heart attack and stroke",
+        "structure": "base_plan",
+        "participation": "not_stated",
+        "coverage_scope": [
+          "Cancer (early, intermediate, major stages)",
+          "Heart Attack (early, intermediate, major stages)",
+          "Stroke (early, intermediate, major stages)",
+          "Gender-specific cancers (major stage; male and female lists) from the 3rd policy year"
+        ],
+        "currency_options": [
+          "S$"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 85,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "Sign-ups are stated as “no medical checks” by answering 4 questions.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Brochure states the plan covers you up to age 85. It also states the policy continues to provide coverage for critical illness and gender-specific cancers thereafter after the cashback event.",
+        "premium_payment_term_description": "Premium structure described as starting from earlier with “lower premiums” and an option to pay fixed premiums from age 70; fixed premiums are stated as not guaranteed and premiums increase with age otherwise.",
+        "premium_frequencies": [
+          "annual"
+        ],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "simplified",
+        "medical_exam_required": false,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "Policy terminates after a major stage critical illness payout (illustrated in the brochure example)."
+        ],
+        "important_caveats": [
+          "Value-added services provided by partners are stated as not contractual benefits, independent third parties, and AIA reserves the right to cancel/terminate/withdraw the value-added services at its discretion.",
+          "Brochure states exclusions such as pre-existing conditions are specified in the policy contract (but specific exclusions are not listed in the brochure).",
+          "Waiting period and survival period are applicable before benefits will be payable (no durations stated).",
+          "Cashback is described as does not reduce the coverage amount upon payout (only payable once)."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "S$100K coverage level",
+            "plan_code": null,
+            "description": "Choose coverage amount S$100,000.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": 100000,
+            "maximum_sum_assured": 100000,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "Covers up to age 85 (brochure statement for the plan).",
+            "premium_payment_term_description": "Premium details are not given as amounts; brochure states fixed premiums option from age 70 and premiums may increase with age (not guaranteed).",
+            "benefit_amounts": [
+              {
+                "benefit_name": "Claim-free cashback",
+                "payout_type": "lump_sum",
+                "payout_value": 0.25,
+                "payout_unit": "of coverage amount",
+                "payout_basis": "Coverage amount",
+                "payout_description": "One-time payout of 25% of the coverage amount on the policy anniversary on or after age 65, or 15 years from the policy date, whichever is later.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": "one-time (claim-free)",
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Numeric example for S$300,000 is provided in the brochure; this plan object records the general 25% rule.",
+                "evidence": [
+                  {
+                    "quote": "Choose from three coverage levels (S$100K, S$200K & S$300K) to suit your budget",
+                    "line_start": 12,
+                    "line_end": 31,
+                    "quote_token_coverage": 1.0
+                  },
+                  {
+                    "quote": "A one-time payout of 25% of the coverage amount will be paid on the policy anniversary on or after the insured’s 65th birthday, or 15 years from the policy date, whichever is later.",
+                    "line_start": 141,
+                    "line_end": 160,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Choose from three coverage levels (S$100K, S$200K & S$300K) to suit your budget, with protection2 against early, intermediate and major stages",
+                "line_start": 13,
+                "line_end": 32,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "S$200K coverage level",
+            "plan_code": null,
+            "description": "Choose coverage amount S$200,000.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": 200000,
+            "maximum_sum_assured": 200000,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "Covers up to age 85 (brochure statement for the plan).",
+            "premium_payment_term_description": "Premium details are not given as amounts; brochure states fixed premiums option from age 70 and premiums may increase with age (not guaranteed).",
+            "benefit_amounts": [
+              {
+                "benefit_name": "Claim-free cashback",
+                "payout_type": "lump_sum",
+                "payout_value": 0.25,
+                "payout_unit": "of coverage amount",
+                "payout_basis": "Coverage amount",
+                "payout_description": "One-time payout of 25% of the coverage amount on the policy anniversary on or after age 65, or 15 years from the policy date, whichever is later.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": "one-time (claim-free)",
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Choose from three coverage levels (S$100K, S$200K & S$300K) to suit your budget",
+                    "line_start": 12,
+                    "line_end": 31,
+                    "quote_token_coverage": 1.0
+                  },
+                  {
+                    "quote": "A one-time payout of 25% of the coverage amount will be paid on the policy anniversary on or after the insured’s 65th birthday, or 15 years from the policy date, whichever is later.",
+                    "line_start": 141,
+                    "line_end": 160,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Choose from three coverage levels (S$100K, S$200K & S$300K) to suit your budget",
+                "line_start": 12,
+                "line_end": 31,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "S$300K coverage level",
+            "plan_code": null,
+            "description": "Choose coverage amount S$300,000.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": 300000,
+            "maximum_sum_assured": 300000,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "Covers up to age 85 (brochure statement for the plan).",
+            "premium_payment_term_description": "Premium details are not given as amounts; brochure states fixed premiums option from age 70 and premiums may increase with age (not guaranteed).",
+            "benefit_amounts": [
+              {
+                "benefit_name": "Claim-free cashback",
+                "payout_type": "lump_sum",
+                "payout_value": 75000,
+                "payout_unit": "S$",
+                "payout_basis": "25% x S$300,000",
+                "payout_description": "One-time payout of 25% of the coverage amount; illustrated for S$300,000 coverage as S$75,000.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": "one-time (claim-free)",
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Illustration; the general rule is 25% of coverage amount.",
+                "evidence": [
+                  {
+                    "quote": "Coverage amount: S$300,000",
+                    "line_start": 76,
+                    "line_end": 95,
+                    "quote_token_coverage": 1.0
+                  },
+                  {
+                    "quote": "Cashback benefit: 25% x S$300,000 = S$75,000",
+                    "line_start": 80,
+                    "line_end": 99,
+                    "quote_token_coverage": 1.0
+                  },
+                  {
+                    "quote": "A one-time payout of 25% of the coverage amount will be paid on the policy anniversary on or after the insured’s 65th birthday, or 15 years from the policy date, whichever is later.",
+                    "line_start": 141,
+                    "line_end": 160,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Gender cancer add-on (major stage, additional 15% payout)",
+                "payout_type": "lump_sum",
+                "payout_value": 45000,
+                "payout_unit": "S$",
+                "payout_basis": "15% x S$300,000",
+                "payout_description": "Additional 15% payout for major stage gender-specific cancers from your 3rd policy year (illustrated add-on as S$45,000 when coverage is S$300,000).",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": "one-time (stated as only payable once in T&Cs for this benefit)",
+                "maximum_claims": null,
+                "benefit_relationship": "additional",
+                "reduces_base_sum_assured": false,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Major stage gender-specific cancers from the 3rd policy year",
+                "notes": "Brochure states this benefit is only payable once and does not reduce the coverage amount upon payout.",
+                "evidence": [
+                  {
+                    "quote": "With cancer risks varying by gender, your cover also includes an additional 15% payout5 for major stage gender-specific cancers from your 3rd policy year",
+                    "line_start": 28,
+                    "line_end": 47,
+                    "quote_token_coverage": 1.0
+                  },
+                  {
+                    "quote": "Gender cancer benefit2: + 15% x S$300,000",
+                    "line_start": 107,
+                    "line_end": 109,
+                    "quote_token_coverage": 0.998
+                  },
+                  {
+                    "quote": "= S$45,000",
+                    "line_start": 92,
+                    "line_end": 111,
+                    "quote_token_coverage": 1.0
+                  },
+                  {
+                    "quote": "This benefit is only payable once, and does not reduce the coverage amount upon payout.",
+                    "line_start": 150,
+                    "line_end": 169,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Choose from three coverage levels (S$100K, S$200K & S$300K) to suit your budget",
+                "line_start": 12,
+                "line_end": 31,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "With cancer risks varying by gender, your cover also includes an additional 15% payout5 for major stage gender-specific cancers from your 3rd policy year",
+                "line_start": 28,
+                "line_end": 47,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Claim-free coverage cashback (25%)",
+            "benefit_category": "cashback",
+            "benefit_level": "base",
+            "benefit_description": "If claim-free, a one-time payout of 25% of the coverage amount on the policy anniversary on or after age 65, or 15 years from policy date, whichever is later.",
+            "trigger_description": "Policy anniversary on/after age 65 while claim-free; alternatively 15 years from policy date if later.",
+            "covered_conditions": [
+              "Claim-free policy status"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": "lump_sum",
+            "payout_value": 0.25,
+            "payout_unit": "of coverage amount",
+            "payout_basis": "Coverage amount",
+            "payout_description": "25% of coverage amount (one-time).",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "one-time",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "Singapore (implied by “Working Singaporeans” and covered CI definitions, but not explicitly geographic in benefit clause)",
+            "notes": "Brochure states the policy continues to provide coverage for critical illness and gender-specific cancers thereafter.",
+            "evidence": [
+              {
+                "quote": "Receive a\n25%\ncoverage cashback\nif claim-free1",
+                "line_start": 1,
+                "line_end": 10,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "A one-time payout of 25% of the coverage amount will be paid on the policy anniversary on or after the\ninsured’s 65th birthday, or 15 years from the policy date, whichever is later.",
+                "line_start": 141,
+                "line_end": 160,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Major stage critical illness benefit (base critical illness payout)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Pays under the major stage critical illness benefit for covered major stage critical illnesses (e.g., Cancer major stage, Heart Attack specified severity, Stroke with neurological deficit). Brochure describes the base CI payout as the higher of 100% of the coverage amount or total annual premiums paid (excluding premium adjustment), after deducting any cashback paid.",
+            "trigger_description": "Diagnosis/treatment meeting “major stage” definitions for covered critical illnesses (covered conditions are listed in the brochure).",
+            "covered_conditions": [
+              "Cancer (major cancer)",
+              "Heart Attack of specified severity",
+              "Stroke with permanent neurological deficit"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": 1,
+            "payout_unit": "coverage amount",
+            "payout_basis": "Higher of (i) 100% of coverage amount or (ii) total annual premiums paid (excluding non-annual premium mode adjustment) after deducting cashback",
+            "payout_description": "Higher of (i) 100% of the coverage amount, or (ii) total annual premiums paid (excluding any premium adjustment for non-annual premium payment mode), after deducting any cashback paid.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "not stated",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Illustration indicates the policy terminates after this payout.",
+            "geographic_scope": "Singapore (covered CI lists are Singapore-focused; benefit clause not explicitly geographic)",
+            "notes": "The brochure’s illustration shows for major stage lung cancer with S$300,000 coverage, the major stage critical illness benefit is S$300,000; it then adds the gender cancer add-on.",
+            "evidence": [
+              {
+                "quote": "We will pay the higher of (i) 100% of the coverage amount, or (ii) the total annual premiums paid (excluding\nany premium adjustment for non-annual premium payment mode), after deducting any cashback paid.",
+                "line_start": 144,
+                "line_end": 163,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "| Major stage critical  | Gender cancer benefit:    |     |     |     |\n| --------------------- | ------------------------- | --- | --- | --- |\n| illness benefit2:     |\nS$345,000",
+                "line_start": 107,
+                "line_end": 110,
+                "quote_token_coverage": 0.997
+              },
+              {
+                "quote": "72\nGilbert is diagnosed with major stage lung cancer. AIA Protect 3\npays S$345,000 under major stage critical illness benefit & gender\ncancer benefit.",
+                "line_start": 87,
+                "line_end": 106,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Gender cancer benefit (major stage, additional 15% payout from 3rd policy year)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Additional payout of 15% for major stage gender-specific cancers from the 3rd policy year. Stated to be payable only once and does not reduce the coverage amount upon payout.",
+            "trigger_description": "Claim for a covered major stage gender-specific cancer from the 3rd policy year (male and female cancer lists are provided).",
+            "covered_conditions": [
+              "Male major stage cancers: Prostate, Testicle, Scrotum, Lung, Colon and Rectum",
+              "Female major stage cancers: Uterus (Corpus uteri), Cervix uteri, Ovary, Lung, Colon and Rectum, Breast"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": 0.15,
+            "payout_unit": "of coverage amount",
+            "payout_basis": "Coverage amount",
+            "payout_description": "Additional 15% payout for major stage gender-specific cancers from the 3rd policy year.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "only once",
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": false,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "From the 3rd policy year",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "Singapore (implied by plan positioning; not explicitly stated in benefit wording)",
+            "notes": "Brochure example shows for major stage lung cancer: gender cancer benefit equals +15% x S$300,000 = S$45,000, added to the base major stage critical illness payout.",
+            "evidence": [
+              {
+                "quote": "With cancer risks varying by gender, your cover also includes an additional\n15% payout5 for major stage gender-specific cancers from your 3rd policy\nyear — giving you greater financial assurance.",
+                "line_start": 28,
+                "line_end": 47,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "5 This benefit is only payable once, and does not reduce the coverage amount upon payout.",
+                "line_start": 150,
+                "line_end": 169,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Gender cancer benefit: + 15% x S$300,000 = S$45,000",
+                "line_start": 107,
+                "line_end": 111,
+                "quote_token_coverage": 0.996
+              },
+              {
+                "quote": "Gender cancers covered:\nMale Female\nMajor Stage • Prostate • Breast",
+                "line_start": 131,
+                "line_end": 150,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Early/Intermediate/Major stage coverage (Cancer, Heart Attack, Stroke) — stage lists provided",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Brochure states the plan provides protection against early, intermediate and major stages of Cancer, Heart Attack, and Stroke, with specific covered conditions listed per stage.",
+            "trigger_description": "Diagnosis/treatment meeting the listed covered conditions for early/intermediate/major stages.",
+            "covered_conditions": [
+              "Heart Attack: Cardiac Pacemaker Insertion, Cardiac Defibrillator Insertion, Pericardiectomy, Early Cardiomyopathy, Heart Attack of Specified Severity (list shown)",
+              "Cancer: Carcinoma in situ, Early Prostate Cancer with Radical Surgery, Early Thyroid Cancer, Early Neuroendocrine Tumours, Early Bladder Cancer, Early Chronic Lymphocytic Leukaemia, Early Melanoma, Gastro-Intestinal Stromal Tumours, Bone Marrow Malignancies, Major Cancer (list shown)",
+              "Stroke: Brain Aneurysm Surgery (via Endovascular procedures), Brain Aneurysm Surgery (via Craniotomy), Cerebral Shunt Insertion, Carotid Artery Surgery, Stroke with Permanent Neurological Deficit (list shown)"
+            ],
+            "condition_stages": [
+              "pre_early",
+              "early",
+              "intermediate",
+              "late_or_severe"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "The brochure provides the names of covered conditions by stage, but does not state the payout percentages/amounts for early and intermediate stages in this extracted text.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "Singapore (contextual)",
+            "notes": "Covered condition lists are explicitly stated by stage on the provided pages. Waiting/survival periods apply generally before benefits will be payable, but their durations are not stated.",
+            "evidence": [
+              {
+                "quote": "Critical Illness Early Stage Intermediate Stage Major Stage\nHeart Attack • Cardiac Pacemaker • Cardiac Defibrillator • Heart Attack of\nInsertion Insertion Specified Severity",
+                "line_start": 107,
+                "line_end": 126,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Cancer • Carcinoma in situ • Carcinoma in situ of • Major Cancer\n• Early Prostate Cancer specified organs treated\nwith Radical Surgery",
+                "line_start": 111,
+                "line_end": 130,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Stroke • Brain Aneurysm Surgery • Carotid Artery Surgery • Stroke with\n(via Endovascular Permanent\nprocedures) Neurological\n• Brain Aneurysm Surgery Deficit",
+                "line_start": 126,
+                "line_end": 145,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "Stay protected against cancer, heart attack and stroke, with enhanced cover for gender-specific cancers.",
+            "line_start": 1,
+            "line_end": 6,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Choose from three coverage levels (S$100K, S$200K & S$300K) to suit your budget",
+            "line_start": 12,
+            "line_end": 31,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Simple sign-ups, no medical checks\nGet your coverage in minutes by simply answering 4 questions.",
+            "line_start": 30,
+            "line_end": 49,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "medium",
+        "review_notes": [
+          "Early and intermediate stage payout amounts are not explicitly quantified in the provided brochure text; only the major-stage gender add-on (15%) and claim-free cashback (25%) are explicit."
+        ],
+        "slug": "aia-aia-protect-3"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 30,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_0ab0385c7b494b32016a8f1c98c31887d090a867e26595b4f9",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:05:11.853479+00:00",
+    "usage": {
+      "input_tokens": 6336,
+      "output_tokens": 6705,
+      "total_tokens": 13041,
+      "reasoning_tokens": 332,
+      "estimated_cost_usd": 0.00964845
+    }
+  }
+}

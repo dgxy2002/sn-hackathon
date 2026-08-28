@@ -1,0 +1,422 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Singlife",
+    "source_file": "Singlife/Medical & Life Insurance/Critical Illness Insurance/Singlife Comprehensive Critical Illness II.md",
+    "source_filename": "Singlife Comprehensive Critical Illness II.md",
+    "document_type": "brochure",
+    "content_sha256": "ff79b7ff814ec57f564482cc26832aba513f39f3a3f77614579dbefc75d8ffbb",
+    "local_markdown_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Critical Illness Insurance/Singlife Comprehensive Critical Illness II.md",
+    "local_pdf_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Critical Illness Insurance/Singlife Comprehensive Critical Illness II.pdf"
+  },
+  "extraction": {
+    "document_summary": "Singlife Comprehensive Critical Illness II is a single-payout critical illness plan that pays a one-time lump sum when you are diagnosed with any of the 135 covered critical illness conditions across early, intermediate and severe stages. The core payout is 100% of your Sum Assured. The brochure also provides add-on payouts that can increase total benefits depending on the event: (1) a further additional 20% of Sum Assured for surgical removal of a Benign Tumour (suspected malignancy) or diagnosis of a Borderline Malignant Tumour, capped at S$25,000; (2) if you spend 4 days or more in the ICU in one hospital admission, you receive an additional 20% of Sum Assured, capped at S$25,000; and (3) a Special Benefit for 27 conditions pays an additional 20% of Sum Assured up to S$25,000 per life per condition, with a maximum of six claims. It also states a death payout of S$5,000 during the coverage period. Key buyer caveats include claim limits (e.g., only one claim under certain benefits, and the Special Benefit has a per-condition and total-claim maximum) and that waiting period and survival period are applicable.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Main benefits and caps are stated clearly (100% Sum Assured, additional 20% with S$25,000 caps, and death payout of S$5,000).",
+      "Eligibility ages (entry age range) are not explicitly stated; only benefit cessation ages and coverage-period choices are described.",
+      "Underwriting level, medical exam requirement, free-look/grace period, and exclusions are not explicitly provided in the brochure text supplied."
+    ],
+    "policies": [
+      {
+        "company": "Singlife",
+        "policy_name": "Singlife Comprehensive Critical Illness II",
+        "aliases": [],
+        "quick_summary": "Single-payout critical illness plan: pays 100% of Sum Assured as a lump sum on diagnosis of 135 covered critical illnesses (across early/intermediate/severe stages). Additional benefits may pay extra 20% of Sum Assured for specified events (benign/borderline tumours, ICU stay ≥4 days, and a Special Benefit for 27 conditions), each subject to caps and claim limits. Death during coverage period pays S$5,000. Coverage period can be chosen from 10 years up to age 99 (in 1-year intervals) and payout limits can be converted if not in SGD. Waiting and survival periods are stated as applicable for certain benefits.",
+        "category": "critical_illness",
+        "policy_type": "critical_illness",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_stated",
+        "coverage_scope": [
+          "Diagnosis of covered critical illnesses across various stages (early, intermediate, severe) among 135 conditions",
+          "Additional payouts for: surgical removal of Benign Tumour (suspected malignancy) or Borderline Malignant Tumour",
+          "Additional payout for ICU stay of 4 days or more within a single hospital admission in Singapore",
+          "Additional payout for 27 covered conditions under the Special Benefit",
+          "Lump-sum payout upon death during the coverage period"
+        ],
+        "currency_options": [
+          "SGD",
+          "USD",
+          "GBP",
+          "EUR",
+          "AUD",
+          "HKD"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 99,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": "ICU-related benefit specifies ICU stay must be in Singapore and confirmed as Necessary Medical Treatment.",
+        "occupation_classes": [],
+        "eligibility_notes": "Brochure says ages mentioned refer to age next birthday.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Choose coverage period any duration from 10 years up till you’re 99 years old (in one-year intervals).",
+        "premium_payment_term_description": null,
+        "premium_frequencies": [
+          "annually"
+        ],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": false,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "For certain benefits: on the Policy Anniversary in which the Life Assured is 85 years old, or upon the expiry of the Policy, whichever is earliest",
+          "For ICU benefit: on the date on which a claim is made, on the Policy Anniversary in which the Life Assured is 85 years old, or upon the expiry of the Policy, whichever is earliest",
+          "For Special Benefit: on the date on which the sixth claim is made, on the Policy Anniversary in which the Life Assured is 18 or 85 years old (based on covered conditions), or upon the expiry of the Policy, whichever is earliest"
+        ],
+        "important_caveats": [
+          "Core critical illness payout is a one-time lump sum; the brochure describes claim limits (e.g., only one claim allowed under certain benefits).",
+          "Waiting period and survival period are applicable for the benefits described as having those terms.",
+          "ICU benefit: ICU stay of 4 days or more must be in one hospital admission in Singapore and must be confirmed as Necessary Medical Treatment; ICU is not considered Necessary Medical Treatment if the Life Assured can be safely and adequately treated in any other facility.",
+          "Special Benefit: only one claim is payable for each condition and a maximum of six claims is allowed under this benefit; the benefit ceases upon the sixth claim or specific age/expiry timing.",
+          "Currency conversion: if coverage amount is not in Singapore dollars, benefit limits stated in Singapore dollars are converted to the equivalent amount in chosen currency based on the insurer’s currency conversion rate."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [],
+        "benefits": [
+          {
+            "benefit_name": "Critical Illness Lump Sum Payout (100% of Sum Assured)",
+            "benefit_category": "critical_illness_diagnosis",
+            "benefit_level": "base",
+            "benefit_description": "A one-time lump-sum payout upon diagnosis of covered critical illness conditions across various stages (early, intermediate or severe). The payout is 100% of the Sum Assured.",
+            "trigger_description": "If diagnosed with any of the covered 135 conditions across various stages of critical illnesses.",
+            "covered_conditions": [
+              "Any of the covered 135 critical illness conditions across early, intermediate and severe stages"
+            ],
+            "condition_stages": [
+              "pre_early",
+              "early",
+              "intermediate",
+              "late_or_severe"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "100% of Sum Assured",
+            "payout_description": "100% of your Sum Assured as a lump-sum payout upon diagnosis.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": 1,
+            "benefit_relationship": "standalone",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": 85,
+            "benefit_expiry_description": "For this benefit, it ceases on the Policy Anniversary in which the Life Assured is 85 years old (or on claim date or policy expiry, whichever is earliest).",
+            "geographic_scope": null,
+            "notes": "The brochure also states this benefit shall cease on the date on which a claim is made, on the Policy Anniversary in which the Life Assured is 85 years old, or upon the expiry of the Policy, whichever is earliest; waiting period and survival period are applicable.",
+            "evidence": [
+              {
+                "quote": "If you’re diagnosed with any of the covered 135 conditions across various stages of critical illnesses1, you’ll get a lump-sum payout that’s 100% of your Sum Assured.",
+                "line_start": 24,
+                "line_end": 43,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Only one claim is allowed under this benefit. An additional 20% of Sum Assured will be payable subject to a cap of S$25,000 (or equivalent currency) per life.",
+                "line_start": 85,
+                "line_end": 104,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "This benefit shall cease on the date on which a claim is made, on the Policy Anniversary in which the Life Assured is 85 years old, or upon the expiry of the Policy, whichever is earliest. Waiting period and survival period are applicable.",
+                "line_start": 88,
+                "line_end": 107,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Benign Tumour (suspected malignancy) / Borderline Malignant Tumour Benefit (additional 20% capped at S$25,000)",
+            "benefit_category": "critical_illness_additional_benefit",
+            "benefit_level": "optional",
+            "benefit_description": "Additional payout for specified benign/borderline tumour scenarios on top of the core critical illness payout (as described in the brochure). Pays an additional 20% of Sum Assured, capped at S$25,000.",
+            "trigger_description": "Surgical removal of a Benign Tumour (suspected malignancy) or diagnosis of a Borderline Malignant Tumour.",
+            "covered_conditions": [
+              "Benign Tumour (suspected malignancy) requiring surgical excision",
+              "Borderline Malignant Tumour"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Additional 20% of Sum Assured",
+            "payout_description": "Additional 20% of your Sum Assured (up to S$25,000).",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 25000,
+            "limit_amount": 25000,
+            "limit_type": "cap",
+            "claim_frequency": null,
+            "maximum_claims": 1,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": 85,
+            "benefit_expiry_description": "Benefit ceases on claim date, on Policy Anniversary at age 85, or policy expiry (whichever is earliest).",
+            "geographic_scope": null,
+            "notes": "The brochure states waiting period and survival period are applicable and provides additional terms about Benign Tumour (suspected malignancy) requiring surgical excision and Borderline Malignant Tumour definitions.",
+            "evidence": [
+              {
+                "quote": "If you undergo surgical removal of a Benign Tumour (suspected malignancy) or are diagnosed with a Borderline Malignant Tumour2, you’ll receive an additional 20% of your Sum Assured (up to S$25,000).",
+                "line_start": 26,
+                "line_end": 45,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Only one claim is allowed under this benefit. An additional 20% of Sum Assured will be payable subject to a cap of S$25,000 (or equivalent currency) per life.",
+                "line_start": 85,
+                "line_end": 104,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Waiting period and survival period are applicable. Please refer to the Product Summary for more details on the benefit terms and conditions including the definitions of Benign Tumour (suspected malignancy) requiring surgical excision and Borderline Malignant Tumour.",
+                "line_start": 89,
+                "line_end": 108,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Intensive Care Unit (ICU) Benefit (additional 20% capped at S$25,000)",
+            "benefit_category": "hospitalisation_additional_benefit",
+            "benefit_level": "optional",
+            "benefit_description": "Additional payout for spending at least 4 days in the ICU within a single hospital admission (in Singapore). Pays additional 20% of Sum Assured, capped at S$25,000.",
+            "trigger_description": "Spend 4 days or more in the Intensive Care Unit within a single hospital admission.",
+            "covered_conditions": [],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Additional 20% of Sum Assured",
+            "payout_description": "Additional 20% of your Sum Assured (up to S$25,000).",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 25000,
+            "limit_amount": 25000,
+            "limit_type": "cap",
+            "claim_frequency": null,
+            "maximum_claims": 1,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": 85,
+            "benefit_expiry_description": "Benefit ceases on the date on which a claim is made, on the Policy Anniversary in which the Life Assured is 85 years old, or upon expiry of the Policy (whichever is earliest).",
+            "geographic_scope": "Singapore",
+            "notes": "ICU stay must be due to illness or accident, in one hospital admission in Singapore, and confirmed as Necessary Medical Treatment. A stay will not be considered Necessary Medical Treatment if the Life Assured can be safely and adequately treated in any other facility. Waiting period and survival period are applicable.",
+            "evidence": [
+              {
+                "quote": "If you spend 4 days or more in the Intensive Care Unit within a single hospital admission3, you’ll receive a payout that’s an additional 20% of your Sum Assured (up to S$25,000).",
+                "line_start": 29,
+                "line_end": 48,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Only one claim is allowed under this benefit. An additional 20% of Sum Assured will be payable subject to a cap of S$25,000 (or equivalent currency) per life.",
+                "line_start": 85,
+                "line_end": 104,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The Intensive Care Unit (ICU) stay of 4 days or more (due to illness or accident) must be in one hospital admission in Singapore and must be confirmed as Necessary Medical Treatment. A stay in ICU will not be considered as Necessary Medical Treatment if the Life Assured can be safely and adequately treated in any other facility.",
+                "line_start": 94,
+                "line_end": 113,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Payout upon death (S$5,000 lump sum)",
+            "benefit_category": "life_events_death",
+            "benefit_level": "base",
+            "benefit_description": "If the Life Assured dies during the coverage period, a lump-sum payout of S$5,000 is made.",
+            "trigger_description": "Death during the coverage period.",
+            "covered_conditions": [],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 5000,
+            "payout_unit": null,
+            "payout_basis": "Fixed amount",
+            "payout_description": "Lump-sum payout of S$5,000 to help with medical bills or funeral expenses.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "standalone",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Only stated as applying if death occurs during the coverage period.",
+            "geographic_scope": null,
+            "notes": "The brochure does not state death benefit claim limits or conversion rules for this specific amount.",
+            "evidence": [
+              {
+                "quote": "If you die during the coverage period, a lump-sum payout of S$5,000 will be made to help with medical bills or funeral expenses.",
+                "line_start": 32,
+                "line_end": 51,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Special Benefit (additional 20% of Sum Assured for 27 conditions, capped at S$25,000 per life per condition; max 6 claims)",
+            "benefit_category": "critical_illness_special_benefit",
+            "benefit_level": "optional",
+            "benefit_description": "If diagnosed with one of the 27 covered conditions under the Special Benefit, you receive an additional 20% of your Sum Assured, up to S$25,000 per life per condition. Only one claim is payable for each condition and a maximum of six claims is allowed under this benefit.",
+            "trigger_description": "Diagnosis with one of the 27 covered conditions under the Special Benefit.",
+            "covered_conditions": [
+              "Any of the 27 covered conditions under the Special Benefit (examples provided)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Additional 20% of Sum Assured",
+            "payout_description": "Additional 20% of Sum Assured, capped at S$25,000 per life per condition.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 25000,
+            "limit_amount": 25000,
+            "limit_type": "cap_per_life_per_condition",
+            "claim_frequency": null,
+            "maximum_claims": 6,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": 18,
+            "benefit_expiry_description": "This benefit ceases on the date on which the sixth claim is made, on the Policy Anniversary in which the Life Assured is 18 or 85 years old (based on covered conditions), or upon the expiry of the Policy, whichever is earliest.",
+            "geographic_scope": null,
+            "notes": "Waiting period (for specific conditions) and survival period are applicable.",
+            "evidence": [
+              {
+                "quote": "Should you be diagnosed with one of the 27 covered conditions under the Special Benefit4, you’ll get a payout that’s an additional 20% of your Sum Assured, up to S$25,000 per life per condition.",
+                "line_start": 35,
+                "line_end": 54,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "If the Life Assured is diagnosed with any one of the 27 conditions covered, an additional 20% of the Sum Assured will be payable, capped at S$25,000 (or equivalent currency) per life per condition. Only one claim is payable for each condition and a maximum of six claims is allowed under this benefit.",
+                "line_start": 98,
+                "line_end": 117,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "This benefit shall cease on the date on which the sixth claim is made, on the Policy Anniversary in which the Life Assured is 18 or 85 years old (based on covered conditions), or upon the expiry of the Policy, whichever is earliest. Waiting period (for specific conditions) and survival period are applicable.",
+                "line_start": 100,
+                "line_end": 119,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "Singlife Comprehensive Critical Illness II provides a one-time lump-sum payout upon diagnosis of critical illnesses across various stages, from early detection to severe diagnosis, along with added benefits to help you recover with peace of mind.",
+            "line_start": 21,
+            "line_end": 40,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "high",
+        "review_notes": [
+          "Brochure does not explicitly state underwriting method, medical exam requirement, waiting period/survival period durations, free-look, or grace period.",
+          "No explicit exclusions were provided in the supplied text; only stated caveats/benefit termination and claim-limit rules."
+        ],
+        "slug": "singlife-singlife-comprehensive-critical-illness-ii"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 14,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_0c528802471213b9016a8f2182f9e087d08975f0302d2ff696",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:25:55.595877+00:00",
+    "usage": {
+      "input_tokens": 6313,
+      "output_tokens": 5179,
+      "total_tokens": 11492,
+      "reasoning_tokens": 302,
+      "estimated_cost_usd": 0.00773635
+    }
+  }
+}

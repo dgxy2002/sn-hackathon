@@ -1,0 +1,472 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Great Eastern",
+    "source_file": "Great Eastern/Health Insurance/GREAT CareShield.md",
+    "source_filename": "GREAT CareShield.md",
+    "document_type": "brochure",
+    "content_sha256": "5151f3d2556e12b7d6d49ad197eb0a76bb185ae200cfe96e476266f791837d96",
+    "local_markdown_path": "backend/scraper/insurance/Great Eastern/Health Insurance/GREAT CareShield.md",
+    "local_pdf_path": "backend/scraper/insurance/Great Eastern/Health Insurance/GREAT CareShield.pdf"
+  },
+  "extraction": {
+    "document_summary": "Great Eastern “GREAT CareShield” is a long-term care supplement intended to provide caregiving support via monthly disability-related payouts plus an Initial Benefit. The brochure states that you receive “Initial Beneﬁt” as a lump sum equal to 3 times the “Monthly Beneﬁt”, and that subsequent payouts of the Monthly Beneﬁt are payable subject to a Deferment Period. It also describes how benefit durations are linked to time: monthly payouts are payable based on a 180-month period (15 years) after the Deferment Period ends. It further introduces additional monthly-style supports for a caregiver and a dependent child, where the brochure shows percentage-based payout amounts (e.g., caregiver at 30% of the Monthly Beneﬁt, dependant care at 30% of the Monthly Beneﬁt) and a lump sum “3 times the Monthly Beneﬁt”. A key limitation/caveat stated is that these payouts are “Subject to Deferment Period”, and that the dependant care benefit applies only when the Life Assured has a child below 22 (age last birthday).",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "The provided Markdown appears truncated with missing headings and many sentences cut off mid-line (e.g., disability definition/conditions and the full table structure).",
+      "Only partial mechanics (Initial Benefit = 3x Monthly Beneﬁt; caregiver/dependant tiers and some percentage amounts; 180-month maximum; Deferment Period references; dependant child age) are extractable from the text shown.",
+      "Eligibility criteria beyond dependant child age (below 22, age last birthday) and general age-basis are not stated in the provided content.",
+      "No explicit product claim/exclusion list is provided in the extracted text."
+    ],
+    "policies": [
+      {
+        "company": "Great Eastern",
+        "policy_name": "GREAT CareShield",
+        "aliases": [
+          "Great CareShield"
+        ],
+        "quick_summary": "A CareShield-style long-term care supplement providing a lump-sum Initial Benefit (3× Monthly Beneﬁt) and monthly disability-related payouts subject to a Deferment Period, plus caregiver and dependant care monthly support shown as percentages of the Monthly Beneﬁt. Dependant Care is only for a child below age 22 (age last birthday). Maximum monthly payout is based on 180 months (15 years) after the Deferment Period ends (as stated). Protected up to specified limits by SDIC (as stated). All age references are age last birthday (as stated). Not much else (eligibility/underwriting/benefit triggers wording) is visible in the provided excerpt.",
+        "category": "long_term_care",
+        "policy_type": "careshield_supplement",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_stated",
+        "coverage_scope": [
+          "Monthly Beneﬁt payable for long-term disability/caregiving support (definition not fully shown)",
+          "Initial Beneﬁt lump sum (3× Monthly Beneﬁt)",
+          "Monthly Caregiver Beneﬁt (percentage shown)",
+          "Monthly Dependant Care Beneﬁt (percentage shown; child age condition shown)"
+        ],
+        "currency_options": [
+          "SGD"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": null,
+        "entry_age_basis": "age_last_birthday",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "Dependant Care Benefit is applicable if the Life Assured has a Child who is below 22 years old (age last birthday).",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Monthly payouts are described as payable for as long as the Life Assured suffers from the stated condition, and are also described as based on a 180-month period (15 years) after the Deferment Period ends (per excerpt).",
+        "premium_payment_term_description": null,
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [],
+        "important_caveats": [
+          "Payouts are “Subject to Deferment Period”.",
+          "Dependant Care Benefit applies only if the Life Assured has a child below 22 years old (age last birthday).",
+          "The excerpt indicates the Initial Benefit “may be paid again for subsequent episodes of inability to perform at least …” but the disability definition/threshold text is truncated."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "Base - Monthly Beneﬁt with Initial Beneﬁt (3× Monthly Beneﬁt)",
+            "plan_code": null,
+            "description": "Standard CareShield supplement benefit set described in the excerpt: Initial Beneﬁt as a lump sum of 3 times the Monthly Beneﬁt, and Monthly Beneﬁt payouts subject to the Deferment Period, with a stated maximum duration based on 180 months (15 years) after the Deferment Period ends.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "All ages specified refer to age last birthday.",
+            "coverage_term_description": "Based on a 180-month period (15 years) after the Deferment Period ends; monthly payouts also stated as payable for as long as the Life Assured suffers from the stated condition (full wording truncated in excerpt).",
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Initial Beneﬁt",
+                "payout_type": "lump_sum",
+                "payout_value": 3,
+                "payout_unit": "times Monthly Beneﬁt",
+                "payout_basis": null,
+                "payout_description": "Initial Beneﬁt is a lump sum payment equivalent to 3 times of the Monthly Beneﬁt.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Subject to Deferment Period (for Monthly Beneﬁt payouts per excerpt).",
+                "notes": "The excerpt also says Initial Beneﬁt “may be paid again for subsequent episodes of inability to perform at least …” but truncates the inability definition.",
+                "evidence": [
+                  {
+                    "quote": "The Initial Beneﬁt is a lump sum payment equivalent to 3 times of the Monthly Beneﬁt.",
+                    "line_start": 34,
+                    "line_end": 53,
+                    "quote_token_coverage": 1.0
+                  },
+                  {
+                    "quote": "One lump sum of 3 times the Monthly Beneﬁt payable",
+                    "line_start": 19,
+                    "line_end": 38,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Monthly Beneﬁt",
+                "payout_type": "monthly_income",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": null,
+                "payout_description": "Monthly Beneﬁt payouts are described as payable for as long as the Life Assured suffers from the stated condition, subject to the Deferment Period, and are also described as based on a 180-month period (15 years) after the Deferment Period ends.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Subject to Deferment Period.",
+                "notes": "Exact trigger definition and what condition qualifies is truncated in the provided excerpt.",
+                "evidence": [
+                  {
+                    "quote": "Subject to Deferment Period. Payouts of Monthly Beneﬁt are payable for as long as the Life Assured suffers from the",
+                    "line_start": 32,
+                    "line_end": 51,
+                    "quote_token_coverage": 1.0
+                  },
+                  {
+                    "quote": "Based on a 180-month period (15 years) after the Deferment Period ends.",
+                    "line_start": 16,
+                    "line_end": 35,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "With GREAT CareShield, you gain conﬁdence knowing that you are covered.",
+                "line_start": 1,
+                "line_end": 2,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Initial Beneﬁt",
+            "benefit_category": "long_term_care_support",
+            "benefit_level": "base",
+            "benefit_description": "A lump sum payment equivalent to 3 times of the Monthly Beneﬁt. The excerpt indicates it may be paid again for subsequent episodes of inability to perform at least a stated threshold, where there was a previous claim for Initial Beneﬁt (threshold text truncated).",
+            "trigger_description": "The excerpt references “subsequent episodes of inability to perform at least … which there was a previous claim for Initial Beneﬁt”, but the inability threshold is truncated.",
+            "covered_conditions": [
+              "Inability to perform at least [definition truncated]"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 3,
+            "payout_unit": "times Monthly Beneﬁt",
+            "payout_basis": null,
+            "payout_description": "Initial Beneﬁt lump sum = 3× Monthly Beneﬁt.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "Whether Initial Beneﬁt is also subject to Deferment Period is not explicitly stated in the excerpt; only Monthly Beneﬁt is explicitly stated as “Subject to Deferment Period”.",
+            "evidence": [
+              {
+                "quote": "The Initial Beneﬁt is a lump sum payment equivalent to 3 times of the Monthly Beneﬁt.",
+                "line_start": 34,
+                "line_end": 53,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "In the event the Life Assured fully recovers from the disability, the Initial Beneﬁt may be paid again for subsequent episodes of inability to perform at least",
+                "line_start": 35,
+                "line_end": 54,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Monthly Beneﬁt",
+            "benefit_category": "long_term_care_support",
+            "benefit_level": "base",
+            "benefit_description": "Monthly payouts for caregiving support, payable subject to a Deferment Period and described as based on a 180-month (15-year) period after the Deferment Period ends.",
+            "trigger_description": "The excerpt states payouts are payable for as long as the Life Assured suffers from the condition (full condition text truncated).",
+            "covered_conditions": [
+              "Life Assured suffers from [condition text truncated]"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "claims_based",
+            "payout_type": "monthly_income",
+            "payout_value": null,
+            "payout_unit": "Monthly Beneﬁt",
+            "payout_basis": null,
+            "payout_description": "Monthly Beneﬁt payouts, subject to Deferment Period; duration described as based on a 180-month period after Deferment Period ends.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "After the Deferment Period ends (per “after the Deferment Period ends”).",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Based on a 180-month (15-year) period after Deferment Period ends (per excerpt).",
+            "geographic_scope": null,
+            "notes": "The brochure excerpt does not provide the exact Deferment Period length or the full definition of the disability trigger.",
+            "evidence": [
+              {
+                "quote": "Subject to Deferment Period. Payouts of Monthly Beneﬁt are payable for as long as the Life Assured suffers from the",
+                "line_start": 32,
+                "line_end": 51,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Based on a 180-month period (15 years) after the Deferment Period ends.",
+                "line_start": 16,
+                "line_end": 35,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Monthly Caregiver Beneﬁt",
+            "benefit_category": "long_term_care_support",
+            "benefit_level": "base",
+            "benefit_description": "A caregiver support benefit payable as a percentage of the Monthly Beneﬁt, subject to the Deferment Period, and payable for up to a maximum of 12 months (whether consecutive or non-consecutive per excerpt).",
+            "trigger_description": "The excerpt is not fully shown, but it states Caregiver Beneﬁt is subject to Deferment Period and payable for up to a maximum of 12 months.",
+            "covered_conditions": [
+              "Life Assured qualifies for caregiver-related support under the product terms (full condition text truncated)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "monthly_income",
+            "payout_value": 30,
+            "payout_unit": "percent of Monthly Beneﬁt",
+            "payout_basis": "Monthly Beneﬁt",
+            "payout_description": "30% of the Monthly Beneﬁt in monthly payouts to provide for caregiving support.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "up to 12 months total",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "After the Deferment Period ends (subject to Deferment Period).",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Payable for up to a maximum of 12 months.",
+            "geographic_scope": null,
+            "notes": "The excerpt truncates whether consecutive or non-consecutive durations are explicitly stated; it does say “whether consecutive or” (rest truncated).",
+            "evidence": [
+              {
+                "quote": "30% of the Monthly Beneﬁt in monthly payouts to provide for your child",
+                "line_start": 1,
+                "line_end": 10,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Monthly Caregiver Beneﬁt",
+                "line_start": 7,
+                "line_end": 26,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Caregiver Beneﬁt is subject to Deferment Period and payable for up to a maximum of 12 months (whether consecutive or",
+                "line_start": 39,
+                "line_end": 58,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          },
+          {
+            "benefit_name": "Monthly Dependant Care Beneﬁt",
+            "benefit_category": "long_term_care_support",
+            "benefit_level": "base",
+            "benefit_description": "A dependent-child care support benefit payable as a percentage of the Monthly Beneﬁt, with eligibility based on the Life Assured having a child below 22 years old (age last birthday). The excerpt also states dependant care is subject to Deferment Period and payable for up to a maximum of 12 months (whether consecutive or …) but truncates the remaining wording.",
+            "trigger_description": "Life Assured has a child below 22 years old (age last birthday) while the product condition is met (full trigger text truncated).",
+            "covered_conditions": [
+              "Life Assured has a child below 22 years old (age last birthday) (as eligibility condition)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "monthly_income",
+            "payout_value": 30,
+            "payout_unit": "percent of Monthly Beneﬁt",
+            "payout_basis": "Monthly Beneﬁt",
+            "payout_description": "30% of Monthly Beneﬁt in monthly payouts (as shown in the excerpt’s percentage list).",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "up to a maximum of 12 months (per excerpt)",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Subject to Deferment Period (per excerpt).",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Payable for up to a maximum of 12 months (per excerpt).",
+            "geographic_scope": null,
+            "notes": "The excerpt does not provide the exact definition of when Dependant Care Benefit becomes payable beyond the child age condition and subject-to-Deferment statement.",
+            "evidence": [
+              {
+                "quote": "Monthly Dependant Care Beneﬁt",
+                "line_start": 8,
+                "line_end": 27,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "30% of Monthly Beneﬁt payable upon inability",
+                "line_start": 27,
+                "line_end": 46,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Dependant Care Beneﬁt is applicable if the Life Assured has a Child who is below 22 years old (age last birthday)",
+                "line_start": 41,
+                "line_end": 60,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Caregiver Beneﬁt is subject to Deferment Period and payable for up to a maximum of 12 months (whether consecutive or",
+                "line_start": 39,
+                "line_end": 58,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          }
+        ],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "With GREAT CareShield, you gain conﬁdence knowing that you are covered. It is the only",
+            "line_start": 1,
+            "line_end": 2,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Protected up to speciﬁed limits by SDIC.",
+            "line_start": 52,
+            "line_end": 71,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "low",
+        "review_notes": [
+          "Only a partial excerpt of the product brochure is available; several key fields (full benefit trigger definitions, exact Deferment Period length, detailed eligibility, and any stated maximum limits for Monthly Beneﬁt beyond the 180-month reference) are truncated.",
+          "The caregiver vs dependant-care percentage assignments are not fully trustworthy because the excerpt mixes example text and a percentage list; extracted percentages are treated as low-confidence where not clearly tied to the named benefit.",
+          "No explicit exclusions are shown in the provided text."
+        ],
+        "slug": "great-eastern-great-careshield"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 18,
+    "evidence_warnings": [],
+    "requires_human_review": true
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_044fc72e5169c087016a8f1f052d7087d08ebf3b982dd7ba83",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:15:16.946586+00:00",
+    "usage": {
+      "input_tokens": 4393,
+      "output_tokens": 4885,
+      "total_tokens": 9278,
+      "reasoning_tokens": 170,
+      "estimated_cost_usd": 0.00698485
+    }
+  }
+}

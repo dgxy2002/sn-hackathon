@@ -49,7 +49,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | L |
 | Depends on | E01-T03, E07-T07, E10-T08 |
@@ -65,6 +65,8 @@
 - [ ] Applied revisions update all affected score, gap, comparison, assumption, evidence, and explanation regions atomically.
 - [ ] Changed values are highlighted with stable layout, visible focus, reduced-motion behavior, and screen-reader announcements.
 - [ ] Confirmation, cancellation, conflict, failure, replay, and undo states remain operable on narrow and wide viewports.
+
+**Current evidence:** [`frontend/src/main.js`](../../frontend/src/main.js), [`frontend/src/style.css`](../../frontend/src/style.css), and the [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md) cover typed conversation/action rendering, allowlisted focus and filtering, live status, and narrow/wide layouts. Proposal, revision, delta, replay, and undo rendering remain pending.
 
 ## E01-T03 - Deliver responsive and accessible interaction states
 

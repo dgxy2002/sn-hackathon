@@ -1,0 +1,1703 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Singlife",
+    "source_file": "Singlife/Medical & Life Insurance/Accident Insurance/Singlife Accident Care.md",
+    "source_filename": "Singlife Accident Care.md",
+    "document_type": "brochure",
+    "content_sha256": "98319c359272b2245b354827f65a397fe707a9f792164377a6fb61027d751fd4",
+    "local_markdown_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Accident Insurance/Singlife Accident Care.md",
+    "local_pdf_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Accident Insurance/Singlife Accident Care.pdf"
+  },
+  "extraction": {
+    "document_summary": "Singlife Accident Care and Singlife Family Accident Care are Singapore Life Ltd yearly renewable personal accident insurance plans with worldwide coverage for accidental death or injury. The core benefit is Accidental Death and Dismemberment (ADDB) with coverage options (Singlife Accident Care: S$250,000 to S$3,000,000; Singlife Family Accident Care: S$500,000 or S$1,000,000) and multipliers: up to 150% for the base ADDB schedule and “3 times”/“2 times” payout scenarios depending on where the accident occurred. They also include daily cash hospital income (up to 365 days per accident) and additional benefits such as Annual Leave Compensation (S$100/day) and a Life Stage Event lump sum for accidental death/TPI occurring 12 months from named life events. Key limitation: benefits are only payable upon an accident occurring, and Singlife Accident Care has no savings/cash value.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Document clearly distinguishes Singlife Accident Care vs Singlife Family Accident Care and provides multiple plan tiers and numeric benefit limits.",
+      "Exclusions are not comprehensively listed; only one explicitly excluded scenario is stated (“Workplaces… not covered”).",
+      "Some covered perils (e.g., infectious diseases) are mentioned without benefit amounts/limits in the provided text; these are therefore not extracted as distinct payout benefits."
+    ],
+    "policies": [
+      {
+        "company": "Singlife",
+        "policy_name": "Singlife Accident Care",
+        "aliases": [
+          "Singlife Accident Care (Individual Coverage)",
+          "Singlife Accident Care – Lite / Standard / Plus / Prestige / Pinnacle"
+        ],
+        "quick_summary": "Yearly renewable personal accident insurance for individuals with worldwide ADDB coverage (S$250,000 to S$3,000,000) and accident-linked cash benefits. Core ADDB can pay up to 150% of the Sum Assured as per the ADDB schedule, with “3 times”/“2 times” payout cases for specific travel/public transport/pedestrian/fire scenarios. Included cash benefits include Daily Accidental Hospital Income up to 365 days per accident and Annual Leave Compensation of S$100/day (starting from day 3) when annual leave is taken to care for you during hospitalization. Optional riders can add accident reimbursement, accidental fracture lump sums, and weekly income.",
+        "category": "personal_accident",
+        "policy_type": "personal_accident",
+        "plan_tier": null,
+        "target_customer": "Individuals; can purchase for yourself or a family member (individual coverage).",
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "Worldwide coverage for accidental death or injury",
+          "Accidental Death and Dismemberment (ADDB) with plan-dependent coverage limits",
+          "Daily cash payout during hospitalization for accidental injury (up to stated limits)",
+          "Annual Leave Compensation Benefit when criteria are met",
+          "Life Stage Event Benefit for accidental death or Total and Permanent Disability linked to specified life stage events"
+        ],
+        "currency_options": [
+          "SGD (S$)"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 99,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [
+          "Occupation class 1 and 2 (premiums based on occupation class 1 and 2 for adults between 17 and 55) "
+        ],
+        "eligibility_notes": "Renew yearly up to the Policy Anniversary before the Life Assured turns age 99 (policy level). The document also states premiums are based on occupation class 1 and 2 for adults between 17 and 55 years old (both inclusive).",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": true,
+        "coverage_term_description": "Yearly renewable; coverage expiry is tied to the Policy Anniversary before age 99 (policy level).",
+        "premium_payment_term_description": "Annual payment mode is referenced; premiums calculated at each Policy Anniversary based on age next birthday.",
+        "premium_frequencies": [
+          "annual"
+        ],
+        "premium_guaranteed": null,
+        "renewal_basis": "Renewed annually up to the Policy Anniversary before the Life Assured turns age 99 (policy level), subject to stated renewal terms.",
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": false,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": "not_stated",
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "Policy will be terminated when 150% of the Sum Assured for ADDB is claimed in a Policy Year"
+        ],
+        "important_caveats": [
+          "Benefits are only payable upon an accident occurring.",
+          "Singlife Accident Care has no savings or investment feature; there is no cash value if the policy ends or if terminated prematurely.",
+          "Workplaces are not covered for the “2x payout” fire scenario (within public place/theatre/hotel/auditorium/school/hospital/mall fire-from-the-time it started; workplaces excluded)."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "Lite",
+            "plan_code": null,
+            "description": "Singlife Accident Care - Lite plan type; Accidental Death and Dismemberment per Policy Year S$250,000.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Accidental Death and Dismemberment Benefit (ADDB) per Policy Year",
+                "payout_type": "lump_sum",
+                "payout_value": 250000,
+                "payout_unit": "SGD per policy year",
+                "payout_basis": "Accidental Death and Dismemberment Benefit (ADDB) per Policy Year",
+                "payout_description": null,
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "| Lite Standard Plus Prestige Pinnacle | Accident Care) Lite Standard Plus Prestige Pinnacle | Accidental Death and Dismemberment per Policy Year S$250,000 S$500,000 S$750,000 S$1,000,000 S$3,000,000 |",
+                    "line_start": 231,
+                    "line_end": 233,
+                    "quote_token_coverage": 0.9012
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Double Accidental Death and Dismemberment Benefit (Double ADDB) per Policy Year",
+                "payout_type": "lump_sum",
+                "payout_value": 500000,
+                "payout_unit": "SGD per policy year",
+                "payout_basis": "Double ADDB per Policy Year",
+                "payout_description": null,
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "| Double ADDB per Policy Year S$500,000 S$1,000,000 S$1,500,000 S$2,000,000 S$6,000,000 |",
+                    "line_start": 235,
+                    "line_end": 235,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Triple Accidental Death and Dismemberment Benefit (Triple ADDB) per Policy Year",
+                "payout_type": "lump_sum",
+                "payout_value": 750000,
+                "payout_unit": "SGD per policy year",
+                "payout_basis": "Triple ADDB per Policy Year",
+                "payout_description": null,
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "| Triple ADDB per Policy Year S$750,000 S$1,500,000 S$2,250,000 S$3,000,000 S$9,000,000 |",
+                    "line_start": 236,
+                    "line_end": 236,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Daily Accidental Hospital Income Benefit",
+                "payout_type": "daily_income",
+                "payout_value": 200,
+                "payout_unit": "SGD per day",
+                "payout_basis": "up to 365 days per accident",
+                "payout_description": "Daily cash benefit when hospitalised for an accident injury; limit stated as up to 365 days per accident.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 365,
+                "limit_type": "days per accident",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "| Daily Accidental Hospital Income Benefit | up to 365 days | S$200 S$300 S$400 S$500 S$600 |",
+                    "line_start": 238,
+                    "line_end": 242,
+                    "quote_token_coverage": 0.996
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Daily ICU Accidental Hospital Income Benefit",
+                "payout_type": "daily_income",
+                "payout_value": 200,
+                "payout_unit": "SGD per day",
+                "payout_basis": "up to 30 days per accident",
+                "payout_description": "ICU daily cash benefit; limit stated as up to 30 days per accident.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 30,
+                "limit_type": "days per accident",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "| Daily ICU Accidental Hospital Income Benefit | up to 30 days per Accident | S$200 S$300 S$400 S$500 S$600 |",
+                    "line_start": 247,
+                    "line_end": 251,
+                    "quote_token_coverage": 0.996
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Ambulance Services Benefit",
+                "payout_type": "service",
+                "payout_value": 300,
+                "payout_unit": "SGD per accident",
+                "payout_basis": "per Accident",
+                "payout_description": null,
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "| Ambulance Services Benefit | per Accident | ... | S$300 | S$300 | S$300 | S$300 | S$300 |",
+                    "line_start": 257,
+                    "line_end": 259,
+                    "quote_token_coverage": 0.998
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Annual Leave Compensation Benefit",
+                "payout_type": "daily_income",
+                "payout_value": 100,
+                "payout_unit": "SGD per day",
+                "payout_basis": "up to 14 days per accident",
+                "payout_description": "Cash benefit of S$100 per day; paid from the 3rd day of annual leave and subject to hospitalisation criteria.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 14,
+                "limit_type": "days per accident",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Paid for annual leave days starting from the 3rd day; benefit not applicable to the first 2 days of annual leave taken; requires hospitalisation for 4 consecutive days or more and that a parent/spouse/child/sibling takes annual leave to care for you.",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "• Annual Leave Compensation Benefit Receive cash benefit of S$100 per day when you are hospitalised for 4 days or more and your parent, spouse, child or sibling takes annual leave to care for you7.",
+                    "line_start": 38,
+                    "line_end": 57,
+                    "quote_token_coverage": 1.0
+                  },
+                  {
+                    "quote": "| Annual Leave Compensation Benefit | up to 14 days per Accident | S$100 | S$100 | S$100 | S$100 | S$100 |",
+                    "line_start": 265,
+                    "line_end": 268,
+                    "quote_token_coverage": 0.997
+                  },
+                  {
+                    "quote": "This benefit is not applicable to the first 2 days of annual leave taken.",
+                    "line_start": 403,
+                    "line_end": 422,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Life Stage Event Benefit per Accident",
+                "payout_type": "lump_sum",
+                "payout_value": 75000,
+                "payout_unit": "SGD per accident",
+                "payout_basis": "per Accident",
+                "payout_description": "Additional lump sum payout for accidental death or Total and Permanent Disability that occurs 12 months from the Life Stage Events.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Life Stage Event refers to: marriage/divorce; becoming a parent/newborn/adoption; purchasing a property; enrolling in education; full-time employment within one year from tertiary graduation; turning 21 years old.",
+                "notes": "Payout is in one lump sum if the Life Assured dies or sustains Total and Permanent Disability as a result of an Accident and the accident occurs 12 months from the Life Stage Event date or until termination of Policy, whichever is earlier.",
+                "evidence": [
+                  {
+                    "quote": "| Life Stage Event Benefit | per Accident | S$75,000 | S$150,000 | S$225,000 | S$300,000 | S$900,000 |",
+                    "line_start": 274,
+                    "line_end": 277,
+                    "quote_token_coverage": 0.997
+                  },
+                  {
+                    "quote": "Provides additional lump sum payout for accidental death or Total and Permanent Disability that occurs 12 months from the Life Stage Events8.",
+                    "line_start": 41,
+                    "line_end": 60,
+                    "quote_token_coverage": 1.0
+                  },
+                  {
+                    "quote": "Life Stage Event refers to the occurrence of:",
+                    "line_start": 408,
+                    "line_end": 427,
+                    "quote_token_coverage": 1.0
+                  },
+                  {
+                    "quote": "We will pay out the Life Stage Event Benefit in one lump sum if the Life Assured dies or sustains Total and Permanent Disability as a result of an Accident and the Accident occurs 12 months from the Life Stage Event date or until the termination of Policy, whichever is earlier.",
+                    "line_start": 407,
+                    "line_end": 426,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Singlife Accident Care comes in 5 plan types – Lite, Standard, Plus, Prestige and Pinnacle, with the sums assured of S$250,000, S$500,000, S$750,000, S$1 million and S$3 million for Accidental Death and Dismemberment Benefit, respectively.",
+                "line_start": 374,
+                "line_end": 393,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Standard",
+            "plan_code": null,
+            "description": "Singlife Accident Care - Standard plan type; Accidental Death and Dismemberment per Policy Year S$500,000.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Accidental Death and Dismemberment Benefit (ADDB) per Policy Year",
+                "payout_type": "lump_sum",
+                "payout_value": 500000,
+                "payout_unit": "SGD per policy year",
+                "payout_basis": "Accidental Death and Dismemberment Benefit (ADDB) per Policy Year",
+                "payout_description": null,
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "| Accidental Death and Dismemberment per Policy Year S$250,000 S$500,000 S$750,000 S$1,000,000 S$3,000,000 |",
+                    "line_start": 232,
+                    "line_end": 233,
+                    "quote_token_coverage": 0.999
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "| Accidental Death and Dismemberment per Policy Year S$250,000 S$500,000 S$750,000 S$1,000,000 S$3,000,000 |",
+                "line_start": 232,
+                "line_end": 233,
+                "quote_token_coverage": 0.999
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "Plus",
+            "plan_code": null,
+            "description": "Singlife Accident Care - Plus plan type; Accidental Death and Dismemberment per Policy Year S$750,000.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Singlife Accident Care comes in 5 plan types – Lite, Standard, Plus, Prestige and Pinnacle, with the sums assured of S$250,000, S$500,000, S$750,000, S$1 million and S$3 million for Accidental Death and Dismemberment Benefit, respectively.",
+                "line_start": 374,
+                "line_end": 393,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          },
+          {
+            "plan_name": "Prestige",
+            "plan_code": null,
+            "description": "Singlife Accident Care - Prestige plan type; Accidental Death and Dismemberment per Policy Year S$1,000,000.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Singlife Accident Care comes in 5 plan types – Lite, Standard, Plus, Prestige and Pinnacle, with the sums assured of S$250,000, S$500,000, S$750,000, S$1 million and S$3 million for Accidental Death and Dismemberment Benefit, respectively.",
+                "line_start": 374,
+                "line_end": 393,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          },
+          {
+            "plan_name": "Pinnacle",
+            "plan_code": null,
+            "description": "Singlife Accident Care - Pinnacle plan type; Accidental Death and Dismemberment per Policy Year S$3,000,000.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Singlife Accident Care comes in 5 plan types – Lite, Standard, Plus, Prestige and Pinnacle, with the sums assured of S$250,000, S$500,000, S$750,000, S$1 million and S$3 million for Accidental Death and Dismemberment Benefit, respectively.",
+                "line_start": 374,
+                "line_end": 393,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          },
+          {
+            "plan_name": "Accident Reimbursement Cover II - Plan 1",
+            "plan_code": null,
+            "description": "Rider tier: Accident Reimbursement Cover II – Plan 1; Accidental Medical Reimbursement Benefit per accident S$4,000 and per policy year S$8,000; Overseas Accidental Medical Reimbursement Benefit per accident S$8,000 and per policy year S$16,000; Traditional Chinese Medicine/Osteopathy/Chiropractic per accident S$700 and per policy year S$1,400; Mobility Aid reimbursement per accident S$1,500 and per policy year S$3,000; Home Modifications reimbursement per accident S$7,000 and per policy S$14,000; Family Support Benefit per policy S$25,000; Double Family Support Benefit per policy S$50,000.",
+            "applies_to": "rider",
+            "linked_rider_name": "Accident Reimbursement Cover II",
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Accidental Medical Reimbursement Benefit",
+                "payout_type": "reimbursement",
+                "payout_value": 4000,
+                "payout_unit": "SGD per accident",
+                "payout_basis": "per Accident",
+                "payout_description": null,
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "| Accident Reimbursement Cover II Plan 1 Plan 2 Plan 3 Plan 4 | ... | Accidental Medical Reimbursement Benefit per Accident | S$4,000 | S$5,000 | S$10,000 | S$15,000 |",
+                    "line_start": 286,
+                    "line_end": 291,
+                    "quote_token_coverage": 0.995
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Overseas Accidental Medical Reimbursement Benefit",
+                "payout_type": "reimbursement",
+                "payout_value": 8000,
+                "payout_unit": "SGD per accident",
+                "payout_basis": "per Accident",
+                "payout_description": null,
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "| Overseas Accidental Medical Reimbursement Benefit per Accident | S$8,000 | S$10,000 | S$20,000 | S$30,000 |",
+                    "line_start": 295,
+                    "line_end": 298,
+                    "quote_token_coverage": 0.997
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "RIDER Accident Reimbursement Cover II / Accident Reimbursement Cover II (Family)\n...\nCover II) Plan 1 Plan 2 Plan 3 Plan 4\n...\nAccidental Medical Reimbursement Benefit per Accident S$4,000 S$5,000 S$10,000 S$15,000",
+                "line_start": 281,
+                "line_end": 291,
+                "quote_token_coverage": 0.99
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Accidental Death and Dismemberment Benefit (ADDB) per Policy Year",
+            "benefit_category": "Accidental death/dismemberment",
+            "benefit_level": "base",
+            "benefit_description": "Payable as Accidental Death and Dismemberment Benefit (ADDB) per Policy Year, based on plan tier sum assured and ADDB schedule.",
+            "trigger_description": "Accidental death or accidental injury resulting in death or dismemberment (details are schedule-based).",
+            "covered_conditions": [
+              "Accident causing accidental death or dismemberment"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": "SGD (plan-dependent per Policy Year)",
+            "payout_basis": "Per Policy Year ADDB amount depends on plan tier",
+            "payout_description": "Base ADDB amount per Policy Year as per plan type.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "Worldwide (advertised).",
+            "notes": "The document states ADDB payout can be up to 150% of the Sum Assured according to the ADDB schedule, and the policy is terminated when 150% of the Sum Assured is claimed in a Policy Year.",
+            "evidence": [
+              {
+                "quote": "• Up to 150% of the Sum Assured3 in the event of death or dismemberment due to an accident;",
+                "line_start": 30,
+                "line_end": 49,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Note: Policy will be terminated when 150% of the Sum Assured for ADDB is claimed in a Policy Year.",
+                "line_start": 378,
+                "line_end": 397,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "| Accidental Death and Dismemberment per Policy Year S$250,000 S$500,000 S$750,000 S$1,000,000 S$3,000,000 |",
+                "line_start": 232,
+                "line_end": 233,
+                "quote_token_coverage": 0.999
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Daily Accidental Hospital Income Benefit",
+            "benefit_category": "Hospital cash benefit",
+            "benefit_level": "base",
+            "benefit_description": "Daily cash payout for hospitalisation due to accidental injury, for up to 365 days per accident.",
+            "trigger_description": "Life Assured is hospitalised due to accidental injury.",
+            "covered_conditions": [
+              "Hospitalised due to Accidental Injury"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "daily_income",
+            "payout_value": null,
+            "payout_unit": "SGD per day (plan-dependent)",
+            "payout_basis": "up to 365 days per accident",
+            "payout_description": null,
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 365,
+            "limit_type": "days per accident",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": null,
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "Worldwide (advertised for accidents).",
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Receive daily cash payout during hospitalisation\nGet financial support with a daily cash payout for up to 365 days per accident while you recover from the accidental injury.",
+                "line_start": 49,
+                "line_end": 68,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "| Daily Accidental Hospital Income Benefit | up to 365 days | S$200 S$300 S$400 S$500 S$600 |",
+                "line_start": 238,
+                "line_end": 242,
+                "quote_token_coverage": 0.996
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Daily ICU Accidental Hospital Income Benefit",
+            "benefit_category": "ICU hospital cash benefit",
+            "benefit_level": "base",
+            "benefit_description": "Daily cash payout for ICU due to accidental injury for up to 30 days per accident.",
+            "trigger_description": "Life Assured receives ICU-level hospital care due to accidental injury.",
+            "covered_conditions": [
+              "ICU for Accidental Injury"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "daily_income",
+            "payout_value": null,
+            "payout_unit": "SGD per day (plan-dependent)",
+            "payout_basis": "up to 30 days per accident",
+            "payout_description": null,
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 30,
+            "limit_type": "days per accident",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": null,
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "| Daily ICU Accidental Hospital Income Benefit | up to 30 days per Accident | S$200 S$300 S$400 S$500 S$600 |",
+                "line_start": 247,
+                "line_end": 251,
+                "quote_token_coverage": 0.996
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Ambulance Services Benefit",
+            "benefit_category": "Emergency services reimbursement/service",
+            "benefit_level": "base",
+            "benefit_description": "Ambulance services benefit per accident as stated in plan tier table.",
+            "trigger_description": "Ambulance services are incurred due to an accident.",
+            "covered_conditions": [
+              "Ambulance services in connection with an accident"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "service",
+            "payout_value": null,
+            "payout_unit": "SGD per accident",
+            "payout_basis": "per Accident",
+            "payout_description": null,
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": null,
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "| Ambulance Services Benefit | per Accident | ... | S$300 | S$300 | S$300 | S$300 | S$300 |",
+                "line_start": 257,
+                "line_end": 259,
+                "quote_token_coverage": 0.998
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Annual Leave Compensation Benefit",
+            "benefit_category": "Caregiving support during hospitalisation",
+            "benefit_level": "base",
+            "benefit_description": "Pays cash benefit of S$100 per day for annual leave days to care for the Life Assured during hospitalisation criteria.",
+            "trigger_description": "Life Assured is hospitalised for 4 consecutive days or more due to an Accidental Injury, and a parent/spouse/child/sibling takes annual leave to take care of the Life Assured.",
+            "covered_conditions": [
+              "Accidental Injury requiring hospitalisation for 4 consecutive days or more",
+              "Annual leave taken by parent/spouse/child/sibling to care for Life Assured during hospitalisation"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "daily_income",
+            "payout_value": 100,
+            "payout_unit": "SGD per day",
+            "payout_basis": "up to 14 days per accident; starting from 3rd day of annual leave",
+            "payout_description": "Not applicable to first 2 days of annual leave taken.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 14,
+            "limit_type": "days per accident",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": null,
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Paid starting from the 3rd day of annual leave.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Receive cash benefit of S$100 per day when you are hospitalised for 4 days or more and your parent, spouse, child or sibling takes annual leave to care for you7.",
+                "line_start": 38,
+                "line_end": 57,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "We will pay the Annual Leave Compensation Benefit for each day of annual leave starting from the 3rd day of annual leave, if the Life Assured sustains an Accidental Injury which:",
+                "line_start": 400,
+                "line_end": 419,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "This benefit is not applicable to the first 2 days of annual leave taken.",
+                "line_start": 403,
+                "line_end": 422,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "| Annual Leave Compensation Benefit | up to 14 days per Accident | S$100 | S$100 | S$100 | S$100 | S$100 |",
+                "line_start": 265,
+                "line_end": 268,
+                "quote_token_coverage": 0.997
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Life Stage Event Benefit",
+            "benefit_category": "Lump sum on life stage events (accident-linked)",
+            "benefit_level": "base",
+            "benefit_description": "Additional lump sum payout for accidental death or Total and Permanent Disability that occurs 12 months from specified Life Stage Events.",
+            "trigger_description": "Accidental death or Total and Permanent Disability as a result of an Accident, with the Accident occurring 12 months from the Life Stage Event date (or until policy termination, whichever is earlier).",
+            "covered_conditions": [
+              "Life Stage Event occurs (as listed in document)",
+              "Accident occurs 12 months from Life Stage Event date",
+              "Life Assured dies or sustains Total and Permanent Disability as a result of an Accident"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": "SGD per accident (plan-dependent)",
+            "payout_basis": "per Accident (and tied to 12 months from Life Stage Event date)",
+            "payout_description": null,
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": null,
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "Life Stage Event types listed: marriage/divorce; becoming a parent/by adopting; purchasing a property; enrolling into education; full-time employment within one year from tertiary graduation; turning 21 years old.",
+            "evidence": [
+              {
+                "quote": "Provides additional lump sum payout for accidental death or Total and Permanent Disability that occurs 12 months from the Life Stage Events8.",
+                "line_start": 41,
+                "line_end": 60,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "We will pay out the Life Stage Event Benefit in one lump sum if the Life Assured dies or sustains Total and Permanent Disability as a result of an Accident and the Accident occurs 12 months from the Life Stage Event date or until the termination of Policy, whichever is earlier.",
+                "line_start": 407,
+                "line_end": 426,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Life Stage Event refers to the occurrence of:",
+                "line_start": 408,
+                "line_end": 427,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "| Life Stage Event Benefit | per Accident | S$75,000 | S$150,000 | S$225,000 | S$300,000 | S$900,000 |",
+                "line_start": 274,
+                "line_end": 277,
+                "quote_token_coverage": 0.997
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [
+          {
+            "name": "Accident Reimbursement Cover II",
+            "description": "Covers medical expenses including physiotherapy recommended by a doctor, traditional chinese medicine and chiropractic treatment. Includes lump sum benefit up to S$100,000 for Accidental Death or Total and Permanent Disability; and provides worldwide coverage with double the coverage limit for Accidental Medical Reimbursement benefit and Family Support Benefit if the accident occurs overseas.",
+            "rider_type": "accident_medical_reimbursement",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "not_stated",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Accident Reimbursement Cover II / Accident Reimbursement Cover II (Family)9\n• Covers medical expenses including physiotherapy recommended by a doctor, traditional chinese medicine and chiropractic treatment.",
+                "line_start": 102,
+                "line_end": 121,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "• Lump sum benefit up S$100,000 to support your loved ones in the event you suffer from Accidental Death or Total and Permanent Disability.",
+                "line_start": 104,
+                "line_end": 123,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "• Worldwide coverage with double the coverage limit for Accidental Medical Reimbursement benefit and Family Support Benefit if the accident occurs overseas13.",
+                "line_start": 106,
+                "line_end": 125,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Accidental Fracture Cover III",
+            "description": "Lump sum payout for accidental bone fracture or dislocation.",
+            "rider_type": "accidental_fracture_lump_sum",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Accidental Fracture Cover III / Accidental Fracture Cover III (Family)9\n• Lump sum payout for accidental bone fracture or dislocation.",
+                "line_start": 108,
+                "line_end": 127,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Weekly Income Cover II",
+            "description": "Weekly income supplement provided in the event of Temporary Total Disability or Temporary Partial Disability due to an accident or sickness.",
+            "rider_type": "disability_income_weekly",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Weekly Income Cover II / Weekly Income Cover II (Family)9\n• Weekly income will be provided to supplement your living expenses in the event you suffer from Temporary Total Disability or Temporary Partial Disability due to an accident or sickness14.",
+                "line_start": 112,
+                "line_end": 131,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "exclusions": [
+          {
+            "exclusion": "Workplaces are not covered for the “2x payout” fire scenario.",
+            "category": "Accidental Death and Dismemberment (2x payout scenario)",
+            "applies_to": "2x payout situation when death/injury sustained while in a fire",
+            "notes": "This exclusion is stated only for the fire-at conditions described for the 2x payout; other coverage scenarios may still apply.",
+            "evidence": [
+              {
+                "quote": "Workplaces (including offices and factories) are not covered.",
+                "line_start": 387,
+                "line_end": 406,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "source_evidence": [
+          {
+            "quote": "Singlife Accident Care\nBENEFITS AND FEATURES\nGo about your day with confidence, knowing you’re covered every step of the way.",
+            "line_start": 26,
+            "line_end": 45,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Singlife Accident Care is yearly renewable up to the Policy Anniversary before the Life Assured turns age 99, at the policy level.",
+            "line_start": 393,
+            "line_end": 412,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "As this product has no savings or investment feature, there is no cash value if the policy ends or if the policy is terminated prematurely. The benefits of the policy will only be payable upon an accident occurring.",
+            "line_start": 442,
+            "line_end": 461,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "medium",
+        "review_notes": [
+          "Base plan tiers (Lite/Standard/Plus/Prestige/Pinnacle) are named; full numeric benefit extraction was completed for Lite but not fully populated for other tiers due to partial visibility of plan-specific amounts in the extracted tables.",
+          "Some non-payout descriptions (e.g., coverage for food poisoning and infectious diseases) are not extracted as separate benefits because the document does not provide explicit payout/limits in the provided text."
+        ],
+        "slug": "singlife-singlife-accident-care"
+      },
+      {
+        "company": "Singlife",
+        "policy_name": "Singlife Family Accident Care",
+        "aliases": [
+          "Singlife Family Accident Care (Shared Coverage for Family)",
+          "Singlife Family Accident Care – Standard / Prestige"
+        ],
+        "quick_summary": "Yearly renewable personal accident insurance for families with shared coverage management. It provides the same core benefit types as Singlife Accident Care, but with key differences: family members share a single payout limit, coverage runs up to age 80 for the Main Life Assured (policy level), and child premiums receive discounts when added to the policy. The base plan offers ADDB coverage of S$500,000 (Standard) or S$1,000,000 (Prestige) per Policy Year and includes Daily Accidental Hospital Income (up to 365 days per accident). Optional riders can extend coverage for accident reimbursement, accidental fracture, and weekly income.",
+        "category": "personal_accident",
+        "policy_type": "personal_accident",
+        "plan_tier": null,
+        "target_customer": "Families; purchase for minimum 2 and up to 6 members in a family.",
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "Worldwide coverage for accidental death or injury",
+          "Accidental Death and Dismemberment (ADDB) with shared payout limit",
+          "Daily cash payout during hospitalisation for accidental injury (up to stated limits)",
+          "Annual Leave Compensation Benefit and Life Stage Event Benefit (same benefits as Singlife Accident Care per document)"
+        ],
+        "currency_options": [
+          "SGD (S$)"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 80,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [
+          "Occupation class 1 and 2 (premiums based on occupation class 1 and 2 for adults between 17 and 55) "
+        ],
+        "eligibility_notes": "Up to 6 family members (up to 2 adult parents and up to 4 dependent child lives assured). The policy must have 1 Main Life Assured who must be an adult life assured and stay throughout the policy term.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": true,
+        "coverage_term_description": "Yearly renewable up to the Policy Anniversary before the Main Life Assured turns 80 (policy level), with stated coverage expiry ages for adult and child lives assured.",
+        "premium_payment_term_description": "Premiums are calculated based on ANB of each Life Assured at each Policy Anniversary; annual payment mode indicated; premium payable may differ by a few cents due to rounding.",
+        "premium_frequencies": [
+          "annual"
+        ],
+        "premium_guaranteed": null,
+        "renewal_basis": "Renew annually up to the Policy Anniversary before Main Life Assured turns 80; subject to policy conditions described (Main Life Assured still covered and at least 2 lives assured covered).",
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": false,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": "not_stated",
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "Policy terminated when 150% of the Sum Assured for ADDB is claimed in a Policy Year"
+        ],
+        "important_caveats": [
+          "Benefits only payable upon an accident occurring.",
+          "No savings/investment feature; no cash value if policy ends or is terminated prematurely."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "Standard",
+            "plan_code": null,
+            "description": "Singlife Family Accident Care - Standard plan type; Accidental Death and Dismemberment per Policy Year S$500,000; Daily Accidental Hospital Income benefit S$300 per day up to 365 days per accident; Daily ICU Accidental Hospital Income benefit S$300 per day up to 30 days per accident; Ambulance Services Benefit S$300 per accident; Annual Leave Compensation Benefit S$100 per day up to 14 days per accident; Life Stage Event Benefit per Accident S$300,000.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Accidental Death and Dismemberment Benefit (ADDB) per Policy Year",
+                "payout_type": "lump_sum",
+                "payout_value": 500000,
+                "payout_unit": "SGD per policy year",
+                "payout_basis": "per Policy Year",
+                "payout_description": null,
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "| Singlife Family ... Standard Prestige | Accidental Death and Dismemberment per Policy Year S$500,000 S$1,000,000 |",
+                    "line_start": 229,
+                    "line_end": 233,
+                    "quote_token_coverage": 0.996
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Daily Accidental Hospital Income Benefit",
+                "payout_type": "daily_income",
+                "payout_value": 300,
+                "payout_unit": "SGD per day",
+                "payout_basis": "up to 365 days per accident",
+                "payout_description": null,
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": 365,
+                "limit_type": "days per accident",
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "| Daily Accidental Hospital Income Benefit up to 365 days per Accident | ... | S$300 S$500 |",
+                    "line_start": 238,
+                    "line_end": 242,
+                    "quote_token_coverage": 0.996
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Life Stage Event Benefit per Accident",
+                "payout_type": "lump_sum",
+                "payout_value": 300000,
+                "payout_unit": "SGD per accident",
+                "payout_basis": "per Accident",
+                "payout_description": null,
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "| Life Stage Event Benefit | per Accident | ... | S$300,000 | S$900,000 |",
+                    "line_start": 274,
+                    "line_end": 277,
+                    "quote_token_coverage": 0.997
+                  }
+                ],
+                "extraction_confidence": "medium"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "| Daily Accidental Hospital Income Benefit | up to 365 days | ... | S$300 S$500 |",
+                "line_start": 238,
+                "line_end": 242,
+                "quote_token_coverage": 0.996
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "Prestige",
+            "plan_code": null,
+            "description": "Singlife Family Accident Care - Prestige plan type; Accidental Death and Dismemberment per Policy Year S$1,000,000.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "| Singlife Family ... Standard Prestige | Accidental Death and Dismemberment per Policy Year S$500,000 S$1,000,000 |",
+                "line_start": 229,
+                "line_end": 233,
+                "quote_token_coverage": 0.996
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "Accident Reimbursement Cover II (Family) - Plan 1",
+            "plan_code": null,
+            "description": "Rider tier: Accident Reimbursement Cover II (Family) – Plan 1; Accidental Medical Reimbursement Benefit per accident S$4,000 and per policy year S$8,000; Overseas Accidental Medical Reimbursement Benefit per accident S$8,000 and per policy year S$16,000; Family Support Benefit per policy S$50,000; Double Family Support Benefit per policy S$100,000.",
+            "applies_to": "rider",
+            "linked_rider_name": "Accident Reimbursement Cover II (Family)",
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Accidental Medical Reimbursement Benefit (Family)",
+                "payout_type": "reimbursement",
+                "payout_value": 4000,
+                "payout_unit": "SGD per accident",
+                "payout_basis": "per Accident",
+                "payout_description": null,
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "| Accident Reimbursement Cover II (Family) Plan 1 Plan 2 Plan 3 Plan 4\n...\nAccidental Medical Reimbursement Benefit per Accident | S$4,000 | S$5,000 | S$10,000 | S$15,000 |",
+                    "line_start": 286,
+                    "line_end": 291,
+                    "quote_token_coverage": 0.995
+                  }
+                ],
+                "extraction_confidence": "medium"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "RIDER Accident Reimbursement Cover II / Accident Reimbursement Cover II (Family)\n...\nAccident Reimbursement\nCover II (Family)) Plan 1 Plan 2 Plan 3 Plan 4\n...\nAccidental Medical Reimbursement Benefit per Accident | S$4,000 | S$5,000 | S$10,000 | S$15,000 |",
+                "line_start": 281,
+                "line_end": 291,
+                "quote_token_coverage": 0.99
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Accidental Death and Dismemberment Benefit (ADDB) per Policy Year (shared limit concept)",
+            "benefit_category": "Accidental death/dismemberment",
+            "benefit_level": "base",
+            "benefit_description": "Accidental Death and Dismemberment (ADDB) per Policy Year with one payout limit shared by all Lives Assured under the single policy.",
+            "trigger_description": "Accidental death or dismemberment due to accident; payout schedule depends on ADDB schedule.",
+            "covered_conditions": [
+              "Accident causing accidental death or dismemberment"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": "SGD per policy year (shared limit; plan-dependent)",
+            "payout_basis": "per Policy Year ADDB amount for the policy",
+            "payout_description": "Family plan has 1 limit to be shared by all Lives Assured; claims paid as they come up until limit is reached.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "Worldwide (advertised).",
+            "notes": "Also subject to policy termination when 150% of Sum Assured for ADDB is claimed in a Policy Year (as stated in Important Notes applicable to ADDB schedule).",
+            "evidence": [
+              {
+                "quote": "One shared payout limit covering your family, making it simply and easy to manage.",
+                "line_start": 39,
+                "line_end": 41,
+                "quote_token_coverage": 0.998
+              },
+              {
+                "quote": "1 limit to be shared by all Lives Assured under the policy, with claims paid as they come up until the limit is reached.",
+                "line_start": 92,
+                "line_end": 95,
+                "quote_token_coverage": 0.997
+              },
+              {
+                "quote": "| Singlife Family Accident Care | ... | Accidental Death and Dismemberment per Policy Year S$500,000 S$1,000,000 |",
+                "line_start": 229,
+                "line_end": 233,
+                "quote_token_coverage": 0.996
+              },
+              {
+                "quote": "Note: Policy will be terminated when 150% of the Sum Assured for ADDB is claimed in a Policy Year.",
+                "line_start": 378,
+                "line_end": 397,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Daily Accidental Hospital Income Benefit",
+            "benefit_category": "Hospital cash benefit",
+            "benefit_level": "base",
+            "benefit_description": "Daily cash payout during hospitalisation for accidental injury for up to 365 days per accident.",
+            "trigger_description": "Hospitalised for accidental injury.",
+            "covered_conditions": [
+              "Hospitalised due to accidental injury"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "daily_income",
+            "payout_value": null,
+            "payout_unit": "SGD per day (plan-dependent)",
+            "payout_basis": "up to 365 days per accident",
+            "payout_description": null,
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 365,
+            "limit_type": "days per accident",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": null,
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Receive daily cash payout during hospitalisation\nGet financial support with a daily cash payout for up to 365 days per accident while you recover from the accidental injury.",
+                "line_start": 49,
+                "line_end": 68,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "| Daily Accidental Hospital Income Benefit | up to 365 days per Accident | ... | S$300 S$500 |",
+                "line_start": 238,
+                "line_end": 242,
+                "quote_token_coverage": 0.996
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Daily ICU Accidental Hospital Income Benefit (Family)",
+            "benefit_category": "ICU hospital cash benefit",
+            "benefit_level": "base",
+            "benefit_description": "Daily cash payout for ICU due to accidental injury for up to 30 days per accident.",
+            "trigger_description": "ICU due to accidental injury.",
+            "covered_conditions": [
+              "ICU for accidental injury"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "daily_income",
+            "payout_value": null,
+            "payout_unit": "SGD per day (plan-dependent)",
+            "payout_basis": "up to 30 days per accident",
+            "payout_description": null,
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 30,
+            "limit_type": "days per accident",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": null,
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "| Daily ICU Accidental Hospital Income Benefit | up to 30 days per Accident | S$300 S$500 |",
+                "line_start": 247,
+                "line_end": 251,
+                "quote_token_coverage": 0.996
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "riders": [
+          {
+            "name": "Accident Reimbursement Cover II (Family)",
+            "description": "Family version of accident medical reimbursement rider with medical expense reimbursement categories and worldwide double limits if accident occurs overseas.",
+            "rider_type": "accident_medical_reimbursement",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Accident Reimbursement Cover II / Accident Reimbursement Cover II (Family)9",
+                "line_start": 100,
+                "line_end": 119,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "• Covers medical expenses including physiotherapy recommended by a doctor, traditional chinese medicine and chiropractic treatment.",
+                "line_start": 102,
+                "line_end": 121,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "name": "Accidental Fracture Cover III (Family)",
+            "description": "Family version of lump sum payout for accidental bone fracture or dislocation.",
+            "rider_type": "accidental_fracture_lump_sum",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Accidental Fracture Cover III / Accidental Fracture Cover III (Family)9\n• Lump sum payout for accidental bone fracture or dislocation.",
+                "line_start": 108,
+                "line_end": 127,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Weekly Income Cover II (Family)",
+            "description": "Family version providing weekly income support for Temporary Total Disability/Temporary Partial Disability due to accident or sickness.",
+            "rider_type": "disability_income_weekly",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Weekly Income Cover II / Weekly Income Cover II (Family)9\n• Weekly income will be provided to supplement your living expenses in the event you suffer from Temporary Total Disability or Temporary Partial Disability due to an accident or sickness14.",
+                "line_start": 112,
+                "line_end": 131,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "Singlife Family Accident Care\nBENEFITS AND FEATURES\nEnjoy the convenience of having one plan that covers you and your family against accidents with premium savings.",
+            "line_start": 55,
+            "line_end": 74,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Singlife Family Accident Care is yearly renewable up to the Policy Anniversary before the Main Life Assured turns age 80, at the policy level, subject to the Main Life Assured is still covered under the Policy and there are at least 2 Lives Assured covered under the Policy.",
+            "line_start": 395,
+            "line_end": 414,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "1 limit to be shared by all Lives Assured under the policy, with claims paid as they come up until the limit is reached.",
+            "line_start": 92,
+            "line_end": 95,
+            "quote_token_coverage": 0.997
+          }
+        ],
+        "extraction_confidence": "medium",
+        "review_notes": [
+          "Family plan tiers are named (Standard, Prestige) and ADDB amounts are stated; several other benefit amounts are present in the table but were not fully extracted into this policy’s benefit_amounts due to partial clarity in the provided text segment.",
+          "Only one explicit exclusion appears in the document and it is about the 2x payout fire scenario; no family-specific exclusions are explicitly stated in the provided text."
+        ],
+        "slug": "singlife-singlife-family-accident-care"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 67,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_06071416c2ba592b016a8f204b7a7c87d0ae8f99d8bdb8e0ad",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:22:43.817672+00:00",
+    "usage": {
+      "input_tokens": 12452,
+      "output_tokens": 16208,
+      "total_tokens": 28660,
+      "reasoning_tokens": 366,
+      "estimated_cost_usd": 0.0227504
+    }
+  }
+}

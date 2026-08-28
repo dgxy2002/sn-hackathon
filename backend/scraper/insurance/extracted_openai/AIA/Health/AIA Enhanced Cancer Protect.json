@@ -1,0 +1,628 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "AIA",
+    "source_file": "AIA/Health/AIA Enhanced Cancer Protect.md",
+    "source_filename": "AIA Enhanced Cancer Protect.md",
+    "document_type": "brochure",
+    "content_sha256": "5833b731583093c4f5a116f3bef159c1c35bd265be545e7de90d975518274654",
+    "local_markdown_path": "backend/scraper/insurance/AIA/Health/AIA Enhanced Cancer Protect.md",
+    "local_pdf_path": "backend/scraper/insurance/AIA/Health/AIA Enhanced Cancer Protect.pdf"
+  },
+  "extraction": {
+    "document_summary": "AIA Enhanced Cancer Protect is a cancer protection plan that provides payouts from the first cancer diagnosis through up to two major stage cancer relapses. The brochure states coverage of up to S$700,000, with each relapse claimable two years apart, and premiums that do not change yearly “1” (premiums are set by entry age and may be adjusted later). Buyers can choose a coverage period of 20 years or “till 65 years old”. The core mechanics are: (1) first diagnosis payout at 100% of the coverage amount, (2) 1st and 2nd major-stage relapse payouts at 100% each, and (3) optional Enhanced Cancer Protect Plus add-on that increases total coverage up to 400%, adds early-stage (50% payout) and catastrophic cancer coverage, and shows an example where catastrophic cancer triggers an additional payout while the 2nd relapse benefit also pays.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Document provides clear benefit mechanics for first diagnosis, two relapse claims (two years apart), and optional add-on early/catastrophic coverage via worked examples and diagrams.",
+      "Exact definitions of covered “Major Cancer”, “Intermediate/Stage”, and “catastrophic cancer” are not enumerated in detail; only a list of early-stage cancers is provided.",
+      "No explicit sum-assured range table or entry/maximum ages are stated beyond coverage ending at age 65 or after 20 years.",
+      "Underwriting type, medical exam requirement, grace period, and free-look period are not stated."
+    ],
+    "policies": [
+      {
+        "company": "AIA",
+        "policy_name": "AIA Enhanced Cancer Protect",
+        "aliases": [
+          "AIA Enhanced Cancer Protect (Thrice the Assurance With One Cancer Plan)"
+        ],
+        "quick_summary": "Cancer protection plan covering first diagnosis and up to two major-stage relapses, with relapse claims spaced two years apart. Coverage can be for 20 years or till age 65. Optional Enhanced Cancer Protect Plus add-on expands coverage to include early-stage and catastrophic cancer (up to 400% total coverage). Premiums are determined at entry age; yearly premium changes may occur based on claims experience/regulatory changes per notes (not guaranteed). Once catastrophic/termination events occur, the brochure’s examples show termination of relevant benefits and continued premium payments to maintain relapse/catastrophic coverage.",
+        "category": "critical_illness",
+        "policy_type": "cancer_only",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "First diagnosis of major cancer (major stage) with 100% of coverage amount",
+          "Up to two major stage cancer relapses (Relapse 1 and Relapse 2) claimable two years apart",
+          "Optional add-on (Enhanced Cancer Protect Plus) includes early-stage, intermediate-stage, and catastrophic cancer coverage and increases total coverage up to 400%"
+        ],
+        "currency_options": [
+          "S$"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 65,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": null,
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": 20,
+        "renewable": null,
+        "coverage_term_description": "Choose between a coverage period of 20 years, or till 65 years old.",
+        "premium_payment_term_description": null,
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "The brochure’s examples state that after catastrophic cancer diagnosis, the policy and add-on cover will terminate (as described in the example).",
+          "The brochure’s examples also show that certain benefits terminate after an early-stage or major-stage diagnosis event (e.g., “major stage cancer benefit terminates” and “cancer relapse benefit terminates” in the example)."
+        ],
+        "important_caveats": [
+          "Cancer relapse benefit is payable only if the diagnosed Major Cancer condition meets the definitions and waiting period as stated in the policy contract.",
+          "Waiting period and survival period are applicable before the benefits will be payable.",
+          "Premiums are not guaranteed and may be adjusted based on future claims experience/regulatory requirements (per terms).",
+          "Value-added services are not contractual benefits and can be cancelled/terminated by partners/AIA without notice."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "Base plan coverage (100% of coverage amount) for first major stage cancer and up to two major stage relapses",
+            "plan_code": null,
+            "description": "Core cancer protection: 100% of the coverage amount for the first major stage cancer diagnosis and for up to two major stage relapse claims (Relapse 1 and Relapse 2), with relapses claimable two years apart. The brochure illustrates this with an example using S$300,000 coverage amount.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": 700000,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "Coverage period is either 20 years or till age 65 (choice stated in brochure).",
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Major stage cancer (1st cancer diagnosis) payout",
+                "payout_type": "lump_sum",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "100% of coverage amount",
+                "payout_description": "Payout is 100% of the coverage amount when major stage cancer occurs (first diagnosis).",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": "Once (first diagnosis)",
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "The brochure shows “For 1st Relapse Relapse” style 100% coverage by diagram; explicit mapping to first diagnosis is supported by “Not a once-and-done plan” statement and the diagram labels for 1st and 2nd relapse.",
+                "evidence": [
+                  {
+                    "quote": "Get 100% of the coverage amount each time for not only the first diagnosis, but also up to two major stage relapses of major cancer",
+                    "line_start": 13,
+                    "line_end": 32,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              },
+              {
+                "benefit_name": "Major stage cancer relapse (1st relapse) payout",
+                "payout_type": "lump_sum",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "100% of coverage amount",
+                "payout_description": "Payout is 100% of the coverage amount for the 1st major stage relapse, claimable two years apart (per brochure statement).",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": "Up to once (Relapse 1)",
+                "maximum_claims": 1,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Major Cancer condition must meet definitions and waiting period stated in the policy contract.",
+                "notes": "Example shows S$300,000 coverage and payout of S$300,000 for 1st cancer relapse benefit.",
+                "evidence": [
+                  {
+                    "quote": "Get 100% of the coverage amount each time for not only the first diagnosis, but also up to two major stage relapses of major cancer, with each relapse claimable two years apart2.",
+                    "line_start": 14,
+                    "line_end": 33,
+                    "quote_token_coverage": 1.0
+                  },
+                  {
+                    "quote": "Rachel suffers a relapse of major stage breast cancer. She receives a payout of S$300,000 from her 1st cancer relapse benefit.",
+                    "line_start": 40,
+                    "line_end": 59,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Major stage cancer relapse (2nd relapse) payout",
+                "payout_type": "lump_sum",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "100% of coverage amount",
+                "payout_description": "Payout is 100% of the coverage amount for the 2nd major stage relapse, claimable two years after the 1st relapse (as relapses are claimable two years apart).",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": "Up to once (Relapse 2)",
+                "maximum_claims": 1,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Major Cancer condition must meet definitions and waiting period stated in the policy contract.",
+                "notes": "Example shows S$300,000 coverage amount and payout of S$300,000 for 2nd cancer relapse benefit.",
+                "evidence": [
+                  {
+                    "quote": "Get 100% of the coverage amount each time for not only the first diagnosis, but also up to two major stage relapses of major cancer, with each relapse claimable two years apart2.",
+                    "line_start": 14,
+                    "line_end": 33,
+                    "quote_token_coverage": 1.0
+                  },
+                  {
+                    "quote": "Total payout: 1st cancer relapse payout  :  S$300,000  2nd cancer relapse payout  :  S$300,000",
+                    "line_start": 96,
+                    "line_end": 100,
+                    "quote_token_coverage": 0.996
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": "Example payouts are illustrative; the plan-specific maximum coverage statement is supported as “up to S$700,000 coverage”.",
+            "evidence": [
+              {
+                "quote": "From the first diagnosis to second relapse, it supports you with high coverage of up to S$700,000",
+                "line_start": 1,
+                "line_end": 16,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "First major stage cancer diagnosis payout",
+            "benefit_category": "major_stage_cancer",
+            "benefit_level": "base",
+            "benefit_description": "Payout of 100% of the coverage amount when major cancer is diagnosed (first diagnosis).",
+            "trigger_description": "First diagnosis of major cancer (Major Cancer).",
+            "covered_conditions": [],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "100% of coverage amount",
+            "payout_description": null,
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "Once (first diagnosis)",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure states 100% of coverage amount applies to first diagnosis and also to up to two major stage relapses.",
+            "evidence": [
+              {
+                "quote": "Get 100% of the coverage amount each time for not only the first diagnosis, but also up to two major stage relapses of major cancer, with each relapse claimable two years apart2.",
+                "line_start": 14,
+                "line_end": 33,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Major stage cancer relapse payout (Relapse 1)",
+            "benefit_category": "major_stage_cancer_relapse",
+            "benefit_level": "base",
+            "benefit_description": "Payout of 100% of the coverage amount when the insured suffers a 1st major stage relapse of major cancer, claimable two years after the prior event (as stated for each relapse).",
+            "trigger_description": "Diagnosis of Major Cancer that is a major stage relapse.",
+            "covered_conditions": [
+              "Major Cancer (definition not included in brochure)"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "100% of coverage amount",
+            "payout_description": null,
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "Up to once",
+            "maximum_claims": 1,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "Relapse benefit payable only if the diagnosed Major Cancer condition meets policy definitions and waiting period.",
+            "evidence": [
+              {
+                "quote": "Cancer relapse benefit is payable if the diagnosed Major Cancer condition meets the definitions and waiting period as stated in the policy contract.",
+                "line_start": 183,
+                "line_end": 202,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Get 100% of the coverage amount each time for not only the first diagnosis, but also up to two major stage relapses of major cancer, with each relapse claimable two years apart2.",
+                "line_start": 14,
+                "line_end": 33,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Rachel suffers a relapse of major stage breast cancer. She receives a payout of S$300,000 from her 1st cancer relapse benefit.",
+                "line_start": 40,
+                "line_end": 59,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Major stage cancer relapse payout (Relapse 2)",
+            "benefit_category": "major_stage_cancer_relapse",
+            "benefit_level": "base",
+            "benefit_description": "Payout of 100% of the coverage amount when the insured suffers a 2nd major stage relapse of major cancer, claimable two years apart.",
+            "trigger_description": "Diagnosis of Major Cancer that is a second relapse (Relapse 2).",
+            "covered_conditions": [
+              "Major Cancer (definition not included in brochure)"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "100% of coverage amount",
+            "payout_description": null,
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "Up to once",
+            "maximum_claims": 1,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "In the brochure’s catastrophic cancer example, the 2nd relapse benefit pays and then the policy/add-on terminate.",
+            "evidence": [
+              {
+                "quote": "Get 100% of the coverage amount each time for not only the first diagnosis, but also up to two major stage relapses of major cancer, with each relapse claimable two years apart2.",
+                "line_start": 14,
+                "line_end": 33,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Total payout: ... 2nd cancer relapse payout  :  S$300,000",
+                "line_start": 96,
+                "line_end": 100,
+                "quote_token_coverage": 0.996
+              },
+              {
+                "quote": "If Rachel is diagnosed with catastrophic cancer, she will receive S$300,000 from her catastrophic cancer benefit, as well as an additional S$300,000 from her 2nd cancer relapse benefit2. Her policy and add-on cover will then terminate.",
+                "line_start": 70,
+                "line_end": 74,
+                "quote_token_coverage": 0.996
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Early stage cancer payout (from Enhanced Cancer Protect Plus add-on)",
+            "benefit_category": "early_stage_cancer",
+            "benefit_level": "rider",
+            "benefit_description": "Early stage cancer payout of 50% of the coverage amount under Enhanced Cancer Protect Plus add-on.",
+            "trigger_description": "Diagnosis of early stage cancer (as covered by the add-on).",
+            "covered_conditions": [
+              "Carcinoma in situ of specified organs",
+              "Early Prostate Cancer",
+              "Early Thyroid Cancer",
+              "Early Neuroendocrine Tumours",
+              "Early Bladder Cancer",
+              "Early Chronic Lymphocytic Leukaemia",
+              "Early Melanoma",
+              "Gastro-Intestinal Stromal Tumours",
+              "Bone Marrow Malignancies"
+            ],
+            "condition_stages": [
+              "pre_early"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "50% of coverage amount",
+            "payout_description": null,
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "Once (as depicted by example sequencing; explicit maximum not stated)",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "Example: early stage breast cancer leads to a S$150,000 payout when coverage amount is S$300,000.",
+            "evidence": [
+              {
+                "quote": "Rachel is diagnosed with early stage breast cancer. Her Enhanced Cancer Protect Plus add-on cover provides a S$150,000 payout (50% of her coverage amount).",
+                "line_start": 60,
+                "line_end": 79,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "• Carcinoma in situ of specified organs",
+                "line_start": 167,
+                "line_end": 168,
+                "quote_token_coverage": 0.999
+              },
+              {
+                "quote": "• Early Prostate Cancer",
+                "line_start": 150,
+                "line_end": 169,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "• Early Thyroid Cancer",
+                "line_start": 152,
+                "line_end": 171,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "• Early Neuroendocrine Tumours",
+                "line_start": 172,
+                "line_end": 173,
+                "quote_token_coverage": 0.999
+              },
+              {
+                "quote": "• Early Bladder Cancer",
+                "line_start": 155,
+                "line_end": 174,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "• Early Chronic Lymphocytic Leukaemia",
+                "line_start": 157,
+                "line_end": 176,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "• Early Melanoma",
+                "line_start": 158,
+                "line_end": 177,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "• Gastro-Intestinal Stromal Tumours",
+                "line_start": 160,
+                "line_end": 179,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "• Bone Marrow Malignancies",
+                "line_start": 161,
+                "line_end": 180,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Catastrophic cancer payout (from Enhanced Cancer Protect Plus add-on)",
+            "benefit_category": "catastrophic_cancer",
+            "benefit_level": "rider",
+            "benefit_description": "Catastrophic cancer benefit pays an amount equal to the coverage amount, and (per example) can be paid in addition to the 2nd cancer relapse benefit; then the policy and add-on cover terminate.",
+            "trigger_description": "Diagnosis of catastrophic cancer.",
+            "covered_conditions": [],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "100% of coverage amount (as implied by example with equal S$ amounts)",
+            "payout_description": null,
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "Once (termination shown after catastrophic cancer diagnosis in example; explicit maximum not stated)",
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure also states “For Catastrophic Cancer (Drawn from Major Stage Cancer benefit)” in the add-on diagram.",
+            "evidence": [
+              {
+                "quote": "If Rachel is diagnosed with catastrophic cancer, she will receive S$300,000 from her catastrophic cancer benefit, as well as an additional S$300,000 from her 2nd cancer relapse benefit2. Her policy and add-on cover will then terminate.",
+                "line_start": 70,
+                "line_end": 74,
+                "quote_token_coverage": 0.996
+              },
+              {
+                "quote": "For Catastrophic Cancer (Drawn from Major Stage Cancer benefit)",
+                "line_start": 51,
+                "line_end": 54,
+                "quote_token_coverage": 0.997
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "riders": [
+          {
+            "name": "Enhanced Cancer Protect Plus",
+            "description": "Optional add-on cover that widens protection by including early, intermediate and catastrophic cancer coverage and increasing total coverage up to 400%. The brochure diagrams show early-stage payout at 50% of coverage amount and catastrophic cancer coverage as an additional benefit.",
+            "rider_type": "add-on",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": "Not stated separately for the add-on; brochure focuses on base plan coverage period choice (20 years or till 65).",
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": "The brochure states it is optional and part of “One add-on cover for 360° protection”.",
+            "evidence": [
+              {
+                "quote": "The optional Enhanced Cancer Protect Plus widens your safety net by including early, intermediate and catastrophic cancer coverage and increasing your total coverage up to 400%, so nothing ever catches you off guard.",
+                "line_start": 23,
+                "line_end": 42,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "From the first diagnosis to second relapse, it supports you with high coverage of up to S$700,000, relapse coverage, premiums that do not change yearly1, and the confidence of knowing your family’s future is secure.",
+            "line_start": 1,
+            "line_end": 18,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Choose between a coverage period of 20 years, or till 65 years old.",
+            "line_start": 16,
+            "line_end": 35,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Get 100% of the coverage amount each time for not only the first diagnosis, but also up to two major stage relapses of major cancer, with each relapse claimable two years apart2.",
+            "line_start": 14,
+            "line_end": 33,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "medium",
+        "review_notes": [
+          "Policy is treated as cancer-only critical illness protection based on brochure wording and stated benefit events (major cancer diagnosis/relapse and add-on early/catastrophic cancer).",
+          "No explicit underwriting/exclusion details were extracted because the document only provides generic “exclusions such as pre-existing conditions” language without naming specific exclusions.",
+          "Catastrophic cancer amount is taken as equal to the coverage amount in the provided example; the brochure does not state a general percentage for catastrophic payout beyond the diagram and example sequencing."
+        ],
+        "slug": "aia-aia-enhanced-cancer-protect"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 29,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_090cad08ef7f030f016a8f1b8f974087d095768931f5ef0d2f",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:00:42.404899+00:00",
+    "usage": {
+      "input_tokens": 7676,
+      "output_tokens": 6137,
+      "total_tokens": 13813,
+      "reasoning_tokens": 303,
+      "estimated_cost_usd": 0.00920645
+    }
+  }
+}

@@ -1,0 +1,551 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Singlife",
+    "source_file": "Singlife/Medical & Life Insurance/Disability Insurance/Singlife ElderShield Standard and Singlife ElderShield Plus.md",
+    "source_filename": "Singlife ElderShield Standard and Singlife ElderShield Plus.md",
+    "document_type": "brochure",
+    "content_sha256": "a81a07c9798fb451f3330312afb4748c79cb1d0d0dd7ba1223dd48fa6a226840",
+    "local_markdown_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Disability Insurance/Singlife ElderShield Standard and Singlife ElderShield Plus.md",
+    "local_pdf_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Disability Insurance/Singlife ElderShield Standard and Singlife ElderShield Plus.pdf"
+  },
+  "extraction": {
+    "document_summary": "This brochure describes two government-approved ElderShield-enhancement supplements from Singlife: Singlife ElderShield Standard and Singlife ElderShield Plus. Both boost your monthly Severe Disability benefit and pay it monthly for up to 12 years or for life, as long as you remain severely disabled (unable to perform a defined number of ADLs). Standard requires inability to perform at least 3 of 6 ADLs, while Plus requires at least 2 of 6. The payout level is stated as S$600 to S$5,000 monthly, plus a Dependant Care Benefit of S$200 monthly for up to 36 months if you have a child aged 22 and below at claim. Both supplements also include a lump-sum for severe disability (up to three times the first monthly benefit) and a death payout of three times the last monthly benefit if death occurs while receiving monthly/Rehabilitation payouts. Premiums can be paid via MediSave (up to S$600 per calendar year). Premiums are waived while receiving the Severe Disability or Rehabilitation benefits. Standard additionally includes a Rehabilitation Benefit if you recover but are still unable to perform 2 ADLs and need physical assistance throughout, and Standard also notes a premium payment term limited to up to policy anniversary or to age 65 (ANB-based).",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Document clearly separates benefits/features for ElderShield Standard vs ElderShield Plus, including ADL threshold differences.",
+      "Some eligibility/term details are referenced as footnotes (e.g., “up to 12 years or for life”), but the brochure states the key mechanics in the main sections.",
+      "Quantitative plan options (e.g., S$300/S$400 ElderShield basic scheme) are mentioned for context, but no standalone new-customer premium/age limits for the Singlife supplements are explicitly given.",
+      "Several important clauses are in “Important notes” but are not expressed with complete legal precision (e.g., MediSave cap, premium payment term constraint), so values are extracted only where explicitly stated."
+    ],
+    "policies": [
+      {
+        "company": "Singlife",
+        "policy_name": "Singlife ElderShield Standard",
+        "aliases": [],
+        "quick_summary": "Singlife ElderShield Standard is a Singlife ElderShield supplement that enhances the government ElderShield scheme by paying an additional monthly benefit for severe disability (S$600 to S$5,000 monthly) for up to 12 years or for life, when you are severely disabled and unable to perform at least 3 of 6 ADLs. It can also pay a lump-sum for severe disability (up to three times the first monthly benefit) and a death payout equal to three times the last monthly benefit if death occurs while receiving benefits. Standard includes a Rehabilitation Benefit after recovery from severe disability—if you are still unable to perform 2 ADLs (even with special aids) and need physical assistance—payable for the remaining benefit payout duration. A Dependant Care Benefit adds S$200 monthly for up to 36 months for eligible children. Premiums can be paid using MediSave (up to S$600 per calendar year) and are waived while receiving the Severe Disability or Rehabilitation benefits.",
+        "category": "disability",
+        "policy_type": "disability_income",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "Additional monthly Severe Disability benefit under the ElderShield scheme (S$600 to S$5,000 monthly)",
+          "Lump-sum payout for severe disability (up to three times first monthly benefit)",
+          "Rehabilitation Benefit after severe disability recovery (Standard only)",
+          "Dependant Care Benefit (S$200 monthly; child aged 22 and below at point of claim; up to 36 months)",
+          "Death payout while receiving monthly/Rehabilitation benefit (three times last monthly benefit)",
+          "Waiver of premium payment while receiving Severe Disability or Rehabilitation benefits",
+          "MediSave payment option for annual premiums (up to S$600 per calendar year, per life assured)"
+        ],
+        "currency_options": [
+          "SGD",
+          "S$"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": null,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "Must have a basic ElderShield policy before purchase. Severe disability definition: unable to perform at least three of six ADLs.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Monthly Severe Disability benefit is payable for up to 12 years or for life, if you are severely disabled and unable to perform at least 3 of the 6 ADLs.",
+        "premium_payment_term_description": "Choose a premium payment period: pay for life, or pay for 20 years or up to your 65th birthday (66 age next birthday) – whichever is later—however the 65th-birthday option is only stated as available with Singlife ElderShield Standard.",
+        "premium_frequencies": [
+          "annual"
+        ],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [],
+        "important_caveats": [
+          "Severe disability threshold differs between Standard and Plus: Standard requires inability to perform at least 3 of 6 ADLs.",
+          "Rehabilitation Benefit is payable only for Standard and only when the Life Assured recovers from severe disability but still cannot perform 2 out of 6 ADLs (even with special aids) and requires physical assistance throughout the activities.",
+          "Premium waiver applies while receiving either the Severe Disability Beneﬁt or the Rehabilitation Benefit.",
+          "MediSave use is limited to up to S$600 per calendar year, per life assured; premiums exceeding this limit must be paid in cash."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": 600,
+        "plans": [
+          {
+            "plan_name": "Monthly Severe Disability Benefit (S$600 to S$5,000)",
+            "plan_code": null,
+            "description": "Monthly Severe Disability Beneﬁt payable when severely disabled (unable to perform at least 3 of the 6 ADLs). Stated range: S$600 to S$5,000 monthly. Payable for up to 12 years or for life.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": 600,
+            "maximum_sum_assured": 5000,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "Severely disabled means unable to perform at least three of the six ADLs (washing, toileting, feeding, dressing, transferring and walking or moving around).",
+            "coverage_term_description": "For up to 12 years or for life, if severely disabled and unable to perform at least 3 of 6 ADLs.",
+            "premium_payment_term_description": "Premium payment period can be chosen (pay for life or pay for 20 years or up to 65th birthday (66 age next birthday) – whichever is later); the age 65 option is only stated as available with Standard.",
+            "benefit_amounts": [
+              {
+                "benefit_name": "Monthly Severe Disability Benefit",
+                "payout_type": "monthly_income",
+                "payout_value": null,
+                "payout_unit": "monthly",
+                "payout_basis": "Range stated in brochure",
+                "payout_description": "S$600 to S$5,000 monthly for up to 12 years or for life, while severely disabled and unable to perform at least 3 of 6 ADLs.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": 600,
+                "maximum_payout_amount": 5000,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Severe disability and ADL inability condition applies.",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "We’ll give you S$600 to S$5,000 monthly, for up to 12 years or for life, if you are severely disabled1 and unable to perform at least 2 (for ElderShield Plus) or 3 (for ElderShield Standard) of the 6 Activities of Daily Living.",
+                    "line_start": 14,
+                    "line_end": 33,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "We’ll give you S$600 to S$5,000 monthly, for up to 12 years or for life, if you are severely disabled1 and unable to perform at least 2 (for ElderShield Plus) or 3 (for ElderShield Standard) of the 6 Activities of Daily Living.",
+                "line_start": 14,
+                "line_end": 33,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Severe Disability Monthly Benefit (ElderShield Standard)",
+            "benefit_category": "disability_income",
+            "benefit_level": "base",
+            "benefit_description": "Monthly Severe Disability Beneﬁt payable when the Life Assured is severely disabled and unable to perform at least 3 of the 6 Activities of Daily Living.",
+            "trigger_description": "Unable to perform at least 3 of 6 ADLs (washing, toileting, feeding, dressing, transferring and walking or moving around).",
+            "covered_conditions": [
+              "Severe disability: unable to perform at least three of the six Activities of Daily Living (ADLs)."
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "monthly_income",
+            "payout_value": null,
+            "payout_unit": "monthly",
+            "payout_basis": "Range stated: S$600 to S$5,000",
+            "payout_description": "S$600 to S$5,000 monthly for up to 12 years or for life, if severely disabled and unable to perform at least 3 of 6 ADLs.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": 600,
+            "maximum_payout_amount": 5000,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "For up to 12 years or for life depending on duration of severe disability.",
+            "geographic_scope": null,
+            "notes": "Brochure states “severely disabled” definition and ADL list in Important notes.",
+            "evidence": [
+              {
+                "quote": "We’ll give you S$600 to S$5,000 monthly, for up to 12 years or for life, if you are severely disabled1 and unable to perform at least 2 (for ElderShield Plus) or 3 (for ElderShield Standard) of the 6 Activities of Daily Living.",
+                "line_start": 14,
+                "line_end": 33,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Severe disability refers to being unable to perform at least two (for Singlife ElderShield Plus) or three (for Singlife ElderShield Standard) of the six Activities of Daily Living (ADLs). The ADLs are washing, toileting, feeding, dressing, transferring and walking or moving around.",
+                "line_start": 241,
+                "line_end": 260,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Lump-sum payout for severe disability (up to 3x first monthly benefit)",
+            "benefit_category": "disability_income",
+            "benefit_level": "base",
+            "benefit_description": "Provides a lump-sum payout when the Life Assured is severely disabled.",
+            "trigger_description": "When you’re severely disabled.",
+            "covered_conditions": [
+              "Severe disability (as defined by inability to perform required number of ADLs)."
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Up to three times your first monthly benefit",
+            "payout_description": "Receive a lump-sum payout, up to three times your first monthly beneﬁt.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Lump-sum payout for severe disability\n\nWe provide relief in a timely manner. Receive a lump-sum payout, up to three times your ﬁ rst monthly beneﬁ t3, when you’re severely disabled1.",
+                "line_start": 20,
+                "line_end": 39,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Rehabilitation Benefit (Standard)",
+            "benefit_category": "disability_income",
+            "benefit_level": "base",
+            "benefit_description": "Extra Rehabilitation Benefit payable after recovery from severe disability but still unable to perform 2 ADLs (even with special aids) and requires physical assistance throughout.",
+            "trigger_description": "Life Assured recovers from Severe Disability but still unable to perform 2 out of 6 ADLs (even with special aids) and requires physical assistance from another person throughout the activities.",
+            "covered_conditions": [
+              "Post-severe disability condition: unable to perform 2 of 6 ADLs (with special aids) and requires physical assistance throughout.",
+              "Rehabilitation Benefit after recovery from severe disability."
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "monthly_income",
+            "payout_value": null,
+            "payout_unit": "monthly",
+            "payout_basis": "Payable for the remaining Benefit Payout Duration (amount described as Rehabilitation Beneﬁt).",
+            "payout_description": "Rehabilitation Beneﬁt is payable when the Life Assured recovers from Severe Disability but is still unable to perform 2 out of 6 ADLs (even with special aids) and requires physical assistance throughout; payable for the remaining Beneﬁt Payout Duration.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Payable for the remaining Beneﬁt Payout Duration.",
+            "geographic_scope": null,
+            "notes": "This benefit is stated in brochure as part of ElderShield Standard: “even when you’re no longer severely disabled but still unable to perform 2 Activities for Daily Living (ADL).”",
+            "evidence": [
+              {
+                "quote": "Rehabilitation Beneﬁ t to support your daily needs\n\nWith di  erent levels of disability, Singlife ElderShield Standard gives you the added relief of a Rehabilitation Beneﬁ t4 even when you’re no longer severely disabled but still unable to perform 2 Activities for Daily Living (ADL).",
+                "line_start": 28,
+                "line_end": 47,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The Rehabilitation Beneﬁ t will be payable when the Life Assured recovers from a Severe Disability but is still unable to perform two out of six ADLs, even with special aids, and requires physical assistance from another person throughout the activities. The Rehabilitation Beneﬁ t will be payable for the remaining Beneﬁ t Payout Duration.",
+                "line_start": 250,
+                "line_end": 269,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Dependant Care Benefit",
+            "benefit_category": "disability_income",
+            "benefit_level": "base",
+            "benefit_description": "Additional Dependant Care Benefit payable monthly for eligible dependant children during the claim period, subject to duration limit.",
+            "trigger_description": "You have a child aged 22 and below, at point of claim, for up to 36 months.",
+            "covered_conditions": [
+              "Child aged 22 and below at point of claim."
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "monthly_income",
+            "payout_value": 200,
+            "payout_unit": "monthly",
+            "payout_basis": "Dependant Care Benefit",
+            "payout_description": "Additional S$200 monthly if you have a child aged 22 and below at point of claim, for up to 36 months.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "For up to 36 months.",
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Additional support for your child\n\nWe care for your loved ones too. Receive Dependant Care Beneﬁ t that is an additional S$200 monthly if you have\n a child aged 22 and below, at point of claim, for up to 36\nmonths.",
+                "line_start": 35,
+                "line_end": 54,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Waiver of premium payment while receiving benefit",
+            "benefit_category": "disability_income",
+            "benefit_level": "base",
+            "benefit_description": "Premium waiver while receiving monthly Severe Disability benefit or Rehabilitation benefit.",
+            "trigger_description": "While you’re receiving your monthly beneﬁ t or Rehabilitation Beneﬁ t.",
+            "covered_conditions": [
+              "Receiving monthly Severe Disability Beneﬁt",
+              "Receiving Rehabilitation Beneﬁt"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "as_charged",
+            "payout_type": "other",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Waiver of premiums",
+            "payout_description": "No premium will be payable during the period in which the Life Assured is receiving either the Severe Disability Beneﬁt or the Rehabilitation Beneﬁt; premium payment resumes when the Life Assured no longer suffers from Severe Disability or no longer meets requirements of the Rehabilitation Beneﬁt.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Waiver of premium payment\n\nWe’re here to help ease your challenges. While you’re receiving your monthly beneﬁ t3 or Rehabilitation Beneﬁ t4, you’re exempted from paying your premiums5.",
+                "line_start": 47,
+                "line_end": 66,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "No premium will be payable during the period in which the Life Assured is receiving either the Severe Disability Beneﬁ t or the Rehabilitation Beneﬁ t. Premium payment will resume when the Life Assured no l ers from Severe Disability, or no longer meets the requirements of the Rehabilitation Beneﬁ t.",
+                "line_start": 255,
+                "line_end": 274,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Death payout (three times last monthly benefit while receiving benefits)",
+            "benefit_category": "disability_income",
+            "benefit_level": "base",
+            "benefit_description": "Provides death payout when death occurs while receiving Severe Disability monthly benefit or Rehabilitation benefit.",
+            "trigger_description": "Death occurs while the Life Assured is receiving either the Severe Disability Beneﬁt or the Rehabilitation Beneﬁt payouts.",
+            "covered_conditions": [
+              "Death while receiving monthly Severe Disability benefit",
+              "Death while receiving Rehabilitation benefit"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Three times the last monthly benefit or Rehabilitation benefit",
+            "payout_description": "Death payout equal to three times the last monthly beneﬁ t (or three times the Rehabilitation Beneﬁt) if death occurs while receiving either of these benefit payouts.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Get a lump-sum payout upon death\n\nWe  er financial relief when you die. The plan gives a\n death payout that’s three times your last monthly beneﬁ t3\nor rehabilitation beneﬁ t, if you die while you’re receiving either\nof these beneﬁ t payouts.",
+                "line_start": 73,
+                "line_end": 78,
+                "quote_token_coverage": 0.9733
+              },
+              {
+                "quote": "Payout upon death would be three times the monthly beneﬁ t or Rehabilitation Beneﬁ t, if the Life Assured were to pass away while receiving either of these beneﬁ ts.",
+                "line_start": 267,
+                "line_end": 286,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "You need to have a basic ElderShield policy before you purchase Singlife ElderShield Standard or Singlife ElderShield Plus.",
+            "line_start": 270,
+            "line_end": 289,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Severe disability refers to being unable to perform at least three of the six Activities of Daily Living (ADLs).",
+            "line_start": 259,
+            "line_end": 259,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "We’ll give you S$600 to S$5,000 monthly, for up to 12 years or for life, if you are severely disabled1 and unable to perform at least 2 (for ElderShield Plus) or 3 (for ElderShield Standard) of the 6 Activities of Daily Living.",
+            "line_start": 14,
+            "line_end": 33,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "With di  erent levels of disability, Singlife ElderShield Standard gives you the added relief of a Rehabilitation Beneﬁ t4 even when you’re no longer severely disabled but\nstill unable to perform 2 Activities for Daily Living (ADL).",
+            "line_start": 28,
+            "line_end": 47,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Receive Dependant Care Beneﬁ t that is an additional S$200 monthly if you have a child aged 22 and below, at point of claim, for up to 36 months.",
+            "line_start": 35,
+            "line_end": 54,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "We provide relief in a timely manner. Receive a lump-sum payout, up to three times your ﬁ rst monthly beneﬁ t3, when you’re severely disabled1.",
+            "line_start": 20,
+            "line_end": 39,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "No premium will be payable during the period in which the Life Assured is receiving either the Severe Disability Beneﬁ t or the Rehabilitation Beneﬁ t.",
+            "line_start": 252,
+            "line_end": 271,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Payout upon death would be three times the monthly beneﬁ t or Rehabilitation Beneﬁ t, if the Life Assured were to pass away while receiving either of these beneﬁ ts.",
+            "line_start": 267,
+            "line_end": 286,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "high",
+        "review_notes": [
+          "Brochure presents both Standard and Plus in the same document; extracted only Singlife ElderShield Standard as the requested standalone base product.",
+          "No explicit underwriting method, entry age limits, or policy expiry/maturity age for Standard are stated in the provided text; those fields are left null/not_stated.",
+          "Basic ElderShield payout (ElderShield 300/400) is referenced only for context and not modeled as separate policies/benefits beyond stating that the Singlife benefit enhances it; only Singlife-stated payout mechanics are extracted into benefits."
+        ],
+        "slug": "singlife-singlife-eldershield-standard"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 20,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_05d5f777b69bc2c4016a8f223b1e0087d0a3d61947743d9e7f",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:29:02.854421+00:00",
+    "usage": {
+      "input_tokens": 6115,
+      "output_tokens": 5070,
+      "total_tokens": 11185,
+      "reasoning_tokens": 0,
+      "estimated_cost_usd": 0.0075605
+    }
+  }
+}

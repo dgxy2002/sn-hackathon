@@ -1,0 +1,450 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Singlife",
+    "source_file": "Singlife/Medical & Life Insurance/Disability Insurance/Singlife Dementia Cover.md",
+    "source_filename": "Singlife Dementia Cover.md",
+    "document_type": "brochure",
+    "content_sha256": "9e4d49167043e10fb3c0682a5834acc6de37755e497558f2769ce53b4874cb15",
+    "local_markdown_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Disability Insurance/Singlife Dementia Cover.md",
+    "local_pdf_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Disability Insurance/Singlife Dementia Cover.pdf"
+  },
+  "extraction": {
+    "document_summary": "Singlife Dementia Cover is a long-term care protection plan focused on cognitive decline, with added mental health and certain injury-related support after a dementia diagnosis. It provides annual payouts of up to S$10,000 for cognitive decline/mental health, with “late dementia” Cognitive Care paid over 10 years up to age 99 (the brochure states late-dementia coverage lasts 10 years from diagnosis and the policy terminates after the full Cognitive Care payout). It also includes the Mental Care Benefit for major depressive disorder, schizophrenia, bipolar disorder, and early/intermediate dementia, paid up to S$50,000 over 5 years. There are also one-time lump-sum payouts up to S$10,000 each for Emotional Resilience (depressive or anxiety disorder) and Medical Expense (accidental burns or fractures). The brochure notes the policy is standalone and not MediSave-approved, and mentions “All age mentioned are Age Next Birthday.”",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Brochure clearly states key benefit structures and caps (e.g., up to S$10,000 annual; up to S$50,000 over 5 years; one-time up to S$10,000).",
+      "Entry age, premium frequency, underwriting, and renewal/termination conditions beyond the Cognitive Care payout end are not stated in a contract-like way.",
+      "No discrete plan tiers (e.g., Plan A/B/C) are named; only a selectable “benefit amount” range (S$200 to S$2,000) is provided."
+    ],
+    "policies": [
+      {
+        "company": "Singlife",
+        "policy_name": "Singlife Dementia Cover",
+        "aliases": [],
+        "quick_summary": "Long-term care protection plan for dementia-related cognitive decline, with mental health-related payouts and one-time lump sums for emotional resilience and certain accidental medical expenses after dementia diagnosis; coverage extends up to age 99 with late-stage Cognitive Care paid over 10 years (policy terminates after full Cognitive Care payout). It is standalone and not MediSave-approved per brochure notes; ages are Age Next Birthday per disclaimer note. Benefit amount selection described as S$200 to S$2,000, used in payout illustrations up to a total payout cap of S$170,000 based on maximum benefit amount.",
+        "category": "disability",
+        "policy_type": "long_term_care",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "cognitive decline (dementia)",
+          "mental health conditions including depressive/anxiety disorder (via Emotional Resilience) and specified disorders via Mental Care benefit",
+          "accidental burns or fractures medical expenses following dementia diagnosis",
+          "personal injury context described as falling/injuring oneself (via the one-time Medical Expense payout after accidental burns/fractures)"
+        ],
+        "currency_options": [
+          "S$"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 99,
+        "entry_age_basis": "age_next_birthday",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": null,
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Coverage up to 99 years old; Cognitive Care benefit for late dementia covers 10 years from diagnosis and policy terminates upon full payment of Cognitive Care payout.",
+        "premium_payment_term_description": "Premium payment relief: stop paying for the policy and stay covered once diagnosed with late-stage dementia and receive the Cognitive Care Benefit.",
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "Policy terminates upon the end of Cognitive Care payout (after full Cognitive Care payout)."
+        ],
+        "important_caveats": [
+          "All age mentioned are Age Next Birthday.",
+          "This policy is not a MediSave-approved policy and you may not use MediSave to pay the premium.",
+          "This brochure states the product summary/contract contains full standard terms and conditions (full details not included in brochure text).",
+          "Late dementia Cognitive Care Benefit covers for 10 years from the date of diagnosis; policy terminates upon full payment of Cognitive Care payout."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": false,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [],
+        "benefits": [
+          {
+            "benefit_name": "Cognitive Care Benefit",
+            "benefit_category": "cognitive_decline_dementia",
+            "benefit_level": "base",
+            "benefit_description": "Annual payouts for cognitive decline and mental health (described as annual payouts of up to S$10,000) and late-stage dementia support paid up to age 99. Late dementia is described as paid out over 10 years and covers 10 years from diagnosis; policy terminates after full payment of Cognitive Care payout.",
+            "trigger_description": "Diagnosis of late-stage dementia (late dementia).",
+            "covered_conditions": [
+              "late-stage dementia"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "monthly_income",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "annual payout (up to S$10,000 stated for cognitive decline and mental health; Cognitive Care benefit described as paid out over 10 years for late dementia)",
+            "payout_description": "Annual payouts of up to S$10,000; late dementia Cognitive Care Benefit is paid out over 10 years (up to age 99) and covers 10 years from date of diagnosis.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 10000,
+            "limit_amount": null,
+            "limit_type": "annual up to S$10,000",
+            "claim_frequency": "annual",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": 99,
+            "benefit_expiry_description": "For late dementia, Cognitive Care Benefit covers you for 10 years from the date of diagnosis; policy terminates upon the end of Cognitive Care payout.",
+            "geographic_scope": null,
+            "notes": "The brochure also states Cognitive Care Benefit may be part of the total payout calculation (up to S$170,000 total payout illustration at maximum benefit amount).",
+            "evidence": [
+              {
+                "quote": "Singlife Dementia Cover is a long-term care protection plan that gives annual payouts of up to S$10,000 for cognitive decline and mental health.",
+                "line_start": 39,
+                "line_end": 58,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Dementia might require long-term care. Get coverage of up to S$100,000 paid out over 10 years6. This covers late Dementia with Cognitive Care benefit till you are age 99 years old7.",
+                "line_start": 67,
+                "line_end": 70,
+                "quote_token_coverage": 0.997
+              },
+              {
+                "quote": "If you are diagnosed with late dementia, Cognitive Care Benefit covers you for 10 years from the date of diagnosis. The policy will terminate upon the end of Cognitive Care payout.",
+                "line_start": 103,
+                "line_end": 122,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Mental Care Benefit",
+            "benefit_category": "mental_health_dementia",
+            "benefit_level": "base",
+            "benefit_description": "Coverage for major depressive disorder, schizophrenia, bipolar disorder, and early or intermediate dementia, paid out over 5 years up to S$50,000. The brochure’s footnote states yearly review is required, and if the Life Assured recovers and becomes eligible again, claims can be paid up to 5 years; yearly payout ends upon full payment of Mental Care benefit.",
+            "trigger_description": "Diagnosis related to the covered mental health conditions and/or early/intermediate dementia (as described for the Mental Care benefit).",
+            "covered_conditions": [
+              "major depressive disorder",
+              "schizophrenia",
+              "bipolar disorder",
+              "early dementia",
+              "intermediate dementia"
+            ],
+            "condition_stages": [
+              "early",
+              "intermediate"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "monthly_income",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "paid out over 5 years (yearly payout implied by brochure narrative and illustration); up to S$50,000 stated",
+            "payout_description": "Up to S$50,000 paid out over 5 years for covered mental health conditions and early/intermediate dementia; yearly review required.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 50000,
+            "limit_amount": null,
+            "limit_type": "up to S$50,000 total over 5 years",
+            "claim_frequency": "yearly (review required)",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Yearly payout will end upon the full payment of the Mental Care benefit (5-year maximum per footnote).",
+            "geographic_scope": null,
+            "notes": "The brochure states a scenario where the Mental Care Benefit payout is S$5,000/year for 5 years (based on an example benefit amount selection, not described as a guaranteed rate beyond the illustration).",
+            "evidence": [
+              {
+                "quote": "Get your coverage extends beyond dementia to include policyholders get preferential rates at selected partners, so you and various other serious mental health conditions. Get your family can get the help and care needed to lessen the physical and financial challenges of dementia.",
+                "line_start": 67,
+                "line_end": 83,
+                "quote_token_coverage": 0.984
+              },
+              {
+                "quote": "Minding your matters providers such as AIC, Dementia Singapore, Doctor Anywhere, Helpling, Immortalize and Simply Wills. Singlife Dementia Cover’s Our coverage extends beyond dementia to include policyholders get preferential rates at selected partners, so you and various other serious mental health conditions. Get your family can get the help and care needed to lessen the physical and financial challenges of dementia.",
+                "line_start": 78,
+                "line_end": 83,
+                "quote_token_coverage": 0.995
+              },
+              {
+                "quote": "Our coverage extends beyond dementia to include policyholders get preferential rates at selected partners, so you and various other serious mental health conditions. Get your family can get the help and care needed to lessen the physical and financial challenges of dementia.",
+                "line_start": 80,
+                "line_end": 83,
+                "quote_token_coverage": 0.997
+              },
+              {
+                "quote": "Minding your matters providers such as AIC, Dementia Singapore, Doctor Anywhere, Helpling, Immortalize and Simply Wills.",
+                "line_start": 60,
+                "line_end": 79,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "We’ve collaborated with a wide range of trusted healthcare and service providers such as AIC, Dementia Singapore, Doctor Anywhere, Helpling, Immortalize and Simply Wills.",
+                "line_start": 77,
+                "line_end": 79,
+                "quote_token_coverage": 0.998
+              },
+              {
+                "quote": "Get covered for major depressive disorder, schizophrenia, bipolar disorder, and early or intermediate Dementia with coverage of up to S$50,000 paid out over 5 years8.",
+                "line_start": 81,
+                "line_end": 85,
+                "quote_token_coverage": 0.996
+              },
+              {
+                "quote": "Yearly review is required to ensure that the Life Assured is still seeking treatment and/or taking medication for the condition. If the Life Assured recovers and subsequently becomes eligible to claim again, claims can be paid up to 5 years. The yearly payout will end upon the full payment of the Mental Care benefit.",
+                "line_start": 128,
+                "line_end": 147,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Emotional Resilience Benefit",
+            "benefit_category": "mental_health_emotional_support",
+            "benefit_level": "base",
+            "benefit_description": "One-time lump-sum payout of up to S$10,000 under the Emotional Resilience benefit for depressive or anxiety disorder after a dementia diagnosis.",
+            "trigger_description": "Depressive or anxiety disorder after a dementia diagnosis.",
+            "covered_conditions": [
+              "depressive disorder",
+              "anxiety disorder",
+              "dementia diagnosis"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "lump-sum up to S$10,000",
+            "payout_description": "One-time lump-sum payout up to S$10,000.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 10000,
+            "limit_amount": null,
+            "limit_type": "up to S$10,000",
+            "claim_frequency": "one-time",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The example scenario shows a lump sum payout of S$5,000 (5x benefit amount) under Emotional Resilience for depressive disorder after dementia, but the brochure also states up to S$10,000.",
+            "evidence": [
+              {
+                "quote": "We’ll give you a one-time lump-sum payout of up to S$10,000 under the Emotional Resilience benefit for depressive or anxiety disorder after a dementia diagnosis.",
+                "line_start": 74,
+                "line_end": 93,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Emotional helping hand\nA person with Dementia may display changes to their behaviour, emotions, and mood. We’ll give you a\none-time lump-sum payout of up to S$10,000 under\nthe Emotional Resilience benefit for depressive or\nanxiety disorder after a dementia diagnosis.",
+                "line_start": 74,
+                "line_end": 93,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Medical Expense Benefit (Accidental Burns or Fractures)",
+            "benefit_category": "accidental_injury_medical_expenses",
+            "benefit_level": "base",
+            "benefit_description": "One-time lump-sum payout of up to S$10,000 for medical expenses incurred for accidental burns or fractures following a dementia diagnosis.",
+            "trigger_description": "Accidental burns or fractures following a dementia diagnosis.",
+            "covered_conditions": [
+              "accidental burns",
+              "accidental fractures",
+              "dementia diagnosis"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "lump-sum up to S$10,000 for medical expenses following accidental burns/fractures",
+            "payout_description": "One-time lump-sum payout of up to S$10,000 for medical expenses incurred for accidental burns or fractures following a dementia diagnosis.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 10000,
+            "limit_amount": null,
+            "limit_type": "up to S$10,000",
+            "claim_frequency": "one-time",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure links this benefit to falls/injuries described as high risk of falling and injuring themselves.",
+            "evidence": [
+              {
+                "quote": "You’ll receive a one-time\nlump-sum payout of up to S$10,000 for medical expenses incurred for accidental burns or fractures following a\ndementia diagnosis.",
+                "line_start": 62,
+                "line_end": 65,
+                "quote_token_coverage": 0.997
+              },
+              {
+                "quote": "Singlife Dementia Cover is a long-term care protection plan that gives annual payouts of up to S$10,000 for cognitive decline\nand mental health. It provides additional support for depressive or anxiety disorder, as well as accidental burns or fractures,\nafter the onset of dementia.",
+                "line_start": 40,
+                "line_end": 59,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Premium payment relief upon late-stage dementia diagnosis",
+            "benefit_category": "premium_payment_relief",
+            "benefit_level": "base",
+            "benefit_description": "Premium payment relief: stop paying for the policy and stay covered once diagnosed with late-stage dementia and receive the Cognitive Care Benefit.",
+            "trigger_description": "Diagnosis with late-stage dementia and receiving the Cognitive Care Benefit.",
+            "covered_conditions": [
+              "late-stage dementia"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "as_charged",
+            "payout_type": "other",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "Policy premium payment can be stopped upon late-stage dementia diagnosis while remaining covered under the benefit.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "not_stated",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "This is described as payment relief rather than a monetary payout amount.",
+            "evidence": [
+              {
+                "quote": "Premium payment relief\nIntroducing Singlife Care Collab – a one-stop health services hub\nWe are with you. You can stop paying for the policy and\nstay covered once you are diagnosed with late-stage\ndementia and receive the Cognitive Care Benefit.",
+                "line_start": 71,
+                "line_end": 76,
+                "quote_token_coverage": 0.995
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "Singlife Dementia Cover is a long-term care protection plan that gives annual payouts of up to S$10,000 for cognitive decline\nand mental health.",
+            "line_start": 39,
+            "line_end": 58,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "It provides additional support for depressive or anxiety disorder, as well as accidental burns or fractures,\nafter the onset of dementia.",
+            "line_start": 40,
+            "line_end": 59,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Choose your benefit amount\nfrom S$200 to S$2,000, that gives a total payout of up to S$170,0005.",
+            "line_start": 61,
+            "line_end": 63,
+            "quote_token_coverage": 0.998
+          },
+          {
+            "quote": "Coverage up to 99 years old",
+            "line_start": 41,
+            "line_end": 60,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "high",
+        "review_notes": [
+          "No explicit entry-age limits, renewal mechanics, or underwriting approach are stated in the provided brochure text.",
+          "The brochure states a selectable benefit amount range (S$200 to S$2,000) but does not provide discrete named tiers; therefore no plan tiers were created."
+        ],
+        "slug": "singlife-singlife-dementia-cover"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 19,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_0d0e347c08cd0595016a8f22196a5087d08408d8e51d7db9d4",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:28:27.170321+00:00",
+    "usage": {
+      "input_tokens": 6302,
+      "output_tokens": 4912,
+      "total_tokens": 11214,
+      "reasoning_tokens": 279,
+      "estimated_cost_usd": 0.0074004
+    }
+  }
+}

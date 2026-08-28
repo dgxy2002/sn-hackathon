@@ -1,0 +1,796 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "AIA",
+    "source_file": "AIA/Health/AIA Absolute Critical Cover.md",
+    "source_filename": "AIA Absolute Critical Cover.md",
+    "document_type": "brochure",
+    "content_sha256": "6cf622da2918ba017a25f879b8918b03a40e0201a2093aa642500442e0690a42",
+    "local_markdown_path": "backend/scraper/insurance/AIA/Health/AIA Absolute Critical Cover.md",
+    "local_pdf_path": "backend/scraper/insurance/AIA/Health/AIA Absolute Critical Cover.pdf"
+  },
+  "extraction": {
+    "document_summary": "AIA Absolute Critical Cover is a critical illness protection plan that also extends to “every stage” of covered conditions, including early, intermediate and major stage critical illnesses, as well as chronic diseases, age-related conditions, and “future unknown diseases”. Buyers can choose a coverage term “up to age 65, 75, or 100”. The plan pays (i) critical illness benefits for covered conditions (including named examples such as thyroid disorders and sleep apnoea), (ii) an additional Safety Net Cover payout if admitted to ICU for at least 4 days—equal to 20% of the coverage amount on top of existing coverage, with a cap described for this benefit, and it terminates thereafter, and (iii) potential cash value only when the term is “up to age 100” via surrender and maturity benefits (75% of coverage amount; maturity at age 100 is 150% of coverage amount). A key caveat is that claims under the Critical Illness Benefit reduce surrender/maturity benefits, and there are stated exclusions such as pre-existing conditions with waiting/survival periods.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Brochure includes many benefit mechanics and caps (e.g., Safety Net Cover ICU stay, surrender/maturity percentages, booster reset/relapse rules).",
+      "Exact underwriting terms, entry age limits, and the full list of plan-specific payable amounts for all conditions are not provided in this excerpt.",
+      "The full list of covered conditions appears in tables, but these tables do not provide per-condition payout amounts beyond the special/pre-early categories described."
+    ],
+    "policies": [
+      {
+        "company": "AIA",
+        "policy_name": "AIA Absolute Critical Cover",
+        "aliases": [],
+        "quick_summary": "Future-looking critical illness protection (early/intermediate/major plus pre-early/chronic/age-related conditions) with an ICU Safety Net Cover add-on payout and potential cash value when coverage term is selected up to age 100; claims can reduce surrender/maturity benefits and pre-existing conditions are excluded with waiting/survival periods applying where stated in the brochure. An optional ASCC Booster enables multiple claims via Power Reset/Power Relapse mechanisms; optional premium waiver riders exist for adults and children (named). Eligibility and underwriting details are not provided in this excerpt.",
+        "category": "health",
+        "policy_type": "critical_illness",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "Early, intermediate and major stage critical illnesses (multi-stage)",
+          "Special conditions and pre-early conditions (including specific chronic/age-related examples)",
+          "First/only plan claims to cover certain health conditions such as thyroid disorders, sleep apnoea, benign prostatic hyperplasia requiring surgery, and glaucoma requiring surgery"
+        ],
+        "currency_options": [
+          "SGD"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 100,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": null,
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Coverage term is selectable “up to age 65, 75, or 100, whichever best fits your needs.”",
+        "premium_payment_term_description": "not_stated",
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": true,
+        "surrender_value_available": true,
+        "bonuses_or_dividends": "not_stated",
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "Death Benefit terminates the policy: “AIA Absolute Critical Cover will terminate after the Death Benefit is paid out.”"
+        ],
+        "important_caveats": [
+          "Claims under Critical Illness Benefit reduce surrender/maturity benefits: “Any claims paid under Critical Illness Benefit will reduce the amount of surrender benefit or maturity benefit.”",
+          "Safety Net Cover benefit terminates thereafter (after described payout): “this benefit terminates thereafter.”",
+          "Pre-existing conditions excluded, and waiting/survival periods apply where applicable: “There are exclusions such as pre-existing conditions, whereby no benefits will be payable. Waiting period and survival period are applicable before the benefits will be payable.”",
+          "Specific caps apply to ICU Safety Net Cover: “For a coverage period of age 85 or earlier is capped at S$25,000 across all policies issued by AIA and this benefit will terminate thereafter.”"
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "Coverage term up to age 65",
+            "plan_code": null,
+            "description": "Select coverage term “up to age 65”. Safety Net Cover cap/cut-off described by coverage period (age 85 or earlier).",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "“Choose a preferred coverage term of up to age 65, 75, or 100, whichever best fits your needs.”",
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Safety Net Cover (ICU 4 days)",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "20% of coverage amount on top of existing coverage amount (as stated)",
+                "payout_description": "One-time payout equal to additional 20% of coverage amount on top of existing coverage amount; capped at S$25,000 across all policies for coverage period of age 85 or earlier; benefit terminates thereafter.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": 25000,
+                "limit_amount": 25000,
+                "limit_type": "cap",
+                "claim_frequency": "one-time (as stated)",
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Stay in ICU must be at least 4 days, occurring within the same episode of any local hospital admission.",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Should you be admitted into the Intensive Care Unit for a minimum of 4 days, we will offer a one-time payout of additional 20% of coverage amount2 on top of your existing coverage amount.",
+                    "line_start": 50,
+                    "line_end": 69,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Choose a preferred coverage term of up to age 65, 75, or 100, whichever best fits your needs.",
+                "line_start": 19,
+                "line_end": 38,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Coverage term up to age 75",
+            "plan_code": null,
+            "description": "Select coverage term “up to age 75”. Safety Net Cover cap/cut-off described by coverage period (age 85 or earlier).",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "“Choose a preferred coverage term of up to age 65, 75, or 100, whichever best fits your needs.”",
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Safety Net Cover (ICU 4 days)",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "20% of coverage amount on top of existing coverage amount (as stated)",
+                "payout_description": "One-time payout equal to additional 20% of coverage amount on top of existing coverage amount; capped at S$25,000 across all policies for coverage period of age 85 or earlier; benefit terminates thereafter.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": 25000,
+                "limit_amount": 25000,
+                "limit_type": "cap",
+                "claim_frequency": "one-time (as stated)",
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Stay in ICU must be at least 4 days, occurring within the same episode of any local hospital admission.",
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "this benefit will terminate thereafter.",
+                    "line_start": 478,
+                    "line_end": 497,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "medium"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Choose a preferred coverage term of up to age 65, 75, or 100, whichever best fits your needs.",
+                "line_start": 19,
+                "line_end": 38,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Coverage term up to age 100",
+            "plan_code": null,
+            "description": "Select coverage term “up to age 100”, enabling potential cash value via surrender (from age 75 or 60th policy anniversary, whichever earlier) and maturity benefit at age 100. Surrender/maturity percentages are stated; claims under Critical Illness Benefit reduce these amounts.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "“Choose a preferred coverage term of up to age 65, 75, or 100”.",
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Surrender Benefit",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "75% of coverage amount (from age 75 or policy anniversary age 60, whichever is earlier) + additional 1% for each progressive year from age 76 onwards up to 99%",
+                "payout_description": "Payable on or after the 60th policy anniversary or at age 75, whichever is earlier: 75% of coverage amount. Plus additional 1% for each progressive year from age 76 onwards, up to 99% of coverage amount.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Cash value shown as available only if choosing coverage term up to age 100.",
+                "notes": "Any claims paid under Critical Illness Benefit reduce surrender benefit or maturity benefit (stated).",
+                "evidence": [
+                  {
+                    "quote": "If you choose the coverage term of up to age 100, you can enjoy potential cash value3 on your plan.",
+                    "line_start": 56,
+                    "line_end": 75,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Maturity Benefit",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "150% of coverage amount at age 100",
+                "payout_description": "Maturity benefit will be payable when the policy matures at age 100: 150% of the coverage amount.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Only payable when the policy matures at age 100.",
+                "notes": "Any claims paid under Critical Illness Benefit reduce the amount of surrender benefit or maturity benefit.",
+                "evidence": [
+                  {
+                    "quote": "The maturity benefit of 150% of the coverage amount will only be payable when the policy matures at age 100.",
+                    "line_start": 483,
+                    "line_end": 502,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "If you choose the coverage term of up to age 100, you can enjoy potential cash value3 on your plan.",
+                "line_start": 56,
+                "line_end": 75,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Critical Illness Benefit (all-encompassing safety net)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Covers early, intermediate and major stage critical illnesses and also covers special conditions and pre-early/chronic/age-related conditions, with stated examples (e.g., thyroid disorders and sleep apnoea). The brochure states it covers “up to 10% off child’s plan” but that is separate; this benefit is the critical illness protection.",
+            "trigger_description": "Diagnosis of covered critical illness / covered conditions across stages and categories (early/intermediate/major; pre-early/chronic/age-related; special conditions).",
+            "covered_conditions": [
+              "Thyroid disorders (including stated claim as covered health conditions)",
+              "Sleep Apnoea (including stated claim as covered health conditions)",
+              "Benign prostatic hyperplasia (requiring surgery)",
+              "Glaucoma (requiring surgery)",
+              "Example early critical illness: Early Stage Liver Cancer (illustrated)"
+            ],
+            "condition_stages": [
+              "pre_early",
+              "early",
+              "intermediate",
+              "late_or_severe"
+            ],
+            "coverage_type": "claims_based",
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "coverage amount (implied by additional payouts described, and by Booster/Reset/Relapse mechanics referencing coverage amount)",
+            "payout_description": null,
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Coverage applies “subject to your selected coverage term”.",
+            "geographic_scope": null,
+            "notes": "No general payout percentage for the base critical illness benefit is explicitly stated in the excerpt beyond illustrative example payouts.",
+            "evidence": [
+              {
+                "quote": "With AIA Absolute Critical Cover, we now offer a plan that takes your protection further into the future.",
+                "line_start": 3,
+                "line_end": 22,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Safety Net Cover (ICU minimum 4 days)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "One-time additional payout if admitted to Intensive Care Unit for at least 4 days in the same episode of any local hospital admission.",
+            "trigger_description": "ICU admission for a minimum of 4 days.",
+            "covered_conditions": [],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "other",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "additional 20% of coverage amount on top of existing coverage amount",
+            "payout_description": "One-time payout of additional 20% of coverage amount on top of existing coverage amount, with cap and termination rules stated in Terms and Conditions.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 25000,
+            "limit_amount": 25000,
+            "limit_type": "cap",
+            "claim_frequency": "one-time payout per the brochure wording",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Benefit terminates after payout (as stated).",
+            "geographic_scope": "local hospital admission (as per ICU condition wording)",
+            "notes": "The brochure says the one-time payout may “encompass all other illnesses, injuries and conditions, even future unknown diseases.”",
+            "evidence": [
+              {
+                "quote": "Should you be admitted into the Intensive Care Unit for a minimum of 4 days, we will offer a one-time payout of additional 20% of coverage amount2 on top of your existing coverage amount.",
+                "line_start": 50,
+                "line_end": 69,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The stay in ICU must be at least 4 days occurring within the same episode of any local hospital admission, due to any diseases, illnesses, injuries or conditions.",
+                "line_start": 479,
+                "line_end": 498,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Child Premium Discount",
+            "benefit_category": "discount",
+            "benefit_level": "optional",
+            "benefit_description": "If the customer purchases AIA Absolute Critical Cover for their child(ren) as well, the first-year premium discount applies, with renewal discount levels based on number of children.",
+            "trigger_description": "Purchasing AIA Absolute Critical Cover for child(ren).",
+            "covered_conditions": [],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": null,
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "premium discount",
+            "payout_description": "10% off the first year’s premiums of the child(ren)’s plan; subsequent renewal discount: 5% for one child; 10% for two or more children (till age 21).",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": null,
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Discount renewal discount is “(till age 21)”.",
+            "geographic_scope": null,
+            "notes": "Not a payout benefit; recorded as a benefit/feature in this brochure.",
+            "evidence": [
+              {
+                "quote": "should you also purchase it for your child(ren), you will enjoy 10% off the first year’s premiums of your child(ren)’s plan.",
+                "line_start": 96,
+                "line_end": 115,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Premium Discount (till age 21)",
+                "line_start": 98,
+                "line_end": 117,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Death Benefit",
+            "benefit_category": "life",
+            "benefit_level": "base",
+            "benefit_description": "On death, loved ones receive 5% of coverage amount, including surrender value (if any).",
+            "trigger_description": "Death of the policyholder.",
+            "covered_conditions": [],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 5,
+            "payout_unit": "percent",
+            "payout_basis": "coverage amount",
+            "payout_description": "Lump sum: 5% of coverage amount, including the surrender value (if any).",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": null,
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "“AIA Absolute Critical Cover will terminate after the Death Benefit is paid out.”",
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "In the unfortunate event of death, your loved ones will receive 5% of your coverage amount, including the surrender value (if any).",
+                "line_start": 103,
+                "line_end": 122,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Surrender Benefit",
+            "benefit_category": "cash_value",
+            "benefit_level": "base",
+            "benefit_description": "Potential cash value benefit for coverage term up to age 100, payable on or after 60th policy anniversary or at age 75 (whichever is earlier), with progressive increases from age 76.",
+            "trigger_description": "Surrender of policy under stated timing conditions.",
+            "covered_conditions": [],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "coverage amount",
+            "payout_description": "75% of coverage amount (from age 75 or 60th policy anniversary, whichever is earlier) plus additional 1% for each progressive year from age 76 onwards, up to 99% of coverage amount.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": null,
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "On or after the 60th policy anniversary or at age 75, whichever is earlier.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "Any claims paid under Critical Illness Benefit reduce surrender benefit.",
+            "evidence": [
+              {
+                "quote": "The surrender benefit of 75% of the coverage amount shall be payable on or after the 60th policy anniversary or at age 75, whichever is earlier, plus additional 1% for each progressive year from age 76 onwards.",
+                "line_start": 482,
+                "line_end": 501,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Maturity Benefit",
+            "benefit_category": "cash_value",
+            "benefit_level": "base",
+            "benefit_description": "Cash value maturity at age 100 for coverage term up to age 100.",
+            "trigger_description": "Policy matures at age 100.",
+            "covered_conditions": [],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "coverage amount",
+            "payout_description": "Maturity benefit of 150% of the coverage amount payable only when the policy matures at age 100.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": null,
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": 100,
+            "benefit_expiry_description": "Only payable when policy matures at age 100.",
+            "geographic_scope": null,
+            "notes": "Any claims paid under Critical Illness Benefit reduce maturity benefit.",
+            "evidence": [
+              {
+                "quote": "The maturity benefit of 150% of the coverage amount will only be payable when the policy matures at age 100.",
+                "line_start": 483,
+                "line_end": 502,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [
+          {
+            "name": "ASCC Booster",
+            "description": "Optional extension to enable multiple claims and relapse protection for multiple critical illnesses and relapse via Power Reset Benefit and Power Relapse Benefit.",
+            "rider_type": "booster",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "Applicable if the ASCC Booster is added (explicit in sections describing Power Relapse Benefit and applied conditions).",
+            "coverage_term_description": "The critical illness conditions also apply to the Power Reset Benefit under the ASCC Booster.",
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": "Power Reset restores coverage amount after 12 months since last critical illness; Power Relapse covers specified recurrences once 24 months have passed and up to stated percentage of coverage amount with conditions including claim admission by AIA and that re-diagnosis claim can be made even if major cancer is not in remission.",
+            "evidence": [
+              {
+                "quote": "Enjoy continual protection with the ASCC Booster1 that further extends your coverage for multiple critical illnesses and relapse.",
+                "line_start": 73,
+                "line_end": 92,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Early Critical Protector Waiver of Premium (II) rider",
+            "description": "Premium waiver rider for future premiums of AIA Absolute Critical Cover and eligible riders (if any) upon diagnosis of specified early/intermediate/major stage critical illnesses.",
+            "rider_type": "premium_waiver",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "Waives future premiums upon diagnosis of: “149 early, intermediate, or major stage critical illnesses” (Early Critical Protector Waiver of Premium (II) rider) or “72 major critical illnesses” with the Critical Protector Waiver of Premium (II) rider (listed in brochure).",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": true,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Future premiums of your AIA Absolute Critical Cover and eligible riders (if any) will be waived, upon diagnosis of any of the covered: • 149 early, intermediate, or major stage critical illnesses with Early Critical Protector Waiver of Premium (II) rider",
+                "line_start": 109,
+                "line_end": 128,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Critical Protector Waiver of Premium (II) rider",
+            "description": "Premium waiver rider for future premiums of AIA Absolute Critical Cover and eligible riders (if any) upon diagnosis of specified major critical illnesses.",
+            "rider_type": "premium_waiver",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "Waives future premiums upon diagnosis of: “72 major critical illnesses with Critical Protector Waiver of Premium (II) rider”.",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": true,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "• 72 major critical illnesses with Critical Protector Waiver of Premium (II) rider",
+                "line_start": 110,
+                "line_end": 129,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Early Critical Protector Payor Benefit (II) rider",
+            "description": "For child plans: premium waiver or payor benefit described to waive future premiums of child’s AIA Absolute Critical Cover and eligible riders (if any) until age 25 or end of rider term upon diagnosis of specified critical illness or on your passing with this rider.",
+            "rider_type": "premium_waiver_payor",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "Waive future premiums for child until the earlier of child’s 25th birthday or end of the premium waiver rider term upon diagnosis of specified illnesses/conditions, or upon your passing with this rider.",
+            "coverage_term_description": "“until your child’s 25th birthday or the end of your premium waiver rider term (whichever is earlier)”.",
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": true,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "We will waive future premiums of your child’s AIA Absolute Critical Cover and eligible riders (if any) until your child’s 25th birthday or the end of your premium waiver rider term (whichever is earlier) upon diagnosis of any of the covered: • 149 early, intermediate, or major stage critical illnesses, total and permanent disability, or upon your passing with Early Critical Protector Payor Benefit (II) rider;",
+                "line_start": 117,
+                "line_end": 136,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Payor Benefit rider",
+            "description": "For child plans: waives future premiums (child’s AIA Absolute Critical Cover and eligible riders) until earlier of child’s 25th birthday or end of premium waiver rider term, upon passing or diagnosis of disability with this rider.",
+            "rider_type": "premium_waiver_payor",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "Waiver triggered by your passing or diagnosis of disability with Payor Benefit rider (listed for child premium waiver section).",
+            "coverage_term_description": "“until your child’s 25th birthday or the end of your premium waiver rider term (whichever is earlier)”.",
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": true,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "or your passing or diagnosis of disability, with Payor Benefit rider",
+                "line_start": 136,
+                "line_end": 137,
+                "quote_token_coverage": 0.999
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "exclusions": [
+          {
+            "exclusion": "Pre-existing conditions (no benefits payable)",
+            "category": "medical_exclusions",
+            "applies_to": "base_policy",
+            "notes": "Brochure states exclusions such as pre-existing conditions where no benefits will be payable; it does not define pre-existing conditions in this excerpt.",
+            "evidence": [
+              {
+                "quote": "There are exclusions such as pre-existing conditions, whereby no benefits will be payable.",
+                "line_start": 472,
+                "line_end": 491,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "source_evidence": [
+          {
+            "quote": "AIA ABSOLUTE CRITICAL COVER",
+            "line_start": 1,
+            "line_end": 1,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Flexible coverage length Choose a preferred coverage term of up to age 65, 75, or 100, whichever best fits your needs.",
+            "line_start": 19,
+            "line_end": 38,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Should you be admitted into the Intensive Care Unit for a minimum of 4 days, we will offer a one-time payout of additional 20% of coverage amount2 on top of your existing coverage amount.",
+            "line_start": 50,
+            "line_end": 69,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "If you choose the coverage term of up to age 100, you can enjoy potential cash value3 on your plan.",
+            "line_start": 56,
+            "line_end": 75,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Any claims paid under Critical Illness Benefit will reduce the amount of surrender benefit or maturity benefit.",
+            "line_start": 68,
+            "line_end": 87,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Future premiums of your AIA Absolute Critical Cover and eligible riders (if any) will be waived, upon diagnosis of any of the covered:",
+            "line_start": 107,
+            "line_end": 126,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "medium",
+        "review_notes": [
+          "ASCC Booster is treated as an optional rider/attachment because the brochure describes adding it and then defines Power Reset/Power Relapse Benefit mechanics as components under the ASCC Booster.",
+          "Only benefits with explicit payout mechanics in the provided pages are extracted into structured benefit records (Safety Net Cover, Death Benefit, Surrender Benefit, Maturity Benefit). The base critical illness payout amounts by stage/condition are not explicitly provided in this excerpt, so they are kept as generalized critical illness coverage.",
+          "Waiting period and survival period are mentioned generally in Terms and Conditions, but no numeric durations are provided in this excerpt."
+        ],
+        "slug": "aia-aia-absolute-critical-cover"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 27,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_0efb3eec908b9fb5016a8f1b0a48a487d0a0637cefb084da1f",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T16:58:42.392146+00:00",
+    "usage": {
+      "input_tokens": 11161,
+      "output_tokens": 8374,
+      "total_tokens": 19535,
+      "reasoning_tokens": 358,
+      "estimated_cost_usd": 0.0126997
+    }
+  }
+}

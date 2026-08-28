@@ -1,0 +1,1525 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "AIA",
+    "source_file": "AIA/Health/AIA Mum2Baby Choices.md",
+    "source_filename": "AIA Mum2Baby Choices.md",
+    "document_type": "brochure",
+    "content_sha256": "7e958c87d675b3d75e8391fd3e58a95913b32ff25ec827f18eda111d710b2b2e",
+    "local_markdown_path": "backend/scraper/insurance/AIA/Health/AIA Mum2Baby Choices.md",
+    "local_pdf_path": "backend/scraper/insurance/AIA/Health/AIA Mum2Baby Choices.pdf"
+  },
+  "extraction": {
+    "document_summary": "AIA Mum2Baby Choices is a prenatal protection proposition with guaranteed lifelong protection for the child, starting from as early as the 13th week of pregnancy. It is offered via two bundled base options: AIA Mum2Baby Protect (a participating whole life plan with boosted protection and stable cash value) and AIA Mum2Baby (an investment-linked plan that bolsters protection during early years and supports investment growth later). Both bundles cover the mother and baby for defined events, including pregnancy complications, childbirth-related medical negligence, congenital illnesses, and hospitalisation benefits. A key mechanic is that the prenatal base plan and applicable riders can be transferred to the child within 100 days from birth “with no medical questions asked,” and coverage is stated as guaranteed up to age 100.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Document provides clear benefit names, payout amounts tied to coverage amount, and stated timeframes (13th week, 100 days transfer, age 100).",
+      "Initial underwriting requirements for purchase of the base policy/riders are not explicitly stated; only the transfer is described as without medical questions.",
+      "No specific exclusion list is provided; only a generic statement that some conditions result in no benefits payable."
+    ],
+    "policies": [
+      {
+        "company": "AIA",
+        "policy_name": "AIA Mum2Baby Protect (AIA Mum2Baby Choices)",
+        "aliases": [
+          "AIA Mum2Baby Protect (IV)"
+        ],
+        "quick_summary": "AIA Mum2Baby Protect is a participating whole life prenatal bundle under AIA Mum2Baby Choices. It provides protection for the expectant mother and baby from as early as the 13th week of pregnancy and includes benefits for pregnancy complications, childbirth medical negligence, congenital illnesses, hospitalisation (up to 30 days), and major hospitalisation for mum. A Baby Protect Plus (III) prenatal rider can be transferred to the child within 100 days from birth with no medical questions asked, aiming at guaranteed coverage for the child up to age 100. Coverage amount options are S$5,000, S$10,000 or S$25,000, which drive the stated benefit payouts.",
+        "category": "health",
+        "policy_type": "whole_life",
+        "plan_tier": null,
+        "target_customer": "Expectant parents; mother and child protection from pregnancy (at least 13 weeks).",
+        "structure": "base_plan",
+        "participation": "participating",
+        "coverage_scope": [
+          "Pregnancy complications (mum)",
+          "Childbirth medical negligence (mum)",
+          "Congenital illnesses (baby)",
+          "Hospitalisation benefits (mum and baby, up to 30 days)",
+          "Major hospitalisation care benefit for mum",
+          "Early Delivery by Caesarean Benefit"
+        ],
+        "currency_options": [
+          "SGD"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 100,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "Prenatal rider/base can be transferred to the child within 100 days from birth with no medical questions asked; early coverage described as starting at the 13th week of pregnancy. Coverage under the prenatal rider ends after the 3rd policy year, for both mum and baby.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Guaranteed lifelong protection for the child stated up to age 100; prenatal rider coverage ends for both mum and baby in the 3rd policy year, and thereafter (if no claims) no claims reward applies per document. Transfer to the child is permitted within 100 days from birth.",
+        "premium_payment_term_description": "not_stated",
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": true,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": "Participating whole life plan (document states participating) with stable cash value that accumulates over time; participation/dividend mechanics not specified.",
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "Coverage under the prenatal rider ends for both mum and baby in the 3rd policy year"
+        ],
+        "important_caveats": [
+          "Early Delivery by Caesarean Benefit is stated to be paid only if the procedure is deemed medically necessary by a registered medical practitioner, and it will not apply if the mother is carrying 2 foetuses during pregnancy.",
+          "Major Hospitalisation Care Benefit for mum terminates once this benefit is paid or 60 days from birth of the baby, whichever is earlier; upon payout, the Hospital Care Benefit for mum also terminates.",
+          "Hospital Care Benefit for mum automatically terminates once a maximum of 30 days of benefit is paid.",
+          "Terms note that certain conditions may result in no benefits payable, and definitions are in the policy contract."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "S$5,000 coverage amount option",
+            "plan_code": null,
+            "description": "Coverage amount of S$5,000 under AIA Mum2Baby Protect bundle; payouts for applicable benefits are stated as S$5,000 for mum death benefit and S$100/day for relevant hospital care benefit (subject to benefit-specific limits/termination rules).",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Death Benefit for mum",
+                "payout_type": "lump_sum",
+                "payout_value": 5000,
+                "payout_unit": "SGD",
+                "payout_basis": "Coverage amount",
+                "payout_description": "Death benefit for mum is stated as the coverage amount.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "The document states this benefit will be paid only once and terminates upon payment for the referenced benefit.",
+                "evidence": [
+                  {
+                    "quote": "Death Benefit for mum Pregnancy complications1 $5,000, $10,000 or $25,000 respectively",
+                    "line_start": 238,
+                    "line_end": 254,
+                    "quote_token_coverage": 0.984
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Hospital Care Benefit for mum (Up to 30 Days)",
+                "payout_type": "daily_income",
+                "payout_value": 100,
+                "payout_unit": "per day",
+                "payout_basis": "Coverage amount option",
+                "payout_description": "Hospital Care Benefit for mum is stated as $100/day for the S$5,000 option; $200/day or $500/day for higher options respectively.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Document states it automatically terminates once a maximum of 30 days of benefit is paid.",
+                "evidence": [
+                  {
+                    "quote": "Hospital Care Benefit for mum2 (Up to 30 Days) $100/day, $200/day or $500/day respectively",
+                    "line_start": 249,
+                    "line_end": 256,
+                    "quote_token_coverage": 0.993
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Early Delivery by Caesarean Benefit",
+                "payout_type": "lump_sum",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Coverage amount",
+                "payout_description": "Pays out 15% of coverage amount, stated as '15% of coverage amount'.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Benefit is stated to be payable only if the procedure is deemed medically necessary; not apply if carrying 2 foetuses.",
+                "evidence": [
+                  {
+                    "quote": "Early Delivery by Caesarean Benefit5   New! 15% of coverage amount",
+                    "line_start": 250,
+                    "line_end": 269,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "AIA Mum2Baby Choices   Bundle Options",
+                "line_start": 19,
+                "line_end": 38,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Coverage Amount (S) $5,000, $10,000 or $25,000",
+                "line_start": 54,
+                "line_end": 73,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "S$10,000 coverage amount option",
+            "plan_code": null,
+            "description": "Coverage amount of S$10,000 under AIA Mum2Baby Protect bundle; payouts scale accordingly per the document’s payout table.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Death Benefit for mum",
+                "payout_type": "lump_sum",
+                "payout_value": 10000,
+                "payout_unit": "SGD",
+                "payout_basis": "Coverage amount",
+                "payout_description": "Death benefit for mum is stated as the coverage amount.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Death Benefit for mum Pregnancy complications1 $5,000, $10,000 or $25,000 respectively",
+                    "line_start": 238,
+                    "line_end": 254,
+                    "quote_token_coverage": 0.984
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Hospital Care Benefit for mum (Up to 30 Days)",
+                "payout_type": "daily_income",
+                "payout_value": 200,
+                "payout_unit": "per day",
+                "payout_basis": "Coverage amount option",
+                "payout_description": "Hospital Care Benefit for mum is stated as $200/day for the S$10,000 option.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Auto-terminates once a maximum of 30 days of benefit is paid.",
+                "evidence": [
+                  {
+                    "quote": "Hospital Care Benefit for mum2 (Up to 30 Days) $100/day, $200/day or $500/day respectively",
+                    "line_start": 249,
+                    "line_end": 256,
+                    "quote_token_coverage": 0.993
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Coverage Amount (S) $5,000, $10,000 or $25,000",
+                "line_start": 54,
+                "line_end": 73,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "S$25,000 coverage amount option",
+            "plan_code": null,
+            "description": "Coverage amount of S$25,000 under AIA Mum2Baby Protect bundle; payouts scale accordingly per the document’s payout table.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Death Benefit for mum",
+                "payout_type": "lump_sum",
+                "payout_value": 25000,
+                "payout_unit": "SGD",
+                "payout_basis": "Coverage amount",
+                "payout_description": "Death benefit for mum is stated as the coverage amount.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Death Benefit for mum Pregnancy complications1 $5,000, $10,000 or $25,000 respectively",
+                    "line_start": 238,
+                    "line_end": 254,
+                    "quote_token_coverage": 0.984
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Hospital Care Benefit for mum (Up to 30 Days)",
+                "payout_type": "daily_income",
+                "payout_value": 500,
+                "payout_unit": "per day",
+                "payout_basis": "Coverage amount option",
+                "payout_description": "Hospital Care Benefit for mum is stated as $500/day for the S$25,000 option.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Auto-terminates once a maximum of 30 days of benefit is paid.",
+                "evidence": [
+                  {
+                    "quote": "Hospital Care Benefit for mum2 (Up to 30 Days) $100/day, $200/day or $500/day respectively",
+                    "line_start": 249,
+                    "line_end": 256,
+                    "quote_token_coverage": 0.993
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Coverage Amount (S) $5,000, $10,000 or $25,000",
+                "line_start": 54,
+                "line_end": 73,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Death Benefit for mum (Pregnancy complications)",
+            "benefit_category": "death",
+            "benefit_level": "base",
+            "benefit_description": "Payable for mum’s death due to pregnancy complications, with payout equal to the selected coverage amount.",
+            "trigger_description": "Expectant mum passes away due to pregnancy complications.",
+            "covered_conditions": [
+              "Pregnancy complications (covered conditions listed under 'List of Covered Conditions# – For Mum' including items such as Abruptio Placentae, Pre-Eclampsia or Eclampsia, etc.)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": "SGD",
+            "payout_basis": "Coverage amount (S$5,000 / S$10,000 / S$25,000)",
+            "payout_description": "Document states $5,000, $10,000 or $25,000 respectively.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "once",
+            "maximum_claims": 1,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Coverage described as starting as early as the 13th week of pregnancy.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Document note: this benefit will only be paid once; once a claim is paid, this benefit will terminate.",
+            "geographic_scope": "not_stated",
+            "notes": "The termination rule is in Terms & Conditions footnote 1.",
+            "evidence": [
+              {
+                "quote": "Death Benefit for mum Pregnancy complications1 $5,000, $10,000 or $25,000 respectively",
+                "line_start": 238,
+                "line_end": 254,
+                "quote_token_coverage": 0.984
+              },
+              {
+                "quote": "1 This benefit will only be paid once. Once a claim is paid, this benefit will terminate.",
+                "line_start": 366,
+                "line_end": 385,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Childbirth Medical Negligence Benefit (mum)",
+            "benefit_category": "death",
+            "benefit_level": "base",
+            "benefit_description": "Pays 100% of coverage amount in addition to the death benefit for mum when mum and/or child passes away due to medical negligence of a Physician/Specialist/Hospital in Singapore or Malaysia.",
+            "trigger_description": "Mum and/or child passes away due to medical negligence of a Physician, Specialist or Hospital in Singapore or Malaysia.",
+            "covered_conditions": [
+              "Childbirth medical negligence (defined by the contract; Singapore/Malaysia provider constraint stated in terms)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": "SGD",
+            "payout_basis": "100% of coverage amount (in addition to the death benefit).",
+            "payout_description": "Document states: will pay 100% of coverage amount, in addition to the Death Benefit for mum.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Document indicates coverage begins as early as the 13th week of pregnancy and continues; specific timing for negligence claim not stated beyond coverage timeline.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "not_stated",
+            "geographic_scope": "Singapore or Malaysia",
+            "notes": "Terms footnote 4 specifies provider location and payout relationship.",
+            "evidence": [
+              {
+                "quote": "Childbirth Medical Negligence Benefit1, 4 $5,000, $10,000 or $25,000 respectively",
+                "line_start": 242,
+                "line_end": 254,
+                "quote_token_coverage": 0.988
+              },
+              {
+                "quote": "4 If mum and/or child unfortunately passes away due to medical negligence of a Physician, Specialist or Hospital in Singapore or Malaysia, this benefit will pay 100% of coverage amount, in addition to the Death Benefit for mum.",
+                "line_start": 375,
+                "line_end": 394,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Hospital Care Benefit for baby (Up to 30 Days)",
+            "benefit_category": "hospital_cash",
+            "benefit_level": "rider",
+            "benefit_description": "Daily hospitalisation benefit for baby for specified reasons including incubation (newborn), ICU/HDU (neonatal ICU/HDU due to premature birth), and certain infectious conditions and severe neonatal jaundice treatment; benefit capped at up to 30 days.",
+            "trigger_description": "Baby is hospitalised due to listed causes (ICU/HDU, incubation, infectious diseases, etc.).",
+            "covered_conditions": [
+              "Congenital illnesses (covered under baby list, with conditions and hospitalisation causes described separately)",
+              "Incubation of a newborn child",
+              "Premature birth requiring neonatal ICU / HDU",
+              "Hand, Foot and Mouth Disease (inpatient hospitalisation)",
+              "Phototherapy or blood transfusion for severe neonatal jaundice",
+              "Infectious diseases list (Avian Influenza H7N9 & H5N1, Chikungunya fever, Dengue haemorrhagic fever, Ebola, SARS, etc.)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "daily_income",
+            "payout_value": null,
+            "payout_unit": "per day",
+            "payout_basis": "Coverage amount option (S$5,000 / S$10,000 / S$25,000 options stated as $100/day / $200/day / $500/day).",
+            "payout_description": "Document states Hospital Care Benefit for baby up to 30 days pays $100/day, $200/day or $500/day respectively.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 30,
+            "limit_type": "days",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Document states 'Protection that begins right from birth' for baby, and coverage described as from 13th week for mum.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Document indicates prenatal rider coverage ends in the 3rd policy year for both mum and baby.",
+            "geographic_scope": "not_stated",
+            "notes": "Benefit details appear under prenatal rider benefit table and baby covered conditions list.",
+            "evidence": [
+              {
+                "quote": "Hospital Care Benefit for baby2 (Up to 30 Days) $100/day, $200/day or $500/day respectively",
+                "line_start": 246,
+                "line_end": 256,
+                "quote_token_coverage": 0.99
+              },
+              {
+                "quote": "Hospital Care Benefit for baby (Up to 30 days) Hospitalisation due to: 1.    Admission into ICU / HDU 2.    Incubation of a newborn child7",
+                "line_start": 332,
+                "line_end": 351,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "4.    Inpatient hospitalisation due to Hand, Foot and Mouth Disease",
+                "line_start": 351,
+                "line_end": 370,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Hospital Care Benefit for mum (Up to 30 Days)",
+            "benefit_category": "hospital_cash",
+            "benefit_level": "rider",
+            "benefit_description": "Daily hospitalisation benefit for mum for pregnancy-complication-related reasons and other listed in-hospital causes, capped at up to 30 days.",
+            "trigger_description": "Mum hospitalised due to covered pregnancy complications or listed causes (including lactational mastitis complications, inpatient psychiatric treatment, pulmonary embolism, post-natal anaemia, infections, etc.).",
+            "covered_conditions": [
+              "Hospitalisation due to any covered Pregnancy Complications",
+              "Complications of lactational mastitis",
+              "Inpatient psychiatric treatment",
+              "Post-natal Anaemia",
+              "Puerperal Infection and Shock",
+              "Pulmonary embolism",
+              "Repair of 4th degree perineal tear",
+              "Septic pelvic thrombophlebitis",
+              "Surgical site infection following Caesarean section",
+              "Uterine infection or transfusion due to retained placenta following birth"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "daily_income",
+            "payout_value": null,
+            "payout_unit": "per day",
+            "payout_basis": "Coverage amount option (S$5,000 / S$10,000 / S$25,000 options stated as $100/day / $200/day / $500/day).",
+            "payout_description": "Document states Hospital Care Benefit for mum up to 30 days pays $100/day, $200/day or $500/day respectively.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 30,
+            "limit_type": "days",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Covers expectant mum against pregnancy complications and provides financial assistance for hospitalisation due to pregnancy complications and other conditions.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Automatically terminates once a maximum of 30 days of benefit is paid; also terminates upon payout of Major Hospitalisation Care Benefit for mum.",
+            "geographic_scope": "not_stated",
+            "notes": "Termination rules are in Terms & Conditions footnote 2 and 3.",
+            "evidence": [
+              {
+                "quote": "Hospital Care Benefit for mum2 (Up to 30 Days) $100/day, $200/day or $500/day respectively",
+                "line_start": 249,
+                "line_end": 256,
+                "quote_token_coverage": 0.993
+              },
+              {
+                "quote": "Hospital Care Benefit for mum (up to 30 days) Hospitalisation due to: 1.    Any of the covered Pregnancy Complications",
+                "line_start": 280,
+                "line_end": 299,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "2 This benefit will automatically terminate once a maximum of 30 days of benefit is paid.",
+                "line_start": 367,
+                "line_end": 386,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Major Hospitalisation Care Benefit for mum (Continuously >30 days or at least 5 days in ICU)",
+            "benefit_category": "hospital_cash",
+            "benefit_level": "rider",
+            "benefit_description": "For longer hospitalisation/ICU situations for mum; pays 100% of coverage amount after deducting any payout under Hospital Care Benefit for mum.",
+            "trigger_description": "Mum hospitalised continuously for more than 30 days or at least 5 days in ICU.",
+            "covered_conditions": [
+              "Major hospitalisation as defined in the brochure"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": "SGD",
+            "payout_basis": "100% of coverage amount after deducting any payout under Hospital Care Benefit for mum.",
+            "payout_description": "Document states '100% of coverage amount after deducting any payout under Hospital Care Benefit for mum'.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Applies during prenatal period for mum; not otherwise time specified in this section.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Terminates once paid or 60 days from the birth of the baby, whichever is earlier; Hospital Care Benefit for mum also terminates upon payout.",
+            "geographic_scope": "not_stated",
+            "notes": "Termination rule explicitly tied to birth timing and other benefit termination.",
+            "evidence": [
+              {
+                "quote": "Major Hospitalisation Care Benefit for mum3 (Continuously for more than 30 Days or at least 5 Days in ICU) 100% of coverage amount after deducting any payout under Hospital Care Benefit for mum",
+                "line_start": 244,
+                "line_end": 263,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "3 The Major Hospitalisation Care Benefit will terminate once this benefit is paid or 60 days from the birth of the baby, whichever is earlier. Upon the payout of this benefit, the Hospital Care Benefit for mum will also terminate.",
+                "line_start": 370,
+                "line_end": 389,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Early Delivery by Caesarean Benefit",
+            "benefit_category": "maternity",
+            "benefit_level": "rider",
+            "benefit_description": "Pays 15% of coverage amount if the expectant mother undergoes caesarean section before 36 weeks of gestation (medically necessary).",
+            "trigger_description": "Caesarean section before 36 weeks; medically necessary by registered medical practitioner; not apply if carrying 2 foetuses.",
+            "covered_conditions": [
+              "Caesarean delivery before 36 weeks (medically necessary; single foetus per exception in terms)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "15% of coverage amount",
+            "payout_description": "Pays out 15% of coverage amount.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Applies during pregnancy delivery event.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Not stated.",
+            "geographic_scope": "not_stated",
+            "notes": "Document states 'New!' and provides conditions in Terms footnote 5.",
+            "evidence": [
+              {
+                "quote": "Early Delivery by Caesarean Benefit5   New! Pays out 15% of coverage amount5 if the expectant mother undergoes a delivery by caesarean section before 36 weeks of gestation.",
+                "line_start": 105,
+                "line_end": 108,
+                "quote_token_coverage": 0.96
+              },
+              {
+                "quote": "5 The Early Delivery by Caesarean Benefit will be paid out if the procedure is deemed medically necessary by a registered medical practitioner. This benefit will not apply if the mother is carrying 2 foetuses during pregnancy.",
+                "line_start": 380,
+                "line_end": 399,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Congenital illnesses (baby) death/benefit",
+            "benefit_category": "death",
+            "benefit_level": "rider",
+            "benefit_description": "Covers baby against congenital illnesses; payout table links this to the same coverage amount options used for the mum death benefit.",
+            "trigger_description": "Baby passes away due to congenital illnesses (as implied by coverage description and benefit listing).",
+            "covered_conditions": [
+              "Congenital illnesses listed (Absence of Two Limbs, Anal Atresia, Down’s Syndrome, Spina Bifida, etc.)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": "SGD",
+            "payout_basis": "Coverage amount",
+            "payout_description": "Document includes Congenital illnesses in the payout table with $5,000 / $10,000 / $25,000 respectively.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Document states 'Protection that begins right from birth' for baby and covers congenital illnesses.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Prenatal rider coverage ends in the 3rd policy year for both mum and baby.",
+            "geographic_scope": "not_stated",
+            "notes": "The brochure instructs to refer to policy contract for definitions.",
+            "evidence": [
+              {
+                "quote": "Congenital illnesses1 Hospitalisation (up to 30 days)2",
+                "line_start": 156,
+                "line_end": 160,
+                "quote_token_coverage": 0.996
+              },
+              {
+                "quote": "List of Covered Conditions# – For Baby Congenital Illnesses 1.    Absence of Two Limbs 2.    Anal Atresia 3.    Atrial Septal Defect",
+                "line_start": 302,
+                "line_end": 321,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "riders": [
+          {
+            "name": "AIA Baby Protect Plus (III)",
+            "description": "Prenatal rider used with AIA Mum2Baby Protect; provides baby protection including congenital illnesses and daily hospitalisation benefits up to 3 years (as described in baby protection section) and can be transferred to the child within 100 days from birth with no medical questions asked.",
+            "rider_type": "prenatal_rider",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "Transfer to child within 100 days from birth with no medical questions asked; rider coverage indicated to end for both mum and baby in the 3rd policy year.",
+            "coverage_term_description": "Coverage under the prenatal rider ends for both mum and baby in the 3rd policy year of the prenatal rider.",
+            "premium_payment_term_description": "not_stated",
+            "includes_premium_waiver": null,
+            "notes": "Document states to supplement baby’s protection with a critical illness rider by adding an eligible critical illness rider right from the start (name not provided for this rider in the brochure).",
+            "evidence": [
+              {
+                "quote": "Prenatal Rider AIA Baby Protect Plus (III)",
+                "line_start": 48,
+                "line_end": 67,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "3RD POLICY YEAR OF PRENATAL RIDER Coverage under AIA Baby Protector (III) or AIA Baby Protect Plus (III) will end for both mum and baby.",
+                "line_start": 171,
+                "line_end": 190,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "With no medical questions asked, you may inform us to transfer the base plan and applicable riders to your child easily within 100 days from birth",
+                "line_start": 113,
+                "line_end": 132,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "AIA Mum2Baby Choices offers two bundled solutions, namely AIA Mum2Baby Protect and AIA Mum2Baby",
+            "line_start": 15,
+            "line_end": 34,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Base Plan AIA Guaranteed Protect Plus (IV) (Whole Life Plan)",
+            "line_start": 41,
+            "line_end": 60,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Prenatal Rider AIA Baby Protect Plus (III)",
+            "line_start": 48,
+            "line_end": 67,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Guaranteed lifelong protection for your child",
+            "line_start": 5,
+            "line_end": 24,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "with no medical questions asked, you may inform us to transfer the base plan and applicable riders to your child easily within 100 days from birth",
+            "line_start": 113,
+            "line_end": 132,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "high",
+        "review_notes": [
+          "Policy-level classification follows document wording: AIA Mum2Baby Protect is described as a participating whole life plan and includes stable cash value.",
+          "This extraction treats the named benefit payouts in the brochure as the available benefits for this bundle; no explicit rider attachment mechanics beyond transfer timing and the prenatal rider coverage period were provided."
+        ],
+        "slug": "aia-aia-mum2baby-protect-aia-mum2baby-choices"
+      },
+      {
+        "company": "AIA",
+        "policy_name": "AIA Mum2Baby (AIA Mum2Baby Choices)",
+        "aliases": [
+          "AIA Mum2Baby (base option: AIA Pro Lifetime Protector (II))"
+        ],
+        "quick_summary": "AIA Mum2Baby is the investment-linked bundle under AIA Mum2Baby Choices. It provides prenatal protection for mother and baby beginning as early as the 13th week of pregnancy, with benefits including pregnancy complications, childbirth medical negligence, congenital illnesses, hospitalisation (up to 30 days) for both mum and baby, and a major hospitalisation care benefit for mum. Like the whole life bundle, the base plan and applicable riders can be transferred to the child within 100 days from birth with no medical questions asked, aiming for guaranteed lifelong coverage up to age 100. Coverage amount options are S$5,000, S$10,000 or S$25,000, which drive the stated daily hospitalisation rates and the lump-sum benefits.",
+        "category": "health",
+        "policy_type": "investment_linked",
+        "plan_tier": null,
+        "target_customer": "Expectant parents; mother and child protection from pregnancy (at least 13 weeks).",
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "Pregnancy complications (mum)",
+          "Childbirth medical negligence (mum)",
+          "Congenital illnesses (baby)",
+          "Hospitalisation benefits (mum and baby, up to 30 days)",
+          "Major hospitalisation care benefit for mum",
+          "Early Delivery by Caesarean Benefit"
+        ],
+        "currency_options": [
+          "SGD"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 100,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "Prenatal rider/base can be transferred to the child within 100 days from birth with no medical questions asked; early coverage described as starting at the 13th week of pregnancy. Coverage under the prenatal rider ends after the 3rd policy year, for both mum and baby.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Guaranteed lifelong protection for the child stated up to age 100; prenatal rider coverage ends for both mum and baby in the 3rd policy year.",
+        "premium_payment_term_description": "not_stated",
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": true,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "Coverage under the prenatal rider ends for both mum and baby in the 3rd policy year"
+        ],
+        "important_caveats": [
+          "Early Delivery by Caesarean Benefit is payable only if the procedure is deemed medically necessary by a registered medical practitioner, and it will not apply if the mother is carrying 2 foetuses during pregnancy.",
+          "Major Hospitalisation Care Benefit for mum terminates once paid or 60 days from the birth of the baby, whichever is earlier; upon payout, the Hospital Care Benefit for mum also terminates.",
+          "Hospital Care Benefit for mum automatically terminates once a maximum of 30 days of benefit is paid.",
+          "Value-added services for baby/mum are not contractual benefits (partner services)."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "S$5,000 coverage amount option",
+            "plan_code": null,
+            "description": "Coverage amount of S$5,000 under AIA Mum2Baby bundle; payout table values for this coverage amount apply.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Death Benefit for mum",
+                "payout_type": "lump_sum",
+                "payout_value": 5000,
+                "payout_unit": "SGD",
+                "payout_basis": "Coverage amount",
+                "payout_description": "Death benefit for mum stated as $5,000 for this coverage amount option.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": "once",
+                "maximum_claims": 1,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Document states this benefit is paid only once and terminates after payment.",
+                "evidence": [
+                  {
+                    "quote": "Death Benefit for mum Pregnancy complications1 $5,000, $10,000 or $25,000 respectively",
+                    "line_start": 238,
+                    "line_end": 254,
+                    "quote_token_coverage": 0.984
+                  }
+                ],
+                "extraction_confidence": "medium"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Coverage Amount (S) $5,000, $10,000 or $25,000",
+                "line_start": 54,
+                "line_end": 73,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "plan_name": "S$10,000 coverage amount option",
+            "plan_code": null,
+            "description": "Coverage amount of S$10,000 under AIA Mum2Baby bundle; payout table values for this coverage amount apply.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Coverage Amount (S) $5,000, $10,000 or $25,000",
+                "line_start": 54,
+                "line_end": 73,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          },
+          {
+            "plan_name": "S$25,000 coverage amount option",
+            "plan_code": null,
+            "description": "Coverage amount of S$25,000 under AIA Mum2Baby bundle; payout table values for this coverage amount apply.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Coverage Amount (S) $5,000, $10,000 or $25,000",
+                "line_start": 54,
+                "line_end": 73,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Death Benefit for mum (Pregnancy complications)",
+            "benefit_category": "death",
+            "benefit_level": "base",
+            "benefit_description": "Payable for mum’s death due to pregnancy complications, with payout equal to the selected coverage amount; paid only once.",
+            "trigger_description": "Mum passes away due to pregnancy complications.",
+            "covered_conditions": [
+              "Pregnancy complications (covered conditions list for mum provided)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": "SGD",
+            "payout_basis": "Coverage amount (S$5,000 / S$10,000 / S$25,000)",
+            "payout_description": "Document states $5,000, $10,000 or $25,000 respectively.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "once",
+            "maximum_claims": 1,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Coverage described as starting as early as the 13th week of pregnancy for mum.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Terminates after first payout.",
+            "geographic_scope": "not_stated",
+            "notes": "Footnote 1 states the benefit is paid only once.",
+            "evidence": [
+              {
+                "quote": "Death Benefit for mum Pregnancy complications1 $5,000, $10,000 or $25,000 respectively",
+                "line_start": 238,
+                "line_end": 254,
+                "quote_token_coverage": 0.984
+              },
+              {
+                "quote": "1 This benefit will only be paid once. Once a claim is paid, this benefit will terminate.",
+                "line_start": 366,
+                "line_end": 385,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Childbirth Medical Negligence Benefit (mum)",
+            "benefit_category": "death",
+            "benefit_level": "base",
+            "benefit_description": "Pays 100% of coverage amount in addition to the death benefit for mum where mum and/or child passes away due to medical negligence of a Physician/Specialist/Hospital in Singapore or Malaysia.",
+            "trigger_description": "Mum and/or child passes away due to medical negligence of a Physician, Specialist or Hospital in Singapore or Malaysia.",
+            "covered_conditions": [
+              "Childbirth medical negligence"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": "SGD",
+            "payout_basis": "100% of coverage amount in addition to Death Benefit for mum.",
+            "payout_description": "Document states 100% coverage amount in addition to the death benefit.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "not_stated",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "not_stated",
+            "geographic_scope": "Singapore or Malaysia",
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Childbirth Medical Negligence Benefit1, 4 $5,000, $10,000 or $25,000 respectively",
+                "line_start": 242,
+                "line_end": 254,
+                "quote_token_coverage": 0.988
+              },
+              {
+                "quote": "4 If mum and/or child unfortunately passes away due to medical negligence of a Physician, Specialist or Hospital in Singapore or Malaysia, this benefit will pay 100% of coverage amount, in addition to the Death Benefit for mum.",
+                "line_start": 375,
+                "line_end": 394,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Hospital Care Benefit for baby (Up to 30 Days)",
+            "benefit_category": "hospital_cash",
+            "benefit_level": "rider",
+            "benefit_description": "Daily hospitalisation benefit for baby for specified causes (ICU/HDU, incubation, infectious diseases, severe neonatal jaundice treatment, premature birth requiring neonatal ICU/HDU, etc.), capped at up to 30 days.",
+            "trigger_description": "Baby hospitalised due to listed causes including ICU/HDU admissions, incubation of newborn, infectious diseases, and neonatal jaundice/premature-related hospitalisations.",
+            "covered_conditions": [
+              "ICU / HDU admission",
+              "Incubation of a newborn child (must be more than 3 consecutive days immediately after birth)",
+              "Premature birth requiring neonatal ICU / HDU",
+              "Phototherapy or blood transfusion for severe neonatal jaundice",
+              "Infectious diseases list (e.g., Dengue haemorrhagic fever, Ebola, SARS, etc.)",
+              "Hand, Foot and Mouth Disease inpatient hospitalisation"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "daily_income",
+            "payout_value": null,
+            "payout_unit": "per day",
+            "payout_basis": "Coverage amount option",
+            "payout_description": "Document states $100/day, $200/day or $500/day respectively (up to 30 days).",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 30,
+            "limit_type": "days",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Protection described as begins right from birth for baby.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Prenatal rider coverage ends in the 3rd policy year for both mum and baby.",
+            "geographic_scope": "not_stated",
+            "notes": "Incubation definition requires more than 3 consecutive days immediately after birth (footnote 7).",
+            "evidence": [
+              {
+                "quote": "Hospital Care Benefit for baby2 (Up to 30 Days) $100/day, $200/day or $500/day respectively",
+                "line_start": 246,
+                "line_end": 256,
+                "quote_token_coverage": 0.99
+              },
+              {
+                "quote": "Hospitalisation due to: 2.    Incubation of a newborn child7",
+                "line_start": 349,
+                "line_end": 351,
+                "quote_token_coverage": 0.998
+              },
+              {
+                "quote": "7 Incubation of a new-born child must be more than 3 consecutive days immediately after birth.",
+                "line_start": 388,
+                "line_end": 407,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Hospital Care Benefit for mum (Up to 30 Days)",
+            "benefit_category": "hospital_cash",
+            "benefit_level": "rider",
+            "benefit_description": "Daily hospitalisation benefit for mum, capped at up to 30 days; terminates automatically after maximum 30 days and also terminates upon payout of Major Hospitalisation Care Benefit for mum.",
+            "trigger_description": "Mum hospitalised due to pregnancy complications or other listed causes (including post-natal anaemia and certain infections).",
+            "covered_conditions": [
+              "Any of the covered Pregnancy Complications",
+              "Complications of lactational mastitis",
+              "Inpatient psychiatric treatment",
+              "Post-natal Anaemia",
+              "Puerperal Infection and Shock",
+              "Pulmonary embolism",
+              "Repair of 4th degree perineal tear",
+              "Septic pelvic thrombophlebitis",
+              "Surgical site infection following Caesarean section",
+              "Uterine infection or transfusion due to retained placenta following birth"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "daily_income",
+            "payout_value": null,
+            "payout_unit": "per day",
+            "payout_basis": "Coverage amount option",
+            "payout_description": "Document states $100/day, $200/day or $500/day respectively.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 30,
+            "limit_type": "days",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Starts as early as the 13th week of pregnancy (mum coverage).",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Terminates after maximum of 30 days benefit is paid; also terminates upon payout of Major Hospitalisation Care Benefit for mum.",
+            "geographic_scope": "not_stated",
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Hospital Care Benefit for mum2 (Up to 30 Days) $100/day, $200/day or $500/day respectively",
+                "line_start": 249,
+                "line_end": 256,
+                "quote_token_coverage": 0.993
+              },
+              {
+                "quote": "2 This benefit will automatically terminate once a maximum of 30 days of benefit is paid.",
+                "line_start": 367,
+                "line_end": 386,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Major Hospitalisation Care Benefit for mum (Continuously >30 days or at least 5 days in ICU)",
+            "benefit_category": "hospital_cash",
+            "benefit_level": "rider",
+            "benefit_description": "Pays 100% of coverage amount after deducting any payout under Hospital Care Benefit for mum; terminates once paid or 60 days from birth of baby, whichever is earlier.",
+            "trigger_description": "Mum hospitalised continuously for more than 30 days or at least 5 days in ICU.",
+            "covered_conditions": [
+              "Major hospitalisation for mum"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": "SGD",
+            "payout_basis": "100% of coverage amount minus any payout under Hospital Care Benefit for mum",
+            "payout_description": "Document states '100% of coverage amount after deducting any payout under Hospital Care Benefit for mum'.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "not_stated",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Terminates once paid or 60 days from birth (whichever earlier).",
+            "geographic_scope": "not_stated",
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Major Hospitalisation Care Benefit for mum3 (Continuously for more than 30 Days or at least 5 Days in ICU) 100% of coverage amount after deducting any payout under Hospital Care Benefit for mum",
+                "line_start": 244,
+                "line_end": 263,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "3 The Major Hospitalisation Care Benefit will terminate once this benefit is paid or 60 days from the birth of the baby, whichever is earlier. Upon the payout of this benefit, the Hospital Care Benefit for mum will also terminate.",
+                "line_start": 370,
+                "line_end": 389,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Early Delivery by Caesarean Benefit",
+            "benefit_category": "maternity",
+            "benefit_level": "rider",
+            "benefit_description": "Pays out 15% of coverage amount if caesarean section occurs before 36 weeks; must be medically necessary; does not apply if mother is carrying 2 foetuses.",
+            "trigger_description": "Caesarean delivery before 36 weeks of gestation, medically necessary by registered medical practitioner; not twin pregnancy (2 foetuses).",
+            "covered_conditions": [
+              "Caesarean section before 36 weeks of gestation"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "15% of coverage amount",
+            "payout_description": "Pays 15% of coverage amount.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "During pregnancy/delivery.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "not_stated",
+            "geographic_scope": "not_stated",
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Early Delivery by Caesarean Benefit5   New! Pays out 15% of coverage amount5 if the expectant mother undergoes a delivery by caesarean section before 36 weeks of gestation.",
+                "line_start": 105,
+                "line_end": 108,
+                "quote_token_coverage": 0.96
+              },
+              {
+                "quote": "5 The Early Delivery by Caesarean Benefit will be paid out if the procedure is deemed medically necessary by a registered medical practitioner. This benefit will not apply if the mother is carrying 2 foetuses during pregnancy.",
+                "line_start": 380,
+                "line_end": 399,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [
+          {
+            "name": "AIA Baby Protector (III)",
+            "description": "Prenatal rider used with AIA Mum2Baby bundle; baby protection including congenital illnesses and daily hospitalisation benefits up to 3 years (as described), and transferability to the child within 100 days from birth with no medical questions asked.",
+            "rider_type": "prenatal_rider",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": "Transfer to child within 100 days from birth with no medical questions asked; prenatal rider coverage ends in the 3rd policy year for both mum and baby.",
+            "coverage_term_description": "Coverage under AIA Baby Protector (III) or AIA Baby Protect Plus (III) ends for both mum and baby in the 3rd policy year of prenatal rider.",
+            "premium_payment_term_description": "not_stated",
+            "includes_premium_waiver": null,
+            "notes": "Document states option to add an eligible critical illness rider for multi-stage critical illness coverage when added right from the start (name not provided).",
+            "evidence": [
+              {
+                "quote": "Prenatal Rider AIA Baby Protector (III)",
+                "line_start": 185,
+                "line_end": 188,
+                "quote_token_coverage": 0.997
+              },
+              {
+                "quote": "3RD POLICY YEAR OF PRENATAL RIDER Coverage under AIA Baby Protector (III) or AIA Baby Protect Plus (III) will end for both mum and baby.",
+                "line_start": 171,
+                "line_end": 190,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "AIA Mum2Baby Choices offers two bundled solutions, namely AIA Mum2Baby Protect and AIA Mum2Baby",
+            "line_start": 15,
+            "line_end": 34,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "AIA Mum2Baby An investment-linked plan that bolsters your protection during your early years while allowing you to maximise your investments in the later years.",
+            "line_start": 42,
+            "line_end": 55,
+            "quote_token_coverage": 0.987
+          },
+          {
+            "quote": "Base Plan AIA Pro Lifetime Protector (II) (Investment-Linked Plan)",
+            "line_start": 57,
+            "line_end": 63,
+            "quote_token_coverage": 0.994
+          },
+          {
+            "quote": "Prenatal Rider AIA Baby Protector (III)",
+            "line_start": 185,
+            "line_end": 188,
+            "quote_token_coverage": 0.997
+          },
+          {
+            "quote": "Guaranteed lifelong protection for your child",
+            "line_start": 5,
+            "line_end": 24,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "with no medical questions asked, you may inform us to transfer the base plan and applicable riders to your child easily within 100 days from birth",
+            "line_start": 113,
+            "line_end": 132,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "medium",
+        "review_notes": [
+          "This bundle is explicitly described as an investment-linked plan, while the benefit list/payout table is presented as the suite of prenatal benefits under AIA Mum2Baby Choices."
+        ],
+        "slug": "aia-aia-mum2baby-aia-mum2baby-choices"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 60,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_0288ee83d9a0aebb016a8f1c065ab887d09c297a5708bc5017",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:03:51.191345+00:00",
+    "usage": {
+      "input_tokens": 7240,
+      "output_tokens": 15181,
+      "total_tokens": 22421,
+      "reasoning_tokens": 488,
+      "estimated_cost_usd": 0.02042425
+    }
+  }
+}

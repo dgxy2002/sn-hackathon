@@ -81,12 +81,12 @@
 **Acceptance criteria:**
 
 - [x] The frontend production build succeeds.
-- [ ] The README documents setup for every demonstrated component.
+- [x] The README documents setup for every demonstrated component.
 - [ ] A clean environment completes the normal scenario.
 - [ ] A clean environment completes the changed-goal scenario.
-- [ ] No synthetic data is presented as real.
+- [x] No synthetic data is presented as real.
 
-**Current evidence:** `npm --prefix frontend run build` passes.
+**Current evidence:** `bash scripts/verify-poc.sh` passes the backend fixture contracts and frontend production build. The [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md) records the live frontend/API browser path and its remaining integration gaps.
 
 ## E08-T05 - Rehearse and record the five-minute demo
 
@@ -175,7 +175,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | M |
 | Depends on | E12-T03, E12-T04 |
@@ -191,3 +191,5 @@
 - [ ] The report records completion, grounding, tool-validity, confirmation, revision-consistency, undo, latency, token, and estimated-cost results.
 - [ ] Fixture and configured OpenRouter modes use the same schemas and disclose adapter, model, prompt, tool, formulation, ruleset, and catalogue versions.
 - [ ] No model self-grades its own conversational or page-changing output.
+
+**Current evidence:** The [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md) and [`backend/tests/test_conversations.py`](../../backend/tests/test_conversations.py) cover grounded Q&A, presentation focus/filtering, idempotent replay, blocked decision-input change, dependency failure, and stale revision. The remaining declared scenarios and model-mode metrics are untested.

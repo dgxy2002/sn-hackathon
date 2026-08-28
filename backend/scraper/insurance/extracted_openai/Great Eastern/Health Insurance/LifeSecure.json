@@ -1,0 +1,482 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Great Eastern",
+    "source_file": "Great Eastern/Health Insurance/LifeSecure.md",
+    "source_filename": "LifeSecure.md",
+    "document_type": "brochure",
+    "content_sha256": "5b757be38e26c64c3d56a677fe2bca48c1fe7b700d4f8ec5553f0f4e7adaa796",
+    "local_markdown_path": "backend/scraper/insurance/Great Eastern/Health Insurance/LifeSecure.md",
+    "local_pdf_path": "backend/scraper/insurance/Great Eastern/Health Insurance/LifeSecure.pdf"
+  },
+  "extraction": {
+    "document_summary": "Great Eastern’s LifeSecure is a disability insurance product that pays a regular monthly benefit for total and permanent disability or for inability to perform at least 2 Activities of Daily Living (ADLs). The monthly payout is stated as “up to S$5,000” for up to a lifetime, and it is intended to help cover disability-related care at home or in hospital and related aids/equipment and home modifications. For stand-alone LifeSecure, a lump sum death benefit equal to 3 times the monthly benefit applies if the life insured dies during the coverage term. A separate “payback benefit” is payable after a deferment period (90 days or 180 days), and then pays a lump sum of 3 times or 6 times the monthly benefit insured. The brochure also describes an out-of-school disability benefit for a child aged 7–16, adding S$500 per month on top of the insured child monthly benefit (ending at age 16, with at least 12 monthly installments).",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Document gives the core benefit mechanics, but does not clearly state the full set of plan options (e.g., how the monthly benefit is selected beyond examples).",
+      "Premium tables are provided for illustrative S$1,000 monthly benefit (stand-alone) and S$500 monthly benefit (as a rider), but eligibility/age limits for the adult coverage are not explicitly enumerated beyond footnotes."
+    ],
+    "policies": [
+      {
+        "company": "Great Eastern",
+        "policy_name": "LifeSecure",
+        "aliases": [
+          "LifeSecure stand-alone plan",
+          "LifeSecure rider"
+        ],
+        "quick_summary": "Disability insurance that pays monthly benefits for total and permanent disability or inability to perform at least 2 ADLs, with optional payback and (for stand-alone) a death lump sum. Also includes an out-of-school disability benefit for children aged 7–16 (adding S$500/month on top of the insured child benefit). Can be purchased stand-alone or as a rider attached to selected whole life plans offered by Great Eastern (as stated). Monthly benefit shown as up to S$5,000 for up to a lifetime; payback lump sum after a deferment period (3x or 6x the monthly benefit). No cash value/investment feature stated.",
+        "category": "disability",
+        "policy_type": "disability_income",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_stated",
+        "coverage_scope": [
+          "Total and permanent disability",
+          "Inability to perform at least 2 Activities of Daily Living (ADLs)",
+          "Out-of-school disability benefit for a child aged 7–16 (where applicable)",
+          "Lump sum payback after deferment period (3x or 6x monthly benefit)",
+          "Stand-alone death benefit of 3 times the monthly benefit during coverage term"
+        ],
+        "currency_options": [
+          "SGD"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": null,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": "Product “applies mainly to Singapore Citizen/PR” and requires “certain residency requirements before you can apply for a policy or renew it.”",
+        "occupation_classes": [],
+        "eligibility_notes": "Child out-of-school disability benefit applies to “your child, age between 7 and 16 years old”. Other adult eligibility/underwriting is not specified in the brochure.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Premium tables and narrative reference coverage term options such as “up to age 65”, “up to age 80”, and “lifetime” (illustrated). Exact selection rules are not stated.",
+        "premium_payment_term_description": "Premium tables illustrate “Premium payment term” options “up to age 65” or “up to age 80” depending on coverage term, but the brochure does not provide a full ruleset.",
+        "premium_frequencies": [
+          "annual premium (illustrated in tables)"
+        ],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": false,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "Policy ends or is terminated prematurely (no cash value stated)"
+        ],
+        "important_caveats": [
+          "If purchased as a stand-alone plan, a lump sum death benefit of 3 times the monthly benefit is payable if death occurs during the coverage term (rider purchase is described separately but death benefit mechanics are only stated in the stand-alone context).",
+          "Payback benefit is payable following a deferment period of 90 days or 180 days starting from when the life assured starts suffering the ADL inability or total and permanent disability, during which “no benefit is payable”.",
+          "No savings/investment feature is stated; brochure states there is no cash value if the policy ends or if terminated prematurely.",
+          "Out-of-school disability benefit ends when the life assured attains age 16, and is subject to a minimum of 12 monthly installments having been paid."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "S$1,000 monthly benefit (LifeSecure stand-alone plan - illustrated)",
+            "plan_code": null,
+            "description": "Illustration table for completing disability protection for a S$1,000 monthly benefit under a LifeSecure stand-alone plan.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "Illustrated coverage terms: “Up to age 65”, “Up to age 80”, and “Lifetime”.",
+            "premium_payment_term_description": "Illustrated premium payment terms for this illustration: “Up to age 65”, “Up to age 80”.",
+            "benefit_amounts": [
+              {
+                "benefit_name": "Monthly disability benefit (illustrated)",
+                "payout_type": "monthly_income",
+                "payout_value": 1000,
+                "payout_unit": "SGD per month",
+                "payout_basis": "Monthly benefit targeted for disability coverage in the illustration.",
+                "payout_description": "Monthly benefit amount set in the illustration.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Brochure provides premium illustrations for a S$1,000 monthly benefit under the stand-alone plan.",
+                "evidence": [
+                  {
+                    "quote": "Table below illustrates the premium amount you can set aside to complete your disability protection for a S$1,000 monthly benefit if you were to take up a LifeSecure stand-alone plan.",
+                    "line_start": 25,
+                    "line_end": 44,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Table below illustrates the premium amount you can set aside to complete your disability protection for a S$1,000 monthly benefit if you were to take up a LifeSecure stand-alone plan.",
+                "line_start": 25,
+                "line_end": 44,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "S$500 monthly benefit (LifeSecure rider to whole life plan - illustrated)",
+            "plan_code": null,
+            "description": "Illustration table for adding a LifeSecure rider to an existing whole life plan, for a S$500 monthly benefit.",
+            "applies_to": "rider",
+            "linked_rider_name": "LifeSecure rider",
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "Illustrated coverage terms: “Up to age 65”, “Up to age 80”, and “Lifetime”.",
+            "premium_payment_term_description": "Illustrated premium payment terms for this illustration: “Up to age 65”, “Up to age 80”.",
+            "benefit_amounts": [
+              {
+                "benefit_name": "Monthly disability benefit (illustrated)",
+                "payout_type": "monthly_income",
+                "payout_value": 500,
+                "payout_unit": "SGD per month",
+                "payout_basis": "Monthly benefit targeted for disability coverage in the illustration.",
+                "payout_description": "Monthly benefit amount set in the illustration.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": "Brochure provides premium illustrations for a S$500 monthly benefit for the rider scenario.",
+                "evidence": [
+                  {
+                    "quote": "Table below illustrates the premium amount you can set aside to complete your disability protection for a S$500 monthly benefit if you were to add a LifeSecure rider to your existing whole life plan.",
+                    "line_start": 38,
+                    "line_end": 57,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Table below illustrates the premium amount you can set aside to complete your disability protection for a S$500 monthly benefit if you were to add a LifeSecure rider to your existing whole life plan.",
+                "line_start": 38,
+                "line_end": 57,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Monthly disability benefit (total & permanent disability or ADL inability)",
+            "benefit_category": "disability",
+            "benefit_level": "base",
+            "benefit_description": "Pays a monthly benefit of up to S$5,000 for up to a lifetime if the life insured has total and permanent disability or is unable to perform at least 2 ADLs.",
+            "trigger_description": "“total and permanent disability” or “upon the inability to perform at least 2 of the Activities of Daily Living (ADLs)”.",
+            "covered_conditions": [
+              "Total and permanent disability",
+              "Inability to perform at least 2 ADLs"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "monthly_income",
+            "payout_value": null,
+            "payout_unit": "SGD per month",
+            "payout_basis": "Up to S$5,000 monthly benefit (exact insured monthly amount not fully specified).",
+            "payout_description": "Monthly benefit is stated as “up to S$5,000”.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 5000,
+            "limit_amount": 5000,
+            "limit_type": "monthly benefit cap",
+            "claim_frequency": "monthly",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Benefit is stated as payable “for up to a lifetime”.",
+            "geographic_scope": "Singapore citizenship/PR focus stated, but benefit coverage geography is not specified.",
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "LifeSecure pays a monthly benefit of up to S$5,000 for up to a lifetime in an event of total and permanent disability or upon the inability to perform at least 2 of the Activities of Daily Living (ADLs)1.",
+                "line_start": 1,
+                "line_end": 12,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Out-of-school disability benefit (child aged 7–16) - additional S$500 monthly",
+            "benefit_category": "disability",
+            "benefit_level": "optional",
+            "benefit_description": "Provides out-of-school disability benefit for the policyholder’s child aged 7 to 16 who needs to be confined at home or in a hospital due to disability, paying an additional S$500 per month on top of the monthly benefit insured for the child.",
+            "trigger_description": "Child aged 7–16 who “needs to be confined at home or in a hospital due to a disability”.",
+            "covered_conditions": [
+              "Child aged between 7 and 16 years old",
+              "Confined at home or in a hospital due to disability"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "monthly_income",
+            "payout_value": 500,
+            "payout_unit": "SGD per month",
+            "payout_basis": "Additional monthly benefit on top of insured child monthly benefit.",
+            "payout_description": "“additional monthly benefit of S$500† on top of the monthly benefit insured for your child”.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "monthly",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": 16,
+            "benefit_expiry_description": "“The out-of-school benefit ends when the life assured attains age 16” and is “subject to a minimum of 12 monthly installments of the benefit having been paid.”",
+            "geographic_scope": "not_stated",
+            "notes": "This is described as an additional monthly benefit for the child (separate from the base adult monthly benefit mechanics).",
+            "evidence": [
+              {
+                "quote": "This plan provides out-of-school disability benefit for your child, age between 7 and 16 years old, who needs to be confined at home or in a hospital due to a disability. You will receive an additional monthly benefit of S$500† on top of the monthly benefit insured for your child.",
+                "line_start": 5,
+                "line_end": 24,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "† The out-of-school benefit ends when the life assured attains age 16, and is subject to a minimum of 12 monthly installments of the benefit having been paid.",
+                "line_start": 22,
+                "line_end": 41,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Payback benefit (lump sum) after deferment - 3x or 6x monthly benefit",
+            "benefit_category": "disability",
+            "benefit_level": "base",
+            "benefit_description": "Following a deferment period, a payback lump sum is paid as 3 times or 6 times of the monthly benefit insured after the deferment period; no benefit is payable during the deferment period.",
+            "trigger_description": "“Following a deferment3 period” where the deferment starts from the date the life assured starts suffering inability to perform at least 2 ADLs or total and permanent disability.",
+            "covered_conditions": [
+              "Inability to perform at least 2 ADLs",
+              "Total and permanent disability"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": "SGD",
+            "payout_basis": "3x or 6x of monthly benefit insured (monthly benefit amount not fixed in the brochure).",
+            "payout_description": "“you will receive a lump sum payment of 3 times or 6 times of the monthly benefit insured.”",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "one-off (following successful claim as described)",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Payable after deferment period of 90 days or 180 days (as the case may be).",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "not_stated",
+            "notes": "The brochure explicitly states no benefit is payable during the deferment period.",
+            "evidence": [
+              {
+                "quote": "Payback benefit upon a successful claim2",
+                "line_start": 8,
+                "line_end": 27,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Following a deferment3 period, you will receive a lump sum payment of 3 times or 6 times of the monthly benefit insured.",
+                "line_start": 10,
+                "line_end": 29,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "3 Payable following a deferment period of 90 days or 180 days (as the case may be) starting from the date on which the life assured starts to suffer from the inability to perform at least 2 of the ADLs or total and permanent disability, during which no benefit is payable.",
+                "line_start": 17,
+                "line_end": 36,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Death benefit (stand-alone purchase only) - 3 times monthly benefit",
+            "benefit_category": "death",
+            "benefit_level": "base",
+            "benefit_description": "When LifeSecure is purchased as a stand-alone plan, a lump sum death benefit equal to 3 times the monthly benefit is payable if the life insured passes on during the coverage term.",
+            "trigger_description": "Death during the coverage term when purchased as a stand-alone plan.",
+            "covered_conditions": [
+              "Death during coverage term (stand-alone purchase)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": "SGD",
+            "payout_basis": "3 times the monthly benefit.",
+            "payout_description": "“a lump sum death benefit of 3 times of the monthly benefit will be payable”.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "one-off",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": "not_stated",
+            "notes": "Brochure describes this death benefit in the stand-alone context; it does not explicitly state the same benefit for rider purchase.",
+            "evidence": [
+              {
+                "quote": "When purchased as a stand-alone plan, a lump sum death benefit of 3 times of the monthly benefit will be payable if the life insured passes on during the coverage term.",
+                "line_start": 1,
+                "line_end": 20,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          }
+        ],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "Health Insurance",
+            "line_start": 1,
+            "line_end": 1,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "LifeSecure pays a monthly benefit of up to S$5,000 for up to a lifetime in an event of total and permanent disability or upon the inability to perform at least 2 of the Activities of Daily Living (ADLs)1.",
+            "line_start": 1,
+            "line_end": 12,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Option to purchase as a stand-alone plan, or as a rider attached to selected whole life plans offered by Great Eastern.",
+            "line_start": 1,
+            "line_end": 18,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "high",
+        "review_notes": [
+          "Brochure describes both stand-alone and rider usage of LifeSecure. This policy object represents LifeSecure itself; rider-related mechanics are not separated as a separate base policy because the document frames the rider as LifeSecure attached to selected whole life plans.",
+          "Adult entry age limits are not explicitly stated; a footnote discusses premium example coverage/payment term up to age 65 and uses “age next birthday”, but does not provide a complete stated min/max entry age."
+        ],
+        "slug": "great-eastern-lifesecure"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 14,
+    "evidence_warnings": [],
+    "requires_human_review": true
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_0454cc463bb7a529016a8f1f2d957887d0a3bdb4b9e475dd4d",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:16:00.614805+00:00",
+    "usage": {
+      "input_tokens": 5301,
+      "output_tokens": 5505,
+      "total_tokens": 10806,
+      "reasoning_tokens": 439,
+      "estimated_cost_usd": 0.00794145
+    }
+  }
+}

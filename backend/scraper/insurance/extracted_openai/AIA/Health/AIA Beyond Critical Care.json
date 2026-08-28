@@ -1,0 +1,1104 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "AIA",
+    "source_file": "AIA/Health/AIA Beyond Critical Care.md",
+    "source_filename": "AIA Beyond Critical Care.md",
+    "document_type": "brochure",
+    "content_sha256": "5b765045a252c7652533a7a285e27fd2995226fbe631e19c2a54c9eda006fd45",
+    "local_markdown_path": "backend/scraper/insurance/AIA/Health/AIA Beyond Critical Care.md",
+    "local_pdf_path": "backend/scraper/insurance/AIA/Health/AIA Beyond Critical Care.pdf"
+  },
+  "extraction": {
+    "document_summary": "AIA Beyond Critical Care is a critical illness (CI) protection plan with multistage CI coverage, relapse protection, and additional benefits for mental well-being. Under the base plan, it covers 43 major stage critical illnesses and 5 rediagnosed or recurred critical illnesses, paying 100% of the coverage amount as a lump sum upon first diagnosis, with the coverage amount restored to 100% after 12 months (subject to the rules on same vs different rediagnosed/recurred events). It also adds mental well-being benefit for 5 mental illnesses, paying an additional 20% of the coverage amount (up to S$50,000 per claim) until age 75, with up to 5 claims (S$150,000 total across all policies). The plan includes a 100% premium refund at policy expiry (base plan total annual premiums, less claims and amounts owing), but exclusions apply for pre-existing conditions and the brochure notes waiting and survival periods before benefits are payable.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Brochure clearly states many core benefit mechanics (payout percentages, coverage counts, refund mechanics, and several caps).",
+      "Specific rider product summary details (full CI lists/definitions under each rider) are not provided in this excerpt; only rider names and some waiver mechanics are stated.",
+      "Waiting/survival periods are mentioned generally, but exact durations for each benefit are not consistently specified in the excerpt."
+    ],
+    "policies": [
+      {
+        "company": "AIA",
+        "policy_name": "AIA Beyond Critical Care",
+        "aliases": [
+          "AIA BEYOND CRITICAL CARE"
+        ],
+        "quick_summary": "Base plan covers major stage critical illnesses and relapse (including rediagnosed/recurrred events), provides a 100% premium refund at policy expiry (less claims), pays an additional mental well-being amount for covered mental illnesses, and includes death, compassionate, and health screening reimbursement benefits. Riders mentioned include multistage CI cover extra and premium waiver/payor benefits triggered by specified CI/mental illness events (details vary by rider). Pre-existing conditions are excluded; waiting and survival periods apply before benefits are payable; some coverage restoration/claim rules depend on whether the subsequent claim is the same or different event.",
+        "category": "critical_illness",
+        "policy_type": "critical_illness",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_stated",
+        "coverage_scope": [
+          "Major stage critical illness (43 specified)",
+          "Rediagnosed or recurred critical illness (5 specified)",
+          "Relapse protection (coverage amount restoration and subsequent claim rules)",
+          "Mental illnesses (5 prominent mental illnesses; additional 20% benefit)",
+          "Death benefit and compassionate benefit",
+          "Health screening reimbursement"
+        ],
+        "currency_options": [
+          "S$"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 85,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": null,
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "The brochure states the policy terminates at age 85 (and the example illustrates termination at age 85). Mental well-being is until age 75.",
+        "premium_payment_term_description": null,
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "Policy expiry / termination at age 85 (as illustrated) ",
+          "Policy terminates upon the insured's death (death benefit note)"
+        ],
+        "important_caveats": [
+          "The brochure states there are exclusions such as pre-existing conditions, and waiting period and survival period apply before benefits are payable.",
+          "Angioplasty and other invasive treatments for Coronary Artery: the brochure states the benefit excludes this item, and only 10% of the coverage amount up to S$25,000 is payable.",
+          "Coverage amount restoration and subsequent claim eligibility depend on whether the subsequent critical illness is a different critical illness or one of the 5 rediagnosed/recurred critical illnesses, and includes waiting between diagnoses for certain same-event subsequent claims.",
+          "The refund of premiums is the base plan’s total annual premiums (less any claims paid), including waived premiums with optional premium waiver rider."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "Early Critical Cover Extra (ECCE) rider",
+            "plan_code": null,
+            "description": "Multistage critical illness add-on: covers 104 early, intermediate, and major critical illnesses until age 75 with coverage amount of up to S$350,000 (when added on).",
+            "applies_to": "rider",
+            "linked_rider_name": "Early Critical Cover Extra (ECCE)",
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": 350000,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "Covers until age 75.",
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Multistage Critical Illness (Early Critical Cover Extra)",
+                "payout_type": null,
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": null,
+                "payout_description": "Up to S$350,000 coverage amount; covers 104 early, intermediate, and major critical illnesses until age 75.",
+                "payout_currency": "S$",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Further your protection for 104 early, intermediate, and major critical illnesses4 until age 75 with a coverage amount of up to S$350,000 when you add on the Early Critical Cover Extra rider.",
+                    "line_start": 43,
+                    "line_end": 62,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Further your protection for 104 early, intermediate, and major critical illnesses4 until age 75 with a coverage amount of up to S$350,000 when you add on the Early Critical Cover Extra rider.",
+                "line_start": 43,
+                "line_end": 62,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Early Critical Protector Waiver of Premium (ECPWP) rider",
+            "plan_code": null,
+            "description": "Premium waiver for the base plan upon diagnosis of covered early, intermediate, or major critical illnesses (103 specified) under this rider.",
+            "applies_to": "rider",
+            "linked_rider_name": "Early Critical Protector Waiver of Premium (ECPWP)",
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Waiver of Premium (Early Critical Protector Waiver of Premium rider)",
+                "payout_type": "premium_waiver",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Future premiums of the AIA Beyond Critical Care base plan",
+                "payout_description": "Future premiums are waived upon diagnosis of any of the covered 103 early, intermediate, or major critical illnesses.",
+                "payout_currency": null,
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "- 103 early, intermediate, or major critical illnesses with\n  Early Critical Protector Waiver of Premium rider4;",
+                    "line_start": 56,
+                    "line_end": 75,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "- 103 early, intermediate, or major critical illnesses with\n  Early Critical Protector Waiver of Premium rider4;",
+                "line_start": 56,
+                "line_end": 75,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Critical Protector Waiver of Premium rider",
+            "plan_code": null,
+            "description": "Premium waiver for the base plan upon diagnosis of covered major critical illnesses (42 specified) under this rider.",
+            "applies_to": "rider",
+            "linked_rider_name": "Critical Protector Waiver of Premium",
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Waiver of Premium (Critical Protector Waiver of Premium rider)",
+                "payout_type": "premium_waiver",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Future premiums of the AIA Beyond Critical Care base plan",
+                "payout_description": "Future premiums are waived upon diagnosis of any of the covered 42 major critical illnesses.",
+                "payout_currency": null,
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "- 42 major critical illnesses with\n  Critical Protector Waiver of Premium rider.4",
+                    "line_start": 58,
+                    "line_end": 77,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "- 42 major critical illnesses with\n  Critical Protector Waiver of Premium rider.4",
+                "line_start": 58,
+                "line_end": 77,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Early Critical Protector Payor Benefit rider",
+            "plan_code": null,
+            "description": "Child premium waiver: future premiums of the child’s AIA Beyond Critical Care base plan waived up to the child’s 25th birthday when the payor is diagnosed with any of the covered 103 early/intermediate/major stage critical illnesses, or is disabled or passed on.",
+            "applies_to": "rider",
+            "linked_rider_name": "Early Critical Protector Payor Benefit",
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "Waiver of future premiums for the child is stated to be up to the child’s 25th birthday.",
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Waiver of future premiums for child (Early Critical Protector Payor Benefit rider)",
+                "payout_type": "premium_waiver",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Future premiums of the child’s AIA Beyond Critical Care base plan",
+                "payout_description": "Future premiums waived up to the child's 25th birthday if the payor is: (1) diagnosed with any of the covered 103 early, intermediate, or major stage critical illnesses, or (2) disabled, or (3) passed on.",
+                "payout_currency": null,
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "Future premiums of your child’s AIA Beyond Critical Care (base plan) will be waived up to his/her 25th birthday should you be:\n- diagnosed with any of the covered 103 early, intermediate, or major stage critical illnesses, be disabled or sadly passed on with\n  Early Critical Protector Payor Benefit rider4;",
+                    "line_start": 66,
+                    "line_end": 85,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Future premiums of your child’s AIA Beyond Critical Care (base plan) will be waived up to his/her 25th birthday should you be:\n- diagnosed with any of the covered 103 early, intermediate, or\n  major stage critical illnesses, be disabled or sadly passed on with\n  Early Critical Protector Payor Benefit rider4;",
+                "line_start": 66,
+                "line_end": 85,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Payor Benefit Comprehensive Special rider",
+            "plan_code": null,
+            "description": "Child premium waiver: future premiums of the child’s AIA Beyond Critical Care base plan waived up to the child’s 25th birthday when the payor is diagnosed with any of the covered 42 major critical illnesses, or is disabled or passed on.",
+            "applies_to": "rider",
+            "linked_rider_name": "Payor Benefit Comprehensive Special",
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "Waiver of future premiums for the child is stated to be up to the child’s 25th birthday.",
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Waiver of future premiums for child (Payor Benefit Comprehensive Special rider)",
+                "payout_type": "premium_waiver",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Future premiums of the child’s AIA Beyond Critical Care base plan",
+                "payout_description": "Future premiums waived up to the child's 25th birthday if the payor is diagnosed with any of the covered 42 major critical illnesses, or is disabled, or passed on.",
+                "payout_currency": null,
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "- diagnosed with any of the covered 42 major critical illnesses, be\n  disabled or sadly passed on with Payor Benefit Comprehensive\n  Special rider4;",
+                    "line_start": 69,
+                    "line_end": 88,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "- diagnosed with any of the covered 42 major critical illnesses, be\n  disabled or sadly passed on with Payor Benefit Comprehensive\n  Special rider4;",
+                "line_start": 69,
+                "line_end": 88,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "plan_name": "Payor Benefit rider",
+            "plan_code": null,
+            "description": "Child premium waiver: future premiums of the child’s AIA Beyond Critical Care base plan waived up to the child’s 25th birthday when the payor is disabled or passed on (rider named Payor Benefit).",
+            "applies_to": "rider",
+            "linked_rider_name": "Payor Benefit",
+            "is_default": null,
+            "ward_class": null,
+            "currency": "S$",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": null,
+            "coverage_term_description": "Waiver of future premiums for the child is stated to be up to the child’s 25th birthday.",
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "Waiver of future premiums for child (Payor Benefit rider)",
+                "payout_type": "premium_waiver",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "Future premiums of the child’s AIA Beyond Critical Care base plan",
+                "payout_description": "Future premiums waived up to the child's 25th birthday if the payor is disabled or passed on with the Payor Benefit rider.",
+                "payout_currency": null,
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": null,
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "- disabled or sadly passed on with Payor Benefit rider.4",
+                    "line_start": 70,
+                    "line_end": 89,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "- disabled or sadly passed on with Payor Benefit rider.4",
+                "line_start": 70,
+                "line_end": 89,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Major Critical Illness and Relapse",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Covers 43 major stage critical illnesses and 5 rediagnosed or recurred critical illnesses until age 85 or at least 30 years, whichever is later, with up to 200% of the coverage amount.",
+            "trigger_description": "Upon first diagnosis of a covered major stage critical illness or the applicable rediagnosed/recurred critical illness event.",
+            "covered_conditions": [
+              "Alzheimer’s Disease / Severe Dementia",
+              "Benign Brain Tumour",
+              "Major Cancer",
+              "Stroke with Permanent Neurological Deficit",
+              "Terminal Illness"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 1,
+            "payout_unit": "coverage_amount",
+            "payout_basis": "coverage amount",
+            "payout_description": "Upon the first diagnosis, 100% of the coverage amount paid in one lump sum.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": 2,
+            "limit_type": "max_multiple_of_coverage_amount (stated as up to 200%)",
+            "claim_frequency": "Multiple claims possible under coverage restoration rules",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": 85,
+            "benefit_expiry_description": "Until age 85 (or for at least 30 years, whichever is later).",
+            "geographic_scope": null,
+            "notes": "Coverage amount restoration: restored to 100% to allow subsequent claim on a different critical illness; if the subsequent claim is one of the 5 rediagnosed or recurred critical illnesses and is the same as a previous one, a waiting period of 24 months between diagnosis dates applies before the subsequent claim can be made. Once 200% of the coverage amount has been paid, premium obligations cease and critical illness benefit terminates.",
+            "evidence": [
+              {
+                "quote": "AIA Beyond Critical Care (base plan) covers you against 43 major stage critical illnesses and 5 rediagnosed or recurred critical illnesses – until age 85 or for at least 30 years, whichever is later – with up to 200% of the coverage amount.",
+                "line_start": 28,
+                "line_end": 47,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Upon the first diagnosis, 100%2 of the coverage amount will be paid to you in one lump sum",
+                "line_start": 31,
+                "line_end": 50,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Your coverage amount will be restored to 100%, allowing you to make a subsequent3 claim on the following:",
+                "line_start": 33,
+                "line_end": 52,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The coverage amount will be restored to 100% after 12 months from the date of diagnosis of the previous\ncritical illness claimed, before a subsequent claim of a different critical illness can be made.",
+                "line_start": 512,
+                "line_end": 531,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Once 200% of the coverage amount has been paid to you, you will no longer need to pay\nthe premiums of your AIA Beyond Critical Care and the critical illness benefit will terminate.",
+                "line_start": 516,
+                "line_end": 535,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Multistage Critical Illness (Early Critical Cover Extra rider)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "rider",
+            "benefit_description": "When added as the Early Critical Cover Extra rider, provides protection for 104 early, intermediate, and major critical illnesses until age 75, with coverage amount up to S$350,000.",
+            "trigger_description": "Diagnosis of covered early, intermediate, or major critical illnesses as defined under the rider (full list/definitions not included in excerpt).",
+            "covered_conditions": [],
+            "condition_stages": [
+              "pre_early",
+              "early",
+              "intermediate",
+              "late_or_severe"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": null,
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": null,
+            "payout_description": "Brochure excerpt states the rider provides up to S$350,000 coverage amount; it does not specify payout percentage/amount for a diagnosis within the excerpt.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 350000,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": 75,
+            "benefit_expiry_description": "Until age 75.",
+            "geographic_scope": null,
+            "notes": "The excerpt includes an illustration where the ECCE rider is terminated after an early stage lung cancer payout, but this is in an example rather than explicit general benefit mechanics.",
+            "evidence": [
+              {
+                "quote": "Further your protection for 104 early, intermediate, and major critical illnesses4 until age 75 with a coverage amount of up to S$350,000 when you add on the Early Critical Cover Extra rider.",
+                "line_start": 43,
+                "line_end": 62,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Mental Well-being Benefit",
+            "benefit_category": "mental_health",
+            "benefit_level": "base",
+            "benefit_description": "Pays an additional 20% of the coverage amount (up to S$50,000 per claim) until age 75 for 5 prominent mental illnesses such as Major Depressive Disorders and Obsessive Compulsive Disorder.",
+            "trigger_description": "Diagnosis of a covered mental illness (list provided in excerpt).",
+            "covered_conditions": [
+              "Major Depressive Disorder (MDD)",
+              "Schizophrenia",
+              "Bipolar Disorder",
+              "Obsessive Compulsive Disorder (OCD)",
+              "Tourette Syndrome (up to age 21)"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": 0.2,
+            "payout_unit": "coverage_amount",
+            "payout_basis": "coverage amount",
+            "payout_description": "Additional 20% of the coverage amount, capped at S$50,000 per claim.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 50000,
+            "limit_amount": 150000,
+            "limit_type": "total_cap_across_all_policies",
+            "claim_frequency": "Up to 5 claims may be made for all covered mental illnesses",
+            "maximum_claims": 5,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": 75,
+            "benefit_expiry_description": "Mental well-being benefit is paid until age 75.",
+            "geographic_scope": null,
+            "notes": "A 3-year waiting period is stated between each mental illness claim.",
+            "evidence": [
+              {
+                "quote": "AIA Beyond Critical Care also pays an additional 20% of the coverage amount (up to S$50,000 per claim) until age 75 for 5 prominent mental illnesses such as Major Depressive Disorders and Obsessive Compulsive Disorder.",
+                "line_start": 85,
+                "line_end": 104,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Covered Mental Illnesses (up to age 75)\n1 Major Depressive Disorder (MDD)\n2\n3\n4\n5\nSchizophrenia\nBipolar Disorder\nObsessive Compulsive Disorder (OCD)\nTourette Syndrome (up to age 21)",
+                "line_start": 488,
+                "line_end": 507,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "A total of 5 claims may be made for all covered mental illnesses, with each claim capped at S$50,000 for a\ncovered mental illness, subject to a waiting period of 3 years between each claim.",
+                "line_start": 524,
+                "line_end": 543,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The total amount payable to you for all covered mental illnesses under AIA Beyond Critical Care and all other policies issued by us\nshall be limited to S$150,000.",
+                "line_start": 526,
+                "line_end": 545,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Health Screening Benefit",
+            "benefit_category": "health_screening",
+            "benefit_level": "base",
+            "benefit_description": "Reimburses the cost of health screening, up to S$200.",
+            "trigger_description": "Health screening(s) undergone by the insured (subject to stated eligibility and timing rules).",
+            "covered_conditions": [],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "as_charged",
+            "payout_type": "reimbursement",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "reimbursement of screening cost",
+            "payout_description": "Reimburse you the cost of your health screening (up to S$200). Benefit starts from the 4th policy year onwards and is available once every 3 years thereafter. Insured must be at least 21 years old at the time of the health screening(s).",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 200,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "Once every 3 years thereafter (per brochure note)",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Starts from 4th policy year onwards.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Health Screening Benefit7\nWe will reimburse you the cost of your health screening (up to S$200) so that you\ncan better take control of your health.",
+                "line_start": 104,
+                "line_end": 123,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The insured must be at least 21 years old at the time he/she undergoes the health screening(s). This\nbenefit will start from the 4th policy year onwards and be available once every 3 years thereafter.",
+                "line_start": 534,
+                "line_end": 553,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Death Benefit",
+            "benefit_category": "death",
+            "benefit_level": "base",
+            "benefit_description": "Pays 100% of the coverage amount in one lump sum, less any critical illness claims paid. This policy terminates upon the death of the insured, and death benefit is not payable if 100% of the coverage amount has already been paid out under the critical illness benefit.",
+            "trigger_description": "Death of the insured (subject to the CI payout condition).",
+            "covered_conditions": [],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 1,
+            "payout_unit": "coverage_amount",
+            "payout_basis": "coverage amount minus critical illness claims paid",
+            "payout_description": "100% coverage amount less any critical illness claims paid.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Terminates upon death.",
+            "geographic_scope": null,
+            "notes": "We will not pay the death benefit if 100% of the coverage amount has been paid out under the critical illness benefit.",
+            "evidence": [
+              {
+                "quote": "Death Benefit6\n100% of the coverage amount will be paid in one\nlump sum, less any critical illness claims paid",
+                "line_start": 96,
+                "line_end": 115,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "We will not pay the death benefit if 100% of the coverage amount has been paid out under the critical\nillness benefit. This policy will terminate upon the death of the insured.",
+                "line_start": 530,
+                "line_end": 549,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Compassionate Benefit",
+            "benefit_category": "death_related",
+            "benefit_level": "base",
+            "benefit_description": "Pays a compassionate benefit of S$10,000 in one lump sum.",
+            "trigger_description": "Should the unforeseen happen (death context within the brochure section).",
+            "covered_conditions": [],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 10000,
+            "payout_unit": "S$",
+            "payout_basis": "fixed amount",
+            "payout_description": "S$10,000 compassionate benefit in one lump sum.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "Brochure does not specify further conditions for this benefit in the excerpt.",
+            "evidence": [
+              {
+                "quote": "Compassionate Benefit\n\nS$10,000 will be paid in one lump sum",
+                "line_start": 100,
+                "line_end": 119,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "100% Refund of Premium Benefit (base plan)",
+            "benefit_category": "premium_refund",
+            "benefit_level": "base",
+            "benefit_description": "Refunds a lump sum equal to the base plan’s total annual premiums at end of policy term, less any claims paid (including premiums that were waived with optional premium waiver rider).",
+            "trigger_description": "Remain in the pink of health throughout to end of policy term (stated as a condition).",
+            "covered_conditions": [],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "base plan total annual premiums (less any claims paid) ",
+            "payout_description": "100% refund of base plan’s total annual premium at end of policy term if remain in good health throughout (even after an early CI payout with an optional rider, per brochure text). Refund includes waived premiums with optional premium waiver rider; brochure footnote states amounts paid/definitions are in product summary.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Paid at end of policy term / policy expiry.",
+            "geographic_scope": null,
+            "notes": "Brochure states the refund is 100% of total annual premium at end of policy term if remain in the pink of health throughout, even after an early CI payout with an optional rider.",
+            "evidence": [
+              {
+                "quote": "We will refund 100%1 of your base plan’s total annual premium at the end of the policy term if you remain in the pink of health\nthroughout, even after an early CI payout with an optional rider!",
+                "line_start": 16,
+                "line_end": 35,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "1   The total annual premiums (less any benefits paid under your policy and any amounts owing to us)\nof your\nAIA Beyond Critical Care (base plan) will be paid to you upon policy expiry.",
+                "line_start": 503,
+                "line_end": 522,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "100% Refund of Premium Benefit\nBolster your financial confidence, knowing that at the end of the policy term, you\nwill be refunded a lump sum of the base plan’s total annual premiums1 (less any\nclaims paid), including those that were waived (with optional premium waiver rider).",
+                "line_start": 78,
+                "line_end": 97,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [
+          {
+            "name": "Early Critical Cover Extra (ECCE) rider",
+            "description": "Adds multistage critical illness protection for 104 early, intermediate, and major critical illnesses until age 75, with coverage amount up to S$350,000.",
+            "rider_type": "critical_illness",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": "Until age 75.",
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": null,
+            "notes": "Full definitions and exclusions are referenced as being in the respective supplementary benefit (rider) product summary.",
+            "evidence": [
+              {
+                "quote": "Further your protection for 104 early, intermediate, and major critical illnesses4 until age 75 with a coverage amount of up to S$350,000 when you add on the Early Critical Cover Extra rider.",
+                "line_start": 43,
+                "line_end": 62,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Please refer to the respective supplementary benefit (rider) product summary for the list of covered critical\nillnesses, definitions, and applicable exclusions.",
+                "line_start": 520,
+                "line_end": 539,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Early Critical Protector Waiver of Premium rider",
+            "description": "Waives future premiums of the AIA Beyond Critical Care base plan upon diagnosis of any of the covered 103 early, intermediate, or major critical illnesses.",
+            "rider_type": "premium_waiver",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": true,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Waive future premiums of your AIA Beyond Critical Care (base plan) upon diagnosis of any of the covered:\n- 103 early, intermediate, or major critical illnesses with\n  Early Critical Protector Waiver of Premium rider4;",
+                "line_start": 56,
+                "line_end": 75,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Critical Protector Waiver of Premium rider",
+            "description": "Waives future premiums of the AIA Beyond Critical Care base plan upon diagnosis of any of the covered 42 major critical illnesses.",
+            "rider_type": "premium_waiver",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": true,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Waive future premiums of your AIA Beyond Critical Care (base plan) upon diagnosis of any of the covered:\n- 42 major critical illnesses with\n  Critical Protector Waiver of Premium rider.4",
+                "line_start": 71,
+                "line_end": 77,
+                "quote_token_coverage": 0.994
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Early Critical Protector Payor Benefit rider",
+            "description": "Waives future premiums of the child’s AIA Beyond Critical Care base plan up to the child’s 25th birthday if the payor is diagnosed with any of the covered 103 early, intermediate, or major stage critical illnesses, or is disabled or passed on.",
+            "rider_type": "premium_waiver",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": "Up to the child’s 25th birthday.",
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": true,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Future premiums of your child’s AIA Beyond Critical Care (base plan) will be waived up to his/her 25th birthday should you be:\n- diagnosed with any of the covered 103 early, intermediate, or\n  major stage critical illnesses, be disabled or sadly passed on with\n  Early Critical Protector Payor Benefit rider4;",
+                "line_start": 66,
+                "line_end": 85,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Payor Benefit Comprehensive Special rider",
+            "description": "Waives future premiums of the child’s AIA Beyond Critical Care base plan up to the child’s 25th birthday if the payor is diagnosed with any of the covered 42 major critical illnesses, or is disabled or passed on.",
+            "rider_type": "premium_waiver",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": "Up to the child’s 25th birthday.",
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": true,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Future premiums of your child’s AIA Beyond Critical Care (base plan) will be waived up to his/her 25th birthday should you be:\n- diagnosed with any of the covered 42 major critical illnesses, be\n  disabled or sadly passed on with Payor Benefit Comprehensive\n  Special rider4;",
+                "line_start": 80,
+                "line_end": 88,
+                "quote_token_coverage": 0.992
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "name": "Payor Benefit rider",
+            "description": "Waives future premiums of the child’s AIA Beyond Critical Care base plan up to the child’s 25th birthday if the payor is disabled or passed on.",
+            "rider_type": "premium_waiver",
+            "is_cash_only": null,
+            "indicative_premium": null,
+            "eligibility": null,
+            "coverage_term_description": "Up to the child’s 25th birthday.",
+            "premium_payment_term_description": null,
+            "includes_premium_waiver": true,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Future premiums of your child’s AIA Beyond Critical Care (base plan) will be waived up to his/her 25th birthday should you be:\n- disabled or sadly passed on with Payor Benefit rider.4",
+                "line_start": 77,
+                "line_end": 85,
+                "quote_token_coverage": 0.992
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "exclusions": [
+          {
+            "exclusion": "Pre-existing conditions (no benefits payable)",
+            "category": "general",
+            "applies_to": "base plan and benefits (general statement)",
+            "notes": "Brochure states exclusions such as pre-existing conditions, whereby no benefits will be payable.",
+            "evidence": [
+              {
+                "quote": "There are exclusions such as pre-existing conditions, whereby no benefits will be payable.",
+                "line_start": 498,
+                "line_end": 517,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "exclusion": "Angioplasty and other invasive treatments for Coronary Artery (only 10% of coverage amount, up to S$25,000 payable)",
+            "category": "critical_illness_specific",
+            "applies_to": "Major Critical Illness and Relapse benefit (footnote 2 states exclusions for this item)",
+            "notes": "The brochure states this benefit excludes Angioplasty and other invasive treatments for Coronary Artery; only 10% of the coverage amount, up to S$25,000, is payable.",
+            "evidence": [
+              {
+                "quote": "2   This benefit excludes Angioplasty and other invasive treatments for Coronary Artery, of which only 10% of\nthe coverage amount, up to S$25,000, is payable.",
+                "line_start": 508,
+                "line_end": 527,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "source_evidence": [
+          {
+            "quote": "AIA Beyond Critical Care (base plan) covers you against 43 major stage critical illnesses and 5 rediagnosed or recurred critical illnesses – until age 85 or for at least 30 years, whichever is later – with up to 200% of the coverage amount.",
+            "line_start": 28,
+            "line_end": 47,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "We will refund 100%1 of your base plan’s total annual premium at the end of the policy term if you remain in the pink of health\nthroughout, even after an early CI payout with an optional rider!",
+            "line_start": 16,
+            "line_end": 35,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "AIA Beyond Critical Care also pays an additional 20% of the coverage amount (up to S$50,000 per claim) until age 75 for 5 prominent mental illnesses such as Major Depressive Disorders and Obsessive Compulsive Disorder.",
+            "line_start": 85,
+            "line_end": 104,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Death Benefit6\n100% of the coverage amount will be paid in one\nlump sum, less any critical illness claims paid",
+            "line_start": 96,
+            "line_end": 115,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Health Screening Benefit7\nWe will reimburse you the cost of your health screening (up to S$200) so that you\ncan better take control of your health.",
+            "line_start": 104,
+            "line_end": 123,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "high",
+        "review_notes": [
+          "This brochure excerpt does not provide full rider coverage details/definitions; it references that such information is in the respective rider product summaries.",
+          "Exact durations for the general waiting/survival periods are not stated in the excerpt (only that they apply)."
+        ],
+        "slug": "aia-aia-beyond-critical-care"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 44,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_0ac3df083404f6c5016a8f1b42861087d09901d69cf73d15a3",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T16:59:59.413693+00:00",
+    "usage": {
+      "input_tokens": 8489,
+      "output_tokens": 11058,
+      "total_tokens": 19547,
+      "reasoning_tokens": 247,
+      "estimated_cost_usd": 0.0155203
+    }
+  }
+}

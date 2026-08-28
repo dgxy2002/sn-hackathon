@@ -1,0 +1,1 @@
+"""CoverCheck POC backend package."""

@@ -1,0 +1,1412 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Singlife",
+    "source_file": "Singlife/Medical & Life Insurance/Critical Illness Insurance/Singlife Essential Critical Illness II.md",
+    "source_filename": "Singlife Essential Critical Illness II.md",
+    "document_type": "brochure",
+    "content_sha256": "ed510271bca950c858554aa6013f5745bc18f727a48cdb741457111209a74c3b",
+    "local_markdown_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Critical Illness Insurance/Singlife Essential Critical Illness II.md",
+    "local_pdf_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Critical Illness Insurance/Singlife Essential Critical Illness II.pdf"
+  },
+  "extraction": {
+    "document_summary": "Singlife Essential Critical Illness II is a multi-protection critical illness plan that pays a lump-sum upon diagnosis of a covered Critical Illness, Total and Permanent Disability, Terminal Illness, or Death. It is designed to cover people with specified pre-existing conditions, including Type 2 Diabetes, pre-diabetes and/or “the 3 Highs” (high blood pressure, high cholesterol, and high BMI). Applicants complete “just 6 questions” with “no medical check-up needed” if no further medical underwriting is required. Benefit payouts include: (1) standard lump-sum payment tied to the Death Benefit Sum Assured for covered events; (2) a diabetes-related extra lump sum of 20% of the Death Benefit Sum Assured (up to S$25,000 per condition per life); and (3) an extra lump sum for “Angioplasty & Other Invasive Treatment For Coronary Artery” of 10% of Sum Assured (up to S$25,000) that reduces the Sum Assured by the same amount. It also has a no-claims reward of 20% of total premiums paid at the end of the policy term.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Brochure provides clear payout mechanics for the diabetes-related extra payout, angioplasty payout, and no-claims reward.",
+      "Some key product underwriting/administration fields (e.g., entry ages, free-look period, full list of TPD/terminal definitions) are not included in the provided text.",
+      "No explicit exclusions are stated in the provided excerpt; only limitation/caveat notes are provided."
+    ],
+    "policies": [
+      {
+        "company": "Singlife",
+        "policy_name": "Singlife Essential Critical Illness II",
+        "aliases": [],
+        "quick_summary": "Multi-protection critical illness plan with lump-sum payouts for covered critical illnesses, TPD, terminal illness and death, with special add-ons for diabetic conditions (extra 20% up to S$25,000/condition) and a separate angioplasty payout (10% up to S$25,000, reducing sum assured by the same amount). Includes a no-claims reward of 20% of total premiums paid at end of term; designed to cover certain pre-existing conditions with a 6-question application (no medical check-up needed if no further underwriting required). Even if a payout has already occurred, the death-related mechanics and diabetic extra benefit rules specify how remaining amounts are determined.",
+        "category": "critical_illness",
+        "policy_type": "critical_illness",
+        "plan_tier": null,
+        "target_customer": "Individuals seeking critical illness coverage including those with certain specified pre-existing conditions (e.g., Type 2 Diabetes, pre-diabetes and/or the 3 Highs).",
+        "structure": "base_plan",
+        "participation": "not_stated",
+        "coverage_scope": [
+          "14 Critical Illnesses",
+          "4 Diabetic Conditions",
+          "Total and Permanent Disability (TPD)",
+          "Terminal Illness",
+          "Death"
+        ],
+        "currency_options": [
+          "SGD"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 85,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "Covers certain pre-existing illnesses including Type 2 Diabetes, pre-diabetes and/or high blood pressure, high cholesterol and/or high Body Mass Index, and application involves 6 questions with no medical check-up needed if responses indicate no further medical underwriting is required.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Flexible coverage term: “Want coverage for 15 years or up to age 85? Or, how about something in between?”",
+        "premium_payment_term_description": "Not stated (brochure provides illustrations; does not state premium payment term rules beyond illustration that premiums stop as policy ends).",
+        "premium_frequencies": [
+          "monthly"
+        ],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "simplified",
+        "medical_exam_required": false,
+        "cash_value_available": false,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": "No-claims reward of 20% of total premiums paid at end of policy term.",
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [],
+        "important_caveats": [
+          "No medical examination is required if the applicant’s responses to the 6 health questions indicate no further medical underwriting is required.",
+          "Death benefit payout depends on whether there has been a prior claim: either 100% of the Sum Assured or total premiums paid (whichever is higher) for no prior claims; for prior claims, the calculation is adjusted and excludes Diabetic Conditions Beneﬁt in the stated manner.",
+          "Diabetic Conditions Beneﬁt pays an additional 20% of the Death Benefit Sum Assured up to S$25,000 per condition per life and ceases once that additional portion is fully paid or when the policy terminates (whichever earlier). Only one claim can be made on the same Diabetic Condition.",
+          "Angioplasty & Other Invasive Treatment For Coronary Artery pays 10% of Sum Assured (subject to maximum claimable limit of S$25,000) and reduces the Sum Assured by the same amount; only once and payable as an early payout of the Death Beneﬁt. Other benefits continue based on the prevailing Sum Assured after that payment.",
+          "If there are no savings/investment features, there is no cash value if the policy ends or is terminated prematurely."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "No-claims reward (20% of total premiums paid at end of policy term)",
+            "plan_code": null,
+            "description": "At end of policy term, if there are no claims, the plan pays back 20% of the total premiums paid.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "Only applies if there are no claims made during the policy term.",
+            "coverage_term_description": null,
+            "premium_payment_term_description": null,
+            "benefit_amounts": [
+              {
+                "benefit_name": "No Claim Reward",
+                "payout_type": "other",
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": "20% of total premiums paid",
+                "payout_description": "Receives back 20% of total premiums paid at the end of the policy term if there are no claims.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": null,
+                "notes": null,
+                "evidence": [
+                  {
+                    "quote": "No claims? You’ll get back 20% of your total premiums paid at the end of the policy term8, just for taking care of your health.",
+                    "line_start": 55,
+                    "line_end": 74,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "No claims? You’ll get back 20% of your total premiums paid at the end of the policy term8, just for taking care of your health.",
+                "line_start": 55,
+                "line_end": 74,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Critical Illness lump-sum payout (covered Critical Illness, TPD, Terminal Illness or Death)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Receives a lump-sum payout upon diagnosis of a covered Critical Illness, Total and Permanent Disability, Terminal Illness or death.",
+            "trigger_description": "Upon diagnosis of a covered Critical Illness, Total and Permanent Disability, Terminal Illness or death.",
+            "covered_conditions": [
+              "Covered Critical Illness",
+              "Total and Permanent Disability",
+              "Terminal Illness",
+              "Death"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Lump-sum payout; death benefit mechanics described in notes (100% Sum Assured or total premiums paid; adjusted for prior claims).",
+            "payout_description": "Brochure states lump-sum payout upon diagnosis/death. Notes specify death benefit payout method based on Sum Assured vs total premiums paid, and adjustments if there were prior claims.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure notes that the Critical Illness Benefit, Total and Permanent Disability Benefit and Terminal Illness Benefit are early payouts of the Death Beneﬁt.",
+            "evidence": [
+              {
+                "quote": "Receive a lump-sum payout upon diagnosis of a covered Critical Illness, Total and Permanent Disability, Terminal Illness or death4, so you and your loved ones can manage ﬁnancially.",
+                "line_start": 37,
+                "line_end": 56,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Critical Illness Beneﬁt, Total and Permanent Disability Beneﬁt and Terminal Illness Beneﬁt are early payouts of the Death Beneﬁt.",
+                "line_start": 269,
+                "line_end": 288,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Major Cancer",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Lump-sum payout upon diagnosis of “Major Cancer”.",
+            "trigger_description": "Diagnosis of “Major Cancer”.",
+            "covered_conditions": [
+              "Major Cancer"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "claims_based",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Lump-sum payout upon diagnosis of covered Critical Illnesses.",
+            "payout_description": "Brochure lists “Major Cancer” as one of the 14 Critical Illnesses; the plan pays a lump-sum upon diagnosis of a covered Critical Illness.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "14 Critical Illnesses",
+                "line_start": 65,
+                "line_end": 84,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Major Cancer",
+                "line_start": 113,
+                "line_end": 132,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Receive a lump-sum payout upon diagnosis of a covered Critical Illness, Total and Permanent Disability, Terminal Illness or death4",
+                "line_start": 36,
+                "line_end": 55,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Heart Attack of Specified Severity",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Lump-sum payout upon diagnosis of “Heart Attack of Specified Severity”.",
+            "trigger_description": "Diagnosis of “Heart Attack of Speciﬁed Severity”.",
+            "covered_conditions": [
+              "Heart Attack of Specified Severity"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "claims_based",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Lump-sum payout upon diagnosis of covered Critical Illnesses.",
+            "payout_description": "Brochure lists “Heart Attack of Speciﬁed Severity” as one of the 14 Critical Illnesses; the plan pays a lump-sum upon diagnosis of a covered Critical Illness.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Heart Attack of Speciﬁed Severity",
+                "line_start": 115,
+                "line_end": 134,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Receive a lump-sum payout upon diagnosis of a covered Critical Illness, Total and Permanent Disability, Terminal Illness or death4",
+                "line_start": 36,
+                "line_end": 55,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Stroke with Permanent Neurological Deficit",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Lump-sum payout upon diagnosis of “Stroke with Permanent Neurological Deﬁcit”.",
+            "trigger_description": "Diagnosis of “Stroke with Permanent Neurological Deﬁcit”.",
+            "covered_conditions": [
+              "Stroke with Permanent Neurological Deficit"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "claims_based",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Lump-sum payout upon diagnosis of covered Critical Illnesses.",
+            "payout_description": "Brochure lists “Stroke with Permanent Neurological Deﬁcit” as one of the 14 Critical Illnesses; the plan pays a lump-sum upon diagnosis of a covered Critical Illness.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Stroke with Permanent Neurological Deﬁcit",
+                "line_start": 117,
+                "line_end": 136,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Receive a lump-sum payout upon diagnosis of a covered Critical Illness, Total and Permanent Disability, Terminal Illness or death4",
+                "line_start": 36,
+                "line_end": 55,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Blindness (Irreversible Loss of Sight)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Lump-sum payout upon diagnosis of “Blindness (Irreversible Loss of Sight)”.",
+            "trigger_description": "Diagnosis of “Blindness (Irreversible Loss of Sight)”.",
+            "covered_conditions": [
+              "Blindness (Irreversible Loss of Sight)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "claims_based",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Lump-sum payout upon diagnosis of covered Critical Illnesses.",
+            "payout_description": "Brochure lists “Blindness (Irreversible Loss of Sight)” as one of the 14 Critical Illnesses; the plan pays a lump-sum upon diagnosis of a covered Critical Illness.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Blindness (Irreversible Loss of Sight)",
+                "line_start": 119,
+                "line_end": 138,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Receive a lump-sum payout upon diagnosis of a covered Critical Illness, Total and Permanent Disability, Terminal Illness or death4",
+                "line_start": 36,
+                "line_end": 55,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Coronary Artery By-pass Surgery",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Lump-sum payout upon diagnosis of “Coronary Artery By-pass Surgery”.",
+            "trigger_description": "Diagnosis/treatment of “Coronary Artery By-pass Surgery”.",
+            "covered_conditions": [
+              "Coronary Artery By-pass Surgery"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "claims_based",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Lump-sum payout upon diagnosis of covered Critical Illnesses.",
+            "payout_description": "Brochure lists “Coronary Artery By-pass Surgery” as one of the 14 Critical Illnesses; the plan pays a lump-sum upon diagnosis of a covered Critical Illness.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Coronary Artery By-pass Surgery",
+                "line_start": 121,
+                "line_end": 140,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Receive a lump-sum payout upon diagnosis of a covered Critical Illness, Total and Permanent Disability, Terminal Illness or death4",
+                "line_start": 36,
+                "line_end": 55,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "End Stage Kidney Failure",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Lump-sum payout upon diagnosis of “End Stage Kidney Failure”.",
+            "trigger_description": "Diagnosis of “End Stage Kidney Failure”.",
+            "covered_conditions": [
+              "End Stage Kidney Failure"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "claims_based",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Lump-sum payout upon diagnosis of covered Critical Illnesses.",
+            "payout_description": "Brochure lists “End Stage Kidney Failure” as one of the 14 Critical Illnesses; the plan pays a lump-sum upon diagnosis of a covered Critical Illness.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "End Stage Kidney Failure",
+                "line_start": 123,
+                "line_end": 142,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Receive a lump-sum payout upon diagnosis of a covered Critical Illness, Total and Permanent Disability, Terminal Illness or death4",
+                "line_start": 36,
+                "line_end": 55,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Other Serious Coronary Artery Disease",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Lump-sum payout upon diagnosis of “Other Serious Coronary Artery Disease”.",
+            "trigger_description": "Diagnosis of “Other Serious Coronary Artery Disease”.",
+            "covered_conditions": [
+              "Other Serious Coronary Artery Disease"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "claims_based",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Lump-sum payout upon diagnosis of covered Critical Illnesses.",
+            "payout_description": "Brochure lists “Other Serious Coronary Artery Disease” as one of the 14 Critical Illnesses; the plan pays a lump-sum upon diagnosis of a covered Critical Illness.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Other Serious Coronary Artery Disease",
+                "line_start": 125,
+                "line_end": 144,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Receive a lump-sum payout upon diagnosis of a covered Critical Illness, Total and Permanent Disability, Terminal Illness or death4",
+                "line_start": 36,
+                "line_end": 55,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "End Stage Lung Disease",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Lump-sum payout upon diagnosis of “End Stage Lung Disease”.",
+            "trigger_description": "Diagnosis of “End Stage Lung Disease”.",
+            "covered_conditions": [
+              "End Stage Lung Disease"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "claims_based",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Lump-sum payout upon diagnosis of covered Critical Illnesses.",
+            "payout_description": "Brochure lists “End Stage Lung Disease” as one of the 14 Critical Illnesses; the plan pays a lump-sum upon diagnosis of a covered Critical Illness.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "End Stage Lung Disease",
+                "line_start": 127,
+                "line_end": 146,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Receive a lump-sum payout upon diagnosis of a covered Critical Illness, Total and Permanent Disability, Terminal Illness or death4",
+                "line_start": 36,
+                "line_end": 55,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Irreversible Loss of Speech",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Lump-sum payout upon diagnosis of “Irreversible Loss of Speech”.",
+            "trigger_description": "Diagnosis of “Irreversible Loss of Speech”.",
+            "covered_conditions": [
+              "Irreversible Loss of Speech"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "claims_based",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Lump-sum payout upon diagnosis of covered Critical Illnesses.",
+            "payout_description": "Brochure lists “Irreversible Loss of Speech” as one of the 14 Critical Illnesses; the plan pays a lump-sum upon diagnosis of a covered Critical Illness.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Irreversible Loss of Speech",
+                "line_start": 129,
+                "line_end": 148,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Receive a lump-sum payout upon diagnosis of a covered Critical Illness, Total and Permanent Disability, Terminal Illness or death4",
+                "line_start": 36,
+                "line_end": 55,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Major Burns",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Lump-sum payout upon diagnosis of “Major Burns”.",
+            "trigger_description": "Diagnosis of “Major Burns”.",
+            "covered_conditions": [
+              "Major Burns"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "claims_based",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Lump-sum payout upon diagnosis of covered Critical Illnesses.",
+            "payout_description": "Brochure lists “Major Burns” as one of the 14 Critical Illnesses; the plan pays a lump-sum upon diagnosis of a covered Critical Illness.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Major Burns",
+                "line_start": 131,
+                "line_end": 150,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Receive a lump-sum payout upon diagnosis of a covered Critical Illness, Total and Permanent Disability, Terminal Illness or death4",
+                "line_start": 36,
+                "line_end": 55,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Deafness (Irreversible Loss of Hearing)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Lump-sum payout upon diagnosis of “Deafness (Irreversible Loss of Hearing)”.",
+            "trigger_description": "Diagnosis of “Deafness (Irreversible Loss of Hearing)”.",
+            "covered_conditions": [
+              "Deafness (Irreversible Loss of Hearing)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "claims_based",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Lump-sum payout upon diagnosis of covered Critical Illnesses.",
+            "payout_description": "Brochure lists “Deafness (Irreversible Loss of Hearing)” as one of the 14 Critical Illnesses; the plan pays a lump-sum upon diagnosis of a covered Critical Illness.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Deafness (Irreversible Loss of Hearing)",
+                "line_start": 133,
+                "line_end": 152,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Receive a lump-sum payout upon diagnosis of a covered Critical Illness, Total and Permanent Disability, Terminal Illness or death4",
+                "line_start": 36,
+                "line_end": 55,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Major Head Trauma",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Lump-sum payout upon diagnosis of “Major Head Trauma”.",
+            "trigger_description": "Diagnosis of “Major Head Trauma”.",
+            "covered_conditions": [
+              "Major Head Trauma"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "claims_based",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Lump-sum payout upon diagnosis of covered Critical Illnesses.",
+            "payout_description": "Brochure lists “Major Head Trauma” as one of the 14 Critical Illnesses; the plan pays a lump-sum upon diagnosis of a covered Critical Illness.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Major Head Trauma",
+                "line_start": 135,
+                "line_end": 154,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Receive a lump-sum payout upon diagnosis of a covered Critical Illness, Total and Permanent Disability, Terminal Illness or death4",
+                "line_start": 36,
+                "line_end": 55,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Severe Bacterial Meningitis",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Lump-sum payout upon diagnosis of “Severe Bacterial Meningitis”.",
+            "trigger_description": "Diagnosis of “Severe Bacterial Meningitis”.",
+            "covered_conditions": [
+              "Severe Bacterial Meningitis"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "claims_based",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Lump-sum payout upon diagnosis of covered Critical Illnesses.",
+            "payout_description": "Brochure lists “Severe Bacterial Meningitis” as one of the 14 Critical Illnesses; the plan pays a lump-sum upon diagnosis of a covered Critical Illness.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Severe Bacterial Meningitis",
+                "line_start": 137,
+                "line_end": 156,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Receive a lump-sum payout upon diagnosis of a covered Critical Illness, Total and Permanent Disability, Terminal Illness or death4",
+                "line_start": 36,
+                "line_end": 55,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Angioplasty & Other Invasive Treatment for Coronary Artery (early Death Benefit payout; Sum Assured reduction)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Advanced lump-sum payout of 10% of Sum Assured (up to S$25,000) if the Life Assured undergoes Angioplasty & Other Invasive Treatment for Coronary Artery; reduces the Sum Assured by the same amount and is payable once as an early payout of the Death Benefit.",
+            "trigger_description": "Undergoes “Angioplasty & Other Invasive Treatment For Coronary Artery”.",
+            "covered_conditions": [
+              "Angioplasty & Other Invasive Treatment For Coronary Artery"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 10,
+            "payout_unit": "percent",
+            "payout_basis": "10% of the Sum Assured",
+            "payout_description": "Pay 10% of the Sum Assured (subject to maximum claimable limit of S$25,000) and reduce the Sum Assured by the same amount; only pay once; early payout of the Death Benefit. Other benefits continue based on prevailing Sum Assured after payment.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 25000,
+            "limit_amount": 25000,
+            "limit_type": "max_claimable_limit",
+            "claim_frequency": "one_time",
+            "maximum_claims": 1,
+            "benefit_relationship": "accelerated",
+            "reduces_base_sum_assured": true,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure’s feature section also describes this as an “advanced lump-sum payout”.",
+            "evidence": [
+              {
+                "quote": "We’ll give you an advanced lump-sum payout that’s 10% of your Sum Assured (up to S$25,000)",
+                "line_start": 48,
+                "line_end": 67,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "If Singapore Life Ltd. has paid part of the Death Beneﬁt as an early payout in a previous claim, the Diabetic Conditions Beneﬁt will be payable based on the prevailing Death Beneﬁt Sum Assured.",
+                "line_start": 277,
+                "line_end": 296,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "If the Life Assured undergoes Angioplasty & Other Invasive Treatment For Coronary Artery, Singapore Life Ltd. will pay 10% of the Sum Assured (subject to the maximum claimable limit of S$25,000) and reduce the Sum Assured by the same amount.",
+                "line_start": 316,
+                "line_end": 318,
+                "quote_token_coverage": 0.998
+              },
+              {
+                "quote": "Singapore Life Ltd. will only pay once for Angioplasty & Other Invasive Treatment For Coronary Artery and this beneﬁt is an early payout of the Death Beneﬁt.",
+                "line_start": 300,
+                "line_end": 319,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Diabetes-related extra lump-sum for Diabetic Conditions (extra 20% of Death Benefit Sum Assured; up to S$25,000 per condition per life)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "If the Life Assured suffers from any of the covered Diabetic Conditions, the plan pays an additional 20% of the Death Benefit Sum Assured, up to S$25,000 per condition per life. Only one claim per same Diabetic Condition; does not reduce Sum Assured of other benefits; ceases once the additional 20% is fully paid or when the policy terminates.",
+            "trigger_description": "Suffers from a covered diabetic condition.",
+            "covered_conditions": [
+              "Coma due to Hyperosmolar Hyperglycemic State (HHS)",
+              "Limb Amputation due to Diabetic Complications",
+              "Diabetic Nephropathy",
+              "Diabetic Ketoacidosis"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 20,
+            "payout_unit": "percent",
+            "payout_basis": "20% of the Death Beneﬁt Sum Assured",
+            "payout_description": "Pay additional 20% of Death Benefit Sum Assured, subject to up to S$25,000 per condition per life. If part of Death Benefit has already been paid as an early payout, the diabetic extra benefit is calculated based on prevailing Death Benefit Sum Assured. Only one claim can be made on the same Diabetic Condition. This benefit ceases once the additional 20% is fully paid or when the policy terminates (whichever is earlier). Any claim on Diabetic Conditions Beneﬁt will not reduce the Sum Assured of the other benefits.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 25000,
+            "limit_amount": 25000,
+            "limit_type": "per_condition_per_life_cap",
+            "claim_frequency": "limited_per_condition",
+            "maximum_claims": 1,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": false,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure also states: “Extra protection for diabetes-related conditions Get an additional lump-sum payout of 20% of the Sum Assured”. The footnote clarifies this as 20% of the Death Beneﬁt Sum Assured, with a cap of S$25,000 per condition per life.",
+            "evidence": [
+              {
+                "quote": "Get an additional lump-sum payout of 20% of the Sum Assured5 for any of the 4 covered diabetic conditions6.",
+                "line_start": 43,
+                "line_end": 62,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "If the Life Assured suffers from any of the covered Diabetic Conditions, Singapore Life Ltd. will pay an additional 20% of the Death Beneﬁt Sum Assured, up to S$25,000 per condition per life.",
+                "line_start": 276,
+                "line_end": 295,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Only one claim can be made on the same Diabetic Condition.",
+                "line_start": 278,
+                "line_end": 297,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Any claim made on the Diabetic Conditions Beneﬁt will not reduce the Sum Assured of the other beneﬁts.",
+                "line_start": 280,
+                "line_end": 299,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Coma due to Hyperosmolar Hyperglycemic State (HHS) (Diabetic Condition extra 20%)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Diabetic Condition extra payout: additional 20% of the Death Benefit Sum Assured (capped as stated for Diabetic Conditions).",
+            "trigger_description": "Serious acute complication of diabetes characterised by severe hyperglycemia with no ketoacidosis.",
+            "covered_conditions": [
+              "Coma due to Hyperosmolar Hyperglycemic State (HHS)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 20,
+            "payout_unit": "percent",
+            "payout_basis": "Additional 20% of the Death Beneﬁt Sum Assured",
+            "payout_description": "Extra payout forms part of the Diabetic Conditions Beneﬁt described in notes (additional 20%, capped and limited per condition).",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 25000,
+            "limit_amount": 25000,
+            "limit_type": "per_condition_per_life_cap",
+            "claim_frequency": null,
+            "maximum_claims": 1,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": false,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Coma due to Hyperosmolar Hyperglycemic State (HHS)",
+                "line_start": 77,
+                "line_end": 96,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "(a)  Coma due to Hyperosmolar Hyperglycemic State (HHS): A serious acute complication of diabetes characterised by severe hyperglycemia with no ketoacidosis.",
+                "line_start": 284,
+                "line_end": 303,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "If the Life Assured suffers from any of the covered Diabetic Conditions, Singapore Life Ltd. will pay an additional 20% of the Death Beneﬁt Sum Assured, up to S$25,000 per condition per life.",
+                "line_start": 276,
+                "line_end": 295,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Limb Amputation due to Diabetic Complications (Diabetic Condition extra 20%)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Diabetic Condition extra payout: additional 20% of the Death Benefit Sum Assured (capped as stated for Diabetic Conditions).",
+            "trigger_description": "Actual undergoing of a leg/foot or arm/hand amputation at specified points to treat gangrene that occurred because of a complication of diabetes.",
+            "covered_conditions": [
+              "Limb Amputation due to Diabetic Complications"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 20,
+            "payout_unit": "percent",
+            "payout_basis": "Additional 20% of the Death Beneﬁt Sum Assured",
+            "payout_description": "Extra payout forms part of the Diabetic Conditions Beneﬁt described in notes (additional 20%, capped and limited per condition).",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 25000,
+            "limit_amount": 25000,
+            "limit_type": "per_condition_per_life_cap",
+            "claim_frequency": null,
+            "maximum_claims": 1,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": false,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Limb Amputation due to Diabetic Complications",
+                "line_start": 79,
+                "line_end": 98,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "(b)  Limb Amputation due to Diabetic Complications: The actual undergoing of amputation of a leg / foot at ankle or above / arm / hand at wrist or above to treat gangrene that has occurred because of a complication of diabetes.",
+                "line_start": 287,
+                "line_end": 306,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "If the Life Assured suffers from any of the covered Diabetic Conditions, Singapore Life Ltd. will pay an additional 20% of the Death Beneﬁt Sum Assured, up to S$25,000 per condition per life.",
+                "line_start": 276,
+                "line_end": 295,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Diabetic Nephropathy (Diabetic Condition extra 20%)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Diabetic Condition extra payout: additional 20% of the Death Benefit Sum Assured (capped as stated for Diabetic Conditions).",
+            "trigger_description": "Definite diagnosis by a Specialist with evidence by eGFR less than 30 ml/min/1.73 m2 with ongoing proteinuria greater than 300mg/24 hours.",
+            "covered_conditions": [
+              "Diabetic Nephropathy"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 20,
+            "payout_unit": "percent",
+            "payout_basis": "Additional 20% of the Death Beneﬁt Sum Assured",
+            "payout_description": "Extra payout forms part of the Diabetic Conditions Beneﬁt described in notes (additional 20%, capped and limited per condition).",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 25000,
+            "limit_amount": 25000,
+            "limit_type": "per_condition_per_life_cap",
+            "claim_frequency": null,
+            "maximum_claims": 1,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": false,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Diabetic Nephropathy",
+                "line_start": 81,
+                "line_end": 100,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "(c)  Diabetic Nephropathy: A deﬁnite diagnosis of diabetic nephropathy by a Specialist and is evident by eGFR less than 30 ml/min/1.73 m2 with ongoing proteinuria greater than 300mg/24 hours.",
+                "line_start": 291,
+                "line_end": 310,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "If the Life Assured suffers from any of the covered Diabetic Conditions, Singapore Life Ltd. will pay an additional 20% of the Death Beneﬁt Sum Assured, up to S$25,000 per condition per life.",
+                "line_start": 276,
+                "line_end": 295,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Diabetic Ketoacidosis (Diabetic Condition extra 20%)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Diabetic Condition extra payout: additional 20% of the Death Benefit Sum Assured (capped as stated for Diabetic Conditions).",
+            "trigger_description": "Serious acute complication of diabetes characterised by ketoacidosis and hyperglycemia.",
+            "covered_conditions": [
+              "Diabetic Ketoacidosis"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 20,
+            "payout_unit": "percent",
+            "payout_basis": "Additional 20% of the Death Beneﬁt Sum Assured",
+            "payout_description": "Extra payout forms part of the Diabetic Conditions Beneﬁt described in notes (additional 20%, capped and limited per condition).",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 25000,
+            "limit_amount": 25000,
+            "limit_type": "per_condition_per_life_cap",
+            "claim_frequency": null,
+            "maximum_claims": 1,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": false,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Diabetic Ketoacidosis",
+                "line_start": 83,
+                "line_end": 102,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "(d)  Diabetic Ketoacidosis: A serious acute complication of diabetes characterised by ketoacidosis (high levels of blood acids called ketones) and hyperglycemia.",
+                "line_start": 293,
+                "line_end": 312,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "If the Life Assured suffers from any of the covered Diabetic Conditions, Singapore Life Ltd. will pay an additional 20% of the Death Beneﬁt Sum Assured, up to S$25,000 per condition per life.",
+                "line_start": 276,
+                "line_end": 295,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "No Claim Reward (20% of total premiums paid at end of policy term)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "optional",
+            "benefit_description": "If there are no claims during the policy term, the policy pays back 20% of total premiums paid at the end of the policy term.",
+            "trigger_description": "No claims made during the policy term.",
+            "covered_conditions": [],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "other",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "20% of total premiums paid",
+            "payout_description": "At end of policy term (if no claims), receive back 20% of total premiums paid.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "End of policy term",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "Illustration mentions a computed amount: “Receives No Claim Reward of S$3,407 (equivalent to 20% of her total premiums paid)”.",
+            "evidence": [
+              {
+                "quote": "No claims? You’ll get back 20% of your total premiums paid at the end of the policy term8, just for taking care of your health.",
+                "line_start": 55,
+                "line_end": 74,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Receives No Claim Reward of S$3,407",
+                "line_start": 232,
+                "line_end": 251,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "(equivalent to 20% of her total premiums paid)",
+                "line_start": 233,
+                "line_end": 252,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "Singlife Essential Critical Illness II is a multi-protection plan covering a comprehensive range of critical illnesses, total and permanent disability, terminal illnesses and death.",
+            "line_start": 14,
+            "line_end": 33,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Hassle-free application With just 6 questions to answer and no medical check-up needed1",
+            "line_start": 25,
+            "line_end": 44,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Extra protection for diabetes-related conditions Get an additional lump-sum payout of 20% of the Sum Assured5 for any of the 4 covered diabetic conditions6.",
+            "line_start": 43,
+            "line_end": 62,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "We’ll give you an advanced lump-sum payout that’s 10% of your Sum Assured (up to S$25,000)",
+            "line_start": 48,
+            "line_end": 67,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Flexible coverage term Want coverage for 15 years or up to age 85?",
+            "line_start": 58,
+            "line_end": 77,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "medium",
+        "review_notes": [
+          "TPD and Terminal Illness benefit triggers are stated at a high level, but the provided excerpt does not list their specific definitions; only the general lump-sum and the note that CI/TPD/Terminal are early payouts of the Death Benefit are extracted.",
+          "Only some of the 14 Critical Illness items are individually represented as benefit records; the brochure excerpt explicitly lists 14 and provides names, but does not provide separate payout formulas for each item beyond the general lump-sum statement and the specific diabetes and angioplasty mechanics."
+        ],
+        "slug": "singlife-singlife-essential-critical-illness-ii"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 59,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_03cb036ce20b1512016a8f2189981887d0aae071f2db6ed6f4",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:27:00.393811+00:00",
+    "usage": {
+      "input_tokens": 6529,
+      "output_tokens": 13615,
+      "total_tokens": 20144,
+      "reasoning_tokens": 366,
+      "estimated_cost_usd": 0.01832455
+    }
+  }
+}

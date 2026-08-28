@@ -1,0 +1,5 @@
+﻿category,product,product_page,brochure_url,local_file,status,candidate_count,error
+Health,,https://www.aia.com.sg/en/our-products/health/critical-illness/aia-prime-critical-cover,,,error,0,"HTTPSConnectionPool(host='www.aia.com.sg', port=443): Read timed out. (read timeout=30)"
+Life Insurance,AIA Mortgage Reducing Term Assurance,https://www.aia.com.sg/en/our-products/life-insurance/term-insurance/aia-mortgage-reducing-term-assurance,,,no_brochure_found,0,
+Accident Protection,AIA #GenFit Personal Accident Insurance,https://www.aia.com.sg/en/our-products/accident-protection/aia-genfit-pa,https://www.aia.com.sg/content/dam/sg-wise/en/docs/our-products/en/aia-genfit-pa.pdf,downloads\AIA\Accident Protection\AIA #GenFit Personal Accident Insurance.pdf,error,2,"HTTPSConnectionPool(host='www.aia.com.sg', port=443): Read timed out. (read timeout=30)"
+Travel & Lifestyle,AIA Mortgage Reducing Term Assurance,https://www.aia.com.sg/en/our-products/travel-and-lifestyle/home/aia-mortgage-reducing-term-assurance,,,no_brochure_found,0,

@@ -1,0 +1,737 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "FWD",
+    "source_file": "FWD/Critical Illness/MultiCover CI.md",
+    "source_filename": "MultiCover CI.md",
+    "document_type": "brochure",
+    "content_sha256": "ebfb6396f3c6871562ed805e1b9f2347b01bd8e0a9743b6fcfeb377e15faf250",
+    "local_markdown_path": "backend/scraper/insurance/FWD/Critical Illness/MultiCover CI.md",
+    "local_pdf_path": "backend/scraper/insurance/FWD/Critical Illness/MultiCover CI.pdf"
+  },
+  "extraction": {
+    "document_summary": "FWD MultiCover CI is a critical illness protection plan that provides multiple payouts and continued coverage beyond the first critical illness claim. It offers a “Critical Illness Benefit” with stage-based payouts (including early-/intermediate-stage and late-stage diagnoses) and continued protection for recurrence, with a “Critical Illness Booster Benefit” and limits on how much can be claimed cumulatively (including a shared 600% claim limit). For late-stage cases, policyholders may also exercise an “Accelerated Care Option” (75% of the Sum Insured) when conditions are met; this option can be exercised only once and is irreversible, and exercising it causes the Critical Illness Booster Benefit to cease. The plan also includes ICU benefits (including an additional Severe Intensive Care Unit Benefit for more severe ICU admissions) with a per-person cap of S$25,000. It further pays a lump-sum Death Benefit of S$5,000 if death occurs while the policy is in force.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Most key payout mechanics, key limits, waiting periods, and benefit cessation conditions are stated in the brochure.",
+      "Specific entry ages, underwriting approach details, and the full list of covered conditions/definitions are not provided in this excerpt (only referenced as available in the Policy Contract).",
+      "The document contains numeric examples, but those are not treated as guaranteed plan parameters beyond the explicitly stated benefit mechanics and limits."
+    ],
+    "policies": [
+      {
+        "company": "FWD",
+        "policy_name": "FWD MultiCover CI",
+        "aliases": [
+          "FWD MultiCover CI Protection that supports through recovery, recurrence and relapse"
+        ],
+        "quick_summary": "Multi-payout critical illness coverage with continued protection after the first claim, including an additional Booster Benefit and an Accelerated Care Option for certain first late-stage diagnoses, plus ICU benefits and a S$5,000 lump-sum Death Benefit while the policy is in force; multiple-claim limits and benefit cessation rules apply (including shared 600% claim limit). The plan is underwritten by FWD Singapore Pte. Ltd. and is subject to pre-existing conditions/exclusions and other benefit-specific terms in the Policy Contract (not provided in full here). See quoted evidence for limits and cessation triggers.",
+        "category": "critical_illness",
+        "policy_type": "critical_illness",
+        "plan_tier": null,
+        "target_customer": null,
+        "structure": "base_plan",
+        "participation": "not_stated",
+        "coverage_scope": [
+          "Early-, intermediate-, and late-stage specified critical illnesses",
+          "Recurrent critical illness (after first claim, subject to limits/terms)",
+          "Intensive Care Unit (ICU) admission benefit for invasive life support conditions",
+          "Severe ICU admission benefit (more severe cases) subject to deductions from the same shared 600% claim limit",
+          "Special Benefit for 22 covered special conditions",
+          "Juvenile Benefit for 17 covered juvenile conditions (below attained age 18)",
+          "Lump-sum Death Benefit of S$5,000 while policy is in force"
+        ],
+        "currency_options": [
+          "SGD"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": 100,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "Coverage terms are stated as “from 5 years up to age 100”. Juvenile Benefit applies for Person Insured below attained age 18.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "Flexible coverage terms from 5 years up to age 100.",
+        "premium_payment_term_description": "Not stated.",
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": 14,
+        "grace_period_days": null,
+        "policy_termination_events": [
+          "Accelerated Care Option exercised causes Critical Illness Booster Benefit to cease (and Booster ceases on other earlier events).",
+          "Intensive Care Unit Benefit ceases when Person Insured turns age 85 or when a claim under this benefit has been made.",
+          "Severe Intensive Care Unit Benefit ceases when Person Insured turns age 85, when a claim under this benefit has been made, or when the Critical Illness Benefit has ceased.",
+          "Special Benefit and Juvenile Benefit cease based on reaching sixth claim threshold or age limits (Special Benefit: age 85; Juvenile Benefit: age 18)."
+        ],
+        "important_caveats": [
+          "Maximum cumulative claim limits apply and not all benefits remain payable up to 900%; payouts may be reduced based on earlier claims and certain benefits have earlier limits and may cease upon reaching defined cumulative claim thresholds.",
+          "Critical Illness Booster Benefit cessation is tied to cumulative payout and/or the Accelerated Care Option exercise.",
+          "ICU admission must be for Necessary Medical Treatment; Severe ICU and ICU benefits are subject to caps/claim limits.",
+          "ICU-related benefits are payable once each (per stated benefit).",
+          "Claims under Intensive Care Unit Benefit and Severe Intensive Care Unit Benefit have interaction with the shared 600% claim limit."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": null,
+        "plans": [
+          {
+            "plan_name": "Critical Illness Benefit (multi-stage, multi-claim with continued protection)",
+            "plan_code": null,
+            "description": "Core multipay critical illness coverage across early-, intermediate-, late-stage critical illnesses and recurrence, with stage-based payout percentages and shared claim-limit mechanics.",
+            "applies_to": "base_policy",
+            "linked_rider_name": null,
+            "is_default": null,
+            "ward_class": null,
+            "currency": "SGD",
+            "minimum_sum_assured": null,
+            "maximum_sum_assured": null,
+            "annual_limit": null,
+            "lifetime_limit": null,
+            "policy_year_limit": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "eligibility_notes": "Critical Illness Booster Benefit is payable upon diagnosis; waiting periods and survival periods are mentioned as benefit-specific conditions. Late-stage booster has no waiting period upon first late-stage eligible diagnosis, per table notes.",
+            "coverage_term_description": "Coverage continues beyond the first critical illness claim; maximum cumulative claim limits and benefit-specific cessation rules apply.",
+            "premium_payment_term_description": "Not stated.",
+            "benefit_amounts": [
+              {
+                "benefit_name": "Critical Illness Benefit - Early/Intermediate-Stage diagnosis payout",
+                "payout_type": "lump_sum",
+                "payout_value": 200,
+                "payout_unit": "% of Sum Insured",
+                "payout_basis": null,
+                "payout_description": "200% of the Sum Insured for early- and intermediate-stage critical illness diagnosis (subject to staging and claim-limit mechanics).",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Payout is stated in the “Continued protection upon recurrence” table, but the full definition/listing and other benefit-specific conditions are referenced to Policy Contract.",
+                "notes": "Brochure shows staging table with percentages and references waiting periods.",
+                "evidence": [
+                  {
+                    "quote": "Early- and Intermediate- Stage Critical Illness Diagnosis* 200% of the Sum Insured",
+                    "line_start": 37,
+                    "line_end": 43,
+                    "quote_token_coverage": 0.994
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Critical Illness Benefit - Late-Stage diagnosis payout",
+                "payout_type": "lump_sum",
+                "payout_value": 150,
+                "payout_unit": "% of Sum Insured",
+                "payout_basis": null,
+                "payout_description": "150% of the Sum Insured for each claim for late-stage critical illness diagnosis.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "The brochure indicates the 150% is 'for each claim' and includes additional notes about waiting periods and cessation of Booster Benefit.",
+                "notes": "Full eligibility list/definitions not included in excerpt.",
+                "evidence": [
+                  {
+                    "quote": "Late-Stage Critical Illness Diagnosis  150% of the Sum Insured for each claim",
+                    "line_start": 37,
+                    "line_end": 47,
+                    "quote_token_coverage": 0.99
+                  }
+                ],
+                "extraction_confidence": "high"
+              },
+              {
+                "benefit_name": "Maximum cumulative claim limit for Critical Illness Booster Benefit period (shared 600% / up to 900% across multiple claims)",
+                "payout_type": null,
+                "payout_value": null,
+                "payout_unit": null,
+                "payout_basis": null,
+                "payout_description": "The brochure states up to 900% of Sum Insured across multiple claims, and also states a 600% claim limit shared by Critical Illness Benefit and Severe Intensive Care Unit Benefit; total amount payable shown includes up to 600% shared and up to 900% with continued protection.",
+                "payout_currency": "SGD",
+                "minimum_payout_amount": null,
+                "maximum_payout_amount": null,
+                "limit_amount": null,
+                "limit_type": null,
+                "claim_frequency": null,
+                "maximum_claims": null,
+                "benefit_relationship": "unknown",
+                "reduces_base_sum_assured": null,
+                "waiting_period_days": null,
+                "survival_period_days": null,
+                "deferment_period_days": null,
+                "conditions": "Brochure notes max cumulative claim limits apply and payouts may be reduced based on earlier claims; not all benefits remain payable up to 900%.",
+                "notes": "This is recorded as a benefit limit mechanic rather than a single payout amount.",
+                "evidence": [
+                  {
+                    "quote": "Receive up to 900% of your Sum Insured across multiple claims for early-, intermediate-, late-stage and recurrent critical illnesses, with protection that continues beyond your first claim",
+                    "line_start": 13,
+                    "line_end": 32,
+                    "quote_token_coverage": 1.0
+                  },
+                  {
+                    "quote": "**The 600% claim limit is shared by: Critical Illness Benefit; and Severe Intensive Care Unit Benefit",
+                    "line_start": 91,
+                    "line_end": 110,
+                    "quote_token_coverage": 1.0
+                  }
+                ],
+                "extraction_confidence": "high"
+              }
+            ],
+            "notes": null,
+            "evidence": [
+              {
+                "quote": "Receive up to 900% of your Sum Insured across multiple claims for early-, intermediate-, late-stage and recurrent critical illnesses, with protection that continues beyond your first claim1.",
+                "line_start": 13,
+                "line_end": 32,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "benefits": [
+          {
+            "benefit_name": "Critical Illness Benefit (Early- and Intermediate-Stage)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Pays 200% of the Sum Insured upon diagnosis of an early- and intermediate-stage critical illness. Amount is stated as based on the Sum Insured with continued protection and recurrence covered subject to benefit-specific rules and claim limits.",
+            "trigger_description": "Payable upon diagnosis of any of the covered early- and intermediate-stage critical illnesses (stage-based payout stated in table).",
+            "covered_conditions": [
+              "Early- and intermediate-stage critical illnesses (specific condition list referenced as in Policy Contract)"
+            ],
+            "condition_stages": [
+              "pre_early",
+              "early",
+              "intermediate",
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 200,
+            "payout_unit": "% of the Sum Insured",
+            "payout_basis": "Sum Insured",
+            "payout_description": "200% of the Sum Insured for early- and intermediate-stage critical illness diagnosis.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Not stated as start age; coverage term is flexible from 5 years up to age 100 and benefit is payable upon diagnosis.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Benefit cessation and claim-limit effects are referenced as benefit-specific conditions in Policy Contract and “maximum cumulative claim limits apply”.",
+            "geographic_scope": null,
+            "notes": "Brochure states that Future premiums are waived upon diagnosis of first late-stage critical illness (premium feature rather than benefit).",
+            "evidence": [
+              {
+                "quote": "Early- and Intermediate- Late-Stage Critical  Recurrent Critical Illness  Diagnosis*  200%  of the Sum Insured 150% of the Sum Insured for each claim",
+                "line_start": 37,
+                "line_end": 47,
+                "quote_token_coverage": 0.99
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Critical Illness Booster Benefit",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Provides an additional Booster Benefit linked to late-stage critical illness diagnosis and recurrence protection, subject to waiting periods and explicit cessation rules (including cessation upon reaching specific payout thresholds and/or exercising the Accelerated Care Option).",
+            "trigger_description": "Payable upon diagnosis of any of the 6 covered specified late-stage critical illnesses after the Critical Illness Benefit has ceased, or upon recurrence of these illnesses.",
+            "covered_conditions": [
+              "6 covered specified late-stage critical illnesses (list referenced as in Policy Contract)"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 150,
+            "payout_unit": "% of the Sum Insured",
+            "payout_basis": null,
+            "payout_description": "150% of the Sum Insured for each claim for recurrent critical illness / late-stage specified critical illnesses (as shown in the table for booster).",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "for each claim",
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "The table indicates different waiting period statements depending on the event.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Booster Benefit will cease on the earliest of: (i) 300% of the Sum Insured is fully paid out; or (ii) when the Accelerated Care Option is exercised.",
+            "geographic_scope": null,
+            "notes": "The brochure further states that if the Accelerated Care Option is exercised, the Critical Illness Booster Benefit shall cease.",
+            "evidence": [
+              {
+                "quote": "Payable upon diagnosis of any of the 6 covered specified late-stage critical illnesses after the Critical Illness Benefit has ceased, or upon recurrence of these illnesses3,4.",
+                "line_start": 53,
+                "line_end": 63,
+                "quote_token_coverage": 0.99
+              },
+              {
+                "quote": "Critical Illness Booster Benefit will cease on the earliest of the following events: (i) 300% of the Sum Insured is fully paid out; or (ii) when the Accelerated Care Option is exercised.",
+                "line_start": 297,
+                "line_end": 316,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Accelerated Care Option (additional payout)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "optional",
+            "benefit_description": "An option that may be exercised once upon the Person Insured’s first eligible late-stage critical illness diagnosis under the Critical Illness Benefit. It pays an additional 75% of the Sum Insured on top of the eligible late-stage critical illness claim.",
+            "trigger_description": "May be exercised when the Person Insured is diagnosed with (i) any covered eligible late-stage critical illness; and (ii) the diagnosis is the first late-stage critical illness diagnosis under the Critical Illness Benefit.",
+            "covered_conditions": [
+              "Covered eligible late-stage critical illnesses (eligible list referenced as in Policy Contract)"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 75,
+            "payout_unit": "% of the Sum Insured",
+            "payout_basis": "Sum Insured",
+            "payout_description": "The 75% Sum Insured will be paid in addition to the claim payable for the late-stage critical illness under the Critical Illness Benefit.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "once",
+            "maximum_claims": 1,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Exercisable only at the time of first eligible late-stage critical illness diagnosis under the Critical Illness Benefit.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Accelerated Care Option may only be exercised once; it cannot be reversed and using it causes the Critical Illness Booster Benefit to cease.",
+            "geographic_scope": null,
+            "notes": "The brochure describes it as a once-only, irreversible option and links it to cessation of Booster Benefit.",
+            "evidence": [
+              {
+                "quote": "Receive additional 75% of the Sum Insured through the Accelerated Care Option^ upon diagnosis of a covered late-stage critical illnesses3,5 to support your needs",
+                "line_start": 79,
+                "line_end": 92,
+                "quote_token_coverage": 0.987
+              },
+              {
+                "quote": "The Accelerated Care Option may only be exercised once. Once exercised, it cannot be reversed. If the Accelerated Care Option is exercised, the Critical Illness Booster Benefit shall cease.",
+                "line_start": 303,
+                "line_end": 322,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Intensive Care Unit Benefit",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Covers ICU admission due to an illness or accident (including where the illness leading to ICU stay is not related to a covered critical illness). Pays 20% of the Sum Insured, capped at S$25,000, for ICU admission with invasive life support for at least 4 consecutive days for Necessary Medical Treatment.",
+            "trigger_description": "Payable for an ICU admission of a minimum of 4 consecutive days with invasive life support.",
+            "covered_conditions": [
+              "ICU admission due to an illness or accident (including non-covered critical illness causes)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": 20,
+            "payout_unit": "% of the Sum Insured",
+            "payout_basis": "Sum Insured",
+            "payout_description": "20% of the Sum Insured (capped at S$25,000) is payable for ICU admission with invasive life support for at least 4 consecutive days.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 25000,
+            "limit_amount": 25000,
+            "limit_type": "cap per Person Insured",
+            "claim_frequency": "once",
+            "maximum_claims": 1,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": 25000,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Not stated; payable upon meeting ICU admission requirements during coverage.",
+            "benefit_expiry_age": 85,
+            "benefit_expiry_description": "Intensive Care Unit Benefit will cease when the Person Insured turns age 85 or when a claim under this benefit has been made.",
+            "geographic_scope": null,
+            "notes": "Brochure states this gives financial support even if the cause is not related to a covered critical illness.",
+            "evidence": [
+              {
+                "quote": "20%^ of the Sum Insured (capped at S$25,000) is payable for an ICU admission of a minimum of 4 consecutive days with invasive life support1,6 —even if the illness leading to ICU stay is not related to a covered critical illness.",
+                "line_start": 130,
+                "line_end": 140,
+                "quote_token_coverage": 0.99
+              },
+              {
+                "quote": "The ICU admission must be for Necessary Medical Treatment. Payout is subject to a maximum benefit payable of S$25,000 per Person Insured. This limit is inclusive of all intensive care unit benefits, however described... Intensive Care Unit Benefit is payable once.",
+                "line_start": 330,
+                "line_end": 333,
+                "quote_token_coverage": 0.997
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Severe Intensive Care Unit Benefit",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Pays 100% of the Sum Insured for more severe ICU admissions leading to invasive life support for at least 5 consecutive days (Necessary Medical Treatment required), capped at S$25,000 per person. This benefit is payable once and claims are deducted from the same 600% shared claim limit as the Critical Illness Benefit.",
+            "trigger_description": "ICU admission for a minimum of 5 consecutive days with invasive life support for more severe cases.",
+            "covered_conditions": [
+              "Severe ICU admission requiring invasive life support for at least 5 consecutive days (illness or accident leading to ICU not restricted by covered critical illness)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": 100,
+            "payout_unit": "% of the Sum Insured",
+            "payout_basis": "Sum Insured",
+            "payout_description": "100% of the Sum Insured is payable for more severe cases leading to ICU admission of a minimum of 5 consecutive days with invasive life support (capped at S$25,000).",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 25000,
+            "limit_amount": 25000,
+            "limit_type": "cap per Person Insured (inclusive of all intensive care unit benefits)",
+            "claim_frequency": "once",
+            "maximum_claims": 1,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": 25000,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Not stated; payable upon meeting ICU admission requirements during coverage.",
+            "benefit_expiry_age": 85,
+            "benefit_expiry_description": "Severe Intensive Care Unit Benefit will cease when Person Insured turns age 85, when a claim under this benefit has been made, or when the Critical Illness Benefit has ceased.",
+            "geographic_scope": null,
+            "notes": "Brochure states claims paid under Severe ICU are deducted from the shared 600% claim limit.",
+            "evidence": [
+              {
+                "quote": "100% of the Sum Insured (capped at S$25,000) is payable for more severe cases leading to ICU admission of a minimum of 5 consecutive days with invasive life support1,7.",
+                "line_start": 129,
+                "line_end": 135,
+                "quote_token_coverage": 0.994
+              },
+              {
+                "quote": "Claims paid under the Severe Intensive Care Unit Benefit will be deducted from the same 600% claim limit as the Critical Illness Benefit.",
+                "line_start": 323,
+                "line_end": 342,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Special Benefit (Special conditions)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Pays an additional 20% of the Sum Insured (capped at S$25,000 per condition) upon diagnosis of any of 22 covered special conditions. Subject to payout frequency rules: each special condition is payable once, with a maximum of 6 claims across the Special Benefit and Juvenile Benefit (with certain conditions payable once only overall among the list of specified mental health-related conditions).",
+            "trigger_description": "Payable upon diagnosis of any of the 22 covered special conditions.",
+            "covered_conditions": [
+              "22 covered special conditions (list referenced as in Policy Contract)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": 20,
+            "payout_unit": "% of the Sum Insured",
+            "payout_basis": "Sum Insured",
+            "payout_description": "20% of the Sum Insured (capped at S$25,000 per condition) payable upon diagnosis of any special condition.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 25000,
+            "limit_amount": 25000,
+            "limit_type": "cap per special condition, per Person Insured (also inclusive of special benefits under other policies/riders issued by us)",
+            "claim_frequency": "once per special condition; limited by overall maximum 6 claims across Special and Juvenile Benefits",
+            "maximum_claims": 6,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": 25000,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Payable upon diagnosis of covered special conditions while policy is in force.",
+            "benefit_expiry_age": 85,
+            "benefit_expiry_description": "Special Benefit will cease when the Person Insured turns age 85 or on the date that the sixth claim is made under either the Special Benefit or Juvenile Benefit, whichever first occurs.",
+            "geographic_scope": null,
+            "notes": "For bipolar disorder, delusional disorders, dissociative disorders, schizophrenia or severe depression, the brochure states only one payout will be made across those listed special conditions; after one is paid, the rest cease.",
+            "evidence": [
+              {
+                "quote": "20%^ of the Sum Insured (capped at S$25,000 per condition) is payable upon diagnosis of any of the 22 covered special conditions1,3,8.",
+                "line_start": 144,
+                "line_end": 147,
+                "quote_token_coverage": 0.997
+              },
+              {
+                "quote": "With the exception of the mentioned special conditions, each special condition is payable once, subject to a maximum of 6 claims across the Special Benefit and Juvenile Benefit. Special Benefit will cease on the earliest of the following events: (i) when the Person Insured turns age 85; or (ii) on the date that the sixth claim is made under either the Special Benefit or Juvenile Benefit, whichever first occurs.",
+                "line_start": 338,
+                "line_end": 357,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Juvenile Benefit (Juvenile conditions)",
+            "benefit_category": "critical_illness",
+            "benefit_level": "base",
+            "benefit_description": "Pays an additional 20% of the Sum Insured (capped at S$25,000 per condition) upon diagnosis of any of 17 covered juvenile conditions, when Juvenile Benefit is applicable (Person Insured below attained age 18). Limited by a maximum of 6 claims across Special and Juvenile Benefits and ceases by age 18 or when the sixth claim is made (whichever first occurs).",
+            "trigger_description": "Payable upon diagnosis of any of the 17 covered juvenile conditions.",
+            "covered_conditions": [
+              "17 covered juvenile conditions (list referenced as in Policy Contract)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "lump_sum",
+            "payout_value": 20,
+            "payout_unit": "% of the Sum Insured",
+            "payout_basis": "Sum Insured",
+            "payout_description": "20% of the Sum Insured (capped at S$25,000 per condition) payable upon diagnosis of any juvenile condition.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": 25000,
+            "limit_amount": 25000,
+            "limit_type": "cap per juvenile condition, per Person Insured (also inclusive across other policies/riders)",
+            "claim_frequency": "once per juvenile condition; limited by overall maximum 6 claims across Special and Juvenile Benefits",
+            "maximum_claims": 6,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": 25000,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Juvenile Benefit is applicable for Person Insured below attained age 18.",
+            "benefit_expiry_age": 18,
+            "benefit_expiry_description": "Juvenile Benefit will cease when the Person Insured turns age 18 or on the date that the sixth claim is made under either the Special Benefit or Juvenile Benefit (whichever first occurs).",
+            "geographic_scope": null,
+            "notes": "Brochure also states maximum of 6 claims across both Special Benefit and Juvenile Benefit.",
+            "evidence": [
+              {
+                "quote": "20%^ of the Sum Insured (capped at S$25,000 per condition) is payable upon diagnosis of any of the 17 covered juvenile conditions1,3,9.",
+                "line_start": 144,
+                "line_end": 147,
+                "quote_token_coverage": 0.997
+              },
+              {
+                "quote": "Juvenile Benefit is applicable for Person Insured below attained age 18. Payout is subject to a maximum benefit payable of S$25,000 for each juvenile condition, per Person Insured.",
+                "line_start": 340,
+                "line_end": 359,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Death Benefit",
+            "benefit_category": "personal_accident",
+            "benefit_level": "base",
+            "benefit_description": "Pays a lump-sum death benefit of S$5,000 to help ease the family’s immediate financial burden if the Person Insured dies while the policy is in force.",
+            "trigger_description": "Lump sum death benefit is paid if the Person Insured dies while the Policy is in force.",
+            "covered_conditions": [
+              "Death while policy is in force"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": 5000,
+            "payout_unit": "SGD",
+            "payout_basis": null,
+            "payout_description": "Lump sum Death Benefit of S$5,000.",
+            "payout_currency": "SGD",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": "once per death event",
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "While Policy is in force.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "Exclusions for death are referenced to Policy Contract.",
+            "evidence": [
+              {
+                "quote": "Death Benefit S$5,00010 payable to help ease your family’s immediate financial burden in the unfortunate event of death.",
+                "line_start": 134,
+                "line_end": 153,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "A lump sum Death Benefit will be paid if the Person Insured dies while the Policy is in force.",
+                "line_start": 348,
+                "line_end": 367,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [],
+        "exclusions": [
+          {
+            "exclusion": "Pre-existing conditions",
+            "category": "not_stated",
+            "applies_to": "base_policy",
+            "notes": "The brochure states that there are certain conditions such as pre-existing conditions and exclusions where no benefits will be payable.",
+            "evidence": [
+              {
+                "quote": "There are certain conditions such as pre-existing conditions and exclusions, where by no benefits will be payable.",
+                "line_start": 284,
+                "line_end": 303,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "exclusion": "Exclusions (unspecified)",
+            "category": "not_stated",
+            "applies_to": "base_policy",
+            "notes": "The brochure references exclusions generally and directs to the Policy Contract for full details.",
+            "evidence": [
+              {
+                "quote": "There are certain conditions such as pre-existing conditions and exclusions, where by no benefits will be payable.",
+                "line_start": 284,
+                "line_end": 303,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "low"
+          }
+        ],
+        "source_evidence": [
+          {
+            "quote": "FWD MultiCover CI goes beyond a single payout. It continues to provide coverage even after the first critical illness claim",
+            "line_start": 1,
+            "line_end": 18,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Receive up to 900% of your Sum Insured across multiple claims for early-, intermediate-, late-stage and recurrent critical illnesses, with protection that continues beyond your first claim",
+            "line_start": 13,
+            "line_end": 32,
+            "quote_token_coverage": 1.0
+          },
+          {
+            "quote": "Flexible coverage terms from 5 years up to age 100",
+            "line_start": 4,
+            "line_end": 23,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "high",
+        "review_notes": [
+          "No explicitly named add-on/rider products were present in the excerpt; ICU and Booster/Accelerated mechanisms are treated as benefits/options within the base policy.",
+          "Full covered condition lists and precise definitions are not included in this Markdown and are referenced to the Policy Contract."
+        ],
+        "slug": "fwd-fwd-multicover-ci"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 25,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_03f2a596ecea00b3016a8f1e418ed087d0a5fe5e4c62f3d7f4",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:12:33.703731+00:00",
+    "usage": {
+      "input_tokens": 8906,
+      "output_tokens": 8460,
+      "total_tokens": 17366,
+      "reasoning_tokens": 370,
+      "estimated_cost_usd": 0.0123562
+    }
+  }
+}

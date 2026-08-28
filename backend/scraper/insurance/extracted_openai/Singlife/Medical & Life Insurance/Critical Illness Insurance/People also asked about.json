@@ -1,0 +1,1022 @@
+{
+  "schema_version": "2.0-openai",
+  "source_document": {
+    "company": "Singlife",
+    "source_file": "Singlife/Medical & Life Insurance/Critical Illness Insurance/People also asked about.md",
+    "source_filename": "People also asked about.md",
+    "document_type": "brochure",
+    "content_sha256": "80912918f4564ee0c6438f117d099a57ba0ae75e3083e714ec1af0f8ca8aceaa",
+    "local_markdown_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Critical Illness Insurance/People also asked about.md",
+    "local_pdf_path": "backend/scraper/insurance/Singlife/Medical & Life Insurance/Critical Illness Insurance/People also asked about.pdf"
+  },
+  "extraction": {
+    "document_summary": "This brochure describes two Singlife government-approved CareShield Life/ElderShield “supplement” plans: Singlife CareShield Standard and Singlife CareShield Plus. Both pay an additional monthly benefit on top of the national CareShield Life/ElderShield severe disability payout when the Life Assured meets the plans’ severe disability definition (based on inability to perform Activities of Daily Living (ADLs)). Singlife CareShield Standard requires inability to perform at least three ADLs, while CareShield Plus requires inability to perform at least two ADLs. The brochure also adds benefits beyond the base severe disability monthly payout: a monthly Add-on benefit for up to 12 months (with earlier ADL triggers for Plus vs Standard), Dependant Care Benefit up to 36 months, Caregiver Relief Benefit up to 12 months, and lump-sum payouts (including a death lump sum that is three times the last monthly benefit). Payment mode flexibility includes limited premium payment options and MediSave usage (up to S$600 per calendar year). A key caveat is the 90-day deferment period before specified benefits are paid.",
+    "markdown_quality": "good",
+    "quality_notes": [
+      "Document clearly differentiates Singlife CareShield Standard vs Singlife CareShield Plus and states their ADL-based severe disability triggers.",
+      "Exact dollar amounts are given as ranges for the additional monthly benefit (S$200 to S$5,000 more each month), but other benefit components (e.g., exact percentages) are given in “Important notes” rather than a table; these were still extracted as written.",
+      "Entry age, maximum coverage age, and exact premium amounts/limits are not stated in the brochure.",
+      "No explicit exclusions section is provided; only procedural caveats (e.g., deferment period, MediSave limit) are stated."
+    ],
+    "policies": [
+      {
+        "company": "Singlife",
+        "policy_name": "Singlife CareShield Standard",
+        "aliases": [
+          "Singlife CareShield Standard"
+        ],
+        "quick_summary": "A CareShield Life/ElderShield supplement paying an additional monthly benefit for severe disability when you can’t perform at least 3 ADLs. Offers a monthly Add-on benefit (for moderate to severe disabilities) and further Dependant Care/Caregiver Relief benefits, plus lump-sum benefits including a 3x death payout. Includes MediSave premium payment (up to S$600/year) and a 90-day deferment period before specified benefits start, with waiver of premium after the deferment period. Additional monthly payouts may be fixed or increasing, and the brochure states the additional monthly benefit is S$200 to S$5,000 more each month on top of the government plan.",
+        "category": "long_term_care",
+        "policy_type": "careshield_supplement",
+        "plan_tier": null,
+        "target_customer": "not_stated",
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "Severe disability (ADL-based) additional monthly payout (on top of CareShield Life/ElderShield)",
+          "Add-on benefit for moderate to severe disability (ADL trigger)",
+          "Dependant Care Benefit (child age-based)",
+          "Caregiver Relief Benefit (additional payout)",
+          "Lump Sum Benefit for severe disability and death lump sum payout",
+          "Waiver of Premium relief (mild disability trigger)"
+        ],
+        "currency_options": [
+          "S$"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": null,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "You need to have a CareShield Life (CSHL) or ElderShield (ESH) policy before you purchase Singlife CareShield Standard.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "You are entitled to the monthly additional payout for as long as you’re severely disabled.",
+        "premium_payment_term_description": "Choose a premium payment period: (i) Pay up to the policy anniversary after you turn 98, or (ii) pay for a limited time (with later of two stated options applying).",
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [],
+        "important_caveats": [
+          "90-day Deferment Period applies for selected benefits: monthly benefit, Lump Sum Benefit, Dependant Care Benefit and Caregiver Relief Benefit are paid after the Deferment Period.",
+          "Severe disability definitions differ by product: Standard requires inability to perform at least three ADLs.",
+          "MediSave premium payment is applicable up to S$600 per calendar year, per life assured; premiums exceeding this limit will have to be paid in cash."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": 600,
+        "plans": [],
+        "benefits": [
+          {
+            "benefit_name": "Additional Severe Disability Monthly Benefit",
+            "benefit_category": "severe_disability_monthly_payout",
+            "benefit_level": "base",
+            "benefit_description": "An additional monthly payout on top of the government plan severe disability payout when the Life Assured is severely disabled; payout is stated as a choice of fixed or increasing. The brochure states the additional monthly benefit is S$200 to S$5,000 more each month and is payable as long as the Life Assured is severely disabled.",
+            "trigger_description": "Severely disabled (Standard): unable to perform at least three of the six ADLs (washing, toileting, feeding, dressing, transferring, walking or moving around).",
+            "covered_conditions": [
+              "Inability to perform at least three of six ADLs (Standard)"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "monthly_income",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Monthly benefit for severe disability, on top of the government plan",
+            "payout_description": "“Get S$200 to S$5,000 more each month” on top of the basic severe disability payout from the government plan; fixed or increasing payouts that grow by 2% or 3% annually.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": 200,
+            "maximum_payout_amount": 5000,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": 90,
+            "benefit_start_description": "Paid after the 90-day Deferment Period for selected benefits.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "The brochure states you are “entitled to this payout for as long as you’re severely disabled.”",
+            "geographic_scope": null,
+            "notes": "The brochure differentiates ADL thresholds for Plus vs Standard; this record reflects Standard.",
+            "evidence": [
+              {
+                "quote": "Get S$200 to S$5,000 more each month, on top of the basic severe disability payout from your government plan. You’re entitled to this payout for as long as you’re severely disabled¹.",
+                "line_start": 19,
+                "line_end": 22,
+                "quote_token_coverage": 0.997
+              },
+              {
+                "quote": "Choose between fixed or increasing payouts – consistent with your payouts make budgeting easier, while those that grow (by 2% or 3% annually) can help you to manage inflation.",
+                "line_start": 19,
+                "line_end": 25,
+                "quote_token_coverage": 0.994
+              },
+              {
+                "quote": "Important notes\n1. Severe disability refers to being unable to perform at least two (for Singlife CareShield Plus) or three (for Singlife CareShield Standard) of the six Activities of Daily Living (ADLs).",
+                "line_start": 143,
+                "line_end": 162,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The Deferment Period is a period of 90 days from the date the Life Assured is confirmed and certified by an Appointed Assessor as being severely disabled.\nThe monthly benefit, Lump Sum Benefit, Dependant Care Benefit and Caregiver Relief Benefit will be paid after the Deferment Period.",
+                "line_start": 164,
+                "line_end": 183,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Add-on Benefit (Monthly, Moderate-to-Severe Disability)",
+            "benefit_category": "add_on_monthly_payout",
+            "benefit_level": "base",
+            "benefit_description": "Additional monthly payout for up to 12 months when the Life Assured is unable to perform at least the specified number of ADLs (for Standard: unable to perform at least two ADLs).",
+            "trigger_description": "For Singlife CareShield Standard: payouts start when you’re unable to perform at least two ADLs.",
+            "covered_conditions": [
+              "Unable to perform at least two ADLs (Standard add-on trigger)"
+            ],
+            "condition_stages": [
+              "intermediate",
+              "early"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "monthly_income",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Additional percentage of monthly benefit while receiving monthly benefit or rehabilitation benefit",
+            "payout_description": "Notes state the Life Assured may receive an additional 60% of their monthly benefit for up to 12 months while they’re receiving their monthly benefit or rehabilitation benefit.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": "up to 12 months",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "The brochure states “Payouts start when you’re unable to perform at least two ADLs” for Standard; Deferment Period applies for selected benefits (details in notes).",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Up to 12 months.",
+            "geographic_scope": null,
+            "notes": "The brochure labels this as an “Add-on Benefit” and ties the payout duration to 12 months.",
+            "evidence": [
+              {
+                "quote": "With the Add-on Benefit, you’ll receive additional monthly payout for up to 12 months. Payouts start when you’re unable to perform one ADL for Singlife CareShield Plus and two ADLs for Singlife CareShield Standard.",
+                "line_start": 20,
+                "line_end": 39,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The Life Assured may receive an additional 60% of their monthly benefit – for up to 12 months – while they’re receiving their monthly benefit or rehabilitation benefit.",
+                "line_start": 151,
+                "line_end": 170,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Note: Deferment Period applies for selected benefits8.",
+                "line_start": 21,
+                "line_end": 40,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Dependant Care Benefit (Monthly, Child Age-based)",
+            "benefit_category": "dependant_care_monthly_payout",
+            "benefit_level": "base",
+            "benefit_description": "Additional monthly payout for up to 36 months to help cover costs for a dependent child condition described in the brochure.",
+            "trigger_description": "The Life Assured is entitled to additional payouts if you have a child under the age of 22.",
+            "covered_conditions": [
+              "Has a child under the age of 22"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "monthly_income",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Additional percentage of monthly benefit while receiving monthly benefit or rehabilitation benefit",
+            "payout_description": "Notes state the Life Assured may receive an additional 20% of their monthly benefit for up to 36 months while they’re receiving their monthly benefit or rehabilitation benefit.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": "up to 36 months",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Up to 36 months.",
+            "geographic_scope": null,
+            "notes": "The brochure also provides an illustration mentioning “Dependant Care Benefit … for up to 36 months” for a son below a specific age.",
+            "evidence": [
+              {
+                "quote": "You’re also entitled to additional payouts if you have a child under the age of 225, and to help cover caregiver costs6.",
+                "line_start": 57,
+                "line_end": 59,
+                "quote_token_coverage": 0.998
+              },
+              {
+                "quote": "Receives S$3,000 monthly benefit⁴ for as long as he can’t perform three ADLs\nReceives S$600 monthly as Add-on Benefit for up to 12 months as she can’t perform two ADLs\nReceives S$1,800 monthly as Dependant Care Benefit, for up to 36 months, as she has a son below age 22",
+                "line_start": 108,
+                "line_end": 125,
+                "quote_token_coverage": 0.983
+              },
+              {
+                "quote": "The Life Assured may receive an additional 20% of their monthly benefit – for up to 36 months – while they’re receiving their monthly benefit or rehabilitation benefit.",
+                "line_start": 150,
+                "line_end": 169,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Caregiver Relief Benefit (Monthly)",
+            "benefit_category": "caregiver_relief_monthly_payout",
+            "benefit_level": "base",
+            "benefit_description": "Additional monthly payout to help cover caregiver costs for a limited duration while receiving the monthly benefit or rehabilitation benefit.",
+            "trigger_description": "The brochure states entitlement to help cover caregiver costs; duration is stated as up to 12 months in the illustration and notes.",
+            "covered_conditions": [
+              "Receiving monthly benefit or rehabilitation benefit (per notes)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "monthly_income",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Additional percentage of monthly benefit while receiving monthly benefit or rehabilitation benefit",
+            "payout_description": "Notes state the Life Assured may receive an additional 60% of their monthly benefit for up to 12 months while they’re receiving their monthly benefit or rehabilitation benefit.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": "up to 12 months",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Up to 12 months.",
+            "geographic_scope": null,
+            "notes": "Illustration shows “Caregiver Relief Benefit … for up to 12 months.”",
+            "evidence": [
+              {
+                "quote": "You’re also entitled to additional payouts if you have a child under the age of 225, and to help cover caregiver costs6.",
+                "line_start": 57,
+                "line_end": 59,
+                "quote_token_coverage": 0.998
+              },
+              {
+                "quote": "Receives S$1,800 monthly as Caregiver Relief Benefit for up to 12 months",
+                "line_start": 101,
+                "line_end": 120,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The Life Assured may receive an additional 60% of their monthly benefit – for up to 12 months – while they’re receiving their monthly benefit or rehabilitation benefit.",
+                "line_start": 151,
+                "line_end": 170,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Lump Sum Benefit (Three times monthly benefit)",
+            "benefit_category": "lump_sum_severe_disability",
+            "benefit_level": "base",
+            "benefit_description": "A lump-sum benefit that is three times the monthly benefit when the Life Assured is severely disabled. The brochure suggests it can help with one-time costs such as a wheelchair purchase.",
+            "trigger_description": "Severely disabled (as defined for Standard: unable to perform at least three ADLs).",
+            "covered_conditions": [
+              "Severely disabled (Standard ADL trigger)"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Three times the monthly benefit",
+            "payout_description": "Lump-sum benefit that’s three times your monthly benefit.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": 90,
+            "benefit_start_description": "Paid after the Deferment Period for selected benefits.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure also later describes a death lump sum; this record is the separate “lump-sum benefit” payable when severely disabled.",
+            "evidence": [
+              {
+                "quote": "Get a lump-sum benefit that’s three times your monthly benefit⁴, when you’re severely disabled¹ – this can help with one-time costs, such as in the purchase of a wheelchair.",
+                "line_start": 54,
+                "line_end": 56,
+                "quote_token_coverage": 0.998
+              },
+              {
+                "quote": "Important notes\n1. Severe disability refers to being unable to perform at least two (for Singlife CareShield Plus) or three (for Singlife CareShield Standard) of the six Activities of Daily Living (ADLs).",
+                "line_start": 143,
+                "line_end": 162,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The Deferment Period is a period of 90 days from the date the Life Assured is confirmed and certified by an Appointed Assessor as being severely disabled.\nThe monthly benefit, Lump Sum Benefit, Dependant Care Benefit and Caregiver Relief Benefit will be paid after the Deferment Period.",
+                "line_start": 164,
+                "line_end": 183,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Death payout (Three times last monthly benefit / rehabilitation benefit)",
+            "benefit_category": "death_lump_sum",
+            "benefit_level": "base",
+            "benefit_description": "A death payout that is three times the last monthly benefit or rehabilitation benefit if the Life Assured dies while receiving the monthly benefit or rehabilitation benefit.",
+            "trigger_description": "Death while the Life Assured is receiving either the monthly benefit or rehabilitation benefit.",
+            "covered_conditions": [
+              "Death while receiving monthly benefit or rehabilitation benefit"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Three times last monthly benefit / rehabilitation benefit",
+            "payout_description": "Plan gives a death payout that’s three times your last monthly benefit or rehabilitation benefit.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure ties this death payout to dying while receiving monthly benefit or rehabilitation benefit.",
+            "evidence": [
+              {
+                "quote": "We offer financial relief when you die.\nThe plan gives a death payout that’s three times your last monthly benefit⁴ or rehabilitation benefit, if you can die while receiving either of these benefit payouts.",
+                "line_start": 64,
+                "line_end": 68,
+                "quote_token_coverage": 0.996
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Waiver of Premium Relief (Mild disability trigger)",
+            "benefit_category": "premium_waiver",
+            "benefit_level": "base",
+            "benefit_description": "Premium waiver / waiver reliefs so you may stop paying premiums but remain covered when you have a mild disability, defined by an ADL threshold.",
+            "trigger_description": "Mild disability: unable to perform at least one Activity of Daily Living (ADL).",
+            "covered_conditions": [
+              "Unable to perform at least one ADL"
+            ],
+            "condition_stages": [
+              "pre_early"
+            ],
+            "coverage_type": "as_charged",
+            "payout_type": "premium_waiver",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Waiver of premium (no cash payout amount stated)",
+            "payout_description": "You may stop paying your premiums but remain covered when you have a mild disability (unable to perform at least one ADL). Waiver of Premium is applicable after the Deferment Period.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Waiver of Premium is applicable after the Deferment Period.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "Specific waiver duration and exact mechanics are not detailed in the brochure beyond the deferment statement.",
+            "evidence": [
+              {
+                "quote": "Get waiver reliefs\nWe understand that every bit counts.\nYou may stop paying your premiums but remain covered when you have a mild disability – that is, when you’re unable to perform at least one Activity of Daily Living (ADL).",
+                "line_start": 30,
+                "line_end": 49,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The Deferment Period is a period of 90 days from the date the Life Assured is confirmed and certified by an Appointed Assessor as being severely disabled.\nThe monthly benefit, Lump Sum Benefit, Dependant Care Benefit and Caregiver Relief Benefit will be paid after the Deferment Period. Waiver of Premium is applicable after the Deferment Period.",
+                "line_start": 165,
+                "line_end": 184,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "Two government-approved supplement plans that boost your CareShield Life or ElderShield payouts",
+            "line_start": 1,
+            "line_end": 4,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "medium",
+        "review_notes": [
+          "No separate rider objects were created because the brochure does not explicitly label any of these as riders/attachments; “Add-on Benefit” is treated as a benefit component within the plan.",
+          "Some percentage-to-benefit mappings are drawn from “Important notes” (e.g., 20% for up to 36 months and 60% for up to 12 months). The brochure does not explicitly state which component each note refers to in the same sentence, so related benefit records are marked medium confidence where applicable."
+        ],
+        "slug": "singlife-singlife-careshield-standard"
+      },
+      {
+        "company": "Singlife",
+        "policy_name": "Singlife CareShield Plus",
+        "aliases": [
+          "Singlife CareShield Plus"
+        ],
+        "quick_summary": "A CareShield Life/ElderShield supplement paying an additional monthly benefit for severe disability when you can’t perform at least 2 ADLs (a less stringent threshold than Standard). Offers a monthly Add-on benefit for moderate-to-severe disability triggered by inability to perform at least 1 ADL, plus Dependant Care (up to 36 months) and Caregiver Relief (up to 12 months) components and lump-sum payouts. The brochure states the additional severe disability monthly benefit is S$200 to S$5,000 more each month, with a choice of fixed or increasing payouts (growing by 2% or 3% annually). MediSave premium payment is possible up to S$600/year, and a 90-day deferment period applies to selected benefits with waiver of premium after the deferment period.",
+        "category": "long_term_care",
+        "policy_type": "careshield_supplement",
+        "plan_tier": null,
+        "target_customer": "not_stated",
+        "structure": "base_plan",
+        "participation": "not_applicable",
+        "coverage_scope": [
+          "Severe disability (ADL-based) additional monthly payout (on top of CareShield Life/ElderShield)",
+          "Add-on benefit for moderate to severe disability (ADL trigger)",
+          "Dependant Care Benefit (child age-based)",
+          "Caregiver Relief Benefit (additional payout)",
+          "Lump Sum Benefit for severe disability and death lump sum payout",
+          "Waiver of Premium relief (mild disability trigger)"
+        ],
+        "currency_options": [
+          "S$"
+        ],
+        "is_active": null,
+        "available_to_new_customers": null,
+        "min_entry_age": null,
+        "max_entry_age": null,
+        "max_coverage_age": null,
+        "entry_age_basis": "not_stated",
+        "residency_requirements": null,
+        "occupation_classes": [],
+        "eligibility_notes": "You need to have a CareShield Life (CSHL) or ElderShield (ESH) policy before you purchase Singlife CareShield Plus.",
+        "annual_limit": null,
+        "lifetime_limit": null,
+        "policy_year_limit": null,
+        "term_years": null,
+        "renewable": null,
+        "coverage_term_description": "You are entitled to the monthly additional payout for as long as you’re severely disabled.",
+        "premium_payment_term_description": "Choose a premium payment period. Brochure mentions paying up to the policy anniversary after you turn 98 or a limited premium payment term (with two stated limited-payment ways; later option applies).",
+        "premium_frequencies": [],
+        "premium_guaranteed": null,
+        "renewal_basis": null,
+        "underwriting": "not_stated",
+        "medical_exam_required": null,
+        "cash_value_available": null,
+        "surrender_value_available": null,
+        "bonuses_or_dividends": null,
+        "free_look_period_days": null,
+        "grace_period_days": null,
+        "policy_termination_events": [],
+        "important_caveats": [
+          "90-day Deferment Period applies for selected benefits: monthly benefit, Lump Sum Benefit, Dependant Care Benefit and Caregiver Relief Benefit are paid after the Deferment Period.",
+          "Severe disability definition for Plus uses inability to perform at least two ADLs (instead of three for Standard).",
+          "MediSave premium payment is applicable up to S$600 per calendar year, per life assured; premiums exceeding this limit will have to be paid in cash."
+        ],
+        "ward_class": null,
+        "is_dpi": null,
+        "medisave_payable": null,
+        "medisave_withdrawal_limit_sgd": 600,
+        "plans": [],
+        "benefits": [
+          {
+            "benefit_name": "Additional Severe Disability Monthly Benefit",
+            "benefit_category": "severe_disability_monthly_payout",
+            "benefit_level": "base",
+            "benefit_description": "An additional monthly payout on top of the government plan severe disability payout when the Life Assured is severely disabled; payout is stated as a choice of fixed or increasing. The brochure states the additional monthly benefit is S$200 to S$5,000 more each month and is payable as long as the Life Assured is severely disabled.",
+            "trigger_description": "Severely disabled (Plus): unable to perform at least two of the six ADLs (washing, toileting, feeding, dressing, transferring, walking or moving around).",
+            "covered_conditions": [
+              "Inability to perform at least two of six ADLs (Plus)"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "monthly_income",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Monthly benefit for severe disability, on top of the government plan",
+            "payout_description": "“Get S$200 to S$5,000 more each month” on top of the basic severe disability payout from the government plan; fixed or increasing payouts that grow by 2% or 3% annually.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": 200,
+            "maximum_payout_amount": 5000,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": 90,
+            "benefit_start_description": "Paid after the 90-day Deferment Period for selected benefits.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "The brochure states you are “entitled to this payout for as long as you’re severely disabled.”",
+            "geographic_scope": null,
+            "notes": "This record reflects the Plus ADL threshold.",
+            "evidence": [
+              {
+                "quote": "Get S$200 to S$5,000 more each month, on top of the basic severe disability payout from your government plan. You’re entitled to this payout for as long as you’re severely disabled¹.",
+                "line_start": 19,
+                "line_end": 22,
+                "quote_token_coverage": 0.997
+              },
+              {
+                "quote": "Choose between fixed or increasing payouts – consistent with your payouts make budgeting easier, while those that grow (by 2% or 3% annually) can help you to manage inflation.",
+                "line_start": 19,
+                "line_end": 25,
+                "quote_token_coverage": 0.994
+              },
+              {
+                "quote": "Important notes\n1. Severe disability refers to being unable to perform at least two (for Singlife CareShield Plus) or three (for Singlife CareShield Standard) of the six Activities of Daily Living (ADLs).",
+                "line_start": 143,
+                "line_end": 162,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The Deferment Period is a period of 90 days from the date the Life Assured is confirmed and certified by an Appointed Assessor as being severely disabled.\nThe monthly benefit, Lump Sum Benefit, Dependant Care Benefit and Caregiver Relief Benefit will be paid after the Deferment Period.",
+                "line_start": 164,
+                "line_end": 183,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Add-on Benefit (Monthly, Moderate-to-Severe Disability)",
+            "benefit_category": "add_on_monthly_payout",
+            "benefit_level": "base",
+            "benefit_description": "Additional monthly payout for up to 12 months when the Life Assured is unable to perform at least the specified number of ADLs (for Plus: inability to perform at least 1 ADL).",
+            "trigger_description": "For Singlife CareShield Plus: payouts start when you’re unable to perform at least one ADL.",
+            "covered_conditions": [
+              "Unable to perform at least one ADL (Plus add-on trigger)"
+            ],
+            "condition_stages": [
+              "early",
+              "intermediate"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "monthly_income",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Additional percentage of monthly benefit while receiving monthly benefit or rehabilitation benefit",
+            "payout_description": "Notes state the Life Assured may receive an additional 60% of their monthly benefit for up to 12 months while they’re receiving their monthly benefit or rehabilitation benefit.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": "up to 12 months",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "The brochure states “Payouts start when you’re unable to perform one ADL for Singlife CareShield Plus”.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Up to 12 months.",
+            "geographic_scope": null,
+            "notes": "“Add-on Benefit” is explicitly named; the brochure also states Deferment Period applies for selected benefits.",
+            "evidence": [
+              {
+                "quote": "With the Add-on Benefit, you’ll receive additional monthly payout for up to 12 months. Payouts start when you’re unable to perform one ADL for Singlife CareShield Plus and two ADLs for Singlife CareShield Standard.",
+                "line_start": 20,
+                "line_end": 39,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The Life Assured may receive an additional 60% of their monthly benefit – for up to 12 months – while they’re receiving their monthly benefit or rehabilitation benefit.",
+                "line_start": 151,
+                "line_end": 170,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Note: Deferment Period applies for selected benefits8.",
+                "line_start": 21,
+                "line_end": 40,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Dependant Care Benefit (Monthly, Child Age-based)",
+            "benefit_category": "dependant_care_monthly_payout",
+            "benefit_level": "base",
+            "benefit_description": "Additional monthly payout for up to 36 months to help cover dependant-related costs when the brochure’s stated child condition is met.",
+            "trigger_description": "Entitled to additional payouts if you have a child under the age of 22.",
+            "covered_conditions": [
+              "Has a child under the age of 22"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "monthly_income",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Additional percentage of monthly benefit while receiving monthly benefit or rehabilitation benefit",
+            "payout_description": "Notes state the Life Assured may receive an additional 20% of their monthly benefit for up to 36 months while they’re receiving their monthly benefit or rehabilitation benefit.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": "up to 36 months",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Up to 36 months.",
+            "geographic_scope": null,
+            "notes": "Illustration references “Dependant Care Benefit … for up to 36 months” for a son below age 22.",
+            "evidence": [
+              {
+                "quote": "You’re also entitled to additional payouts if you have a child under the age of 225, and to help cover caregiver costs6.",
+                "line_start": 57,
+                "line_end": 59,
+                "quote_token_coverage": 0.998
+              },
+              {
+                "quote": "Receives S$662 monthly as\nDependant Care Benefit\nfor up to 36 months,\nas he has a son below age 22",
+                "line_start": 127,
+                "line_end": 146,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The Life Assured may receive an additional 20% of their monthly benefit – for up to 36 months – while they’re receiving their monthly benefit or rehabilitation benefit.",
+                "line_start": 150,
+                "line_end": 169,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Caregiver Relief Benefit (Monthly)",
+            "benefit_category": "caregiver_relief_monthly_payout",
+            "benefit_level": "base",
+            "benefit_description": "Additional monthly payout to help cover caregiver costs for up to 12 months while receiving the monthly benefit or rehabilitation benefit.",
+            "trigger_description": "Receiving their monthly benefit or rehabilitation benefit (per notes) and help cover caregiver costs (per brochure text).",
+            "covered_conditions": [
+              "Receiving monthly benefit or rehabilitation benefit (as described in notes for caregiver relief)"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "percentage",
+            "payout_type": "monthly_income",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Additional percentage of monthly benefit while receiving monthly benefit or rehabilitation benefit",
+            "payout_description": "Notes state an additional 60% of monthly benefit for up to 12 months.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": "up to 12 months",
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": "Up to 12 months.",
+            "geographic_scope": null,
+            "notes": "Illustration provides a caregiver relief benefit duration of up to 12 months.",
+            "evidence": [
+              {
+                "quote": "You’re also entitled to additional payouts if you have a child under the age of 225, and to help cover caregiver costs6.",
+                "line_start": 57,
+                "line_end": 59,
+                "quote_token_coverage": 0.998
+              },
+              {
+                "quote": "Receives S$1,987 monthly as\nCaregiver Relief Benefit\nfor up to 12 months",
+                "line_start": 130,
+                "line_end": 149,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The Life Assured may receive an additional 60% of their monthly benefit – for up to 12 months – while they’re receiving their monthly benefit or rehabilitation benefit.",
+                "line_start": 151,
+                "line_end": 170,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Lump Sum Benefit (Three times monthly benefit)",
+            "benefit_category": "lump_sum_severe_disability",
+            "benefit_level": "base",
+            "benefit_description": "A lump-sum benefit that’s three times the monthly benefit when the Life Assured is severely disabled.",
+            "trigger_description": "Severely disabled (Plus: unable to perform at least two ADLs).",
+            "covered_conditions": [
+              "Severely disabled (Plus ADL trigger)"
+            ],
+            "condition_stages": [
+              "late_or_severe"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Three times monthly benefit",
+            "payout_description": "Lump-sum benefit that’s three times your monthly benefit.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": 90,
+            "benefit_start_description": "Paid after the Deferment Period for selected benefits.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure states “Lump Sum Benefit” in the Deferment Period note.",
+            "evidence": [
+              {
+                "quote": "Get a lump-sum benefit that’s three times your monthly benefit⁴, when you’re severely disabled¹ – this can help with one-time costs, such as in the purchase of a wheelchair.",
+                "line_start": 54,
+                "line_end": 56,
+                "quote_token_coverage": 0.998
+              },
+              {
+                "quote": "Important notes\n1. Severe disability refers to being unable to perform at least two (for Singlife CareShield Plus) or three (for Singlife CareShield Standard) of the six Activities of Daily Living (ADLs).",
+                "line_start": 143,
+                "line_end": 162,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "The Deferment Period is a period of 90 days from the date the Life Assured is confirmed and certified by an Appointed Assessor as being severely disabled.\nThe monthly benefit, Lump Sum Benefit, Dependant Care Benefit and Caregiver Relief Benefit will be paid after the Deferment Period.",
+                "line_start": 164,
+                "line_end": 183,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          },
+          {
+            "benefit_name": "Death payout (Three times last monthly benefit / rehabilitation benefit)",
+            "benefit_category": "death_lump_sum",
+            "benefit_level": "base",
+            "benefit_description": "A death payout that’s three times the last monthly benefit or rehabilitation benefit if the Life Assured dies while receiving either benefit payout.",
+            "trigger_description": "Death while receiving monthly benefit or rehabilitation benefit.",
+            "covered_conditions": [
+              "Death while receiving monthly benefit or rehabilitation benefit"
+            ],
+            "condition_stages": [
+              "not_applicable"
+            ],
+            "coverage_type": "fixed_benefit",
+            "payout_type": "lump_sum",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Three times last monthly benefit / rehabilitation benefit",
+            "payout_description": "Death payout = three times your last monthly benefit or rehabilitation benefit.",
+            "payout_currency": "S$",
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "additional",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": null,
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "Brochure text contains a grammatical error (“if you can die”); the intended trigger is death while receiving either benefit payout.",
+            "evidence": [
+              {
+                "quote": "The plan gives a death payout that’s three times your\nlast monthly benefit⁴ or rehabilitation benefit, if you can benefit die while receiving either of these benefit payouts.",
+                "line_start": 66,
+                "line_end": 68,
+                "quote_token_coverage": 0.998
+              }
+            ],
+            "extraction_confidence": "medium"
+          },
+          {
+            "benefit_name": "Waiver of Premium Relief (Mild disability trigger)",
+            "benefit_category": "premium_waiver",
+            "benefit_level": "base",
+            "benefit_description": "Premium waiver reliefs so you may stop paying premiums but remain covered when you have a mild disability (unable to perform at least one ADL).",
+            "trigger_description": "Mild disability: unable to perform at least one Activity of Daily Living (ADL).",
+            "covered_conditions": [
+              "Unable to perform at least one ADL"
+            ],
+            "condition_stages": [
+              "pre_early"
+            ],
+            "coverage_type": "as_charged",
+            "payout_type": "premium_waiver",
+            "payout_value": null,
+            "payout_unit": null,
+            "payout_basis": "Waiver of premium (cash amount not stated)",
+            "payout_description": "Stop paying premiums but remain covered when mild disability occurs; waiver of premium is applicable after the Deferment Period.",
+            "payout_currency": null,
+            "minimum_payout_amount": null,
+            "maximum_payout_amount": null,
+            "limit_amount": null,
+            "limit_type": null,
+            "claim_frequency": null,
+            "maximum_claims": null,
+            "benefit_relationship": "unknown",
+            "reduces_base_sum_assured": null,
+            "deductible_sgd": null,
+            "co_insurance_pct": null,
+            "co_insurance_cap_sgd": null,
+            "waiting_period_days": null,
+            "survival_period_days": null,
+            "deferment_period_days": null,
+            "benefit_start_description": "Waiver of Premium is applicable after the Deferment Period.",
+            "benefit_expiry_age": null,
+            "benefit_expiry_description": null,
+            "geographic_scope": null,
+            "notes": "The brochure does not state how long waiver relief lasts once triggered.",
+            "evidence": [
+              {
+                "quote": "You may stop paying your premiums but remain covered when you have a mild disability – that is, when you’re unable to perform at least one Activity of Daily Living (ADL).",
+                "line_start": 30,
+                "line_end": 49,
+                "quote_token_coverage": 1.0
+              },
+              {
+                "quote": "Waiver of Premium is applicable after the Deferment Period.",
+                "line_start": 165,
+                "line_end": 184,
+                "quote_token_coverage": 1.0
+              }
+            ],
+            "extraction_confidence": "high"
+          }
+        ],
+        "riders": [],
+        "exclusions": [],
+        "source_evidence": [
+          {
+            "quote": "With Singlife CareShield Standard or\nSinglife CareShield Plus, you can have\ngreater assurance with better severe\ndisability support.",
+            "line_start": 1,
+            "line_end": 11,
+            "quote_token_coverage": 1.0
+          }
+        ],
+        "extraction_confidence": "medium",
+        "review_notes": [
+          "Add-on/Dependant/Caregiver components are extracted from brochure text and “Important notes” percentage statements; the brochure does not explicitly tie each percentage note to a named benefit in-line, so those percentage-based benefit mappings are medium confidence."
+        ],
+        "slug": "singlife-singlife-careshield-plus"
+      }
+    ]
+  },
+  "validation": {
+    "evidence_quotes_checked": 40,
+    "evidence_warnings": [],
+    "requires_human_review": false
+  },
+  "api": {
+    "provider": "OpenAI",
+    "endpoint": "responses",
+    "model_requested": "gpt-5.4-nano",
+    "model_returned": "gpt-5.4-nano-2026-03-17",
+    "response_id": "resp_0f16588c718c7ddb016a8f212957d887d08528c9356ea70106",
+    "prompt_version": "2026-08-26.8",
+    "generated_at": "2026-08-26T17:25:22.242065+00:00",
+    "usage": {
+      "input_tokens": 6721,
+      "output_tokens": 11905,
+      "total_tokens": 18626,
+      "reasoning_tokens": 1122,
+      "estimated_cost_usd": 0.01622545
+    }
+  }
+}
