@@ -14,6 +14,8 @@
 - Accept the complete local Docker Compose topology from a clean setup.
 - Replay extraction, retrieval, decision, and changed-profile evaluation suites.
 - Verify that real-product RAG remains read-only across the website and cannot alter E07 synthetic recommendations.
+- Accept Phase 3B real-product evidence comparison against citation, neutrality, unknown-state, canonical-isolation, and accessibility fixtures.
+- Independently evaluate any Phase 6 real-product ranked pilot before it can be enabled beyond its internal test configuration.
 - Replay conversational Q&A, cached-plan exploration with evidence states, presentation, confirmation, revision, cancellation, conflict, and undo scenarios.
 - Aggregate OpenRouter extraction and explanation correctness, latency, tool success, token, cost, and bounded-loop metrics.
 - Verify that locally tested image digests are ready for ECR and that ECS, RDS, S3, Secrets Manager, and CloudWatch mappings are documented.
@@ -24,6 +26,7 @@
 - **URS:** [URS-FR-008, URS-FR-010, URS-FR-011, URS-FR-012, URS-FR-018, URS-FR-019, URS-FR-020, URS-FR-021, URS-FR-022, URS-FR-024, URS-FR-027, URS-FR-028, URS-FR-029, URS-FR-030, URS-FR-031, URS-FR-032, URS-NFR-006, URS-NFR-007, URS-NFR-013, URS-NFR-015, URS-NFR-017](../urs/URS.md)
 - **PRD:** [PRD-FR-022, PRD-FR-024, PRD-FR-025, PRD-FR-026, PRD-FR-029, PRD-FR-032, PRD-FR-034, PRD-FR-036, PRD-FR-037, PRD-FR-038, PRD-NFR-006, PRD-NFR-013, PRD-NFR-016, PRD-NFR-017, PRD-NFR-021](../prd/PRD.md)
 - **Backlog:** [E08 tickets](../backlog/E08-integrated-demo-and-evaluation.md)
+- **Staged real products:** URS-FR-033 to URS-FR-035, URS-NFR-022; PRD-FR-039 to PRD-FR-041, PRD-NFR-028, PRD-NFR-029.
 
 ## Repository evidence
 
@@ -39,6 +42,8 @@
 - [ ] One end-to-end scenario and one changed-goal scenario complete without manual data repair.
 - [ ] The demo visibly distinguishes live, cached, synthetic, and simulated data.
 - [x] All 71 cached real-product records are searchable with approval/evidence state, and explored products remain visibly separate from synthetic recommendations.
+- [ ] A small comparison-eligible subset passes Phase 3B field-citation, neutral-ordering, canonical-isolation, and browser acceptance tests.
+- [ ] Any Phase 6 real-product ranked pilot passes independent deterministic correctness, abstention, stability, explanation-fidelity, and safeguard tests before enablement.
 - [ ] Extraction, retrieval, recommendation, and orchestration acceptance targets are reported from predeclared fixtures.
 - [ ] Conversational scenarios report grounding, valid-tool, confirmation, revision-consistency, replay, undo, latency, token, and estimated-cost outcomes against independent expected results.
 - [ ] Model and tool runs report token, latency, cost, retry, iteration, and error metrics.

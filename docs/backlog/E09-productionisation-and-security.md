@@ -92,3 +92,24 @@ hardening evidence.
 - [ ] Penetration, resilience, load, recovery, and accessibility tests meet agreed targets.
 - [ ] Product claims, conflicts, source coverage, and complaint handling are documented.
 - [ ] A launch decision records accepted risks and accountable sign-off.
+
+## E09-T05 - Approve public real-product ranked mode
+
+| Field | Value |
+|---|---|
+| Status | Deferred |
+| Priority | P3 |
+| Size | M |
+| Depends on | E08-T11, E09-T04 |
+
+**User story:** As the organization operating CoverCheck SG, we need explicit approval for public real-product ranking so an internal Phase 6 pilot cannot silently become a consumer financial-advice product.
+
+**Requirements:** URS-FR-035, URS-NFR-008; PRD-FR-041, PRD-NFR-007, PRD-NFR-012.
+
+**Acceptance criteria:**
+
+- [ ] Legal and compliance approve the intended user, wording, ranking scope, source coverage, conflicts, disclaimers, escalation, and complaint handling.
+- [ ] Privacy, security, identity, retention, audit, resilience, monitoring, rollback, and incident controls pass the E09 production gates.
+- [ ] Public evaluation thresholds, change-control owners, source-refresh service levels, and automatic disable conditions are approved.
+- [ ] A launch decision records accepted residual risks and names accountable product, compliance, technical, and operational owners.
+- [ ] Without this approval, real-product ranked mode remains internal and disabled in public configuration.

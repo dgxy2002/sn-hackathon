@@ -25,6 +25,8 @@ The extraction report was generated on 26 August 2026 and the database work is r
 
 Real-product RAG is read-only throughout applicable website and conversational contexts. It may answer cited questions and support catalogue exploration. It cannot enter, replace, reorder, or otherwise alter E07's synthetic-plan ranking.
 
+The [staged comparison and ranking decision](2026-08-28-real-product-comparison-and-ranking-stages.md) adds a Phase 3B neutral evidence-comparison mode within this read-only boundary. It also defines a later Phase 6 internal ranked-pilot gate. Phase 3B does not reopen DEC-004 or make any real product recommendation eligible.
+
 ### Catalogue breadth and evidence state
 
 All 71 cached policy records may be searched to improve discovery and avoid an artificially narrow view. Each result must expose an evidence state such as `approved`, `unverified`, `stale`, `conflicting`, or `unknown` plus its synthetic status. Cache inclusion does not mean source approval, currency, eligibility, affordability, or suitability.
@@ -109,6 +111,16 @@ Owner: Tim.
 - Keep explored real products visually and semantically separate from the synthetic recommendation.
 - Ensure no read-only action mutates profile, extraction, recommendation, or revision state.
 
+### Phase 3B - Real-product evidence comparison
+
+Owners: Darren for comparison eligibility; Tim for E10, E01, E12, and E08 acceptance.
+
+- Approve a small pilot subset in one category rather than waiting for all 71 searchable records.
+- Normalize source-backed comparison fields and preserve unsupported values as `Unknown`.
+- Expose `POST /v1/evidence/compare` without invoking E07 or creating canonical state.
+- Render two to four selected products in neutral provider/product order with no rank, score, badge, or suitability language.
+- Prove through E08 fixtures that every populated cell is cited and presentation changes leave canonical contracts unchanged.
+
 ### Phase 4 - E11 consequential path
 
 Owner: Jana and Tim, after the direct read path is accepted.
@@ -127,6 +139,15 @@ Owner: Tim with capability owners.
 - Verify that no real-product result changes synthetic ranking.
 - Complete local PostgreSQL/pgvector parity and Docker Compose acceptance before claiming the approved local runtime target is met.
 
+### Phase 6 - Internal real-product ranked pilot
+
+Owners: Deborah for E07; Tim for E08; named product and compliance approvers for DEC-004.
+
+- Begin only after Phase 5 acceptance, approved E07 formulation and correctness, ranking-eligible product data, and a recorded DEC-004/compliance approval.
+- Rank only candidates with complete source-backed decision inputs required by the formulation.
+- Preserve deterministic eligibility, ranking, no-recommendation, versioning, replacement safeguards, synthetic fallback, and model-explanation boundaries.
+- Keep the mode internal until E08 ranked-pilot evaluation passes; public use remains blocked by E09.
+
 ## Open controls
 
 These items remain incomplete and must not be implied by recent ingestion:
@@ -138,3 +159,4 @@ These items remain incomplete and must not be implied by recent ingestion:
 - Fixed retrieval evaluation and deterministic non-embedding fallback.
 - Local PostgreSQL/pgvector adapter and Docker Compose acceptance.
 - Public-use compliance, security, and operational hardening under E09.
+- Ranking-eligible product coverage and formal DEC-004 approval for Phase 6.

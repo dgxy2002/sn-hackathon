@@ -5,9 +5,9 @@
 | Field | Value |
 |---|---|
 | Product | CoverCheck SG |
-| Version | 1.3 |
+| Version | 1.4 |
 | Status | POC baseline |
-| Date | 26 August 2026 |
+| Date | 28 August 2026 |
 | Product objective | Demonstrate an evidence-backed insurance-readiness journey for first-time working adults in Singapore |
 | User requirements | [URS v1.0](../urs/URS.md) |
 
@@ -27,6 +27,7 @@ CoverCheck SG is a web-based educational assistant that moves a first-time worki
 8. Run the complete POC locally with Docker Compose before introducing AWS runtime dependencies.
 9. Reuse the same container images and service contracts when deploying to AWS later.
 10. Let users investigate, reshape, and replay their final comparison through a grounded conversational agent without weakening deterministic decision controls.
+11. Introduce real-product data first as a neutral evidence comparison, then enable deterministic real-product ranking only after separate data, evaluation, and compliance gates pass.
 
 ## 3. Non-goals
 
@@ -34,6 +35,7 @@ CoverCheck SG is a web-based educational assistant that moves a first-time worki
 - Recommending policy cancellation or replacement.
 - Production identity, sensitive-data storage, or public launch readiness.
 - Exhaustive provider coverage or live scraping during the judged demo.
+- Real-product suitability ranking before the Phase 6 ranked-pilot gate is approved.
 - Unqualified claims of independence, unbiasedness, or population representativeness.
 - Amazon Bedrock or AgentCore as a prerequisite for local development; these remain optional future adapters if credits and organizer requirements justify them.
 
@@ -46,6 +48,7 @@ CoverCheck SG is a web-based educational assistant that moves a first-time worki
 | Retrieval | Expected reviewed source appears in the top five for at least 90% of fixed queries; all shown claims include a source and date. |
 | Decision support | Zero hard-rule violations across at least 20 reviewed synthetic profiles; at least 90% top-category agreement with prewritten ground truth. |
 | Explanation | Every result includes a reason, trade-off, assumptions, missing data, and evidence status. |
+| Evidence comparison | Every populated real-product comparison cell has field evidence, source and date state; neutral ordering and canonical-state isolation pass 100% of declared cases. |
 | Reliability | At least 95% first-pass schema validation and zero runs beyond the configured loop cap. |
 | Demo | One normal scenario and one changed-goal scenario complete within the rehearsed five-minute story. |
 
@@ -86,11 +89,14 @@ CoverCheck SG is a web-based educational assistant that moves a first-time worki
 | PRD-FR-031 | Require an approved grounded formulation document before enabling plan ranking. | P0 | URS-FR-009, URS-FR-010, URS-FR-011, URS-FR-026, URS-NFR-003 | The document defines formulas, inputs, units, constraints, weights, reason codes, missing-data behavior, replacement safeguards, worked examples, and reviewer sign-off. |
 | PRD-FR-032 | Embed an `Ask CoverCheck` conversational agent in the final summary page with contextual follow-ups, suggested tasks, progress, and cited responses. | P1 | URS-FR-027, URS-FR-028, URS-NFR-021 | The panel retains current-session context and exposes idle, planning, acting, waiting-for-confirmation, completed, unsupported, and failed states. |
 | PRD-FR-033 | Convert each user request into one or more schema-valid intents and allowlisted typed tools. | P1 | URS-FR-029, URS-FR-030, URS-FR-032, URS-NFR-018 | Supported intents include `ANSWER_QUESTION`, `SEARCH_PLANS`, `FOCUS_SECTION`, `FILTER_COMPARISON`, `PROPOSE_PROFILE_PATCH`, `PROPOSE_EXTRACTION_PATCH`, `RUN_RECOMMENDATION`, `APPLY_SUMMARY_REVISION`, and `UNDO_REVISION`. |
-| PRD-FR-034 | Search and compare additional plans only from the approved E06 catalogue. | P1 | URS-FR-028, URS-FR-031 | Results preserve eligibility, source, effective or retrieval date, freshness, evidence spans, and synthetic status; unsupported requests return no evidence. |
+| PRD-FR-034 | Search and explore additional plans only from the approved E06 catalogue. | P1 | URS-FR-028, URS-FR-031 | Results preserve eligibility, source, effective or retrieval date, freshness, evidence spans, and synthetic status; unsupported requests return no evidence. |
 | PRD-FR-035 | Let presentation-only actions navigate, focus, filter, sort, and temporarily alter the visible comparison without confirmation. | P1 | URS-FR-029, URS-FR-031 | The page visibly follows the agent's action trace while canonical profile and recommendation versions remain unchanged. |
-| PRD-FR-036 | Preview and confirm proposed profile, comparison-membership, or extracted-policy changes before applying them. | P1 | URS-FR-030, URS-FR-031 | The preview identifies old and proposed values, affected calculations, required review, evidence impact, and available cancel action. |
+| PRD-FR-036 | Preview and confirm proposed profile, canonical comparison-membership, or extracted-policy changes before applying them. | P1 | URS-FR-030, URS-FR-031 | The preview identifies old and proposed values, affected calculations, required review, evidence impact, and available cancel action. |
 | PRD-FR-037 | After confirmation, version changed inputs, rerun E07 deterministically, and replace affected summary sections from the validated result contract. | P1 | URS-FR-012, URS-FR-031, URS-NFR-019 | Updated gaps, eligibility, rankings, comparison rows, assumptions, and explanation share one revision ID and a visible before/after delta. |
 | PRD-FR-038 | Preserve an ordered conversational action trace, revision history, and undo behavior for the current POC session. | P1 | URS-FR-032, URS-NFR-020 | A reviewer can replay tool calls and revisions, while the user can undo an applied revision through a new deterministic rerun or restore. |
+| PRD-FR-039 | Classify each real-product record as searchable evidence, comparison eligible, or ranking eligible through explicit gates. | P1 | URS-FR-016, URS-FR-034 | State transitions require recorded source permission, identity, URL, version/freshness, field provenance and completeness, evaluation, and approval evidence. |
+| PRD-FR-040 | Provide a read-only evidence-comparison contract and main-page mode for two to four comparison-eligible products from one category. | P1 | URS-FR-028, URS-FR-033, URS-NFR-022 | The table is neutrally ordered, labels unknown values, cites every populated cell, displays no fit or recommendation rank, and leaves canonical versions unchanged. |
+| PRD-FR-041 | Enable a bounded internal real-product ranked mode only through the Phase 6 gate. | P1 | URS-FR-026, URS-FR-034, URS-FR-035 | The mode remains disabled until Phase 5 acceptance, approved E07 formulation and correctness, ranking-eligible candidate data, independent E08 tests, and explicit DEC-004/compliance approval. |
 
 ## 6. Non-functional product requirements
 
@@ -123,6 +129,8 @@ CoverCheck SG is a web-based educational assistant that moves a first-time worki
 | PRD-NFR-025 | Any mutation of decision inputs or reviewed extraction fields shall require explicit user confirmation and produce an auditable version. | P0 | URS-FR-030, URS-NFR-019 | Navigation and temporary presentation actions may run immediately, but no canonical input changes before confirmation. |
 | PRD-NFR-026 | Conversation context shall use bounded current-session history and compact typed state rather than unbounded transcripts or raw documents. | P1 | URS-NFR-007, URS-NFR-020 | Turn, token, tool, latency, and history-size caps are enforced and fixture fallback remains available. |
 | PRD-NFR-027 | Dynamic summary changes shall preserve accessibility, visible focus, reduced-motion support, and stable layout dimensions. | P1 | URS-NFR-002, URS-NFR-021 | Action progress, confirmation, changed regions, citations, and undo are keyboard operable and announced without incoherent layout shifts. |
+| PRD-NFR-028 | Evidence-comparison ordering and membership shall not be presented as a suitability signal. | P0 | URS-FR-033, URS-NFR-022 | Rows use provider/product ordering after user selection; retrieval similarity can support discovery but cannot order the comparison table. |
+| PRD-NFR-029 | Evidence-comparison presentation actions shall be isolated from profile, E07 catalogue, recommendation, and summary-revision state. | P0 | URS-FR-033, URS-NFR-019, URS-NFR-022 | Before and after canonical contracts are identical when only real-product evidence rows are added, removed, sorted, or filtered. |
 
 ## 7. Capability boundaries
 
@@ -132,8 +140,8 @@ CoverCheck SG is a web-based educational assistant that moves a first-time worki
 | Readiness and personalization | Gather explicit context, preserve unknowns, and identify missing information. | Infer sensitive facts that can be asked directly. |
 | Extraction | Convert a policy document into fields, confidence, and page evidence. | Guess low-confidence values. |
 | Source ingestion | Acquire permitted content, normalize versions, and record freshness and failures. | Bypass source approval or silently overwrite product history. |
-| Information retrieval | Return small, dated product evidence records. | Make the final recommendation or merge product versions silently. |
-| Decision support | Calculate gaps, enforce eligibility, and rank plans reproducibly. | Delegate hard rules or arithmetic to an LLM. |
+| Information retrieval | Return small, dated product evidence records and comparison-eligible field projections. | Make the final recommendation, imply suitability, or merge product versions silently. |
+| Decision support | Calculate gaps, enforce eligibility, and rank plans reproducibly; use synthetic plans until the Phase 6 gate is approved. | Delegate hard rules or arithmetic to an LLM or consume weaker-than-ranking-eligible real-product data. |
 | Explanation | Express the fixed result in clear language. | Change rank, eligibility, evidence, or numerical results. |
 | Agent orchestration | Sequence capability calls, validate state transitions, restrict tools, and record run events. | Reimplement capability logic or continue after a terminal failure. |
 | Conversational summary agent | Interpret final-page requests, operate allowlisted page tools, explore approved alternatives, request confirmation, and present validated revisions. | Execute arbitrary page code, search unapproved sources, or directly author canonical decision values. |
@@ -215,6 +223,7 @@ The route names are a POC contract and may be implemented in one service. Capabi
 | `POST /v1/extractions` | E04 through E10 | Submit a consented synthetic document or fixture | Extraction ID, status, fields, warnings, and metrics |
 | `PATCH /v1/extractions/{extraction_id}` | E04 through E10 | Record reviewed field corrections | Revised extraction with original and reviewed provenance |
 | `POST /v1/evidence/search` | E06 through E10 | Retrieve product evidence for a typed query | Dated evidence records or explicit no-evidence |
+| `POST /v1/evidence/compare` | E06 through E10 | Build a neutral field-level comparison for selected comparison-eligible products | Read-only comparison, citations, unknowns, eligibility state, and unchanged canonical version references |
 | `POST /v1/recommendations` | E07 through E10 | Evaluate deterministic rules against profile and plans | Immutable recommendation result |
 | `POST /invocations` | E11 | Run the provider-neutral coordinator in the backend container | Final state, result, events, and run metrics |
 | `POST /v1/conversations` | E12 through E10 | Start a current-session conversation over a recommendation revision | Conversation ID, active revision, capabilities, and suggested prompts |
@@ -253,7 +262,11 @@ Extraction ID, document label and synthetic status, adapter and model version, s
 
 ### Plan evidence
 
-Plan and provider IDs; product version and effective date; category; eligibility; benefits; premiums and assumptions; terms and riders; exclusions and limitations; fees and surrender implications; source URL; quoted evidence spans; retrieval date; verification and freshness state; and synthetic status.
+Plan and provider IDs; product version and effective date; category; eligibility; benefits; premiums and assumptions; terms and riders; exclusions and limitations; fees and surrender implications; source URL; quoted evidence spans; retrieval date; verification and freshness state; searchable, comparison-eligible, and ranking-eligible states with gate reasons; and synthetic status.
+
+### Evidence comparison
+
+Comparison ID and contract version; selected product IDs and category; neutral ordering rule; normalized field keys, values, units, assumptions, unknown state, evidence IDs, source/date/version state, and comparison-eligibility decision; warnings and unsupported fields; plus active profile, catalogue, recommendation, and summary-revision references proving that the read-only comparison did not mutate canonical state.
 
 ### Recommendation result
 
@@ -271,18 +284,18 @@ Conversation, session, message, proposal, action, run, and revision IDs; active 
 
 | Epic | PRD requirements | Primary URS outcomes |
 |---|---|---|
-| [E01](../epics/E01-poc-web-experience.md) | PRD-FR-001, PRD-FR-004, PRD-FR-012, PRD-FR-032, PRD-FR-035, PRD-FR-037; PRD-NFR-001, PRD-NFR-006, PRD-NFR-027 | Public, usable, clearly bounded journey with validated dynamic summary rendering |
+| [E01](../epics/E01-poc-web-experience.md) | PRD-FR-001, PRD-FR-004, PRD-FR-012, PRD-FR-032, PRD-FR-035, PRD-FR-037, PRD-FR-040; PRD-NFR-001, PRD-NFR-006, PRD-NFR-027 to PRD-NFR-029 | Public, usable, clearly bounded journey with validated dynamic summary and neutral evidence-comparison rendering |
 | [E02](../epics/E02-readiness-quiz-and-peer-benchmark.md) | PRD-FR-002, PRD-FR-003; PRD-NFR-002, PRD-NFR-009 | Readiness discovery and responsible peer context |
 | [E03](../epics/E03-user-profile-and-personalization.md) | PRD-FR-004, PRD-FR-005, PRD-FR-011, PRD-FR-015, PRD-FR-028, PRD-FR-033, PRD-FR-036, PRD-FR-037; PRD-NFR-008, PRD-NFR-013, PRD-NFR-023, PRD-NFR-025 | Explicit, versioned, confirmable user understanding including a no-policy path |
 | [E04](../epics/E04-policy-ocr-and-extraction.md) | PRD-FR-006, PRD-FR-016, PRD-FR-021, PRD-FR-025, PRD-FR-027, PRD-FR-036, PRD-FR-037; PRD-NFR-003, PRD-NFR-004, PRD-NFR-010, PRD-NFR-017, PRD-NFR-022, PRD-NFR-025 | Reviewable OpenRouter-or-fixture extraction with confirmed provenance-preserving corrections |
 | [E05](../epics/E05-source-data-ingestion-poc.md) | PRD-FR-007, PRD-FR-017, PRD-FR-030; PRD-NFR-003, PRD-NFR-008, PRD-NFR-011, PRD-NFR-021 | Proven bounded, idempotent, continuously running ingestion pattern |
-| [E06](../epics/E06-insurance-retrieval-and-rag.md) | PRD-FR-007, PRD-FR-008, PRD-FR-017, PRD-FR-018, PRD-FR-021, PRD-FR-033, PRD-FR-034, PRD-FR-035; PRD-NFR-003, PRD-NFR-005, PRD-NFR-011, PRD-NFR-015, PRD-NFR-017, PRD-NFR-020 | Dated approved-catalogue evidence and conversational exploration from portable PostgreSQL/pgvector storage |
-| [E07](../epics/E07-explainable-decision-support.md) | PRD-FR-009, PRD-FR-010, PRD-FR-019, PRD-FR-024, PRD-FR-031, PRD-FR-037; PRD-NFR-002, PRD-NFR-003, PRD-NFR-013, PRD-NFR-015, PRD-NFR-016, PRD-NFR-025 | Approved formulation and reproducible comparisons with deterministic revision deltas |
-| [E08](../epics/E08-integrated-demo-and-evaluation.md) | PRD-FR-022, PRD-FR-024, PRD-FR-025, PRD-FR-026, PRD-FR-029, PRD-FR-032, PRD-FR-034, PRD-FR-036, PRD-FR-037, PRD-FR-038; PRD-NFR-006, PRD-NFR-013, PRD-NFR-015, PRD-NFR-016, PRD-NFR-017, PRD-NFR-021 | Docker Compose and conversational acceptance, measured results, and AWS deployment readiness |
-| [E09](../epics/E09-productionisation-and-security.md) | PRD-NFR-007, PRD-NFR-012 | Tracked post-POC production readiness |
-| [E10](../epics/E10-backend-api-and-poc-persistence.md) | PRD-FR-014, PRD-FR-015, PRD-FR-016, PRD-FR-018, PRD-FR-019, PRD-FR-021, PRD-FR-026, PRD-FR-029, PRD-FR-032, PRD-FR-033, PRD-FR-036, PRD-FR-037, PRD-FR-038; PRD-NFR-008, PRD-NFR-010, PRD-NFR-011, PRD-NFR-012, PRD-NFR-017 to PRD-NFR-021, PRD-NFR-023, PRD-NFR-025, PRD-NFR-026 | Contract-first API, disposable conversational state, revisions, and portable service adapters |
+| [E06](../epics/E06-insurance-retrieval-and-rag.md) | PRD-FR-007, PRD-FR-008, PRD-FR-017, PRD-FR-018, PRD-FR-021, PRD-FR-033 to PRD-FR-035, PRD-FR-039, PRD-FR-040; PRD-NFR-003, PRD-NFR-005, PRD-NFR-011, PRD-NFR-015, PRD-NFR-017, PRD-NFR-020, PRD-NFR-028 | Dated catalogue evidence, eligibility-state gates, exploration, and neutral comparison projections |
+| [E07](../epics/E07-explainable-decision-support.md) | PRD-FR-009, PRD-FR-010, PRD-FR-019, PRD-FR-024, PRD-FR-031, PRD-FR-037, PRD-FR-041; PRD-NFR-002, PRD-NFR-003, PRD-NFR-013, PRD-NFR-015, PRD-NFR-016, PRD-NFR-025 | Approved formulation and reproducible synthetic comparisons, followed by gated real-product ranking only in Phase 6 |
+| [E08](../epics/E08-integrated-demo-and-evaluation.md) | PRD-FR-022, PRD-FR-024 to PRD-FR-026, PRD-FR-029, PRD-FR-032, PRD-FR-034, PRD-FR-036 to PRD-FR-041; PRD-NFR-006, PRD-NFR-013, PRD-NFR-015 to PRD-NFR-017, PRD-NFR-021, PRD-NFR-028, PRD-NFR-029 | Docker Compose, evidence-comparison and ranked-pilot gates, conversational acceptance, measured results, and AWS readiness |
+| [E09](../epics/E09-productionisation-and-security.md) | PRD-FR-041; PRD-NFR-007, PRD-NFR-012 | Tracked post-POC production readiness and public real-product ranking approval |
+| [E10](../epics/E10-backend-api-and-poc-persistence.md) | PRD-FR-014 to PRD-FR-016, PRD-FR-018, PRD-FR-019, PRD-FR-021, PRD-FR-026, PRD-FR-029, PRD-FR-032, PRD-FR-033, PRD-FR-036 to PRD-FR-040; PRD-NFR-008, PRD-NFR-010 to PRD-NFR-012, PRD-NFR-017 to PRD-NFR-021, PRD-NFR-023, PRD-NFR-025, PRD-NFR-026, PRD-NFR-029 | Contract-first API, read-only evidence comparison, disposable conversational state, revisions, and portable adapters |
 | [E11](../epics/E11-runtime-orchestration-and-operations.md) | PRD-FR-013, PRD-FR-020 to PRD-FR-023, PRD-FR-027, PRD-FR-030, PRD-FR-033 to PRD-FR-036, PRD-FR-038; PRD-NFR-005, PRD-NFR-010, PRD-NFR-013, PRD-NFR-014, PRD-NFR-017, PRD-NFR-019, PRD-NFR-021 to PRD-NFR-024, PRD-NFR-026 | Bounded local-first orchestration, typed conversational tools, OpenRouter calls, and observable runtime operations |
-| [E12](../epics/E12-conversational-summary-agent.md) | PRD-FR-032 to PRD-FR-038; PRD-NFR-003, PRD-NFR-005, PRD-NFR-010, PRD-NFR-013 to PRD-NFR-017, PRD-NFR-022 to PRD-NFR-027 | Grounded conversation, visible typed page actions, and confirmed deterministic summary revisions |
+| [E12](../epics/E12-conversational-summary-agent.md) | PRD-FR-032 to PRD-FR-040; PRD-NFR-003, PRD-NFR-005, PRD-NFR-010, PRD-NFR-013 to PRD-NFR-017, PRD-NFR-022 to PRD-NFR-029 | Grounded conversation, neutral real-product evidence comparison, visible typed page actions, and confirmed deterministic summary revisions |
 
 ## 12. Source coverage matrix
 
@@ -300,6 +313,7 @@ This matrix demonstrates that the PRD covers the complete source scope rather th
 | Shared data contracts, backend API, local persistence, configuration, and AWS adapters | PRD-FR-014 to PRD-FR-016, PRD-FR-026, PRD-FR-029, PRD-NFR-008, PRD-NFR-010 to PRD-NFR-013, PRD-NFR-018 to PRD-NFR-021 | E10 |
 | OpenRouter, runtime entrypoint, tools, loops, state, prompts, scraper lifecycle, and metrics | PRD-FR-013, PRD-FR-020, PRD-FR-022, PRD-FR-023, PRD-FR-027, PRD-FR-030, PRD-NFR-005, PRD-NFR-014, PRD-NFR-022 | E11 |
 | Final-page conversation, approved-plan exploration, visible page actions, confirmations, revisions, replay, and undo | PRD-FR-032 to PRD-FR-038, PRD-NFR-023 to PRD-NFR-027 | E01, E03, E04, E06, E07, E08, E10, E11, E12 |
+| Staged real-product evidence comparison and ranked-pilot gates | PRD-FR-039 to PRD-FR-041, PRD-NFR-028, PRD-NFR-029 | E01, E06, E07, E08, E09, E10, E12 |
 | Docker Compose acceptance and same-image AWS migration | PRD-FR-026, PRD-FR-029, PRD-NFR-015, PRD-NFR-018 to PRD-NFR-021 | E08, E10, E11 |
 | Evaluation targets, ground truth, OCR experiment, demo, and fallback | Success measures, PRD-FR-024, PRD-FR-025, PRD-NFR-006, PRD-NFR-016, PRD-NFR-017 | E02, E04, E06, E07, E08 |
 | Production identity, privacy, security, resilience, and regulatory review | PRD-NFR-007, PRD-NFR-012 | E09 |
@@ -312,14 +326,15 @@ This matrix demonstrates that the PRD covers the complete source scope rather th
 | DEC-001 | Use Docker Compose and OpenRouter as the default runtime; treat Amazon Bedrock and AgentCore as optional later adapters. | Resolved for POC | Jana | AWS credits or organizer requirements may add an adapter but cannot block local execution. |
 | DEC-002 | Confirm the exact OpenRouter model slug represented by `5.6 Luna`. | Open | Tim | Set `OPENROUTER_MODEL` explicitly; never invent a slug in source or deployment configuration. |
 | DEC-003 | Verify the source and exact wording of the draft 26% Gen Z statistic. | Open | Jana | Omit the claim from product and presentation copy. |
-| DEC-004 | Decide whether real retrieved products can feed recommendations in the demo. | Resolved for POC | Deborah | Keep sourced real-evidence retrieval and synthetic-plan ranking visibly separate unless compliance approves otherwise. |
+| DEC-004 | Decide whether real retrieved products can feed recommendations in the demo. | Resolved for POC; Phase 6 gate defined | Deborah | Keep sourced real-evidence retrieval and synthetic-plan ranking visibly separate. Reopening requires the Phase 6 data, E07, E08, and compliance approvals. |
 | DEC-005 | Confirm minimum pilot cohort and consent wording. | Baseline defined | Jana | Require at least 10 for a percentile; otherwise show an official benchmark and label any mock cohort. |
 | DEC-006 | Confirm provider sites permitted for automated retrieval and reuse. | Open | Darren | Use approved cached or synthetic fixtures and never depend on live scraping during the demo. |
 | DEC-007 | Use local PostgreSQL/pgvector first and migrate the same schema to RDS PostgreSQL/pgvector later. | Resolved for POC | Darren | Keep metadata and full-text retrieval available when embeddings or external providers are unavailable. |
 | DEC-008 | Implement the final-page agent with visible, typed application tools rather than screenshot-coordinate computer use. | Resolved for POC | Tim | Allow immediate presentation actions; preview and confirm decision-input or reviewed-extraction changes; search only the approved catalogue. |
+| DEC-009 | Stage real-product data first as a neutral evidence comparison and later as a gated ranked pilot. | Resolved | Tim, Darren, Deborah | Phase 3B may compare a small comparison-eligible subset without E07/E11; real-product ranking remains disabled until Phase 6. See the [staged decision](../evaluation/2026-08-28-real-product-comparison-and-ranking-stages.md). |
 
 ## 14. Release posture
 
-The POC release is demo-ready when all P0 acceptance criteria required by the rehearsed scenario are met, synthetic and simulated states are visible, and open P1 limitations are disclosed. It is not approved for real customer data or public financial decision-making.
+The POC release is demo-ready when all P0 acceptance criteria required by the rehearsed scenario are met, synthetic and simulated states are visible, and open P1 limitations are disclosed. Phase 3B may be accepted independently when its comparison subset and isolation gates pass; it does not authorize Phase 6. The POC is not approved for real customer data or public financial decision-making.
 
 Execution tickets are maintained in the [backlog register](../backlog/README.md).

@@ -183,3 +183,25 @@
 - [x] Real-product exploration remains read-only and is distinguished from deterministic E07 synthetic recommendations.
 
 **Current evidence:** [`backend/app/evidence.py`](../../backend/app/evidence.py), [`backend/app/contracts.py`](../../backend/app/contracts.py), [`backend/tests/test_evidence.py`](../../backend/tests/test_evidence.py), and the [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md). Affordability and structured eligibility filters, complete source governance, local PostgreSQL parity, and fixed retrieval evaluation remain pending.
+
+## E06-T09 - Build the comparison-eligible product projection
+
+| Field | Value |
+|---|---|
+| Status | Ready |
+| Priority | P1 |
+| Size | M |
+| Depends on | E06-T01, E06-T02, E06-T05 |
+
+**User story:** As a user comparing real products, I need a reviewed subset with normalized, cited fields so missing brochure data cannot be mistaken for a factual difference or suitability signal.
+
+**Requirements:** URS-FR-033, URS-FR-034, URS-NFR-004, URS-NFR-022; PRD-FR-039, PRD-FR-040, PRD-NFR-003, PRD-NFR-015, PRD-NFR-028.
+
+**Acceptance criteria:**
+
+- [ ] A pilot subset of at least two products in one category has approved reuse, authoritative URLs, unambiguous identities, and non-stale/non-conflicting evidence state.
+- [ ] Each product records separate searchable, comparison-eligible, and ranking-eligible states plus machine-readable gate reasons.
+- [ ] Comparison fields use stable keys and normalized units for benefits, premiums, eligibility, exclusions, term, and other available facts.
+- [ ] Every populated field resolves to evidence, source, document/version state, and date type; missing fields remain `Unknown`.
+- [ ] Comparison eligibility requires only the approved evidence-mode gates and does not imply ranking eligibility or suitability.
+- [ ] Records outside the pilot subset remain searchable evidence and cannot enter the comparison projection.

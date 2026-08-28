@@ -186,3 +186,25 @@
 - [ ] Typed errors include action not allowed, confirmation required, revision conflict, no evidence, dependency unavailable, timeout, and loop limit.
 
 **Current evidence:** Conversation creation, idempotent messages, action events, action-not-allowed behavior, dependency blocking, and optimistic revision conflicts are implemented in [`backend/app/conversations.py`](../../backend/app/conversations.py). Proposal, confirmation, revision, replay, undo, no-evidence, timeout, and loop-limit routes remain pending.
+
+## E10-T09 - Expose the read-only evidence-comparison API
+
+| Field | Value |
+|---|---|
+| Status | Ready |
+| Priority | P1 |
+| Size | M |
+| Depends on | E06-T09, E10-T04 |
+
+**User story:** As the website, I need one typed endpoint for selected real-product evidence so comparison rendering cannot invent fields or mutate recommendation state.
+
+**Requirements:** URS-FR-017, URS-FR-033, URS-FR-034, URS-NFR-010, URS-NFR-011, URS-NFR-022; PRD-FR-039, PRD-FR-040, PRD-NFR-008, PRD-NFR-010, PRD-NFR-029.
+
+**Acceptance criteria:**
+
+- [ ] `POST /v1/evidence/compare` accepts two to four product IDs from one category and rejects non-comparison-eligible or mixed-category selections.
+- [ ] The response returns neutral ordering, normalized fields, unknown state, evidence IDs, source/date/version state, warnings, and comparison gate reasons.
+- [ ] The response carries active profile, catalogue, recommendation, and revision references without changing them.
+- [ ] Repeated requests are deterministic and fixture, cached, Supabase, and later local PostgreSQL adapters use the same contract.
+- [ ] Invalid selection, stale/conflicting evidence, missing comparison evidence, timeout, and dependency failure return typed outcomes.
+- [ ] Contract tests prove that the endpoint cannot call E07 or create profile, recommendation, proposal, or summary-revision records.
