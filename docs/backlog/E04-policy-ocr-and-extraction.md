@@ -28,7 +28,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | M |
 | Depends on | None |
@@ -41,9 +41,11 @@
 
 - [ ] The exact OpenRouter slug represented by `5.6 Luna` is confirmed and assigned to `OPENROUTER_MODEL`.
 - [ ] Provider, model, prompt, timeout, and token-limit configuration is documented without a real API key.
-- [ ] At least three representative synthetic policy pages are labelled with field truth and page regions.
-- [ ] Fixture licensing and synthetic status are documented.
-- [ ] Target fields and exact-match rules are frozen.
+- [x] At least three representative synthetic policy pages are labelled with field truth and page regions.
+- [x] Fixture licensing and synthetic status are documented.
+- [x] Target fields and exact-match rules are frozen.
+
+**Current evidence:** [`backend/fixtures/policies/manifest.json`](../../backend/fixtures/policies/manifest.json), the fixture [README](../../backend/fixtures/policies/README.md), three synthetic SVG policy pages, and [`backend/tests/test_policy_fixtures.py`](../../backend/tests/test_policy_fixtures.py). The exact OpenRouter slug and live-run configuration remain unresolved.
 
 ## E04-T03 - Build the OpenRouter extraction adapter
 

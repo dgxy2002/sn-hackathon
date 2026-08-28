@@ -7,7 +7,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | Done |
 | Priority | P0 |
 | Size | M |
 | Depends on | None |
@@ -18,17 +18,19 @@
 
 **Acceptance criteria:**
 
-- [ ] A documented command starts the service without production credentials when fixture mode is selected.
-- [ ] `GET /health` reports service version and dependency status.
-- [ ] `GET /v1/capabilities` reports contract versions and live, cached, synthetic, or simulated mode for each capability.
-- [ ] Configuration validates at startup and secrets are absent from client output and logs.
-- [ ] Local frontend origins are configurable without a wildcard production policy.
+- [x] A documented command starts the service without production credentials when fixture mode is selected.
+- [x] `GET /health` reports service version and dependency status.
+- [x] `GET /v1/capabilities` reports contract versions and live, cached, synthetic, or simulated mode for each capability.
+- [x] Configuration validates at startup and secrets are absent from client output and logs.
+- [x] Local frontend origins are configurable without a wildcard production policy.
+
+**Evidence:** [`backend/app/main.py`](../../backend/app/main.py), [`backend/app/config.py`](../../backend/app/config.py), [`backend/.env.example`](../../backend/.env.example), [`backend/tests/test_system_routes.py`](../../backend/tests/test_system_routes.py), and the root [`README.md`](../../README.md).
 
 ## E10-T02 - Publish shared schemas and typed errors
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P0 |
 | Size | M |
 | Depends on | E03-T02, E10-T01 |
@@ -42,7 +44,9 @@
 - [ ] Schemas exist for profile, extraction, evidence, plan, recommendation, invocation, run event, run metrics, and error envelope.
 - [ ] Every schema has a stable ID and explicit version.
 - [ ] Complete, incomplete, invalid, and terminal-failure examples are committed.
-- [ ] Errors include code, message, retryable state, run ID, and safe details.
+- [x] Errors include code, message, retryable state, run ID, and safe details.
+
+**Current evidence:** [`backend/app/contracts.py`](../../backend/app/contracts.py) and [`backend/tests/test_conversations.py`](../../backend/tests/test_conversations.py). Capability-owned schemas remain blocked by E03/E04/E06/E07 contracts.
 - [ ] Contract tests fail on incompatible versions, missing fields, and wrong types.
 
 ## E10-T03 - Implement synthetic session and repository adapters
@@ -92,7 +96,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P0 |
 | Size | M |
 | Depends on | E10-T04 |
@@ -107,7 +111,9 @@
 - [ ] Repeated mutating requests follow documented idempotency behavior.
 - [ ] Dependency timeouts and retries are bounded and tested.
 - [ ] The frontend completes one normal fixture scenario through the API.
-- [ ] Clean setup and test commands are documented in the repository README.
+- [x] Clean setup and test commands are documented in the repository README.
+
+**Current evidence:** Idempotent conversation messages, typed conflicts, and the live frontend/API smoke path are covered by [`backend/tests/test_conversations.py`](../../backend/tests/test_conversations.py) and the [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md). Full capability-route coverage remains pending.
 
 ## E10-T06 - Containerize the local API and state services
 
@@ -157,7 +163,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | L |
 | Depends on | E10-T02, E10-T03, E10-T05 |
@@ -173,3 +179,5 @@
 - [ ] Idempotency and optimistic version checks prevent duplicate confirmations, stale proposals, and partial canonical updates.
 - [ ] Synthetic current-session repositories delete conversation and revision state with the session unless a named fixture retains it.
 - [ ] Typed errors include action not allowed, confirmation required, revision conflict, no evidence, dependency unavailable, timeout, and loop limit.
+
+**Current evidence:** Conversation creation, idempotent messages, action events, action-not-allowed behavior, dependency blocking, and optimistic revision conflicts are implemented in [`backend/app/conversations.py`](../../backend/app/conversations.py). Proposal, confirmation, revision, replay, undo, no-evidence, timeout, and loop-limit routes remain pending.

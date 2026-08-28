@@ -30,9 +30,9 @@ Epics implement the [User Requirements Specification](../urs/URS.md) and [Produc
 | [E07 - Explainable Decision Support](E07-explainable-decision-support.md) | Deborah | P0 | In progress | [Tickets](../backlog/E07-explainable-decision-support.md) | Gap calculations and static synthetic comparison |
 | [E08 - Integrated Demo and Evaluation](E08-integrated-demo-and-evaluation.md) | Tim | P0 | In progress | [Tickets](../backlog/E08-integrated-demo-and-evaluation.md) | Frontend journey builds; agent integrations and measurements pending |
 | [E09 - Productionisation and Security](E09-productionisation-and-security.md) | Tim | P3 | Deferred | [Tickets](../backlog/E09-productionisation-and-security.md) | Basic POC trust messaging and secret handling only |
-| [E10 - Backend API and POC Persistence](E10-backend-api-and-poc-persistence.md) | Tim | P0 | Planned | [Tickets](../backlog/E10-backend-api-and-poc-persistence.md) | No application API or synthetic session repository exists |
+| [E10 - Backend API and POC Persistence](E10-backend-api-and-poc-persistence.md) | Tim | P0 | In progress | [Tickets](../backlog/E10-backend-api-and-poc-persistence.md) | Fixture API, health/capability manifests, typed conversation errors, and in-memory idempotent message replay implemented; capability and persistence routes remain |
 | [E11 - Runtime Orchestration and Operations](E11-runtime-orchestration-and-operations.md) | Jana | P0 | Planned | [Tickets](../backlog/E11-runtime-orchestration-and-operations.md) | Local/AWS runtime contract documented; coordinator and continuous scraper are not implemented |
-| [E12 - Conversational Summary Agent](E12-conversational-summary-agent.md) | Tim | P1 | Planned | [Tickets](../backlog/E12-conversational-summary-agent.md) | Dynamic final-page agent contract documented; implementation is pending |
+| [E12 - Conversational Summary Agent](E12-conversational-summary-agent.md) | Tim | P1 | In progress | [Tickets](../backlog/E12-conversational-summary-agent.md) | Final-page fixture agent, visible typed-action trace, allowlisted focus/filter actions, and blocked decision-input changes implemented; proposals, reruns, replay, and undo remain |
 
 ## Ownership rules
 

@@ -1,5 +1,11 @@
 import './style.css'
 import workerImage from './assets/covercheck-worker.jpg'
+import {
+  ApiError,
+  createClientId,
+  createConversation,
+  sendConversationMessage,
+} from './api.js'
 
 const app = document.querySelector('#app')
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -96,6 +102,22 @@ const state = {
     budget: 180,
     preference: 'Protection-only',
   },
+  agent: {
+    activeRevisionId: 'summary-v1',
+    conversationId: '',
+    status: 'idle',
+    messages: [],
+    actions: [],
+    comparisonFilter: 'all',
+    pendingFocus: '',
+    error: '',
+    abortController: null,
+    suggestedPrompts: [
+      { id: 'why-ranked-first', label: 'Why this ranks first', message: 'Why does LionCity Term Flex rank first?' },
+      { id: 'show-critical-illness', label: 'Show critical illness', message: 'Show only the critical illness option.' },
+      { id: 'show-unknowns', label: 'Show assumptions', message: 'What does the ranking still not know?' },
+    ],
+  },
 }
 
 const formatCurrency = (value) => new Intl.NumberFormat('en-SG', {
@@ -110,6 +132,108 @@ const escapeHtml = (value) => String(value)
   .replaceAll('>', '&gt;')
   .replaceAll('"', '&quot;')
   .replaceAll("'", '&#039;')
+
+const citationLinks = {
+  'MONEYSENSE-LIFE-INSURANCE': 'https://www.moneysense.gov.sg/life-insurance/',
+}
+
+const actionTargetLabels = {
+  'reasoning:ranking': 'Why this ranks first',
+  'reasoning:assumptions': 'Unknowns and assumptions',
+  'comparison:critical-illness': 'Critical-illness comparison',
+  'profile:decision-input': 'Decision input',
+  'summary:current': 'Current summary',
+}
+
+const agentMessageView = (message) => {
+  const citations = (message.citations || []).map((citation) => {
+    const safeUrl = citationLinks[citation.evidence_id]
+    const label = escapeHtml(citation.label)
+    return safeUrl
+      ? `<a href="${safeUrl}" target="_blank" rel="noreferrer">${label} ↗</a>`
+      : `<span>${label}</span>`
+  }).join('')
+
+  return `
+    <article class="agent-message is-${escapeHtml(message.role)}">
+      <span class="mono">${message.role === 'assistant' ? 'COVERCHECK' : 'YOU'}</span>
+      <p>${escapeHtml(message.content)}</p>
+      ${citations ? `<div class="agent-citations" aria-label="Answer sources">${citations}</div>` : ''}
+    </article>
+  `
+}
+
+const agentActionView = (action, index) => `
+  <details class="agent-action is-${escapeHtml(action.status)}" ${index === state.agent.actions.length - 1 ? 'open' : ''}>
+    <summary>
+      <span class="action-sequence mono">${String(index + 1).padStart(2, '0')}</span>
+      <span><b>${escapeHtml(action.tool.replaceAll('_', ' '))}</b><small>${escapeHtml(actionTargetLabels[action.target] || 'Blocked target')}</small></span>
+      <i aria-hidden="true">${action.status === 'completed' ? 'DONE' : 'STOPPED'}</i>
+    </summary>
+    <div class="agent-action-detail">
+      <span>${action.evidence_count} evidence record${action.evidence_count === 1 ? '' : 's'}</span>
+      <span>${action.confirmation_required ? 'Confirmation required' : 'No confirmation needed'}</span>
+      <span>${action.error_code ? escapeHtml(action.error_code) : escapeHtml(action.affected_regions.join(', '))}</span>
+    </div>
+  </details>
+`
+
+const agentView = () => {
+  const statusLabels = {
+    idle: 'Ready',
+    planning: 'Planning safe actions',
+    completed: 'Completed',
+    unsupported: 'Stopped safely',
+    cancelled: 'Cancelled',
+    failed: 'Backend unavailable',
+  }
+  const isBusy = state.agent.status === 'planning'
+  const messages = state.agent.messages.length
+    ? state.agent.messages.map(agentMessageView).join('')
+    : '<p class="agent-empty">Ask about the synthetic result or change how the comparison is presented.</p>'
+
+  return `
+    <section class="agent-workspace" id="ask-covercheck" aria-labelledby="agent-title">
+      <div class="agent-conversation">
+        <div class="agent-heading">
+          <div>
+            <span class="section-index mono">03 · CONVERSATIONAL EXPLORATION</span>
+            <h2 id="agent-title">Ask CoverCheck</h2>
+          </div>
+          <span class="agent-state is-${state.agent.status}" aria-live="polite">${statusLabels[state.agent.status]}</span>
+        </div>
+        <div class="agent-prompts" aria-label="Suggested questions">
+          ${state.agent.suggestedPrompts.map((prompt) => `
+            <button type="button" data-agent-prompt data-prompt="${escapeHtml(prompt.message)}" ${isBusy ? 'disabled' : ''}>
+              ${escapeHtml(prompt.label)} <span aria-hidden="true">↗</span>
+            </button>
+          `).join('')}
+        </div>
+        <div class="agent-messages" aria-live="polite">${messages}</div>
+        ${state.agent.error ? `<p class="agent-error" role="alert">${escapeHtml(state.agent.error)}</p>` : ''}
+        <form class="agent-composer" id="agent-form">
+          <label class="sr-only" for="agent-message">Ask CoverCheck about this summary</label>
+          <textarea id="agent-message" name="message" rows="2" maxlength="1000" placeholder="Ask why, inspect assumptions, or filter the table" required ${isBusy ? 'disabled' : ''}></textarea>
+          ${isBusy
+            ? '<button class="agent-stop" type="button" data-action="stop-agent">Stop</button>'
+            : '<button class="agent-send" type="submit">Send <span aria-hidden="true">↗</span></button>'}
+        </form>
+        <p class="agent-boundary">Fixture agent · typed actions only · decision-input changes stay blocked until confirmation and deterministic rerun are available.</p>
+      </div>
+      <aside class="agent-trace" aria-labelledby="trace-title">
+        <div class="trace-heading">
+          <span class="section-index mono">VISIBLE ACTIONS</span>
+          <h3 id="trace-title">What changed on the page</h3>
+        </div>
+        <div class="agent-actions">
+          ${state.agent.actions.length
+            ? state.agent.actions.map(agentActionView).join('')
+            : '<p class="agent-empty">No action has run. Hidden model reasoning is never shown or used as an instruction.</p>'}
+        </div>
+      </aside>
+    </section>
+  `
+}
 
 const getScore = () => {
   const earned = state.answers.reduce((total, answer) => total + (answer?.value ?? 0), 0)
@@ -514,6 +638,7 @@ const comparisonView = () => {
   const ciTarget = annualIncome * 4
   const deathGap = Math.max(0, deathTarget - 100000)
   const ciGap = Math.max(0, ciTarget - 50000)
+  const criticalIllnessOnly = state.agent.comparisonFilter === 'critical-illness'
 
   return `
     <main class="comparison-screen" data-screen="comparison">
@@ -552,16 +677,19 @@ const comparisonView = () => {
         </div>
       </section>
 
-      <section class="comparison-section" aria-labelledby="compare-title">
+      <section class="comparison-section" id="plan-comparison" aria-labelledby="compare-title" tabindex="-1">
         <div class="comparison-section-heading">
           <div>
             <span class="section-index mono">02 · ELIGIBLE OPTIONS</span>
             <h2 id="compare-title">Compare what you pay and get.</h2>
           </div>
-          <p>Budget checked against your ${formatCurrency(state.profile.budget)} monthly comfort limit.</p>
+          <div class="comparison-context">
+            <p>Budget checked against your ${formatCurrency(state.profile.budget)} monthly comfort limit.</p>
+            ${criticalIllnessOnly ? '<button class="text-button" type="button" data-action="clear-agent-filter">Show all options</button>' : ''}
+          </div>
         </div>
         <div class="table-wrap" tabindex="0" aria-label="Scrollable plan comparison table">
-          <table class="plan-table">
+          <table class="plan-table${criticalIllnessOnly ? ' is-ci-filtered' : ''}">
             <thead>
               <tr>
                 <th scope="col">Compare</th>
@@ -583,11 +711,11 @@ const comparisonView = () => {
         </div>
 
         <div class="reasoning-drawers">
-          <details open>
+          <details id="ranking-reason" tabindex="-1" open>
             <summary><span><b>Why LionCity Term Flex ranks first</b><small>Fit score 82 / 100 · synthetic</small></span><i aria-hidden="true">+</i></summary>
             <div class="drawer-content"><p>It covers the biggest known gap, stays within budget and is protection-only. It still does not fill the full MoneySense guide amount.</p></div>
           </details>
-          <details>
+          <details id="ranking-assumptions" tabindex="-1">
             <summary><span><b>What the ranking does not know</b><small>Three assumptions remain</small></span><i aria-hidden="true">+</i></summary>
             <div class="drawer-content"><p>Your work cover, existing illness add-on and insurance company approval are still unknown. Check these before deciding.</p></div>
           </details>
@@ -597,6 +725,8 @@ const comparisonView = () => {
           </details>
         </div>
       </section>
+
+      ${agentView()}
 
       <section class="decision-footer">
         <div>
@@ -626,16 +756,102 @@ const views = {
   comparison: comparisonView,
 }
 
-function render({ focus = true } = {}) {
+function render({ focus = true, preserveScroll = false } = {}) {
+  const scrollTop = window.scrollY
   app.innerHTML = views[state.view]()
   document.body.dataset.view = state.view
-  window.scrollTo({ top: 0, behavior: 'instant' })
+  window.scrollTo({ top: preserveScroll ? scrollTop : 0, behavior: 'instant' })
 
   if (focus) {
     requestAnimationFrame(() => {
       const title = app.querySelector('.screen-title')
       if (title && (state.keyboard || reduceMotion.matches)) title.focus({ preventScroll: true })
     })
+  }
+
+  if (state.agent.pendingFocus) {
+    const focusId = state.agent.pendingFocus
+    state.agent.pendingFocus = ''
+    requestAnimationFrame(() => {
+      const target = app.querySelector(`#${focusId}`)
+      if (!target) return
+      if (target instanceof HTMLDetailsElement) target.open = true
+      target.focus({ preventScroll: true })
+      target.scrollIntoView({
+        behavior: reduceMotion.matches ? 'auto' : 'smooth',
+        block: 'center',
+      })
+    })
+  }
+}
+
+const applyAgentActions = (actions) => {
+  const actionMap = {
+    'FOCUS_SECTION:reasoning:ranking': () => {
+      state.agent.pendingFocus = 'ranking-reason'
+    },
+    'FOCUS_SECTION:reasoning:assumptions': () => {
+      state.agent.pendingFocus = 'ranking-assumptions'
+    },
+    'FILTER_COMPARISON:comparison:critical-illness': () => {
+      state.agent.comparisonFilter = 'critical-illness'
+      state.agent.pendingFocus = 'plan-comparison'
+    },
+  }
+
+  actions
+    .filter((action) => action.status === 'completed')
+    .forEach((action) => actionMap[`${action.tool}:${action.target}`]?.())
+}
+
+async function askAgent(message) {
+  const content = String(message || '').trim()
+  if (!content || state.agent.status === 'planning') return
+
+  const controller = new AbortController()
+  state.agent.abortController = controller
+  state.agent.status = 'planning'
+  state.agent.error = ''
+  state.agent.messages.push({ role: 'user', content, citations: [] })
+  render({ focus: false, preserveScroll: true })
+
+  try {
+    if (!state.agent.conversationId) {
+      const conversation = await createConversation(state.agent.activeRevisionId, controller.signal)
+      state.agent.conversationId = conversation.conversation_id
+      state.agent.suggestedPrompts = conversation.suggested_prompts
+    }
+
+    const response = await sendConversationMessage(
+      state.agent.conversationId,
+      {
+        client_message_id: createClientId(),
+        active_revision_id: state.agent.activeRevisionId,
+        message: content,
+      },
+      controller.signal,
+    )
+    state.agent.messages.push({
+      role: 'assistant',
+      content: response.assistant_message.content,
+      citations: response.assistant_message.citations,
+    })
+    state.agent.actions.push(...response.actions)
+    state.agent.status = response.state
+    applyAgentActions(response.actions)
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      state.agent.status = 'cancelled'
+      state.agent.error = 'Request stopped. The comparison remains unchanged.'
+    } else {
+      state.agent.status = 'failed'
+      state.agent.error = error instanceof ApiError
+        ? error.message
+        : 'The local backend is unavailable. Start it on port 8000 and try again.'
+    }
+  } finally {
+    state.agent.abortController = null
+    render({ focus: false, preserveScroll: true })
   }
 }
 
@@ -721,6 +937,12 @@ app.addEventListener('change', (event) => {
 
 app.addEventListener('submit', (event) => {
   event.preventDefault()
+  if (event.target.id === 'agent-form') {
+    const form = new FormData(event.target)
+    void askAgent(form.get('message'))
+    return
+  }
+
   if (event.target.id === 'account-form') {
     const error = app.querySelector('#account-error')
     if (!event.target.checkValidity()) {
@@ -748,6 +970,13 @@ app.addEventListener('click', (event) => {
     return
   }
 
+  const prompt = event.target.closest('[data-agent-prompt]')
+  if (prompt) {
+    event.preventDefault()
+    void askAgent(prompt.dataset.prompt)
+    return
+  }
+
   const control = event.target.closest('[data-action]')
   if (!control) return
   event.preventDefault()
@@ -770,10 +999,21 @@ app.addEventListener('click', (event) => {
     navigate('ocr')
   }
   if (action === 'confirm-extraction') navigate('comparison')
+  if (action === 'clear-agent-filter') {
+    state.agent.comparisonFilter = 'all'
+    state.agent.pendingFocus = 'plan-comparison'
+    render({ focus: false, preserveScroll: true })
+  }
+  if (action === 'stop-agent') state.agent.abortController?.abort()
   if (action === 'restart') {
     state.questionIndex = 0
     state.answers = []
     state.onboardingStep = 0
+    state.agent.conversationId = ''
+    state.agent.status = 'idle'
+    state.agent.messages = []
+    state.agent.actions = []
+    state.agent.comparisonFilter = 'all'
     navigate('intro')
   }
 })

@@ -4,7 +4,7 @@
 |---|---|
 | Primary owner | Tim |
 | Priority | P1 |
-| Status | Planned |
+| Status | In progress |
 | Outcome | Users can ask grounded follow-up questions and visibly reshape the final comparison through safe agent actions, confirmed input changes, deterministic reruns, and reversible summary revisions. |
 
 ## Scope
@@ -38,13 +38,13 @@
 
 ## Definition of done
 
-- [ ] The final summary includes an accessible `Ask CoverCheck` panel with suggested prompts, follow-up context, and visible trust boundaries.
+- [x] The final summary includes an accessible `Ask CoverCheck` panel with suggested prompts, follow-up context, and visible trust boundaries.
 - [ ] The agent answers current-summary questions and explores additional approved plans with dated citations and freshness status.
 - [ ] An expandable action trace shows planning, tools, affected page regions, confirmations, deterministic reruns, completion, and failures.
-- [ ] Presentation-only actions visibly focus or reshape the page without changing canonical decision versions.
+- [x] Presentation-only actions visibly focus or reshape the page without changing canonical decision versions.
 - [ ] Profile, canonical comparison, and extracted-policy changes show a before/after proposal and cannot apply without confirmation.
 - [ ] Confirmed changes produce versioned inputs, a deterministic E07 rerun, one coherent summary revision, highlighted deltas, and undo.
-- [ ] Model output cannot execute arbitrary code, selectors, coordinates, SQL, unregistered tools, or unapproved-source searches.
+- [x] Model output cannot execute arbitrary code, selectors, coordinates, SQL, unregistered tools, or unapproved-source searches.
 - [ ] Conversation, action, evidence, confirmation, revision, model, prompt, tool, formulation, and ruleset versions are replayable within the POC session.
 - [ ] Normal Q&A, approved-plan exploration, presentation change, profile change, extraction correction, cancellation, undo, stale evidence, no evidence, invalid action, and dependency failure scenarios pass.
 - [ ] The complete flow works in Docker Compose fixture mode and with configured OpenRouter mode using the same contracts.

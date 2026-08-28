@@ -4,6 +4,16 @@
 **Owner:** Tim
 **Posture:** All tickets are deferred until the POC is validated. Baseline secret hygiene and synthetic-data use still apply now.
 
+## POC baseline evidence
+
+The deferred ticket statuses remain unchanged. Current safeguards are limited to
+repository-wide `.env` and generated-secret ignores, a safe `.env.example`,
+startup rejection of wildcard origins and unconfigured live model modes,
+secret-free health output, synthetic-only policy fixtures, escaped response
+content, and frontend allowlists for action targets and citation URLs. These are
+POC guardrails, not production identity, privacy, threat-model, or operational
+hardening evidence.
+
 ## E09-T01 - Threat-model the intended production system
 
 | Field | Value |

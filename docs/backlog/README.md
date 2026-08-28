@@ -28,9 +28,9 @@ This folder contains the executable backlog for the CoverCheck SG POC. Each tick
 | [E07 - Explainable Decision Support](E07-explainable-decision-support.md) | Deborah | P0 | In progress | 7 |
 | [E08 - Integrated Demo and Evaluation](E08-integrated-demo-and-evaluation.md) | Tim | P0 | In progress | 9 |
 | [E09 - Productionisation and Security](E09-productionisation-and-security.md) | Tim | P3 | Deferred | 4 |
-| [E10 - Backend API and POC Persistence](E10-backend-api-and-poc-persistence.md) | Tim | P0 | Planned | 8 |
+| [E10 - Backend API and POC Persistence](E10-backend-api-and-poc-persistence.md) | Tim | P0 | In progress | 8 |
 | [E11 - Runtime Orchestration and Operations](E11-runtime-orchestration-and-operations.md) | Jana | P0 | Planned | 8 |
-| [E12 - Conversational Summary Agent](E12-conversational-summary-agent.md) | Tim | P1 | Planned | 5 |
+| [E12 - Conversational Summary Agent](E12-conversational-summary-agent.md) | Tim | P1 | In progress | 5 |
 
 ## Execution order
 
