@@ -65,10 +65,12 @@
 **Acceptance criteria:**
 
 - [ ] Follow-up questions retain the active profile, recommendation, evidence, and prior-turn context within the session cap.
-- [ ] Search is restricted to E06 cached catalogue records and returns approval, unverified, stale, unknown, and no-evidence states explicitly.
+- [x] Search is restricted to E06 cached catalogue records and returns approval, unverified, stale, unknown, and no-evidence states explicitly.
 - [ ] Alternative plans retain eligibility, evidence spans, source, document as-of date, product effective date, retrieval date, freshness, and synthetic labels.
-- [ ] Real-product alternatives remain read-only and can be added to or removed from exploration views without entering or changing E07 synthetic ranking.
-- [ ] Every factual answer links to evidence or is visibly labelled synthetic, unknown, or unsupported.
+- [x] Real-product alternatives remain read-only and can be added to or removed from exploration views without entering or changing E07 synthetic ranking.
+- [x] Every factual answer links to evidence or is visibly labelled synthetic, unknown, or unsupported.
+
+**Current evidence:** [`backend/app/evidence.py`](../../backend/app/evidence.py), [`backend/app/conversations.py`](../../backend/app/conversations.py), [`frontend/src/main.js`](../../frontend/src/main.js), and the [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md). Structured affordability and eligibility filters, temporary comparison columns, Supabase browser parity, and consequential revision paths remain pending.
 
 **Delivery order:** Read-only questions and catalogue exploration call the typed E10/E06 evidence service directly. E11 remains required for the consequential proposal, confirmation, deterministic-rerun, revision, replay, and undo path in E12-T04 and E12-T05.
 

@@ -1,0 +1,18 @@
+.git
+.gitignore
+.venv
+**/.venv
+**/__pycache__
+**/.pytest_cache
+**/node_modules
+**/dist
+**/.env
+**/.env.*
+!**/.env.example
+
+# The cached adapter needs brochure Markdown and the normalized policy corpus,
+# not the downloaded PDFs or per-policy extraction artifacts.
+backend/scraper/insurance/**
+!backend/scraper/insurance/**/
+!backend/scraper/insurance/**/*.md
+!backend/scraper/insurance/extracted_openai/policies.jsonl

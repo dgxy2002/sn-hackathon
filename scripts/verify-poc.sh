@@ -11,4 +11,9 @@ fi
 
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=backend \
   backend/.venv/bin/python -m pytest backend/tests -q
-npm --prefix frontend run build
+VITE_API_URL="${VITE_API_URL:-http://localhost:8000}" \
+  npm --prefix frontend run build
+
+if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then
+  docker compose config --quiet
+fi

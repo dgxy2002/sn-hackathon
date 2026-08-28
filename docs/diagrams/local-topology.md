@@ -2,41 +2,41 @@
 
 ## Current interim topology
 
-The implemented website/API and RAG paths run separately. Supabase-first integration is an approved temporary delivery step, not the final local deployment target.
+The implemented website and API now share a typed read-only evidence service. The credential-free cached adapter is the demonstrated default; Supabase remains an optional live adapter and local PostgreSQL retrieval remains the target.
 
 ```mermaid
 flowchart LR
     Browser[Browser]
-    Web[Vite development server]
-    FixtureAPI[FastAPI fixture API]
-    Agent[Typed fixture agent]
+    Web[Vite or Nginx web service]
+    API[FastAPI API]
+    Agent[Typed conversation service]
+    Evidence[Typed read-only evidence service]
 
     Corpus[79 cached brochures]
-    Extract[OpenAI extraction CLI]
-    RAG[Supabase ingestion and query CLIs]
-    Cache[(SQLite embedding cache)]
+    Cached[Deterministic cached adapter]
+    Live[Optional Supabase adapter]
     OpenAI[OpenAI API]
     Supabase[(Hosted Supabase<br/>PostgreSQL and pgvector)]
+    LocalDB[(Compose PostgreSQL<br/>pgvector initialized, adapter pending)]
 
     Browser --> Web
-    Web --> FixtureAPI
-    FixtureAPI --> Agent
-
-    Corpus --> Extract
-    Extract --> OpenAI
-    Extract --> RAG
-    RAG --> OpenAI
-    RAG --> Cache
-    RAG --> Supabase
-
-    FixtureAPI -. approved typed read-only E10/E06 bridge .-> RAG
+    Web --> API
+    API --> Agent
+    Agent --> Evidence
+    API --> Evidence
+    Evidence --> Cached
+    Cached --> Corpus
+    Evidence --> Live
+    Live --> OpenAI
+    Live --> Supabase
+    API -. adapter not implemented .-> LocalDB
 ```
 
-The dotted bridge is not implemented. It will sit behind Supabase and deterministic fixture adapters, keep service credentials server-side, expose adapter mode, and return dated evidence states without changing E07's synthetic ranking.
+The dotted local-database path is not implemented. Compose initializes pgvector, but backend health deliberately reports the database as not configured while cached evidence remains active. Provider credentials stay server-side, adapter mode is returned in contracts, and read-only evidence cannot change E07's synthetic ranking.
 
 ## Target local topology
 
-This is the required POC runtime target. It is planned architecture until the E10 container tickets are implemented.
+This is the required POC runtime target. Web, backend, and PostgreSQL containers are implemented; database retrieval, the continuous scraper, and optional object storage remain planned.
 
 ```mermaid
 flowchart TB

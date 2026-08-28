@@ -39,7 +39,7 @@
 ## Definition of done
 
 - [x] The final summary includes an accessible `Ask CoverCheck` panel with suggested prompts, follow-up context, and visible trust boundaries.
-- [ ] The agent answers current-summary questions and explores all cached plans with dated citations, approval/evidence state, freshness status, and explicit unsupported outcomes.
+- [x] The agent answers current-summary questions and explores all cached plans with dated citations, approval/evidence state, freshness status, and explicit unsupported outcomes.
 - [ ] An expandable action trace shows planning, tools, affected page regions, confirmations, deterministic reruns, completion, and failures.
 - [x] Presentation-only actions visibly focus or reshape the page without changing canonical decision versions.
 - [ ] Profile, canonical comparison, and extracted-policy changes show a before/after proposal and cannot apply without confirmation.
@@ -52,3 +52,5 @@
 ## POC boundary
 
 The agent operates only within CoverCheck's typed application capabilities and cached catalogue. Real-product RAG is read-only and cannot enter or alter E07's synthetic ranking; records that are not approved or current remain visibly labelled. The agent cannot browse arbitrary websites, transact, contact advisers, purchase, replace, surrender, or recommend cancelling insurance. Conversation and revision history is disposable with the current synthetic POC session unless retained as a named evaluation fixture.
+
+The [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md) verifies the current read-only catalogue slice. Proposals, confirmed changes, deterministic reruns, replay, and undo remain open.

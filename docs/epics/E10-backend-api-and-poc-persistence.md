@@ -29,20 +29,26 @@
 
 E10 owns transport, schema validation, repositories, and common errors. It does not own profile semantics, OCR models, retrieval ranking, insurance decision rules, or orchestration policy; those remain in their capability epics.
 
+## Repository evidence
+
+- [`backend/app/contracts.py`](../../backend/app/contracts.py), [`backend/app/evidence.py`](../../backend/app/evidence.py), and [`backend/app/main.py`](../../backend/app/main.py) implement the versioned evidence contract, adapters, typed failures, and API route.
+- [`backend/Dockerfile`](../../backend/Dockerfile), [`frontend/Dockerfile`](../../frontend/Dockerfile), and [`compose.yaml`](../../compose.yaml) implement the healthy non-root web/API slice and pgvector bootstrap.
+- The [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md) records the successful containerized integration and the still-unimplemented persistence boundaries.
+
 ## Definition of done
 
 - [x] A documented command starts the backend and `GET /health` and `GET /v1/capabilities` report version and adapter modes.
 - [ ] Docker Compose starts the API with healthy PostgreSQL/pgvector and optional local object-store dependencies.
 - [x] `.env.example` documents `APP_ENV`, `DATABASE_URL`, object-store settings, `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`, provider modes, and scrape freshness settings without real secrets.
 - [ ] Profile, extraction, evidence-search, recommendation, invocation, conversation, proposal-confirmation, summary-revision, undo, and run-inspection routes publish versioned schemas and typed errors.
-- [ ] `POST /v1/evidence/search` returns the same read-only contract from Supabase and fixture adapters, including source approval, evidence state, distinct date fields, provenance, and explicit no-evidence outcomes.
+- [x] `POST /v1/evidence/search` returns the same read-only contract from Supabase and fixture adapters, including source approval, evidence state, distinct date fields, provenance, and explicit no-evidence outcomes.
 - [ ] Complete, incomplete, invalid, no-evidence, and dependency-failure fixtures pass API contract tests.
 - [ ] Anonymous synthetic sessions can retain profile versions, extraction corrections, recommendation results, conversations, action traces, summary revisions, and run events for replay and undo.
 - [ ] Repeated mutating requests follow documented idempotency rules and do not create duplicate active records.
 - [ ] Uploaded document bytes are deleted after extraction by default and the POC stores no real customer data.
 - [ ] The frontend can complete the normal fixture scenario through the API rather than embedded view data.
 - [ ] The AWS mapping injects secrets through Secrets Manager and swaps only endpoints and adapters for ECS, RDS, and S3.
-- [ ] The API image exposes health checks, handles termination, logs to stdout/stderr, and runs as non-root where practical.
+- [x] The API image exposes health checks, handles termination, logs to stdout/stderr, and runs as non-root where practical.
 
 ## POC boundary
 

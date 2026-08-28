@@ -22,8 +22,8 @@
 - [ ] Every cached source is assigned an approval state such as approved, unverified, restricted, or rejected.
 - [ ] Each source records owner, URL, retrieval method, terms or robots decision, and review date.
 - [ ] Official and provider sources are preferred over aggregators.
-- [ ] Search results expose source approval and evidence state; cache inclusion alone never implies suitability or source approval.
-- [ ] The demo does not depend on live scraping.
+- [x] Search results expose source approval and evidence state; cache inclusion alone never implies suitability or source approval.
+- [x] The demo does not depend on live scraping.
 
 ## E06-T02 - Ingest normalized insurance products and evidence
 
@@ -42,7 +42,7 @@
 
 - [x] The offline preparation path normalizes 87 policy rows into 71 unique policy slugs and 1,319 candidate chunks.
 - [x] The seven Markdown-undated Great Eastern files have official PDF footer research for brochure as-of date and version label.
-- [ ] Plan, provider, product version, document as-of date, product effective date, retrieval date, evidence state, and synthetic status are represented distinctly.
+- [x] Plan, provider, product version, document as-of date, product effective date, retrieval date, evidence state, and synthetic status are represented distinctly.
 - [ ] Benefits, premiums, exclusions, and eligibility retain source evidence where available.
 - [ ] Scrape or ingest outcomes are logged.
 
@@ -67,8 +67,8 @@
 
 - [ ] Documents are chunked and embedded with versioned metadata.
 - [ ] Category and eligibility filters run before vector similarity.
-- [ ] Search covers all cached policy records and results include evidence span, source URL where available, date type, evidence state, synthetic status, and score.
-- [ ] Supabase and deterministic fixture adapters return the same E10 evidence contract.
+- [x] Search covers all cached policy records and results include evidence span, source URL where available, date type, evidence state, synthetic status, and score.
+- [x] Supabase and deterministic fixture adapters return the same E10 evidence contract.
 - [ ] Unsupported or stale queries return an explicit no-evidence result.
 
 **Current evidence:** [`backend/scraper/query_insurance_rag.py`](../../backend/scraper/query_insurance_rag.py), [`backend/scraper/rag_common.py`](../../backend/scraper/rag_common.py), and [`backend/scraper/supabase_schema.sql`](../../backend/scraper/supabase_schema.sql) implement evidence chunks, cached OpenAI embeddings, pgvector similarity, metadata pre-filtering, and typed CLI results. The CLI is not an application service: versioned metadata, evidence-state and freshness enforcement, complete citation URLs, deterministic fallback, E10 API exposure, and retrieval evaluation remain incomplete.
@@ -180,4 +180,6 @@
 - [ ] All cached catalogue records can be searched, with approval and evidence state applied to every result.
 - [ ] Results preserve eligibility, exclusions, source spans, document as-of date, product effective date, retrieval date, freshness, and synthetic status.
 - [ ] Stale, conflicting, missing, and no-evidence outcomes are explicit and cannot become cited facts.
-- [ ] Real-product exploration remains read-only and is distinguished from deterministic E07 synthetic recommendations.
+- [x] Real-product exploration remains read-only and is distinguished from deterministic E07 synthetic recommendations.
+
+**Current evidence:** [`backend/app/evidence.py`](../../backend/app/evidence.py), [`backend/app/contracts.py`](../../backend/app/contracts.py), [`backend/tests/test_evidence.py`](../../backend/tests/test_evidence.py), and the [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md). Affordability and structured eligibility filters, complete source governance, local PostgreSQL parity, and fixed retrieval evaluation remain pending.

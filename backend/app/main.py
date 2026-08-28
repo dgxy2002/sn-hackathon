@@ -25,8 +25,11 @@ from .contracts import (
     DependencyStatus,
     ErrorDetail,
     ErrorEnvelope,
+    EvidenceSearchRequest,
+    EvidenceSearchResponse,
     HealthResponse,
 )
+from .evidence import EvidenceDependencyError, EvidenceService, create_evidence_service
 
 
 def _dependency(configured: bool, fallback_mode: CapabilityMode) -> DependencyStatus:
@@ -36,9 +39,21 @@ def _dependency(configured: bool, fallback_mode: CapabilityMode) -> DependencySt
     )
 
 
-def create_app(settings: Settings | None = None) -> FastAPI:
+def create_app(
+    settings: Settings | None = None,
+    evidence_service: EvidenceService | None = None,
+) -> FastAPI:
     runtime = settings or Settings.from_env()
-    conversations = ConversationService()
+    evidence = evidence_service or create_evidence_service(
+        runtime.evidence_mode,
+        corpus_path=runtime.evidence_corpus_path,
+        max_age_days=runtime.evidence_max_age_days,
+        timeout_seconds=runtime.dependency_timeout_seconds,
+        supabase_url=runtime.supabase_url,
+        service_key=runtime.supabase_service_role_key,
+        openai_key=runtime.openai_key,
+    )
+    conversations = ConversationService(evidence)
     application = FastAPI(
         title="CoverCheck POC API",
         version=SERVICE_VERSION,
@@ -90,6 +105,18 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             details={"active_revision_id": str(error)},
         )
 
+    @application.exception_handler(EvidenceDependencyError)
+    def evidence_dependency_failed(
+        request: Request, error: EvidenceDependencyError
+    ) -> JSONResponse:
+        return error_response(
+            code="EVIDENCE_DEPENDENCY_UNAVAILABLE",
+            message="The evidence service is temporarily unavailable.",
+            status_code=503,
+            retryable=True,
+            details={"mode": evidence.mode},
+        )
+
     @application.get("/health", response_model=HealthResponse, tags=["system"])
     def health() -> HealthResponse:
         return HealthResponse(
@@ -126,6 +153,14 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 for name, mode in modes.items()
             },
         )
+
+    @application.post(
+        "/v1/evidence/search",
+        response_model=EvidenceSearchResponse,
+        tags=["evidence"],
+    )
+    def search_evidence(request: EvidenceSearchRequest) -> EvidenceSearchResponse:
+        return evidence.search(request)
 
     @application.post(
         "/v1/conversations",

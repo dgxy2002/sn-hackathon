@@ -116,6 +116,7 @@ const state = {
       { id: 'why-ranked-first', label: 'Why this ranks first', message: 'Why does LionCity Term Flex rank first?' },
       { id: 'show-critical-illness', label: 'Show critical illness', message: 'Show only the critical illness option.' },
       { id: 'show-unknowns', label: 'Show assumptions', message: 'What does the ranking still not know?' },
+      { id: 'explore-cached-critical-illness', label: 'Explore cached CI plans', message: 'Which cached plans mention critical illness protection?' },
     ],
   },
 }
@@ -137,21 +138,77 @@ const citationLinks = {
   'MONEYSENSE-LIFE-INSURANCE': 'https://www.moneysense.gov.sg/life-insurance/',
 }
 
+const safeExternalUrl = (value) => {
+  try {
+    const url = new URL(String(value || ''))
+    return ['http:', 'https:'].includes(url.protocol) ? url.href : ''
+  } catch {
+    return ''
+  }
+}
+
+const formatEvidenceDate = (value) => {
+  if (!value) return 'Unknown'
+  const [year, month, day] = String(value).slice(0, 10).split('-').map(Number)
+  if (!year || !month || !day) return 'Unknown'
+  return new Intl.DateTimeFormat('en-SG', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(new Date(Date.UTC(year, month - 1, day)))
+}
+
 const actionTargetLabels = {
   'reasoning:ranking': 'Why this ranks first',
   'reasoning:assumptions': 'Unknowns and assumptions',
   'comparison:critical-illness': 'Critical-illness comparison',
   'profile:decision-input': 'Decision input',
   'summary:current': 'Current summary',
+  'evidence:cached-catalogue': 'Cached brochure evidence',
 }
 
 const agentMessageView = (message) => {
   const citations = (message.citations || []).map((citation) => {
-    const safeUrl = citationLinks[citation.evidence_id]
+    const safeUrl = safeExternalUrl(citation.url || citationLinks[citation.evidence_id])
     const label = escapeHtml(citation.label)
-    return safeUrl
-      ? `<a href="${safeUrl}" target="_blank" rel="noreferrer">${label} ↗</a>`
-      : `<span>${label}</span>`
+    const provider = escapeHtml(citation.provider || '')
+    const product = escapeHtml(citation.product || '')
+    const sourceFile = escapeHtml(citation.source_file || '')
+    const excerpt = escapeHtml(citation.excerpt || '')
+    const evidenceState = escapeHtml(
+      citation.synthetic ? 'synthetic fixture' : (citation.evidence_state || 'unknown evidence'),
+    )
+    const freshness = escapeHtml(citation.freshness_status || 'unknown')
+    const documentDate = escapeHtml(formatEvidenceDate(citation.document_as_of_date))
+    const effectiveDate = escapeHtml(formatEvidenceDate(citation.product_effective_date))
+    const source = safeUrl
+      ? `<a href="${escapeHtml(safeUrl)}" target="_blank" rel="noreferrer">Open provider source <span aria-hidden="true">↗</span></a>`
+      : `<span>${sourceFile ? `Cached file: ${sourceFile}` : 'Source URL unavailable in cached record'}</span>`
+
+    if (!citation.excerpt) {
+      return safeUrl
+        ? `<a href="${escapeHtml(safeUrl)}" target="_blank" rel="noreferrer">${label} <span aria-hidden="true">↗</span></a>`
+        : `<span>${label}</span>`
+    }
+
+    return `
+      <details class="agent-evidence">
+        <summary>
+          <span><b>${provider || label}</b><small>${product || label}</small></span>
+          <i class="is-${escapeHtml(citation.evidence_state || 'unknown')}">${evidenceState}</i>
+        </summary>
+        <div class="agent-evidence-detail">
+          <blockquote>${excerpt}</blockquote>
+          <dl>
+            <div><dt>Brochure as at</dt><dd>${documentDate}</dd></div>
+            <div><dt>Terms effective</dt><dd>${effectiveDate}</dd></div>
+            <div><dt>Freshness</dt><dd>${freshness}</dd></div>
+          </dl>
+          <p>${source}</p>
+        </div>
+      </details>
+    `
   }).join('')
 
   return `
@@ -190,7 +247,7 @@ const agentView = () => {
   const isBusy = state.agent.status === 'planning'
   const messages = state.agent.messages.length
     ? state.agent.messages.map(agentMessageView).join('')
-    : '<p class="agent-empty">Ask about the synthetic result or change how the comparison is presented.</p>'
+    : '<p class="agent-empty">Ask about the synthetic result, inspect assumptions, or explore the cached brochure catalogue.</p>'
 
   return `
     <section class="agent-workspace" id="ask-covercheck" aria-labelledby="agent-title">
@@ -218,7 +275,7 @@ const agentView = () => {
             ? '<button class="agent-stop" type="button" data-action="stop-agent">Stop</button>'
             : '<button class="agent-send" type="submit">Send <span aria-hidden="true">↗</span></button>'}
         </form>
-        <p class="agent-boundary">Fixture agent · typed actions only · decision-input changes stay blocked until confirmation and deterministic rerun are available.</p>
+        <p class="agent-boundary">Typed actions only · evidence labels preserve source state and unknown dates · cached real products never enter the synthetic ranking.</p>
       </div>
       <aside class="agent-trace" aria-labelledby="trace-title">
         <div class="trace-heading">
@@ -847,7 +904,7 @@ async function askAgent(message) {
       state.agent.status = 'failed'
       state.agent.error = error instanceof ApiError
         ? error.message
-        : 'The local backend is unavailable. Start it on port 8000 and try again.'
+        : 'The local backend is unavailable. Start the CoverCheck API and try again.'
     }
   } finally {
     state.agent.abortController = null

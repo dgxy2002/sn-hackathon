@@ -4,6 +4,7 @@ from dataclasses import dataclass, field
 from threading import Lock
 from uuid import uuid4
 
+from .evidence import EvidenceDependencyError, EvidenceService
 from .contracts import (
     ActionEvent,
     AssistantMessage,
@@ -11,6 +12,7 @@ from .contracts import (
     ConversationMessageRequest,
     ConversationMessageResponse,
     ConversationResponse,
+    EvidenceSearchRequest,
     SuggestedPrompt,
 )
 
@@ -31,9 +33,10 @@ class ConversationRecord:
 
 
 class ConversationService:
-    def __init__(self) -> None:
+    def __init__(self, evidence_service: EvidenceService | None = None) -> None:
         self._records: dict[str, ConversationRecord] = {}
         self._lock = Lock()
+        self._evidence_service = evidence_service
 
     def create(self, active_revision_id: str) -> ConversationResponse:
         conversation_id = f"conv-{uuid4()}"
@@ -63,6 +66,11 @@ class ConversationService:
                     label="Show assumptions",
                     message="What does the ranking still not know?",
                 ),
+                SuggestedPrompt(
+                    id="explore-cached-critical-illness",
+                    label="Explore cached CI plans",
+                    message="Which cached plans mention critical illness protection?",
+                ),
             ],
         )
 
@@ -91,7 +99,9 @@ class ConversationService:
         action_id = f"action-{uuid4()}"
         message_id = f"message-{uuid4()}"
 
-        if "critical illness" in text or "critical-illness" in text:
+        if (
+            "critical illness" in text or "critical-illness" in text
+        ) and ("show only" in text or "filter" in text):
             return ConversationMessageResponse(
                 conversation_id=record.conversation_id,
                 client_message_id=request.client_message_id,
@@ -229,6 +239,113 @@ class ConversationService:
                 ],
             )
 
+        if self._evidence_service is None:
+            return self._unsupported_answer(
+                record,
+                request,
+                run_id,
+                action_id,
+                message_id,
+                "Evidence search is not available, so I left your summary unchanged.",
+                "DEPENDENCY_UNAVAILABLE",
+            )
+
+        try:
+            evidence_response = self._evidence_service.search(
+                EvidenceSearchRequest(query=request.message, max_results=5)
+            )
+        except EvidenceDependencyError:
+            return self._unsupported_answer(
+                record,
+                request,
+                run_id,
+                action_id,
+                message_id,
+                "The evidence service is temporarily unavailable. Your summary is unchanged.",
+                "DEPENDENCY_UNAVAILABLE",
+            )
+
+        if not evidence_response.evidence:
+            return self._unsupported_answer(
+                record,
+                request,
+                run_id,
+                action_id,
+                message_id,
+                (
+                    "I could not find supporting brochure evidence in the cached catalogue. "
+                    "I have not inferred an answer or changed your summary."
+                ),
+                "NO_EVIDENCE",
+            )
+
+        products = list(
+            dict.fromkeys(
+                f"{item.provider} {item.product}" for item in evidence_response.evidence
+            )
+        )
+        product_summary = ", ".join(products[:3])
+        if len(products) > 3:
+            product_summary += f", and {len(products) - 3} more"
+        citations = [
+            Citation(
+                evidence_id=item.evidence_id,
+                label=f"{item.provider} · {item.product} · {item.section_title}",
+                url=item.source_url,
+                synthetic=item.synthetic,
+                provider=item.provider,
+                product=item.product,
+                excerpt=item.value,
+                source_file=item.source_file,
+                source_approval=item.source_approval,
+                evidence_state=item.evidence_state,
+                freshness_status=item.freshness_status,
+                document_as_of_date=item.document_as_of_date,
+                product_effective_date=item.product_effective_date,
+                document_version=item.document_version,
+                similarity=item.similarity,
+            )
+            for item in evidence_response.evidence
+        ]
+        return ConversationMessageResponse(
+            conversation_id=record.conversation_id,
+            client_message_id=request.client_message_id,
+            run_id=run_id,
+            state="completed",
+            active_revision_id=record.active_revision_id,
+            assistant_message=AssistantMessage(
+                message_id=message_id,
+                content=(
+                    f"I found {len(citations)} read-only brochure excerpts across "
+                    f"{product_summary}. They are cached evidence, not recommendations; "
+                    "approval, freshness, and unknown dates remain visible below."
+                ),
+                citations=citations,
+            ),
+            actions=[
+                ActionEvent(
+                    action_id=action_id,
+                    intent="ANSWER_QUESTION",
+                    tool="ANSWER_QUESTION",
+                    target="evidence:cached-catalogue",
+                    status="completed",
+                    evidence_count=len(citations),
+                    confirmation_required=False,
+                    affected_regions=["agent"],
+                )
+            ],
+        )
+
+    @staticmethod
+    def _unsupported_answer(
+        record: ConversationRecord,
+        request: ConversationMessageRequest,
+        run_id: str,
+        action_id: str,
+        message_id: str,
+        content: str,
+        error_code: str,
+    ) -> ConversationMessageResponse:
         return ConversationMessageResponse(
             conversation_id=record.conversation_id,
             client_message_id=request.client_message_id,
@@ -237,10 +354,7 @@ class ConversationService:
             active_revision_id=record.active_revision_id,
             assistant_message=AssistantMessage(
                 message_id=message_id,
-                content=(
-                    "I can currently explain the synthetic ranking, focus its assumptions, "
-                    "or filter to the critical-illness option. Your summary is unchanged."
-                ),
+                content=content,
                 citations=[],
             ),
             actions=[
@@ -248,12 +362,12 @@ class ConversationService:
                     action_id=action_id,
                     intent="ANSWER_QUESTION",
                     tool="ANSWER_QUESTION",
-                    target="summary:current",
+                    target="evidence:cached-catalogue",
                     status="blocked",
                     evidence_count=0,
                     confirmation_required=False,
                     affected_regions=["agent"],
-                    error_code="ACTION_NOT_ALLOWED",
+                    error_code=error_code,
                 )
             ],
         )

@@ -29,6 +29,8 @@
 
 - [`frontend/src/main.js`](../../frontend/src/main.js) already provides the complete simulated user journey.
 - [`frontend/package.json`](../../frontend/package.json) provides a successful production build command.
+- [`compose.yaml`](../../compose.yaml) builds a healthy web/API slice and initializes PostgreSQL with pgvector without claiming that the cached adapter queries it.
+- The [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md) records the successful containerized conversation and read-only evidence flow.
 - [`docs/PLAN.md`](../PLAN.md) defines shared contracts, AWS assumptions, acceptance metrics, and the five-minute demo story.
 
 ## Definition of done
@@ -36,11 +38,11 @@
 - [ ] The four capability outputs and API routes validate against frozen shared contracts.
 - [ ] One end-to-end scenario and one changed-goal scenario complete without manual data repair.
 - [ ] The demo visibly distinguishes live, cached, synthetic, and simulated data.
-- [ ] All 71 cached real-product records are searchable with approval/evidence state, and explored products remain visibly separate from synthetic recommendations.
+- [x] All 71 cached real-product records are searchable with approval/evidence state, and explored products remain visibly separate from synthetic recommendations.
 - [ ] Extraction, retrieval, recommendation, and orchestration acceptance targets are reported from predeclared fixtures.
 - [ ] Conversational scenarios report grounding, valid-tool, confirmation, revision-consistency, replay, undo, latency, token, and estimated-cost outcomes against independent expected results.
 - [ ] Model and tool runs report token, latency, cost, retry, iteration, and error metrics.
-- [ ] A clean setup follows the README and the frontend build succeeds.
+- [x] A clean setup follows the README and the frontend build succeeds.
 - [ ] One documented Docker Compose command starts healthy web, API, scraper, PostgreSQL/pgvector, and configured local object-store services.
 - [ ] The normal and no-policy scenarios pass through the containerized API.
 - [ ] An AWS readiness check maps the same image digests and environment contract to ECR/ECS, RDS, S3, Secrets Manager, and CloudWatch.

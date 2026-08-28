@@ -30,7 +30,8 @@
 - [`backend/scraper/ingest_insurance_supabase.py`](../../backend/scraper/ingest_insurance_supabase.py) normalizes 71 unique policy slugs and prepares 1,319 evidence chunks.
 - [`backend/scraper/rag_common.py`](../../backend/scraper/rag_common.py) and [`backend/scraper/query_insurance_rag.py`](../../backend/scraper/query_insurance_rag.py) provide cached OpenAI embeddings, Supabase/PostgREST access, and a typed retrieval CLI.
 - [`backend/scraper/supabase_schema.sql`](../../backend/scraper/supabase_schema.sql) enables pgvector and defines insurers, policies, document chunks, retrieval RPCs, and scrape logs.
-- The RAG path is not connected to [`backend/app/main.py`](../../backend/app/main.py) or the website; the current conversation API remains fixture-backed.
+- [`backend/app/evidence.py`](../../backend/app/evidence.py) exposes cached, synthetic, and Supabase adapters through one typed read-only service; [`backend/app/main.py`](../../backend/app/main.py) publishes it at `POST /v1/evidence/search`.
+- The [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md) records the containerized website path and verifies that cached exploration does not alter E07's synthetic comparison.
 
 ## Definition of done
 
@@ -39,8 +40,8 @@
 - [ ] Every cached record has a source-governance and evidence state; unverified records remain visibly distinct from approved evidence.
 - [ ] All 79 brochure as-of statements are retained in structured records, unresolved dates remain explicitly unknown, and the GREAT SupremeHealth/GREAT TotalCare 2 document-identity mismatch is resolved.
 - [ ] Document as-of date, product effective date, product version, and retrieval date are stored as distinct fields with provenance.
-- [ ] `POST /v1/evidence/search` returns one contract from Supabase and deterministic fixture adapters without coupling consumers to either store.
-- [ ] All cached records are available to read-only search, while real-product evidence cannot enter or alter E07 synthetic ranking.
+- [x] `POST /v1/evidence/search` returns one contract from Supabase and deterministic fixture adapters without coupling consumers to either store.
+- [x] All cached records are available to read-only search, while real-product evidence cannot enter or alter E07 synthetic ranking.
 - [ ] Fixed evaluation queries retrieve the expected reviewed source in the top five at least 90% of the time.
 - [ ] Every returned product claim includes an evidence span, URL where available, date type, evidence state, and synthetic status.
 - [ ] Missing or stale evidence produces an explicit unsupported result rather than a generated fact.

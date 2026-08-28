@@ -40,7 +40,7 @@
 **Acceptance criteria:**
 
 - [ ] The frontend can call E10 without embedded capability fixtures on the normal integration path.
-- [ ] Read-only RAG is available through E10 across applicable website contexts and cannot alter E07 synthetic recommendation inputs or results.
+- [x] Read-only RAG is available through E10 across applicable website contexts and cannot alter E07 synthetic recommendation inputs or results.
 - [ ] E11 invokes only allowed extraction, profile, retrieval, and decision tools.
 - [ ] One normal and one changed-goal scenario return schema-valid results.
 - [ ] Live, cached, simulated, synthetic, approved, unverified, stale, and unknown evidence states are visibly distinguished where applicable.
@@ -83,11 +83,11 @@
 
 - [x] The frontend production build succeeds.
 - [x] The README documents setup for every demonstrated component.
-- [ ] A clean environment completes the normal scenario.
+- [x] A clean environment completes the normal scenario.
 - [ ] A clean environment completes the changed-goal scenario.
 - [x] No synthetic data is presented as real.
 
-**Current evidence:** `bash scripts/verify-poc.sh` passes the backend fixture contracts and frontend production build. The [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md) records the live frontend/API browser path and its remaining integration gaps.
+**Current evidence:** `bash scripts/verify-poc.sh` passes the backend contracts, frontend production build, and Compose configuration. The [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md) records the first frontend/API path; the [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md) records the containerized cached-evidence path and its remaining integration gaps.
 
 ## E08-T05 - Rehearse and record the five-minute demo
 
