@@ -24,7 +24,7 @@ This folder contains the executable backlog for the CoverCheck SG POC. Each tick
 | [E03 - User Profile and Personalization](E03-user-profile-and-personalization.md) | Jana | P1 | In progress | 7 |
 | [E04 - Policy OCR and Extraction](E04-policy-ocr-and-extraction.md) | Tim | P1 | In progress | 6 |
 | [E05 - Source Data Ingestion POC](E05-source-data-ingestion-poc.md) | Darren | P1 | In progress | 6 |
-| [E06 - Insurance Retrieval and RAG](E06-insurance-retrieval-and-rag.md) | Darren | P1 | Planned | 8 |
+| [E06 - Insurance Retrieval and RAG](E06-insurance-retrieval-and-rag.md) | Darren | P1 | In progress | 8 |
 | [E07 - Explainable Decision Support](E07-explainable-decision-support.md) | Deborah | P0 | In progress | 7 |
 | [E08 - Integrated Demo and Evaluation](E08-integrated-demo-and-evaluation.md) | Tim | P0 | In progress | 9 |
 | [E09 - Productionisation and Security](E09-productionisation-and-security.md) | Tim | P3 | Deferred | 4 |

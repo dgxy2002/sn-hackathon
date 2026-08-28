@@ -4,7 +4,7 @@
 |---|---|
 | Primary owner | Darren |
 | Priority | P1 |
-| Status | Planned |
+| Status | In progress |
 | Outcome | Product comparisons use small, dated evidence records retrieved from approved Singapore insurance sources. |
 
 ## Scope

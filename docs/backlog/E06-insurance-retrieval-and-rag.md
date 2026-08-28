@@ -27,7 +27,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | L |
 | Depends on | E06-T01, E08-T01 |
@@ -43,11 +43,13 @@
 - [ ] Benefits, premiums, exclusions, and eligibility retain source evidence where available.
 - [ ] Scrape or ingest outcomes are logged.
 
+**Current evidence:** [`backend/scraper/extract_insurance_openai.py`](../../backend/scraper/extract_insurance_openai.py), [`backend/scraper/ingest_insurance_supabase.py`](../../backend/scraper/ingest_insurance_supabase.py), and the committed extraction artifacts implement structured extraction and normalized ingestion for 87 policy rows across four providers. Source approval, authoritative product versions and effective dates, complete URLs and premiums, and ingest-run logging remain incomplete.
+
 ## E06-T03 - Implement filtered semantic retrieval
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P1 |
 | Size | L |
 | Depends on | E06-T02 |
@@ -62,6 +64,8 @@
 - [ ] Category and eligibility filters run before vector similarity.
 - [ ] Results include evidence span, source URL, date, and score.
 - [ ] Unsupported or stale queries return an explicit no-evidence result.
+
+**Current evidence:** [`backend/scraper/query_insurance_rag.py`](../../backend/scraper/query_insurance_rag.py), [`backend/scraper/rag_common.py`](../../backend/scraper/rag_common.py), and [`backend/scraper/supabase_schema.sql`](../../backend/scraper/supabase_schema.sql) implement evidence chunks, cached OpenAI embeddings, pgvector similarity, metadata pre-filtering, and typed CLI results. Versioned metadata, eligibility and freshness enforcement, complete citation URLs, deterministic fallback, API exposure, and retrieval evaluation remain incomplete.
 
 ## E06-T04 - Evaluate retrieval quality and citation coverage
 
