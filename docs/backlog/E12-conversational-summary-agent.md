@@ -56,19 +56,21 @@
 | Status | Ready |
 | Priority | P1 |
 | Size | L |
-| Depends on | E06-T08, E11-T08, E12-T02 |
+| Depends on | E06-T08, E10-T04, E12-T02 |
 
-**User story:** As a curious user, I need to ask why a result appeared and explore other approved plans without losing evidence or eligibility context.
+**User story:** As a curious user, I need to ask why a result appeared and explore the cached real-product catalogue without losing evidence state or mistaking exploration for a recommendation.
 
 **Requirements:** URS-FR-027, URS-FR-028, URS-FR-029, URS-NFR-004, URS-NFR-019; PRD-FR-032, PRD-FR-033, PRD-FR-034, PRD-FR-035, PRD-NFR-003, PRD-NFR-015, PRD-NFR-022.
 
 **Acceptance criteria:**
 
 - [ ] Follow-up questions retain the active profile, recommendation, evidence, and prior-turn context within the session cap.
-- [ ] Search is restricted to approved E06 catalogue records and returns explicit no-evidence or stale-evidence states.
-- [ ] Alternative plans retain eligibility, evidence spans, source and effective dates, freshness, and synthetic labels.
-- [ ] Temporary alternatives can be added to or removed from the visible comparison without silently becoming a recommendation.
+- [ ] Search is restricted to E06 cached catalogue records and returns approval, unverified, stale, unknown, and no-evidence states explicitly.
+- [ ] Alternative plans retain eligibility, evidence spans, source, document as-of date, product effective date, retrieval date, freshness, and synthetic labels.
+- [ ] Real-product alternatives remain read-only and can be added to or removed from exploration views without entering or changing E07 synthetic ranking.
 - [ ] Every factual answer links to evidence or is visibly labelled synthetic, unknown, or unsupported.
+
+**Delivery order:** Read-only questions and catalogue exploration call the typed E10/E06 evidence service directly. E11 remains required for the consequential proposal, confirmation, deterministic-rerun, revision, replay, and undo path in E12-T04 and E12-T05.
 
 ## E12-T04 - Integrate proposals, confirmation, and dynamic revisions
 

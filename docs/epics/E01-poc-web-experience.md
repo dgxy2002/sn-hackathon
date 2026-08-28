@@ -14,6 +14,7 @@
 - Back navigation, form handling, keyboard quiz controls, and reduced-motion support.
 - Clear educational-not-advice and synthetic-data messaging.
 - Typed final-page conversation, action, confirmation, delta, replay, and undo rendering without model-authored markup.
+- Read-only rendering of real-product evidence with source, date type, approval/evidence state, and a visible boundary from synthetic recommendations.
 
 ## Requirements traceability
 
@@ -36,6 +37,7 @@
 - [x] Synthetic recommendations and the educational boundary are visible.
 - [x] `npm --prefix frontend run build` completes successfully.
 - [ ] The final page renders typed agent progress, proposals, confirmations, changed regions, replay, and undo without executing model-authored markup or selectors.
+- [ ] Read-only RAG results render across applicable views with citations, distinct date fields, evidence state, and no visual implication that an explored real product is recommended.
 - [ ] Dynamic summary states remain responsive, keyboard operable, visibly focused, and compatible with reduced motion.
 
 ## POC boundary

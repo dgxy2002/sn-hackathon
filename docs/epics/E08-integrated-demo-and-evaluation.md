@@ -13,7 +13,8 @@
 - Integrate the frontend with the E10 API and E11 coordinator.
 - Accept the complete local Docker Compose topology from a clean setup.
 - Replay extraction, retrieval, decision, and changed-profile evaluation suites.
-- Replay conversational Q&A, approved-plan exploration, presentation, confirmation, revision, cancellation, conflict, and undo scenarios.
+- Verify that real-product RAG remains read-only across the website and cannot alter E07 synthetic recommendations.
+- Replay conversational Q&A, cached-plan exploration with evidence states, presentation, confirmation, revision, cancellation, conflict, and undo scenarios.
 - Aggregate OpenRouter extraction and explanation correctness, latency, tool success, token, cost, and bounded-loop metrics.
 - Verify that locally tested image digests are ready for ECR and that ECS, RDS, S3, Secrets Manager, and CloudWatch mappings are documented.
 - Provide a preloaded scenario and recorded fallback.
@@ -35,6 +36,7 @@
 - [ ] The four capability outputs and API routes validate against frozen shared contracts.
 - [ ] One end-to-end scenario and one changed-goal scenario complete without manual data repair.
 - [ ] The demo visibly distinguishes live, cached, synthetic, and simulated data.
+- [ ] All 71 cached real-product records are searchable with approval/evidence state, and explored products remain visibly separate from synthetic recommendations.
 - [ ] Extraction, retrieval, recommendation, and orchestration acceptance targets are reported from predeclared fixtures.
 - [ ] Conversational scenarios report grounding, valid-tool, confirmation, revision-consistency, replay, undo, latency, token, and estimated-cost outcomes against independent expected results.
 - [ ] Model and tool runs report token, latency, cost, retry, iteration, and error metrics.

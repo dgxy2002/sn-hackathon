@@ -1,5 +1,41 @@
 # Local Docker Compose Topology
 
+## Current interim topology
+
+The implemented website/API and RAG paths run separately. Supabase-first integration is an approved temporary delivery step, not the final local deployment target.
+
+```mermaid
+flowchart LR
+    Browser[Browser]
+    Web[Vite development server]
+    FixtureAPI[FastAPI fixture API]
+    Agent[Typed fixture agent]
+
+    Corpus[79 cached brochures]
+    Extract[OpenAI extraction CLI]
+    RAG[Supabase ingestion and query CLIs]
+    Cache[(SQLite embedding cache)]
+    OpenAI[OpenAI API]
+    Supabase[(Hosted Supabase<br/>PostgreSQL and pgvector)]
+
+    Browser --> Web
+    Web --> FixtureAPI
+    FixtureAPI --> Agent
+
+    Corpus --> Extract
+    Extract --> OpenAI
+    Extract --> RAG
+    RAG --> OpenAI
+    RAG --> Cache
+    RAG --> Supabase
+
+    FixtureAPI -. approved typed read-only E10/E06 bridge .-> RAG
+```
+
+The dotted bridge is not implemented. It will sit behind Supabase and deterministic fixture adapters, keep service credentials server-side, expose adapter mode, and return dated evidence states without changing E07's synthetic ranking.
+
+## Target local topology
+
 This is the required POC runtime target. It is planned architecture until the E10 container tickets are implemented.
 
 ```mermaid

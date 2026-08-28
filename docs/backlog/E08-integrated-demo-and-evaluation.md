@@ -40,9 +40,10 @@
 **Acceptance criteria:**
 
 - [ ] The frontend can call E10 without embedded capability fixtures on the normal integration path.
+- [ ] Read-only RAG is available through E10 across applicable website contexts and cannot alter E07 synthetic recommendation inputs or results.
 - [ ] E11 invokes only allowed extraction, profile, retrieval, and decision tools.
 - [ ] One normal and one changed-goal scenario return schema-valid results.
-- [ ] Live, cached, simulated, and synthetic data are visibly distinguished.
+- [ ] Live, cached, simulated, synthetic, approved, unverified, stale, and unknown evidence states are visibly distinguished where applicable.
 - [ ] Missing-information, no-evidence, and dependency-failure outcomes render without presenting a recommendation.
 
 ## E08-T03 - Capture agent and evaluation metrics
@@ -186,7 +187,8 @@
 
 **Acceptance criteria:**
 
-- [ ] Frozen scenarios cover grounded Q&A, approved-plan exploration, presentation change, confirmed and cancelled profile changes, extraction correction, undo, stale evidence, no evidence, invalid action, dependency failure, and loop cap.
+- [ ] Frozen scenarios cover grounded Q&A, cached-plan exploration with evidence states, presentation change, confirmed and cancelled profile changes, extraction correction, undo, stale evidence, no evidence, invalid action, dependency failure, and loop cap.
+- [ ] Catalogue scenarios cover all 71 cached products and prove that unverified or stale evidence is labelled and no real product becomes an E07 recommendation.
 - [ ] Independent expected outcomes identify allowed tools, confirmation boundary, citations, deterministic result changes, page regions, and terminal state.
 - [ ] The report records completion, grounding, tool-validity, confirmation, revision-consistency, undo, latency, token, and estimated-cost results.
 - [ ] Fixture and configured OpenRouter modes use the same schemas and disclose adapter, model, prompt, tool, formulation, ruleset, and catalogue versions.

@@ -10,15 +10,23 @@ flowchart LR
         SPA[Vite vanilla-JS SPA]
         State[In-memory profile and navigation state]
         Fixtures[Synthetic OCR, benchmark, and plan fixtures]
-        Scraper[Python source scraper CLI]
+        CurrentAPI[FastAPI fixture API]
+        FixtureAgent[Typed fixture conversation agent]
+        Corpus[79 cached insurer brochures]
+        ExtractCLI[OpenAI extraction CLI]
+        RAGScripts[Supabase ingestion and retrieval CLIs]
+        EmbeddingCache[(Local embedding cache)]
+        CardScraper[Credit-card scraper CLI]
         SupabaseREST[Supabase REST API]
-        ProductDB[(Product and scrape-log tables)]
+        ProductDB[(Hosted PostgreSQL and pgvector)]
     end
 
     subgraph External[Current external references]
+        ProviderSources[Insurer brochure sources]
         SingSaver[SingSaver product pages]
         MoneySense[MoneySense guidance]
         MAS[MAS representatives register]
+        OpenAI[OpenAI extraction and embeddings]
     end
 
     subgraph LocalTarget[Planned local Docker Compose runtime]
@@ -43,11 +51,20 @@ flowchart LR
     User --> SPA
     SPA --> State
     SPA --> Fixtures
+    SPA --> CurrentAPI
+    CurrentAPI --> FixtureAgent
     SPA --> MoneySense
     SPA --> MAS
 
-    SingSaver --> Scraper
-    Scraper --> SupabaseREST
+    ProviderSources --> Corpus
+    Corpus --> ExtractCLI
+    ExtractCLI --> OpenAI
+    ExtractCLI --> RAGScripts
+    RAGScripts --> OpenAI
+    RAGScripts --> EmbeddingCache
+    RAGScripts --> SupabaseREST
+    SingSaver --> CardScraper
+    CardScraper --> SupabaseREST
     SupabaseREST --> ProductDB
 
     SPA -. versioned HTTP contracts .-> API
@@ -83,23 +100,25 @@ flowchart LR
     classDef implemented fill:#e7f4ed,stroke:#246b45,color:#123b28;
     classDef simulated fill:#fff3d6,stroke:#a66500,color:#573900;
     classDef planned fill:#edf1f7,stroke:#53657d,color:#263545,stroke-dasharray: 5 4;
-    class SPA,State,Scraper,SupabaseREST,ProductDB implemented;
-    class Fixtures simulated;
+    class SPA,State,CurrentAPI,Corpus,ExtractCLI,RAGScripts,EmbeddingCache,CardScraper,SupabaseREST,ProductDB,OpenAI implemented;
+    class Fixtures,FixtureAgent simulated;
     class API,DB,ObjectStore,Coordinator,SummaryAgent,ToolPolicy,Extract,Profile,Rules,Retrieval,ScraperLoop,Events,OpenRouter planned;
 ```
 
 ## Boundary notes
 
-- The current user journey runs entirely in [`frontend/src/main.js`](../../frontend/src/main.js). It does not call a backend.
-- Upload, OCR output, the pilot benchmark, and plan recommendations are currently simulated with synthetic values in the SPA.
-- [`backend/scraper/card_scraper.py`](../../backend/scraper/card_scraper.py) is a separate working ingestion POC for credit cards; it is not yet an insurance retriever.
-- [`backend/scraper/supabase_schema.sql`](../../backend/scraper/supabase_schema.sql) defines the insurance and pgvector foundation, but no frontend or RAG runtime currently consumes it.
+- The current user journey keeps profile, upload, extraction, gap, and recommendation data in [`frontend/src/main.js`](../../frontend/src/main.js), but the final `Ask CoverCheck` panel calls the FastAPI conversation routes in [`backend/app/main.py`](../../backend/app/main.py).
+- Those conversation routes use a typed fixture agent. They do not call the insurance RAG store.
+- Darren's separate RAG slice extracts 79 cached brochures into 87 policy rows, normalizes 71 unique policy slugs, prepares 1,319 candidate chunks, and retrieves typed evidence through a Supabase-backed CLI.
+- No current edge connects `CurrentAPI` to `RAGScripts` or `ProductDB`. The first integration slice adds a typed E10 evidence-service boundary with Supabase and deterministic fixture adapters.
+- All cached records may be searched for read-only questions and exploration, but every result carries approval/evidence state and cannot enter E07's synthetic ranking.
+- OpenAI owns current offline brochure extraction and embeddings. OpenRouter remains the configured E04/E11 provider for user-document extraction and explanation.
 - [E10](../epics/E10-backend-api-and-poc-persistence.md) owns transport, shared schema validation, typed errors, and disposable synthetic state; it does not own capability business rules.
-- [E11](../epics/E11-runtime-orchestration-and-operations.md) owns the bounded coordinator, OpenRouter runtime integration, and operational coordination; capability services remain independently testable.
+- Direct read-only E10/E06 retrieval does not require E11. [E11](../epics/E11-runtime-orchestration-and-operations.md) owns consequential proposals, confirmed changes, deterministic reruns, revisions, replay, undo, OpenRouter runtime integration, and operational coordination.
 - [E12](../epics/E12-conversational-summary-agent.md) owns the final-page agent experience and integration. E11 executes its allowlisted typed tools; E03/E04/E06/E07 retain profile, extraction, retrieval, and deterministic decision authority.
-- Navigation, focus, sorting, filtering, and temporary approved-plan exploration may apply immediately. Profile, canonical comparison, and reviewed extraction changes require confirmation, immutable input versions, and a fresh E07 result before the canonical summary changes.
+- Navigation, focus, sorting, filtering, and read-only cached-plan exploration may apply immediately. Profile, canonical comparison, and reviewed extraction changes require confirmation, immutable input versions, and a fresh E07 result before the canonical summary changes.
 - Model output cannot become HTML, JavaScript, selectors, coordinates, SQL, arbitrary URLs, or canonical recommendation values.
 - The local target is Docker Compose with `.env` configuration. OpenRouter `5.6 Luna` handles policy extraction and grounded explanation; the exact model slug remains an explicit configuration decision.
-- The implemented Supabase proof remains repository evidence, but the target local application store is PostgreSQL/pgvector so it can later move to RDS PostgreSQL.
+- Supabase/PostgREST is the first RAG integration adapter because it is implemented. This temporary delivery deviation does not change the target local PostgreSQL/pgvector store or its later RDS PostgreSQL migration.
 - Amazon Bedrock and AgentCore are optional future adapters and are not required for local execution.
 - Production identity, durable personal data, private document storage, and operational hardening are intentionally deferred to [E09](../epics/E09-productionisation-and-security.md).

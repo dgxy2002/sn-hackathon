@@ -5,18 +5,18 @@
 | Primary owner | Darren |
 | Priority | P1 |
 | Status | In progress |
-| Outcome | Product comparisons use small, dated evidence records retrieved from approved Singapore insurance sources. |
+| Outcome | Read-only questions and catalogue exploration use small, dated evidence records from cached Singapore insurance sources without changing synthetic recommendations. |
 
 ## Scope
 
-- Acquire a narrow set of permitted insurer and official-source documents.
-- Normalize products, versions, effective dates, source URLs, and evidence spans.
-- Store products and chunks in local PostgreSQL/pgvector and retrieve evidence by need and product category.
+- Register the complete cached insurer corpus, assign each record an explicit approval and evidence state, and never treat cache inclusion as source approval.
+- Normalize products, document as-of dates, product effective dates, versions, retrieval dates, source URLs, and evidence spans without substituting one date type for another.
+- Integrate the implemented Supabase/PostgREST store first behind a replaceable adapter while retaining local PostgreSQL/pgvector as the approved target.
 - Expose retrieval through the backend API container with metadata, full-text, and filter fallback when embeddings are unavailable.
-- Keep embedding and model providers configuration-driven rather than AWS-dependent.
+- Keep OpenAI brochure extraction and embeddings separate from the configured OpenRouter E04/E11 document and explanation capabilities.
 - Migrate the same schema to RDS PostgreSQL/pgvector and permitted snapshots to S3 later.
-- Return citations and freshness metadata without making the final recommendation.
-- Expose typed exploration over the approved catalogue for conversational alternatives and temporary comparisons.
+- Return citations, approval state, and freshness metadata without making or changing a recommendation.
+- Expose typed read-only questions and broad exploration across all cached records while keeping E07 ranking synthetic and deterministic.
 
 ## Requirements traceability
 
@@ -26,22 +26,29 @@
 
 ## Repository evidence
 
-- [`backend/scraper/supabase_schema.sql`](../../backend/scraper/supabase_schema.sql) enables pgvector and defines insurers, policies, document chunks, and scrape logs.
-- [`backend/scraper/card_scraper.py`](../../backend/scraper/card_scraper.py) provides the completed ingestion pattern from E05.
-- [`docs/PLAN.md`](../PLAN.md) defines the information-system contract and sourcing constraints.
+- [`backend/scraper/extract_insurance_openai.py`](../../backend/scraper/extract_insurance_openai.py) and the committed extraction artifacts cover 79 brochures and 87 structured policy rows.
+- [`backend/scraper/ingest_insurance_supabase.py`](../../backend/scraper/ingest_insurance_supabase.py) normalizes 71 unique policy slugs and prepares 1,319 evidence chunks.
+- [`backend/scraper/rag_common.py`](../../backend/scraper/rag_common.py) and [`backend/scraper/query_insurance_rag.py`](../../backend/scraper/query_insurance_rag.py) provide cached OpenAI embeddings, Supabase/PostgREST access, and a typed retrieval CLI.
+- [`backend/scraper/supabase_schema.sql`](../../backend/scraper/supabase_schema.sql) enables pgvector and defines insurers, policies, document chunks, retrieval RPCs, and scrape logs.
+- The RAG path is not connected to [`backend/app/main.py`](../../backend/app/main.py) or the website; the current conversation API remains fixture-backed.
 
 ## Definition of done
 
-- [ ] An approved source list documents terms and retrieval method for each source.
-- [ ] At least one product category from at least two providers is ingested with version and effective date.
+- [x] Offline preparation validates 79 cached brochures, 87 structured policy rows, 71 unique policy slugs, and 1,319 candidate chunks.
+- [x] The seven Markdown-undated Great Eastern files have been checked against their downloaded official PDFs and their brochure as-of dates and version labels recorded in the [integration decision record](../evaluation/2026-08-28-rag-website-integration-decisions.md).
+- [ ] Every cached record has a source-governance and evidence state; unverified records remain visibly distinct from approved evidence.
+- [ ] All 79 brochure as-of statements are retained in structured records, unresolved dates remain explicitly unknown, and the GREAT SupremeHealth/GREAT TotalCare 2 document-identity mismatch is resolved.
+- [ ] Document as-of date, product effective date, product version, and retrieval date are stored as distinct fields with provenance.
+- [ ] `POST /v1/evidence/search` returns one contract from Supabase and deterministic fixture adapters without coupling consumers to either store.
+- [ ] All cached records are available to read-only search, while real-product evidence cannot enter or alter E07 synthetic ranking.
 - [ ] Fixed evaluation queries retrieve the expected reviewed source in the top five at least 90% of the time.
-- [ ] Every returned product claim includes an evidence span, URL, and retrieval or effective date.
+- [ ] Every returned product claim includes an evidence span, URL where available, date type, evidence state, and synthetic status.
 - [ ] Missing or stale evidence produces an explicit unsupported result rather than a generated fact.
 - [ ] Superseded and conflicting product versions remain auditable and are not silently merged into current results.
 - [ ] Retrieval contract tests pass against local PostgreSQL/pgvector and the deterministic non-embedding fallback.
 - [ ] The RDS PostgreSQL/pgvector and S3 migration mapping is documented without changing evidence contracts.
-- [ ] Conversational search returns only approved catalogue records with eligibility, provenance, freshness, and explicit no-evidence behavior.
+- [ ] Conversational search exposes approval, eligibility, provenance, freshness, and explicit no-evidence behavior for every cached catalogue record.
 
 ## POC boundary
 
-No exhaustive market coverage, live scraping during the judged demo, or claim of independent whole-market advice is required.
+The cached catalogue is broad but not exhaustive and must not be described as whole-market coverage or the basis for an absolute-best-plan claim. Real RAG remains read-only educational evidence; E07 continues to rank only visibly synthetic plans. No live scraping during the judged demo is required.

@@ -1,6 +1,6 @@
 # Sequence Diagram
 
-## Current browser-only sequence
+## Current browser and fixture-API sequence
 
 ```mermaid
 sequenceDiagram
@@ -8,6 +8,8 @@ sequenceDiagram
     participant SPA as Vite SPA
     participant State as In-memory state
     participant Fixtures as Synthetic fixtures
+    participant API as FastAPI conversation API
+    participant Agent as Typed fixture agent
 
     User->>SPA: Open landing page
     loop Five readiness questions
@@ -32,9 +34,47 @@ sequenceDiagram
     SPA->>State: Calculate death and CI gaps
     SPA->>Fixtures: Load three synthetic plans
     SPA-->>User: Show static comparison and reasons
+    User->>SPA: Ask a final-page question or presentation request
+    SPA->>API: Create conversation and send typed message
+    API->>Agent: Resolve fixture intent and allowlisted action
+    Agent->>Fixtures: Select synthetic answer and citation
+    Agent-->>API: Typed message, action events, and status
+    API-->>SPA: Versioned fixture response
+    SPA-->>User: Show answer and focus or filter the summary
 ```
 
-No document bytes, profile data, retrieval request, or recommendation request leave the browser in the current sequence.
+Conversation messages leave the browser in the current sequence. Profile data, document bytes, evidence-search requests, and recommendation requests do not; the fixture agent never queries Darren's RAG store.
+
+## First read-only RAG integration sequence
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant SPA as Website and Ask CoverCheck
+    participant API as E10 API
+    participant Evidence as E06 evidence service
+    participant OpenAI as OpenAI embeddings
+    participant Supabase as Supabase PostgreSQL and pgvector
+    participant Fixture as Deterministic evidence fixture
+
+    User->>SPA: Ask a product question or explore cached plans
+    SPA->>API: POST typed evidence search or conversation message
+    API->>Evidence: Validated read-only query and filters
+    alt Supabase adapter available
+        Evidence->>OpenAI: Embed the bounded query
+        OpenAI-->>Evidence: Query vector
+        Evidence->>Supabase: Metadata filter and pgvector search
+        Supabase-->>Evidence: Cached chunks and policy IDs
+    else Dependency unavailable
+        Evidence->>Fixture: Run deterministic fallback query
+        Fixture-->>Evidence: Schema-identical evidence records
+    end
+    Evidence-->>API: Evidence or explicit no-evidence state
+    API-->>SPA: Citations, date types, approval/evidence state, and mode
+    SPA-->>User: Read-only answer or broad catalogue exploration
+```
+
+This first slice searches all cached records but does not treat every record as approved. It keeps `document_as_of_date`, `product_effective_date`, and `retrieved_at` distinct, labels weak or stale evidence, and cannot change the E07 synthetic recommendation. It intentionally uses the existing Supabase adapter first; local PostgreSQL/pgvector remains the approved target.
 
 ## Target local Docker Compose sequence
 
@@ -84,10 +124,10 @@ sequenceDiagram
         RAG-->>API: Typed evidence records or no-evidence
         API-->>Coordinator: Validated evidence contract
         Coordinator->>API: Evaluate recommendation tool call
-        API->>Rules: Profile, extracted policy, plans, and ruleset
+        API->>Rules: Profile, extracted policy, synthetic plans, and ruleset
         Rules-->>API: Gaps, exclusions, ranking, and trade-offs
         API-->>Coordinator: Immutable decision contract
-        Coordinator->>OpenRouter: Immutable result and small evidence for explanation
+        Coordinator->>OpenRouter: Immutable synthetic result and separately labelled evidence
         OpenRouter-->>Coordinator: Explanation without ranking changes
         Coordinator->>Runs: Store ordered events, versions, and metrics
         Coordinator-->>API: Final result and terminal state
@@ -106,7 +146,7 @@ sequenceDiagram
     participant SPA as E01 final summary and E12 panel
     participant API as E10 conversation API
     participant Coordinator as E11 bounded coordinator
-    participant Catalogue as E06 approved catalogue
+    participant Catalogue as E06 cached catalogue
     participant Profile as E03 profile service
     participant Extraction as E04 extraction review
     participant Rules as E07 deterministic engine
@@ -114,16 +154,15 @@ sequenceDiagram
 
     User->>SPA: Ask a follow-up or request a page change
     SPA->>API: POST conversation message with active revision
-    API->>Coordinator: Validated context and allowed tools
 
-    alt Read-only question or approved-plan exploration
-        Coordinator->>Catalogue: Search approved records and evidence
-        Catalogue-->>Coordinator: Dated cited results or no evidence
-        Coordinator-->>API: Cited answer and typed presentation actions
+    alt Read-only question or cached-plan exploration
+        API->>Catalogue: Validated typed evidence query
+        Catalogue-->>API: Dated results with evidence state or no evidence
         API->>Store: Record messages, actions, versions, and metrics
         API-->>SPA: Stream visible actions and answer
         SPA-->>User: Focus, filter, sort, or show temporary alternatives
     else Profile, comparison, or extracted-policy change
+        API->>Coordinator: Validated context and allowed tools
         Coordinator-->>API: Typed proposal with old and proposed values
         API->>Store: Save pending proposal and action trace
         API-->>SPA: Confirmation required
@@ -144,7 +183,7 @@ sequenceDiagram
                 Coordinator->>Extraction: Create confirmed reviewed version
                 Extraction-->>Coordinator: New extraction version
             end
-            Coordinator->>Rules: Rerun with versioned inputs and approved catalogue
+            Coordinator->>Rules: Rerun with versioned inputs and synthetic plan catalogue
             Rules-->>Coordinator: Deterministic result and before/after delta
             Coordinator->>Store: Atomically store run, actions, and summary revision
             Coordinator-->>API: Validated revision and undo lineage
@@ -163,4 +202,4 @@ sequenceDiagram
     end
 ```
 
-The model selects only registered typed actions. It cannot execute page code or coordinates, search outside the approved catalogue, bypass confirmation, or directly author profile versions, extracted values, eligibility, rankings, or displayed decision numbers.
+Read-only E06 retrieval may bypass E11 but not E10 schema validation or evidence-state rules. Consequential actions enter E11 and select only registered typed tools. Model output cannot execute page code or coordinates, search outside the cached E06 corpus, bypass confirmation, place real retrieved products into E07 ranking, or directly author profile versions, extracted values, eligibility, rankings, or displayed decision numbers.

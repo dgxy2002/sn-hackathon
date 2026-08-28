@@ -10,14 +10,14 @@
 ## Scope
 
 - Add an `Ask CoverCheck` conversational panel to the final summary page with suggested prompts and current-session context.
-- Answer questions about the active profile, gaps, ranking, assumptions, evidence, and approved plan alternatives.
+- Answer questions about the active profile, gaps, synthetic ranking, assumptions, evidence, and cached real-product alternatives.
 - Show a live, expandable action timeline while the agent searches, focuses sections, filters comparisons, proposes changes, reruns analysis, and updates the page.
 - Let presentation-only actions navigate, focus, sort, filter, and temporarily reshape the comparison immediately.
 - Let users request changes to profile inputs, comparison membership, and extracted policy fields.
 - Preview old and proposed values and require explicit confirmation before changing decision inputs or reviewed extraction fields.
 - Apply confirmed changes through E03/E04 contracts, rerun E07 deterministically, and render only the validated recommendation and delta contracts.
 - Highlight changed summary regions and provide current-session revision history, replay, and undo.
-- Use only the approved E06 catalogue; preserve citations, dates, freshness, and synthetic labels.
+- Search all cached E06 records for read-only exploration; preserve citations, date types, approval/evidence state, freshness, and synthetic labels.
 - Execute allowlisted typed application tools through E10/E11 rather than model-authored HTML, JavaScript, selectors, coordinates, SQL, or arbitrary web navigation.
 
 ## Requirements traceability
@@ -39,16 +39,16 @@
 ## Definition of done
 
 - [x] The final summary includes an accessible `Ask CoverCheck` panel with suggested prompts, follow-up context, and visible trust boundaries.
-- [ ] The agent answers current-summary questions and explores additional approved plans with dated citations and freshness status.
+- [ ] The agent answers current-summary questions and explores all cached plans with dated citations, approval/evidence state, freshness status, and explicit unsupported outcomes.
 - [ ] An expandable action trace shows planning, tools, affected page regions, confirmations, deterministic reruns, completion, and failures.
 - [x] Presentation-only actions visibly focus or reshape the page without changing canonical decision versions.
 - [ ] Profile, canonical comparison, and extracted-policy changes show a before/after proposal and cannot apply without confirmation.
 - [ ] Confirmed changes produce versioned inputs, a deterministic E07 rerun, one coherent summary revision, highlighted deltas, and undo.
-- [x] Model output cannot execute arbitrary code, selectors, coordinates, SQL, unregistered tools, or unapproved-source searches.
+- [x] Model output cannot execute arbitrary code, selectors, coordinates, SQL, unregistered tools, or outside-corpus source searches.
 - [ ] Conversation, action, evidence, confirmation, revision, model, prompt, tool, formulation, and ruleset versions are replayable within the POC session.
-- [ ] Normal Q&A, approved-plan exploration, presentation change, profile change, extraction correction, cancellation, undo, stale evidence, no evidence, invalid action, and dependency failure scenarios pass.
+- [ ] Normal Q&A, cached-plan exploration with evidence states, presentation change, profile change, extraction correction, cancellation, undo, stale evidence, no evidence, invalid action, and dependency failure scenarios pass.
 - [ ] The complete flow works in Docker Compose fixture mode and with configured OpenRouter mode using the same contracts.
 
 ## POC boundary
 
-The agent operates only within CoverCheck's typed application capabilities and approved catalogue. It cannot browse arbitrary websites, transact, contact advisers, purchase, replace, surrender, or recommend cancelling insurance. Conversation and revision history is disposable with the current synthetic POC session unless retained as a named evaluation fixture.
+The agent operates only within CoverCheck's typed application capabilities and cached catalogue. Real-product RAG is read-only and cannot enter or alter E07's synthetic ranking; records that are not approved or current remain visibly labelled. The agent cannot browse arbitrary websites, transact, contact advisers, purchase, replace, surrender, or recommend cancelling insurance. Conversation and revision history is disposable with the current synthetic POC session unless retained as a named evaluation fixture.

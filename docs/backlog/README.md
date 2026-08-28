@@ -43,6 +43,18 @@ This folder contains the executable backlog for the CoverCheck SG POC. Each tick
 7. Deliver E12 after the profile, extraction, retrieval, decision, API, and orchestration contracts support safe dynamic revisions.
 8. Keep E09 deferred except for baseline safeguards that prevent secret exposure, real-data use, or misleading claims.
 
+## Approved E06 website integration order
+
+The [28 August RAG and website integration decision](../evaluation/2026-08-28-rag-website-integration-decisions.md) adds this delivery sequence without changing the local-first target in `docs/PLAN.md`:
+
+1. Freeze the E06 evidence, evidence-state, and distinct date-field contract; correct source identity and enrich brochure metadata.
+2. Wrap the existing Supabase retrieval path and a deterministic fixture fallback behind one E06 service interface.
+3. Expose the read-only service through E10 and verify adapter parity, typed errors, timeouts, and credential boundaries.
+4. Render broad cached-catalogue questions and exploration through E01/E12 without changing E07 synthetic ranking.
+5. Evaluate grounding, top-five retrieval, citation/date coverage, stale/no-evidence behavior, and the read-only recommendation boundary through E08.
+6. Complete local PostgreSQL/pgvector and Docker Compose parity before claiming the approved local runtime target.
+7. Use E11 for consequential proposals, confirmations, deterministic reruns, revisions, replay, and undo.
+
 ## Backlog maintenance rules
 
 1. Ticket IDs are stable and use `E##-T##`.

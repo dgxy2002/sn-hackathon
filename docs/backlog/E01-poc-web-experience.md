@@ -62,6 +62,7 @@
 
 - [ ] The final page renders conversation, action-event, proposal, summary-revision, and delta contracts without trusting model-authored markup.
 - [ ] Presentation actions can focus, expand, sort, filter, and temporarily add or remove approved comparison rows.
+- [ ] Real-product search results show source, date type, approval/evidence state, synthetic status, and the read-only boundary from E07 recommendations.
 - [ ] Applied revisions update all affected score, gap, comparison, assumption, evidence, and explanation regions atomically.
 - [ ] Changed values are highlighted with stable layout, visible focus, reduced-motion behavior, and screen-reader announcements.
 - [ ] Confirmation, cancellation, conflict, failure, replay, and undo states remain operable on narrow and wide viewports.

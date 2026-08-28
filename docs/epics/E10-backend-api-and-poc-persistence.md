@@ -13,6 +13,7 @@
 - Load local configuration from an uncommitted `.env` documented by `.env.example`.
 - Publish versioned request, response, event, and error schemas for profiles, extraction, evidence, recommendations, conversations, proposals, actions, summary revisions, and runs.
 - Expose capability routes while preserving ownership of business logic in E03, E04, E06, E07, and E11.
+- Integrate E06 first through the existing Supabase/PostgREST implementation and a deterministic fixture fallback behind one evidence-service interface.
 - Maintain anonymous POC sessions, profile versions, extraction reviews, recommendation results, conversations, proposals, actions, summary revisions, and run records using replaceable repositories.
 - Provide fixture and local PostgreSQL/pgvector adapters by default plus an S3-compatible object-store adapter where permitted snapshots are needed.
 - Preserve the same environment-variable contract when moving to ECS Fargate, RDS PostgreSQL, Amazon S3, and AWS Secrets Manager.
@@ -34,6 +35,7 @@ E10 owns transport, schema validation, repositories, and common errors. It does 
 - [ ] Docker Compose starts the API with healthy PostgreSQL/pgvector and optional local object-store dependencies.
 - [x] `.env.example` documents `APP_ENV`, `DATABASE_URL`, object-store settings, `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`, provider modes, and scrape freshness settings without real secrets.
 - [ ] Profile, extraction, evidence-search, recommendation, invocation, conversation, proposal-confirmation, summary-revision, undo, and run-inspection routes publish versioned schemas and typed errors.
+- [ ] `POST /v1/evidence/search` returns the same read-only contract from Supabase and fixture adapters, including source approval, evidence state, distinct date fields, provenance, and explicit no-evidence outcomes.
 - [ ] Complete, incomplete, invalid, no-evidence, and dependency-failure fixtures pass API contract tests.
 - [ ] Anonymous synthetic sessions can retain profile versions, extraction corrections, recommendation results, conversations, action traces, summary revisions, and run events for replay and undo.
 - [ ] Repeated mutating requests follow documented idempotency rules and do not create duplicate active records.
@@ -44,4 +46,4 @@ E10 owns transport, schema validation, repositories, and common errors. It does 
 
 ## POC boundary
 
-Mock identity and disposable synthetic state are sufficient. Production authentication, tenant isolation, encryption operations, retention controls, backups, and public-service reliability remain in E09.
+Mock identity and disposable synthetic state are sufficient. Supabase is the first E06 integration adapter because it is already implemented, but this temporary delivery choice does not replace the local PostgreSQL/pgvector target or complete the Docker Compose DOD. Production authentication, tenant isolation, encryption operations, retention controls, backups, and public-service reliability remain in E09.

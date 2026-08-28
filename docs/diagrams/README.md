@@ -8,7 +8,7 @@ These diagrams describe the CoverCheck SG POC and its smallest intended integrat
 | [Local topology](local-topology.md) | Docker Compose services, health boundaries, local `.env`, volumes, and OpenRouter access |
 | [AWS topology](aws-topology.md) | AWS target topology and service mapping for each epic/module |
 | [Workflow diagram](workflow.md) | User and system workflow from readiness quiz through conversational exploration and dynamic revision |
-| [Sequence diagram](sequence.md) | Current browser-only flow, target local OpenRouter flow, and conversational read/change paths |
+| [Sequence diagram](sequence.md) | Current fixture-API flow, first Supabase-backed read-only RAG integration, target local OpenRouter flow, and consequential conversational paths |
 | [ER diagram](er-diagram.md) | Current SQL model plus proposed workflow, conversation, action, and summary-revision state |
 
 ## Notation
@@ -20,3 +20,5 @@ These diagrams describe the CoverCheck SG POC and its smallest intended integrat
 - **AWS target:** A planned managed-service migration for the same containers and contracts, not evidence that deployment exists.
 
 The related ownership and DOD live in the [epic register](../epics/README.md).
+
+The approved interim adapter, catalogue, provider, date-field, and orchestration decisions are recorded in the [RAG and website integration decision](../evaluation/2026-08-28-rag-website-integration-decisions.md). The interim Supabase path does not replace the local topology target.

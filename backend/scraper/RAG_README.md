@@ -1,6 +1,6 @@
 # Insurance RAG database
 
-This folder contains the product-information RAG implementation for the `Darren` information system described in [`PLAN.md`](../../PLAN.md). Its responsibility is narrow:
+This folder contains the product-information RAG implementation for the `Darren` information system described in [`PLAN.md`](../../docs/PLAN.md). Its responsibility is narrow:
 
 - ingest insurer brochure extractions into normalized Supabase tables;
 - create evidence-rich policy chunks and embeddings;
@@ -8,6 +8,21 @@ This folder contains the product-information RAG implementation for the `Darren`
 - preserve policy, plan, benefit, rider, exclusion, source, and confidence metadata.
 
 It does **not** calculate a user's protection gap, decide eligibility, rank suitable products, or tell a user to replace an existing policy. Those belong to the deterministic decision-support system described in the project plan.
+
+## Application integration boundary
+
+The current RAG and website paths are implemented but isolated. Retrieval runs through this folder's Supabase-backed CLI, while the website calls the FastAPI fixture conversation routes. The first integration slice will expose the existing retrieval implementation through E10's typed `POST /v1/evidence/search` contract and a deterministic fixture fallback.
+
+The approved scope, date research, delivery sequence, and remaining controls are recorded in the [RAG and website integration decisions](../../docs/evaluation/2026-08-28-rag-website-integration-decisions.md).
+
+- Real-product RAG is read-only across the product: it may support cited questions and broad catalogue exploration, but it does not enter E07's synthetic-plan ranking or become a recommendation.
+- All 71 cached policy records may be searched. Every result must expose an evidence state such as approved, unverified, stale, or unknown; inclusion in the cache is not source approval or proof of suitability.
+- Supabase/PostgREST is the first integration adapter because it is the implemented store. This is a temporary delivery deviation, not a change to the approved local PostgreSQL/pgvector target in the project plan.
+- A fixture adapter must return the same evidence contract when Supabase or OpenAI embeddings are unavailable.
+- OpenAI remains the offline brochure-extraction and embedding provider. OpenRouter remains the configured E04/E11 document and explanation provider; neither provider's output may alter deterministic ranking.
+- Consequential profile, extraction, comparison, or recommendation changes remain behind E11's typed orchestration, confirmation, and E07 rerun controls.
+
+The evidence contract must distinguish three dates: `document_as_of_date` from brochure wording, `product_effective_date` from an authoritative product or policy source, and `retrieved_at` from capture or ingestion. A recent retrieval timestamp must not be presented as a product effective date.
 
 ## What is implemented
 
@@ -233,11 +248,11 @@ Recommended application flow:
 
 The RAG database implementation is usable, but `PLAN.md` identifies several components that are not present in this repository:
 
-1. **Effective/version dates:** most extraction records have a retrieval timestamp and content hash, but no authoritative brochure effective date or product version. Do not claim that a result is current solely because it was recently ingested.
+1. **As-of, effective, and version dates:** none of the 87 structured policy rows currently stores an explicit effective date or product version. Seventy-two of the 79 cached brochure files contain a recognizable `information correct/accurate as at` statement, but extraction does not yet retain it. Extract those statements as `document_as_of_date`, research official sources for the seven undated Great Eastern files, preserve `unknown` where no authoritative date is available, and never substitute the 26-27 August 2026 capture date for product effectiveness.
 2. **Six missing FWD source URLs:** the FWD extraction folder has no scraper `manifest.csv`, so Life PA, Personal Accident, MultiCover CI, Recover First, Future First, and Life Protection retain local evidence paths but no product-page or brochure URL. Restore a FWD manifest and rerun ingestion to populate them.
 3. **Complete premium data:** brochures rarely contain a quote for a specific age, sex, smoking status, sum assured, and term. Affordability cannot be enforced until a premium source or quote workflow populates `policy_premiums`.
 4. **Complete contractual exclusions:** brochure extraction contains only exclusions explicitly printed in the brochure. Policy wording would be a separate, higher-authority source.
-5. **Application API/AgentCore entrypoint:** no backend service currently exposes retrieval to the four-agent orchestration layer. `query_insurance_rag.py` is a CLI and reference implementation.
+5. **Application API entrypoint:** no backend service currently exposes retrieval to the website or orchestration layer. `query_insurance_rag.py` is a CLI and reference implementation; E10 must expose it through the versioned evidence-search contract with Supabase and fixture adapters.
 6. **Decision-support contracts:** there are no implemented user-profile, coverage-gap, eligibility-rule, recommendation-run, or recommendation-evidence tables/services yet. Those are outside the RAG database boundary but are required for the full recommendation system.
 7. **Retrieval evaluation set:** the plan requires expected-source-in-top-5 performance of at least 90%. A labelled query set and evaluation script have not yet been created.
 8. **AWS decision:** the current implementation uses Supabase pgvector and OpenAI embeddings. `PLAN.md` still lists Amazon Bedrock/AgentCore as an open stack decision. If AWS is mandatory, keep the relational/chunk contracts and replace the embedding/retrieval adapter rather than redoing extraction.

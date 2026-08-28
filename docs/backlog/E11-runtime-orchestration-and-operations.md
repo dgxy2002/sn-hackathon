@@ -158,7 +158,7 @@
 | Size | L |
 | Depends on | E10-T08, E11-T03, E11-T05 |
 
-**User story:** As a reviewer, I need conversational requests executed through a bounded state machine so the model can sequence useful actions without gaining arbitrary application control.
+**User story:** As a reviewer, I need consequential conversational requests executed through a bounded state machine so the model can sequence useful actions without gaining arbitrary application control.
 
 **Requirements:** URS-FR-027, URS-FR-028, URS-FR-029, URS-FR-030, URS-FR-032, URS-NFR-018, URS-NFR-019; PRD-FR-033, PRD-FR-034, PRD-FR-035, PRD-FR-036, PRD-FR-038, PRD-NFR-023, PRD-NFR-024, PRD-NFR-026.
 
@@ -169,3 +169,5 @@
 - [ ] Model output is never executed as HTML, JavaScript, selectors, coordinates, SQL, arbitrary URLs, or undeclared tool properties.
 - [ ] Ordered events expose intent, tool, target, status, evidence count, confirmation state, affected regions, versions, latency, tokens, cost, and errors without hidden reasoning.
 - [ ] Fixture and configured OpenRouter adapters support identical normal, unsupported, stale, conflict, timeout, provider-failure, and loop-limit scenarios.
+
+Read-only questions and cached-catalogue exploration may call the typed E10/E06 evidence service without entering this coordinator. Any proposal, canonical input change, deterministic rerun, summary revision, replay, or undo remains within E11's bounded tool policy.
