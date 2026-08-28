@@ -87,12 +87,12 @@
 **Acceptance criteria:**
 
 - [ ] Profile create/read/version, extraction submit/review, evidence search, recommendation evaluation, and run-inspection routes match the PRD API surface.
-- [ ] `POST /v1/evidence/search` calls an E06 service through Supabase or deterministic fixture adapters and returns identical versioned response schemas.
-- [ ] Evidence responses distinguish source approval, evidence state, document as-of date, product effective date, retrieval date, provenance, and synthetic status.
-- [ ] Real, cached, synthetic, and simulated adapters return the same response schemas.
-- [ ] Each response includes mode, contract version, and run or correlation ID.
+- [x] `POST /v1/evidence/search` calls an E06 service through Supabase or deterministic fixture adapters and returns identical versioned response schemas.
+- [x] Evidence responses distinguish source approval, evidence state, document as-of date, product effective date, retrieval date, provenance, and synthetic status.
+- [x] Real, cached, synthetic, and simulated adapters return the same response schemas.
+- [x] Each response includes mode, contract version, and run or correlation ID.
 - [ ] Missing information, low-confidence review, no evidence, no eligible plan, stale evidence, timeout, and dependency failure are typed outcomes.
-- [ ] Capability-specific business logic remains outside route handlers.
+- [x] Capability-specific business logic remains outside route handlers.
 
 **Delivery order:** Implement the direct read-only E10/E06 path first. E11 is not required to relay a typed evidence query, but remains mandatory for proposals, confirmed input changes, deterministic reruns, revisions, and undo.
 
@@ -114,11 +114,11 @@
 - [ ] Contract tests exercise every success and terminal-error response.
 - [ ] Repeated mutating requests follow documented idempotency behavior.
 - [ ] Dependency timeouts and retries are bounded and tested.
-- [ ] The frontend completes one normal fixture scenario through the API.
+- [x] The frontend completes one normal fixture scenario through the API.
 - [ ] The frontend completes read-only RAG questions and broad cached-catalogue exploration through both Supabase and fixture modes without changing the synthetic recommendation.
 - [x] Clean setup and test commands are documented in the repository README.
 
-**Current evidence:** Idempotent conversation messages, typed conflicts, and the live frontend/API smoke path are covered by [`backend/tests/test_conversations.py`](../../backend/tests/test_conversations.py) and the [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md). Full capability-route coverage remains pending.
+**Current evidence:** Idempotent conversation messages, typed conflicts, cached evidence, and the live frontend/API path are covered by [`backend/tests/test_conversations.py`](../../backend/tests/test_conversations.py), [`backend/tests/test_evidence.py`](../../backend/tests/test_evidence.py), the [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md), and the [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md). Supabase browser parity and full capability-route coverage remain pending.
 
 ## E10-T06 - Containerize the local API and state services
 
@@ -186,3 +186,25 @@
 - [ ] Typed errors include action not allowed, confirmation required, revision conflict, no evidence, dependency unavailable, timeout, and loop limit.
 
 **Current evidence:** Conversation creation, idempotent messages, action events, action-not-allowed behavior, dependency blocking, and optimistic revision conflicts are implemented in [`backend/app/conversations.py`](../../backend/app/conversations.py). Proposal, confirmation, revision, replay, undo, no-evidence, timeout, and loop-limit routes remain pending.
+
+## E10-T09 - Expose the read-only evidence-comparison API
+
+| Field | Value |
+|---|---|
+| Status | Ready |
+| Priority | P1 |
+| Size | M |
+| Depends on | E06-T09, E10-T04 |
+
+**User story:** As the website, I need one typed endpoint for selected real-product evidence so comparison rendering cannot invent fields or mutate recommendation state.
+
+**Requirements:** URS-FR-017, URS-FR-033, URS-FR-034, URS-NFR-010, URS-NFR-011, URS-NFR-022; PRD-FR-039, PRD-FR-040, PRD-NFR-008, PRD-NFR-010, PRD-NFR-029.
+
+**Acceptance criteria:**
+
+- [ ] `POST /v1/evidence/compare` accepts two to four product IDs from one category and rejects non-comparison-eligible or mixed-category selections.
+- [ ] The response returns neutral ordering, normalized fields, unknown state, evidence IDs, source/date/version state, warnings, and comparison gate reasons.
+- [ ] The response carries active profile, catalogue, recommendation, and revision references without changing them.
+- [ ] Repeated requests are deterministic and fixture, cached, Supabase, and later local PostgreSQL adapters use the same contract.
+- [ ] Invalid selection, stale/conflicting evidence, missing comparison evidence, timeout, and dependency failure return typed outcomes.
+- [ ] Contract tests prove that the endpoint cannot call E07 or create profile, recommendation, proposal, or summary-revision records.

@@ -17,8 +17,9 @@ flowchart TD
     K[Build normalized user and policy profile]
     L[Calculate protection gaps and affordability]
     M[Retrieve dated product evidence]
-    N[Apply hard constraints and rank eligible plans]
-    O[Explain reasons, trade-offs, assumptions, and evidence]
+    M1[Compare selected real-product evidence without ranking]
+    N[Apply hard constraints and rank eligible synthetic plans]
+    O[Explain synthetic reasons, trade-offs, and assumptions]
     P[Ask CoverCheck a follow-up or request]
     S{Request type}
     T[Answer with dated evidence]
@@ -34,7 +35,8 @@ flowchart TD
     G -- Yes --> H --> I --> J --> K
     G -- No or skip --> R[Mark current-policy fields unknown] --> K
     K --> L
-    L --> M --> N --> O --> P --> S
+    L --> N --> O --> P --> S
+    L --> M --> M1 --> P
     S -- Question --> T --> Q
     S -- Presentation --> U --> Q
     S -- Profile, comparison, or policy change --> V --> W
@@ -46,9 +48,9 @@ flowchart TD
     classDef implemented fill:#e7f4ed,stroke:#246b45,color:#123b28;
     classDef simulated fill:#fff3d6,stroke:#a66500,color:#573900;
     classDef planned fill:#edf1f7,stroke:#53657d,color:#263545,stroke-dasharray: 5 4;
-    class A,B,C,D,E,F,H,L,P,U,Q implemented;
+    class A,B,C,D,E,F,H,L,M,P,U,Q implemented;
     class I,J,N,O,S,T simulated;
-    class G,K,M,R,V,W,X,Y,Z planned;
+    class G,K,M1,R,V,W,X,Y,Z planned;
 ```
 
 ## Current POC status
@@ -61,12 +63,12 @@ flowchart TD
 | No-policy path | Navigation can continue, but the explicit API state and tests are pending |
 | Extraction review | Synthetic, hard-coded fields and confidence values |
 | Gap analysis | Deterministic death and critical-illness calculations |
-| Product retrieval | Supabase-backed ingestion and typed retrieval CLI exist for 71 cached policies; no website or E10 evidence route consumes them |
+| Product retrieval | Cached, synthetic, and Supabase adapters expose one E10 evidence contract; fixed evaluation and local PostgreSQL parity remain pending |
 | Ranking | Static synthetic comparison with a budget rationale |
 | Adaptation | User can navigate back, but outputs are not versioned or change-explained |
-| Conversational summary | Final-page panel and FastAPI fixture agent provide typed Q&A, citations, action traces, focus/filter actions, idempotent replay, and blocked decision-input changes; real RAG, proposals, revisions, and undo remain pending |
-| Approved next slice | Expose all cached RAG records through E10 Supabase and fixture adapters for read-only questions and exploration, with explicit approval/evidence state and no effect on E07 synthetic ranking |
+| Conversational summary | Final-page panel and FastAPI service provide typed Q&A, cached evidence, action traces, focus/filter actions, idempotent replay, and blocked decision-input changes; proposals, revisions, and undo remain pending |
+| Approved next slice | Phase 3B: compare a small comparison-eligible real-product subset with cited fields, neutral ordering, explicit unknowns, and no effect on E07 synthetic ranking |
 
 ## Workflow invariant
 
-Unknown values remain unknown. The workflow must return an insufficient-data outcome rather than invent policy terms, eligibility, or user circumstances. Brochure as-of dates, product effective dates, and retrieval dates remain distinct. Real-product RAG is read-only and cannot become a recommendation. Presentation actions cannot mutate canonical inputs, and consequential changes cannot reach the summary without confirmation and a deterministic E07 rerun.
+Unknown values remain unknown. The workflow must return an insufficient-data outcome rather than invent policy terms, eligibility, or user circumstances. Brochure as-of dates, product effective dates, and retrieval dates remain distinct. Phase 3B real-product evidence is read-only and non-ranked. Real products can enter deterministic ranking only through the separately approved Phase 6 gate. Presentation actions cannot mutate canonical inputs, and consequential changes cannot reach the summary without confirmation and a deterministic E07 rerun.

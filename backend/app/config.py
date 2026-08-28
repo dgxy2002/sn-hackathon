@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Literal, Mapping, cast
 
 
@@ -32,6 +32,16 @@ def _origins(value: str | None) -> tuple[str, ...]:
     return origins
 
 
+def _positive_int(value: str, variable: str) -> int:
+    try:
+        parsed = int(value)
+    except ValueError as error:
+        raise ConfigurationError(f"{variable} must be an integer") from error
+    if parsed < 1:
+        raise ConfigurationError(f"{variable} must be greater than zero")
+    return parsed
+
+
 @dataclass(frozen=True)
 class Settings:
     app_env: str
@@ -45,12 +55,26 @@ class Settings:
     database_configured: bool
     object_store_configured: bool
     openrouter_configured: bool
+    supabase_url: str | None = field(repr=False)
+    supabase_service_role_key: str | None = field(repr=False)
+    openai_key: str | None = field(repr=False)
+    evidence_corpus_path: str | None
+    evidence_max_age_days: int
+    dependency_timeout_seconds: int
 
     @classmethod
     def from_env(cls, environ: Mapping[str, str] | None = None) -> "Settings":
         values = os.environ if environ is None else environ
         openrouter_key = values.get("OPENROUTER_API_KEY", "").strip()
         openrouter_model = values.get("OPENROUTER_MODEL", "").strip()
+        supabase_url = values.get("SUPABASE_URL", "").strip()
+        supabase_service_role_key = values.get(
+            "SUPABASE_SERVICE_ROLE_KEY", ""
+        ).strip()
+        openai_key = (
+            values.get("OPENAI_KEY", "").strip()
+            or values.get("OPENAI_API_KEY", "").strip()
+        )
 
         settings = cls(
             app_env=values.get("APP_ENV", "development").strip(),
@@ -59,7 +83,7 @@ class Settings:
             extraction_mode=_mode(
                 values.get("EXTRACTION_MODE", "simulated"), "EXTRACTION_MODE"
             ),
-            evidence_mode=_mode(values.get("EVIDENCE_MODE", "synthetic"), "EVIDENCE_MODE"),
+            evidence_mode=_mode(values.get("EVIDENCE_MODE", "cached"), "EVIDENCE_MODE"),
             recommendation_mode=_mode(
                 values.get("RECOMMENDATION_MODE", "simulated"), "RECOMMENDATION_MODE"
             ),
@@ -69,12 +93,27 @@ class Settings:
             conversation_mode=_mode(
                 values.get("CONVERSATION_MODE", "simulated"), "CONVERSATION_MODE"
             ),
-            database_configured=bool(values.get("DATABASE_URL", "").strip()),
+            database_configured=bool(
+                values.get("DATABASE_URL", "").strip()
+                or (supabase_url and supabase_service_role_key)
+            ),
             object_store_configured=bool(
                 values.get("OBJECT_STORE_ENDPOINT", "").strip()
                 and values.get("OBJECT_STORE_BUCKET", "").strip()
             ),
             openrouter_configured=bool(openrouter_key and openrouter_model),
+            supabase_url=supabase_url or None,
+            supabase_service_role_key=supabase_service_role_key or None,
+            openai_key=openai_key or None,
+            evidence_corpus_path=values.get("EVIDENCE_CORPUS_PATH", "").strip() or None,
+            evidence_max_age_days=_positive_int(
+                values.get("EVIDENCE_MAX_AGE_DAYS", "365"),
+                "EVIDENCE_MAX_AGE_DAYS",
+            ),
+            dependency_timeout_seconds=_positive_int(
+                values.get("DEPENDENCY_TIMEOUT_SECONDS", "20"),
+                "DEPENDENCY_TIMEOUT_SECONDS",
+            ),
         )
         settings.validate()
         return settings
@@ -91,4 +130,10 @@ class Settings:
         if "live" in openrouter_modes and not self.openrouter_configured:
             raise ConfigurationError(
                 "Live model capabilities require OPENROUTER_API_KEY and OPENROUTER_MODEL"
+            )
+        if self.evidence_mode == "live" and not (
+            self.supabase_url and self.supabase_service_role_key and self.openai_key
+        ):
+            raise ConfigurationError(
+                "Live evidence requires SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, and OPENAI_KEY"
             )

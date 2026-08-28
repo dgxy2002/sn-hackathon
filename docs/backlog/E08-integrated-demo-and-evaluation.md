@@ -40,7 +40,7 @@
 **Acceptance criteria:**
 
 - [ ] The frontend can call E10 without embedded capability fixtures on the normal integration path.
-- [ ] Read-only RAG is available through E10 across applicable website contexts and cannot alter E07 synthetic recommendation inputs or results.
+- [x] Read-only RAG is available through E10 across applicable website contexts and cannot alter E07 synthetic recommendation inputs or results.
 - [ ] E11 invokes only allowed extraction, profile, retrieval, and decision tools.
 - [ ] One normal and one changed-goal scenario return schema-valid results.
 - [ ] Live, cached, simulated, synthetic, approved, unverified, stale, and unknown evidence states are visibly distinguished where applicable.
@@ -83,11 +83,11 @@
 
 - [x] The frontend production build succeeds.
 - [x] The README documents setup for every demonstrated component.
-- [ ] A clean environment completes the normal scenario.
+- [x] A clean environment completes the normal scenario.
 - [ ] A clean environment completes the changed-goal scenario.
 - [x] No synthetic data is presented as real.
 
-**Current evidence:** `bash scripts/verify-poc.sh` passes the backend fixture contracts and frontend production build. The [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md) records the live frontend/API browser path and its remaining integration gaps.
+**Current evidence:** `bash scripts/verify-poc.sh` passes the backend contracts, frontend production build, and Compose configuration. The [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md) records the first frontend/API path; the [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md) records the containerized cached-evidence path and its remaining integration gaps.
 
 ## E08-T05 - Rehearse and record the five-minute demo
 
@@ -195,3 +195,47 @@
 - [ ] No model self-grades its own conversational or page-changing output.
 
 **Current evidence:** The [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md) and [`backend/tests/test_conversations.py`](../../backend/tests/test_conversations.py) cover grounded Q&A, presentation focus/filtering, idempotent replay, blocked decision-input change, dependency failure, and stale revision. The remaining declared scenarios and model-mode metrics are untested.
+
+## E08-T10 - Accept Phase 3B real-product evidence comparison
+
+| Field | Value |
+|---|---|
+| Status | Ready |
+| Priority | P1 |
+| Size | M |
+| Depends on | E01-T06, E06-T09, E10-T09, E12-T06 |
+
+**User story:** As a reviewer, I need independent evidence that real-product comparison is factual, neutral, and isolated from recommendation state before it becomes a demo feature.
+
+**Requirements:** URS-FR-033, URS-FR-034, URS-NFR-004, URS-NFR-013, URS-NFR-022; PRD-FR-039, PRD-FR-040, PRD-NFR-016, PRD-NFR-028, PRD-NFR-029.
+
+**Acceptance criteria:**
+
+- [ ] Predeclared fixtures cover two to four complete products, partial fields, mixed category, stale, conflicting, unapproved, unsupported, and no-evidence cases.
+- [ ] One hundred percent of populated cells resolve to the expected field evidence, source, date/version state, and normalized unit.
+- [ ] Unknown values remain unknown and prohibited recommendation language appears zero times.
+- [ ] Discovery-result permutations always produce provider/product comparison ordering after the same user selection.
+- [ ] Before and after profile, E07 catalogue, recommendation, and summary-revision contracts are byte-equivalent for presentation-only comparison actions.
+- [ ] Desktop, mobile, keyboard, screen-reader, reduced-motion, cached-adapter, and fixture-adapter scenarios pass.
+
+## E08-T11 - Evaluate the Phase 6 real-product ranked pilot
+
+| Field | Value |
+|---|---|
+| Status | Ready |
+| Priority | P1 |
+| Size | M |
+| Depends on | E07-T08 |
+
+**User story:** As an approving reviewer, I need independent real-product ranking tests so DEC-004 cannot be treated as satisfied by plausible model output or a successful evidence comparison.
+
+**Requirements:** URS-FR-015, URS-FR-019, URS-FR-026, URS-FR-034, URS-FR-035, URS-NFR-003, URS-NFR-004, URS-NFR-013; PRD-FR-024, PRD-FR-031, PRD-FR-041, PRD-NFR-002, PRD-NFR-015, PRD-NFR-016.
+
+**Acceptance criteria:**
+
+- [ ] Real-product profile, catalogue, evidence, ruleset, expected eligibility, expected rank, and abstention fixtures are written before execution and name independent reviewers.
+- [ ] Hard-rule violations equal zero and the approved ranking agreement target is met without model self-grading.
+- [ ] Missing, stale, conflicting, or superseded decision inputs produce the expected exclusion or no-recommendation result.
+- [ ] Repeated version-identical inputs produce identical eligibility, fit, ordering, reasons, and evidence references.
+- [ ] Explanation fidelity, replacement safeguards, synthetic fallback, latency, and failure behavior are reported with limitations.
+- [ ] Failure does not affect Phase 3B evidence comparison and leaves real-product ranked mode disabled.

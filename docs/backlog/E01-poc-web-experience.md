@@ -61,8 +61,7 @@
 **Acceptance criteria:**
 
 - [ ] The final page renders conversation, action-event, proposal, summary-revision, and delta contracts without trusting model-authored markup.
-- [ ] Presentation actions can focus, expand, sort, filter, and temporarily add or remove approved comparison rows.
-- [ ] Real-product search results show source, date type, approval/evidence state, synthetic status, and the read-only boundary from E07 recommendations.
+- [ ] Presentation actions can focus, expand, sort, and filter existing summary regions.
 - [ ] Applied revisions update all affected score, gap, comparison, assumption, evidence, and explanation regions atomically.
 - [ ] Changed values are highlighted with stable layout, visible focus, reduced-motion behavior, and screen-reader announcements.
 - [ ] Confirmation, cancellation, conflict, failure, replay, and undo states remain operable on narrow and wide viewports.
@@ -111,3 +110,25 @@
 - [x] No interface offers purchase, surrender, replacement, or cancellation actions.
 
 **Evidence:** [`frontend/src/main.js`](../../frontend/src/main.js).
+
+## E01-T06 - Render real-product evidence comparison mode
+
+| Field | Value |
+|---|---|
+| Status | Ready |
+| Priority | P1 |
+| Size | M |
+| Depends on | E01-T03, E06-T09, E10-T09 |
+
+**User story:** As a user, I need selected real products displayed side by side without recommendation signals so I can inspect sourced differences before relying on a ranked result.
+
+**Requirements:** URS-FR-033, URS-NFR-002, URS-NFR-022; PRD-FR-040, PRD-NFR-027, PRD-NFR-028, PRD-NFR-029.
+
+**Acceptance criteria:**
+
+- [ ] Two to four comparison-eligible products from one category render in a dedicated evidence mode on the main comparison surface.
+- [ ] Rows use provider then product name ordering and show no rank, score, best-plan badge, or suitability language.
+- [ ] Every populated cell exposes its source, evidence span, date/version state, and normalized unit; unresolved values show `Unknown`.
+- [ ] The synthetic ranked recommendation remains visually and semantically separate.
+- [ ] Adding, removing, sorting, or filtering evidence rows leaves active profile, E07 catalogue, recommendation, and revision references unchanged.
+- [ ] Desktop, mobile, keyboard, screen-reader, and reduced-motion checks pass.

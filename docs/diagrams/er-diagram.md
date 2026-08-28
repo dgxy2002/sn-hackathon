@@ -176,6 +176,51 @@ erDiagram
 
 `document_as_of_date`, `product_effective_date`, and `retrieved_at` are distinct. Unknown values remain null. `evidence_state` records approval, freshness, conflict, or uncertainty; broad cache inclusion alone never means approved or suitable.
 
+## Proposed Phase 3B evidence-comparison contract
+
+The comparison is a read-only response contract, not a recommendation record or proof that new SQL tables already exist.
+
+```mermaid
+erDiagram
+    EVIDENCE_COMPARISON ||--|{ COMPARISON_PRODUCT : includes
+    COMPARISON_PRODUCT ||--o{ COMPARISON_CELL : contains
+    COMPARISON_CELL }o--|| EVIDENCE_RESULT : cites
+    EVIDENCE_COMPARISON ||--|| CANONICAL_REFERENCES : preserves
+
+    EVIDENCE_COMPARISON {
+        TEXT comparison_id
+        TEXT contract_version
+        TEXT category
+        TEXT ordering_rule
+        TEXT adapter_mode
+    }
+
+    COMPARISON_PRODUCT {
+        TEXT policy_id
+        TEXT provider
+        TEXT product
+        TEXT comparison_state
+        JSONB gate_reasons
+    }
+
+    COMPARISON_CELL {
+        TEXT field_key
+        JSONB normalized_value
+        TEXT normalized_unit
+        BOOLEAN unknown
+        TEXT evidence_id
+    }
+
+    CANONICAL_REFERENCES {
+        TEXT profile_version
+        TEXT catalogue_version
+        TEXT recommendation_version
+        TEXT summary_revision_id
+    }
+```
+
+Products enter this contract only when their comparison gate passes. Provider/product ordering is fixed after user selection. Canonical references are returned unchanged to make isolation testable; Phase 3B does not create a recommendation or summary revision.
+
 ## Proposed POC runtime model
 
 The E10 repository contract adds disposable synthetic workflow state without claiming that these tables already exist.
@@ -338,5 +383,6 @@ erDiagram
 - Conversation and revision records are synthetic-only current-session state by default. They retain typed content and version lineage, not raw document bytes, hidden model reasoning, or executable page instructions.
 - Presentation-only revisions may retain the same recommendation run; confirmed decision-input or extraction changes reference a fresh deterministic recommendation run. Parent and undo fields are logical self-references.
 - The first E10/E06 integration adapter may use the existing Supabase path, with a schema-identical deterministic fixture adapter for fallback. E10 still targets local PostgreSQL/pgvector in Docker Compose; the same migrations later target RDS PostgreSQL/pgvector.
+- Phase 3B comparison records are projections over evidence, not E07 recommendation rows. A later Phase 6 ranked pilot may reference real products only after ranking-eligibility and DEC-004 gates pass.
 - Permitted source snapshots may use local S3-compatible storage and later Amazon S3; uploaded user document bytes are not persisted by default.
 - Production identity and user-data controls remain in [E09](../epics/E09-productionisation-and-security.md).

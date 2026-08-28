@@ -5,7 +5,7 @@
 | Primary owner | Deborah |
 | Priority | P0 |
 | Status | In progress |
-| Outcome | Synthetic profiles receive reproducible plan-category rankings with visible reasons, exclusions, assumptions, and trade-offs. |
+| Outcome | Synthetic profiles receive reproducible rankings now; a bounded real-product ranked pilot may use the same deterministic controls only after the Phase 6 gate. |
 
 ## Scope
 
@@ -16,12 +16,14 @@
 - Grounded plain-language explanation that cannot alter the calculated result.
 - Alternative and insufficient-data outcomes.
 - Deterministic reruns and typed before/after deltas for confirmed profile, comparison, or extraction changes.
+- A separately approved Phase 6 extension that admits only ranking-eligible real products and preserves no-recommendation behavior.
 
 ## Requirements traceability
 
 - **URS:** [URS-FR-009, URS-FR-010, URS-FR-011, URS-FR-012, URS-FR-015, URS-FR-017, URS-FR-019, URS-FR-026, URS-FR-031, URS-NFR-003, URS-NFR-004, URS-NFR-010, URS-NFR-013, URS-NFR-019](../urs/URS.md)
 - **PRD:** [PRD-FR-009, PRD-FR-010, PRD-FR-019, PRD-FR-024, PRD-FR-031, PRD-FR-037, PRD-NFR-002, PRD-NFR-003, PRD-NFR-013, PRD-NFR-015, PRD-NFR-016, PRD-NFR-025](../prd/PRD.md)
 - **Backlog:** [E07 tickets](../backlog/E07-explainable-decision-support.md)
+- **Phase 6:** URS-FR-034, URS-FR-035; PRD-FR-039, PRD-FR-041.
 
 ## Repository evidence
 
@@ -42,7 +44,9 @@
 - [ ] Replacement and underwriting risks are flagged without recommending cancellation or surrender.
 - [ ] Every recommendation records the formulation and ruleset versions used.
 - [ ] Confirmed changes rerun the same formulation and return one coherent delta; undo restores or recalculates a complete prior result rather than patching displayed values.
+- [ ] Real-product ranked mode remains disabled until Phase 3B acceptance, all synthetic E07 correctness gates, ranking-eligible product data, predeclared E08 tests, and explicit DEC-004/compliance approval pass.
+- [ ] Once approved for the internal pilot, real-product ranking is deterministic, versioned, independently evaluated, and able to abstain without model-authored repairs.
 
 ## POC boundary
 
-Outputs are educational comparisons using synthetic plans. The system must not purchase, replace, surrender, or recommend cancelling a policy.
+Current POC outputs are educational comparisons using synthetic plans. Phase 3B real-product evidence is non-ranked. A Phase 6 internal ranked pilot does not authorize public use, purchase, replacement, surrender, or cancellation recommendations.

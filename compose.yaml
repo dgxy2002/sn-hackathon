@@ -1,0 +1,62 @@
+name: covercheck
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        VITE_API_URL: /api
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "${WEB_PORT:-4173}:8080"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1:8080/"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      APP_ENV: local-compose
+      EVIDENCE_MODE: cached
+      EVIDENCE_MAX_AGE_DAYS: "365"
+      DEPENDENCY_TIMEOUT_SECONDS: "20"
+      PROFILE_MODE: synthetic
+      EXTRACTION_MODE: simulated
+      RECOMMENDATION_MODE: simulated
+      ORCHESTRATION_MODE: simulated
+      CONVERSATION_MODE: simulated
+    ports:
+      - "${API_PORT:-8000}:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2)"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-covercheck}
+      POSTGRES_USER: ${POSTGRES_USER:-covercheck}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-covercheck-local-only}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./backend/docker/postgres-init.sql:/docker-entrypoint-initdb.d/001-pgvector.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  postgres-data:

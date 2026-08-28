@@ -76,6 +76,34 @@ sequenceDiagram
 
 This first slice searches all cached records but does not treat every record as approved. It keeps `document_as_of_date`, `product_effective_date`, and `retrieved_at` distinct, labels weak or stale evidence, and cannot change the E07 synthetic recommendation. It intentionally uses the existing Supabase adapter first; local PostgreSQL/pgvector remains the approved target.
 
+## Phase 3B real-product evidence-comparison sequence
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant SPA as E01 comparison surface
+    participant API as E10 API
+    participant Evidence as E06 comparison projection
+    participant E07 as Synthetic recommendation state
+
+    User->>SPA: Select two to four real products in one category
+    SPA->>API: POST /v1/evidence/compare with selected product IDs
+    API->>Evidence: Validate comparison eligibility and requested fields
+    Evidence->>Evidence: Normalize units and resolve field evidence
+    alt All products are comparison eligible
+        Evidence-->>API: Neutral product order, cited cells, unknowns, and gate state
+        API-->>SPA: Read-only comparison plus unchanged canonical references
+        SPA-->>User: Show "Real-product evidence comparison - not a recommendation"
+    else Selection or evidence fails a gate
+        Evidence-->>API: Typed stale, conflict, mixed-category, or unsupported result
+        API-->>SPA: Failure without partial comparison
+        SPA-->>User: Show why the product cannot be compared
+    end
+    Note over API,E07: E07 is not invoked and its catalogue, result, and revision remain unchanged
+```
+
+Phase 3B may follow the direct read-only integration before E11 exists. Discovery relevance can help the user find products, but the comparison uses provider/product ordering and contains no fit score, recommendation badge, or suitability claim.
+
 ## Target local Docker Compose sequence
 
 ```mermaid
@@ -202,4 +230,4 @@ sequenceDiagram
     end
 ```
 
-Read-only E06 retrieval may bypass E11 but not E10 schema validation or evidence-state rules. Consequential actions enter E11 and select only registered typed tools. Model output cannot execute page code or coordinates, search outside the cached E06 corpus, bypass confirmation, place real retrieved products into E07 ranking, or directly author profile versions, extracted values, eligibility, rankings, or displayed decision numbers.
+Read-only E06 retrieval and Phase 3B comparison may bypass E11 but not E10 schema validation, comparison-eligibility, or evidence-state rules. Consequential actions enter E11 and select only registered typed tools. Before the separately approved Phase 6 path, model output cannot execute page code or coordinates, search outside the cached E06 corpus, bypass confirmation, place real retrieved products into E07 ranking, or directly author profile versions, extracted values, eligibility, rankings, or displayed decision numbers. Phase 6 still uses E07 deterministically and never lets the model author rank.

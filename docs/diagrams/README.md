@@ -8,8 +8,8 @@ These diagrams describe the CoverCheck SG POC and its smallest intended integrat
 | [Local topology](local-topology.md) | Docker Compose services, health boundaries, local `.env`, volumes, and OpenRouter access |
 | [AWS topology](aws-topology.md) | AWS target topology and service mapping for each epic/module |
 | [Workflow diagram](workflow.md) | User and system workflow from readiness quiz through conversational exploration and dynamic revision |
-| [Sequence diagram](sequence.md) | Current fixture-API flow, first Supabase-backed read-only RAG integration, target local OpenRouter flow, and consequential conversational paths |
-| [ER diagram](er-diagram.md) | Current SQL model plus proposed workflow, conversation, action, and summary-revision state |
+| [Sequence diagram](sequence.md) | Current fixture/API flow, read-only RAG, Phase 3B evidence comparison, target local OpenRouter flow, and consequential conversational paths |
+| [ER diagram](er-diagram.md) | Current SQL model plus proposed evidence-comparison, workflow, conversation, action, and summary-revision state |
 
 ## Notation
 
@@ -21,4 +21,4 @@ These diagrams describe the CoverCheck SG POC and its smallest intended integrat
 
 The related ownership and DOD live in the [epic register](../epics/README.md).
 
-The approved interim adapter, catalogue, provider, date-field, and orchestration decisions are recorded in the [RAG and website integration decision](../evaluation/2026-08-28-rag-website-integration-decisions.md). The interim Supabase path does not replace the local topology target.
+The approved interim adapter, catalogue, provider, date-field, and orchestration decisions are recorded in the [RAG and website integration decision](../evaluation/2026-08-28-rag-website-integration-decisions.md). Phase 3B comparison and Phase 6 ranking gates are recorded in the [staged real-product decision](../evaluation/2026-08-28-real-product-comparison-and-ranking-stages.md). The interim Supabase path does not replace the local topology target.

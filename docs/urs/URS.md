@@ -5,9 +5,9 @@
 | Field | Value |
 |---|---|
 | Product | CoverCheck SG |
-| Version | 1.3 |
+| Version | 1.4 |
 | Status | POC baseline |
-| Date | 26 August 2026 |
+| Date | 28 August 2026 |
 | Audience | Product, engineering, research, and hackathon reviewers |
 | Source documents | [Project plan](../PLAN.md) and [initial product brief](../OnboardingPrompt.md) |
 
@@ -40,6 +40,7 @@ A first-time working adult in Singapore, primarily aged 19-29, who may have inhe
 - The user may not know policy names, benefits, exclusions, premiums, ownership, or employment-related coverage limits.
 - Unknown information is valid and must not be treated as no coverage.
 - The POC uses synthetic plans and synthetic policy documents unless explicitly labelled otherwise.
+- Real-product evidence may be searched or compared only according to its approved evidence state; this does not make it a recommendation.
 - Peer results are based only on a labelled hackathon pilot cohort, not the Singapore population.
 - The user remains responsible for confirming information with official sources or an authorized representative.
 
@@ -76,9 +77,12 @@ A first-time working adult in Singapore, primarily aged 19-29, who may have inhe
 | URS-FR-027 | The user shall be able to ask contextual follow-up questions from the final summary page. | P1 | The conversation retains the active profile, recommendation, evidence, and prior-turn context within the POC session. |
 | URS-FR-028 | The user shall be able to ask about approved plans and alternatives not shown in the initial comparison. | P1 | Answers and explored alternatives come only from the approved catalogue and retain source, date, freshness, and synthetic status. |
 | URS-FR-029 | The user shall be able to ask the agent to navigate, focus, filter, sort, or otherwise change the summary presentation. | P1 | Harmless presentation changes update the page through visible, allowlisted actions without changing decision inputs. |
-| URS-FR-030 | The user shall be able to request changes to profile inputs, comparison plans, or extracted policy fields from the conversation. | P1 | The system shows the proposed changes and requires confirmation before changing any decision input or reviewed policy field. |
+| URS-FR-030 | The user shall be able to request changes to profile inputs, canonical comparison plans, or extracted policy fields from the conversation. | P1 | The system shows the proposed changes and requires confirmation before changing any decision input or reviewed policy field. |
 | URS-FR-031 | The user shall see the summary update dynamically after an approved request and understand what changed. | P1 | A confirmed request creates a versioned revision, reruns deterministic analysis where required, highlights the delta, and offers undo. |
 | URS-FR-032 | A reviewer shall be able to inspect and replay the conversational agent's actions and resulting summary revisions. | P1 | The run exposes ordered intents, tools, evidence, confirmations, deterministic reruns, page revisions, and terminal status. |
+| URS-FR-033 | The user shall be able to compare two to four comparison-eligible real products side by side in a clearly non-ranked evidence mode. | P1 | Products come from one category, use neutral ordering, show only source-backed fields, preserve unknown values, and do not change the synthetic recommendation. |
+| URS-FR-034 | A reviewer shall be able to determine when a real product is searchable, comparison eligible, or ranking eligible. | P1 | Each state has explicit source, identity, freshness, field-completeness, evaluation, and approval gates; a weaker state never implies a stronger one. |
+| URS-FR-035 | An internal user shall receive a deterministic real-product ranking only after the ranked-pilot gate is approved. | P1 | The ranking remains disabled until Phase 5 acceptance, E07 correctness, ranking-eligible data, predeclared E08 tests, and explicit DEC-004/compliance approval are recorded. |
 
 ## 6. Non-functional user requirements
 
@@ -105,6 +109,7 @@ A first-time working adult in Singapore, primarily aged 19-29, who may have inhe
 | URS-NFR-019 | Conversational requests shall not bypass deterministic calculation, eligibility, ranking, extraction-review, or evidence rules. | P0 | The model can propose inputs and actions but cannot directly author canonical recommendation values. |
 | URS-NFR-020 | Conversation and summary-revision state shall be disposable and limited to the current synthetic POC session by default. | P1 | Starting a new session removes chat and revision history unless a versioned evaluation fixture explicitly retains it. |
 | URS-NFR-021 | The conversational interface shall expose progress, evidence, confirmation, failure, completion, and undo states accessibly. | P1 | Keyboard and screen-reader users can follow and control the same action lifecycle as pointer users. |
+| URS-NFR-022 | Real-product evidence comparison shall be provenance-complete, neutrally ordered, and isolated from canonical recommendation state. | P0 | Every populated cell has field evidence, source and date state; presentation-only changes leave profile, catalogue, recommendation, and revision versions unchanged. |
 
 ## 7. User journey acceptance
 
@@ -117,7 +122,8 @@ flowchart LR
     D1[Upload and review extracted policy]
     D2[Continue with policy fields unknown]
     E[See calculated gaps]
-    F[Compare evidence-backed options]
+    F[See synthetic ranked comparison]
+    F1[Optionally compare real-product evidence]
     G[Ask follow-up or explore alternatives]
     H{Request changes?}
     I[Preview and confirm decision inputs]
@@ -127,7 +133,7 @@ flowchart LR
     A --> B --> C --> D
     D -- Yes --> D1 --> E
     D -- No --> D2 --> E
-    E --> F --> G --> H
+    E --> F --> F1 --> G --> H
     H -- No --> K
     H -- Yes --> I --> J --> G
 ```
@@ -142,6 +148,7 @@ The minimum POC journey is accepted when one target user can complete it without
 - Exhaustive whole-market insurance coverage.
 - Production authentication, document retention, payments, or adviser communication.
 - Claims that the product is an independent financial adviser.
+- Real-product ranking before the Phase 6 ranked-pilot gate and public real-product ranking before E09 approval.
 
 ## 9. Traceability
 

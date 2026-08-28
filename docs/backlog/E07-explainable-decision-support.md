@@ -148,3 +148,26 @@
 - [ ] A typed delta identifies changed inputs, calculations, eligibility, ranking, comparison rows, assumptions, citations, and explanation facts.
 - [ ] Insufficient or stale evidence yields focused questions, warnings, or no recommendation rather than inferred values.
 - [ ] Undo recalculates or restores a coherent prior result and never patches individual displayed numbers directly.
+
+## E07-T08 - Enable the gated real-product ranked pilot
+
+| Field | Value |
+|---|---|
+| Status | Ready |
+| Priority | P1 |
+| Size | L |
+| Depends on | E06-T09, E07-T04, E07-T05, E07-T06, E08-T10, DEC-004 Phase 6 approval |
+
+**User story:** As an internal reviewer, I need real products ranked only from complete, approved evidence through the same deterministic formulation so the result can be audited and safely declined when evidence is insufficient.
+
+**Requirements:** URS-FR-010, URS-FR-011, URS-FR-015, URS-FR-026, URS-FR-034, URS-FR-035, URS-NFR-003, URS-NFR-004, URS-NFR-019; PRD-FR-019, PRD-FR-031, PRD-FR-039, PRD-FR-041, PRD-NFR-002, PRD-NFR-015, PRD-NFR-016.
+
+**Acceptance criteria:**
+
+- [ ] A named product, compliance, and decision-support approval reopens DEC-004 for a bounded internal Phase 6 pilot.
+- [ ] Only ranking-eligible products with complete formulation-required premiums, eligibility, benefits, exclusions, term, effective/version state, and freshness enter evaluation.
+- [ ] The deterministic engine records profile, catalogue, evidence, formulation, and ruleset versions and returns stable eligibility, fit, ordering, reason codes, and no-recommendation outcomes.
+- [ ] Incomplete, stale, conflicting, or unapproved products are excluded with reason codes and cannot be repaired by model inference.
+- [ ] Model-generated explanation cannot change eligibility, rank, score, values, evidence IDs, or abstention.
+- [ ] Synthetic ranked mode remains available as a labelled fallback and regression baseline.
+- [ ] The pilot cannot transact, recommend cancellation or surrender, claim whole-market coverage, or present itself as regulated advice.
