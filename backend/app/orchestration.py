@@ -60,7 +60,16 @@ class CoordinatorService:
                 self._append(events, run_id, "extracting", "extraction", "started")
                 extraction = self._extraction.submit(request.fixture_id)
                 self._append(events, run_id, "extracting", "extraction", "completed")
-            if extraction is None or extraction.review_required:
+            else:
+                self._append(
+                    events,
+                    run_id,
+                    "extracting",
+                    "extraction",
+                    "skipped",
+                    {"reason": "user_confirmed_policy_values"},
+                )
+            if extraction is not None and extraction.review_required:
                 self._append(
                     events,
                     run_id,
