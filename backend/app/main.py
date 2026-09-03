@@ -20,6 +20,11 @@ from .extraction import (
     FixtureExtractionService,
 )
 from .orchestration import CoordinatorService, RunNotFoundError
+from .model_gateway import (
+    BedrockExplanationService,
+    ExplanationService,
+    FixtureExplanationService,
+)
 from .conversations import (
     ConversationNotFoundError,
     ConversationService,
@@ -83,6 +88,7 @@ def _dependency(configured: bool, fallback_mode: CapabilityMode) -> DependencySt
 def create_app(
     settings: Settings | None = None,
     evidence_service: EvidenceService | None = None,
+    explanation_service: ExplanationService | None = None,
 ) -> FastAPI:
     runtime = settings or Settings.from_env()
     evidence = evidence_service or create_evidence_service(
@@ -98,10 +104,20 @@ def create_app(
     profiles = InMemoryProfileRepository()
     decisions = DecisionService(runtime.recommendation_mode)
     extractions = FixtureExtractionService(runtime.extraction_mode)
+    explanations = explanation_service or (
+        BedrockExplanationService(
+            model_id=runtime.bedrock_model_id or "",
+            region_name=runtime.aws_region or "",
+            timeout_seconds=runtime.dependency_timeout_seconds,
+        )
+        if runtime.orchestration_mode == "live"
+        else FixtureExplanationService()
+    )
     coordinator = CoordinatorService(
         profiles,
         extractions,
         decisions,
+        explanations,
         runtime.orchestration_mode,
     )
     conversations = ConversationService(evidence, profiles, decisions)
@@ -283,6 +299,7 @@ def create_app(
                 "database": _dependency(runtime.database_configured, "synthetic"),
                 "object_store": _dependency(runtime.object_store_configured, "simulated"),
                 "openrouter": _dependency(runtime.openrouter_configured, "simulated"),
+                "bedrock": _dependency(runtime.bedrock_configured, "simulated"),
             },
         )
 

@@ -7,6 +7,8 @@ from typing import Literal, Mapping, cast
 
 CapabilityMode = Literal["live", "cached", "synthetic", "simulated"]
 VALID_MODES = {"live", "cached", "synthetic", "simulated"}
+ModelProvider = Literal["fixture", "openrouter", "bedrock"]
+VALID_MODEL_PROVIDERS = {"fixture", "openrouter", "bedrock"}
 DEFAULT_ORIGINS = ("http://localhost:5173", "http://127.0.0.1:5173")
 
 
@@ -19,6 +21,13 @@ def _mode(value: str, variable: str) -> CapabilityMode:
         expected = ", ".join(sorted(VALID_MODES))
         raise ConfigurationError(f"{variable} must be one of: {expected}")
     return cast(CapabilityMode, value)
+
+
+def _provider(value: str, variable: str) -> ModelProvider:
+    if value not in VALID_MODEL_PROVIDERS:
+        expected = ", ".join(sorted(VALID_MODEL_PROVIDERS))
+        raise ConfigurationError(f"{variable} must be one of: {expected}")
+    return cast(ModelProvider, value)
 
 
 def _origins(value: str | None) -> tuple[str, ...]:
@@ -56,6 +65,11 @@ class Settings:
     database_url: str | None = field(repr=False)
     object_store_configured: bool
     openrouter_configured: bool
+    bedrock_configured: bool
+    llm_provider: ModelProvider
+    document_ai_provider: ModelProvider
+    bedrock_model_id: str | None
+    aws_region: str | None
     supabase_url: str | None = field(repr=False)
     supabase_service_role_key: str | None = field(repr=False)
     openai_key: str | None = field(repr=False)
@@ -68,6 +82,11 @@ class Settings:
         values = os.environ if environ is None else environ
         openrouter_key = values.get("OPENROUTER_API_KEY", "").strip()
         openrouter_model = values.get("OPENROUTER_MODEL", "").strip()
+        bedrock_model_id = values.get("BEDROCK_MODEL_ID", "").strip()
+        aws_region = (
+            values.get("AWS_REGION", "").strip()
+            or values.get("AWS_DEFAULT_REGION", "").strip()
+        )
         supabase_url = values.get("SUPABASE_URL", "").strip()
         supabase_service_role_key = values.get(
             "SUPABASE_SERVICE_ROLE_KEY", ""
@@ -104,6 +123,16 @@ class Settings:
                 and values.get("OBJECT_STORE_BUCKET", "").strip()
             ),
             openrouter_configured=bool(openrouter_key and openrouter_model),
+            bedrock_configured=bool(bedrock_model_id and aws_region),
+            llm_provider=_provider(
+                values.get("LLM_PROVIDER", "bedrock"), "LLM_PROVIDER"
+            ),
+            document_ai_provider=_provider(
+                values.get("DOCUMENT_AI_PROVIDER", "fixture"),
+                "DOCUMENT_AI_PROVIDER",
+            ),
+            bedrock_model_id=bedrock_model_id or None,
+            aws_region=aws_region or None,
             supabase_url=supabase_url or None,
             supabase_service_role_key=supabase_service_role_key or None,
             openai_key=openai_key or None,
@@ -124,14 +153,21 @@ class Settings:
         if not self.app_env:
             raise ConfigurationError("APP_ENV cannot be empty")
 
-        openrouter_modes = (
-            self.extraction_mode,
-            self.orchestration_mode,
-            self.conversation_mode,
-        )
-        if "live" in openrouter_modes and not self.openrouter_configured:
+        if self.extraction_mode == "live" and (
+            self.document_ai_provider != "openrouter"
+            or not self.openrouter_configured
+        ):
             raise ConfigurationError(
-                "Live model capabilities require OPENROUTER_API_KEY and OPENROUTER_MODEL"
+                "Live extraction requires DOCUMENT_AI_PROVIDER=openrouter, "
+                "OPENROUTER_API_KEY, and OPENROUTER_MODEL"
+            )
+        if (
+            self.orchestration_mode == "live"
+            or self.conversation_mode == "live"
+        ) and (self.llm_provider != "bedrock" or not self.bedrock_configured):
+            raise ConfigurationError(
+                "Live orchestration requires LLM_PROVIDER=bedrock, "
+                "BEDROCK_MODEL_ID, and AWS_REGION"
             )
         if self.evidence_mode == "live" and not (
             self.supabase_url and self.supabase_service_role_key and self.openai_key

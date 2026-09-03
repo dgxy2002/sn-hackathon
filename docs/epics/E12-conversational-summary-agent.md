@@ -20,6 +20,7 @@
 - Search all cached E06 records for read-only exploration; preserve citations, date types, approval/evidence state, freshness, and synthetic labels.
 - Select, add, remove, sort, and filter comparison-eligible real products in the dedicated Phase 3B evidence mode as presentation-only actions.
 - Execute allowlisted typed application tools through E10/E11 rather than model-authored HTML, JavaScript, selectors, coordinates, SQL, or arbitrary web navigation.
+- Render only schema-validated Bedrock explanation fields beside the immutable E07 result and clear stale prose after revisions or undo.
 
 ## Requirements traceability
 
@@ -48,12 +49,13 @@
 - [ ] Profile, canonical comparison, and extracted-policy changes show a before/after proposal and cannot apply without confirmation.
 - [x] Supported confirmed budget changes produce versioned inputs, a deterministic E07 rerun, one coherent summary revision, highlighted deltas, and undo; other profile fields and extraction corrections remain open.
 - [x] Model output cannot execute arbitrary code, selectors, coordinates, SQL, unregistered tools, or outside-corpus source searches.
+- [x] A Bedrock or fixture explanation is separate from E07 rank and score fields and stale explanation text is cleared after a deterministic revision or undo.
 - [ ] Conversation, action, evidence, confirmation, revision, model, prompt, tool, formulation, and ruleset versions are replayable within the POC session.
 - [ ] Normal Q&A, cached-plan exploration with evidence states, presentation change, profile change, extraction correction, cancellation, undo, stale evidence, no evidence, invalid action, and dependency failure scenarios pass.
-- [ ] The complete flow works in Docker Compose fixture mode and with configured OpenRouter mode using the same contracts.
+- [ ] The complete flow works in Docker Compose fixture mode and configured Bedrock explanation mode using the same contracts; OpenRouter remains independently scoped to E04 extraction.
 
 ## POC boundary
 
 The agent operates only within CoverCheck's typed application capabilities and cached catalogue. Real-product RAG is read-only and cannot enter or alter E07's synthetic ranking; records that are not approved or current remain visibly labelled. The agent cannot browse arbitrary websites, transact, contact advisers, purchase, replace, surrender, or recommend cancelling insurance. Conversation and revision history is disposable with the current synthetic POC session unless retained as a named evaluation fixture.
 
-The [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md) verifies the read-only catalogue slice. The [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md) verifies budget proposals, confirmation, cancellation, deterministic reruns, replay, and undo. Other profile fields, extraction corrections, real-product Phase 3B tools, and OpenRouter mode remain open.
+The [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md) verifies the read-only catalogue slice. The [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md) verifies budget proposals, confirmation, cancellation, deterministic reruns, replay, and undo. Mocked provider tests verify that Bedrock cannot mutate the deterministic result. Other profile fields, extraction corrections, real-product Phase 3B tools, and credentialed Bedrock acceptance remain open.

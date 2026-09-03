@@ -5,9 +5,9 @@
 | Field | Value |
 |---|---|
 | Product | CoverCheck SG |
-| Version | 1.4 |
+| Version | 1.5 |
 | Status | POC baseline |
-| Date | 28 August 2026 |
+| Date | 3 September 2026 |
 | Audience | Product, engineering, research, and hackathon reviewers |
 | Source documents | [Project plan](../PLAN.md) and [initial product brief](../OnboardingPrompt.md) |
 
@@ -69,7 +69,7 @@ A first-time working adult in Singapore, primarily aged 19-29, who may have inhe
 | URS-FR-019 | A reviewer shall be able to replay fixed synthetic scenarios against prewritten expected outcomes. | P0 | Versioned profiles, plans, rules, documents, queries, and expected results can be rerun without manual repair. |
 | URS-FR-020 | The team shall be able to switch between live-approved, cached, synthetic, and simulated adapters without changing consumer contracts. | P1 | Every output identifies its data mode and all modes validate against the same schema. |
 | URS-FR-021 | A developer shall be able to start the web application, backend API, continuously running scraper, PostgreSQL/pgvector database, and local object store with Docker Compose. | P0 | One documented local command starts healthy containers without requiring AWS resources. |
-| URS-FR-022 | The system shall use OpenRouter `5.6 Luna` for language-model tasks and policy PDF/image ingestion, OCR, and structured extraction. | P0 | Provider and model are selected through configuration, and extraction output retains confidence and page evidence. |
+| URS-FR-022 | The system shall use Amazon Bedrock for grounded E11 explanation and a separately configured OpenRouter adapter for policy PDF/image ingestion, OCR, and structured extraction. | P0 | Provider, model or inference-profile ID, and region are selected through configuration; model explanation cannot change the deterministic decision, and extraction retains confidence and page evidence. |
 | URS-FR-023 | A user who has no policy document shall be able to skip upload and continue with explicitly unknown existing-policy fields. | P0 | The no-policy path reaches gap analysis without creating synthetic coverage facts. |
 | URS-FR-024 | An operator shall be able to deploy the same web, backend, and scraper container images to AWS without changing application code. | P1 | Deployment changes configuration and managed-service adapters, not capability contracts or business logic. |
 | URS-FR-025 | A data operator shall have exactly one continuously running scraper runtime that refreshes due approved sources and exposes freshness and failure status. | P1 | The runtime prevents concurrent active scraper loops and records each source outcome. |

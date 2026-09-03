@@ -36,13 +36,14 @@ The local-database path and scraper lease were accepted on 28 August 2026. Provi
 
 ## Remaining configured-service topology
 
-Web, backend, scraper, PostgreSQL retrieval, and fixture workflows are implemented. This diagram adds the still-pending configured OpenRouter and optional object-store paths.
+Web, backend, scraper, PostgreSQL retrieval, fixture workflows, and the typed Bedrock explanation adapter are implemented. This diagram adds the credentialed Bedrock call, still-pending OpenRouter extraction, and optional object-store paths.
 
 ```mermaid
 flowchart TB
     Browser[Desktop or mobile browser]
     Env[Uncommitted .env]
-    OpenRouter[OpenRouter API<br/>configured 5.6 Luna]
+    OpenRouter[OpenRouter API<br/>E04 extraction pending]
+    Bedrock[Amazon Bedrock<br/>E11 grounded explanation]
     Sources[Approved public sources]
 
     subgraph Host[Developer machine]
@@ -61,7 +62,8 @@ flowchart TB
     Web -->|versioned HTTP API| API
     API -->|SQL| DB
     API -->|temporary or permitted objects| Store
-    API -->|HTTPS: extraction and explanation| OpenRouter
+    API -->|HTTPS: extraction| OpenRouter
+    API -->|Converse: immutable E07 result| Bedrock
     Scraper -->|HTTPS with allowlist and limits| Sources
     Scraper -->|lease, upsert, logs, freshness| DB
     Scraper -->|permitted source snapshots| Store
@@ -84,6 +86,6 @@ flowchart TB
 
 ## Configuration boundary
 
-Local `.env` contains values such as `APP_ENV`, `DATABASE_URL`, `OBJECT_STORE_ENDPOINT`, `OBJECT_STORE_BUCKET`, `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`, `LLM_PROVIDER`, `DOCUMENT_AI_PROVIDER`, `AGENT_MAX_ACTIONS`, `CONVERSATION_MAX_TURNS`, `SUMMARY_REVISION_LIMIT`, `SCRAPE_INTERVAL_SECONDS`, and `SCRAPE_LEASE_TTL_SECONDS`. Only `.env.example` with safe placeholders belongs in version control.
+Local `.env` contains values such as `APP_ENV`, `DATABASE_URL`, `OBJECT_STORE_ENDPOINT`, `OBJECT_STORE_BUCKET`, `OPENROUTER_API_KEY`, `OPENROUTER_MODEL`, `LLM_PROVIDER`, `BEDROCK_MODEL_ID`, `AWS_REGION`, `DOCUMENT_AI_PROVIDER`, `AGENT_MAX_ACTIONS`, `CONVERSATION_MAX_TURNS`, `SUMMARY_REVISION_LIMIT`, `SCRAPE_INTERVAL_SECONDS`, and `SCRAPE_LEASE_TTL_SECONDS`. Only `.env.example` with safe placeholders belongs in version control.
 
-The web browser never receives provider, database, or object-store credentials. E12 adds no container: it uses the web and backend images plus disposable PostgreSQL session state. Fixture mode must work without an OpenRouter API key.
+The web browser never receives provider, database, or object-store credentials. E12 adds no container: it uses the web and backend images plus disposable PostgreSQL session state. Fixture mode works without AWS or OpenRouter credentials; live E11 mode uses boto3's standard credential chain.

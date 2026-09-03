@@ -97,6 +97,7 @@ const state = {
     profile: null,
     extraction: null,
     recommendation: null,
+    explanation: null,
   },
   evidenceComparison: {
     status: 'idle',
@@ -274,6 +275,7 @@ async function prepareComparison(hasCurrentPolicy) {
     state.runtime.profile = invocation.profile
     state.runtime.extraction = invocation.extraction
     state.runtime.recommendation = invocation.recommendation
+    state.runtime.explanation = invocation.explanation
     state.runtime.status = invocation.state
     state.agent.activeRevisionId = 'summary-v1'
     state.agent.conversationId = ''
@@ -960,6 +962,7 @@ const neutralEvidenceView = () => {
 
 const comparisonView = () => {
   const recommendation = state.runtime.recommendation
+  const explanation = state.runtime.explanation
   const gapByType = Object.fromEntries((recommendation?.gaps || []).map((gap) => [gap.gap_type, gap]))
   const deathGap = gapByType.death?.gap_amount || 0
   const ciGap = gapByType.critical_illness?.gap_amount || 0
@@ -973,6 +976,12 @@ const comparisonView = () => {
   const excluded = (recommendation?.evaluations || []).find((evaluation) => !evaluation.eligible)
   const closest = eligible[0]
   const closestName = planPresentation[closest?.plan_id]?.[0] || 'No eligible plan'
+  const closestReason = explanation?.plan_reasons?.[closest?.plan_id]
+    || closest?.reason_codes.join(', ')
+    || 'No eligible plan was returned.'
+  const explanationLabel = explanation
+    ? `${explanation.provider.toUpperCase()} · ${explanation.model_id}`
+    : 'DETERMINISTIC RESULT · EXPLANATION PENDING AFTER REVISION'
   const closestScore = closest?.score === null || closest?.score === undefined
     ? 'Not scored'
     : `${Math.round(closest.score * 100)} / 100`
@@ -1033,7 +1042,11 @@ const comparisonView = () => {
         <div class="reasoning-drawers">
           <details id="ranking-reason" tabindex="-1" open>
             <summary><span><b>Why ${escapeHtml(closestName)} ranks first</b><small>Fit score ${closestScore} · synthetic</small></span><i aria-hidden="true">+</i></summary>
-            <div class="drawer-content"><p>${escapeHtml(closest?.reason_codes.join(', ') || 'No eligible plan was returned.')}</p></div>
+            <div class="drawer-content">
+              <span class="mono">${escapeHtml(explanationLabel)}</span>
+              ${explanation?.summary ? `<p>${escapeHtml(explanation.summary)}</p>` : ''}
+              <p>${escapeHtml(closestReason)}</p>
+            </div>
           </details>
           <details id="ranking-assumptions" tabindex="-1">
             <summary><span><b>What the ranking does not know</b><small>${recommendation?.assumptions.length || 0} assumptions remain</small></span><i aria-hidden="true">+</i></summary>
@@ -1216,6 +1229,7 @@ async function decideAgentProposal(proposalId, decision) {
       state.agent.canUndo = true
       state.runtime.profile = response.revision.profile
       state.runtime.recommendation = response.revision.recommendation
+      state.runtime.explanation = null
       state.profile.budget = response.revision.profile.data.monthly_budget.value
     }
   } catch (error) {
@@ -1250,6 +1264,7 @@ async function undoAgentRevision() {
     state.agent.status = 'completed'
     state.runtime.profile = response.restored_revision.profile
     state.runtime.recommendation = response.restored_revision.recommendation
+    state.runtime.explanation = null
     state.profile.budget = response.restored_revision.profile.data.monthly_budget.value
   } catch (error) {
     state.agent.status = 'failed'
@@ -1431,6 +1446,7 @@ app.addEventListener('click', (event) => {
     state.runtime.profile = null
     state.runtime.extraction = null
     state.runtime.recommendation = null
+    state.runtime.explanation = null
     state.evidenceComparison = { status: 'idle', error: '', products: [], warnings: [] }
     navigate('intro')
   }

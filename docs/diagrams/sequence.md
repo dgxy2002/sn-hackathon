@@ -104,9 +104,9 @@ sequenceDiagram
 
 Phase 3B may follow the direct read-only integration before E11 exists. Discovery relevance can help the user find products, but the comparison uses provider/product ordering and contains no fit score, recommendation badge, or suitability claim.
 
-## Accepted fixture runtime and pending OpenRouter sequence
+## Accepted fixture runtime, Bedrock explanation, and pending OpenRouter extraction
 
-The local API, PostgreSQL evidence path, deterministic E07 engine, invocation coordinator, and run events are implemented. In the sequence below, the OpenRouter extraction and explanation calls remain pending; fixture mode supplies the same typed boundaries without a provider credential.
+The local API, PostgreSQL evidence path, deterministic E07 engine, invocation coordinator, run events, and typed Bedrock explanation adapter are implemented. OpenRouter extraction and a credentialed live Bedrock acceptance run remain pending; fixture mode supplies the same explanation boundary without a provider credential.
 
 ```mermaid
 sequenceDiagram
@@ -119,7 +119,8 @@ sequenceDiagram
     participant RAG as Retrieval service
     participant DB as Local PostgreSQL and pgvector
     participant Rules as Decision engine
-    participant OpenRouter as OpenRouter 5.6 Luna
+    participant OpenRouter as OpenRouter extraction
+    participant Bedrock as Amazon Bedrock Converse
     participant Runs as POC run repository
 
     User->>SPA: Submit consented profile and optional synthetic policy
@@ -157,8 +158,8 @@ sequenceDiagram
         API->>Rules: Profile, extracted policy, synthetic plans, and ruleset
         Rules-->>API: Gaps, exclusions, ranking, and trade-offs
         API-->>Coordinator: Immutable decision contract
-        Coordinator->>OpenRouter: Immutable synthetic result and separately labelled evidence
-        OpenRouter-->>Coordinator: Explanation without ranking changes
+        Coordinator->>Bedrock: Immutable synthetic result and compact personalization context
+        Bedrock-->>Coordinator: Schema-validated explanation without ranking fields
         Coordinator->>Runs: Store ordered events, versions, and metrics
         Coordinator-->>API: Final result and terminal state
         API-->>SPA: Recommendation contract and run metrics
@@ -166,7 +167,7 @@ sequenceDiagram
     end
 ```
 
-The accepted fixture sequence runs in Docker Compose and uses `.env` configuration. The tested coordinator validates transitions and preserves the deterministic result. Full loop-limit acceptance, live OpenRouter behavior, and the later ECS Fargate mapping remain open; Bedrock or AgentCore may be added only as optional adapters.
+The accepted fixture sequence runs in Docker Compose and uses `.env` configuration. The tested coordinator validates transitions, records Bedrock provider/model/prompt/token metadata, rejects unknown plan IDs, and preserves the deterministic result on provider failure. Credentialed live Bedrock acceptance, priced cost metrics, full loop-limit acceptance, live OpenRouter extraction, and the later ECS Fargate deployment remain open. AgentCore remains optional.
 
 ## Current budget-revision sequence and remaining patch types
 

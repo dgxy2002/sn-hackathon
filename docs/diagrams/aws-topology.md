@@ -10,6 +10,7 @@ flowchart TB
 
     subgraph AWS[AWS account]
         ECR[(Amazon ECR<br/>web, backend, scraper images)]
+        Bedrock[Amazon Bedrock<br/>grounded explanation]
         DNS[Route 53]
         ALB[Application Load Balancer]
 
@@ -40,6 +41,7 @@ flowchart TB
     ECR -. same tested image digests .-> API
     ECR -. same tested image digests .-> Scraper
     API --> RDS
+    API -->|Converse API through task role| Bedrock
     Scraper -->|singleton lease and upserts| RDS
     API --> S3
     Scraper --> S3
@@ -69,8 +71,8 @@ flowchart TB
 | E08 Integration and Evaluation | ECR promotion evidence, ECS task definitions, CloudWatch dashboards, S3 evaluation artifacts | Verify locally accepted image digests and environment mappings before deployment. |
 | E09 Productionisation | IAM, KMS, WAF, CloudTrail, Config, GuardDuty, backup and recovery services as later scope | Add production security, resilience, governance, rotation, and regulatory approval after POC validation. |
 | E10 Backend and Persistence | ECR, ECS Fargate, ALB, RDS, S3, Secrets Manager, Parameter Store, CloudWatch | Own image, network, health, environment, database, and object-store adapter mappings. |
-| E11 Runtime Operations | Backend and scraper ECS services, Secrets Manager, CloudWatch; Bedrock/AgentCore optional | Operate bounded invocation/model calls and scraper lifecycle; keep OpenRouter external through controlled egress. |
-| E12 Conversational Summary Agent | Existing web and backend ECS services, RDS current-session records, controlled OpenRouter egress, CloudWatch | Run the final-page panel, typed action policy, confirmation, deterministic revision, replay, and undo contracts without adding an application service. |
+| E11 Runtime Operations | Backend and scraper ECS services, Amazon Bedrock, IAM task role, Secrets Manager, CloudWatch | Operate bounded invocation/model calls and scraper lifecycle; allow Bedrock to explain only immutable E07 results. |
+| E12 Conversational Summary Agent | Existing web and backend ECS services, RDS current-session records, Bedrock through the backend task role, CloudWatch | Run the final-page panel, typed action policy, confirmation, deterministic revision, replay, and undo contracts without adding an application service. |
 
 ## Swap contract
 
@@ -84,4 +86,4 @@ flowchart TB
 | S3-compatible local object store | Amazon S3 | Object keys and repository interface remain stable. |
 | Local stdout/stderr and health checks | CloudWatch Logs, metrics, and alarms | Applications do not need a separate log-shipping code path. |
 
-Bedrock and AgentCore remain optional future adapters. Adding either must not change the profile, extraction, evidence, recommendation, invocation, conversation, action, summary-revision, or run-event contracts.
+Bedrock is required for live E11 grounded explanation and must not change the profile, extraction, evidence, recommendation, invocation, conversation, action, summary-revision, or run-event contracts. AgentCore remains optional and deferred.

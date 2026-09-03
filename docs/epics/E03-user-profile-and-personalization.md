@@ -28,6 +28,8 @@
 ## Repository evidence
 
 - [`frontend/src/main.js`](../../frontend/src/main.js) contains a five-step onboarding flow and an in-memory `state.profile`.
+- [`backend/app/personalization.py`](../../backend/app/personalization.py) classifies goal context deterministically, builds compact versioned explanation context, and selects focused questions without asking no-policy users for nonexistent private cover.
+- [`backend/tests/test_personalization.py`](../../backend/tests/test_personalization.py) covers project goal wording, word-based timeframes, context output, and the no-policy question path.
 - [`docs/PLAN.md`](../PLAN.md) defines the fuller Financial Needs Analysis-inspired profile and shared user-profile contract.
 
 ## Definition of done
