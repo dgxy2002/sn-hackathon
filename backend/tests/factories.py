@@ -26,6 +26,8 @@ def make_profile(
     policy_state: str = "present",
     existing_death_cover: float | None = None,
     existing_ci_cover: float | None = None,
+    goal: str | None = "protect dependants",
+    goal_state: str = "present",
 ) -> VersionedProfile:
     cover_state = "present" if has_current_policy else "unknown"
     return VersionedProfile(
@@ -36,7 +38,7 @@ def make_profile(
         data=ProfileData(
             life_stage=field("first-job"),
             employment_status=field("full-time"),
-            goal=field("protect dependants"),
+            goal=field(goal, state=goal_state),
             target_amount=field(500_000.0),
             target_date=field(date(2046, 8, 28)),
             monthly_income=field(monthly_income, state=monthly_income_state),

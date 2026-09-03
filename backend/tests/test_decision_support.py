@@ -79,3 +79,38 @@ def test_profile_versions_are_immutable_and_missing_profiles_are_typed() -> None
     missing = request(app, "GET", "/v1/profiles/missing")
     assert missing.status_code == 404
     assert missing.json()["error"]["code"] == "PROFILE_NOT_FOUND"
+
+def test_goal_is_included_in_personalised_assumptions() -> None:
+    result = DecisionService().evaluate(
+        make_profile(goal="I want to buy a flat in three years")
+    )
+
+    assert result.status == "ranked"
+    assert any(
+        "home_purchase" in assumption
+        for assumption in result.assumptions
+    )
+
+
+def test_vague_goal_adds_affordability_assumption() -> None:
+    result = DecisionService().evaluate(
+        make_profile(goal="I want to be financially secure")
+    )
+
+    assert result.status == "ranked"
+    assert any(
+        "goal was broad" in assumption
+        for assumption in result.assumptions
+    )
+
+
+def test_missing_goal_returns_focused_question() -> None:
+    result = DecisionService().evaluate(
+        make_profile(goal=None, goal_state="unknown")
+    )
+
+    assert result.status == "insufficient_data"
+    assert result.missing_fields == ["goal"]
+    assert result.focused_questions == [
+        "What is your primary insurance goal?"
+    ]
