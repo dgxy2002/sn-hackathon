@@ -79,7 +79,7 @@ flowchart LR
 - Navigation, focus, sorting, filtering, and read-only cached-plan exploration may apply immediately. Profile, canonical comparison, and reviewed extraction changes require confirmation, immutable input versions, and a fresh E07 result before the canonical summary changes.
 - Real-product ranking remains disabled until the separate Phase 6 data, E07, E08, DEC-004, and compliance gates pass. Public ranked mode additionally requires E09 approval.
 - Model output cannot become HTML, JavaScript, selectors, coordinates, SQL, arbitrary URLs, or canonical recommendation values.
-- The accepted local target is Docker Compose with `.env` configuration. Fixture mode requires no provider credential. The typed Bedrock Converse adapter is implemented; credentialed live acceptance and pricing remain pending. OpenRouter policy extraction remains pending because the exact model slug is unresolved.
+- The accepted local target is Docker Compose with `.env` configuration. Fixture mode requires no provider credential. The typed Bedrock Converse adapter and credentialed live path are accepted; priced-cost reporting remains pending. OpenRouter policy extraction remains pending because the exact model slug is unresolved.
 - Local PostgreSQL/pgvector is the default POC evidence store. Supabase/PostgREST remains an optional adapter, and RDS PostgreSQL/pgvector remains a later migration target.
 - Amazon Bedrock is required for live E11 explanation but not credential-free local fixture execution. AgentCore remains optional and deferred.
 - Production identity, durable personal data, private document storage, and operational hardening are intentionally deferred to [E09](../epics/E09-productionisation-and-security.md).

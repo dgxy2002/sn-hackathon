@@ -329,7 +329,7 @@ class DecisionService:
     def _missing_critical_fields(self, profile: VersionedProfile) -> list[str]:
         fields: dict[str, ProfileField[Any]] = {
             "monthly_income": profile.data.monthly_income,
-            "monthly_expenses": profile.data.monthly_expenses,
+            "liabilities": profile.data.liabilities,
             "monthly_budget": profile.data.monthly_budget,
             "product_preference": profile.data.product_preference,
             "goal": profile.data.goal,
@@ -378,7 +378,7 @@ class DecisionService:
     def _question(field: str) -> str:
         labels = {
             "monthly_income": "What is your monthly take-home income?",
-            "monthly_expenses": "What are your monthly essential expenses?",
+            "liabilities": "What is the total balance of your outstanding loans?",
             "monthly_budget": "What monthly insurance budget feels sustainable?",
             "product_preference": "Do you prefer protection-only cover or savings features?",
             "has_current_policy": "Do you currently have a private insurance policy?",

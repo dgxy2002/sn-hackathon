@@ -5,7 +5,7 @@
 | Field | Value |
 |---|---|
 | Product | CoverCheck SG |
-| Version | 1.5 |
+| Version | 1.6 |
 | Status | POC baseline |
 | Date | 3 September 2026 |
 | Audience | Product, engineering, research, and hackathon reviewers |
@@ -15,11 +15,11 @@
 
 This User Requirements Specification (URS) defines what first-time working adults and project stakeholders need from the CoverCheck SG proof of concept. It describes user outcomes and constraints without prescribing the implementation.
 
-CoverCheck SG is an educational insurance-readiness and comparison assistant for Singapore. It is not a licensed financial adviser and does not transact, replace, surrender, or recommend cancelling policies.
+CoverCheck SG is an educational insurance-readiness and synthetic-comparison assistant for Singapore. Users may start directly with no private plan or an existing plan; the readiness check is optional. It is not a licensed financial adviser and does not transact, replace, surrender, or recommend cancelling policies.
 
 ## 2. Problem statement
 
-A first-time working adult in Singapore who has inherited insurance bought by their parents needs an independent way to understand what they own, what it covers, and whether it still fits their budget, responsibilities, and goals. Existing policies may be poorly understood, while product information is difficult to compare and often presented by sellers with limited panels or commercial interests.
+A first-time working adult in Singapore, including someone with no private policy, needs a clear way to understand their protection starting point and, where relevant, what an existing plan covers. Existing policies may be poorly understood, while product information is difficult to compare and often presented by sellers with limited panels or commercial interests.
 
 ## 3. Users and stakeholders
 
@@ -48,15 +48,15 @@ A first-time working adult in Singapore, primarily aged 19-29, who may have inhe
 
 | ID | User requirement | POC priority | Acceptance statement |
 |---|---|---:|---|
-| URS-FR-001 | The user shall be able to complete a public insurance-readiness quiz without signing in. | P0 | The quiz can be started and completed before account creation. |
+| URS-FR-001 | The user shall be able to take an optional public insurance-readiness check without signing in. | P0 | Four questions can be started and completed before consent, or skipped in favor of a direct protection route. |
 | URS-FR-002 | The user shall receive a repeatable readiness result that distinguishes known, unclear, and missing coverage information. | P0 | Identical answers produce the same score and dimension results. |
 | URS-FR-003 | The user shall see a constructive peer or benchmark comparison with cohort label, sample size, and collection date. | P0 | No unlabeled or fabricated population percentile is shown. |
-| URS-FR-004 | The user shall be able to continue through a POC account and consent step before providing personal profile details. | P0 | The purpose and POC storage behavior are shown before onboarding. |
-| URS-FR-005 | The user shall be able to provide life stage, goals, cash flow, dependants, debts, existing coverage, budget, and product preferences. | P1 | The minimum profile can be completed through a structured questionnaire. |
+| URS-FR-004 | The user shall give clear consent before providing profile details without being required to create an account. | P0 | Purpose, POC processing, and excluded personal data are shown before onboarding; no name or email is collected. |
+| URS-FR-005 | The user shall provide only the minimum fields used by the current decision formulation. | P1 | The common route asks for income, liabilities, goal, product preference, and additional-premium ceiling; the existing-plan route adds four verified current-cover figures. |
 | URS-FR-006 | The user shall be told when decision-critical information is unknown and be asked only for information needed to improve the result. | P1 | Missing data is not converted to a negative answer or invented value. |
-| URS-FR-007 | The user shall be able to provide a policy PDF or image, or choose a clearly labelled synthetic sample. | P1 | Supported input choices are visible before extraction begins. |
+| URS-FR-007 | The user shall be able to choose a clearly labelled synthetic policy sample; personal-file selection remains a non-processing demo control until document handling is accepted. | P1 | The screen states that the POC does not process the user's real document and offers a safe synthetic route. |
 | URS-FR-008 | The user shall be able to review extracted policy fields, confidence, page evidence, warnings, and unresolved values before use. | P1 | Low-confidence fields can remain unresolved or be corrected. |
-| URS-FR-009 | The user shall see protection gaps and affordability calculations with their assumptions and Singapore reference points. | P0 | Calculations expose inputs, formula intent, and source links. |
+| URS-FR-009 | The user shall see protection gaps and affordability calculations with their assumptions and Singapore reference points. | P0 | Death/TPD use annual income x 9 plus liabilities; critical illness uses annual income x 4; calculations expose formula intent and draft-review status. |
 | URS-FR-010 | The user shall be able to compare eligible synthetic plans or plan categories against their profile and budget. | P0 | Alternatives and excluded options are distinguishable. |
 | URS-FR-011 | The user shall receive reasons, trade-offs, assumptions, missing data, confidence, and dated evidence for comparison outputs. | P0 | Every product claim is linked to an evidence identifier or marked synthetic. |
 | URS-FR-012 | The user shall be able to change a goal, budget, dependant, or policy and understand why the result changed. | P1 | A material input change reruns analysis and produces a change explanation. |
@@ -68,9 +68,9 @@ A first-time working adult in Singapore, primarily aged 19-29, who may have inhe
 | URS-FR-018 | A reviewer shall be able to observe what models and tools acted, whether contracts passed, and what latency, token, cost, retry, and error outcomes occurred. | P0 | A run summary exposes the complete POC execution path and metrics. |
 | URS-FR-019 | A reviewer shall be able to replay fixed synthetic scenarios against prewritten expected outcomes. | P0 | Versioned profiles, plans, rules, documents, queries, and expected results can be rerun without manual repair. |
 | URS-FR-020 | The team shall be able to switch between live-approved, cached, synthetic, and simulated adapters without changing consumer contracts. | P1 | Every output identifies its data mode and all modes validate against the same schema. |
-| URS-FR-021 | A developer shall be able to start the web application, backend API, continuously running scraper, PostgreSQL/pgvector database, and local object store with Docker Compose. | P0 | One documented local command starts healthy containers without requiring AWS resources. |
+| URS-FR-021 | A developer shall be able to start the web application, backend API, continuously running scraper, and PostgreSQL/pgvector database with Docker Compose. | P0 | One documented local command starts the four healthy required containers without AWS; object storage remains optional and unconfigured. |
 | URS-FR-022 | The system shall use Amazon Bedrock for grounded E11 explanation and a separately configured OpenRouter adapter for policy PDF/image ingestion, OCR, and structured extraction. | P0 | Provider, model or inference-profile ID, and region are selected through configuration; model explanation cannot change the deterministic decision, and extraction retains confidence and page evidence. |
-| URS-FR-023 | A user who has no policy document shall be able to skip upload and continue with explicitly unknown existing-policy fields. | P0 | The no-policy path reaches gap analysis without creating synthetic coverage facts. |
+| URS-FR-023 | A user who has no current private policy shall skip upload and continue with existing-policy fields marked not applicable. | P0 | The no-policy path reaches gap analysis without creating coverage facts; Unsure remains a separate unknown state. |
 | URS-FR-024 | An operator shall be able to deploy the same web, backend, and scraper container images to AWS without changing application code. | P1 | Deployment changes configuration and managed-service adapters, not capability contracts or business logic. |
 | URS-FR-025 | A data operator shall have exactly one continuously running scraper runtime that refreshes due approved sources and exposes freshness and failure status. | P1 | The runtime prevents concurrent active scraper loops and records each source outcome. |
 | URS-FR-026 | A reviewer shall be able to inspect the approved mathematical formulation used by plan ranking. | P0 | Every recommendation records the formulation and ruleset versions used to calculate gaps, exclusions, and fit. |
@@ -115,27 +115,30 @@ A first-time working adult in Singapore, primarily aged 19-29, who may have inhe
 
 ```mermaid
 flowchart LR
-    A[Discover readiness gap]
-    B[Understand result and benchmark]
-    C[Consent and build profile]
-    D{Existing policy available?}
-    D1[Upload and review extracted policy]
-    D2[Continue with policy fields unknown]
-    E[See calculated gaps]
-    F[See synthetic ranked comparison]
-    F1[Optionally compare real-product evidence]
-    G[Ask follow-up or explore alternatives]
-    H{Request changes?}
-    I[Preview and confirm decision inputs]
-    J[Recalculate and update summary]
-    K[Verify adviser]
+    A[Choose no-plan, existing-plan, or optional readiness check]
+    B[Optional result and labelled pilot context]
+    C[Consent without account creation]
+    D[Provide five decision inputs]
+    E{Current private policy?}
+    E1[Add four verified figures and review synthetic extraction]
+    E2[Continue with policy fields not applicable or unknown]
+    F[See calculated gaps]
+    G[See synthetic ranked comparison]
+    G1[Explore neutral cached real evidence]
+    H[Ask follow-up or explore alternatives]
+    I{Request a supported change?}
+    J[Preview and confirm budget]
+    K[Recalculate and update summary]
+    L[Replay, undo, or verify adviser]
 
-    A --> B --> C --> D
-    D -- Yes --> D1 --> E
-    D -- No --> D2 --> E
-    E --> F --> F1 --> G --> H
-    H -- No --> K
-    H -- Yes --> I --> J --> G
+    A -- Readiness check --> B --> C
+    A -- Direct route --> C
+    C --> D --> E
+    E -- Yes --> E1 --> F
+    E -- No or unsure --> E2 --> F
+    F --> G --> G1 --> H --> I
+    I -- No --> L
+    I -- Yes --> J --> K --> H
 ```
 
 The minimum POC journey is accepted when one target user can complete it without team intervention and can explain the result, its assumptions, and its synthetic or sourced evidence.

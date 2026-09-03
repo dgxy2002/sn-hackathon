@@ -5,16 +5,16 @@
 ```mermaid
 flowchart TD
     A[Open CoverCheck SG]
-    B[Complete five-question readiness quiz]
-    C[Calculate deterministic readiness score]
-    D[Show known gaps and labelled pilot benchmark]
-    E[Create mock account and consent]
-    F[Complete five-step profile]
-    G{Have a policy document?}
-    H[Select PDF, image, or synthetic sample]
-    I[Extract fields with confidence and page evidence]
-    J[Review and correct unresolved fields]
-    K[Build normalized user and policy profile]
+    B{Choose starting route}
+    C[Optional four-question readiness check]
+    D[Show three readiness categories and labelled pilot context]
+    E[Consent without account creation]
+    F[Provide five decision inputs]
+    G{Current private plan?}
+    H[Add four verified current-plan figures]
+    I[Use synthetic sample extraction]
+    J[Review fields, confidence, and page evidence]
+    K[Build normalized profile with explicit field states]
     L[Calculate protection gaps and affordability]
     M[Retrieve dated product evidence]
     M1[Compare selected real-product evidence without ranking]
@@ -31,9 +31,12 @@ flowchart TD
     Z[Replay or undo revision]
     Q[Continue exploring or verify an authorized representative]
 
-    A --> B --> C --> D --> E --> F --> G
+    A --> B
+    B -- Check basics first --> C --> D --> B
+    B -- No plan or review a plan --> E --> F --> G
     G -- Yes --> H --> I --> J --> K
-    G -- No or skip --> R[Mark current-policy fields unknown] --> K
+    G -- No --> R[Mark current-policy fields not applicable] --> K
+    G -- Unsure --> R1[Preserve current-policy fields as unknown] --> K
     K --> L
     L --> N --> O --> P --> S
     L --> M --> M1 --> P
@@ -48,20 +51,20 @@ flowchart TD
     classDef implemented fill:#e7f4ed,stroke:#246b45,color:#123b28;
     classDef simulated fill:#fff3d6,stroke:#a66500,color:#573900;
     classDef planned fill:#edf1f7,stroke:#53657d,color:#263545,stroke-dasharray: 5 4;
-    class A,B,C,D,E,F,G,H,K,L,M,N,P,Q,R,S,T,U,V,W,X,Y,Z implemented;
-    class I,J,O,M1 simulated;
+    class A,B,C,D,E,F,G,H,K,L,M,N,O,P,Q,R,R1,S,T,U,V,W,X,Y,Z implemented;
+    class I,J,M1 simulated;
 ```
 
 ## Current POC status
 
 | Workflow slice | Current behavior |
 |---|---|
-| Quiz and result | Implemented in the browser |
-| Account and profile | Mock account plus versioned, disposable five-step profile through the API |
-| Policy upload | File selection works; document content is not processed |
-| No-policy path | The API skips extraction and preserves existing-policy values as unknown |
+| Landing, quiz, and result | Neutral Singapore hero with direct no-plan/existing-plan routes; optional four-question check and result are implemented |
+| Consent and profile | No account data; one five-input step for all users and one four-figure current-plan step only when applicable |
+| Policy upload | File selection is navigation only; personal document content is not processed |
+| No-policy path | The API skips extraction and preserves existing-policy values as not applicable; Unsure remains unknown |
 | Extraction review | Synthetic, hard-coded fields and confidence values |
-| Gap analysis | Deterministic death and critical-illness calculations |
+| Gap analysis | Death/TPD target is annual income x 9 plus liabilities; critical-illness target is annual income x 4 |
 | Product retrieval | Local PostgreSQL, cached-corpus, synthetic, and optional Supabase adapters expose one E10 evidence contract; fixed retrieval evaluation remains pending |
 | Ranking | API-backed deterministic ranking over the labelled synthetic plan catalogue |
 | Adaptation | Confirmed budget changes create immutable profile and summary revisions, rerun E07, show deltas, and support replay and undo; other patch types remain pending |

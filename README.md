@@ -15,14 +15,26 @@ ranking. The approved bridge, evidence-state rules, provider split, date
 research, and delivery order are recorded in the
 [RAG and website integration decisions](docs/evaluation/2026-08-28-rag-website-integration-decisions.md).
 
-The current browser POC includes an eight-question weighted readiness check and
-a two-step financial-needs profile. The profile records age, occupation, life
-stage, income, spending, dependants, financial support, loan commitments,
-optional credit-card context, current-policy status, detailed benefit amounts,
-riders, Integrated Shield context, explicit protection priorities, and an
-additional-premium ceiling. Current-policy status supports **Yes**, **No**, and
-**Unsure**; unknown cover is never treated as zero. Priority sliders feed the
-deterministic fit calculation rather than explanation prose.
+The current browser POC starts with two direct routes: **I do not have a plan**
+and **Review a plan I have**. A four-question readiness check remains available
+as an optional, no-sign-in detour. Consent does not collect a name, email, NRIC,
+medical details, payment data, or beneficiary information.
+
+The no-plan route asks for only five decision inputs: monthly take-home income,
+total liabilities, primary protection goal, protection-versus-savings
+preference, and maximum additional monthly premium. Private-policy status is
+preset to No and all private-policy amounts are sent as `not_applicable`. The
+existing-plan route adds four user-verified figures: current monthly premium,
+death benefit, total permanent disability benefit, and advanced critical
+illness benefit. A synthetic extraction sample demonstrates reviewable policy
+fields; selected personal-file contents are not processed by this POC.
+
+The deterministic formulation uses annual income x 9 plus liabilities for
+death and TPD targets, and annual income x 4 for the critical-illness target.
+Monthly expenses are not a critical input because the current calculation does
+not use them. Four labelled synthetic plans are eligible for ranking. The 71
+normalized cached real products remain read-only evidence and cannot enter the
+ranking; no real product has passed the separate comparison or ranking gates.
 
 ## Frontend
 

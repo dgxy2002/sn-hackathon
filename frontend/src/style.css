@@ -245,15 +245,15 @@ a {
 .intro-image {
   z-index: -3;
   object-fit: cover;
-  object-position: 50% 53%;
+  object-position: 50% center;
   animation: image-settle 750ms var(--spring-smooth) both;
 }
 
 .intro-scrim {
   z-index: -2;
   background:
-    linear-gradient(90deg, rgba(13, 15, 16, 0.87) 0%, rgba(13, 15, 16, 0.58) 48%, rgba(13, 15, 16, 0.08) 78%),
-    linear-gradient(0deg, rgba(13, 15, 16, 0.48), transparent 52%);
+    linear-gradient(90deg, rgba(11, 17, 22, 0.91) 0%, rgba(11, 17, 22, 0.74) 43%, rgba(11, 17, 22, 0.24) 76%),
+    linear-gradient(0deg, rgba(11, 17, 22, 0.62), transparent 58%);
 }
 
 .intro-screen::after {
@@ -292,8 +292,8 @@ a {
 
 .intro-copy {
   align-self: end;
-  width: min(820px, 74vw);
-  padding: 128px 4.5vw 7vh;
+  width: min(980px, 86vw);
+  padding: 128px 4.5vw 6vh;
 }
 
 .intro-copy .eyebrow {
@@ -301,22 +301,88 @@ a {
 }
 
 .display-title {
-  max-width: 11ch;
+  max-width: 12ch;
   margin-bottom: 24px;
   font-family: var(--display);
-  font-size: 76px;
+  font-size: clamp(58px, 6vw, 88px);
   font-weight: 760;
-  line-height: 0.95;
-  letter-spacing: 0;
+  line-height: 0.93;
+  letter-spacing: -0.035em;
   text-wrap: balance;
 }
 
 .intro-deck {
   max-width: 44ch;
-  margin-bottom: 30px;
+  margin-bottom: 26px;
   color: rgba(255, 255, 255, 0.82);
   font-size: 18px;
   line-height: 1.55;
+}
+
+.intro-actions {
+  display: grid;
+  width: min(760px, 100%);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.journey-button {
+  display: grid;
+  min-height: 104px;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  align-content: center;
+  gap: 5px 18px;
+  padding: 20px 22px;
+  border: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(13, 20, 25, 0.56);
+  color: white;
+  text-align: left;
+  backdrop-filter: blur(10px);
+  transition: background-color 220ms var(--ease-snap), color 220ms var(--ease-snap), transform 220ms var(--ease-snap);
+}
+
+.journey-button.is-primary {
+  background: white;
+  color: var(--ink);
+}
+
+.journey-button span {
+  font-family: var(--display);
+  font-size: 19px;
+  font-weight: 750;
+}
+
+.journey-button small {
+  grid-column: 1;
+  color: inherit;
+  font-size: 11px;
+  line-height: 1.4;
+  opacity: 0.72;
+}
+
+.journey-button i {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  font-size: 22px;
+  font-style: normal;
+}
+
+.intro-quiz-link {
+  min-height: 44px;
+  margin-top: 10px;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.56);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.82);
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
 }
 
 .intro-sequence {
@@ -327,6 +393,7 @@ a {
 .intro-sequence:nth-child(2) { animation-delay: 160ms; }
 .intro-sequence:nth-child(3) { animation-delay: 240ms; }
 .intro-sequence:nth-child(4) { animation-delay: 320ms; }
+.intro-sequence:nth-child(5) { animation-delay: 400ms; }
 
 @keyframes intro-arrive {
   from { opacity: 0; transform: translateY(24px); filter: blur(6px); }
@@ -362,6 +429,10 @@ a {
   color: rgba(255, 255, 255, 0.6);
   font-family: var(--mono);
   font-size: 9px;
+}
+
+.image-credit a {
+  text-underline-offset: 2px;
 }
 
 /* Question flow */
@@ -816,6 +887,16 @@ a {
   box-shadow: none;
 }
 
+.result-paths {
+  display: grid;
+  flex: 0 0 min(390px, 100%);
+  gap: 10px;
+}
+
+.result-paths .secondary-button {
+  border-color: var(--ink);
+}
+
 .report-footer {
   padding: 28px 9vw;
 }
@@ -877,6 +958,12 @@ a {
   gap: 22px;
   padding: 70px 7vw;
   animation-delay: 90ms;
+}
+
+.account-form .consent-row {
+  padding: 24px;
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.52);
 }
 
 .field {
@@ -1207,6 +1294,26 @@ a {
   padding: 20px;
   border-left: 5px solid var(--cobalt);
   background: color-mix(in srgb, var(--cobalt) 8%, white);
+}
+
+.path-callout {
+  display: grid;
+  gap: 8px;
+  padding: 18px 20px;
+  border-left: 5px solid var(--coral);
+  background: color-mix(in srgb, var(--coral) 9%, white);
+}
+
+.path-callout span {
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.path-callout p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .unknown-callout p {
@@ -1831,7 +1938,7 @@ a {
 
 .declared-cover-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   border-left: 1px solid var(--line-strong);
 }
 
@@ -2681,6 +2788,17 @@ a {
     color: var(--cobalt);
   }
 
+  .journey-button:hover {
+    z-index: 1;
+    background: var(--cobalt);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .intro-quiz-link:hover {
+    color: white;
+  }
+
   .brand:hover .brand-mark {
     transform: rotate(-6deg) scale(1.04);
   }
@@ -2786,7 +2904,7 @@ a {
   }
 
   .intro-image {
-    object-position: 59% center;
+    object-position: 49% center;
   }
 
   .intro-scrim {
@@ -2796,12 +2914,12 @@ a {
 
   .intro-copy {
     width: 100%;
-    padding: 110px 20px 58px;
+    padding: 104px 20px 54px;
   }
 
   .display-title {
-    max-width: 10ch;
-    font-size: 46px;
+    max-width: 11ch;
+    font-size: clamp(42px, 12vw, 54px);
   }
 
   .intro-deck {
@@ -2809,8 +2927,17 @@ a {
     font-size: 15px;
   }
 
-  .intro-copy .primary-button {
-    width: 100%;
+  .intro-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .journey-button {
+    min-height: 82px;
+    padding: 15px 17px;
+  }
+
+  .journey-button span {
+    font-size: 17px;
   }
 
   .participation-note {
@@ -2920,6 +3047,10 @@ a {
 
   .result-action .primary-button,
   .decision-footer .primary-button {
+    width: 100%;
+  }
+
+  .result-paths {
     width: 100%;
   }
 

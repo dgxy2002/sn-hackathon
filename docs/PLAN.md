@@ -17,6 +17,15 @@ This document organizes the requirements in [the IGNITE brief](IGNITE-Agentic-AI
 
 The current delivery posture is a hackathon POC. Productionisation and security hardening are tracked as a low-priority, deferred epic; baseline safeguards for secrets, synthetic-data labels, and the educational-not-advice boundary still apply.
 
+### Current implementation checkpoint - 3 September 2026
+
+This plan contains earlier discovery and future-scope material. The working POC is narrower:
+
+1. **Working judged path:** direct no-plan and existing-plan routes, optional four-question readiness check, consent without account creation, deterministic synthetic comparison, Bedrock explanation, and confirmed budget revision with replay and undo.
+2. **Neutral evidence:** 71 normalized cached real products can be explored as read-only evidence; they do not affect calculations, eligibility, scores, or order.
+3. **Gated real-product features:** no real product is comparison eligible or ranking eligible until the recorded Phase 3B and Phase 6 gates pass.
+4. **Deferred production controls:** production identity, customer-document handling, AWS deployment, public scraping approval, legal/compliance approval, and operational hardening remain open.
+
 ## 1. Problem Definition
 
 ### Evidence-backed problem statement
@@ -84,11 +93,11 @@ Only authorized firms and individuals may give financial advice on life insuranc
 
 **In scope by Friday:**
 
-- Public readiness quiz with no sign-in.
+- Direct no-plan and existing-plan routes, with an optional public readiness check and no sign-in.
 - Results page with a rule-based score, uncertainty, and clearly labelled peer comparison.
-- Account-creation transition; mock authentication is acceptable for the prototype.
-- Structured onboarding questionnaire.
-- Policy-document upload and OCR demonstration.
+- Consent without account creation or identity collection.
+- Minimum structured profile containing only current decision inputs.
+- Clearly labelled synthetic policy-extraction demonstration; personal-file contents are not processed.
 - Four agent-system demonstrations using stable data contracts.
 - Synthetic plan catalogue and reviewed synthetic user profiles for correctness tests.
 - A small, cited real-product retrieval collection for the RAG demonstration.
@@ -110,43 +119,42 @@ Only authorized firms and individuals may give financial advice on life insuranc
 
 ```mermaid
 flowchart LR
-    A[Public readiness quiz]
-    B[Readiness result<br/>Known gaps and benchmark]
-    C[Create account]
-    D[Consent and onboarding]
-    E[Upload inherited policies]
-    F[Structured user and policy profile]
-    G[Gap analysis and plan comparison]
-    H[Evidence-backed explanation]
-    I[Ask follow-ups and explore approved plans]
-    J{Change decision inputs?}
-    K[Preview and confirm]
-    L[Deterministic rerun and summary revision]
-    M[Undo, continue, or verify an adviser]
+    A[Open CoverCheck SG]
+    B{Choose a route}
+    C[Optional four-question readiness check]
+    D[Readiness result and labelled pilot context]
+    E[Consent without account creation]
+    F[Five decision inputs]
+    G{Existing private plan?}
+    H[Add four verified current-plan figures]
+    I[Review synthetic extraction sample]
+    J[Deterministic gaps and synthetic ranking]
+    K[Bedrock explains the immutable result]
+    L[Ask follow-ups or propose a budget change]
+    M[Preview and confirm]
+    N[Deterministic rerun, replay, or undo]
 
-    A --> B --> C --> D
-    D --> E --> F
-    D --> F
-    F --> G --> H --> I --> J
-    J -- No --> M
-    J -- Yes --> K --> L --> I
-    M -. Circumstances change .-> D
+    A --> B
+    B -- Check basics first --> C --> D --> B
+    B -- No plan or review plan --> E --> F --> G
+    G -- No or unsure --> J
+    G -- Yes --> H --> I --> J
+    J --> K --> L
+    L -- Consequential change --> M --> N --> L
 ```
 
-### Stage 1: Curiosity quiz
+### Stage 1: Optional curiosity check
 
-The landing page should feel like a polished BuzzFeed-style assessment: fast, visual, and specific. It must not ask for an NRIC, exact salary, medical details, or policy upload.
+The landing page now leads with the two protection routes. A user may instead take a short optional check. It does not ask for an NRIC, salary, medical details, or policy upload.
 
-Suggested 8-question quiz:
+Implemented four-question check:
 
-1. Can you name every insurance policy currently covering you?
-2. Do you know who owns each policy and who pays its premium?
-3. Do you know the coverage amount for death/TPD and critical illness?
-4. Do you know your hospital plan, ward level, deductible, and co-insurance?
-5. Do you know which coverage ends when you leave your employer?
-6. Do you know the total annual premium and its share of your income?
-7. Could you identify the main exclusions and surrender implications?
-8. Would you know how to verify an adviser and compare alternatives before buying?
+1. Do you know what insurance currently covers you?
+2. Do you know what it costs each month or year?
+3. Do you know which benefit would respond to a serious event?
+4. Do you know the main limits and when cover ends?
+
+The result shows coverage visibility at 50%, protection basics at 25%, and terms awareness at 25%. This is a readiness conversation starter, not the fuller Insurance Readiness Score proposed later in this plan and not a suitability score.
 
 Result copy should create curiosity without fear:
 
@@ -154,13 +162,24 @@ Result copy should create curiosity without fear:
 - Good: "Pilot participants in a similar age band most often missed employer-coverage expiry."
 - Avoid: "You are behind 74% of your peers and could lose everything."
 
-### Stage 2: Account and consent
+### Stage 2: Consent without an account
 
-Explain why more information is required, what will be stored, how documents are processed, and that incomplete answers reduce recommendation confidence. Ask for consent before collecting or retaining policy information.
+Explain why five decision inputs are required and how the local POC uses them. Ask for consent before collection. Do not collect a mock name or email merely to simulate account creation.
 
-### Stage 3: Full onboarding
+### Stage 3: Minimum decision profile
 
-The onboarding profile should adapt the official Singapore Financial Needs Analysis process while collecting only what the MVP needs.
+The working POC collects only fields that affect the current calculation, a hard constraint, deterministic priority weighting, or the explanation:
+
+| Route | Required inputs |
+|---|---|
+| Every user | Monthly take-home income, total liabilities, primary protection goal, protection-versus-savings preference, and maximum additional monthly premium |
+| Existing plan only | Current monthly premium, death benefit, TPD benefit, and advanced critical-illness benefit |
+
+No-plan private-policy fields are `not_applicable`; unsure-policy fields remain `unknown`. Monthly expenses, age, occupation, detailed loan categories, credit cards, riders, and other broad FNA fields are not required by the current formulation.
+
+### Deferred full-FNA research
+
+The following discovery list is not the implemented POC questionnaire or a current DOD. Reintroduce a field only after documenting which calculation, constraint, eligibility rule, or explanation it changes.
 
 | Section | Questions/data | Why it matters |
 |---|---|---|
@@ -486,9 +505,9 @@ Do not claim accuracy, token, or cost improvements until this test is run. Repor
 | Time | Show | Agentic point |
 |---|---|---|
 | 0:00-0:30 | A young worker inherits policies but cannot explain them. | Evidence-backed problem. |
-| 0:30-1:00 | Complete the public quiz and reveal specific unknowns. | Readiness, not fear. |
-| 1:00-1:30 | Create an account and state a goal/budget. | Personalization asks rather than assumes. |
-| 1:30-2:15 | Upload a sample policy and show OCR fields/confidence. | Extraction acts; compare OCR baseline metrics. |
+| 0:30-1:00 | Choose a direct route or briefly show the optional four-question check. | Readiness, not fear or friction. |
+| 1:00-1:30 | Consent and provide the five decision inputs. | Personalization asks only what the formulation uses. |
+| 1:30-2:15 | On the existing-plan route, add four verified figures and review the synthetic extraction sample. | Extraction remains visibly synthetic and reviewable. |
 | 2:15-3:00 | Retrieve current plan evidence with sources. | Information agent uses grounded data. |
 | 3:00-3:45 | Show fit, exclusions, reasons, and trade-offs. | Decision support is deterministic and explainable. |
 | 3:45-4:30 | Ask for a lower-budget alternative; show the live typed-action trace, preview and confirm the budget change, then highlight the recalculated comparison delta. | Visible, bounded agent operation with deterministic adaptation. |

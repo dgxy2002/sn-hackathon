@@ -41,7 +41,7 @@
 
 - [x] `POST /invocations` accepts the versioned invocation contract in the backend container.
 - [x] States cover validation, optional extraction review, profile completion, retrieval, decision, explanation, and terminal outcomes.
-- [x] The no-policy branch skips extraction and preserves existing-policy fields as unknown.
+- [x] The no-policy branch skips extraction and marks existing-policy fields not applicable; unsure-policy fields remain unknown.
 - [x] Missing information, no evidence, no eligible plan, dependency failure, and completion are explicit states.
 - [x] Every state validates input and output before transition.
 
@@ -84,7 +84,8 @@
 - [x] Bedrock receives only compact personalization context and the immutable decision contract; raw documents are excluded.
 - [ ] Output covers reasons, trade-offs, assumptions, missing data, confidence, and evidence references. The current typed response covers summary, plan reasons, and cautious next steps.
 - [x] The response schema cannot carry ranks, scores, eligibility, or evidence mutations; validation rejects unknown plan IDs and malformed output.
-- [ ] Provider, exact model or inference-profile ID, prompt version, token use, latency, estimated cost, and result are recorded. Cost pricing and a credentialed live acceptance run remain open.
+- [x] Provider, exact model or inference-profile ID, prompt version, token use, latency, and result are recorded in a credentialed live acceptance run.
+- [ ] Estimated priced cost is calculated and recorded.
 
 **Current evidence:** [`backend/app/model_gateway.py`](../../backend/app/model_gateway.py), [`backend/app/orchestration.py`](../../backend/app/orchestration.py), and [`backend/tests/test_model_gateway.py`](../../backend/tests/test_model_gateway.py).
 
@@ -92,7 +93,7 @@
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P0 |
 | Size | M |
 | Depends on | E10-T04, E11-T03, E11-T04 |
@@ -127,7 +128,7 @@
 - [ ] Runtime status identifies the active lease owner, last cycle, next due source, and freshness state.
 - [ ] The lifecycle emits events for due selection, fetch, parse, normalize, version, upsert, index, success, retry, and failure.
 - [ ] Health degrades on repeated failures or source staleness without discarding the prior verified version.
-- [ ] Only one active scraper loop can hold the lease.
+- [x] Only one active scraper loop can hold the lease in the accepted Compose topology.
 - [ ] Scraper events contain no credentials or prohibited raw content.
 
 ## E11-T07 - Prepare the AWS runtime topology

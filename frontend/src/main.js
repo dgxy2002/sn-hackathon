@@ -1,5 +1,5 @@
 import './style.css'
-import workerImage from './assets/covercheck-worker.jpg'
+import skylineImage from './assets/singapore-skyline-landscape.jpg'
 import {
   ApiError,
   compareEvidence,
@@ -19,135 +19,98 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
 const questions = [
   {
-    category: 'behaviour',
-    weight: 0.125,
-    kicker: 'Behaviour · Inventory',
-    question: 'Can you list every insurance plan you currently have?',
-    note: 'Include plans bought by you or family, plus national schemes.',
+    category: 'visibility',
+    weight: 0.25,
+    kicker: 'Basics · What covers you',
+    question: 'Do you know what insurance currently covers you?',
+    note: 'Include cover bought by you, family, an employer, or a national scheme.',
     answers: [
-      ['Yes', 'All of them', 3],
-      ['Mostly', 'The main ones', 2],
-      ['One or two', 'I am not sure', 1],
-      ['No clue', 'I need to check', 0],
+      ['Yes', 'I know the main plans and benefits', 3],
+      ['Mostly', 'I know the plans, not every detail', 2],
+      ['A little', 'I only know one or two names', 1],
+      ['Not yet', 'I need a simple inventory', 0],
     ],
   },
   {
-    category: 'behaviour',
-    weight: 0.125,
-    kicker: 'Behaviour · Cost',
-    question: 'Do you track the total premium you pay each month?',
-    note: 'Include annual premiums divided by 12.',
+    category: 'visibility',
+    weight: 0.25,
+    kicker: 'Basics · What it costs',
+    question: 'Do you know what your insurance costs each month or year?',
+    note: 'A rough total is enough; annual premiums can be divided by 12.',
     answers: [
-      ['Exactly', 'I update the total', 3],
-      ['Roughly', 'Within a small range', 2],
-      ['Partly', 'Some plans only', 1],
-      ['Not yet', 'I have never totalled it', 0],
+      ['Exactly', 'I know the total', 3],
+      ['Roughly', 'I know the range', 2],
+      ['Partly', 'I know some premiums', 1],
+      ['Not yet', 'I have never added them up', 0],
     ],
   },
   {
-    category: 'behaviour',
-    weight: 0.125,
-    kicker: 'Behaviour · Review',
-    question: 'When did you last review whether your cover still fits?',
-    note: 'A review means checking amounts, premiums, terms and gaps.',
+    category: 'foundations',
+    weight: 0.25,
+    kicker: 'Basics · What responds',
+    question: 'If something serious happened, do you know which cover would respond?',
+    note: 'Think hospitalisation, serious illness, disability, or death.',
     answers: [
-      ['This year', 'Within 12 months', 3],
-      ['Recently', 'One to two years ago', 2],
-      ['A while ago', 'More than two years', 1],
-      ['Never', 'No structured review', 0],
+      ['Clearly', 'I know the main benefits and triggers', 3],
+      ['Mostly', 'I understand the broad differences', 2],
+      ['A little', 'Some terms blur together', 1],
+      ['Not yet', 'I need plain-language guidance', 0],
     ],
   },
   {
-    category: 'behaviour',
-    weight: 0.125,
-    kicker: 'Behaviour · Credit',
-    question: 'How do you usually manage your credit-card balance?',
-    note: 'This checks cash-flow behaviour, not your credit score.',
+    category: 'terms',
+    weight: 0.25,
+    kicker: 'Basics · Where it stops',
+    question: 'Do you know the main limits and when your cover ends?',
+    note: 'Check exclusions, waiting periods, renewals, and the end age or date.',
     answers: [
-      ['Pay in full', 'Every statement', 3],
-      ['Usually full', 'Rarely carry a balance', 2],
-      ['Minimum plus', 'Often carry a balance', 1],
-      ['Minimum only', 'Most months', 0],
-    ],
-  },
-  {
-    category: 'knowledge',
-    weight: 0.15,
-    kicker: 'Knowledge · Hospital cover',
-    question: 'What does an Integrated Shield Plan mainly add?',
-    note: 'Choose the answer closest to your understanding.',
-    answers: [
-      ['Hospital cover', 'Private coverage above MediShield Life', 3],
-      ['Some hospital cover', 'But I am unclear how it works', 2],
-      ['A life plan', 'I may be mixing plan types', 1],
-      ['Not sure', 'I have not come across it', 0],
-    ],
-  },
-  {
-    category: 'knowledge',
-    weight: 0.15,
-    kicker: 'Knowledge · Protection',
-    question: 'Can you distinguish death, disability and critical-illness payouts?',
-    note: 'They may use different triggers and may not be additive.',
-    answers: [
-      ['Clearly', 'I know the triggers and amounts', 3],
-      ['Mostly', 'I know the main differences', 2],
-      ['A little', 'The terms blur together', 1],
-      ['Not yet', 'I need a plain-language review', 0],
-    ],
-  },
-  {
-    category: 'awareness',
-    weight: 0.10,
-    kicker: 'Awareness · Limits',
-    question: 'Do you know the major exclusions and waiting periods in your plans?',
-    note: 'Knowing a plan name alone does not show what a claim requires.',
-    answers: [
-      ['Yes', 'I checked the policy terms', 3],
-      ['Some', 'I know the main limits', 2],
-      ['Vaguely', 'I need to verify them', 1],
-      ['No', 'I have not reviewed them', 0],
-    ],
-  },
-  {
-    category: 'awareness',
-    weight: 0.10,
-    kicker: 'Awareness · Gaps',
-    question: 'Would you revisit cover after taking a loan or supporting someone?',
-    note: 'Loans and dependants can change the size and duration of a gap.',
-    answers: [
-      ['Yes', 'I would recalculate it', 3],
-      ['Probably', 'I know it can matter', 2],
-      ['Maybe', 'I am unsure how', 1],
-      ['No', 'I did not know it mattered', 0],
+      ['Yes', 'I know the main limits and end dates', 3],
+      ['Some', 'I know the obvious ones', 2],
+      ['Vaguely', 'I would need to verify them', 1],
+      ['Not yet', 'I have not read the terms', 0],
     ],
   },
 ]
 
 const onboardingSteps = [
-  ['You and your money', 'Only the context needed to estimate protection gaps and affordability.'],
-  ['Cover and priorities', 'Record what you know, leave the rest unknown, then set what matters most.'],
+  ['Your starting point', 'Five inputs that directly change the demo gap calculation or option ordering.'],
+  ['What your plan already covers', 'Only the four current-plan amounts used by this demo.'],
 ]
 
-const insurerOptions = [
-  'Not sure',
-  'MINDEF Group Insurance (Singlife)',
-  'Great Eastern',
-  'AIA',
-  'Prudential',
-  'Manulife',
-  'Singlife',
-  'China Life',
-  'FWD',
-  'Tokio Marine',
-  'Etiqa',
-  'Income Insurance',
-  'Other',
+const goalOptions = [
+  'Protect my family or dependants',
+  'Protect my income if I cannot work',
+  'Pay off debt if something happens',
+  'Start with affordable basic protection',
 ]
+
+const goalPriorityMap = {
+  'Protect my family or dependants': { death: 100, disability: 75, critical_illness: 80, personal_accident: 20 },
+  'Protect my income if I cannot work': { death: 50, disability: 100, critical_illness: 90, personal_accident: 20 },
+  'Pay off debt if something happens': { death: 90, disability: 80, critical_illness: 60, personal_accident: 20 },
+  'Start with affordable basic protection': { death: 75, disability: 75, critical_illness: 75, personal_accident: 20 },
+}
+
+const createEmptyProfile = () => ({
+  name: '',
+  email: '',
+  consent: false,
+  income: '',
+  debt: '',
+  insuranceStatus: 'Unsure',
+  currentPremium: '',
+  deathCover: '',
+  tpdCover: '',
+  advancedCiCover: '',
+  goal: '',
+  budget: '',
+  productPreference: '',
+})
 
 const state = {
   view: 'intro',
   profileId: `browser-${createClientId()}`,
+  entrySource: 'intro',
   questionIndex: 0,
   answers: [],
   onboardingStep: 0,
@@ -168,49 +131,7 @@ const state = {
     products: [],
     warnings: [],
   },
-  profile: {
-    name: 'Ari',
-    email: '',
-    consent: false,
-    age: 28,
-    gender: 'Prefer not to say',
-    occupation: 'Product designer',
-    maritalStatus: 'Single',
-    income: 4200,
-    expenses: 2300,
-    dependants: 'None',
-    supportedPeople: [],
-    loanCommitments: [],
-    debt: 0,
-    creditCardCount: 1,
-    creditCardProviders: '',
-    totalCreditLimit: 8000,
-    creditUtilization: 10,
-    minimumPaymentFrequency: 'Never',
-    insuranceStatus: 'Yes',
-    medishield: true,
-    careshield: false,
-    integratedShield: true,
-    shieldProvider: 'Not sure',
-    currentInsurer: 'Not sure',
-    currentProductName: '',
-    currentProductType: 'Protection-only / term',
-    currentPremium: 120,
-    deathCover: 100000,
-    terminalIllnessCover: 100000,
-    tpdCover: 100000,
-    earlyCiCover: 25000,
-    intermediateCiCover: 50000,
-    advancedCiCover: 50000,
-    personalAccidentCover: 0,
-    riders: [{ name: '', duration: 0, coverage: 0, premium: 0 }],
-    goal: 'Protect my income and avoid duplicate cover',
-    budget: 180,
-    deathPriority: 85,
-    disabilityPriority: 80,
-    ciPriority: 90,
-    accidentPriority: 55,
-  },
+  profile: createEmptyProfile(),
   agent: {
     activeRevisionId: 'summary-v1',
     conversationId: '',
@@ -285,30 +206,14 @@ const profileField = (value, stateName = 'present') => ({
 const buildVersionedProfile = (insuranceStatus) => {
   const hasCurrentPolicy = insuranceStatus === 'Yes'
   const policyIsUnsure = insuranceStatus === 'Unsure'
-  const dependantCount = {
-    None: 0,
-    Parents: 1,
-    'Partner or child': 1,
-    'Multiple people': 2,
-  }[state.profile.dependants] ?? 0
   const unknown = () => profileField(null, 'unknown')
   const notApplicable = () => profileField(null, 'not_applicable')
   const policyValue = (value) => {
-    if (hasCurrentPolicy) return profileField(Number(value))
+    if (hasCurrentPolicy) return value === '' ? unknown() : profileField(Number(value))
     return policyIsUnsure ? unknown() : notApplicable()
   }
-  const policyText = (value) => {
-    if (!hasCurrentPolicy) return policyIsUnsure ? unknown() : notApplicable()
-    return value && value !== 'Not sure' ? profileField(value) : unknown()
-  }
-  const riders = state.profile.riders
-    .filter((rider) => rider.name.trim())
-    .map((rider) => ({
-      name: rider.name.trim(),
-      coverage_amount: Number(rider.coverage),
-      duration_years: Number(rider.duration),
-      monthly_premium: Number(rider.premium),
-    }))
+  const policyUnknown = () => hasCurrentPolicy ? unknown() : policyIsUnsure ? unknown() : notApplicable()
+  const priorities = goalPriorityMap[state.profile.goal] || goalPriorityMap['Start with affordable basic protection']
 
   return {
     schema_id: 'covercheck.profile',
@@ -318,63 +223,51 @@ const buildVersionedProfile = (insuranceStatus) => {
     as_of_date: new Date().toISOString().slice(0, 10),
     consent: state.profile.consent,
     data: {
-      life_stage: profileField(`age-${state.profile.age}`),
+      life_stage: unknown(),
       employment_status: unknown(),
       goal: profileField(state.profile.goal),
       target_amount: unknown(),
       target_date: unknown(),
       monthly_income: profileField(Number(state.profile.income)),
-      monthly_expenses: profileField(Number(state.profile.expenses)),
+      monthly_expenses: unknown(),
       emergency_savings_months: unknown(),
-      dependant_count: profileField(dependantCount),
-      dependant_support_years: profileField(0),
+      dependant_count: unknown(),
+      dependant_support_years: unknown(),
       liabilities: profileField(Number(state.profile.debt)),
       has_current_policy: policyIsUnsure ? unknown() : profileField(hasCurrentPolicy),
       existing_death_cover: policyValue(state.profile.deathCover),
       existing_ci_cover: policyValue(state.profile.advancedCiCover),
-      government_cover: profileField([
-        ...(state.profile.medishield ? ['MediShield Life'] : []),
-        ...(state.profile.careshield ? ['CareShield Life'] : []),
-      ]),
+      government_cover: unknown(),
       employer_cover: unknown(),
       monthly_budget: profileField(Number(state.profile.budget)),
-      product_preference: profileField('protection-only'),
-      age: profileField(Number(state.profile.age)),
-      gender: profileField(state.profile.gender),
-      occupation: profileField(state.profile.occupation),
-      marital_status: profileField(state.profile.maritalStatus),
-      supported_people: profileField(state.profile.supportedPeople),
-      loan_commitments: profileField(state.profile.loanCommitments),
-      current_insurer: policyText(state.profile.currentInsurer),
-      current_product_name: policyText(state.profile.currentProductName),
-      current_product_type: policyText(state.profile.currentProductType),
-      integrated_shield_plan: hasCurrentPolicy
-        ? profileField(Boolean(state.profile.integratedShield))
-        : policyIsUnsure ? unknown() : notApplicable(),
-      integrated_shield_provider: hasCurrentPolicy && state.profile.integratedShield
-        ? policyText(state.profile.shieldProvider)
-        : hasCurrentPolicy ? notApplicable() : policyIsUnsure ? unknown() : notApplicable(),
-      current_monthly_premium: policyValue(state.profile.currentPremium),
-      existing_terminal_illness_cover: policyValue(state.profile.terminalIllnessCover),
-      existing_tpd_cover: policyValue(state.profile.tpdCover),
-      existing_early_ci_cover: policyValue(state.profile.earlyCiCover),
-      existing_intermediate_ci_cover: policyValue(state.profile.intermediateCiCover),
-      existing_advanced_ci_cover: policyValue(state.profile.advancedCiCover),
-      existing_personal_accident_cover: policyValue(state.profile.personalAccidentCover),
-      riders: hasCurrentPolicy ? profileField(riders) : policyIsUnsure ? unknown() : notApplicable(),
-      protection_priorities: profileField({
-        death: Number(state.profile.deathPriority),
-        disability: Number(state.profile.disabilityPriority),
-        critical_illness: Number(state.profile.ciPriority),
-        personal_accident: Number(state.profile.accidentPriority),
-      }),
-      credit_card_count: profileField(Number(state.profile.creditCardCount)),
-      credit_card_providers: profileField(
-        state.profile.creditCardProviders.split(',').map((item) => item.trim()).filter(Boolean),
+      product_preference: profileField(
+        state.profile.productPreference === 'Protection only' ? 'protection-only' : 'savings-linked',
       ),
-      total_credit_limit: profileField(Number(state.profile.totalCreditLimit)),
-      credit_utilization_percent: profileField(Number(state.profile.creditUtilization)),
-      minimum_payment_frequency: profileField(state.profile.minimumPaymentFrequency),
+      age: unknown(),
+      gender: unknown(),
+      occupation: unknown(),
+      marital_status: unknown(),
+      supported_people: unknown(),
+      loan_commitments: unknown(),
+      current_insurer: policyUnknown(),
+      current_product_name: policyUnknown(),
+      current_product_type: policyUnknown(),
+      integrated_shield_plan: policyUnknown(),
+      integrated_shield_provider: policyUnknown(),
+      current_monthly_premium: policyValue(state.profile.currentPremium),
+      existing_terminal_illness_cover: policyUnknown(),
+      existing_tpd_cover: policyValue(state.profile.tpdCover),
+      existing_early_ci_cover: policyUnknown(),
+      existing_intermediate_ci_cover: policyUnknown(),
+      existing_advanced_ci_cover: policyValue(state.profile.advancedCiCover),
+      existing_personal_accident_cover: policyUnknown(),
+      riders: policyUnknown(),
+      protection_priorities: profileField(priorities),
+      credit_card_count: unknown(),
+      credit_card_providers: unknown(),
+      total_credit_limit: unknown(),
+      credit_utilization_percent: unknown(),
+      minimum_payment_frequency: unknown(),
     },
   }
 }
@@ -639,9 +532,9 @@ const agentView = () => {
 }
 
 const readinessCategories = {
-  behaviour: { label: 'Behaviour', weight: 50 },
-  knowledge: { label: 'Knowledge', weight: 30 },
-  awareness: { label: 'Awareness', weight: 20 },
+  visibility: { label: 'Coverage visibility', weight: 50 },
+  foundations: { label: 'Protection basics', weight: 25 },
+  terms: { label: 'Terms awareness', weight: 25 },
 }
 
 const getReadinessBreakdown = () => {
@@ -676,7 +569,7 @@ const brand = (tone = '') => `
 `
 
 const trustNote = () => `
-  <p class="trust-note">Educational comparison, not financial advice. All plans shown are synthetic demo data.</p>
+  <p class="trust-note">Educational direction, not financial advice. Ranked options are synthetic demo plans; cached real brochures stay outside ranking.</p>
 `
 
 const appHeader = ({ step = '', back = false } = {}) => `
@@ -693,10 +586,10 @@ const introView = () => `
   <main class="intro-screen view-enter" data-screen="intro">
     <img
       class="intro-image"
-      src="${workerImage}"
-      alt="Three young adults at Marina Bay with Marina Bay Sands behind them"
-      width="1800"
-      height="1200"
+      src="${skylineImage}"
+      alt="Singapore skyline across Marina Bay in daylight"
+      width="2200"
+      height="782"
       fetchpriority="high"
     />
     <div class="intro-scrim" aria-hidden="true"></div>
@@ -705,18 +598,20 @@ const introView = () => `
       <span class="intro-label">Singapore · Ages 18-30</span>
     </header>
     <section class="intro-copy" aria-labelledby="intro-title">
-      <p class="eyebrow intro-sequence">Insurance, minus the blur.</p>
-      <h1 id="intro-title" class="display-title intro-sequence">What did your parents actually buy?</h1>
-      <p class="intro-deck intro-sequence">Eight quick questions. No salary, NRIC or upload needed.</p>
-      <button class="primary-button intro-sequence" type="button" data-action="start-quiz">
-        Check my readiness <span aria-hidden="true">→</span>
-      </button>
+      <p class="eyebrow intro-sequence">Insurance clarity, minus the sales pitch.</p>
+      <h1 id="intro-title" class="display-title intro-sequence">Find your protection starting point.</h1>
+      <p class="intro-deck intro-sequence">Choose the path that fits. The gap check uses five inputs—no NRIC or medical details.</p>
+      <div class="intro-actions intro-sequence" aria-label="Choose how to start">
+        <button class="journey-button is-primary" type="button" data-action="start-no-policy">
+          <span>I don’t have a plan</span><small>Start from zero private cover</small><i aria-hidden="true">→</i>
+        </button>
+        <button class="journey-button" type="button" data-action="review-policy">
+          <span>Review a plan I have</span><small>Add the four figures used in this demo</small><i aria-hidden="true">→</i>
+        </button>
+      </div>
+      <button class="intro-quiz-link intro-sequence" type="button" data-action="start-quiz">Or check my insurance basics · 4 questions</button>
     </section>
-    <aside class="participation-note intro-sequence" aria-label="Pilot participation">
-      <strong>24</strong>
-      <span>hackathon pilot<br />completions this week</span>
-    </aside>
-    <p class="image-credit">Photo: krzhck / Unsplash · Marina Bay</p>
+    <p class="image-credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:Singapore_(SG),_Marina_Bay_--_2019_--_4439-48.jpg" target="_blank" rel="noreferrer">Dietmar Rabich / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a></p>
   </main>
 `
 
@@ -762,14 +657,10 @@ const resultView = () => {
   const breakdown = getReadinessBreakdown()
   const score = breakdown.score
   const topicRows = [
-    ['Plan inventory', 'List plans and national schemes', 0],
-    ['Premium tracking', 'Add monthly and annual costs', 1],
-    ['Review habit', 'Recheck terms and amounts regularly', 2],
-    ['Credit-card behaviour', 'Protect cash flow from carried balances', 3],
-    ['Integrated Shield Plans', 'Know how private hospital cover sits above MediShield Life', 4],
-    ['Protection triggers', 'Separate death, disability and illness payouts', 5],
-    ['Limits and waiting periods', 'Verify the actual policy wording', 6],
-    ['Life-change gaps', 'Recalculate after loans or new dependants', 7],
+    ['What covers you', 'List private, employer, family-bought, and national cover', 0],
+    ['What it costs', 'Add monthly and annual premiums into one total', 1],
+    ['What responds', 'Separate hospital, illness, disability, and death benefits', 2],
+    ['Where it stops', 'Verify exclusions, waiting periods, renewals, and end dates', 3],
   ]
   const actionCount = topicRows.filter(([, , index]) => (state.answers[index]?.value ?? 0) < 2).length
   const headline = actionCount === 0
@@ -841,10 +732,13 @@ const resultView = () => {
 
       <section class="result-action report-reveal reveal-4">
         <div>
-          <span class="section-index mono">NEXT · ABOUT 5 MIN</span>
-          <h2>Fill the gaps. Then compare.</h2>
+          <span class="section-index mono">NEXT · ABOUT 3 MIN</span>
+          <h2>Turn this into a protection starting point.</h2>
         </div>
-        <button class="primary-button" type="button" data-action="create-account">Continue with a demo account <span aria-hidden="true">→</span></button>
+        <div class="result-paths">
+          <button class="primary-button" type="button" data-action="start-no-policy">I don’t have a plan <span aria-hidden="true">→</span></button>
+          <button class="secondary-button" type="button" data-action="review-policy">Review a plan I have</button>
+        </div>
       </section>
       <footer class="report-footer">${trustNote()}</footer>
     </main>
@@ -855,40 +749,32 @@ const signupView = () => `
   <main class="form-screen" data-screen="signup">
     ${appHeader({ back: true })}
     <section class="form-intro view-enter">
-      <p class="eyebrow">Save your progress</p>
-      <h1 class="form-title screen-title" tabindex="-1">A demo account. No production account is created.</h1>
-      <p>Name and email stay in this tab. Profile answers go to the local POC API; live explanation sends compact profile context, never an uploaded document, to Amazon Bedrock.</p>
+      <p class="eyebrow">Before the gap check</p>
+      <h1 class="form-title screen-title" tabindex="-1">No account. Just clear consent.</h1>
+      <p>Your answers go to the local POC API. A compact profile summary—not a policy document—is sent to Amazon Bedrock for plain-language explanation.</p>
     </section>
     <form id="account-form" class="account-form view-enter" novalidate>
-      <label class="field">
-        <span>First name</span>
-        <input type="text" name="name" data-field="name" value="${escapeHtml(state.profile.name)}" autocomplete="given-name" required />
-      </label>
-      <label class="field">
-        <span>Email</span>
-        <input type="email" name="email" data-field="email" value="${escapeHtml(state.profile.email)}" placeholder="you@example.com" autocomplete="email" required />
-      </label>
       <label class="consent-row">
         <input type="checkbox" name="consent" data-field="consent" ${state.profile.consent ? 'checked' : ''} required />
-        <span>I understand how this local demo processes my inputs.</span>
+        <span>I understand this local demo uses my answers to calculate synthetic gaps and explain a synthetic comparison.</span>
       </label>
-      <button class="primary-button" type="submit">Start my profile <span aria-hidden="true">→</span></button>
+      <button class="primary-button" type="submit">Continue to five inputs <span aria-hidden="true">→</span></button>
       <p class="form-error" id="account-error" role="alert"></p>
     </form>
     <aside class="privacy-aside view-enter">
       <span class="mono">NOT COLLECTED</span>
-      <p>No NRIC, medical details, payment or beneficiary information.</p>
+      <p>No name, email, NRIC, medical details, payment, or beneficiary information.</p>
     </aside>
   </main>
 `
 
-const radioGroup = (name, label, options, current) => `
+const radioGroup = (name, label, options, current, required = false) => `
   <fieldset class="choice-field">
     <legend>${label}</legend>
     <div class="segmented-options">
       ${options.map((option) => `
         <label>
-          <input type="radio" name="${name}" data-field="${name}" value="${escapeHtml(option)}" ${current === option ? 'checked' : ''} />
+          <input type="radio" name="${name}" data-field="${name}" value="${escapeHtml(option)}" ${current === option ? 'checked' : ''} ${required ? 'required' : ''} />
           <span>${option}</span>
         </label>
       `).join('')}
@@ -896,177 +782,73 @@ const radioGroup = (name, label, options, current) => `
   </fieldset>
 `
 
-const checkboxGroup = (name, label, options, current = []) => `
-  <fieldset class="choice-field compact-checks">
-    <legend>${label}</legend>
-    <div class="segmented-options">
-      ${options.map((option) => `
-        <label>
-          <input type="checkbox" data-list-field="${name}" value="${escapeHtml(option)}" ${current.includes(option) ? 'checked' : ''} />
-          <span>${escapeHtml(option)}</span>
-        </label>
-      `).join('')}
-    </div>
-  </fieldset>
-`
-
-const riderFields = (rider, index) => `
-  <article class="rider-card">
-    <div class="rider-heading">
-      <strong>Rider ${index + 1}</strong>
-      <button type="button" class="text-button" data-action="remove-rider" data-rider-index="${index}">Remove</button>
-    </div>
-    <div class="field-pair">
-      <label class="field"><span>Rider name</span><input type="text" data-rider-field="name" data-rider-index="${index}" value="${escapeHtml(rider.name)}" placeholder="e.g. Early CI rider" /></label>
-      <label class="field"><span>Coverage duration (years)</span><input type="number" min="0" max="100" step="1" data-rider-field="duration" data-rider-index="${index}" value="${rider.duration}" /></label>
-    </div>
-    <div class="field-pair">
-      <label class="field money-field"><span>Rider coverage</span><i>S$</i><input type="number" min="0" step="1000" data-rider-field="coverage" data-rider-index="${index}" value="${rider.coverage}" /></label>
-      <label class="field money-field"><span>Rider monthly premium</span><i>S$</i><input type="number" min="0" step="1" data-rider-field="premium" data-rider-index="${index}" value="${rider.premium}" /></label>
-    </div>
-  </article>
-`
-
-const prioritySlider = (key, label, value) => `
-  <label class="range-field priority-range">
-    <span><b>${label}</b><output>${value} / 100</output></span>
-    <input type="range" min="0" max="100" step="5" data-field="${key}" value="${value}" />
-  </label>
-`
+const activeOnboardingSteps = () => state.profile.insuranceStatus === 'Yes'
+  ? onboardingSteps
+  : onboardingSteps.slice(0, 1)
 
 const onboardingFields = () => {
   const profile = state.profile
   if (state.onboardingStep === 0) {
     return `
-      <div class="field-pair">
-        <label class="field"><span>Age</span><input type="number" min="18" max="100" step="1" data-field="age" value="${profile.age}" required /></label>
-        <label class="field"><span>Occupation or course of study</span><input type="text" maxlength="100" data-field="occupation" value="${escapeHtml(profile.occupation)}" required /></label>
+      ${radioGroup('insuranceStatus', 'Where are you starting?', ['No', 'Yes', 'Unsure'], profile.insuranceStatus, true)}
+      <div class="path-callout">
+        <span class="mono">${profile.insuranceStatus === 'Yes' ? 'EXISTING PLAN PATH' : profile.insuranceStatus === 'No' ? 'NO-PLAN PATH' : 'UNSURE PATH'}</span>
+        <p>${profile.insuranceStatus === 'Yes' ? 'You will add four current-plan amounts, then review a synthetic policy extraction.' : profile.insuranceStatus === 'No' ? 'Policy questions and upload are skipped. No private cover will be invented.' : 'No private cover will be deducted; the result will show what needs verification.'}</p>
       </div>
-      ${radioGroup('gender', 'Gender', ['Woman', 'Man', 'Non-binary', 'Prefer not to say'], profile.gender)}
-      ${radioGroup('maritalStatus', 'Life stage', ['Single', 'Married', 'Married with children'], profile.maritalStatus)}
       <div class="field-pair">
-        <label class="field money-field"><span>Monthly take-home income</span><i>S$</i><input type="number" min="0" step="100" data-field="income" value="${profile.income}" required /></label>
-        <label class="field money-field"><span>Monthly spending</span><i>S$</i><input type="number" min="0" step="100" data-field="expenses" value="${profile.expenses}" required /></label>
+        <label class="field money-field"><span>Monthly take-home income</span><i>S$</i><input type="number" min="0.01" step="0.01" data-field="income" value="${profile.income}" placeholder="e.g. 4,200" required /></label>
+        <label class="field money-field"><span>Total loans left to pay</span><i>S$</i><input type="number" min="0" step="0.01" data-field="debt" value="${profile.debt}" placeholder="Enter 0 if none" required /></label>
       </div>
-      ${radioGroup('dependants', 'How many people rely on your income?', ['None', 'Parents', 'Partner or child', 'Multiple people'], profile.dependants)}
-      ${checkboxGroup('supportedPeople', 'Who do you financially support? Select any.', ['Parents', 'Partner', 'Children', 'Siblings'], profile.supportedPeople)}
-      ${checkboxGroup('loanCommitments', 'Existing loan commitments', ['Housing / mortgage', 'Car', 'Education'], profile.loanCommitments)}
-      <label class="field money-field"><span>Total loans left to pay</span><i>S$</i><input type="number" min="0" step="1000" data-field="debt" value="${profile.debt}" /></label>
-      <p class="field-caption">A rough total is enough. Savings and asset balances are not requested.</p>
-      <details class="optional-details">
-        <summary>Optional credit-card context</summary>
-        <p>This helps explain cash-flow pressure. It does not affect an insurer or credit score.</p>
-        <div class="field-pair">
-          <label class="field"><span>Number of cards</span><input type="number" min="0" max="30" step="1" data-field="creditCardCount" value="${profile.creditCardCount}" /></label>
-          <label class="field"><span>Banks or providers</span><input type="text" maxlength="200" data-field="creditCardProviders" value="${escapeHtml(profile.creditCardProviders)}" placeholder="e.g. DBS, UOB" /></label>
-        </div>
-        <div class="field-pair">
-          <label class="field money-field"><span>Total credit limit</span><i>S$</i><input type="number" min="0" step="500" data-field="totalCreditLimit" value="${profile.totalCreditLimit}" /></label>
-          <label class="field"><span>Typical limit used (%)</span><input type="number" min="0" max="100" step="1" data-field="creditUtilization" value="${profile.creditUtilization}" /></label>
-        </div>
-        ${radioGroup('minimumPaymentFrequency', 'Paid only the minimum in the last 6 months?', ['Never', 'Once or twice', 'Regularly'], profile.minimumPaymentFrequency)}
-      </details>
+      <p class="field-caption">A rough total is enough. Savings, spending, and loan categories are not used by the current formulation.</p>
+      ${radioGroup('goal', 'What matters most right now?', goalOptions, profile.goal, true)}
+      ${radioGroup('productPreference', 'What kind of demo option should be considered?', ['Protection only', 'Open to savings features'], profile.productPreference, true)}
+      <label class="field money-field"><span>Maximum additional monthly premium</span><i>S$</i><input type="number" min="0.01" step="0.01" data-field="budget" value="${profile.budget}" placeholder="e.g. 150" required /></label>
+      <p class="field-caption">This is a hard ceiling for the synthetic demo options—not a quote or spending recommendation.</p>
     `
   }
 
   const premiumShare = profile.income > 0 ? (profile.currentPremium / profile.income) * 100 : 0
-  const hasCurrentPolicy = profile.insuranceStatus === 'Yes'
-  const policyDetails = hasCurrentPolicy
-    ? `
-        <div class="field-pair">
-          <label class="field">
-            <span>Current insurer</span>
-            <select data-field="currentInsurer">
-              ${insurerOptions.map((insurer) => `<option ${profile.currentInsurer === insurer ? 'selected' : ''}>${escapeHtml(insurer)}</option>`).join('')}
-            </select>
-          </label>
-          <label class="field"><span>Plan or product name</span><input type="text" maxlength="120" data-field="currentProductName" value="${escapeHtml(profile.currentProductName)}" placeholder="Leave blank if unknown" /></label>
-        </div>
-        ${radioGroup('currentProductType', 'Current plan type', ['Protection-only / term', 'Whole life', 'Investment-linked policy', 'Not sure'], profile.currentProductType)}
-        <label class="field money-field"><span>Total current monthly premiums</span><i>S$</i><input type="number" min="0" step="1" data-field="currentPremium" value="${profile.currentPremium}" required /></label>
-        <div class="premium-preview ${premiumShare > 15 ? 'is-high' : premiumShare > 5 ? 'is-watch' : 'is-comfort'}">
-          <span class="mono">CURRENT PREMIUM / INCOME</span>
-          <strong>${premiumShare.toFixed(1)}%</strong>
-          <p>5% is a demo adviser-interview comfort marker. MoneySense’s educational upper reference is 15% of income.</p>
-        </div>
-        <fieldset class="check-field">
-          <legend>National and hospital cover</legend>
-          <label><input type="checkbox" data-field="medishield" ${profile.medishield ? 'checked' : ''} /><span><b>MediShield Life</b><small>Basic health insurance for large hospital bills.</small></span></label>
-          <label><input type="checkbox" data-field="integratedShield" ${profile.integratedShield ? 'checked' : ''} /><span><b>Integrated Shield Plan</b><small>Private hospital insurance that adds to MediShield Life; exact benefits depend on the product.</small></span></label>
-          <label><input type="checkbox" data-field="careshield" ${profile.careshield ? 'checked' : ''} /><span><b>CareShield Life</b><small>Monthly support for severe disability.</small></span></label>
-        </fieldset>
-        ${profile.integratedShield ? `
-          <label class="field">
-            <span>Integrated Shield provider</span>
-            <select data-field="shieldProvider">
-              ${insurerOptions.map((insurer) => `<option ${profile.shieldProvider === insurer ? 'selected' : ''}>${escapeHtml(insurer)}</option>`).join('')}
-            </select>
-          </label>
-        ` : ''}
-        <fieldset class="coverage-fieldset">
-          <legend>Declared sum assured or benefit amounts</legend>
-          <p>Enter 0 only when you know there is no cover. Amounts are kept separate because benefits can overlap or reduce another payout.</p>
-          <div class="coverage-grid">
-            <label class="field money-field"><span>Death</span><i>S$</i><input type="number" min="0" step="1000" data-field="deathCover" value="${profile.deathCover}" /></label>
-            <label class="field money-field"><span>Terminal illness</span><i>S$</i><input type="number" min="0" step="1000" data-field="terminalIllnessCover" value="${profile.terminalIllnessCover}" /></label>
-            <label class="field money-field"><span>Total permanent disability</span><i>S$</i><input type="number" min="0" step="1000" data-field="tpdCover" value="${profile.tpdCover}" /></label>
-            <label class="field money-field"><span>Early-stage critical illness</span><i>S$</i><input type="number" min="0" step="1000" data-field="earlyCiCover" value="${profile.earlyCiCover}" /></label>
-            <label class="field money-field"><span>Intermediate critical illness</span><i>S$</i><input type="number" min="0" step="1000" data-field="intermediateCiCover" value="${profile.intermediateCiCover}" /></label>
-            <label class="field money-field"><span>Advanced critical illness</span><i>S$</i><input type="number" min="0" step="1000" data-field="advancedCiCover" value="${profile.advancedCiCover}" /></label>
-            <label class="field money-field"><span>Personal accident</span><i>S$</i><input type="number" min="0" step="1000" data-field="personalAccidentCover" value="${profile.personalAccidentCover}" /></label>
-          </div>
-        </fieldset>
-        <section class="riders-editor" aria-labelledby="riders-title">
-          <div class="riders-title-row"><div><h2 id="riders-title">Riders and add-ons</h2><p>Record the rider name, duration, benefit and premium.</p></div><button class="secondary-button" type="button" data-action="add-rider">Add rider</button></div>
-          ${profile.riders.map(riderFields).join('')}
-        </section>
-      `
-    : profile.insuranceStatus === 'Unsure'
-      ? '<div class="unknown-callout"><strong>That is okay.</strong><p>No private coverage will be assumed or deducted. The result will show what to verify.</p></div>'
-      : '<div class="unknown-callout"><strong>No current private policy recorded.</strong><p>The gap check will start from zero declared private cover and keep national schemes separate.</p></div>'
-
   return `
-    ${radioGroup('insuranceStatus', 'Do you currently have insurance?', ['Yes', 'No', 'Unsure'], profile.insuranceStatus)}
-    ${policyDetails}
-    <div class="priority-grid">
-      ${prioritySlider('deathPriority', 'Death protection', profile.deathPriority)}
-      ${prioritySlider('disabilityPriority', 'Disability protection', profile.disabilityPriority)}
-      ${prioritySlider('ciPriority', 'Critical illness', profile.ciPriority)}
-      ${prioritySlider('accidentPriority', 'Personal accident', profile.accidentPriority)}
+    <div class="unknown-callout">
+      <strong>Only enter amounts you can verify.</strong>
+      <p>These are the current-plan figures used in the gap and affordability calculations. Enter 0 only when the policy explicitly has no such benefit.</p>
     </div>
-    <label class="field">
-      <span>What protection or financial outcome matters most?</span>
-      <textarea rows="3" data-field="goal" required>${escapeHtml(profile.goal)}</textarea>
-    </label>
-    <label class="range-field">
-      <span><b>Maximum additional monthly premium</b><output>${formatCurrency(profile.budget)}</output></span>
-      <input type="range" min="0" max="500" step="10" data-field="budget" value="${profile.budget}" />
-      <small>Drag to a comfortable ceiling. If unsure, an adviser can confirm actual product pricing.</small>
-    </label>
+    <div class="field-pair">
+      <label class="field money-field"><span>Total current monthly premium</span><i>S$</i><input type="number" min="0" step="0.01" data-field="currentPremium" value="${profile.currentPremium}" placeholder="e.g. 120" required /></label>
+      <label class="field money-field"><span>Death benefit</span><i>S$</i><input type="number" min="0" step="0.01" data-field="deathCover" value="${profile.deathCover}" placeholder="e.g. 100,000" required /></label>
+      <label class="field money-field"><span>Total permanent disability benefit</span><i>S$</i><input type="number" min="0" step="0.01" data-field="tpdCover" value="${profile.tpdCover}" placeholder="e.g. 100,000" required /></label>
+      <label class="field money-field"><span>Advanced critical illness benefit</span><i>S$</i><input type="number" min="0" step="0.01" data-field="advancedCiCover" value="${profile.advancedCiCover}" placeholder="e.g. 50,000" required /></label>
+    </div>
+    <div class="premium-preview ${premiumShare > 15 ? 'is-high' : premiumShare > 5 ? 'is-watch' : 'is-comfort'}">
+      <span class="mono">CURRENT PREMIUM / INCOME</span>
+      <strong>${premiumShare.toFixed(1)}%</strong>
+      <p>5% is a demo adviser-interview marker. MoneySense’s educational upper reference is 15% of income.</p>
+    </div>
   `
 }
 
 const onboardingView = () => {
-  const current = onboardingSteps[state.onboardingStep]
-  const isFinalStep = state.onboardingStep === onboardingSteps.length - 1
+  const steps = activeOnboardingSteps()
+  const current = steps[state.onboardingStep]
+  const isFinalStep = state.onboardingStep === steps.length - 1
   const isPlanning = isFinalStep && state.runtime.status === 'planning'
   const finalAction = state.profile.insuranceStatus === 'Yes'
     ? 'Review a sample policy'
     : 'Find my protection gaps'
   return `
     <main class="onboarding-screen" data-screen="onboarding">
-      ${appHeader({ step: `PROFILE ${state.onboardingStep + 1} / ${onboardingSteps.length}`, back: true })}
+      ${appHeader({ step: `PROFILE ${state.onboardingStep + 1} / ${steps.length}`, back: true })}
       <div class="onboarding-layout">
         <aside class="stepper" aria-label="Onboarding progress">
           <p class="mono">YOUR PROFILE</p>
           <ol>
-            ${onboardingSteps.map((step, index) => `
+            ${steps.map((step, index) => `
               <li class="${index === state.onboardingStep ? 'is-current' : ''} ${index < state.onboardingStep ? 'is-complete' : ''}">
                 <span>${String(index + 1).padStart(2, '0')}</span><b>${step[0]}</b>
               </li>
             `).join('')}
           </ol>
-          <p class="stepper-note">You can go back. It is fine not to know.</p>
+          <p class="stepper-note">Only fields used by the current demo are required.</p>
         </aside>
         <section class="onboarding-main view-enter">
           <p class="eyebrow">Step ${state.onboardingStep + 1}</p>
@@ -1090,15 +872,15 @@ const uploadView = () => `
   <main class="upload-screen" data-screen="upload">
     ${appHeader({ step: 'POLICY REVIEW', back: true })}
     <section class="upload-heading view-enter">
-      <p class="eyebrow">Check a policy</p>
-      <h1 class="upload-title screen-title" tabindex="-1">Upload one policy. We will flag anything unclear.</h1>
-      <p>Demo only: your file stays on this device. This screen always loads a fake sample.</p>
+      <p class="eyebrow">Synthetic extraction demo</p>
+      <h1 class="upload-title screen-title" tabindex="-1">See how a policy review could work.</h1>
+      <p>This POC does not process your real document. Use the synthetic sample to continue safely.</p>
     </section>
     <section class="upload-zone view-enter" aria-labelledby="upload-label">
       <div class="upload-symbol" aria-hidden="true"><span>PDF</span></div>
       <div>
-        <h2 id="upload-label">Drop a policy document here</h2>
-        <p>PDF, JPG or PNG · Use a sample, not your real policy</p>
+        <h2 id="upload-label">Policy document preview</h2>
+        <p>PDF, JPG or PNG · Demo navigation only; file contents are not read</p>
       </div>
       <label class="primary-button file-button">
         Choose a file
@@ -1106,7 +888,7 @@ const uploadView = () => `
       </label>
       <span class="or-label mono">OR</span>
       <button class="secondary-button" type="button" data-action="use-sample">Use synthetic sample policy</button>
-      <button class="text-button" type="button" data-action="no-policy">I do not have a policy</button>
+      <button class="text-button" type="button" data-action="no-policy">Switch to the no-plan path</button>
     </section>
     <div class="upload-guardrails view-enter">
       <p><span class="mono">01</span> Every detail links back to a page.</p>
@@ -1190,7 +972,7 @@ const comparisonTable = (evaluations) => {
     <table class="plan-table">
       <thead><tr><th scope="col">Compare</th>${visible.map(({ evaluation, details }) => `
         <th scope="col" class="${evaluation.rank === 1 ? 'recommended' : ''}">
-          ${evaluation.rank === 1 ? '<span>Closest fit</span>' : ''}${escapeHtml(details[0])}
+          ${evaluation.rank === 1 ? '<span>Closest demo fit</span>' : ''}${escapeHtml(details[0])}
         </th>
       `).join('')}</tr></thead>
       <tbody>
@@ -1244,25 +1026,16 @@ const declaredCoverageView = (insuranceStatus) => {
   }
   const coverage = [
     ['Death', state.profile.deathCover],
-    ['Terminal illness', state.profile.terminalIllnessCover],
     ['Total permanent disability', state.profile.tpdCover],
-    ['Early-stage critical illness', state.profile.earlyCiCover],
-    ['Intermediate critical illness', state.profile.intermediateCiCover],
     ['Advanced critical illness', state.profile.advancedCiCover],
-    ['Personal accident', state.profile.personalAccidentCover],
   ]
-  const riders = state.profile.riders.filter((rider) => rider.name.trim())
   return `
     <div class="declared-cover-heading">
-      <div><span class="mono">USER-DECLARED</span><h3>${escapeHtml(state.profile.currentInsurer)} · ${escapeHtml(state.profile.currentProductName || 'Product name unknown')}</h3></div>
-      <div><b>${formatCurrency(state.profile.currentPremium)} / month</b><small>${state.profile.integratedShield ? 'Integrated Shield Plan declared' : 'No Integrated Shield Plan declared'}</small></div>
+      <div><span class="mono">USER-DECLARED</span><h3>Current private cover used in this demo</h3></div>
+      <div><b>${formatCurrency(state.profile.currentPremium)} / month</b><small>Insurer and product identity are not used for ranking.</small></div>
     </div>
     <div class="declared-cover-grid">
       ${coverage.map(([label, amount]) => `<article><span>${label}</span><strong class="mono">${formatCurrency(amount)}</strong></article>`).join('')}
-    </div>
-    <div class="declared-riders">
-      <h3>Riders and add-ons</h3>
-      ${riders.length ? riders.map((rider) => `<p><b>${escapeHtml(rider.name)}</b><span>${formatCurrency(rider.coverage)} · ${rider.duration} years · ${formatCurrency(rider.premium)}/month</span></p>`).join('') : '<p><span>No rider was declared.</span></p>'}
     </div>
     <p class="comparison-warning">Amounts are displayed separately and are not added together because policy benefits may overlap, accelerate, or reduce another payout.</p>
   `
@@ -1308,7 +1081,7 @@ const comparisonView = () => {
       ${appHeader()}
       <section class="comparison-lead view-enter">
         <div>
-          <p class="eyebrow">Comparison ready for ${escapeHtml(state.profile.name || 'you')}</p>
+          <p class="eyebrow">Synthetic protection direction</p>
           <h1 class="comparison-title screen-title" tabindex="-1">${insuranceStatus === 'Yes' ? 'Your current plan covers part of the basics.' : insuranceStatus === 'Unsure' ? 'Start with the gaps, then verify what cover you have.' : 'Start with the largest known protection gaps.'}</h1>
         </div>
         <div class="comparison-meta">
@@ -1356,8 +1129,8 @@ const comparisonView = () => {
       <section class="comparison-section" id="plan-comparison" aria-labelledby="compare-title" tabindex="-1">
         <div class="comparison-section-heading">
           <div>
-            <span class="section-index mono">03 · ELIGIBLE OPTIONS</span>
-            <h2 id="compare-title">Compare what you pay and get.</h2>
+            <span class="section-index mono">03 · ELIGIBLE SYNTHETIC OPTIONS</span>
+            <h2 id="compare-title">Closest fits among four demo plans.</h2>
           </div>
           <div class="comparison-context">
             <p>Budget checked against your ${formatCurrency(state.profile.budget)} monthly comfort limit.</p>
@@ -1370,7 +1143,7 @@ const comparisonView = () => {
 
         <div class="reasoning-drawers">
           <details id="ranking-reason" tabindex="-1" open>
-            <summary><span><b>Why ${escapeHtml(closestName)} ranks first</b><small>Fit score ${closestScore} · synthetic</small></span><i aria-hidden="true">+</i></summary>
+            <summary><span><b>Why ${escapeHtml(closestName)} is the closest demo fit</b><small>Fit score ${closestScore} · synthetic</small></span><i aria-hidden="true">+</i></summary>
             <div class="drawer-content">
               <span class="mono">${escapeHtml(explanationLabel)}</span>
               ${explanation?.summary ? `<p>${escapeHtml(explanation.summary)}</p>` : ''}
@@ -1378,7 +1151,7 @@ const comparisonView = () => {
             </div>
           </details>
           <details id="ranking-assumptions" tabindex="-1">
-            <summary><span><b>What the ranking does not know</b><small>${recommendation?.assumptions.length || 0} assumptions remain</small></span><i aria-hidden="true">+</i></summary>
+            <summary><span><b>What the demo ranking does not know</b><small>${recommendation?.assumptions.length || 0} assumptions remain</small></span><i aria-hidden="true">+</i></summary>
             <div class="drawer-content"><p>${escapeHtml(recommendation?.assumptions.join(' ') || 'No assumptions recorded.')}</p></div>
           </details>
           <details>
@@ -1489,47 +1262,19 @@ const syncProfileFromVersioned = (versionedProfile) => {
   const status = data.has_current_policy?.state === 'present'
     ? data.has_current_policy.value ? 'Yes' : 'No'
     : 'Unsure'
-  const dependantCount = Number(presentValue(data.dependant_count, 0))
 
   state.profile.insuranceStatus = status
   state.profile.goal = presentValue(data.goal, state.profile.goal)
   state.profile.income = Number(presentValue(data.monthly_income, state.profile.income))
-  state.profile.expenses = Number(presentValue(data.monthly_expenses, state.profile.expenses))
-  state.profile.dependants = dependantCount === 0
-    ? 'None'
-    : dependantCount === 1 ? 'Partner or child' : 'Multiple people'
   state.profile.debt = Number(presentValue(data.liabilities, state.profile.debt))
   state.profile.budget = Number(presentValue(data.monthly_budget, state.profile.budget))
-  state.profile.age = Number(presentValue(data.age, state.profile.age))
-  state.profile.gender = presentValue(data.gender, state.profile.gender)
-  state.profile.occupation = presentValue(data.occupation, state.profile.occupation)
-  state.profile.maritalStatus = presentValue(data.marital_status, state.profile.maritalStatus)
-  state.profile.supportedPeople = presentValue(data.supported_people, state.profile.supportedPeople)
-  state.profile.loanCommitments = presentValue(data.loan_commitments, state.profile.loanCommitments)
-  state.profile.currentInsurer = presentValue(data.current_insurer, state.profile.currentInsurer)
-  state.profile.currentProductName = presentValue(data.current_product_name, state.profile.currentProductName)
-  state.profile.currentProductType = presentValue(data.current_product_type, state.profile.currentProductType)
-  state.profile.integratedShield = Boolean(presentValue(data.integrated_shield_plan, false))
-  state.profile.shieldProvider = presentValue(data.integrated_shield_provider, state.profile.shieldProvider)
+  state.profile.productPreference = presentValue(data.product_preference, 'protection-only') === 'protection-only'
+    ? 'Protection only'
+    : 'Open to savings features'
   state.profile.currentPremium = Number(presentValue(data.current_monthly_premium, status === 'Yes' ? state.profile.currentPremium : 0))
   state.profile.deathCover = Number(presentValue(data.existing_death_cover, status === 'Yes' ? state.profile.deathCover : 0))
-  state.profile.terminalIllnessCover = Number(presentValue(data.existing_terminal_illness_cover, status === 'Yes' ? state.profile.terminalIllnessCover : 0))
   state.profile.tpdCover = Number(presentValue(data.existing_tpd_cover, status === 'Yes' ? state.profile.tpdCover : 0))
-  state.profile.earlyCiCover = Number(presentValue(data.existing_early_ci_cover, status === 'Yes' ? state.profile.earlyCiCover : 0))
-  state.profile.intermediateCiCover = Number(presentValue(data.existing_intermediate_ci_cover, status === 'Yes' ? state.profile.intermediateCiCover : 0))
   state.profile.advancedCiCover = Number(presentValue(data.existing_advanced_ci_cover, status === 'Yes' ? state.profile.advancedCiCover : 0))
-  state.profile.personalAccidentCover = Number(presentValue(data.existing_personal_accident_cover, status === 'Yes' ? state.profile.personalAccidentCover : 0))
-  state.profile.creditCardCount = Number(presentValue(data.credit_card_count, state.profile.creditCardCount))
-  state.profile.creditCardProviders = presentValue(data.credit_card_providers, []).join(', ')
-  state.profile.totalCreditLimit = Number(presentValue(data.total_credit_limit, state.profile.totalCreditLimit))
-  state.profile.creditUtilization = Number(presentValue(data.credit_utilization_percent, state.profile.creditUtilization))
-  state.profile.minimumPaymentFrequency = presentValue(data.minimum_payment_frequency, state.profile.minimumPaymentFrequency)
-  if (data.protection_priorities?.state === 'present') {
-    state.profile.deathPriority = data.protection_priorities.value.death
-    state.profile.disabilityPriority = data.protection_priorities.value.disability
-    state.profile.ciPriority = data.protection_priorities.value.critical_illness
-    state.profile.accidentPriority = data.protection_priorities.value.personal_accident
-  }
 }
 
 async function askAgent(message) {
@@ -1675,7 +1420,7 @@ function goBack(keyboard = false) {
     }
     return
   }
-  if (state.view === 'signup') navigate('result', 'back', keyboard)
+  if (state.view === 'signup') navigate(state.entrySource === 'quiz' ? 'result' : 'intro', 'back', keyboard)
   else if (state.view === 'onboarding') {
     if (state.onboardingStep === 0) navigate('signup', 'back', keyboard)
     else {
@@ -1685,7 +1430,7 @@ function goBack(keyboard = false) {
       render()
     }
   } else if (state.view === 'upload') {
-    state.onboardingStep = onboardingSteps.length - 1
+    state.onboardingStep = activeOnboardingSteps().length - 1
     navigate('onboarding', 'back', keyboard)
   } else if (state.view === 'ocr') navigate('upload', 'back', keyboard)
 }
@@ -1716,25 +1461,13 @@ function chooseAnswer(index, keyboard = false) {
 }
 
 function updateProfileField(target) {
-  const listKey = target.dataset.listField
-  if (listKey) {
-    state.profile[listKey] = [...app.querySelectorAll(`[data-list-field="${listKey}"]:checked`)]
-      .map((item) => item.value)
-    return
-  }
-  const riderKey = target.dataset.riderField
-  const riderIndex = Number(target.dataset.riderIndex)
-  if (riderKey && Number.isInteger(riderIndex) && state.profile.riders[riderIndex]) {
-    state.profile.riders[riderIndex][riderKey] = target.type === 'number'
-      ? Number(target.value)
-      : target.value
-    return
-  }
   const key = target.dataset.field
   if (!key) return
   const isBoolean = target.type === 'checkbox'
   const isNumber = target.type === 'number' || target.type === 'range'
-  state.profile[key] = isBoolean ? target.checked : isNumber ? Number(target.value) : target.value
+  state.profile[key] = isBoolean
+    ? target.checked
+    : isNumber && target.value !== '' ? Number(target.value) : target.value
 
   if (target.type === 'range') {
     const output = target.closest('.range-field')?.querySelector('output')
@@ -1760,7 +1493,7 @@ function updateProfileField(target) {
 app.addEventListener('input', (event) => updateProfileField(event.target))
 app.addEventListener('change', (event) => {
   updateProfileField(event.target)
-  if (['insuranceStatus', 'integratedShield'].includes(event.target.dataset.field)) {
+  if (event.target.dataset.field === 'insuranceStatus') {
     render({ focus: false, preserveScroll: true })
     return
   }
@@ -1781,7 +1514,7 @@ app.addEventListener('submit', (event) => {
   if (event.target.id === 'account-form') {
     const error = app.querySelector('#account-error')
     if (!event.target.checkValidity()) {
-      if (error) error.textContent = 'Add a valid email and confirm consent to continue.'
+      if (error) error.textContent = 'Confirm consent to continue.'
       event.target.reportValidity()
       return
     }
@@ -1794,7 +1527,7 @@ app.addEventListener('submit', (event) => {
       event.target.reportValidity()
       return
     }
-    if (state.onboardingStep === onboardingSteps.length - 1) {
+    if (state.onboardingStep === activeOnboardingSteps().length - 1) {
       if (state.profile.insuranceStatus === 'Yes') navigate('upload', 'forward', true)
       else void prepareComparison(state.profile.insuranceStatus)
     }
@@ -1830,23 +1563,22 @@ app.addEventListener('click', (event) => {
     state.answers = []
     navigate('quiz')
   }
+  if (action === 'start-no-policy') {
+    state.entrySource = state.view === 'result' ? 'quiz' : 'intro'
+    state.profile.insuranceStatus = 'No'
+    state.onboardingStep = 0
+    navigate('signup')
+  }
+  if (action === 'review-policy') {
+    state.entrySource = state.view === 'result' ? 'quiz' : 'intro'
+    state.profile.insuranceStatus = 'Yes'
+    state.onboardingStep = 0
+    navigate('signup')
+  }
   if (action === 'back') goBack()
-  if (action === 'create-account') navigate('signup')
   if (action === 'previous-onboarding') {
     state.onboardingStep -= 1
     navigate('onboarding', 'back')
-  }
-  if (action === 'add-rider') {
-    state.profile.riders.push({ name: '', duration: 0, coverage: 0, premium: 0 })
-    render({ focus: false, preserveScroll: true })
-  }
-  if (action === 'remove-rider') {
-    const riderIndex = Number(control.dataset.riderIndex)
-    if (Number.isInteger(riderIndex)) state.profile.riders.splice(riderIndex, 1)
-    if (!state.profile.riders.length) {
-      state.profile.riders.push({ name: '', duration: 0, coverage: 0, premium: 0 })
-    }
-    render({ focus: false, preserveScroll: true })
   }
   if (action === 'use-sample') {
     state.fileName = 'Inherited_Policy_Sample.pdf'
@@ -1869,6 +1601,8 @@ app.addEventListener('click', (event) => {
   if (action === 'stop-agent') state.agent.abortController?.abort()
   if (action === 'restart') {
     state.profileId = `browser-${createClientId()}`
+    state.profile = createEmptyProfile()
+    state.entrySource = 'intro'
     state.questionIndex = 0
     state.answers = []
     state.onboardingStep = 0

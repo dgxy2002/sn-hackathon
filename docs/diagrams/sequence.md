@@ -104,9 +104,9 @@ sequenceDiagram
 
 Phase 3B may follow the direct read-only integration before E11 exists. Discovery relevance can help the user find products, but the comparison uses provider/product ordering and contains no fit score, recommendation badge, or suitability claim.
 
-## Accepted fixture runtime, Bedrock explanation, and pending OpenRouter extraction
+## Accepted runtime, live Bedrock explanation, and pending OpenRouter extraction
 
-The local API, PostgreSQL evidence path, deterministic E07 engine, invocation coordinator, run events, and typed Bedrock explanation adapter are implemented. OpenRouter extraction and a credentialed live Bedrock acceptance run remain pending; fixture mode supplies the same explanation boundary without a provider credential.
+The local API, PostgreSQL evidence path, deterministic E07 engine, invocation coordinator, run events, and typed Bedrock explanation adapter are implemented. Credentialed Bedrock completed through the Docker/Nginx/API path. OpenRouter extraction remains pending; fixture mode supplies the same explanation boundary without a provider credential.
 
 ```mermaid
 sequenceDiagram
@@ -140,7 +140,7 @@ sequenceDiagram
         Extract-->>API: Values, confidence, page evidence, and metrics
         API-->>Coordinator: Validated extraction contract
     else No policy supplied
-        Coordinator->>Coordinator: Skip extraction and preserve policy fields as unknown
+        Coordinator->>Coordinator: Skip extraction and mark policy fields not applicable
     end
 
     alt Decision-critical fields are missing
@@ -167,7 +167,7 @@ sequenceDiagram
     end
 ```
 
-The accepted fixture sequence runs in Docker Compose and uses `.env` configuration. The tested coordinator validates transitions, records Bedrock provider/model/prompt/token metadata, rejects unknown plan IDs, and preserves the deterministic result on provider failure. Credentialed live Bedrock acceptance, priced cost metrics, full loop-limit acceptance, live OpenRouter extraction, and the later ECS Fargate deployment remain open. AgentCore remains optional.
+The accepted sequence runs in Docker Compose and uses `.env` configuration. The tested coordinator validates transitions, records Bedrock provider/model/prompt/token metadata, rejects unknown plan IDs, and preserves the deterministic result on provider failure. Credentialed live Bedrock acceptance is complete. Priced cost metrics, full loop-limit acceptance, live OpenRouter extraction, and the later ECS Fargate deployment remain open. AgentCore remains optional.
 
 ## Current budget-revision sequence and remaining patch types
 

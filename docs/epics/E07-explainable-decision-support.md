@@ -33,6 +33,8 @@
 ## Definition of done
 
 - [x] The POC displays calculated gaps, synthetic alternatives, assumptions, and at least one exclusion reason.
+- [x] Death and TPD targets equal annual income x 9 plus liabilities; the critical-illness target equals annual income x 4.
+- [x] Monthly expenses are non-critical because the current formulation does not use them; liabilities are critical because they change death and TPD targets.
 - [ ] A versioned formulation document defines sourced formulas, variables, units, unknown handling, affordability, hard exclusions, duplicate coverage, replacement risk, weighted fit, reason codes, and worked examples.
 - [ ] The formulation has a named reviewer, approval date, and change history; ranking cannot be released without approval.
 - [x] Plans and rules are data-driven rather than embedded in view markup.
@@ -47,7 +49,7 @@
 - [x] Real-product ranked mode remains disabled until Phase 3B acceptance, all synthetic E07 correctness gates, ranking-eligible product data, predeclared E08 tests, and explicit DEC-004/compliance approval pass.
 - [ ] Once approved for the internal pilot, real-product ranking is deterministic, versioned, independently evaluated, and able to abstain without model-authored repairs.
 
-**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md). The ruleset remains a draft implementation: independent formulation approval and the 20-profile correctness evaluation are still required.
+**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md) and [Gen-Z journey review](../evaluation/2026-09-03-gen-z-journey-and-project-truth.md). The ruleset remains a draft implementation: independent formulation approval and the 20-profile correctness evaluation are still required.
 
 ## POC boundary
 

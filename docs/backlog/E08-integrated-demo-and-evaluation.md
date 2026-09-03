@@ -42,7 +42,8 @@
 - [x] The frontend can call E10 without embedded capability fixtures on the normal integration path.
 - [x] Read-only RAG is available through E10 across applicable website contexts and cannot alter E07 synthetic recommendation inputs or results.
 - [x] E11 invokes only allowed extraction, profile, retrieval, and decision tools.
-- [ ] One normal and one changed-goal scenario return schema-valid results.
+- [x] No-plan and existing-plan scenarios return schema-valid results.
+- [ ] One changed-goal conversational scenario returns a schema-valid deterministic difference explanation.
 - [x] Live, cached, simulated, synthetic, approved, unverified, stale, and unknown evidence states are visibly distinguished where applicable.
 - [ ] Missing-information, no-evidence, and dependency-failure outcomes render without presenting a recommendation.
 
@@ -87,7 +88,7 @@
 - [ ] A clean environment completes the changed-goal scenario.
 - [x] No synthetic data is presented as real.
 
-**Current evidence:** `scripts/verify-poc.sh`, 38 backend tests, and the frontend production build pass. The [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md) records policy, no-policy, proposal, confirmation, cancellation, replay, undo, and mobile paths. Changed-goal and live-provider scenarios remain open.
+**Current evidence:** The frontend production build passes. The [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md), [Bedrock integration](../evaluation/2026-09-03-bedrock-personalization-integration.md), and [Gen-Z journey review](../evaluation/2026-09-03-gen-z-journey-and-project-truth.md) record policy, no-policy, optional-quiz, live-provider, proposal, confirmation, replay, undo, desktop, and mobile paths. Changed-goal remains open.
 
 ## E08-T05 - Rehearse and record the five-minute demo
 
@@ -145,9 +146,10 @@
 
 **Acceptance criteria:**
 
-- [ ] One documented Docker Compose command starts healthy web, backend, one scraper, PostgreSQL/pgvector, and configured local object-store services.
+- [x] One documented Docker Compose command starts healthy web, backend, one scraper, and PostgreSQL/pgvector services; local object storage is optional and unconfigured.
 - [x] A fresh environment initializes schemas and synthetic fixtures without manual repair.
-- [ ] Normal, no-policy, changed-goal, OpenRouter-unavailable fallback, and stale-source scenarios pass.
+- [x] Normal existing-plan and no-policy scenarios pass.
+- [ ] Changed-goal, OpenRouter-unavailable fallback, and stale-source scenarios pass.
 - [x] No real secret is required for fixture mode and no secret reaches the browser or logs.
 - [ ] Shutdown preserves intended database/object-store volumes and terminates application processes cleanly.
 
@@ -194,7 +196,7 @@
 - [ ] Fixture and configured Bedrock explanation modes use the same schemas and disclose adapter, model, prompt, tool, formulation, ruleset, and catalogue versions; OpenRouter extraction is evaluated separately.
 - [ ] No model self-grades its own conversational or page-changing output.
 
-**Current evidence:** The [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md), the [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md), the [Bedrock and personalization integration](../evaluation/2026-09-03-bedrock-personalization-integration.md), and backend tests cover grounded Q&A, presentation changes, confirmed and cancelled budget changes, deterministic rerun, replay, undo, idempotency, dependency failure, stale revision, and mocked Bedrock contract validation. Extraction correction, loop-cap, complete scenario metrics, and credentialed model mode remain untested.
+**Current evidence:** The [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md), the [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md), the [Bedrock and personalization integration](../evaluation/2026-09-03-bedrock-personalization-integration.md), the [Gen-Z journey review](../evaluation/2026-09-03-gen-z-journey-and-project-truth.md), and backend checks cover grounded Q&A, presentation changes, configured Bedrock explanation, confirmed and cancelled budget changes, deterministic rerun, replay, undo, idempotency, dependency failure, stale revision, and model contract validation. Extraction correction, loop-cap, and complete scenario metrics remain untested.
 
 ## E08-T10 - Accept Phase 3B real-product evidence comparison
 

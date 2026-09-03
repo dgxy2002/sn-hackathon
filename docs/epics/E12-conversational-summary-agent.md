@@ -46,16 +46,18 @@
 - [x] An expandable action trace shows planning, tools, affected page regions, confirmations, deterministic reruns, completion, and failures.
 - [x] Presentation-only actions visibly focus or reshape the page without changing canonical decision versions.
 - [ ] Phase 3B presentation tools add or remove only comparison-eligible real products, preserve neutral ordering and cited fields, and leave canonical versions unchanged.
-- [ ] Profile, canonical comparison, and extracted-policy changes show a before/after proposal and cannot apply without confirmation.
+- [x] Monthly-budget changes show a before/after proposal and cannot apply without confirmation.
+- [ ] Goal, dependant, preference, declared-cover, canonical-comparison, and extraction-field changes use the same proposal boundary.
 - [x] Supported confirmed budget changes produce versioned inputs, a deterministic E07 rerun, one coherent summary revision, highlighted deltas, and undo; other profile fields and extraction corrections remain open.
 - [x] Model output cannot execute arbitrary code, selectors, coordinates, SQL, unregistered tools, or outside-corpus source searches.
 - [x] A Bedrock or fixture explanation is separate from E07 rank and score fields and stale explanation text is cleared after a deterministic revision or undo.
-- [ ] Conversation, action, evidence, confirmation, revision, model, prompt, tool, formulation, and ruleset versions are replayable within the POC session.
+- [x] The current budget-change slice exposes ordered conversation, proposal, confirmation, deterministic-rerun, revision, replay, and undo events within the POC session.
 - [ ] Normal Q&A, cached-plan exploration with evidence states, presentation change, profile change, extraction correction, cancellation, undo, stale evidence, no evidence, invalid action, and dependency failure scenarios pass.
-- [ ] The complete flow works in Docker Compose fixture mode and configured Bedrock explanation mode using the same contracts; OpenRouter remains independently scoped to E04 extraction.
+- [x] The accepted no-plan and existing-plan flows work in Docker Compose with configured Bedrock explanation using the same contracts as fixture mode.
+- [ ] OpenRouter extraction and the remaining conversational mutation/failure matrix are independently accepted.
 
 ## POC boundary
 
 The agent operates only within CoverCheck's typed application capabilities and cached catalogue. Real-product RAG is read-only and cannot enter or alter E07's synthetic ranking; records that are not approved or current remain visibly labelled. The agent cannot browse arbitrary websites, transact, contact advisers, purchase, replace, surrender, or recommend cancelling insurance. Conversation and revision history is disposable with the current synthetic POC session unless retained as a named evaluation fixture.
 
-The [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md) verifies the read-only catalogue slice. The [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md) verifies budget proposals, confirmation, cancellation, deterministic reruns, replay, and undo. Mocked provider tests verify that Bedrock cannot mutate the deterministic result. Other profile fields, extraction corrections, real-product Phase 3B tools, and credentialed Bedrock acceptance remain open.
+The [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md) verifies the read-only catalogue slice. The [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md) verifies budget proposals, confirmation, cancellation, deterministic reruns, replay, and undo. The [Bedrock integration](../evaluation/2026-09-03-bedrock-personalization-integration.md) and [Gen-Z journey review](../evaluation/2026-09-03-gen-z-journey-and-project-truth.md) verify the configured live explanation path without giving Bedrock decision ownership. Other profile fields, extraction corrections, and real-product Phase 3B tools remain open.
