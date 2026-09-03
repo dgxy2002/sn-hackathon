@@ -17,7 +17,7 @@
 - Accept Phase 3B real-product evidence comparison against citation, neutrality, unknown-state, canonical-isolation, and accessibility fixtures.
 - Independently evaluate any Phase 6 real-product ranked pilot before it can be enabled beyond its internal test configuration.
 - Replay conversational Q&A, cached-plan exploration with evidence states, presentation, confirmation, revision, cancellation, conflict, and undo scenarios.
-- Aggregate OpenRouter extraction and explanation correctness, latency, tool success, token, cost, and bounded-loop metrics.
+- Aggregate OpenRouter extraction and Bedrock explanation correctness, latency, tool success, token, cost, and bounded-loop metrics separately.
 - Verify that locally tested image digests are ready for ECR and that ECS, RDS, S3, Secrets Manager, and CloudWatch mappings are documented.
 - Provide a preloaded scenario and recorded fallback.
 
@@ -33,6 +33,7 @@
 - [`frontend/src/main.js`](../../frontend/src/main.js) already provides the complete simulated user journey.
 - [`frontend/package.json`](../../frontend/package.json) provides a successful production build command.
 - [`compose.yaml`](../../compose.yaml) builds healthy web, API, scraper, and PostgreSQL/pgvector services; the backend queries the local database for cached evidence.
+- [`backend/tests/test_model_gateway.py`](../../backend/tests/test_model_gateway.py) exercises Bedrock response grounding and rejection with a mocked Converse client; it is not a credentialed live-model acceptance run.
 - The [cached evidence browser smoke test](../evaluation/2026-08-28-cached-evidence-browser-smoke-test.md) records the successful containerized conversation and read-only evidence flow.
 - [`docs/PLAN.md`](../PLAN.md) defines shared contracts, AWS assumptions, acceptance metrics, and the five-minute demo story.
 
@@ -53,7 +54,7 @@
 - [ ] An AWS readiness check maps the same image digests and environment contract to ECR/ECS, RDS, S3, Secrets Manager, and CloudWatch.
 - [ ] The five-minute demo is rehearsed twice and has a recorded fallback.
 
-**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md). Changed-goal, live-model metrics, real Phase 3B acceptance, AWS review, and demo rehearsal remain open.
+**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md) and [Bedrock and personalization integration](../evaluation/2026-09-03-bedrock-personalization-integration.md). Credentialed Bedrock metrics, changed-goal acceptance, real Phase 3B acceptance, AWS review, and demo rehearsal remain open.
 
 ## POC boundary
 

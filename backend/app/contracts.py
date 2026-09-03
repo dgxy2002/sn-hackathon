@@ -18,6 +18,7 @@ RECOMMENDATION_SCHEMA_ID = "covercheck.recommendation"
 INVOCATION_SCHEMA_ID = "covercheck.invocation"
 RUN_EVENT_SCHEMA_ID = "covercheck.run-event"
 RUN_METRICS_SCHEMA_ID = "covercheck.run-metrics"
+EXPLANATION_SCHEMA_ID = "covercheck.grounded-explanation"
 
 
 class StrictModel(BaseModel):
@@ -275,6 +276,19 @@ class RunMetrics(StrictModel):
     terminal_status: Literal["completed", "failed", "blocked"]
 
 
+class GroundedExplanation(StrictModel):
+    schema_id: Literal["covercheck.grounded-explanation"] = EXPLANATION_SCHEMA_ID
+    contract_version: Literal["1.0.0"] = CONTRACT_VERSION
+    mode: CapabilityMode
+    provider: Literal["fixture", "bedrock"]
+    model_id: str = Field(min_length=1, max_length=200)
+    prompt_version: str = Field(min_length=1, max_length=100)
+    recommendation_id: str
+    summary: str = Field(min_length=1, max_length=1200)
+    plan_reasons: dict[str, str] = Field(default_factory=dict)
+    next_steps: list[str] = Field(default_factory=list, max_length=3)
+
+
 class InvocationResponse(StrictModel):
     contract_version: Literal["1.0.0"] = CONTRACT_VERSION
     invocation_id: str
@@ -290,6 +304,7 @@ class InvocationResponse(StrictModel):
     profile: VersionedProfile
     extraction: ExtractionResult | None = None
     recommendation: RecommendationResult | None = None
+    explanation: GroundedExplanation | None = None
     events: list[RunEvent]
     metrics: RunMetrics
 

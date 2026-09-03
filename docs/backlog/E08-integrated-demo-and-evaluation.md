@@ -124,7 +124,7 @@
 
 **Acceptance criteria:**
 
-- [ ] The report covers quiz comprehension, OpenRouter extraction accuracy, retrieval top-five results, citation coverage, decision-rule violations, category agreement, explanation completeness, schema validity, loop caps, latency, tokens, and estimated cost.
+- [ ] The report covers quiz comprehension, OpenRouter extraction accuracy, Bedrock explanation completeness and grounding, retrieval top-five results, citation coverage, decision-rule violations, category agreement, schema validity, loop caps, latency, tokens, and estimated cost.
 - [ ] Every metric names fixture version, sample size, evaluator, run date, and limitations.
 - [ ] Failed cases and unmet targets remain visible.
 - [ ] Aspirational targets are visually distinct from measured results.
@@ -191,10 +191,10 @@
 - [ ] Catalogue scenarios cover all 71 cached products and prove that unverified or stale evidence is labelled and no real product becomes an E07 recommendation.
 - [ ] Independent expected outcomes identify allowed tools, confirmation boundary, citations, deterministic result changes, page regions, and terminal state.
 - [ ] The report records completion, grounding, tool-validity, confirmation, revision-consistency, undo, latency, token, and estimated-cost results.
-- [ ] Fixture and configured OpenRouter modes use the same schemas and disclose adapter, model, prompt, tool, formulation, ruleset, and catalogue versions.
+- [ ] Fixture and configured Bedrock explanation modes use the same schemas and disclose adapter, model, prompt, tool, formulation, ruleset, and catalogue versions; OpenRouter extraction is evaluated separately.
 - [ ] No model self-grades its own conversational or page-changing output.
 
-**Current evidence:** The [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md), the [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md), and backend tests cover grounded Q&A, presentation changes, confirmed and cancelled budget changes, deterministic rerun, replay, undo, idempotency, dependency failure, and stale revision. Extraction correction, loop-cap, complete scenario metrics, and model mode remain untested.
+**Current evidence:** The [fixture-agent smoke test](../evaluation/2026-08-26-fixture-agent-smoke-test.md), the [integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md), the [Bedrock and personalization integration](../evaluation/2026-09-03-bedrock-personalization-integration.md), and backend tests cover grounded Q&A, presentation changes, confirmed and cancelled budget changes, deterministic rerun, replay, undo, idempotency, dependency failure, stale revision, and mocked Bedrock contract validation. Extraction correction, loop-cap, complete scenario metrics, and credentialed model mode remain untested.
 
 ## E08-T10 - Accept Phase 3B real-product evidence comparison
 

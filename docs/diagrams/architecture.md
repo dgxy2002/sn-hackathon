@@ -22,10 +22,11 @@ flowchart LR
         Fixtures[Synthetic policies and plans]
     end
 
-    subgraph Optional[Optional or offline adapters]
+    subgraph Providers[Provider and offline adapters]
         Supabase[Hosted Supabase and pgvector]
         OpenAI[Offline extraction and embeddings]
-        OpenRouter[OpenRouter model slug unresolved]
+        OpenRouter[OpenRouter extraction<br/>model slug unresolved]
+        Bedrock[Amazon Bedrock Converse<br/>grounded explanation adapter]
         Store[Optional S3-compatible object store]
         Sources[Approved live insurance sources pending]
     end
@@ -51,13 +52,14 @@ flowchart LR
     Corpus --> OpenAI
     Evidence -. optional adapter .-> Supabase
     Sources -. approval required .-> Scraper
-    API -. live extraction and explanation pending .-> OpenRouter
+    API -. live extraction pending .-> OpenRouter
+    Coordinator -->|immutable E07 result and compact E03 context| Bedrock
     API -. permitted objects pending .-> Store
 
     classDef implemented fill:#e7f4ed,stroke:#246b45,color:#123b28;
     classDef simulated fill:#fff3d6,stroke:#a66500,color:#573900;
     classDef planned fill:#edf1f7,stroke:#53657d,color:#263545,stroke-dasharray: 5 4;
-    class Web,API,Profile,Evidence,Compare,Rules,Coordinator,Conversation,Scraper,DB,Corpus,OpenAI,Supabase implemented;
+    class Web,API,Profile,Evidence,Compare,Rules,Coordinator,Conversation,Scraper,DB,Corpus,OpenAI,Supabase,Bedrock implemented;
     class Extraction,Fixtures simulated;
     class OpenRouter,Store,Sources planned;
 ```
@@ -70,14 +72,14 @@ flowchart LR
 - Runtime migrations load the committed corpus into local PostgreSQL through the typed E10/E06 boundary. Supabase remains an optional adapter.
 - All cached records may be searched for read-only questions and exploration, but every result carries approval/evidence state and cannot enter E07's synthetic ranking.
 - Phase 3B adds a comparison projector for a small comparison-eligible subset. It returns neutrally ordered cited fields and cannot invoke E07 or mutate canonical state.
-- OpenAI owns current offline brochure extraction and embeddings. OpenRouter remains the configured E04/E11 provider for user-document extraction and explanation.
+- OpenAI owns current offline brochure extraction and embeddings. OpenRouter remains the configured E04 user-document extraction provider. Amazon Bedrock is the required live E11 grounded-explanation provider.
 - [E10](../epics/E10-backend-api-and-poc-persistence.md) owns transport, shared schema validation, typed errors, and disposable synthetic state; it does not own capability business rules.
-- Direct read-only E10/E06 retrieval does not require E11. [E11](../epics/E11-runtime-orchestration-and-operations.md) owns consequential proposals, confirmed changes, deterministic reruns, revisions, replay, undo, OpenRouter runtime integration, and operational coordination.
+- Direct read-only E10/E06 retrieval does not require E11. [E11](../epics/E11-runtime-orchestration-and-operations.md) owns consequential proposals, confirmed changes, deterministic reruns, revisions, replay, undo, Bedrock explanation integration, and operational coordination.
 - [E12](../epics/E12-conversational-summary-agent.md) owns the final-page agent experience and integration. E11 executes its allowlisted typed tools; E03/E04/E06/E07 retain profile, extraction, retrieval, and deterministic decision authority.
 - Navigation, focus, sorting, filtering, and read-only cached-plan exploration may apply immediately. Profile, canonical comparison, and reviewed extraction changes require confirmation, immutable input versions, and a fresh E07 result before the canonical summary changes.
 - Real-product ranking remains disabled until the separate Phase 6 data, E07, E08, DEC-004, and compliance gates pass. Public ranked mode additionally requires E09 approval.
 - Model output cannot become HTML, JavaScript, selectors, coordinates, SQL, arbitrary URLs, or canonical recommendation values.
-- The accepted local target is Docker Compose with `.env` configuration. Fixture mode requires no provider credential. OpenRouter policy extraction and grounded explanation remain pending because the exact model slug is unresolved.
+- The accepted local target is Docker Compose with `.env` configuration. Fixture mode requires no provider credential. The typed Bedrock Converse adapter is implemented; credentialed live acceptance and pricing remain pending. OpenRouter policy extraction remains pending because the exact model slug is unresolved.
 - Local PostgreSQL/pgvector is the default POC evidence store. Supabase/PostgREST remains an optional adapter, and RDS PostgreSQL/pgvector remains a later migration target.
-- Amazon Bedrock and AgentCore are optional future adapters and are not required for local execution.
+- Amazon Bedrock is required for live E11 explanation but not credential-free local fixture execution. AgentCore remains optional and deferred.
 - Production identity, durable personal data, private document storage, and operational hardening are intentionally deferred to [E09](../epics/E09-productionisation-and-security.md).

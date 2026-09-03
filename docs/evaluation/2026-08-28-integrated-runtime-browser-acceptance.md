@@ -11,6 +11,11 @@ insurance source is approved for E05 fetching, and live OpenRouter orchestration
 is not exercised. This record does not approve real-product comparison or
 ranking, the draft E07 formulation, source reuse, or production use.
 
+**Subsequent status (3 September 2026):** E11 explanation was reassigned from
+OpenRouter to required Amazon Bedrock. A typed, mocked Converse integration is
+now implemented; this dated record still accurately reports that no live model
+call occurred during the 28 August acceptance.
+
 | Field | Value |
 |---|---|
 | Evaluator | Tim implementation pass using pytest, Docker Compose, API checks, and Playwright |
@@ -72,8 +77,8 @@ Playwright exercised the rebuilt Compose application at
   and product-identity review are not approved for a real Phase 3B subset.
 - The E07 formulation remains draft and has no named independent reviewer,
   approval date, or 20-profile evaluation.
-- OpenRouter model selection, credentials, extraction/explanation evaluation,
-  and token, cost, and latency measurements remain unavailable.
+- OpenRouter extraction selection and credentials plus credentialed Bedrock
+  explanation evaluation, cost, and latency measurements remain unavailable.
 - Conversational canonical mutation currently supports budget changes only;
   goal, dependant, preference, declared-cover, and extraction corrections remain
   unimplemented.

@@ -13,7 +13,7 @@
 - Normalize products, document as-of dates, product effective dates, versions, retrieval dates, source URLs, and evidence spans without substituting one date type for another.
 - Integrate the implemented Supabase/PostgREST store first behind a replaceable adapter while retaining local PostgreSQL/pgvector as the approved target.
 - Expose retrieval through the backend API container with metadata, full-text, and filter fallback when embeddings are unavailable.
-- Keep OpenAI brochure extraction and embeddings separate from the configured OpenRouter E04/E11 document and explanation capabilities.
+- Keep OpenAI brochure extraction and embeddings separate from the configured OpenRouter E04 user-document extraction and Amazon Bedrock E11 explanation capabilities.
 - Migrate the same schema to RDS PostgreSQL/pgvector and permitted snapshots to S3 later.
 - Return citations, approval state, and freshness metadata without making or changing a recommendation.
 - Expose typed read-only questions and broad exploration across all cached records while keeping E07 ranking synthetic and deterministic.

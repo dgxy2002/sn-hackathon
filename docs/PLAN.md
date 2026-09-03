@@ -362,7 +362,7 @@ The POC must run locally before AWS deployment work begins.
 
 - Docker Compose starts the web container, backend API container, exactly one continuously running scraper container, PostgreSQL with pgvector, and optional S3-compatible object storage.
 - Local configuration and secrets come from an uncommitted `.env`; `.env.example` contains safe placeholders only.
-- OpenRouter `5.6 Luna` is selected through `LLM_PROVIDER`, `OPENROUTER_MODEL`, and `DOCUMENT_AI_PROVIDER` configuration for language tasks and policy PDF/image ingestion, OCR, and extraction. Confirm the exact OpenRouter model slug before implementation.
+- Amazon Bedrock is selected through `LLM_PROVIDER`, `BEDROCK_MODEL_ID`, and `AWS_REGION` for E11 grounded explanation. OpenRouter remains separately selected through `DOCUMENT_AI_PROVIDER` and `OPENROUTER_MODEL` for E04 policy PDF/image ingestion, OCR, and extraction; its exact model slug still requires confirmation.
 - The backend exposes versioned profile, extraction, evidence, recommendation, invocation, conversation, proposal, confirmation, summary-revision, undo, and run-inspection contracts.
 - PostgreSQL full-text and metadata retrieval provide the deterministic local baseline; optional semantic embeddings remain behind a provider adapter.
 
@@ -375,7 +375,7 @@ The POC must run locally before AWS deployment work begins.
 - Inject secrets from AWS Secrets Manager and non-secret configuration from ECS task definitions or Parameter Store using the same environment-variable names.
 - Send container logs and health/freshness metrics to CloudWatch.
 - Use private subnets for API, scraper, and RDS; route outbound provider and approved-source calls through controlled VPC egress.
-- Amazon Bedrock and AgentCore are optional future provider/runtime adapters, deferred until credits and organizer requirements are confirmed.
+- Amazon Bedrock is a required E11 provider and uses the boto3 Converse API behind the existing typed contract. AgentCore remains deferred. Local simulated mode must continue without AWS credentials.
 
 Engineering constraints:
 
@@ -534,7 +534,7 @@ The MVP is ready when:
 Resolve these before implementation diverges:
 
 1. Confirm the exact OpenRouter model slug represented by **5.6 Luna**.
-2. Confirm whether Amazon Bedrock or AgentCore remains a judged requirement; otherwise keep both as deferred adapters.
+2. **Resolved 3 September 2026:** Amazon Bedrock is required for live E11 grounded explanation; AgentCore remains deferred.
 3. Obtain the original source for the 26% Gen Z claim or remove it entirely.
 4. Decide whether real-product recommendations are shown in the demo or whether real retrieval and synthetic recommendation remain visibly separate.
 5. Decide the minimum pilot cohort and consent language for peer comparison.
