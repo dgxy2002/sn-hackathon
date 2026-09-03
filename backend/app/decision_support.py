@@ -161,7 +161,7 @@ class DecisionService:
                 else "unknown"
             ),
             comfort_reference_note=(
-                "The 5% marker is adviser-interview input for this demo, not official guidance."
+                "The 5% marker is a planning reference, not official guidance."
             ),
         )
         evaluations = [
@@ -320,7 +320,7 @@ class DecisionService:
                 "DETERMINISTIC_WEIGHTED_FIT",
                 "USER_PROTECTION_PRIORITIES_APPLIED",
             ],
-            trade_offs=["Illustrative premium and benefits use synthetic fixture data."],
+            trade_offs=["Premium and benefit figures are illustrative examples, not quotes."],
             evidence_ids=plan.evidence_ids,
             projected_monthly_premium=projected_premium,
             projected_income_share=round(projected_share, 4),

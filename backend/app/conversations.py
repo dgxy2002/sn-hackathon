@@ -115,24 +115,24 @@ class ConversationService:
             active_revision_id=active_revision_id,
             suggested_prompts=[
                 SuggestedPrompt(
-                    id="why-ranked-first",
-                    label="Why this ranks first",
-                    message="Why does the first eligible option rank first?",
-                ),
-                SuggestedPrompt(
-                    id="show-critical-illness",
-                    label="Show critical illness",
-                    message="Show only the critical illness option.",
+                    id="how-gaps-work",
+                    label="How are my gaps calculated?",
+                    message="How were my protection gaps calculated?",
                 ),
                 SuggestedPrompt(
                     id="show-unknowns",
                     label="Show assumptions",
-                    message="What does the ranking still not know?",
+                    message="What assumptions should I verify?",
+                ),
+                SuggestedPrompt(
+                    id="explore-term-life",
+                    label="Explore life cover",
+                    message="Which brochures mention term life protection?",
                 ),
                 SuggestedPrompt(
                     id="explore-integrated-shield",
                     label="Explore hospital cover",
-                    message="Which cached plans mention Integrated Shield hospital cover?",
+                    message="Which plans mention Integrated Shield hospital cover?",
                 ),
             ],
             profile_id=profile.profile_id if profile else None,
@@ -292,6 +292,57 @@ class ConversationService:
         action_id = f"action-{uuid4()}"
         message_id = f"message-{uuid4()}"
 
+        if any(term in text for term in ("gap calculated", "gaps calculated", "calculation", "formula")):
+            if record.recommendation is None or not record.recommendation.gaps:
+                return self._unsupported_answer(
+                    record,
+                    request,
+                    run_id,
+                    action_id,
+                    message_id,
+                    "There is no completed gap calculation to explain yet.",
+                    "RECOMMENDATION_UNAVAILABLE",
+                )
+            gap_labels = {
+                "death": "death",
+                "total_permanent_disability": "total permanent disability",
+                "critical_illness": "critical illness",
+            }
+            amounts = ", ".join(
+                f"{gap_labels[gap.gap_type]} S${gap.gap_amount:,.0f}"
+                for gap in record.recommendation.gaps
+            )
+            return ConversationMessageResponse(
+                conversation_id=record.conversation_id,
+                client_message_id=request.client_message_id,
+                run_id=run_id,
+                state="completed",
+                active_revision_id=record.active_revision_id,
+                assistant_message=AssistantMessage(
+                    message_id=message_id,
+                    content=(
+                        f"Your calculated gaps are {amounts}. Death and total permanent "
+                        "disability use nine times annual income plus outstanding loans, "
+                        "less the matching cover you declared. Critical illness uses four "
+                        "times annual income, less declared critical-illness cover. These "
+                        "are educational planning references, not personalised advice."
+                    ),
+                    citations=[],
+                ),
+                actions=[
+                    ActionEvent(
+                        action_id=action_id,
+                        intent="FOCUS_SECTION",
+                        tool="FOCUS_SECTION",
+                        target="reasoning:ranking",
+                        status="completed",
+                        evidence_count=0,
+                        confirmation_required=False,
+                        affected_regions=["ranking_reason", "agent"],
+                    )
+                ],
+            )
+
         if (
             "critical illness" in text or "critical-illness" in text
         ) and ("show only" in text or "filter" in text):
@@ -304,13 +355,13 @@ class ConversationService:
                 assistant_message=AssistantMessage(
                     message_id=message_id,
                     content=(
-                        "I filtered the table to the synthetic critical-illness option. "
-                        "This changes presentation only; it does not change the ranking."
+                        "I focused the page on the critical-illness cover direction. "
+                        "Your calculated gaps and profile remain unchanged."
                     ),
                     citations=[
                         Citation(
                             evidence_id="SYN-HEC-02",
-                            label="Harbour Essential CI synthetic fixture",
+                            label="Illustrative critical-illness structure",
                             synthetic=True,
                         )
                     ],
@@ -339,7 +390,7 @@ class ConversationService:
                 assistant_message=AssistantMessage(
                     message_id=message_id,
                     content=(
-                        "The comparison still cannot verify whether declared benefits overlap, "
+                        "This result cannot verify whether declared benefits overlap, "
                         "the exact rider terms, or any insurer underwriting outcome. I opened "
                         "the assumptions section."
                     ),
@@ -385,7 +436,7 @@ class ConversationService:
                         content=(
                             f"I can change your {field_label} from {old_value} "
                             f"to {proposed_value}. Confirm before I create "
-                            "a new profile version and rerun the deterministic comparison."
+                            "a new profile version and recalculate your result."
                         ),
                         citations=[],
                     ),
@@ -413,8 +464,8 @@ class ConversationService:
                     message_id=message_id,
                     content=(
                         "That would change a decision input and requires confirmation plus a "
-                        "fresh deterministic recommendation. Those dependencies are not ready, "
-                        "so I left your summary unchanged."
+                        "fresh calculation. I could not prepare that change, so your result "
+                        "remains unchanged."
                     ),
                     citations=[],
                 ),
@@ -454,7 +505,7 @@ class ConversationService:
                     run_id,
                     action_id,
                     message_id,
-                    "No eligible synthetic option is currently ranked first.",
+                    "No cover direction currently fits the limits you entered.",
                     "NO_ELIGIBLE_PLAN",
                 )
             plan_name = self._plan_label(top_evaluation.plan_id)
@@ -471,16 +522,16 @@ class ConversationService:
                 assistant_message=AssistantMessage(
                     message_id=message_id,
                     content=(
-                        f"{plan_name} ranks first in this synthetic result because its "
-                        "deterministic weighted fit is highest among eligible options"
-                        f" ({component_summary}). The calculation applies your protection "
-                        "priorities, premium ceiling, and product preference; it does not "
-                        "establish suitability or guarantee complete coverage."
+                        f"The {plan_name} example is shown first because its calculated fit "
+                        f"is highest among the examples within your limits ({component_summary}). "
+                        "The ordering uses your protection priorities, monthly ceiling, and "
+                        "cover preference. It is an illustrative structure—not an insurer "
+                        "product, quote, or suitability assessment."
                     ),
                     citations=[
                         Citation(
                             evidence_id=evidence_id,
-                            label=f"{plan_name} synthetic fixture",
+                            label=f"{plan_name} illustrative structure",
                             synthetic=True,
                         )
                         for evidence_id in top_evaluation.evidence_ids
@@ -534,7 +585,7 @@ class ConversationService:
                 action_id,
                 message_id,
                 (
-                    "I could not find supporting brochure evidence in the cached catalogue. "
+                    "I could not find supporting evidence in the brochure library. "
                     "I have not inferred an answer or changed your summary."
                 ),
                 "NO_EVIDENCE",
@@ -577,9 +628,9 @@ class ConversationService:
             assistant_message=AssistantMessage(
                 message_id=message_id,
                 content=(
-                    f"I found {len(citations)} read-only brochure excerpts across "
-                    f"{product_summary}. They are cached evidence, not recommendations; "
-                    "approval, freshness, and unknown dates remain visible below."
+                    f"I found {len(citations)} brochure excerpts across {product_summary}. "
+                    "Use the source details and dates below to verify current terms directly "
+                    "with the provider. These excerpts are information, not recommendations."
                 ),
                 citations=citations,
             ),
@@ -735,10 +786,10 @@ class ConversationService:
     @staticmethod
     def _plan_label(plan_id: str) -> str:
         return {
-            "synthetic-lioncity-term-flex": "LionCity Term Flex",
-            "synthetic-harbour-essential-ci": "Harbour Essential CI",
-            "synthetic-orchid-income-shield": "Orchid Income Shield",
-            "synthetic-meridian-whole-life-plus": "Meridian Whole Life Plus",
+            "synthetic-lioncity-term-flex": "family and debt protection",
+            "synthetic-harbour-essential-ci": "serious-illness cash cover",
+            "synthetic-orchid-income-shield": "monthly income protection",
+            "synthetic-meridian-whole-life-plus": "whole-life cover",
         }.get(plan_id, plan_id)
 
     def _get_record(self, conversation_id: str) -> ConversationRecord:
