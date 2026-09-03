@@ -36,6 +36,11 @@ GOAL_PATTERNS: dict[str, tuple[str, ...]] = {
     "cashflow_control": ("stop overspending", "manage spending", "budget better"),
     "debt_reduction": ("pay off debt", "clear my loan", "pay off my loan"),
     "wealth_building": ("start investing", "grow my wealth", "invest"),
+    "affordable_protection": (
+        "affordable basic protection",
+        "affordable protection",
+        "keep insurance affordable",
+    ),
 }
 
 NUMBER_WORDS = {
@@ -89,13 +94,11 @@ def classify_goal(text: str) -> GoalContext:
 
 
 QUESTION_ORDER = (
-    "age",
-    "occupation",
     "monthly_income",
-    "monthly_expenses",
-    "dependant_count",
+    "liabilities",
     "has_current_policy",
     "monthly_budget",
+    "product_preference",
 )
 
 
@@ -112,9 +115,9 @@ QUESTION_DETAILS = {
         "What is your monthly take-home income?",
         "This helps assess whether a plan is affordable.",
     ),
-    "monthly_expenses": (
-        "What are your monthly essential expenses?",
-        "This prevents the system from suggesting an unrealistic premium.",
+    "liabilities": (
+        "What is the total balance of your outstanding loans?",
+        "Outstanding liabilities are added to the death and TPD protection reference.",
     ),
     "dependant_count": (
         "Do you financially support anyone else?",
@@ -160,7 +163,6 @@ def next_question(profile: VersionedProfile) -> FocusedQuestion | None:
         question_order[policy_index:policy_index] = [
             "existing_death_cover",
             "existing_ci_cover",
-            "existing_tpd_cover",
         ]
 
     for field_name in question_order:

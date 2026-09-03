@@ -5,7 +5,7 @@
 | Field | Value |
 |---|---|
 | Product | CoverCheck SG |
-| Version | 1.5 |
+| Version | 1.6 |
 | Status | POC baseline |
 | Date | 3 September 2026 |
 | Product objective | Demonstrate an evidence-backed insurance-readiness journey for first-time working adults in Singapore |
@@ -13,7 +13,7 @@
 
 ## 1. Product summary
 
-CoverCheck SG is a web-based educational assistant that moves a first-time working adult from curiosity to an explainable insurance comparison. The POC combines a readiness quiz, structured profile, policy extraction demonstration, grounded product retrieval, deterministic decision support, and plain-language explanations.
+CoverCheck SG is a web-based educational assistant that moves a first-time working adult from a direct no-plan or existing-plan route to an explainable synthetic insurance comparison. The POC combines an optional four-question readiness check, a minimum decision profile, a synthetic policy-extraction demonstration, neutral cached-product evidence, deterministic decision support, and Bedrock plain-language explanation.
 
 ## 2. Goals
 
@@ -50,18 +50,18 @@ CoverCheck SG is a web-based educational assistant that moves a first-time worki
 | Explanation | Every result includes a reason, trade-off, assumptions, missing data, and evidence status. |
 | Evidence comparison | Every populated real-product comparison cell has field evidence, source and date state; neutral ordering and canonical-state isolation pass 100% of declared cases. |
 | Reliability | At least 95% first-pass schema validation and zero runs beyond the configured loop cap. |
-| Demo | One normal scenario and one changed-goal scenario complete within the rehearsed five-minute story. |
+| Demo | No-plan, existing-plan, and optional-quiz routes complete; one confirmed budget change can be replayed and undone within the rehearsed five-minute story. |
 
 ## 5. Functional product requirements
 
 | ID | Product requirement | Priority | Related URS | Acceptance criteria |
 |---|---|---:|---|---|
-| PRD-FR-001 | Provide a responsive single-page journey from landing through recommendation and adviser verification. | P0 | URS-FR-001, URS-FR-004, URS-FR-013, URS-FR-014 | All POC views are reachable without a backend and preserve clear state and trust messaging. |
+| PRD-FR-001 | Provide a responsive single-page journey from landing through recommendation and adviser verification. | P0 | URS-FR-001, URS-FR-004, URS-FR-013, URS-FR-014 | Landing, quiz, consent, and forms render locally; API-dependent comparison views complete in the integrated stack or fail visibly without inventing a result. |
 | PRD-FR-002 | Implement a deterministic readiness quiz and dimension-level result. | P0 | URS-FR-001, URS-FR-002 | Fixed answer fixtures produce stable scores and known/unclear result rows. |
 | PRD-FR-003 | Render a contextual pilot benchmark without unsupported population claims. | P0 | URS-FR-003 | Cohort label, age range, sample size, and collection date are displayed. |
-| PRD-FR-004 | Provide a mock account, consent transition, and structured minimum user profile. | P0 | URS-FR-004, URS-FR-005 | The user can complete onboarding and see how the collected fields affect analysis. |
+| PRD-FR-004 | Provide a consent transition without account creation and a structured minimum user profile. | P0 | URS-FR-004, URS-FR-005 | No name or email is required; the user can complete onboarding and see how the collected fields affect analysis. |
 | PRD-FR-005 | Represent profile versions, explicit unknowns, missing-field prompts, and material changes. | P1 | URS-FR-005, URS-FR-006, URS-FR-012 | Decision-critical unknowns are preserved and material changes trigger an explained rerun. |
-| PRD-FR-006 | Accept synthetic policy documents and return reviewable extracted fields with confidence and page evidence. | P1 | URS-FR-007, URS-FR-008 | At least three labelled synthetic pages pass through the configured OpenRouter extraction path and allow correction. |
+| PRD-FR-006 | Demonstrate synthetic policy extraction with reviewable fields, confidence, and page evidence. | P1 | URS-FR-007, URS-FR-008 | The fixture path is clearly labelled synthetic; selected personal-file contents are not processed until the separately gated document adapter is accepted. |
 | PRD-FR-007 | Ingest and normalize permitted product sources with retrieval dates, effective dates, versions, and scrape outcomes. | P1 | URS-FR-010, URS-FR-011 | At least two providers in one category produce typed product and evidence records. |
 | PRD-FR-008 | Retrieve small dated evidence records for comparison queries using filtered semantic search. | P1 | URS-FR-010, URS-FR-011, URS-FR-015 | Fixed queries meet top-five retrieval targets and unsupported queries return no evidence. |
 | PRD-FR-009 | Calculate gaps, apply hard constraints, rank eligible synthetic plans, and support no-recommendation outcomes. | P0 | URS-FR-009, URS-FR-010, URS-FR-015 | Reviewed test profiles meet the decision correctness targets without LLM-authored eligibility. |
@@ -83,7 +83,7 @@ CoverCheck SG is a web-based educational assistant that moves a first-time worki
 | PRD-FR-025 | Evaluate the configured OpenRouter policy-extraction path against labelled synthetic pages and publish measured field accuracy, latency, tokens, estimated cost, context size, and corrections. | P1 | URS-FR-008, URS-FR-018, URS-FR-019, URS-FR-022 | The report includes provider, exact model slug, run date, pricing assumptions, and no unsupported savings claim. |
 | PRD-FR-026 | Provide one Docker Compose topology containing the web, backend API, one continuous scraper, PostgreSQL with pgvector, and an optional S3-compatible local object store. | P0 | URS-FR-021, URS-NFR-006, URS-NFR-015, URS-NFR-016, URS-NFR-017 | A documented local command builds and starts all required services, and health checks reach a ready state without AWS access. |
 | PRD-FR-027 | Use Amazon Bedrock for E11 grounded explanation and retain OpenRouter as the separately configured E04 policy PDF/image extraction provider. | P0 | URS-FR-008, URS-FR-022, URS-NFR-013 | Provider, exact model or inference-profile ID, region, prompt version, token usage, and outcome are recorded for every model call. |
-| PRD-FR-028 | Support an explicit no-policy path that bypasses document extraction and preserves existing-policy fields as unknown. | P0 | URS-FR-023, URS-FR-006, URS-FR-015 | Users can continue without upload, no coverage is invented, and recommendation rules handle the resulting uncertainty. |
+| PRD-FR-028 | Support an explicit no-policy path that bypasses document extraction and marks existing-policy fields not applicable. | P0 | URS-FR-023, URS-FR-006, URS-FR-015 | Users can continue without upload, no coverage is invented, and an unsure status remains distinct from an explicit no. |
 | PRD-FR-029 | Package web, API, and scraper as environment-neutral images that can be pushed to ECR and run on ECS Fargate. | P1 | URS-FR-024, URS-NFR-015, URS-NFR-017 | AWS deployment uses the same image digests tested locally and supplies only environment-specific configuration and managed-service endpoints. |
 | PRD-FR-030 | Operate exactly one continuous scraper loop that leases work, refreshes due approved sources, versions changed content, records outcomes, and retries bounded failures. | P1 | URS-FR-016, URS-FR-025, URS-NFR-012, URS-NFR-017 | Docker Compose runs one scraper container; ECS later runs a Fargate service with desired count one plus a database-backed singleton lease. |
 | PRD-FR-031 | Require an approved grounded formulation document before enabling plan ranking. | P0 | URS-FR-009, URS-FR-010, URS-FR-011, URS-FR-026, URS-NFR-003 | The document defines formulas, inputs, units, constraints, weights, reason codes, missing-data behavior, replacement safeguards, worked examples, and reviewer sign-off. |
@@ -153,6 +153,8 @@ CoverCheck SG is a web-based educational assistant that moves a first-time worki
 
 The target score is a transparent 0-100 measure of readiness to make an informed decision, not wealth, risk, or personal worth.
 
+The implemented optional POC check is intentionally smaller: four questions produce three displayed categories - coverage visibility 50%, protection basics 25%, and terms awareness 25%. The fuller rubric below remains a future research and user-validation target, not a claim about the current screen.
+
 | Dimension | Weight | Minimum evidence |
 |---|---:|---|
 | Coverage visibility | 30 | Policy name, ownership, payer, benefits, premiums, term, riders, and exclusions |
@@ -175,7 +177,9 @@ Every component exposes its source and calculation. `unknown` is excluded or fla
 
 ### Minimum onboarding coverage
 
-The profile covers life stage, residency, employment and expected changes, goals and horizons, income, expenses, savings, assets, liabilities, dependants and support duration, inherited and current policies, MediShield Life, Integrated Shield Plans, CareShield Life, DPS and HPS where relevant, employer benefits and expiry, health-care preferences, product preferences, sustainable premium budget, and investment risk and knowledge only when investment-linked products are in scope.
+The working POC requires monthly take-home income, total liabilities, primary protection goal, protection-versus-savings preference, and maximum additional monthly premium. The existing-plan route additionally requires current monthly premium, death benefit, TPD benefit, and advanced critical-illness benefit. Every required field affects the current calculation, a hard constraint, priority weighting, or explanation. Broader Financial Needs Analysis fields remain future research and must not be reintroduced without a documented decision effect.
+
+The current deterministic targets are annual income x 9 plus liabilities for death and TPD, and annual income x 4 for critical illness. Monthly expenses are not decision-critical in this formulation. Four labelled synthetic plans are ranking eligible; cached real products are evidence only.
 
 ### Extraction target fields
 
@@ -240,7 +244,7 @@ The route names are a POC contract and may be implemented in one service. Capabi
 | Evidence chunks and embeddings | Local PostgreSQL/pgvector or frozen retrieval fixture | Retain only permitted text and metadata | Every chunk retains source and retrieval date. AWS target is RDS PostgreSQL with pgvector. |
 | Permitted source snapshots and temporary synthetic files | Local S3-compatible object store or filesystem adapter | Retain only when source terms and the POC policy permit | AWS target is Amazon S3; raw user policy bytes are deleted after extraction by default. |
 | Scrape logs | Local PostgreSQL or local evaluation artifact | Retain for freshness and failure analysis | Logs include outcome, hash, counts, next due time, lease owner, and cost where applicable. |
-| Anonymous POC sessions and profile versions | In-memory or synthetic-only POC repository | Short-lived and disposable | Mock account identifiers are not production identity. |
+| Anonymous POC sessions and profile versions | In-memory or synthetic-only POC repository | Short-lived and disposable | Browser-generated profile IDs are not user accounts or production identity. |
 | Uploaded policy bytes | Process memory or temporary file only | Delete after extraction by default | The judged demo uses synthetic files only. |
 | Extraction fields and corrections | In-memory or synthetic-only POC repository | Retain for scenario replay | Original and reviewed values remain distinguishable. |
 | Recommendation and run records | Local artifact or synthetic-only POC repository | Retain for evaluation and deck evidence | Record all input and configuration versions. |
@@ -335,6 +339,6 @@ This matrix demonstrates that the PRD covers the complete source scope rather th
 
 ## 14. Release posture
 
-The POC release is demo-ready when all P0 acceptance criteria required by the rehearsed scenario are met, synthetic and simulated states are visible, and open P1 limitations are disclosed. Phase 3B may be accepted independently when its comparison subset and isolation gates pass; it does not authorize Phase 6. The POC is not approved for real customer data or public financial decision-making.
+The current release has four explicit levels: (1) a working synthetic judged POC, (2) neutral cached real evidence, (3) gated real-product comparison and ranking, and (4) deferred production controls. The POC is demo-ready only for level 1 with level 2 visibly separated. Phase 3B may be accepted independently when its comparison subset and isolation gates pass; it does not authorize Phase 6. The POC is not approved for real customer data or public financial decision-making.
 
 Execution tickets are maintained in the [backlog register](../backlog/README.md).

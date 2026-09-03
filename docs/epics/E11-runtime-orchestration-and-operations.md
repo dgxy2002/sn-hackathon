@@ -58,20 +58,22 @@ stateDiagram-v2
 
 ## Definition of done
 
-- [ ] Docker Compose starts healthy backend, scraper, database, and configured local object-store services without AWS access.
+- [x] Docker Compose starts healthy web, backend, singleton scraper, and PostgreSQL/pgvector services; optional object storage is unconfigured.
 - [x] The invocation contract accepts a versioned request and returns final state, result, ordered events, and run metrics.
 - [x] Only declared tools execute, every result validates before transition, and raw documents remain outside explanation prompts.
 - [x] Conversational tool policy validates action schema, target, base version, preconditions, idempotency, confirmation, allowed summary regions, and terminal state.
 - [x] Model output never executes as page code, selectors, coordinates, SQL, arbitrary URLs, or direct canonical decision values.
 - [ ] Every loop and retry path has a tested cap with `LOOP_LIMIT_REACHED` as a terminal failure.
-- [ ] Bedrock calls record provider, exact model or inference-profile ID, prompt version, tokens, latency, estimated cost, and outcome. Provider, model, prompt, token, latency, and outcome fields are implemented; priced cost evaluation remains open.
+- [x] Credentialed Bedrock calls record provider, exact model or inference-profile ID, prompt version, tokens, latency, and outcome.
+- [ ] Estimated priced cost is calculated and recorded; token counts alone do not satisfy this gate.
 - [x] Explanation uses the immutable E07 decision contract and cannot mutate rank, eligibility, evidence, or numbers.
 - [x] Live, cached, synthetic, and simulated adapters emit the same contracts and visible mode labels.
-- [ ] Exactly one scraper loop runs, retains a database lease, records source freshness, and recovers from bounded failures.
+- [x] Exactly one scraper loop runs under a database-backed singleton lease in the accepted Compose topology.
+- [ ] Approved-source freshness cycles and bounded failure recovery are independently accepted.
 - [ ] The AWS topology maps images to ECR/ECS, PostgreSQL to RDS, snapshots to S3, secrets to Secrets Manager, and logs/metrics/alarms to CloudWatch.
 - [ ] Normal, no-policy, missing-information, no-evidence, dependency-failure, changed-goal, and stale-source scenarios reach their expected terminal states.
 
-**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md) and [Bedrock and personalization integration](../evaluation/2026-09-03-bedrock-personalization-integration.md). A credentialed live-model acceptance run, priced cost evaluation, full loop-limit acceptance, scraper freshness cycles, changed-goal coverage, and AWS deployment remain open.
+**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md), [Bedrock and personalization integration](../evaluation/2026-09-03-bedrock-personalization-integration.md), and [Gen-Z journey review](../evaluation/2026-09-03-gen-z-journey-and-project-truth.md). Priced cost evaluation, full loop-limit acceptance, scraper freshness cycles, changed-goal coverage, and AWS deployment remain open.
 
 ## POC boundary
 

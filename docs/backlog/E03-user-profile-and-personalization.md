@@ -18,8 +18,9 @@
 
 **Acceptance criteria:**
 
-- [x] The flow collects life stage, cash flow, dependants, debt, existing cover, goals, budget, and preference.
-- [x] Account and consent precede profile collection.
+- [x] The common flow collects income, liabilities, goal, product preference, and additional-premium ceiling.
+- [x] The existing-plan path alone adds current premium, death, TPD, and advanced critical-illness amounts.
+- [x] Consent without account creation precedes profile collection.
 - [x] Detailed diagnoses, NRIC, payment data, and beneficiary identities are not requested.
 
 **Evidence:** `onboardingSteps`, `onboardingFields`, and `onboardingView` in [`frontend/src/main.js`](../../frontend/src/main.js).
@@ -88,12 +89,12 @@
 
 | Field | Value |
 |---|---|
-| Status | In progress |
-| Priority | P1 |
+| Status | Deferred |
+| Priority | P3 |
 | Size | M |
 | Depends on | E03-T02 |
 
-**User story:** As a first-time working adult, I need the profile to cover the circumstances that materially affect protection needs and affordability without collecting unnecessary sensitive data.
+**User story:** As a future production user, I may need a broader Financial Needs Analysis after every additional field has a documented decision effect.
 
 **Requirements:** URS-FR-005, URS-FR-006, URS-NFR-001, URS-NFR-005; PRD-FR-004, PRD-FR-005, PRD-FR-015, PRD-NFR-004, PRD-NFR-009.
 
@@ -105,6 +106,8 @@
 - [ ] Detailed diagnoses, NRIC, payment data, and beneficiary identities remain excluded from the POC.
 - [ ] Each field documents why it affects a calculation, constraint, or explanation.
 
+**Deferral reason:** The judged POC intentionally removed these questions because the current formulation does not use most of them. They must not be reintroduced merely for questionnaire completeness.
+
 ## E03-T06 - Implement the no-policy profile API path
 
 | Field | Value |
@@ -114,7 +117,7 @@
 | Size | M |
 | Depends on | E03-T02, E10-T04 |
 
-**User story:** As a user without an existing policy document, I need to skip upload and continue with an honest unknown-coverage state.
+**User story:** As a user without an existing private policy, I need to skip upload and continue without invented cover.
 
 **Requirements:** URS-FR-006, URS-FR-015, URS-FR-023, URS-FR-024, URS-NFR-011, URS-NFR-015; PRD-FR-015, PRD-FR-028, PRD-NFR-008, PRD-NFR-015.
 
@@ -122,7 +125,7 @@
 
 - [x] The profile contract represents `has_current_policy: false` separately from missing or unknown policy details.
 - [x] The coordinator bypasses extraction when no policy is supplied.
-- [x] Existing-policy values remain unknown and no synthetic coverage is added.
+- [x] Existing-policy values are not applicable when policy status is No; Unsure remains unknown; no synthetic coverage is added.
 - [x] Gap and recommendation services return assumptions, focused questions, or insufficient data as defined by the formulation.
 - [ ] API tests cover policy supplied, no policy, unknown policy status, and changed policy status through the local backend container.
 
@@ -142,7 +145,8 @@
 **Acceptance criteria:**
 
 - [x] A profile patch contains the base version, changed fields, old values, proposed values, reason, and affected calculations.
-- [ ] Budget, goal, dependant, preference, declared-coverage, and other decision-input changes require confirmation.
+- [x] Budget changes require confirmation.
+- [ ] Goal, dependant, preference, declared-coverage, and other decision-input changes use the same confirmation boundary.
 - [x] Validation preserves explicit unknown values and rejects stale, disallowed, or conflicting patches.
 - [x] Confirmation creates a new immutable profile version; cancellation leaves the active version unchanged.
 - [x] Applied and rejected proposals retain typed audit events without hidden model reasoning.
