@@ -2,15 +2,12 @@ import './style.css'
 import skylineImage from './assets/singapore-skyline-landscape.jpg'
 import {
   ApiError,
-  compareEvidence,
   createClientId,
   createConversation,
   decideProposal,
   fetchReplay,
   invokeCoverCheck,
-  reviewExtraction,
   sendConversationMessage,
-  submitExtraction,
   undoRevision,
 } from './api.js'
 
@@ -73,8 +70,8 @@ const questions = [
 ]
 
 const onboardingSteps = [
-  ['Your starting point', 'Five inputs that directly change the demo gap calculation or option ordering.'],
-  ['What your plan already covers', 'Only the four current-plan amounts used by this demo.'],
+  ['Your starting point', 'Five details used to calculate your protection starting point.'],
+  ['What your plan already covers', 'Four figures copied from your latest policy schedule.'],
 ]
 
 const goalOptions = [
@@ -116,7 +113,6 @@ const state = {
   onboardingStep: 0,
   direction: 'forward',
   keyboard: false,
-  fileName: '',
   runtime: {
     status: 'idle',
     error: '',
@@ -124,12 +120,6 @@ const state = {
     extraction: null,
     recommendation: null,
     explanation: null,
-  },
-  evidenceComparison: {
-    status: 'idle',
-    error: '',
-    products: [],
-    warnings: [],
   },
   profile: createEmptyProfile(),
   agent: {
@@ -147,10 +137,10 @@ const state = {
     error: '',
     abortController: null,
     suggestedPrompts: [
-      { id: 'why-ranked-first', label: 'Why this ranks first', message: 'Why does the first eligible option rank first?' },
-      { id: 'show-critical-illness', label: 'Show critical illness', message: 'Show only the critical illness option.' },
-      { id: 'show-unknowns', label: 'Show assumptions', message: 'What does the ranking still not know?' },
-      { id: 'explore-integrated-shield', label: 'Explore hospital cover', message: 'Which cached plans mention Integrated Shield hospital cover?' },
+      { id: 'how-gaps-work', label: 'How are my gaps calculated?', message: 'How were my protection gaps calculated?' },
+      { id: 'show-unknowns', label: 'Show assumptions', message: 'What assumptions should I verify?' },
+      { id: 'explore-term-life', label: 'Explore life cover', message: 'Which brochures mention term life protection?' },
+      { id: 'explore-integrated-shield', label: 'Explore hospital cover', message: 'Which plans mention Integrated Shield hospital cover?' },
     ],
   },
 }
@@ -280,29 +270,13 @@ async function prepareComparison(insuranceStatus = state.profile.insuranceStatus
   render({ focus: false, preserveScroll: true })
 
   try {
-    const hasCurrentPolicy = insuranceStatus === 'Yes'
     const profile = buildVersionedProfile(insuranceStatus)
-    let extraction = null
-    if (hasCurrentPolicy) {
-      const submitted = await submitExtraction('policy-term-001', controller.signal)
-      extraction = await reviewExtraction(
-        submitted.extraction_id,
-        {
-          expected_version: submitted.version,
-          fields: submitted.fields.map((field) => ({
-            ...field,
-            reviewed_value: field.original_value,
-          })),
-        },
-        controller.signal,
-      )
-    }
     const invocation = await invokeCoverCheck({
       schema_id: 'covercheck.invocation',
       contract_version: '1.0.0',
       invocation_id: createClientId(),
       profile,
-      extraction_id: extraction?.extraction_id || null,
+      extraction_id: null,
     }, controller.signal)
     state.runtime.profile = invocation.profile
     state.runtime.extraction = invocation.extraction
@@ -316,45 +290,30 @@ async function prepareComparison(insuranceStatus = state.profile.insuranceStatus
     state.agent.replay = []
     state.agent.canUndo = false
 
-    if (invocation.recommendation) {
-      const comparison = await compareEvidence({
-        product_ids: [
-          'synthetic-lioncity-critical-cover',
-          'synthetic-harbour-essential-ci',
-        ],
-        comparison_mode: 'synthetic_fixture',
-        canonical_references: {
-          profile_id: invocation.profile.profile_id,
-          profile_version: invocation.profile.version,
-          catalogue_version: invocation.recommendation.catalogue_version,
-          recommendation_id: invocation.recommendation.recommendation_id,
-          revision_id: state.agent.activeRevisionId,
-        },
-      }, controller.signal)
-      state.evidenceComparison = {
-        status: comparison.status,
-        error: '',
-        products: comparison.products,
-        warnings: comparison.warnings,
-      }
-    }
     navigate('comparison')
   } catch (error) {
     state.runtime.status = 'failed'
     state.runtime.error = error instanceof ApiError
       ? error.message
-      : 'The local backend is unavailable. The comparison was not created.'
+      : 'CoverCheck is temporarily unavailable. Please try again.'
     render({ focus: false, preserveScroll: true })
   }
 }
 
 const actionTargetLabels = {
-  'reasoning:ranking': 'Why this ranks first',
-  'reasoning:assumptions': 'Unknowns and assumptions',
-  'comparison:critical-illness': 'Critical-illness comparison',
-  'profile:decision-input': 'Decision input',
-  'summary:current': 'Current summary',
-  'evidence:cached-catalogue': 'Cached brochure evidence',
+  'reasoning:ranking': 'Calculation method',
+  'reasoning:assumptions': 'Assumptions to verify',
+  'comparison:critical-illness': 'Critical-illness gap',
+  'profile:decision-input': 'Profile update',
+  'summary:current': 'Current result',
+  'evidence:cached-catalogue': 'Brochure library',
+}
+
+const actionToolLabels = {
+  ANSWER_QUESTION: 'Searched brochure library',
+  FOCUS_SECTION: 'Opened result details',
+  FILTER_COMPARISON: 'Focused the result',
+  PROPOSE_PROFILE_PATCH: 'Prepared a profile change',
 }
 
 const agentMessageView = (message) => {
@@ -365,15 +324,23 @@ const agentMessageView = (message) => {
     const product = escapeHtml(citation.product || '')
     const sourceFile = escapeHtml(citation.source_file || '')
     const excerpt = escapeHtml(citation.excerpt || '')
+    const evidenceStateLabels = {
+      approved: 'Provider source',
+      current: 'Current source',
+      unverified: 'Verify source',
+      stale: 'Check date',
+      conflicting: 'Conflicting details',
+      unknown: 'Date unavailable',
+    }
     const evidenceState = escapeHtml(
-      citation.synthetic ? 'synthetic fixture' : (citation.evidence_state || 'unknown evidence'),
+      citation.synthetic ? 'Illustrative source' : (evidenceStateLabels[citation.evidence_state] || 'Verify source'),
     )
     const freshness = escapeHtml(citation.freshness_status || 'unknown')
     const documentDate = escapeHtml(formatEvidenceDate(citation.document_as_of_date))
     const effectiveDate = escapeHtml(formatEvidenceDate(citation.product_effective_date))
     const source = safeUrl
       ? `<a href="${escapeHtml(safeUrl)}" target="_blank" rel="noreferrer">Open provider source <span aria-hidden="true">↗</span></a>`
-      : `<span>${sourceFile ? `Cached file: ${sourceFile}` : 'Source URL unavailable in cached record'}</span>`
+      : `<span>${sourceFile ? `Brochure record: ${sourceFile}` : 'Open the provider website to verify current terms'}</span>`
 
     if (!citation.excerpt) {
       return safeUrl
@@ -413,12 +380,12 @@ const agentActionView = (action, index) => `
   <details class="agent-action is-${escapeHtml(action.status)}" ${index === state.agent.actions.length - 1 ? 'open' : ''}>
     <summary>
       <span class="action-sequence mono">${String(index + 1).padStart(2, '0')}</span>
-      <span><b>${escapeHtml(action.tool.replaceAll('_', ' '))}</b><small>${escapeHtml(actionTargetLabels[action.target] || 'Blocked target')}</small></span>
-      <i aria-hidden="true">${action.status === 'completed' ? 'DONE' : 'STOPPED'}</i>
+      <span><b>${escapeHtml(actionToolLabels[action.tool] || 'Reviewed result')}</b><small>${escapeHtml(actionTargetLabels[action.target] || 'No change made')}</small></span>
+      <i aria-hidden="true">${action.status === 'completed' ? 'DONE' : 'NO CHANGE'}</i>
     </summary>
     <div class="agent-action-detail">
       <span>${action.evidence_count} evidence record${action.evidence_count === 1 ? '' : 's'}</span>
-      <span>${action.confirmation_required ? 'Confirmation required' : 'No confirmation needed'}</span>
+      <span>${action.confirmation_required ? 'Your confirmation is required' : 'Result unchanged'}</span>
       <span>${action.error_code ? escapeHtml(action.error_code) : escapeHtml(action.affected_regions.join(', '))}</span>
     </div>
   </details>
@@ -457,7 +424,7 @@ const revisionView = () => {
       <span class="mono">REVISION APPLIED</span>
       <p>${escapeHtml(inputChanges || 'Profile updated')}</p>
       ${gapChanges ? `<small>${escapeHtml(gapChanges)}</small>` : ''}
-      <small>${delta.ranking_changed ? 'Ranking changed.' : 'Ranking stayed the same.'}</small>
+      <small>Your protection starting point was recalculated.</small>
     </section>
   `
 }
@@ -465,27 +432,31 @@ const revisionView = () => {
 const agentView = () => {
   const statusLabels = {
     idle: 'Ready',
-    planning: 'Planning safe actions',
+    planning: 'Working on it',
     waiting_for_confirmation: 'Waiting for confirmation',
     completed: 'Completed',
-    unsupported: 'Stopped safely',
+    unsupported: 'No source found',
     cancelled: 'Cancelled',
-    failed: 'Backend unavailable',
+    failed: 'Temporarily unavailable',
   }
   const isBusy = state.agent.status === 'planning'
   const messages = state.agent.messages.length
     ? state.agent.messages.map(agentMessageView).join('')
-    : '<p class="agent-empty">Ask about the synthetic result, inspect assumptions, or explore the cached brochure catalogue.</p>'
+    : '<p class="agent-empty">Ask how the amounts were calculated, update your budget, or search the brochure library by cover type or provider.</p>'
 
   return `
     <section class="agent-workspace" id="ask-covercheck" aria-labelledby="agent-title">
       <div class="agent-conversation">
         <div class="agent-heading">
           <div>
-            <span class="section-index mono">05 · CONVERSATIONAL EXPLORATION</span>
-            <h2 id="agent-title">Ask CoverCheck</h2>
+            <span class="section-index mono">04 · ASK & EXPLORE</span>
+            <h2 id="agent-title">Ask about your result.</h2>
           </div>
           <span class="agent-state is-${state.agent.status}" aria-live="polite">${statusLabels[state.agent.status]}</span>
+        </div>
+        <p class="agent-deck">CoverCheck can explain your calculation, search real brochure excerpts, and recalculate after a change you confirm.</p>
+        <div class="provider-list" aria-label="Brochure providers available">
+          <span>Brochure library</span><b>AIA</b><b>FWD</b><b>Great Eastern</b><b>Singlife</b>
         </div>
         <div class="agent-prompts" aria-label="Suggested questions">
           ${state.agent.suggestedPrompts.map((prompt) => `
@@ -499,34 +470,31 @@ const agentView = () => {
         ${proposalView()}
         ${revisionView()}
         <form class="agent-composer" id="agent-form">
-          <label class="sr-only" for="agent-message">Ask CoverCheck about this summary</label>
-          <textarea id="agent-message" name="message" rows="2" maxlength="1000" placeholder="Ask why, inspect assumptions, or filter the table" required ${isBusy ? 'disabled' : ''}></textarea>
+          <label class="sr-only" for="agent-message">Ask CoverCheck about your result</label>
+          <textarea id="agent-message" name="message" rows="2" maxlength="1000" placeholder="Ask about a gap, provider, cover type, or change your budget" required ${isBusy ? 'disabled' : ''}></textarea>
           ${isBusy
             ? '<button class="agent-stop" type="button" data-action="stop-agent">Stop</button>'
             : '<button class="agent-send" type="submit">Send <span aria-hidden="true">↗</span></button>'}
         </form>
-        ${state.agent.conversationId ? `
-          <div class="revision-controls">
-            <button type="button" data-action="show-replay">Show replay</button>
-            <button type="button" data-action="undo-revision" ${state.agent.canUndo ? '' : 'disabled'}>Undo last confirmed change</button>
+        <p class="agent-boundary">Brochure excerpts are read-only and may be dated. CoverCheck asks before changing any profile input.</p>
+        <details class="activity-panel">
+          <summary><span>Session activity</span><small>${state.agent.actions.length} action${state.agent.actions.length === 1 ? '' : 's'}</small></summary>
+          ${state.agent.conversationId ? `
+            <div class="revision-controls">
+              <button type="button" data-action="show-replay">Show history</button>
+              <button type="button" data-action="undo-revision" ${state.agent.canUndo ? '' : 'disabled'}>Undo last confirmed change</button>
+            </div>
+            ${state.agent.replay.length ? `<ol class="replay-list">${state.agent.replay.map((item) => `
+              <li><span class="mono">${String(item.sequence).padStart(2, '0')}</span>${escapeHtml(item.event_type.replaceAll('_', ' '))}</li>
+            `).join('')}</ol>` : ''}
+          ` : ''}
+          <div class="agent-actions">
+            ${state.agent.actions.length
+              ? state.agent.actions.map(agentActionView).join('')
+              : '<p class="agent-empty">No changes or source lookups yet.</p>'}
           </div>
-          ${state.agent.replay.length ? `<ol class="replay-list">${state.agent.replay.map((item) => `
-            <li><span class="mono">${String(item.sequence).padStart(2, '0')}</span>${escapeHtml(item.event_type.replaceAll('_', ' '))}</li>
-          `).join('')}</ol>` : ''}
-        ` : ''}
-        <p class="agent-boundary">Typed actions only · evidence labels preserve source state and unknown dates · cached real products never enter the synthetic ranking.</p>
+        </details>
       </div>
-      <aside class="agent-trace" aria-labelledby="trace-title">
-        <div class="trace-heading">
-          <span class="section-index mono">VISIBLE ACTIONS</span>
-          <h3 id="trace-title">What changed on the page</h3>
-        </div>
-        <div class="agent-actions">
-          ${state.agent.actions.length
-            ? state.agent.actions.map(agentActionView).join('')
-            : '<p class="agent-empty">No action has run. Hidden model reasoning is never shown or used as an instruction.</p>'}
-        </div>
-      </aside>
     </section>
   `
 }
@@ -569,7 +537,7 @@ const brand = (tone = '') => `
 `
 
 const trustNote = () => `
-  <p class="trust-note">Educational direction, not financial advice. Ranked options are synthetic demo plans; cached real brochures stay outside ranking.</p>
+  <p class="trust-note">Educational starting point—not financial advice. Verify current policy terms and speak with a licensed adviser before buying, replacing, or cancelling cover.</p>
 `
 
 const appHeader = ({ step = '', back = false } = {}) => `
@@ -606,7 +574,7 @@ const introView = () => `
           <span>I don’t have a plan</span><small>Start from zero private cover</small><i aria-hidden="true">→</i>
         </button>
         <button class="journey-button" type="button" data-action="review-policy">
-          <span>Review a plan I have</span><small>Add the four figures used in this demo</small><i aria-hidden="true">→</i>
+          <span>Review a plan I have</span><small>Add four figures from your policy</small><i aria-hidden="true">→</i>
         </button>
       </div>
       <button class="intro-quiz-link intro-sequence" type="button" data-action="start-quiz">Or check my insurance basics · 4 questions</button>
@@ -710,27 +678,7 @@ const resultView = () => {
         </div>
       </section>
 
-      <section class="benchmark-section report-reveal reveal-3" aria-labelledby="benchmark-title">
-        <div class="section-index mono">02 · Context, not competition</div>
-        <div class="benchmark-content">
-          <div class="benchmark-heading">
-            <h2 id="benchmark-title">Hackathon pilot participants</h2>
-            <p>See where your score sits. This is context, not a ranking.</p>
-          </div>
-          <div class="benchmark-distribution" role="img" aria-label="Bell curve of pilot readiness scores. Your score is ${score}; the pilot midpoint is 61.">
-            <svg viewBox="0 0 700 240" preserveAspectRatio="none" aria-hidden="true">
-              <path class="distribution-area" d="M0 220 C85 220 113 210 150 190 C205 160 225 80 300 42 C340 21 360 21 400 42 C475 80 495 160 550 190 C587 210 615 220 700 220 L700 240 L0 240 Z" />
-              <path class="distribution-line" d="M0 220 C85 220 113 210 150 190 C205 160 225 80 300 42 C340 21 360 21 400 42 C475 80 495 160 550 190 C587 210 615 220 700 220" />
-            </svg>
-            <span class="distribution-marker pilot" style="--position: 61%"><i></i><b>Pilot midpoint<br />61</b></span>
-            <span class="distribution-marker you" style="--position: ${score}%"><i></i><b>You<br />${score}</b></span>
-            <span class="distribution-scale mono"><i>0</i><i>50</i><i>100</i></span>
-          </div>
-          <p class="source-line mono">n=24 · ages 19-29 · collected 18-25 Aug 2026 · demo pilot sample</p>
-        </div>
-      </section>
-
-      <section class="result-action report-reveal reveal-4">
+      <section class="result-action report-reveal reveal-3">
         <div>
           <span class="section-index mono">NEXT · ABOUT 3 MIN</span>
           <h2>Turn this into a protection starting point.</h2>
@@ -751,12 +699,12 @@ const signupView = () => `
     <section class="form-intro view-enter">
       <p class="eyebrow">Before the gap check</p>
       <h1 class="form-title screen-title" tabindex="-1">No account. Just clear consent.</h1>
-      <p>Your answers go to the local POC API. A compact profile summary—not a policy document—is sent to Amazon Bedrock for plain-language explanation.</p>
+      <p>Your answers are used to calculate the result. A compact profile summary—not a policy document—is sent to Amazon Bedrock for a plain-language explanation.</p>
     </section>
     <form id="account-form" class="account-form view-enter" novalidate>
       <label class="consent-row">
         <input type="checkbox" name="consent" data-field="consent" ${state.profile.consent ? 'checked' : ''} required />
-        <span>I understand this local demo uses my answers to calculate synthetic gaps and explain a synthetic comparison.</span>
+        <span>I agree to the use of my answers for this coverage check and its AI-generated explanation.</span>
       </label>
       <button class="primary-button" type="submit">Continue to five inputs <span aria-hidden="true">→</span></button>
       <p class="form-error" id="account-error" role="alert"></p>
@@ -793,17 +741,17 @@ const onboardingFields = () => {
       ${radioGroup('insuranceStatus', 'Where are you starting?', ['No', 'Yes', 'Unsure'], profile.insuranceStatus, true)}
       <div class="path-callout">
         <span class="mono">${profile.insuranceStatus === 'Yes' ? 'EXISTING PLAN PATH' : profile.insuranceStatus === 'No' ? 'NO-PLAN PATH' : 'UNSURE PATH'}</span>
-        <p>${profile.insuranceStatus === 'Yes' ? 'You will add four current-plan amounts, then review a synthetic policy extraction.' : profile.insuranceStatus === 'No' ? 'Policy questions and upload are skipped. No private cover will be invented.' : 'No private cover will be deducted; the result will show what needs verification.'}</p>
+        <p>${profile.insuranceStatus === 'Yes' ? 'Copy four amounts from your latest policy schedule. Only figures you confirm are used.' : profile.insuranceStatus === 'No' ? 'The calculation starts from zero declared private cover.' : 'No private cover is deducted until you can verify it.'}</p>
       </div>
       <div class="field-pair">
         <label class="field money-field"><span>Monthly take-home income</span><i>S$</i><input type="number" min="0.01" step="0.01" data-field="income" value="${profile.income}" placeholder="e.g. 4,200" required /></label>
         <label class="field money-field"><span>Total loans left to pay</span><i>S$</i><input type="number" min="0" step="0.01" data-field="debt" value="${profile.debt}" placeholder="Enter 0 if none" required /></label>
       </div>
-      <p class="field-caption">A rough total is enough. Savings, spending, and loan categories are not used by the current formulation.</p>
+      <p class="field-caption">A rough loan total is enough. Savings and spending are not needed for this calculation.</p>
       ${radioGroup('goal', 'What matters most right now?', goalOptions, profile.goal, true)}
-      ${radioGroup('productPreference', 'What kind of demo option should be considered?', ['Protection only', 'Open to savings features'], profile.productPreference, true)}
+      ${radioGroup('productPreference', 'What type of cover would you prefer to explore?', ['Protection only', 'Open to savings features'], profile.productPreference, true)}
       <label class="field money-field"><span>Maximum additional monthly premium</span><i>S$</i><input type="number" min="0.01" step="0.01" data-field="budget" value="${profile.budget}" placeholder="e.g. 150" required /></label>
-      <p class="field-caption">This is a hard ceiling for the synthetic demo options—not a quote or spending recommendation.</p>
+      <p class="field-caption">This is your stated ceiling for exploring cover—not a quote or spending recommendation.</p>
     `
   }
 
@@ -822,7 +770,7 @@ const onboardingFields = () => {
     <div class="premium-preview ${premiumShare > 15 ? 'is-high' : premiumShare > 5 ? 'is-watch' : 'is-comfort'}">
       <span class="mono">CURRENT PREMIUM / INCOME</span>
       <strong>${premiumShare.toFixed(1)}%</strong>
-      <p>5% is a demo adviser-interview marker. MoneySense’s educational upper reference is 15% of income.</p>
+      <p>5% is a planning reference. MoneySense’s educational upper reference is 15% of income.</p>
     </div>
   `
 }
@@ -832,9 +780,7 @@ const onboardingView = () => {
   const current = steps[state.onboardingStep]
   const isFinalStep = state.onboardingStep === steps.length - 1
   const isPlanning = isFinalStep && state.runtime.status === 'planning'
-  const finalAction = state.profile.insuranceStatus === 'Yes'
-    ? 'Review a sample policy'
-    : 'Find my protection gaps'
+  const finalAction = 'Calculate my protection gaps'
   return `
     <main class="onboarding-screen" data-screen="onboarding">
       ${appHeader({ step: `PROFILE ${state.onboardingStep + 1} / ${steps.length}`, back: true })}
@@ -848,7 +794,7 @@ const onboardingView = () => {
               </li>
             `).join('')}
           </ol>
-          <p class="stepper-note">Only fields used by the current demo are required.</p>
+          <p class="stepper-note">Only details used in your calculation are required.</p>
         </aside>
         <section class="onboarding-main view-enter">
           <p class="eyebrow">Step ${state.onboardingStep + 1}</p>
@@ -868,161 +814,64 @@ const onboardingView = () => {
   `
 }
 
-const uploadView = () => `
-  <main class="upload-screen" data-screen="upload">
-    ${appHeader({ step: 'POLICY REVIEW', back: true })}
-    <section class="upload-heading view-enter">
-      <p class="eyebrow">Synthetic extraction demo</p>
-      <h1 class="upload-title screen-title" tabindex="-1">See how a policy review could work.</h1>
-      <p>This POC does not process your real document. Use the synthetic sample to continue safely.</p>
-    </section>
-    <section class="upload-zone view-enter" aria-labelledby="upload-label">
-      <div class="upload-symbol" aria-hidden="true"><span>PDF</span></div>
-      <div>
-        <h2 id="upload-label">Policy document preview</h2>
-        <p>PDF, JPG or PNG · Demo navigation only; file contents are not read</p>
-      </div>
-      <label class="primary-button file-button">
-        Choose a file
-        <input id="policy-file" type="file" accept=".pdf,.jpg,.jpeg,.png" />
-      </label>
-      <span class="or-label mono">OR</span>
-      <button class="secondary-button" type="button" data-action="use-sample">Use synthetic sample policy</button>
-      <button class="text-button" type="button" data-action="no-policy">Switch to the no-plan path</button>
-    </section>
-    <div class="upload-guardrails view-enter">
-      <p><span class="mono">01</span> Every detail links back to a page.</p>
-      <p><span class="mono">02</span> Unclear text is marked for review.</p>
-      <p><span class="mono">03</span> This demo never tells you to cancel.</p>
-    </div>
-  </main>
-`
+const illustrativeOptions = {
+  'synthetic-lioncity-term-flex': {
+    type: 'Term life',
+    direction: 'Family and debt protection',
+    description: 'A high-cover, fixed-term structure to explore when death and disability gaps are the priority.',
+    benefit: 'S$400,000',
+    term: 'To age 65',
+    premium: 78,
+  },
+  'synthetic-harbour-essential-ci': {
+    type: 'Critical illness',
+    direction: 'Serious-illness cash cover',
+    description: 'A lump-sum critical-illness structure to explore alongside hospital and income protection.',
+    benefit: 'S$150,000',
+    term: '30 years',
+    premium: 64,
+  },
+  'synthetic-orchid-income-shield': {
+    type: 'Disability income',
+    direction: 'Monthly income protection',
+    description: 'A monthly-benefit structure to explore if being unable to work is your main concern.',
+    benefit: 'S$2,000 / month',
+    term: 'To age 60',
+    premium: 92,
+  },
+}
 
-const ocrField = (label, value, confidence, unresolved = false) => `
-  <label class="ocr-field ${unresolved ? 'is-unresolved' : ''}">
-    <span><b>${label}</b><i class="confidence ${confidence >= 90 ? 'high' : confidence >= 75 ? 'medium' : 'low'}">${confidence}%</i></span>
-    <input type="text" value="${escapeHtml(value)}" ${unresolved ? 'placeholder="Review required"' : ''} />
-    <small class="mono">${unresolved ? 'TO CHECK · PAGE 6' : 'MATCHED ON PAGE 1'}</small>
-  </label>
-`
-
-const ocrView = () => `
-  <main class="ocr-screen" data-screen="ocr">
-    ${appHeader({ step: 'EXTRACTION REVIEW', back: true })}
-    <div class="ocr-layout">
-      <section class="document-panel view-enter" aria-label="Synthetic policy document preview">
-        <div class="document-toolbar">
-          <span class="mono">${escapeHtml(state.fileName || 'Inherited_Policy_Sample.pdf')}</span>
-          <span class="mono">PAGE 1 / 8</span>
-        </div>
-        <article class="document-page">
-          <div class="document-brand">MERLION MUTUAL</div>
-          <p class="mono">POLICY SCHEDULE · SYNTHETIC DEMO</p>
-          <h2>Foundation Term Protect</h2>
-          <div class="document-rule"></div>
+const optionDirectionsView = (evaluations) => `
+  <div class="direction-grid">
+    ${evaluations.map((evaluation) => {
+      const option = illustrativeOptions[evaluation.plan_id]
+      if (!option) return ''
+      return `
+        <article class="direction-card ${evaluation.rank === 1 ? 'is-primary' : ''}">
+          <div class="direction-card-heading">
+            <span class="mono">${evaluation.rank === 1 ? 'START HERE' : `ALTERNATIVE ${evaluation.rank - 1}`}</span>
+            <span>${escapeHtml(option.type)}</span>
+          </div>
+          <h3>${escapeHtml(option.direction)}</h3>
+          <p>${escapeHtml(option.description)}</p>
           <dl>
-            <div><dt>Policy owner</dt><dd>Tan Mei</dd></div>
-            <div><dt>Life assured</dt><dd>Ari Tan</dd></div>
-            <div class="document-highlight"><dt>Death / permanent disability</dt><dd>S$100,000</dd></div>
-            <div><dt>Policy term</dt><dd>To age 65</dd></div>
-            <div><dt>Annual premium</dt><dd>S$684.00</dd></div>
+            <div><dt>Example benefit</dt><dd>${escapeHtml(option.benefit)}</dd></div>
+            <div><dt>Example term</dt><dd>${escapeHtml(option.term)}</dd></div>
+            <div><dt>Illustrative premium</dt><dd>${formatCurrency(option.premium)} / month</dd></div>
           </dl>
-          <p class="document-fineprint">This synthetic document is created for the CoverCheck SG hackathon prototype. It is not an issued insurance contract.</p>
         </article>
-      </section>
-      <section class="extraction-panel">
-        <div class="extraction-heading ocr-reveal">
-          <p class="eyebrow">6 details found · 1 to check</p>
-          <h1 class="ocr-title screen-title" tabindex="-1">Check the details before using them.</h1>
-          <p>Confidence shows how clearly the text was read. It does not rate the plan.</p>
-        </div>
-        <form class="ocr-fields">
-          ${ocrField('Insurance company', 'Merlion Mutual', 99)}
-          ${ocrField('Plan name', 'Foundation Term Protect', 98)}
-          ${ocrField('Death / permanent disability', 'S$100,000', 96)}
-          ${ocrField('Monthly cost', 'S$57', 93)}
-          ${ocrField('Cover ends', 'At age 65', 88)}
-          ${ocrField('Critical illness add-on', '', 42, true)}
-        </form>
-        <div class="ocr-actions ocr-reveal">
-          <p><span class="status-dot"></span> Five values match visible page evidence.</p>
-          <button class="primary-button" type="button" data-action="confirm-extraction" ${state.runtime.status === 'planning' ? 'disabled' : ''}>${state.runtime.status === 'planning' ? 'Running checks…' : 'Confirm and compare <span aria-hidden="true">→</span>'}</button>
-          ${state.runtime.error ? `<p class="form-error" role="alert">${escapeHtml(state.runtime.error)}</p>` : ''}
-        </div>
-      </section>
-    </div>
-  </main>
+      `
+    }).join('')}
+  </div>
+  <p class="illustration-note"><b>Illustrative examples only.</b> These are not insurer products or quotes. Use them to understand which cover structure to investigate in the brochure library or with a licensed adviser.</p>
 `
-
-const planPresentation = {
-  'synthetic-lioncity-term-flex': ['LionCity Term Flex', 'Term life', 'S$400,000', 'To age 65', 78],
-  'synthetic-harbour-essential-ci': ['Harbour Essential CI', 'Critical illness', 'S$150,000', '30 years', 64],
-  'synthetic-orchid-income-shield': ['Orchid Income Shield', 'Disability income', 'S$2,000 / month', 'To age 60', 92],
-  'synthetic-meridian-whole-life-plus': ['Meridian Whole Life Plus', 'Whole life', 'S$350,000', 'Whole life', 286],
-}
-
-const comparisonTable = (evaluations) => {
-  const visible = evaluations.map((evaluation) => ({
-    evaluation,
-    details: planPresentation[evaluation.plan_id] || [evaluation.plan_id, 'Unknown', 'Unknown', 'Unknown', 0],
-  }))
-  const row = (label, value) => `<tr><th scope="row">${label}</th>${visible.map(value).join('')}</tr>`
-
-  return `
-    <table class="plan-table">
-      <thead><tr><th scope="col">Compare</th>${visible.map(({ evaluation, details }) => `
-        <th scope="col" class="${evaluation.rank === 1 ? 'recommended' : ''}">
-          ${evaluation.rank === 1 ? '<span>Closest demo fit</span>' : ''}${escapeHtml(details[0])}
-        </th>
-      `).join('')}</tr></thead>
-      <tbody>
-        ${row('What it covers', ({ details }) => `<td>${escapeHtml(details[1])}</td>`)}
-        ${row('New plan premium', ({ details }) => `<td><strong>${formatCurrency(details[4])}</strong></td>`)}
-        ${row('Projected total / income', ({ evaluation, details }) => `<td><strong>${formatCurrency(evaluation.projected_monthly_premium ?? details[4])}</strong><br /><small>${evaluation.projected_income_share === null || evaluation.projected_income_share === undefined ? 'Share unavailable' : `${(evaluation.projected_income_share * 100).toFixed(1)}% of monthly income`}</small></td>`)}
-        ${row('Benefit amount', ({ details }) => `<td>${escapeHtml(details[2])}</td>`)}
-        ${row('How long', ({ details }) => `<td>${escapeHtml(details[3])}</td>`)}
-        ${row('Fit score', ({ evaluation }) => `<td>${evaluation.score === null ? 'Not scored' : `${Math.round(evaluation.score * 100)} / 100`}</td>`)}
-        ${row('Trade-offs', ({ evaluation }) => `<td>${escapeHtml(evaluation.trade_offs.join(', ') || 'None recorded')}</td>`)}
-        ${row('Evidence', ({ evaluation }) => `<td><small class="mono">${escapeHtml(evaluation.evidence_ids.join(' · '))}</small></td>`)}
-      </tbody>
-    </table>
-  `
-}
-
-const neutralEvidenceView = () => {
-  if (!state.evidenceComparison.products.length) {
-    return `<p class="comparison-empty">${escapeHtml(state.evidenceComparison.error || 'No eligible evidence comparison is available.')}</p>`
-  }
-  const fieldValue = (product, key) => product.fields.find((field) => field.key === key)?.value || 'Unknown'
-
-  return `
-    <div class="evidence-comparison-grid">
-      ${state.evidenceComparison.products.map((product) => `
-        <article>
-          <span class="mono">${product.synthetic ? 'SYNTHETIC FIXTURE' : 'REAL CACHED EVIDENCE'} · ${escapeHtml(product.eligibility)}</span>
-          <h3>${escapeHtml(product.product)}</h3>
-          <p>${escapeHtml(product.provider)}</p>
-          <dl>
-            <div><dt>Benefit</dt><dd>${escapeHtml(fieldValue(product, 'benefit'))}</dd></div>
-            <div><dt>Premium</dt><dd>${escapeHtml(fieldValue(product, 'premium'))}</dd></div>
-          </dl>
-          <details>
-            <summary>Inspect evidence lineage</summary>
-            <p class="mono">${escapeHtml(product.fields.flatMap((field) => field.evidence_ids).join(' · '))}</p>
-          </details>
-        </article>
-      `).join('')}
-    </div>
-    <p class="comparison-warning">${escapeHtml(state.evidenceComparison.warnings.join(' '))}</p>
-  `
-}
 
 const declaredCoverageView = (insuranceStatus) => {
   if (insuranceStatus === 'Unsure') {
-    return '<p class="comparison-empty">Your insurance status is unsure. No private cover was deducted; verify your policies before relying on the illustrated gaps.</p>'
+    return '<p class="comparison-empty">Your current private cover is not yet confirmed, so it was not deducted. Check your policy schedule before using these amounts as a planning reference.</p>'
   }
   if (insuranceStatus === 'No') {
-    return '<p class="comparison-empty">No current private policy was declared. Existing private cover was not invented.</p>'
+    return '<p class="comparison-empty">You said you do not have a current private policy, so the calculation starts from zero declared private cover.</p>'
   }
   const coverage = [
     ['Death', state.profile.deathCover],
@@ -1031,13 +880,13 @@ const declaredCoverageView = (insuranceStatus) => {
   ]
   return `
     <div class="declared-cover-heading">
-      <div><span class="mono">USER-DECLARED</span><h3>Current private cover used in this demo</h3></div>
-      <div><b>${formatCurrency(state.profile.currentPremium)} / month</b><small>Insurer and product identity are not used for ranking.</small></div>
+      <div><span class="mono">YOU CONFIRMED</span><h3>Current private cover used in the calculation</h3></div>
+      <div><b>${formatCurrency(state.profile.currentPremium)} / month</b><small>Confirm these figures against your latest policy schedule.</small></div>
     </div>
     <div class="declared-cover-grid">
       ${coverage.map(([label, amount]) => `<article><span>${label}</span><strong class="mono">${formatCurrency(amount)}</strong></article>`).join('')}
     </div>
-    <p class="comparison-warning">Amounts are displayed separately and are not added together because policy benefits may overlap, accelerate, or reduce another payout.</p>
+    <p class="comparison-warning">Benefits stay separate because one payout may overlap with or reduce another. Confirm how your policy treats accelerated and overlapping benefits.</p>
   `
 }
 
@@ -1049,28 +898,21 @@ const comparisonView = () => {
   const ciGap = gapByType.critical_illness?.gap_amount || 0
   const tpdGap = gapByType.total_permanent_disability?.gap_amount
   const affordability = recommendation?.affordability
-  const currentPremiumShare = affordability?.current_income_share == null
+  const budgetIncomeShare = affordability?.budget_income_share == null
     ? null
-    : affordability.current_income_share * 100
+    : affordability.budget_income_share * 100
   const criticalIllnessOnly = state.agent.comparisonFilter === 'critical-illness'
-  const eligible = (recommendation?.evaluations || [])
+  const allEligible = (recommendation?.evaluations || [])
     .filter((evaluation) => evaluation.eligible)
     .sort((left, right) => left.rank - right.rank)
+  const eligible = allEligible
     .filter((evaluation) => (
-      !criticalIllnessOnly || planPresentation[evaluation.plan_id]?.[1] === 'Critical illness'
+      !criticalIllnessOnly || illustrativeOptions[evaluation.plan_id]?.type === 'Critical illness'
     ))
-  const excluded = (recommendation?.evaluations || []).find((evaluation) => !evaluation.eligible)
-  const closest = eligible[0]
-  const closestName = planPresentation[closest?.plan_id]?.[0] || 'No eligible plan'
-  const closestReason = explanation?.plan_reasons?.[closest?.plan_id]
-    || closest?.reason_codes.join(', ')
-    || 'No eligible plan was returned.'
-  const explanationLabel = explanation
-    ? `${explanation.provider.toUpperCase()} · ${explanation.model_id}`
-    : 'DETERMINISTIC RESULT · EXPLANATION PENDING AFTER REVISION'
-  const closestScore = closest?.score === null || closest?.score === undefined
-    ? 'Not scored'
-    : `${Math.round(closest.score * 100)} / 100`
+  const closest = allEligible[0]
+  const closestDirection = illustrativeOptions[closest?.plan_id]?.direction || 'No direction fits the stated monthly ceiling'
+  const assumptions = (recommendation?.assumptions || [])
+    .filter((assumption) => !assumption.startsWith('The explanation was tailored to:'))
   const policyField = state.runtime.profile?.data.has_current_policy
   const insuranceStatus = policyField?.state !== 'present'
     ? 'Unsure'
@@ -1081,47 +923,48 @@ const comparisonView = () => {
       ${appHeader()}
       <section class="comparison-lead view-enter">
         <div>
-          <p class="eyebrow">Synthetic protection direction</p>
-          <h1 class="comparison-title screen-title" tabindex="-1">${insuranceStatus === 'Yes' ? 'Your current plan covers part of the basics.' : insuranceStatus === 'Unsure' ? 'Start with the gaps, then verify what cover you have.' : 'Start with the largest known protection gaps.'}</h1>
+          <p class="eyebrow">Your protection starting point</p>
+          <h1 class="comparison-title screen-title" tabindex="-1">${insuranceStatus === 'Yes' ? 'See what your declared cover may still leave open.' : insuranceStatus === 'Unsure' ? 'See the starting point, then verify the cover you have.' : 'Start with the largest protection gaps.'}</h1>
+          <p class="comparison-lead-deck">Calculated from the income, loans, budget, goal, and cover amounts you provided.</p>
         </div>
         <div class="comparison-meta">
-          <span class="synthetic-badge">Synthetic plan data</span>
-          <span class="mono">PROFILE V${state.runtime.profile?.version || 1} · RULESET ${escapeHtml(recommendation?.ruleset_version || 'UNAVAILABLE')}</span>
+          <span class="result-ready"><i aria-hidden="true"></i> Calculation complete</span>
+          <span class="mono">UPDATED ${escapeHtml(state.runtime.profile?.as_of_date || new Date().toISOString().slice(0, 10))}</span>
         </div>
       </section>
 
       <section class="gap-strip" aria-labelledby="gap-title">
         <div class="gap-intro">
-          <span class="section-index mono">01 · CALCULATED GAPS</span>
-          <h2 id="gap-title">What may still be missing</h2>
-          <p>Draft deterministic formulation; independent policy review is still pending.</p>
+          <span class="section-index mono">01 · YOUR COVERAGE GAPS</span>
+          <h2 id="gap-title">Amounts to investigate</h2>
+          <p>A planning baseline—not a quote. Open the assumptions below to see what is and is not included.</p>
         </div>
         <div class="gap-stat">
           <span>Death</span>
           <strong class="mono">${formatCurrency(deathGap)}</strong>
-          <small>${escapeHtml(gapByType.death?.reason_code || 'No calculation available')}</small>
+          <small>9× annual income + loans − declared death cover</small>
         </div>
         <div class="gap-stat">
           <span>Total permanent disability</span>
           <strong class="mono">${tpdGap === undefined ? 'Unknown' : formatCurrency(tpdGap)}</strong>
-          <small>${escapeHtml(gapByType.total_permanent_disability?.reason_code || 'Declared TPD amount required')}</small>
+          <small>${tpdGap === undefined ? 'Add your current TPD benefit to calculate this gap' : '9× annual income + loans − declared TPD cover'}</small>
         </div>
         <div class="gap-stat">
           <span>Critical illness</span>
           <strong class="mono">${formatCurrency(ciGap)}</strong>
-          <small>${escapeHtml(gapByType.critical_illness?.reason_code || 'No calculation available')}</small>
+          <small>4× annual income − declared critical-illness cover</small>
         </div>
-        <div class="gap-stat premium-gap is-${escapeHtml(affordability?.band || 'unknown')}">
-          <span>Current premium / income</span>
-          <strong class="mono">${currentPremiumShare === null ? 'Unknown' : `${currentPremiumShare.toFixed(1)}%`}</strong>
-          <small>5% demo interview marker · 15% MoneySense educational maximum</small>
+        <div class="gap-stat premium-gap">
+          <span>Your monthly ceiling</span>
+          <strong class="mono">${formatCurrency(state.profile.budget)}</strong>
+          <small>${budgetIncomeShare === null ? 'Income share unavailable' : `${budgetIncomeShare.toFixed(1)}% of monthly income`}</small>
         </div>
       </section>
 
       <section class="declared-cover-section" aria-labelledby="declared-cover-title">
         <div class="comparison-section-heading">
-          <div><span class="section-index mono">02 · YOUR DECLARED COVER</span><h2 id="declared-cover-title">See every protection amount separately.</h2></div>
-          <p>Captured context only. This inventory is not a policy interpretation.</p>
+          <div><span class="section-index mono">02 · WHAT WE USED</span><h2 id="declared-cover-title">Your declared private cover</h2></div>
+          <p>Each benefit is kept separate so overlapping policy payouts are not added together.</p>
         </div>
         ${declaredCoverageView(insuranceStatus)}
       </section>
@@ -1129,51 +972,27 @@ const comparisonView = () => {
       <section class="comparison-section" id="plan-comparison" aria-labelledby="compare-title" tabindex="-1">
         <div class="comparison-section-heading">
           <div>
-            <span class="section-index mono">03 · ELIGIBLE SYNTHETIC OPTIONS</span>
-            <h2 id="compare-title">Closest fits among four demo plans.</h2>
+            <span class="section-index mono">03 · WHAT TO EXPLORE</span>
+            <h2 id="compare-title">Cover directions within your ceiling</h2>
           </div>
           <div class="comparison-context">
-            <p>Budget checked against your ${formatCurrency(state.profile.budget)} monthly comfort limit.</p>
-            ${criticalIllnessOnly ? '<button class="text-button" type="button" data-action="clear-agent-filter">Show all options</button>' : ''}
+            <p><b>${escapeHtml(closestDirection)}</b> is the first structure to investigate based on your stated priority, preference, and ${formatCurrency(state.profile.budget)} monthly ceiling.</p>
+            ${criticalIllnessOnly ? '<button class="text-button" type="button" data-action="clear-agent-filter">Show every direction</button>' : ''}
           </div>
         </div>
-        <div class="table-wrap" tabindex="0" aria-label="Scrollable plan comparison table">
-          ${comparisonTable(eligible)}
-        </div>
+        ${eligible.length ? optionDirectionsView(eligible) : '<p class="comparison-empty">No example fits the monthly ceiling you entered. Ask CoverCheck to change your budget, or discuss a staged approach with a licensed adviser.</p>'}
 
         <div class="reasoning-drawers">
-          <details id="ranking-reason" tabindex="-1" open>
-            <summary><span><b>Why ${escapeHtml(closestName)} is the closest demo fit</b><small>Fit score ${closestScore} · synthetic</small></span><i aria-hidden="true">+</i></summary>
+          <details id="ranking-reason" tabindex="-1">
+            <summary><span><b>Plain-language explanation</b><small>${explanation ? 'Generated with Amazon Bedrock' : 'Recalculate to refresh'}</small></span><i aria-hidden="true">+</i></summary>
             <div class="drawer-content">
-              <span class="mono">${escapeHtml(explanationLabel)}</span>
-              ${explanation?.summary ? `<p>${escapeHtml(explanation.summary)}</p>` : ''}
-              <p>${escapeHtml(closestReason)}</p>
+              <p>${escapeHtml(explanation?.summary || 'Your result has changed. The displayed amounts remain calculated from your confirmed inputs.')}</p>
             </div>
           </details>
           <details id="ranking-assumptions" tabindex="-1">
-            <summary><span><b>What the demo ranking does not know</b><small>${recommendation?.assumptions.length || 0} assumptions remain</small></span><i aria-hidden="true">+</i></summary>
-            <div class="drawer-content"><p>${escapeHtml(recommendation?.assumptions.join(' ') || 'No assumptions recorded.')}</p></div>
+            <summary><span><b>Assumptions to verify</b><small>${assumptions.length} item${assumptions.length === 1 ? '' : 's'}</small></span><i aria-hidden="true">+</i></summary>
+            <div class="drawer-content assumption-list">${assumptions.length ? `<ul>${assumptions.map((assumption) => `<li>${escapeHtml(assumption)}</li>`).join('')}</ul>` : '<p>No additional assumptions were recorded.</p>'}</div>
           </details>
-          <details>
-            <summary><span><b>Excluded synthetic option</b><small>${escapeHtml(planPresentation[excluded?.plan_id]?.[0] || 'None')} · deterministic gate</small></span><i aria-hidden="true">+</i></summary>
-            <div class="drawer-content"><p>${escapeHtml(excluded?.exclusions.join(', ') || 'No plan was excluded.')}</p></div>
-          </details>
-        </div>
-      </section>
-
-      <section class="evidence-comparison-section" aria-labelledby="evidence-comparison-title">
-        <div class="comparison-section-heading">
-          <div>
-            <span class="section-index mono">04 · NEUTRAL EVIDENCE VIEW</span>
-            <h2 id="evidence-comparison-title">Compare product facts without a winner.</h2>
-          </div>
-          <p>This separate Phase 3B view uses labelled synthetic evidence. It cannot alter the ranked recommendation.</p>
-        </div>
-        ${neutralEvidenceView()}
-        <div class="catalogue-coverage">
-          <span class="mono">CACHED REAL BROCHURE PROVIDERS</span>
-          <p><b>AIA</b><b>FWD</b><b>Great Eastern</b><b>Singlife</b></p>
-          <small>The profile can record MINDEF Group Insurance, Prudential, Manulife, China Life, Tokio Marine, Etiqa, Income Insurance and other providers. They are not shown as searchable evidence until source brochures pass ingestion and review gates.</small>
         </div>
       </section>
 
@@ -1182,15 +1001,15 @@ const comparisonView = () => {
       <section class="decision-footer">
         <div>
           <span class="section-index mono">BEFORE YOU ACT</span>
-          <h2>Check the policy. Check the adviser.</h2>
-          <p>Do not cancel existing cover based on this demo. A new plan may have different terms or cost more.</p>
+          <h2>Verify before you decide.</h2>
+          <p>Check current policy wording, premiums, exclusions, and replacement risks with a licensed adviser. Do not cancel existing cover from this calculation alone.</p>
         </div>
         <a class="primary-button" href="https://eservices.mas.gov.sg/rr" target="_blank" rel="noreferrer">Check an adviser on MAS <span aria-hidden="true">↗</span></a>
       </section>
       <footer class="comparison-footer">
         ${brand()}
         ${trustNote()}
-        <button class="text-button" type="button" data-action="restart">Restart prototype</button>
+        <button class="text-button" type="button" data-action="restart">Start over</button>
       </footer>
     </main>
   `
@@ -1202,8 +1021,6 @@ const views = {
   result: resultView,
   signup: signupView,
   onboarding: onboardingView,
-  upload: uploadView,
-  ocr: ocrView,
   comparison: comparisonView,
 }
 
@@ -1326,7 +1143,7 @@ async function askAgent(message) {
       state.agent.status = 'failed'
       state.agent.error = error instanceof ApiError
         ? error.message
-        : 'The local backend is unavailable. Start the CoverCheck API and try again.'
+        : 'CoverCheck is temporarily unavailable. Please try again.'
     }
   } finally {
     state.agent.abortController = null
@@ -1429,10 +1246,7 @@ function goBack(keyboard = false) {
       state.keyboard = keyboard
       render()
     }
-  } else if (state.view === 'upload') {
-    state.onboardingStep = activeOnboardingSteps().length - 1
-    navigate('onboarding', 'back', keyboard)
-  } else if (state.view === 'ocr') navigate('upload', 'back', keyboard)
+  }
 }
 
 function chooseAnswer(index, keyboard = false) {
@@ -1495,11 +1309,6 @@ app.addEventListener('change', (event) => {
   updateProfileField(event.target)
   if (event.target.dataset.field === 'insuranceStatus') {
     render({ focus: false, preserveScroll: true })
-    return
-  }
-  if (event.target.id === 'policy-file' && event.target.files?.[0]) {
-    state.fileName = event.target.files[0].name
-    navigate('ocr')
   }
 })
 
@@ -1528,8 +1337,7 @@ app.addEventListener('submit', (event) => {
       return
     }
     if (state.onboardingStep === activeOnboardingSteps().length - 1) {
-      if (state.profile.insuranceStatus === 'Yes') navigate('upload', 'forward', true)
-      else void prepareComparison(state.profile.insuranceStatus)
+      void prepareComparison(state.profile.insuranceStatus)
     }
     else {
       state.onboardingStep += 1
@@ -1580,15 +1388,6 @@ app.addEventListener('click', (event) => {
     state.onboardingStep -= 1
     navigate('onboarding', 'back')
   }
-  if (action === 'use-sample') {
-    state.fileName = 'Inherited_Policy_Sample.pdf'
-    navigate('ocr')
-  }
-  if (action === 'no-policy') {
-    state.profile.insuranceStatus = 'No'
-    void prepareComparison('No')
-  }
-  if (action === 'confirm-extraction') void prepareComparison('Yes')
   if (action === 'confirm-proposal') void decideAgentProposal(control.dataset.proposalId, 'confirm')
   if (action === 'cancel-proposal') void decideAgentProposal(control.dataset.proposalId, 'cancel')
   if (action === 'show-replay') void showReplay()
@@ -1621,7 +1420,6 @@ app.addEventListener('click', (event) => {
     state.runtime.extraction = null
     state.runtime.recommendation = null
     state.runtime.explanation = null
-    state.evidenceComparison = { status: 'idle', error: '', products: [], warnings: [] }
     navigate('intro')
   }
 })

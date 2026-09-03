@@ -67,10 +67,13 @@ class FixtureExplanationService:
             key=lambda item: item.rank or 0,
         )
         if ranked:
-            top = ranked[0]
+            gap_summary = ", ".join(
+                f"{gap.gap_type.replace('_', ' ')} S${gap.gap_amount:,.0f}"
+                for gap in recommendation.gaps
+            )
             summary = (
-                f"The deterministic rules ranked {top.plan_id} first among the "
-                "eligible synthetic options."
+                f"The calculation identified these planning gaps: {gap_summary}. "
+                "Review the assumptions and verify current policy benefits before acting."
             )
             plan_reasons = {
                 item.plan_id: ", ".join(item.reason_codes)
@@ -78,8 +81,8 @@ class FixtureExplanationService:
             }
         else:
             summary = (
-                "The deterministic rules did not identify an eligible synthetic "
-                "option for the supplied profile."
+                "No illustrative cover structure fits the monthly ceiling supplied. "
+                "Review the ceiling or discuss a staged approach with a licensed adviser."
             )
             plan_reasons = {}
         return ExplanationOutcome(
@@ -93,7 +96,7 @@ class FixtureExplanationService:
                 plan_reasons=plan_reasons,
                 next_steps=[
                     "Review the recorded assumptions and evidence before acting.",
-                    "Do not cancel or surrender existing cover based on this POC.",
+                    "Do not cancel or surrender existing cover from this calculation alone.",
                 ],
             ),
             usage=ModelUsage(),
@@ -130,7 +133,22 @@ class BedrockExplanationService:
         }
         payload = {
             "profile_context": build_context(profile),
-            "immutable_recommendation": recommendation.model_dump(mode="json"),
+            "immutable_recommendation": {
+                "recommendation_id": recommendation.recommendation_id,
+                "status": recommendation.status,
+                "gaps": [gap.model_dump(mode="json") for gap in recommendation.gaps],
+                "assumptions": recommendation.assumptions,
+                "stated_monthly_ceiling": (
+                    profile.data.monthly_budget.value
+                    if profile.data.monthly_budget.state == "present"
+                    else None
+                ),
+                "ceiling_income_share": (
+                    recommendation.affordability.budget_income_share
+                    if recommendation.affordability is not None
+                    else None
+                ),
+            },
         }
         try:
             response = self._bedrock_client().converse(
@@ -217,15 +235,19 @@ class BedrockExplanationService:
     @staticmethod
     def _system_prompt() -> str:
         return (
-            "You explain a completed educational insurance comparison. The supplied "
-            "recommendation is immutable. Never recalculate, add, remove, reorder, or "
-            "rescore a plan. Never invent profile values, evidence, benefits, premiums, "
-            "eligibility, or suitability. Return JSON only with keys summary, "
-            "plan_reasons, and next_steps. plan_reasons must be an object keyed only by "
-            "eligible plan_id values from the supplied recommendation. next_steps must "
-            "contain at most three cautious educational actions. If affordability is "
-            "present, distinguish the 5% adviser-interview comfort marker from the 15% "
-            "MoneySense educational upper reference and do not present either as a "
-            "guarantee or personal recommendation. Do not advise purchase, "
+            "You explain a completed educational insurance coverage calculation. The supplied "
+            "recommendation is immutable. Never recalculate or invent profile values, "
+            "evidence, benefits, premiums, eligibility, products, or suitability. Return "
+            "JSON only with keys summary, plan_reasons, and next_steps. plan_reasons must "
+            "be an empty object because no products are supplied. next_steps must "
+            "contain at most three cautious educational actions. The customer-facing summary "
+            "must explain only the calculated coverage gaps, stated monthly ceiling, and key "
+            "assumptions in plain English. Do not mention plans, options, products, providers, "
+            "availability, eligibility, internal IDs, scores, models, or fictional names. Do "
+            "not use the words synthetic, fixture, demo, prototype, ruleset, catalogue, "
+            "ranking, ranked, fit score, or deterministic. Treat stated_monthly_ceiling only "
+            "as the user's exploration limit and ceiling_income_share only as its percentage "
+            "of monthly income; never call either a premium, current spending, affordability "
+            "position, recommendation, or guarantee. Do not advise purchase, "
             "cancellation, surrender, or replacement."
         )
