@@ -89,17 +89,25 @@ def classify_goal(text: str) -> GoalContext:
 
 
 QUESTION_ORDER = (
+    "age",
+    "occupation",
     "monthly_income",
     "monthly_expenses",
     "dependant_count",
     "has_current_policy",
-    "target_date",
     "monthly_budget",
-    "product_preference",
 )
 
 
 QUESTION_DETAILS = {
+    "age": (
+        "What is your age?",
+        "Age helps keep the profile and policy review relevant.",
+    ),
+    "occupation": (
+        "What is your occupation or current student status?",
+        "Occupation provides context without assuming employer coverage.",
+    ),
     "monthly_income": (
         "What is your monthly take-home income?",
         "This helps assess whether a plan is affordable.",
@@ -123,6 +131,10 @@ QUESTION_DETAILS = {
     "existing_ci_cover": (
         "What critical-illness coverage do you already have?",
         "This prevents duplicate or unnecessary cover assumptions.",
+    ),
+    "existing_tpd_cover": (
+        "What total permanent disability coverage do you already have?",
+        "This allows a separate TPD gap to be shown without inferring cover.",
     ),
     "target_date": (
         "When would you like to achieve this goal?",
@@ -148,12 +160,13 @@ def next_question(profile: VersionedProfile) -> FocusedQuestion | None:
         question_order[policy_index:policy_index] = [
             "existing_death_cover",
             "existing_ci_cover",
+            "existing_tpd_cover",
         ]
 
     for field_name in question_order:
-        field: ProfileField[Any] = getattr(data, field_name)
+        field: ProfileField[Any] | None = getattr(data, field_name)
 
-        if field.state != "present":
+        if field is not None and field.state != "present":
             question, reason = QUESTION_DETAILS[field_name]
             return FocusedQuestion(
                 field=field_name,
@@ -177,17 +190,34 @@ def next_question(profile: VersionedProfile) -> FocusedQuestion | None:
 
 def build_context(profile: VersionedProfile) -> dict[str, Any]:
     goal = classify_goal(str(profile.data.goal.value or ""))
+    priorities_field = profile.data.protection_priorities
+    explicit_priorities = (
+        priorities_field.value.model_dump()
+        if priorities_field is not None
+        and priorities_field.state == "present"
+        and priorities_field.value is not None
+        else None
+    )
 
     return {
         "profile_version": profile.version,
+        "age": profile.data.age.value if profile.data.age else None,
+        "gender": profile.data.gender.value if profile.data.gender else None,
+        "occupation": profile.data.occupation.value if profile.data.occupation else None,
         "goal_categories": list(goal.categories),
-        "priorities": list(goal.priorities),
+        "priorities": explicit_priorities or list(goal.priorities),
         "timeframe_years": goal.timeframe_years,
         "goal_is_vague": goal.vague,
         "dependant_count": profile.data.dependant_count.value,
+        "current_monthly_premium": (
+            profile.data.current_monthly_premium.value
+            if profile.data.current_monthly_premium
+            else None
+        ),
         "unknown_fields": [
             name
             for name in type(profile.data).model_fields
-            if getattr(profile.data, name).state != "present"
+            if getattr(profile.data, name) is None
+            or getattr(profile.data, name).state != "present"
         ],
     }

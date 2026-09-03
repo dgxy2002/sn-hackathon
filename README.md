@@ -15,6 +15,15 @@ ranking. The approved bridge, evidence-state rules, provider split, date
 research, and delivery order are recorded in the
 [RAG and website integration decisions](docs/evaluation/2026-08-28-rag-website-integration-decisions.md).
 
+The current browser POC includes an eight-question weighted readiness check and
+a two-step financial-needs profile. The profile records age, occupation, life
+stage, income, spending, dependants, financial support, loan commitments,
+optional credit-card context, current-policy status, detailed benefit amounts,
+riders, Integrated Shield context, explicit protection priorities, and an
+additional-premium ceiling. Current-policy status supports **Yes**, **No**, and
+**Unsure**; unknown cover is never treated as zero. Priority sliders feed the
+deterministic fit calculation rather than explanation prose.
+
 ## Frontend
 
 ```bash
@@ -55,6 +64,11 @@ provider failure produces a typed failed run without changing the deterministic
 recommendation. Simulated mode uses the same explanation contract without AWS
 credentials.
 
+The credentialed Compose path, including corporate TLS interception, has been
+validated end to end. The dated evidence and remaining non-production gates are
+recorded in the
+[Bedrock and personalization integration record](docs/evaluation/2026-09-03-bedrock-personalization-integration.md).
+
 ## Docker Compose demo
 
 Docker Compose starts the built web app, cached-evidence API, singleton scraper
@@ -65,6 +79,19 @@ cp .env.example .env
 docker compose up --build -d
 docker compose ps
 ```
+
+On a corporate network that intercepts TLS, point
+`CORPORATE_CA_CERT_PATH` in `.env` to the organization-provided PEM or CRT
+bundle and use the opt-in build override:
+
+```bash
+docker compose -f compose.yaml -f compose.corporate-ca.yaml up --build -d
+```
+
+BuildKit exposes the CA only to the dependency-install build steps. The backend
+image installs it into the system trust bundle so boto3 can call Bedrock at
+runtime. Do not add the certificate file itself to the repository, and never
+disable TLS verification.
 
 Open `http://localhost:4173`. The web container proxies `/api` to the backend,
 so no backend URL or secret is embedded in the browser bundle. The API remains

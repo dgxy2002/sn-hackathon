@@ -67,6 +67,7 @@ FieldSource = Literal["user", "extraction", "system", "fixture"]
 ProfileValue = TypeVar("ProfileValue")
 NonNegativeNumber = Annotated[float, Field(strict=True, ge=0)]
 NonNegativeInteger = Annotated[int, Field(strict=True, ge=0)]
+PriorityScore = Annotated[int, Field(strict=True, ge=0, le=100)]
 
 
 class FieldProvenance(StrictModel):
@@ -89,6 +90,20 @@ class ProfileField(StrictModel, Generic[ProfileValue]):
         return self
 
 
+class RiderDetail(StrictModel):
+    name: str = Field(min_length=1, max_length=120)
+    coverage_amount: NonNegativeNumber
+    duration_years: NonNegativeInteger
+    monthly_premium: NonNegativeNumber = 0.0
+
+
+class ProtectionPriorities(StrictModel):
+    death: PriorityScore
+    disability: PriorityScore
+    critical_illness: PriorityScore
+    personal_accident: PriorityScore
+
+
 class ProfileData(StrictModel):
     life_stage: ProfileField[str]
     employment_status: ProfileField[str]
@@ -108,6 +123,31 @@ class ProfileData(StrictModel):
     employer_cover: ProfileField[bool]
     monthly_budget: ProfileField[NonNegativeNumber]
     product_preference: ProfileField[str]
+    age: ProfileField[NonNegativeInteger] | None = None
+    gender: ProfileField[str] | None = None
+    occupation: ProfileField[str] | None = None
+    marital_status: ProfileField[str] | None = None
+    supported_people: ProfileField[list[str]] | None = None
+    loan_commitments: ProfileField[list[str]] | None = None
+    current_insurer: ProfileField[str] | None = None
+    current_product_name: ProfileField[str] | None = None
+    current_product_type: ProfileField[str] | None = None
+    integrated_shield_plan: ProfileField[bool] | None = None
+    integrated_shield_provider: ProfileField[str] | None = None
+    current_monthly_premium: ProfileField[NonNegativeNumber] | None = None
+    existing_terminal_illness_cover: ProfileField[NonNegativeNumber] | None = None
+    existing_tpd_cover: ProfileField[NonNegativeNumber] | None = None
+    existing_early_ci_cover: ProfileField[NonNegativeNumber] | None = None
+    existing_intermediate_ci_cover: ProfileField[NonNegativeNumber] | None = None
+    existing_advanced_ci_cover: ProfileField[NonNegativeNumber] | None = None
+    existing_personal_accident_cover: ProfileField[NonNegativeNumber] | None = None
+    riders: ProfileField[list[RiderDetail]] | None = None
+    protection_priorities: ProfileField[ProtectionPriorities] | None = None
+    credit_card_count: ProfileField[NonNegativeInteger] | None = None
+    credit_card_providers: ProfileField[list[str]] | None = None
+    total_credit_limit: ProfileField[NonNegativeNumber] | None = None
+    credit_utilization_percent: ProfileField[PriorityScore] | None = None
+    minimum_payment_frequency: ProfileField[str] | None = None
 
 
 class VersionedProfile(StrictModel):
@@ -177,7 +217,7 @@ class PlanFixture(StrictModel):
 
 
 class GapCalculation(StrictModel):
-    gap_type: Literal["death", "critical_illness"]
+    gap_type: Literal["death", "critical_illness", "total_permanent_disability"]
     target_amount: NonNegativeNumber
     existing_amount: NonNegativeNumber
     gap_amount: NonNegativeNumber
@@ -201,6 +241,24 @@ class PlanEvaluation(StrictModel):
     exclusions: list[str] = Field(default_factory=list)
     trade_offs: list[str] = Field(default_factory=list)
     evidence_ids: list[str] = Field(default_factory=list)
+    projected_monthly_premium: NonNegativeNumber | None = None
+    projected_income_share: NonNegativeNumber | None = None
+
+
+class AffordabilityAssessment(StrictModel):
+    monthly_income: NonNegativeNumber
+    current_monthly_premium: NonNegativeNumber | None
+    current_income_share: NonNegativeNumber | None
+    budget_income_share: NonNegativeNumber
+    comfort_reference_share: NonNegativeNumber
+    maximum_reference_share: NonNegativeNumber
+    band: Literal[
+        "within_comfort_reference",
+        "between_references",
+        "above_maximum_reference",
+        "unknown",
+    ]
+    comfort_reference_note: str
 
 
 class RecommendationResult(StrictModel):
@@ -220,6 +278,7 @@ class RecommendationResult(StrictModel):
     assumptions: list[str]
     missing_fields: list[str]
     focused_questions: list[str]
+    affordability: AffordabilityAssessment | None = None
     synthetic: Literal[True] = True
 
 
@@ -521,6 +580,8 @@ PatchField = Literal[
     "has_current_policy",
     "existing_death_cover",
     "existing_ci_cover",
+    "existing_tpd_cover",
+    "current_monthly_premium",
 ]
 PatchValue = str | float | int | bool | None
 
@@ -551,7 +612,7 @@ class ValueDelta(StrictModel):
 
 
 class GapDelta(StrictModel):
-    gap_type: Literal["death", "critical_illness"]
+    gap_type: Literal["death", "critical_illness", "total_permanent_disability"]
     old_amount: NonNegativeNumber
     new_amount: NonNegativeNumber
 

@@ -1,18 +1,23 @@
-# Bedrock and Personalization Integration - 2026-09-03
+# Bedrock, Personalization, and FA-Profile Integration - 2026-09-03
 
 ## Scope
 
-This record accepts the repository integration of Jana's deterministic personalization work and Deborah's Amazon Bedrock intent. It does not accept a credentialed live Bedrock invocation, real-product ranking, OpenRouter extraction, or AWS deployment.
+This record accepts the repository integration of Jana's deterministic
+personalization work, Deborah's Amazon Bedrock intent, and the implemented
+financial-adviser interview feedback. It now includes credentialed local
+Bedrock and Docker Compose acceptance. It does not accept real-product ranking,
+OpenRouter extraction, AWS deployment, or production suitability.
 
 The integration keeps E07 as the sole author of gaps, eligibility, scores, ordering, assumptions, exclusions, and evidence references. Bedrock receives the immutable recommendation plus compact E03 context and may return explanation prose only.
 
 | Field | Value |
 |---|---|
-| Integration branch | `integration/bedrock-personalization` |
+| Original team integration branch | `integration/bedrock-personalization` |
+| Completion branch | `feature/complete-poc` |
 | Provider interface | Fixture or Amazon Bedrock Runtime Converse API |
 | Live provider configuration | `LLM_PROVIDER=bedrock`, `BEDROCK_MODEL_ID`, `AWS_REGION` |
 | Extraction provider boundary | OpenRouter remains independently scoped to E04 |
-| Credentials used in this acceptance | None; Bedrock was mocked |
+| Credentials used in this acceptance | Local ignored environment only; no secret or certificate committed |
 
 ## Integrated behavior
 
@@ -23,6 +28,12 @@ The integration keeps E07 as the sole author of gaps, eligibility, scores, order
 - Provider, model or inference-profile ID, prompt version, latency, token counts, and outcome are recorded.
 - The frontend renders explanation as escaped text and clears it after a confirmed revision or undo so stale prose cannot accompany a changed recommendation.
 - Goal classification recognizes common project and protection intents, including word-based timeframes, and focused questions do not ask no-policy users about nonexistent private cover.
+- The frontend uses a 50/30/20 weighted readiness quiz followed by a two-step profile rather than four long onboarding pages.
+- The profile captures age, gender, occupation, life stage, income, expenses, supported people, dependants, loan types and balances, optional credit-card context, explicit goals, protection priorities, current premium, insurer/product/type, detailed death/terminal-illness/TPD/CI/personal-accident amounts, Integrated Shield context, and rider details.
+- Current-policy status supports Yes, No, and Unsure. No-policy fields become not applicable; unsure fields remain unknown and are not deducted from calculated gaps.
+- User protection priorities are normalized and applied by the deterministic coverage-fit calculation. Bedrock only explains the resulting immutable order.
+- Affordability separates a 5% adviser-interview demo marker from the 15% MoneySense educational upper reference. An absent current premium remains unknown rather than displaying 0%.
+- Restarted browser scenarios receive a fresh profile identifier, preventing immutable-version collisions while retaining revision lineage within a scenario.
 
 ## Validation
 
@@ -35,11 +46,23 @@ The integration keeps E07 as the sole author of gaps, eligibility, scores, order
 | Compose validation | `docker compose config --quiet` completed successfully |
 | Editor diagnostics | No backend or frontend source errors reported |
 | Repository whitespace check | `git diff --check` completed without findings |
+| Credentialed Bedrock invocation | Completed through the Docker/Nginx/API path using Bedrock Converse; one recorded run used 1,529 input and 453 output tokens |
+| Corporate TLS path | Frontend and backend images built with an external BuildKit CA secret; boto3 reached Bedrock without disabling verification |
+| Compose runtime | PostgreSQL, scraper, backend, and web services reported healthy |
+| Browser: current policy | Quiz, mock account, two-step profile, synthetic extraction review, live explanation, comparison, budget revision, and undo completed |
+| Browser: no policy | Repeated post-restart scenario completed without profile-version conflict; private cover was not invented and current affordability stayed unknown |
+| Browser: unsure policy | Completed without extraction; no private amount was deducted and the verification warning rendered |
+| Browser network/console | Invocation and evidence requests returned HTTP 200; no console errors or warnings were observed |
+| Priority sensitivity | Death-first and CI-first profiles produced different deterministic leaders; CI-first ranked the synthetic CI fixture first |
+
+The 49-test result above belongs to the original team-integration acceptance.
+The completion pass intentionally used production builds, Python compilation,
+direct deterministic probes, API/browser smoke paths, diagnostics, and
+`git diff --check` instead of rerunning the complete suite.
 
 ## Open gates
 
-- No AWS credentials were available, so model access, IAM permissions, regional availability, model or inference-profile entitlement, live latency, and output quality were not exercised.
 - Estimated priced cost is not yet calculated even though token counts are captured.
 - OpenRouter E04 extraction remains blocked on the exact model-slug decision.
-- Full changed-goal browser acceptance, broader profile and extraction revisions, AWS deployment, and production security remain open.
+- AWS deployment, production security, legal/compliance review, and independent review of the draft gap formulation remain open.
 - Real-product comparison and ranking gates are unchanged; the implemented E07 ranking remains synthetic and deterministic.

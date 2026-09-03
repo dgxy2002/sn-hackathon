@@ -9,6 +9,7 @@
   ],
   "death_income_multiple": 9,
   "critical_illness_income_multiple": 4,
+  "comfort_protection_income_share": 0.05,
   "maximum_protection_income_share": 0.15,
   "minimum_emergency_fund_months": 3,
   "weights": {

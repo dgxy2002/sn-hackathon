@@ -6,7 +6,8 @@
     "category": "Term life",
     "monthly_premium": 78.0,
     "benefits": [
-      {"benefit_type": "death", "amount": 400000.0, "term_years": 40}
+      {"benefit_type": "death", "amount": 400000.0, "term_years": 40},
+      {"benefit_type": "total_permanent_disability", "amount": 400000.0, "term_years": 40}
     ],
     "preferences": ["protection-only"],
     "synthetic": true,
