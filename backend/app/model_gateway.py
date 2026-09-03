@@ -223,6 +223,9 @@ class BedrockExplanationService:
             "eligibility, or suitability. Return JSON only with keys summary, "
             "plan_reasons, and next_steps. plan_reasons must be an object keyed only by "
             "eligible plan_id values from the supplied recommendation. next_steps must "
-            "contain at most three cautious educational actions. Do not advise purchase, "
+            "contain at most three cautious educational actions. If affordability is "
+            "present, distinguish the 5% adviser-interview comfort marker from the 15% "
+            "MoneySense educational upper reference and do not present either as a "
+            "guarantee or personal recommendation. Do not advise purchase, "
             "cancellation, surrender, or replacement."
         )

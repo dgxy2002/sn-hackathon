@@ -18,6 +18,7 @@ from .contracts import (
     ChangeProposal,
     EvidenceSearchRequest,
     GapDelta,
+    PatchField,
     ProfilePatch,
     ProposalDecisionRequest,
     ProposalDecisionResponse,
@@ -116,7 +117,7 @@ class ConversationService:
                 SuggestedPrompt(
                     id="why-ranked-first",
                     label="Why this ranks first",
-                    message="Why does LionCity Term Flex rank first?",
+                    message="Why does the first eligible option rank first?",
                 ),
                 SuggestedPrompt(
                     id="show-critical-illness",
@@ -129,9 +130,9 @@ class ConversationService:
                     message="What does the ranking still not know?",
                 ),
                 SuggestedPrompt(
-                    id="explore-cached-critical-illness",
-                    label="Explore cached CI plans",
-                    message="Which cached plans mention critical illness protection?",
+                    id="explore-integrated-shield",
+                    label="Explore hospital cover",
+                    message="Which cached plans mention Integrated Shield hospital cover?",
                 ),
             ],
             profile_id=profile.profile_id if profile else None,
@@ -338,8 +339,9 @@ class ConversationService:
                 assistant_message=AssistantMessage(
                     message_id=message_id,
                     content=(
-                        "The comparison still lacks your full work cover, existing illness "
-                        "add-on terms, and insurer underwriting outcome. I opened that section."
+                        "The comparison still cannot verify whether declared benefits overlap, "
+                        "the exact rider terms, or any insurer underwriting outcome. I opened "
+                        "the assumptions section."
                     ),
                     citations=[],
                 ),
@@ -357,9 +359,19 @@ class ConversationService:
                 ],
             )
 
-        if "budget" in text or "dependant" in text or "goal" in text:
+        if any(
+            term in text
+            for term in ("budget", "dependant", "dependent", "goal", "premium")
+        ):
             proposal = self._profile_proposal(record, text)
             if proposal is not None:
+                field_label = proposal.patch.field_name.replace("_", " ")
+                old_value = self._display_patch_value(
+                    proposal.patch.field_name, proposal.patch.old_value
+                )
+                proposed_value = self._display_patch_value(
+                    proposal.patch.field_name, proposal.patch.proposed_value
+                )
                 record.proposals[proposal.proposal_id] = proposal
                 self._event(record, "proposal_created", proposal_id=proposal.proposal_id)
                 return ConversationMessageResponse(
@@ -371,8 +383,8 @@ class ConversationService:
                     assistant_message=AssistantMessage(
                         message_id=message_id,
                         content=(
-                            f"I can change your monthly budget from S${proposal.patch.old_value:g} "
-                            f"to S${proposal.patch.proposed_value:g}. Confirm before I create "
+                            f"I can change your {field_label} from {old_value} "
+                            f"to {proposed_value}. Confirm before I create "
                             "a new profile version and rerun the deterministic comparison."
                         ),
                         citations=[],
@@ -421,7 +433,35 @@ class ConversationService:
                 ],
             )
 
-        if "why" in text or "rank" in text or "lioncity" in text:
+        if "why" in text or "rank" in text:
+            top_plan_id = (
+                self._top_plan(record.recommendation) if record.recommendation else None
+            )
+            top_evaluation = next(
+                (
+                    item
+                    for item in (
+                        record.recommendation.evaluations if record.recommendation else []
+                    )
+                    if item.plan_id == top_plan_id
+                ),
+                None,
+            )
+            if top_evaluation is None:
+                return self._unsupported_answer(
+                    record,
+                    request,
+                    run_id,
+                    action_id,
+                    message_id,
+                    "No eligible synthetic option is currently ranked first.",
+                    "NO_ELIGIBLE_PLAN",
+                )
+            plan_name = self._plan_label(top_evaluation.plan_id)
+            component_summary = ", ".join(
+                f"{item.component} {item.score:.2f}"
+                for item in top_evaluation.fit_components
+            )
             return ConversationMessageResponse(
                 conversation_id=record.conversation_id,
                 client_message_id=request.client_message_id,
@@ -431,23 +471,19 @@ class ConversationService:
                 assistant_message=AssistantMessage(
                     message_id=message_id,
                     content=(
-                        "LionCity Term Flex ranks first in this synthetic result because it "
-                        "addresses the largest known gap, stays inside the stated monthly "
-                        "budget, and matches the protection-only preference. It does not fill "
-                        "the whole illustrative gap."
+                        f"{plan_name} ranks first in this synthetic result because its "
+                        "deterministic weighted fit is highest among eligible options"
+                        f" ({component_summary}). The calculation applies your protection "
+                        "priorities, premium ceiling, and product preference; it does not "
+                        "establish suitability or guarantee complete coverage."
                     ),
                     citations=[
                         Citation(
-                            evidence_id="SYN-LTF-01",
-                            label="LionCity Term Flex synthetic fixture",
+                            evidence_id=evidence_id,
+                            label=f"{plan_name} synthetic fixture",
                             synthetic=True,
-                        ),
-                        Citation(
-                            evidence_id="MONEYSENSE-LIFE-INSURANCE",
-                            label="MoneySense life insurance guidance",
-                            url="https://www.moneysense.gov.sg/life-insurance/",
-                            synthetic=False,
-                        ),
+                        )
+                        for evidence_id in top_evaluation.evidence_ids
                     ],
                 ),
                 actions=[
@@ -457,7 +493,7 @@ class ConversationService:
                         tool="FOCUS_SECTION",
                         target="reasoning:ranking",
                         status="completed",
-                        evidence_count=2,
+                        evidence_count=len(top_evaluation.evidence_ids),
                         confirmation_required=False,
                         affected_regions=["ranking_reason", "agent"],
                     )
@@ -566,13 +602,49 @@ class ConversationService:
     ) -> ChangeProposal | None:
         if record.profile is None or record.recommendation is None or self._decisions is None:
             return None
-        match = re.search(
-            r"budget\s+(?:to\s+)?(?:s\$|sgd|\$)?\s*(\d+(?:\.\d+)?)", text
+
+        field_name: PatchField | None = None
+        proposed_value: str | float | int | None = None
+        reason = ""
+        affected_calculations: list[str] = []
+        budget_match = re.search(
+            r"budget\s+(?:to\s+|is\s+)?(?:s\$|sgd|\$)?\s*(\d+(?:\.\d+)?)",
+            text,
         )
-        if match is None:
+        premium_match = re.search(
+            r"(?:current\s+)?(?:monthly\s+)?premium\s+(?:to\s+|is\s+)?"
+            r"(?:s\$|sgd|\$)?\s*(\d+(?:\.\d+)?)",
+            text,
+        )
+        dependant_match = re.search(
+            r"(?:dependants?|dependents?)\s+(?:to\s+|is\s+)?(\d+)", text
+        )
+        goal_match = re.search(r"goal\s+(?:to\s+|is\s+)(.+?)(?:[.!]|$)", text)
+        if budget_match:
+            field_name = "monthly_budget"
+            proposed_value = float(budget_match.group(1))
+            reason = "User requested a different sustainable monthly premium budget."
+            affected_calculations = ["affordability", "eligibility", "weighted_fit", "ranking"]
+        elif premium_match:
+            field_name = "current_monthly_premium"
+            proposed_value = float(premium_match.group(1))
+            reason = "User corrected the total current monthly insurance premium."
+            affected_calculations = ["affordability", "eligibility", "ranking"]
+        elif dependant_match:
+            field_name = "dependant_count"
+            proposed_value = int(dependant_match.group(1))
+            reason = "User corrected the number of people who depend on their income."
+            affected_calculations = ["profile_context", "explanation"]
+        elif goal_match:
+            field_name = "goal"
+            proposed_value = goal_match.group(1).strip()
+            reason = "User clarified their primary protection goal."
+            affected_calculations = ["personalization", "explanation"]
+        if field_name is None or proposed_value is None:
             return None
-        proposed_value = float(match.group(1))
-        current = record.profile.data.monthly_budget
+        current = getattr(record.profile.data, field_name)
+        if current is None:
+            return None
         proposal_id = f"proposal-{uuid4()}"
         return ChangeProposal(
             proposal_id=proposal_id,
@@ -581,15 +653,23 @@ class ConversationService:
             status="pending",
             patch=ProfilePatch(
                 base_profile_version=record.profile.version,
-                field_name="monthly_budget",
+                field_name=field_name,
                 old_state=current.state,
                 old_value=current.value,
                 proposed_state="present",
                 proposed_value=proposed_value,
-                reason="User requested a different sustainable monthly premium budget.",
-                affected_calculations=["affordability", "eligibility", "weighted_fit", "ranking"],
+                reason=reason,
+                affected_calculations=affected_calculations,
             ),
         )
+
+    @staticmethod
+    def _display_patch_value(field_name: str, value: str | float | int | bool | None) -> str:
+        if field_name in {"monthly_budget", "current_monthly_premium"} and isinstance(
+            value, (int, float)
+        ):
+            return f"S${value:g}"
+        return str(value)
 
     @staticmethod
     def _apply_patch(profile: VersionedProfile, patch: ProfilePatch) -> VersionedProfile:
@@ -651,6 +731,15 @@ class ConversationService:
     @staticmethod
     def _top_plan(result: RecommendationResult) -> str | None:
         return next((item.plan_id for item in result.evaluations if item.rank == 1), None)
+
+    @staticmethod
+    def _plan_label(plan_id: str) -> str:
+        return {
+            "synthetic-lioncity-term-flex": "LionCity Term Flex",
+            "synthetic-harbour-essential-ci": "Harbour Essential CI",
+            "synthetic-orchid-income-shield": "Orchid Income Shield",
+            "synthetic-meridian-whole-life-plus": "Meridian Whole Life Plus",
+        }.get(plan_id, plan_id)
 
     def _get_record(self, conversation_id: str) -> ConversationRecord:
         record = self._records.get(conversation_id)
