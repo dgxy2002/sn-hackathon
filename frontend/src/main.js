@@ -278,6 +278,12 @@ async function prepareComparison(insuranceStatus = state.profile.insuranceStatus
       profile,
       extraction_id: null,
     }, controller.signal)
+    if (!invocation.recommendation || invocation.recommendation.status === 'insufficient_data') {
+      throw new ApiError(
+        'CoverCheck could not calculate the result from those inputs. Review the amounts and try again.',
+        'CALCULATION_INCOMPLETE',
+      )
+    }
     state.runtime.profile = invocation.profile
     state.runtime.extraction = invocation.extraction
     state.runtime.recommendation = invocation.recommendation
