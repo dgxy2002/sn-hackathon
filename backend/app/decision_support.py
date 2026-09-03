@@ -15,6 +15,7 @@ from .contracts import (
     RecommendationResult,
     VersionedProfile,
 )
+from .personalization import classify_goal
 
 
 FIXTURE_ROOT = Path(__file__).resolve().parents[1] / "fixtures" / "decision"
@@ -92,6 +93,8 @@ class DecisionService:
                 focused_questions=[self._question(field) for field in missing_fields],
             )
 
+        goal_context = classify_goal(str(profile.data.goal.value or ""))
+
         income = self._number(profile.data.monthly_income)
         budget = self._number(profile.data.monthly_budget)
         liabilities = self._number(profile.data.liabilities)
@@ -130,6 +133,16 @@ class DecisionService:
             "MoneySense income multiples are educational reference points, not personal advice.",
             "Employer and government cover are not deducted because benefit amounts were not provided.",
         ]
+        if goal_context.vague:
+            assumptions.append(
+                "The stated goal was broad, so the result uses affordability as the default priority."
+            )
+        elif goal_context.categories:
+            assumptions.append(
+                "The explanation was tailored to: "
+                + ", ".join(goal_context.categories)
+                + "."
+            )
         if not has_policy:
             assumptions.append("No current private policy was declared; no private cover was invented.")
         if self._number(profile.data.emergency_savings_months) < self.rules["minimum_emergency_fund_months"]:
@@ -224,6 +237,7 @@ class DecisionService:
             "monthly_budget": profile.data.monthly_budget,
             "product_preference": profile.data.product_preference,
             "has_current_policy": profile.data.has_current_policy,
+            "goal": profile.data.goal,
         }
         if profile.data.has_current_policy.state == "present" and profile.data.has_current_policy.value is True:
             fields.update(
@@ -246,6 +260,7 @@ class DecisionService:
             "has_current_policy": "Do you currently have a private insurance policy?",
             "existing_death_cover": "What death benefit does your current policy provide?",
             "existing_ci_cover": "What critical-illness benefit does your current policy provide?",
+            "goal": "What is your primary insurance goal?",
         }
         return labels[field]
 
