@@ -70,8 +70,8 @@ const questions = [
 ]
 
 const onboardingSteps = [
-  ['Your starting point', 'Five details used to calculate your protection starting point.'],
-  ['What your plan already covers', 'Four figures copied from your latest policy schedule.'],
+  ['To get to know you better', 'Answer 5 quick questions to help us understand your needs.'],
+  ['What your plan already covers', 'Enter 4 details about your current insurance policy.'],
 ]
 
 const goalOptions = [
@@ -574,13 +574,13 @@ const introView = () => `
     <section class="intro-copy" aria-labelledby="intro-title">
       <p class="eyebrow intro-sequence">Insurance clarity, minus the sales pitch.</p>
       <h1 id="intro-title" class="display-title intro-sequence">Find your protection starting point.</h1>
-      <p class="intro-deck intro-sequence">Choose the path that fits. The gap check uses five inputs—no NRIC or medical details.</p>
+      <p class="intro-deck intro-sequence">Choose the option that best fits you. Just 5 quick details to calculate your coverage—no NRIC or sensitive medical info required.</p>
       <div class="intro-actions intro-sequence" aria-label="Choose how to start">
         <button class="journey-button is-primary" type="button" data-action="start-no-policy">
-          <span>I don’t have a plan</span><small>Start from zero private cover</small><i aria-hidden="true">→</i>
+          <span>I don’t have a plan</span><small>Let's start from the beginning</small><i aria-hidden="true">→</i>
         </button>
         <button class="journey-button" type="button" data-action="review-policy">
-          <span>Review a plan I have</span><small>Add four figures from your policy</small><i aria-hidden="true">→</i>
+          <span>Review a plan I have</span><small>Let's understand your current policy better</small><i aria-hidden="true">→</i>
         </button>
       </div>
       <button class="intro-quiz-link intro-sequence" type="button" data-action="start-quiz">Or check my insurance basics · 4 questions</button>
@@ -703,16 +703,16 @@ const signupView = () => `
   <main class="form-screen" data-screen="signup">
     ${appHeader({ back: true })}
     <section class="form-intro view-enter">
-      <p class="eyebrow">Before the gap check</p>
-      <h1 class="form-title screen-title" tabindex="-1">No account. Just clear consent.</h1>
-      <p>Your answers are used to calculate the result. A compact profile summary—not a policy document—is sent to Amazon Bedrock for a plain-language explanation.</p>
+      <p class="eyebrow">Before we proceed</p>
+      <h1 class="form-title screen-title" tabindex="-1">No sign-up required. Review our terms to get started immediately.</h1>
+      <p>We will generate a brief profile summary to draft your summary using AI. Your full policy documents will remain private and are never saved or uploaded.</p>
     </section>
     <form id="account-form" class="account-form view-enter" novalidate>
       <label class="consent-row">
         <input type="checkbox" name="consent" data-field="consent" ${state.profile.consent ? 'checked' : ''} required />
         <span>I agree to the use of my answers for this coverage check and its AI-generated explanation.</span>
       </label>
-      <button class="primary-button" type="submit">Continue to five inputs <span aria-hidden="true">→</span></button>
+      <button class="primary-button" type="submit">Continue<span aria-hidden="true">→</span></button>
       <p class="form-error" id="account-error" role="alert"></p>
     </form>
     <aside class="privacy-aside view-enter">
@@ -744,20 +744,20 @@ const onboardingFields = () => {
   const profile = state.profile
   if (state.onboardingStep === 0) {
     return `
-      ${radioGroup('insuranceStatus', 'Where are you starting?', ['No', 'Yes', 'Unsure'], profile.insuranceStatus, true)}
+      ${radioGroup('insuranceStatus', 'Do you have existing private insurance?', ['No', 'Yes', 'Unsure'], profile.insuranceStatus, true)}
       <div class="path-callout">
-        <span class="mono">${profile.insuranceStatus === 'Yes' ? 'EXISTING PLAN PATH' : profile.insuranceStatus === 'No' ? 'NO-PLAN PATH' : 'UNSURE PATH'}</span>
-        <p>${profile.insuranceStatus === 'Yes' ? 'Copy four amounts from your latest policy schedule. Only figures you confirm are used.' : profile.insuranceStatus === 'No' ? 'The calculation starts from zero declared private cover.' : 'No private cover is deducted until you can verify it.'}</p>
+        <span class="mono">${profile.insuranceStatus === 'Yes' ? 'I have existing coverage' : profile.insuranceStatus === 'No' ? 'I\'m starting fresh' : 'I\'m not sure what I have'}</span>
+        <p>${profile.insuranceStatus === 'Yes' ? 'We\'ll check your current policies to spot gaps and avoid duplicate coverage. Only figures you confirm are used.' : profile.insuranceStatus === 'No' ? 'We\'ll calculate your full recommended protection from the ground up.' : 'We\'ll guide you through common baseline plans or help you start afresh.'}</p>
       </div>
       <div class="field-pair">
-        <label class="field money-field"><span>Monthly take-home income</span><i>S$</i><input type="number" min="0.01" step="0.01" data-field="income" value="${profile.income}" placeholder="e.g. 4,200" required /></label>
+        <label class="field money-field"><span>Monthly take-home income</span><i>S$</i><input type="number" min="0.01" step="0.01" data-field="income" value="${profile.income}" placeholder="e.g. 4200" required /></label>
         <label class="field money-field"><span>Total loans left to pay</span><i>S$</i><input type="number" min="0" step="0.01" data-field="debt" value="${profile.debt}" placeholder="Enter 0 if none" required /></label>
       </div>
-      <p class="field-caption">A rough loan total is enough. Savings and spending are not needed for this calculation.</p>
+      <p class="field-caption">An estimated total loan balance is all we need—savings and spending details aren't required.</p>
       ${radioGroup('goal', 'What matters most right now?', goalOptions, profile.goal, true)}
       ${radioGroup('productPreference', 'What type of cover would you prefer to explore?', ['Protection only', 'Open to savings features'], profile.productPreference, true)}
       <label class="field money-field"><span>Maximum additional monthly premium</span><i>S$</i><input type="number" min="0.01" step="0.01" data-field="budget" value="${profile.budget}" placeholder="e.g. 150" required /></label>
-      <p class="field-caption">This is your stated ceiling for exploring cover—not a quote or spending recommendation.</p>
+      <p class="field-caption">This is just the maximum budget you're comfortable with—not an actual price quote or a recommendation on what you should spend.</p>
     `
   }
 
@@ -800,7 +800,7 @@ const onboardingView = () => {
               </li>
             `).join('')}
           </ol>
-          <p class="stepper-note">Only details used in your calculation are required.</p>
+          <p class="stepper-note">We only ask for what we need to calculate your results.</p>
         </aside>
         <section class="onboarding-main view-enter">
           <p class="eyebrow">Step ${state.onboardingStep + 1}</p>
