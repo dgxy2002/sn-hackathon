@@ -1,1 +1,1 @@
-"""CoverCheck POC backend package."""
+"""Before You Commit backend package."""

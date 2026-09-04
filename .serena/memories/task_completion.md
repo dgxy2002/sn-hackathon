@@ -1,6 +1,6 @@
 # Task Completion
 
-Run checks for the touched module; do not claim lint/test/typecheck because none are configured yet.
+Run checks for the touched module and keep `PLAN.md` implementation evidence current.
 
 ## Frontend changes
 
@@ -10,17 +10,16 @@ npm ci
 npm run build
 ```
 
-For visual changes, also run the Vite app and verify relevant desktop/mobile states; apply the invoked VibeCurb skill's visual-diff and accessibility gates.
+For visual changes, run the Compose app and verify relevant desktop/mobile states, console/network output, text fit, stage scroll position, and the authentic PDF journey.
 
-## Scraper changes
+## Backend changes
 
-```bash
-backend/.venv/bin/python -m py_compile backend/scraper/card_scraper.py
-backend/.venv/bin/python backend/scraper/card_scraper.py --help
-backend/.venv/bin/python backend/scraper/card_scraper.py --dry-run --limit 3
+```powershell
+$backend = (Resolve-Path '.\backend').Path
+docker compose run --rm --no-deps -v "${backend}:/app" -w /app backend python -m pytest tests -q
 ```
 
-Do not run a write-enabled scraper as routine validation. If dependencies are absent, create/install the venv using `mem:suggested_commands`.
+Also rebuild affected images, check `/health`, inspect OpenAPI paths after route changes, and prove transient workspaces are removed after deletion tests.
 
 ## Repository/customization changes
 

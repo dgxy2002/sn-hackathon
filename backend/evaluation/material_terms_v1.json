@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Synthetic adjudicated fixtures for deterministic material-term extraction. These fixtures do not contain personal data and do not complete Gate 3's representative-document requirement.",
+  "cases": [
+    {
+      "case_id": "complete-labelled-summary",
+      "text": "Benefit Illustration\nInsurer: Example Life Pte. Ltd.\nProduct Name: Steady Future Plus\nIllustration Date: 4 September 2026\nPolicy Status: Proposed\nPremium Amount: SGD 123.45\nPremium Frequency: Monthly\nPremium Payment Period: 20 years\nPremium Escalation: 3% annually\nCoverage Commencement: 01/10/2026\nMaturity Date: 2046-10-01\nFree-look Period: 14 days",
+      "expected_present": {
+        "premium.amount": {"amount": "123.45", "currency": "SGD"},
+        "premium.frequency": "monthly",
+        "premium.payment_duration": {"duration": 20, "unit": "years"},
+        "commitment.insurer": "Example Life Pte. Ltd",
+        "commitment.product_name": "Steady Future Plus",
+        "commitment.document_type": "benefit_illustration",
+        "commitment.issue_date": "2026-09-04",
+        "commitment.policy_status": "proposed",
+        "premium.escalation": {"percentage": "3", "frequency": "annual"},
+        "coverage.commencement": "2026-10-01",
+        "coverage.expiry_or_maturity": "2046-10-01",
+        "exit.free_look_period": {"duration": 14, "unit": "days"}
+      }
+    },
+    {
+      "case_id": "missing-fields-remain-unknown",
+      "text": "Premium Amount: S$0.00",
+      "expected_present": {
+        "premium.amount": {"amount": "0.00", "currency": "SGD"}
+      }
+    },
+    {
+      "case_id": "conflicting-values-remain-unknown",
+      "text": "Insurer: Example Life Pte. Ltd.\nInsurer: Other Life Ltd.\nPremium Amount: S$100.00\nPremium Amount: S$200.00\nPremium Frequency: Yearly",
+      "expected_present": {
+        "premium.frequency": "annual"
+      }
+    },
+    {
+      "case_id": "unlabelled-prose-does-not-create-facts",
+      "text": "The insurer may increase a premium after reviewing the policy. Ask when coverage starts and how cancellation works.",
+      "expected_present": {}
+    },
+    {
+      "case_id": "alternate-supported-formats",
+      "text": "Document Type: Quotation\nQuotation Date: 04/09/2026\nQuotation Status: Quoted\nPremium Frequency: Half yearly\nPremium Payment Term: 18 months\nCoverage Start Date: 5 Sep 2026\nExpiry Date: 5 September 2046\nCancellation Period: 2 weeks",
+      "expected_present": {
+        "commitment.document_type": "quotation",
+        "commitment.issue_date": "2026-09-04",
+        "commitment.policy_status": "quoted",
+        "premium.frequency": "semi-annual",
+        "premium.payment_duration": {"duration": 18, "unit": "months"},
+        "coverage.commencement": "2026-09-05",
+        "coverage.expiry_or_maturity": "2046-09-05",
+        "exit.free_look_period": {"duration": 2, "unit": "weeks"}
+      }
+    }
+  ]
+}

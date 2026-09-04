@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 from threading import Event
 
 
-LEASE_KEY = "covercheck-continuous-scraper"
+LEASE_KEY = "before-you-commit-guidance-refresh"
 
 
 def _database_url() -> str:
@@ -145,7 +145,9 @@ def run() -> int:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="CoverCheck singleton scraper worker")
+    parser = argparse.ArgumentParser(
+        description="Before You Commit official-guidance refresh worker"
+    )
     parser.add_argument("--check-lock", action="store_true")
     arguments = parser.parse_args()
     return check_lock() if arguments.check_lock else run()
