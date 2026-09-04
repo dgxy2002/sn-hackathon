@@ -3,14 +3,14 @@
 **Epic:** [E11 - Runtime Orchestration and Operations](../epics/E11-runtime-orchestration-and-operations.md)
 **Owner:** Jana
 
-## E11-T01 - Freeze local runtime and OpenRouter configuration
+## E11-T01 - Freeze local runtime and Bedrock configuration
 
 | Field | Value |
 |---|---|
-| Status | In progress |
+| Status | Done |
 | Priority | P0 |
 | Size | S |
-| Depends on | E04-T02, E10-T06 |
+| Depends on | E10-T06 |
 
 **User story:** As the implementation team, we need one local runtime and provider contract so coordinator work is independent of AWS access.
 
@@ -18,11 +18,11 @@
 
 **Acceptance criteria:**
 
-- [ ] Docker Compose and OpenRouter `5.6 Luna` are documented as the local default.
-- [ ] The exact OpenRouter model slug is configured once through `OPENROUTER_MODEL` and recorded per run.
-- [ ] Policy extraction and explanation provider modes are selected independently by environment variables.
-- [ ] Amazon Bedrock and AgentCore are optional future adapters and do not block local startup.
-- [ ] Fixture mode starts without an OpenRouter credential.
+- [x] Docker Compose and Amazon Bedrock are documented as the required live E11 provider path.
+- [x] The Bedrock model or inference-profile ID and region are configured once and recorded per run.
+- [x] OpenRouter policy extraction and Bedrock explanation are selected independently by environment variables.
+- [x] Bedrock uses boto3 locally and an ECS task role in AWS; AgentCore remains deferred.
+- [x] Fixture mode starts without AWS or OpenRouter credentials.
 
 ## E11-T02 - Implement the coordinator state machine and entrypoint
 
@@ -41,7 +41,7 @@
 
 - [x] `POST /invocations` accepts the versioned invocation contract in the backend container.
 - [x] States cover validation, optional extraction review, profile completion, retrieval, decision, explanation, and terminal outcomes.
-- [x] The no-policy branch skips extraction and preserves existing-policy fields as unknown.
+- [x] The no-policy branch skips extraction and marks existing-policy fields not applicable; unsure-policy fields remain unknown.
 - [x] Missing information, no evidence, no eligible plan, dependency failure, and completion are explicit states.
 - [x] Every state validates input and output before transition.
 
@@ -66,11 +66,11 @@
 - [ ] Raw document content is not returned to or retained in explanation prompts.
 - [ ] Fixture fallback uses the same contracts and visible mode labels.
 
-## E11-T04 - Generate and validate OpenRouter explanations
+## E11-T04 - Generate and validate Bedrock explanations
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P0 |
 | Size | M |
 | Depends on | E07-T03, E11-T02 |
@@ -81,16 +81,19 @@
 
 **Acceptance criteria:**
 
-- [ ] OpenRouter receives only the immutable decision contract and small cited evidence records.
-- [ ] Output covers reasons, trade-offs, assumptions, missing data, confidence, and evidence references.
-- [ ] Validation rejects changed ranks, numbers, eligibility, evidence IDs, unsupported claims, and cancellation language.
-- [ ] Provider, exact model slug, prompt version, token use, latency, estimated cost, and result are recorded.
+- [x] Bedrock receives only compact personalization context and the immutable decision contract; raw documents are excluded.
+- [ ] Output covers reasons, trade-offs, assumptions, missing data, confidence, and evidence references. The current typed response covers summary, plan reasons, and cautious next steps.
+- [x] The response schema cannot carry ranks, scores, eligibility, or evidence mutations; validation rejects unknown plan IDs and malformed output.
+- [x] Provider, exact model or inference-profile ID, prompt version, token use, latency, and result are recorded in a credentialed live acceptance run.
+- [ ] Estimated priced cost is calculated and recorded.
+
+**Current evidence:** [`backend/app/model_gateway.py`](../../backend/app/model_gateway.py), [`backend/app/orchestration.py`](../../backend/app/orchestration.py), and [`backend/tests/test_model_gateway.py`](../../backend/tests/test_model_gateway.py).
 
 ## E11-T05 - Emit run events, metrics, and replay metadata
 
 | Field | Value |
 |---|---|
-| Status | Ready |
+| Status | In progress |
 | Priority | P0 |
 | Size | M |
 | Depends on | E10-T04, E11-T03, E11-T04 |
@@ -125,7 +128,7 @@
 - [ ] Runtime status identifies the active lease owner, last cycle, next due source, and freshness state.
 - [ ] The lifecycle emits events for due selection, fetch, parse, normalize, version, upsert, index, success, retry, and failure.
 - [ ] Health degrades on repeated failures or source staleness without discarding the prior verified version.
-- [ ] Only one active scraper loop can hold the lease.
+- [x] Only one active scraper loop can hold the lease in the accepted Compose topology.
 - [ ] Scraper events contain no credentials or prohibited raw content.
 
 ## E11-T07 - Prepare the AWS runtime topology
@@ -137,7 +140,7 @@
 | Size | M |
 | Depends on | E05-T06, E06-T07, E10-T07, E11-T05, E11-T06 |
 
-**User story:** As a deployment owner, I need the local runtime mapped module by module to AWS while OpenRouter remains the configured external provider.
+**User story:** As a deployment owner, I need the local runtime mapped module by module to AWS with Bedrock invoked from the backend task through IAM.
 
 **Requirements:** URS-FR-024, URS-FR-025, URS-NFR-014, URS-NFR-015, URS-NFR-016, URS-NFR-017; PRD-FR-029, PRD-FR-030, PRD-NFR-019, PRD-NFR-020, PRD-NFR-021, PRD-NFR-022.
 
@@ -146,8 +149,8 @@
 - [ ] ECR stores the locally accepted web, backend, and scraper image digests.
 - [ ] ECS Fargate runs web and backend services plus one scraper service task.
 - [ ] RDS PostgreSQL/pgvector, S3, Secrets Manager, ALB, controlled egress, and CloudWatch mappings are explicit.
-- [ ] OpenRouter remains external and is reached from private tasks through controlled outbound networking.
-- [ ] Optional Bedrock or AgentCore adapters are documented separately and do not alter the local contract.
+- [ ] The backend task role grants only the required Bedrock inference action and model or inference-profile resources.
+- [ ] Bedrock uses the same explanation contract accepted locally; AgentCore remains optional and cannot alter it.
 
 ## E11-T08 - Orchestrate bounded conversational tools
 
@@ -168,6 +171,6 @@
 - [x] Tool policy validates target, preconditions, base versions, idempotency, confirmation, allowed summary regions, loop cap, and terminal state.
 - [x] Model output is never executed as HTML, JavaScript, selectors, coordinates, SQL, arbitrary URLs, or undeclared tool properties.
 - [x] Ordered events expose intent, tool, target, status, evidence count, confirmation state, affected regions, versions, latency, tokens, cost, and errors without hidden reasoning.
-- [ ] Fixture and configured OpenRouter adapters support identical normal, unsupported, stale, conflict, timeout, provider-failure, and loop-limit scenarios.
+- [ ] Fixture and configured Bedrock adapters support identical normal, unsupported, stale, conflict, timeout, provider-failure, and loop-limit scenarios.
 
 Read-only questions and cached-catalogue exploration may call the typed E10/E06 evidence service without entering this coordinator. Any proposal, canonical input change, deterministic rerun, summary revision, replay, or undo remains within E11's bounded tool policy.

@@ -9,13 +9,14 @@
 
 ## Scope
 
-- Collect life stage, cash flow, dependants, debt, existing coverage, goals, budget, and product preference.
+- Collect the five common decision inputs used by the current formulation: income, liabilities, goal, product preference, and additional-premium ceiling.
+- For an existing plan, add only current premium, death, TPD, and advanced critical-illness benefits.
 - Preserve unknown values instead of treating them as no coverage.
 - Ask targeted follow-up questions when a decision-critical field is missing.
-- Recalculate outputs when the user changes a goal, budget, dependant, or existing policy.
+- Recalculate outputs after a confirmed supported change; the working conversational mutation is monthly budget.
 - Represent conversational profile changes as versioned proposals that require confirmation before activation.
 - Expose profile create, read, and version behavior through the E10 API contract.
-- Represent `has_current_policy: false` explicitly and allow policy upload and extraction to be skipped.
+- Represent policy state as Yes, No, or Unsure; No makes private-policy amounts not applicable, while Unsure preserves unknowns.
 - Keep profile normalization deterministic and independent of an LLM.
 - Run inside the local backend container and remain portable to the same image on ECS Fargate.
 
@@ -27,24 +28,27 @@
 
 ## Repository evidence
 
-- [`frontend/src/main.js`](../../frontend/src/main.js) contains a five-step onboarding flow and an in-memory `state.profile`.
+- [`frontend/src/main.js`](../../frontend/src/main.js) contains one common minimum-input step, one existing-plan-only cover step, and an in-memory `state.profile`.
+- [`backend/app/personalization.py`](../../backend/app/personalization.py) classifies goal context deterministically, builds compact versioned explanation context, and selects focused questions without asking no-policy users for nonexistent private cover.
+- [`backend/tests/test_personalization.py`](../../backend/tests/test_personalization.py) covers project goal wording, word-based timeframes, context output, and the no-policy question path.
 - [`docs/PLAN.md`](../PLAN.md) defines the fuller Financial Needs Analysis-inspired profile and shared user-profile contract.
 
 ## Definition of done
 
 - [x] A versioned profile contract identifies value, source, and unknown status for decision-critical fields.
 - [x] The UI collects the minimum POC profile through a multi-step form.
-- [ ] The profile covers all decision-relevant Financial Needs Analysis sections defined in the plan, with conditional risk questions only when needed.
+- [x] Every required UI field changes the current calculation, a hard constraint, deterministic priority weighting, or explanation.
 - [x] Missing decision-critical fields trigger a focused question or an insufficient-data result.
 - [x] The profile API distinguishes present, unknown, not-applicable, and explicitly no-current-policy states.
 - [x] A user can skip policy upload and reach analysis without fabricated coverage values.
-- [ ] Changing a goal, budget, dependant, or policy reruns the analysis and explains what changed.
+- [x] A confirmed budget change reruns the analysis and identifies the changed input and ranking effect.
+- [ ] Goal, dependant, preference, declared-cover, and extraction-field proposals are supported with the same confirmation boundary.
 - [x] A conversational profile patch shows old and proposed values, rejects stale versions, requires confirmation, and creates an immutable active version.
-- [ ] Profile contract tests pass through the local backend container and use the same contract intended for ECS.
-- [ ] At least three synthetic profiles follow meaningfully different paths.
+- [x] The profile contract passes through the local backend container and uses the same contract intended for ECS.
+- [x] Current-policy, no-policy, and unsure-policy synthetic profiles follow distinct browser paths.
 
-**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md). Confirmed conversational mutation is currently limited to monthly budget; the broader goal, dependant, preference, and policy-change requirement remains open.
+**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md), [Bedrock and personalization integration](../evaluation/2026-09-03-bedrock-personalization-integration.md), and [Gen-Z journey review](../evaluation/2026-09-03-gen-z-journey-and-project-truth.md). Confirmed conversational mutation is currently limited to monthly budget; broader patch types remain open.
 
 ## POC boundary
 
-Detailed diagnoses, NRIC, payment data, beneficiary identities, episodic memory, and production profile persistence are excluded.
+Detailed diagnoses, NRIC, payment data, beneficiary identities, episodic memory, and production profile persistence are excluded. A broad Financial Needs Analysis questionnaire is deferred; no field should return to the POC unless its decision effect is documented.

@@ -1,16 +1,13 @@
 import './style.css'
-import workerImage from './assets/covercheck-worker.jpg'
+import skylineImage from './assets/singapore-skyline-landscape.jpg'
 import {
   ApiError,
-  compareEvidence,
   createClientId,
   createConversation,
   decideProposal,
   fetchReplay,
   invokeCoverCheck,
-  reviewExtraction,
   sendConversationMessage,
-  submitExtraction,
   undoRevision,
 } from './api.js'
 
@@ -19,110 +16,112 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
 const questions = [
   {
-    kicker: 'What you have',
-    question: 'Do you know which insurance plans you have?',
-    note: 'Include plans from family, work and CPF.',
+    category: 'visibility',
+    weight: 0.25,
+    kicker: 'Basics · What covers you',
+    question: 'Do you know what insurance currently covers you?',
+    note: 'Include cover bought by you, family, an employer, or a national scheme.',
     answers: [
-      ['Yes', 'All of them', 3],
-      ['Mostly', 'The main ones', 2],
-      ['One or two', 'I am not sure', 1],
-      ['No clue', 'I need to check', 0],
+      ['Yes', 'I know the main plans and benefits', 3],
+      ['Mostly', 'I know the plans, not every detail', 2],
+      ['A little', 'I only know one or two names', 1],
+      ['Not yet', 'I need a simple inventory', 0],
     ],
   },
   {
-    kicker: 'What it pays',
-    question: 'Do you know what your plans would pay for?',
-    note: 'For example: hospital bills, illness or lost income.',
+    category: 'visibility',
+    weight: 0.25,
+    kicker: 'Basics · What it costs',
+    question: 'Do you know what your insurance costs each month or year?',
+    note: 'A rough total is enough; annual premiums can be divided by 12.',
     answers: [
-      ['Yes', 'The key payouts', 3],
-      ['Mostly', 'A few gaps', 2],
-      ['Roughly', 'Just the basics', 1],
-      ['No clue', 'I only know the names', 0],
+      ['Exactly', 'I know the total', 3],
+      ['Roughly', 'I know the range', 2],
+      ['Partly', 'I know some premiums', 1],
+      ['Not yet', 'I have never added them up', 0],
     ],
   },
   {
-    kicker: 'What it costs',
-    question: 'Do you know your total insurance cost each month?',
-    note: 'Count plans paid by you or your family.',
+    category: 'foundations',
+    weight: 0.25,
+    kicker: 'Basics · What responds',
+    question: 'If something serious happened, do you know which cover would respond?',
+    note: 'Think hospitalisation, serious illness, disability, or death.',
     answers: [
-      ['Exactly', 'I track it', 3],
-      ['Roughly', 'Close enough', 2],
-      ['Some of it', 'Not every plan', 1],
-      ['No clue', 'Never added it up', 0],
+      ['Clearly', 'I know the main benefits and triggers', 3],
+      ['Mostly', 'I understand the broad differences', 2],
+      ['A little', 'Some terms blur together', 1],
+      ['Not yet', 'I need plain-language guidance', 0],
     ],
   },
   {
-    kicker: 'Work cover',
-    question: 'Would your cover change if you left your job?',
-    note: 'Some work benefits end on your last day.',
+    category: 'terms',
+    weight: 0.25,
+    kicker: 'Basics · Where it stops',
+    question: 'Do you know the main limits and when your cover ends?',
+    note: 'Check exclusions, waiting periods, renewals, and the end age or date.',
     answers: [
-      ['I know', 'I checked', 3],
-      ['Probably', 'I know the basics', 2],
-      ['Not sure', 'I should ask HR', 1],
-      ['No clue', 'Never thought about it', 0],
-    ],
-  },
-  {
-    kicker: 'The limits',
-    question: 'Do you know what your plans do not cover?',
-    note: 'These limits are called exclusions.',
-    answers: [
-      ['Yes', 'The main limits', 3],
-      ['Some', 'One or two', 2],
-      ['Vaguely', 'I need a refresh', 1],
-      ['No clue', 'I have not checked', 0],
+      ['Yes', 'I know the main limits and end dates', 3],
+      ['Some', 'I know the obvious ones', 2],
+      ['Vaguely', 'I would need to verify them', 1],
+      ['Not yet', 'I have not read the terms', 0],
     ],
   },
 ]
 
 const onboardingSteps = [
-  ['Life stage', 'Tell us where you are now.'],
-  ['Monthly budget', 'A quick affordability check.'],
-  ['People and loans', 'Who relies on you?'],
-  ['Cover now', 'Start with what you already have.'],
-  ['Priorities', 'What matters most?'],
+  ['Your starting point', 'Five details used to calculate your protection starting point.'],
+  ['What your plan already covers', 'Four figures copied from your latest policy schedule.'],
 ]
+
+const goalOptions = [
+  'Protect my family or dependants',
+  'Protect my income if I cannot work',
+  'Pay off debt if something happens',
+  'Start with affordable basic protection',
+]
+
+const goalPriorityMap = {
+  'Protect my family or dependants': { death: 100, disability: 75, critical_illness: 80, personal_accident: 20 },
+  'Protect my income if I cannot work': { death: 50, disability: 100, critical_illness: 90, personal_accident: 20 },
+  'Pay off debt if something happens': { death: 90, disability: 80, critical_illness: 60, personal_accident: 20 },
+  'Start with affordable basic protection': { death: 75, disability: 75, critical_illness: 75, personal_accident: 20 },
+}
+
+const createEmptyProfile = () => ({
+  name: '',
+  email: '',
+  consent: false,
+  income: '',
+  debt: '',
+  insuranceStatus: 'Unsure',
+  currentPremium: '',
+  deathCover: '',
+  tpdCover: '',
+  advancedCiCover: '',
+  goal: '',
+  budget: '',
+  productPreference: '',
+})
 
 const state = {
   view: 'intro',
+  profileId: `browser-${createClientId()}`,
+  entrySource: 'intro',
   questionIndex: 0,
   answers: [],
   onboardingStep: 0,
   direction: 'forward',
   keyboard: false,
-  fileName: '',
   runtime: {
     status: 'idle',
     error: '',
     profile: null,
     extraction: null,
     recommendation: null,
+    explanation: null,
   },
-  evidenceComparison: {
-    status: 'idle',
-    error: '',
-    products: [],
-    warnings: [],
-  },
-  profile: {
-    name: 'Ari',
-    email: '',
-    consent: false,
-    ageBand: '25-29',
-    employment: 'Full-time employee',
-    income: 4200,
-    expenses: 2300,
-    emergencyMonths: 3,
-    dependants: 'None',
-    debt: 0,
-    medishield: true,
-    careshield: true,
-    employer: true,
-    goal: 'Protect my income and avoid duplicate cover',
-    goalCategory: 'family_protection',
-    budget: 180,
-    preference: 'Protection-only',
-  },
+  profile: createEmptyProfile(),
   agent: {
     activeRevisionId: 'summary-v1',
     conversationId: '',
@@ -138,10 +137,10 @@ const state = {
     error: '',
     abortController: null,
     suggestedPrompts: [
-      { id: 'why-ranked-first', label: 'Why this ranks first', message: 'Why does LionCity Term Flex rank first?' },
-      { id: 'show-critical-illness', label: 'Show critical illness', message: 'Show only the critical illness option.' },
-      { id: 'show-unknowns', label: 'Show assumptions', message: 'What does the ranking still not know?' },
-      { id: 'explore-cached-critical-illness', label: 'Explore cached CI plans', message: 'Which cached plans mention critical illness protection?' },
+      { id: 'how-gaps-work', label: 'How are my gaps calculated?', message: 'How were my protection gaps calculated?' },
+      { id: 'show-unknowns', label: 'Show assumptions', message: 'What assumptions should I verify?' },
+      { id: 'explore-term-life', label: 'Explore life cover', message: 'Which brochures mention term life protection?' },
+      { id: 'explore-integrated-shield', label: 'Explore hospital cover', message: 'Which plans mention Integrated Shield hospital cover?' },
     ],
   },
 }
@@ -194,54 +193,76 @@ const profileField = (value, stateName = 'present') => ({
   },
 })
 
-const buildVersionedProfile = (hasCurrentPolicy) => {
-  const dependantCount = {
-    None: 0,
-    Parents: 1,
-    'Partner or child': 1,
-    'Multiple people': 2,
-  }[state.profile.dependants] ?? 0
-  const preference = state.profile.preference === 'Protection-only'
-    ? 'protection-only'
-    : state.profile.preference === 'Open to plans with savings'
-      ? 'savings-linked'
-      : 'unsure'
+const buildVersionedProfile = (insuranceStatus) => {
+  const hasCurrentPolicy = insuranceStatus === 'Yes'
+  const policyIsUnsure = insuranceStatus === 'Unsure'
   const unknown = () => profileField(null, 'unknown')
+  const notApplicable = () => profileField(null, 'not_applicable')
+  const policyValue = (value) => {
+    if (hasCurrentPolicy) return value === '' ? unknown() : profileField(Number(value))
+    return policyIsUnsure ? unknown() : notApplicable()
+  }
+  const policyUnknown = () => hasCurrentPolicy ? unknown() : policyIsUnsure ? unknown() : notApplicable()
+  const priorities = goalPriorityMap[state.profile.goal] || goalPriorityMap['Start with affordable basic protection']
 
   return {
     schema_id: 'covercheck.profile',
     contract_version: '1.0.0',
-    profile_id: 'browser-demo-profile',
+    profile_id: state.profileId,
     version: 1,
     as_of_date: new Date().toISOString().slice(0, 10),
     consent: state.profile.consent,
     data: {
-      life_stage: profileField(state.profile.ageBand),
-      employment_status: profileField(state.profile.employment),
-      goal: profileField(`${state.profile.goalCategory}: ${state.profile.goal}`),
+      life_stage: unknown(),
+      employment_status: unknown(),
+      goal: profileField(state.profile.goal),
       target_amount: unknown(),
       target_date: unknown(),
       monthly_income: profileField(Number(state.profile.income)),
-      monthly_expenses: profileField(Number(state.profile.expenses)),
-      emergency_savings_months: profileField(Number(state.profile.emergencyMonths)),
-      dependant_count: profileField(dependantCount),
-      dependant_support_years: profileField(0),
+      monthly_expenses: unknown(),
+      emergency_savings_months: unknown(),
+      dependant_count: unknown(),
+      dependant_support_years: unknown(),
       liabilities: profileField(Number(state.profile.debt)),
-      has_current_policy: profileField(hasCurrentPolicy),
-      existing_death_cover: hasCurrentPolicy ? profileField(100000) : unknown(),
-      existing_ci_cover: hasCurrentPolicy ? profileField(50000) : unknown(),
-      government_cover: profileField([
-        ...(state.profile.medishield ? ['MediShield Life'] : []),
-        ...(state.profile.careshield ? ['CareShield Life'] : []),
-      ]),
-      employer_cover: profileField(Boolean(state.profile.employer)),
+      has_current_policy: policyIsUnsure ? unknown() : profileField(hasCurrentPolicy),
+      existing_death_cover: policyValue(state.profile.deathCover),
+      existing_ci_cover: policyValue(state.profile.advancedCiCover),
+      government_cover: unknown(),
+      employer_cover: unknown(),
       monthly_budget: profileField(Number(state.profile.budget)),
-      product_preference: profileField(preference),
+      product_preference: profileField(
+        state.profile.productPreference === 'Protection only' ? 'protection-only' : 'savings-linked',
+      ),
+      age: unknown(),
+      gender: unknown(),
+      occupation: unknown(),
+      marital_status: unknown(),
+      supported_people: unknown(),
+      loan_commitments: unknown(),
+      current_insurer: policyUnknown(),
+      current_product_name: policyUnknown(),
+      current_product_type: policyUnknown(),
+      integrated_shield_plan: policyUnknown(),
+      integrated_shield_provider: policyUnknown(),
+      current_monthly_premium: policyValue(state.profile.currentPremium),
+      existing_terminal_illness_cover: policyUnknown(),
+      existing_tpd_cover: policyValue(state.profile.tpdCover),
+      existing_early_ci_cover: policyUnknown(),
+      existing_intermediate_ci_cover: policyUnknown(),
+      existing_advanced_ci_cover: policyValue(state.profile.advancedCiCover),
+      existing_personal_accident_cover: policyUnknown(),
+      riders: policyUnknown(),
+      protection_priorities: profileField(priorities),
+      credit_card_count: unknown(),
+      credit_card_providers: unknown(),
+      total_credit_limit: unknown(),
+      credit_utilization_percent: unknown(),
+      minimum_payment_frequency: unknown(),
     },
   }
 }
 
-async function prepareComparison(hasCurrentPolicy) {
+async function prepareComparison(insuranceStatus = state.profile.insuranceStatus) {
   if (state.runtime.status === 'planning') return
   const controller = new AbortController()
   state.runtime.status = 'planning'
@@ -249,32 +270,24 @@ async function prepareComparison(hasCurrentPolicy) {
   render({ focus: false, preserveScroll: true })
 
   try {
-    const profile = buildVersionedProfile(hasCurrentPolicy)
-    let extraction = null
-    if (hasCurrentPolicy) {
-      const submitted = await submitExtraction('policy-term-001', controller.signal)
-      extraction = await reviewExtraction(
-        submitted.extraction_id,
-        {
-          expected_version: submitted.version,
-          fields: submitted.fields.map((field) => ({
-            ...field,
-            reviewed_value: field.original_value,
-          })),
-        },
-        controller.signal,
-      )
-    }
+    const profile = buildVersionedProfile(insuranceStatus)
     const invocation = await invokeCoverCheck({
       schema_id: 'covercheck.invocation',
       contract_version: '1.0.0',
       invocation_id: createClientId(),
       profile,
-      extraction_id: extraction?.extraction_id || null,
+      extraction_id: null,
     }, controller.signal)
+    if (!invocation.recommendation || invocation.recommendation.status === 'insufficient_data') {
+      throw new ApiError(
+        'CoverCheck could not calculate the result from those inputs. Review the amounts and try again.',
+        'CALCULATION_INCOMPLETE',
+      )
+    }
     state.runtime.profile = invocation.profile
     state.runtime.extraction = invocation.extraction
     state.runtime.recommendation = invocation.recommendation
+    state.runtime.explanation = invocation.explanation
     state.runtime.status = invocation.state
     state.agent.activeRevisionId = 'summary-v1'
     state.agent.conversationId = ''
@@ -283,45 +296,30 @@ async function prepareComparison(hasCurrentPolicy) {
     state.agent.replay = []
     state.agent.canUndo = false
 
-    if (invocation.recommendation) {
-      const comparison = await compareEvidence({
-        product_ids: [
-          'synthetic-lioncity-critical-cover',
-          'synthetic-harbour-essential-ci',
-        ],
-        comparison_mode: 'synthetic_fixture',
-        canonical_references: {
-          profile_id: invocation.profile.profile_id,
-          profile_version: invocation.profile.version,
-          catalogue_version: invocation.recommendation.catalogue_version,
-          recommendation_id: invocation.recommendation.recommendation_id,
-          revision_id: state.agent.activeRevisionId,
-        },
-      }, controller.signal)
-      state.evidenceComparison = {
-        status: comparison.status,
-        error: '',
-        products: comparison.products,
-        warnings: comparison.warnings,
-      }
-    }
     navigate('comparison')
   } catch (error) {
     state.runtime.status = 'failed'
     state.runtime.error = error instanceof ApiError
       ? error.message
-      : 'The local backend is unavailable. The comparison was not created.'
+      : 'CoverCheck is temporarily unavailable. Please try again.'
     render({ focus: false, preserveScroll: true })
   }
 }
 
 const actionTargetLabels = {
-  'reasoning:ranking': 'Why this ranks first',
-  'reasoning:assumptions': 'Unknowns and assumptions',
-  'comparison:critical-illness': 'Critical-illness comparison',
-  'profile:decision-input': 'Decision input',
-  'summary:current': 'Current summary',
-  'evidence:cached-catalogue': 'Cached brochure evidence',
+  'reasoning:ranking': 'Calculation method',
+  'reasoning:assumptions': 'Assumptions to verify',
+  'comparison:critical-illness': 'Critical-illness gap',
+  'profile:decision-input': 'Profile update',
+  'summary:current': 'Current result',
+  'evidence:cached-catalogue': 'Brochure library',
+}
+
+const actionToolLabels = {
+  ANSWER_QUESTION: 'Searched brochure library',
+  FOCUS_SECTION: 'Opened result details',
+  FILTER_COMPARISON: 'Focused the result',
+  PROPOSE_PROFILE_PATCH: 'Prepared a profile change',
 }
 
 const agentMessageView = (message) => {
@@ -332,15 +330,23 @@ const agentMessageView = (message) => {
     const product = escapeHtml(citation.product || '')
     const sourceFile = escapeHtml(citation.source_file || '')
     const excerpt = escapeHtml(citation.excerpt || '')
+    const evidenceStateLabels = {
+      approved: 'Provider source',
+      current: 'Current source',
+      unverified: 'Verify source',
+      stale: 'Check date',
+      conflicting: 'Conflicting details',
+      unknown: 'Date unavailable',
+    }
     const evidenceState = escapeHtml(
-      citation.synthetic ? 'synthetic fixture' : (citation.evidence_state || 'unknown evidence'),
+      citation.synthetic ? 'Illustrative source' : (evidenceStateLabels[citation.evidence_state] || 'Verify source'),
     )
     const freshness = escapeHtml(citation.freshness_status || 'unknown')
     const documentDate = escapeHtml(formatEvidenceDate(citation.document_as_of_date))
     const effectiveDate = escapeHtml(formatEvidenceDate(citation.product_effective_date))
     const source = safeUrl
       ? `<a href="${escapeHtml(safeUrl)}" target="_blank" rel="noreferrer">Open provider source <span aria-hidden="true">↗</span></a>`
-      : `<span>${sourceFile ? `Cached file: ${sourceFile}` : 'Source URL unavailable in cached record'}</span>`
+      : `<span>${sourceFile ? `Brochure record: ${sourceFile}` : 'Open the provider website to verify current terms'}</span>`
 
     if (!citation.excerpt) {
       return safeUrl
@@ -380,12 +386,12 @@ const agentActionView = (action, index) => `
   <details class="agent-action is-${escapeHtml(action.status)}" ${index === state.agent.actions.length - 1 ? 'open' : ''}>
     <summary>
       <span class="action-sequence mono">${String(index + 1).padStart(2, '0')}</span>
-      <span><b>${escapeHtml(action.tool.replaceAll('_', ' '))}</b><small>${escapeHtml(actionTargetLabels[action.target] || 'Blocked target')}</small></span>
-      <i aria-hidden="true">${action.status === 'completed' ? 'DONE' : 'STOPPED'}</i>
+      <span><b>${escapeHtml(actionToolLabels[action.tool] || 'Reviewed result')}</b><small>${escapeHtml(actionTargetLabels[action.target] || 'No change made')}</small></span>
+      <i aria-hidden="true">${action.status === 'completed' ? 'DONE' : 'NO CHANGE'}</i>
     </summary>
     <div class="agent-action-detail">
       <span>${action.evidence_count} evidence record${action.evidence_count === 1 ? '' : 's'}</span>
-      <span>${action.confirmation_required ? 'Confirmation required' : 'No confirmation needed'}</span>
+      <span>${action.confirmation_required ? 'Your confirmation is required' : 'Result unchanged'}</span>
       <span>${action.error_code ? escapeHtml(action.error_code) : escapeHtml(action.affected_regions.join(', '))}</span>
     </div>
   </details>
@@ -424,7 +430,7 @@ const revisionView = () => {
       <span class="mono">REVISION APPLIED</span>
       <p>${escapeHtml(inputChanges || 'Profile updated')}</p>
       ${gapChanges ? `<small>${escapeHtml(gapChanges)}</small>` : ''}
-      <small>${delta.ranking_changed ? 'Ranking changed.' : 'Ranking stayed the same.'}</small>
+      <small>Your protection starting point was recalculated.</small>
     </section>
   `
 }
@@ -432,27 +438,31 @@ const revisionView = () => {
 const agentView = () => {
   const statusLabels = {
     idle: 'Ready',
-    planning: 'Planning safe actions',
+    planning: 'Working on it',
     waiting_for_confirmation: 'Waiting for confirmation',
     completed: 'Completed',
-    unsupported: 'Stopped safely',
+    unsupported: 'No source found',
     cancelled: 'Cancelled',
-    failed: 'Backend unavailable',
+    failed: 'Temporarily unavailable',
   }
   const isBusy = state.agent.status === 'planning'
   const messages = state.agent.messages.length
     ? state.agent.messages.map(agentMessageView).join('')
-    : '<p class="agent-empty">Ask about the synthetic result, inspect assumptions, or explore the cached brochure catalogue.</p>'
+    : '<p class="agent-empty">Ask how the amounts were calculated, update your budget, or search the brochure library by cover type or provider.</p>'
 
   return `
     <section class="agent-workspace" id="ask-covercheck" aria-labelledby="agent-title">
       <div class="agent-conversation">
         <div class="agent-heading">
           <div>
-            <span class="section-index mono">03 · CONVERSATIONAL EXPLORATION</span>
-            <h2 id="agent-title">Ask CoverCheck</h2>
+            <span class="section-index mono">04 · ASK & EXPLORE</span>
+            <h2 id="agent-title">Ask about your result.</h2>
           </div>
           <span class="agent-state is-${state.agent.status}" aria-live="polite">${statusLabels[state.agent.status]}</span>
+        </div>
+        <p class="agent-deck">CoverCheck can explain your calculation, search real brochure excerpts, and recalculate after a change you confirm.</p>
+        <div class="provider-list" aria-label="Brochure providers available">
+          <span>Brochure library</span><b>AIA</b><b>FWD</b><b>Great Eastern</b><b>Singlife</b>
         </div>
         <div class="agent-prompts" aria-label="Suggested questions">
           ${state.agent.suggestedPrompts.map((prompt) => `
@@ -466,42 +476,64 @@ const agentView = () => {
         ${proposalView()}
         ${revisionView()}
         <form class="agent-composer" id="agent-form">
-          <label class="sr-only" for="agent-message">Ask CoverCheck about this summary</label>
-          <textarea id="agent-message" name="message" rows="2" maxlength="1000" placeholder="Ask why, inspect assumptions, or filter the table" required ${isBusy ? 'disabled' : ''}></textarea>
+          <label class="sr-only" for="agent-message">Ask CoverCheck about your result</label>
+          <textarea id="agent-message" name="message" rows="2" maxlength="1000" placeholder="Ask about a gap, provider, cover type, or change your budget" required ${isBusy ? 'disabled' : ''}></textarea>
           ${isBusy
             ? '<button class="agent-stop" type="button" data-action="stop-agent">Stop</button>'
             : '<button class="agent-send" type="submit">Send <span aria-hidden="true">↗</span></button>'}
         </form>
-        ${state.agent.conversationId ? `
-          <div class="revision-controls">
-            <button type="button" data-action="show-replay">Show replay</button>
-            <button type="button" data-action="undo-revision" ${state.agent.canUndo ? '' : 'disabled'}>Undo last confirmed change</button>
+        <p class="agent-boundary">Brochure excerpts are read-only and may be dated. CoverCheck asks before changing any profile input.</p>
+        <details class="activity-panel">
+          <summary><span>Session activity</span><small>${state.agent.actions.length} action${state.agent.actions.length === 1 ? '' : 's'}</small></summary>
+          ${state.agent.conversationId ? `
+            <div class="revision-controls">
+              <button type="button" data-action="show-replay">Show history</button>
+              <button type="button" data-action="undo-revision" ${state.agent.canUndo ? '' : 'disabled'}>Undo last confirmed change</button>
+            </div>
+            ${state.agent.replay.length ? `<ol class="replay-list">${state.agent.replay.map((item) => `
+              <li><span class="mono">${String(item.sequence).padStart(2, '0')}</span>${escapeHtml(item.event_type.replaceAll('_', ' '))}</li>
+            `).join('')}</ol>` : ''}
+          ` : ''}
+          <div class="agent-actions">
+            ${state.agent.actions.length
+              ? state.agent.actions.map(agentActionView).join('')
+              : '<p class="agent-empty">No changes or source lookups yet.</p>'}
           </div>
-          ${state.agent.replay.length ? `<ol class="replay-list">${state.agent.replay.map((item) => `
-            <li><span class="mono">${String(item.sequence).padStart(2, '0')}</span>${escapeHtml(item.event_type.replaceAll('_', ' '))}</li>
-          `).join('')}</ol>` : ''}
-        ` : ''}
-        <p class="agent-boundary">Typed actions only · evidence labels preserve source state and unknown dates · cached real products never enter the synthetic ranking.</p>
+        </details>
       </div>
-      <aside class="agent-trace" aria-labelledby="trace-title">
-        <div class="trace-heading">
-          <span class="section-index mono">VISIBLE ACTIONS</span>
-          <h3 id="trace-title">What changed on the page</h3>
-        </div>
-        <div class="agent-actions">
-          ${state.agent.actions.length
-            ? state.agent.actions.map(agentActionView).join('')
-            : '<p class="agent-empty">No action has run. Hidden model reasoning is never shown or used as an instruction.</p>'}
-        </div>
-      </aside>
     </section>
   `
 }
 
-const getScore = () => {
-  const earned = state.answers.reduce((total, answer) => total + (answer?.value ?? 0), 0)
-  return Math.round(34 + (earned / (questions.length * 3)) * 56)
+const readinessCategories = {
+  visibility: { label: 'Coverage visibility', weight: 50 },
+  foundations: { label: 'Protection basics', weight: 25 },
+  terms: { label: 'Terms awareness', weight: 25 },
 }
+
+const getReadinessBreakdown = () => {
+  const categories = Object.fromEntries(
+    Object.entries(readinessCategories).map(([key, item]) => [key, { ...item, earned: 0, possible: 0 }]),
+  )
+  let weightedScore = 0
+  questions.forEach((question, index) => {
+    const normalized = (state.answers[index]?.value ?? 0) / 3
+    weightedScore += normalized * question.weight
+    categories[question.category].earned += normalized * question.weight
+    categories[question.category].possible += question.weight
+  })
+  return {
+    score: Math.round(weightedScore * 100),
+    categories: Object.fromEntries(
+      Object.entries(categories).map(([key, item]) => [key, {
+        ...item,
+        score: Math.round((item.earned / item.possible) * 100),
+      }]),
+    ),
+  }
+}
+
+const getScore = () => getReadinessBreakdown().score
 
 const brand = (tone = '') => `
   <a class="brand ${tone}" href="#" data-action="home" aria-label="CoverCheck SG home">
@@ -511,7 +543,7 @@ const brand = (tone = '') => `
 `
 
 const trustNote = () => `
-  <p class="trust-note">Educational comparison, not financial advice. All plans shown are synthetic demo data.</p>
+  <p class="trust-note">Educational starting point—not financial advice. Verify current policy terms and speak with a licensed adviser before buying, replacing, or cancelling cover.</p>
 `
 
 const appHeader = ({ step = '', back = false } = {}) => `
@@ -528,10 +560,10 @@ const introView = () => `
   <main class="intro-screen view-enter" data-screen="intro">
     <img
       class="intro-image"
-      src="${workerImage}"
-      alt="Three young adults at Marina Bay with Marina Bay Sands behind them"
-      width="1800"
-      height="1200"
+      src="${skylineImage}"
+      alt="Singapore skyline across Marina Bay in daylight"
+      width="2200"
+      height="782"
       fetchpriority="high"
     />
     <div class="intro-scrim" aria-hidden="true"></div>
@@ -540,18 +572,20 @@ const introView = () => `
       <span class="intro-label">Singapore · Ages 18-30</span>
     </header>
     <section class="intro-copy" aria-labelledby="intro-title">
-      <p class="eyebrow intro-sequence">Insurance, minus the blur.</p>
-      <h1 id="intro-title" class="display-title intro-sequence">What did your parents actually buy?</h1>
-      <p class="intro-deck intro-sequence">Five quick questions. No salary, NRIC or upload needed.</p>
-      <button class="primary-button intro-sequence" type="button" data-action="start-quiz">
-        Check my readiness <span aria-hidden="true">→</span>
-      </button>
+      <p class="eyebrow intro-sequence">Insurance clarity, minus the sales pitch.</p>
+      <h1 id="intro-title" class="display-title intro-sequence">Find your protection starting point.</h1>
+      <p class="intro-deck intro-sequence">Choose the path that fits. The gap check uses five inputs—no NRIC or medical details.</p>
+      <div class="intro-actions intro-sequence" aria-label="Choose how to start">
+        <button class="journey-button is-primary" type="button" data-action="start-no-policy">
+          <span>I don’t have a plan</span><small>Start from zero private cover</small><i aria-hidden="true">→</i>
+        </button>
+        <button class="journey-button" type="button" data-action="review-policy">
+          <span>Review a plan I have</span><small>Add four figures from your policy</small><i aria-hidden="true">→</i>
+        </button>
+      </div>
+      <button class="intro-quiz-link intro-sequence" type="button" data-action="start-quiz">Or check my insurance basics · 4 questions</button>
     </section>
-    <aside class="participation-note intro-sequence" aria-label="Pilot participation">
-      <strong>24</strong>
-      <span>hackathon pilot<br />completions this week</span>
-    </aside>
-    <p class="image-credit">Photo: krzhck / Unsplash · Marina Bay</p>
+    <p class="image-credit">Photo: <a href="https://commons.wikimedia.org/wiki/File:Singapore_(SG),_Marina_Bay_--_2019_--_4439-48.jpg" target="_blank" rel="noreferrer">Dietmar Rabich / Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noreferrer">CC BY-SA 4.0</a></p>
   </main>
 `
 
@@ -594,24 +628,29 @@ const questionView = () => {
 }
 
 const resultView = () => {
-  const score = getScore()
-  const policyKnown = (state.answers[0]?.value ?? 0) >= 2
-  const coverageKnown = (state.answers[1]?.value ?? 0) >= 2
-  const costKnown = (state.answers[2]?.value ?? 0) >= 2
-  const workKnown = (state.answers[3]?.value ?? 0) >= 2
-  const exclusionsKnown = (state.answers[4]?.value ?? 0) >= 2
-  const unknownCount = [policyKnown, coverageKnown, costKnown, workKnown, exclusionsKnown].filter((value) => !value).length
-  const headline = unknownCount === 0
+  const breakdown = getReadinessBreakdown()
+  const score = breakdown.score
+  const topicRows = [
+    ['What covers you', 'List private, employer, family-bought, and national cover', 0],
+    ['What it costs', 'Add monthly and annual premiums into one total', 1],
+    ['What responds', 'Separate hospital, illness, disability, and death benefits', 2],
+    ['Where it stops', 'Verify exclusions, waiting periods, renewals, and end dates', 3],
+  ]
+  const actionCount = topicRows.filter(([, , index]) => (state.answers[index]?.value ?? 0) < 2).length
+  const headline = actionCount === 0
     ? 'You know the basics. Now check if the numbers still fit.'
-    : `${unknownCount} thing${unknownCount === 1 ? '' : 's'} to check before you compare plans.`
+    : `${actionCount} thing${actionCount === 1 ? '' : 's'} to check before you compare plans.`
 
-  const coverageRow = (label, detail, known) => `
+  const coverageRow = (label, detail, index) => {
+    const known = (state.answers[index]?.value ?? 0) >= 2
+    return `
     <li>
-      <span class="coverage-status ${known ? 'is-known' : 'is-unknown'}">${known ? 'Known' : 'Unknown'}</span>
+      <span class="coverage-status ${known ? 'is-known' : 'is-unknown'}">${known ? 'Visible' : 'Check'}</span>
       <strong>${label}</strong>
       <span>${detail}</span>
     </li>
   `
+  }
 
   return `
     <main class="report-screen" data-screen="result">
@@ -623,7 +662,16 @@ const resultView = () => {
           <span>/ 100</span>
         </div>
         <h1 id="result-title" class="report-title screen-title" tabindex="-1">${headline}</h1>
-        <p class="report-definition">This score measures what you know, not how well-off or protected you are.</p>
+        <p class="report-definition">This score measures readiness actions and understanding—not wealth, suitability or how protected you are.</p>
+        <div class="readiness-breakdown" aria-label="Weighted readiness categories">
+          ${Object.values(breakdown.categories).map((category) => `
+            <article>
+              <span class="mono">${category.weight}% WEIGHT</span>
+              <strong>${category.score}</strong>
+              <p>${category.label}</p>
+            </article>
+          `).join('')}
+        </div>
       </section>
 
       <section class="coverage-map report-reveal reveal-2" aria-labelledby="coverage-title">
@@ -631,41 +679,20 @@ const resultView = () => {
         <div>
           <h2 id="coverage-title">What you know so far</h2>
           <ul>
-            ${coverageRow('Your plans', policyKnown ? 'You know the main plans.' : 'Check which plans you have.', policyKnown)}
-            ${coverageRow('What they pay', coverageKnown ? 'You know the main payouts.' : 'Check what each plan pays for.', coverageKnown)}
-            ${coverageRow('Monthly cost', costKnown ? 'You know the total cost.' : 'Add up every premium.', costKnown)}
-            ${coverageRow('Work cover', workKnown ? 'You know what ends with your job.' : 'Ask HR what ends when you leave.', workKnown)}
-            ${coverageRow('Plan limits', exclusionsKnown ? 'You know the main exclusions.' : 'Check what is not covered.', exclusionsKnown)}
+            ${topicRows.map(([label, detail, index]) => coverageRow(label, detail, index)).join('')}
           </ul>
         </div>
       </section>
 
-      <section class="benchmark-section report-reveal reveal-3" aria-labelledby="benchmark-title">
-        <div class="section-index mono">02 · Context, not competition</div>
-        <div class="benchmark-content">
-          <div class="benchmark-heading">
-            <h2 id="benchmark-title">Hackathon pilot participants</h2>
-            <p>See where your score sits. This is context, not a ranking.</p>
-          </div>
-          <div class="benchmark-distribution" role="img" aria-label="Bell curve of pilot readiness scores. Your score is ${score}; the pilot midpoint is 61.">
-            <svg viewBox="0 0 700 240" preserveAspectRatio="none" aria-hidden="true">
-              <path class="distribution-area" d="M0 220 C85 220 113 210 150 190 C205 160 225 80 300 42 C340 21 360 21 400 42 C475 80 495 160 550 190 C587 210 615 220 700 220 L700 240 L0 240 Z" />
-              <path class="distribution-line" d="M0 220 C85 220 113 210 150 190 C205 160 225 80 300 42 C340 21 360 21 400 42 C475 80 495 160 550 190 C587 210 615 220 700 220" />
-            </svg>
-            <span class="distribution-marker pilot" style="--position: 61%"><i></i><b>Pilot midpoint<br />61</b></span>
-            <span class="distribution-marker you" style="--position: ${score}%"><i></i><b>You<br />${score}</b></span>
-            <span class="distribution-scale mono"><i>0</i><i>50</i><i>100</i></span>
-          </div>
-          <p class="source-line mono">n=24 · ages 19-29 · collected 18-25 Aug 2026 · demo pilot sample</p>
-        </div>
-      </section>
-
-      <section class="result-action report-reveal reveal-4">
+      <section class="result-action report-reveal reveal-3">
         <div>
-          <span class="section-index mono">NEXT · ABOUT 5 MIN</span>
-          <h2>Fill the gaps. Then compare.</h2>
+          <span class="section-index mono">NEXT · ABOUT 3 MIN</span>
+          <h2>Turn this into a protection starting point.</h2>
         </div>
-        <button class="primary-button" type="button" data-action="create-account">Continue with a demo account <span aria-hidden="true">→</span></button>
+        <div class="result-paths">
+          <button class="primary-button" type="button" data-action="start-no-policy">I don’t have a plan <span aria-hidden="true">→</span></button>
+          <button class="secondary-button" type="button" data-action="review-policy">Review a plan I have</button>
+        </div>
       </section>
       <footer class="report-footer">${trustNote()}</footer>
     </main>
@@ -676,40 +703,32 @@ const signupView = () => `
   <main class="form-screen" data-screen="signup">
     ${appHeader({ back: true })}
     <section class="form-intro view-enter">
-      <p class="eyebrow">Save your progress</p>
-      <h1 class="form-title screen-title" tabindex="-1">A demo account. Nothing is sent or saved.</h1>
-      <p>Your answers stay in this tab and reset when you refresh.</p>
+      <p class="eyebrow">Before the gap check</p>
+      <h1 class="form-title screen-title" tabindex="-1">No account. Just clear consent.</h1>
+      <p>Your answers are used to calculate the result. A compact profile summary—not a policy document—is sent to Amazon Bedrock for a plain-language explanation.</p>
     </section>
     <form id="account-form" class="account-form view-enter" novalidate>
-      <label class="field">
-        <span>First name</span>
-        <input type="text" name="name" data-field="name" value="${escapeHtml(state.profile.name)}" autocomplete="given-name" required />
-      </label>
-      <label class="field">
-        <span>Email</span>
-        <input type="email" name="email" data-field="email" value="${escapeHtml(state.profile.email)}" placeholder="you@example.com" autocomplete="email" required />
-      </label>
       <label class="consent-row">
         <input type="checkbox" name="consent" data-field="consent" ${state.profile.consent ? 'checked' : ''} required />
-        <span>I understand my answers stay in this browser session.</span>
+        <span>I agree to the use of my answers for this coverage check and its AI-generated explanation.</span>
       </label>
-      <button class="primary-button" type="submit">Start my profile <span aria-hidden="true">→</span></button>
+      <button class="primary-button" type="submit">Continue to five inputs <span aria-hidden="true">→</span></button>
       <p class="form-error" id="account-error" role="alert"></p>
     </form>
     <aside class="privacy-aside view-enter">
       <span class="mono">NOT COLLECTED</span>
-      <p>No NRIC, medical details, payment or beneficiary information.</p>
+      <p>No name, email, NRIC, medical details, payment, or beneficiary information.</p>
     </aside>
   </main>
 `
 
-const radioGroup = (name, label, options, current) => `
+const radioGroup = (name, label, options, current, required = false) => `
   <fieldset class="choice-field">
     <legend>${label}</legend>
     <div class="segmented-options">
       ${options.map((option) => `
         <label>
-          <input type="radio" name="${name}" data-field="${name}" value="${escapeHtml(option)}" ${current === option ? 'checked' : ''} />
+          <input type="radio" name="${name}" data-field="${name}" value="${escapeHtml(option)}" ${current === option ? 'checked' : ''} ${required ? 'required' : ''} />
           <span>${option}</span>
         </label>
       `).join('')}
@@ -717,93 +736,71 @@ const radioGroup = (name, label, options, current) => `
   </fieldset>
 `
 
+const activeOnboardingSteps = () => state.profile.insuranceStatus === 'Yes'
+  ? onboardingSteps
+  : onboardingSteps.slice(0, 1)
+
 const onboardingFields = () => {
   const profile = state.profile
-  switch (state.onboardingStep) {
-    case 0:
-      return `
-        ${radioGroup('ageBand', 'Age band', ['19-24', '25-29'], profile.ageBand)}
-        ${radioGroup('employment', 'Employment', ['Full-time employee', 'Contract or gig work', 'Starting work soon'], profile.employment)}
-        <label class="field">
-          <span>Changing jobs soon?</span>
-          <select data-field="jobChange" name="jobChange">
-            <option>No plans</option>
-            <option>Maybe this year</option>
-            <option>Yes, soon</option>
-          </select>
-        </label>
-      `
-    case 1:
-      return `
-        <div class="field-pair">
-          <label class="field money-field"><span>Monthly take-home income</span><i>S$</i><input type="number" min="0" step="100" data-field="income" value="${profile.income}" /></label>
-          <label class="field money-field"><span>Monthly essentials</span><i>S$</i><input type="number" min="0" step="100" data-field="expenses" value="${profile.expenses}" /></label>
-        </div>
-        <label class="range-field">
-          <span><b>Emergency savings</b><output>${profile.emergencyMonths} months</output></span>
-          <input type="range" min="0" max="12" step="1" data-field="emergencyMonths" value="${profile.emergencyMonths}" />
-          <small>MoneySense guide: aim for 3-6 months of expenses.</small>
-        </label>
-      `
-    case 2:
-      return `
-        ${radioGroup('dependants', 'Who relies on your income?', ['None', 'Parents', 'Partner or child', 'Multiple people'], profile.dependants)}
-        <label class="field money-field"><span>Loans left to pay</span><i>S$</i><input type="number" min="0" step="1000" data-field="debt" value="${profile.debt}" /></label>
-        <p class="field-caption">A rough total is enough.</p>
-      `
-    case 3:
-      return `
-        <fieldset class="check-field">
-          <legend>Cover you already have</legend>
-          <label><input type="checkbox" data-field="medishield" ${profile.medishield ? 'checked' : ''} /><span><b>MediShield Life</b><small>Helps with large hospital bills.</small></span></label>
-          <label><input type="checkbox" data-field="careshield" ${profile.careshield ? 'checked' : ''} /><span><b>CareShield Life</b><small>Monthly support for severe disability.</small></span></label>
-          <label><input type="checkbox" data-field="employer" ${profile.employer ? 'checked' : ''} /><span><b>Work insurance</b><small>Cover from your current job.</small></span></label>
-        </fieldset>
-        <p class="field-caption">Not sure? Leave it unchecked. We will show it as unknown.</p>
-      `
-    default:
-      return `
-        <label class="field">
-          <span>Main financial priority</span>
-          <select data-field="goalCategory" name="goalCategory">
-            <option value="family_protection" ${profile.goalCategory === 'family_protection' ? 'selected' : ''}>Protect my family</option>
-            <option value="home_purchase" ${profile.goalCategory === 'home_purchase' ? 'selected' : ''}>Save for a home</option>
-            <option value="emergency_fund" ${profile.goalCategory === 'emergency_fund' ? 'selected' : ''}>Build emergency savings</option>
-            <option value="debt_reduction" ${profile.goalCategory === 'debt_reduction' ? 'selected' : ''}>Reduce debt</option>
-            <option value="cashflow_control" ${profile.goalCategory === 'cashflow_control' ? 'selected' : ''}>Manage spending</option>
-          </select>
-        </label>
-
-        <label class="field">
-          <span>Main goal</span>
-          <textarea rows="3" data-field="goal">${escapeHtml(profile.goal)}</textarea>
-        </label>
-        <label class="range-field">
-          <span><b>Monthly insurance budget</b><output>${formatCurrency(profile.budget)}</output></span>
-          <input type="range" min="50" max="500" step="10" data-field="budget" value="${profile.budget}" />
-          <small>This is a comfort limit, not a spending target.</small>
-        </label>
-        ${radioGroup('preference', 'Plan type', ['Protection-only', 'Open to plans with savings', 'Not sure yet'], profile.preference)}
-      `
+  if (state.onboardingStep === 0) {
+    return `
+      ${radioGroup('insuranceStatus', 'Where are you starting?', ['No', 'Yes', 'Unsure'], profile.insuranceStatus, true)}
+      <div class="path-callout">
+        <span class="mono">${profile.insuranceStatus === 'Yes' ? 'EXISTING PLAN PATH' : profile.insuranceStatus === 'No' ? 'NO-PLAN PATH' : 'UNSURE PATH'}</span>
+        <p>${profile.insuranceStatus === 'Yes' ? 'Copy four amounts from your latest policy schedule. Only figures you confirm are used.' : profile.insuranceStatus === 'No' ? 'The calculation starts from zero declared private cover.' : 'No private cover is deducted until you can verify it.'}</p>
+      </div>
+      <div class="field-pair">
+        <label class="field money-field"><span>Monthly take-home income</span><i>S$</i><input type="number" min="0.01" step="0.01" data-field="income" value="${profile.income}" placeholder="e.g. 4,200" required /></label>
+        <label class="field money-field"><span>Total loans left to pay</span><i>S$</i><input type="number" min="0" step="0.01" data-field="debt" value="${profile.debt}" placeholder="Enter 0 if none" required /></label>
+      </div>
+      <p class="field-caption">A rough loan total is enough. Savings and spending are not needed for this calculation.</p>
+      ${radioGroup('goal', 'What matters most right now?', goalOptions, profile.goal, true)}
+      ${radioGroup('productPreference', 'What type of cover would you prefer to explore?', ['Protection only', 'Open to savings features'], profile.productPreference, true)}
+      <label class="field money-field"><span>Maximum additional monthly premium</span><i>S$</i><input type="number" min="0.01" step="0.01" data-field="budget" value="${profile.budget}" placeholder="e.g. 150" required /></label>
+      <p class="field-caption">This is your stated ceiling for exploring cover—not a quote or spending recommendation.</p>
+    `
   }
+
+  const premiumShare = profile.income > 0 ? (profile.currentPremium / profile.income) * 100 : 0
+  return `
+    <div class="unknown-callout">
+      <strong>Only enter amounts you can verify.</strong>
+      <p>These are the current-plan figures used in the gap and affordability calculations. Enter 0 only when the policy explicitly has no such benefit.</p>
+    </div>
+    <div class="field-pair">
+      <label class="field money-field"><span>Total current monthly premium</span><i>S$</i><input type="number" min="0" step="0.01" data-field="currentPremium" value="${profile.currentPremium}" placeholder="e.g. 120" required /></label>
+      <label class="field money-field"><span>Death benefit</span><i>S$</i><input type="number" min="0" step="0.01" data-field="deathCover" value="${profile.deathCover}" placeholder="e.g. 100,000" required /></label>
+      <label class="field money-field"><span>Total permanent disability benefit</span><i>S$</i><input type="number" min="0" step="0.01" data-field="tpdCover" value="${profile.tpdCover}" placeholder="e.g. 100,000" required /></label>
+      <label class="field money-field"><span>Advanced critical illness benefit</span><i>S$</i><input type="number" min="0" step="0.01" data-field="advancedCiCover" value="${profile.advancedCiCover}" placeholder="e.g. 50,000" required /></label>
+    </div>
+    <div class="premium-preview ${premiumShare > 15 ? 'is-high' : premiumShare > 5 ? 'is-watch' : 'is-comfort'}">
+      <span class="mono">CURRENT PREMIUM / INCOME</span>
+      <strong>${premiumShare.toFixed(1)}%</strong>
+      <p>5% is a planning reference. MoneySense’s educational upper reference is 15% of income.</p>
+    </div>
+  `
 }
 
 const onboardingView = () => {
-  const current = onboardingSteps[state.onboardingStep]
+  const steps = activeOnboardingSteps()
+  const current = steps[state.onboardingStep]
+  const isFinalStep = state.onboardingStep === steps.length - 1
+  const isPlanning = isFinalStep && state.runtime.status === 'planning'
+  const finalAction = 'Calculate my protection gaps'
   return `
     <main class="onboarding-screen" data-screen="onboarding">
-      ${appHeader({ step: `PROFILE ${state.onboardingStep + 1} / ${onboardingSteps.length}`, back: true })}
+      ${appHeader({ step: `PROFILE ${state.onboardingStep + 1} / ${steps.length}`, back: true })}
       <div class="onboarding-layout">
         <aside class="stepper" aria-label="Onboarding progress">
           <p class="mono">YOUR PROFILE</p>
           <ol>
-            ${onboardingSteps.map((step, index) => `
+            ${steps.map((step, index) => `
               <li class="${index === state.onboardingStep ? 'is-current' : ''} ${index < state.onboardingStep ? 'is-complete' : ''}">
                 <span>${String(index + 1).padStart(2, '0')}</span><b>${step[0]}</b>
               </li>
             `).join('')}
           </ol>
-          <p class="stepper-note">You can go back. It is fine not to know.</p>
+          <p class="stepper-note">Only details used in your calculation are required.</p>
         </aside>
         <section class="onboarding-main view-enter">
           <p class="eyebrow">Step ${state.onboardingStep + 1}</p>
@@ -813,8 +810,9 @@ const onboardingView = () => {
             ${onboardingFields()}
             <div class="form-actions">
               ${state.onboardingStep > 0 ? '<button class="secondary-button" type="button" data-action="previous-onboarding">Previous</button>' : ''}
-              <button class="primary-button" type="submit">${state.onboardingStep === onboardingSteps.length - 1 ? 'Review a policy' : 'Next step'} <span aria-hidden="true">→</span></button>
+              <button class="primary-button" type="submit" ${isPlanning ? 'disabled' : ''}>${isPlanning ? 'Running checks…' : isFinalStep ? `${finalAction} <span aria-hidden="true">→</span>` : 'Next step <span aria-hidden="true">→</span>'}</button>
             </div>
+            ${state.runtime.error ? `<p class="form-error" role="alert">${escapeHtml(state.runtime.error)}</p>` : ''}
           </form>
         </section>
       </div>
@@ -822,255 +820,187 @@ const onboardingView = () => {
   `
 }
 
-const uploadView = () => `
-  <main class="upload-screen" data-screen="upload">
-    ${appHeader({ step: 'POLICY REVIEW', back: true })}
-    <section class="upload-heading view-enter">
-      <p class="eyebrow">Check a policy</p>
-      <h1 class="upload-title screen-title" tabindex="-1">Upload one policy. We will flag anything unclear.</h1>
-      <p>Demo only: your file stays on this device. This screen always loads a fake sample.</p>
-    </section>
-    <section class="upload-zone view-enter" aria-labelledby="upload-label">
-      <div class="upload-symbol" aria-hidden="true"><span>PDF</span></div>
-      <div>
-        <h2 id="upload-label">Drop a policy document here</h2>
-        <p>PDF, JPG or PNG · Use a sample, not your real policy</p>
-      </div>
-      <label class="primary-button file-button">
-        Choose a file
-        <input id="policy-file" type="file" accept=".pdf,.jpg,.jpeg,.png" />
-      </label>
-      <span class="or-label mono">OR</span>
-      <button class="secondary-button" type="button" data-action="use-sample">Use synthetic sample policy</button>
-      <button class="text-button" type="button" data-action="no-policy">I do not have a policy</button>
-    </section>
-    <div class="upload-guardrails view-enter">
-      <p><span class="mono">01</span> Every detail links back to a page.</p>
-      <p><span class="mono">02</span> Unclear text is marked for review.</p>
-      <p><span class="mono">03</span> This demo never tells you to cancel.</p>
-    </div>
-  </main>
-`
+const illustrativeOptions = {
+  'synthetic-lioncity-term-flex': {
+    type: 'Term life',
+    direction: 'Family and debt protection',
+    description: 'A high-cover, fixed-term structure to explore when death and disability gaps are the priority.',
+    benefit: 'S$400,000',
+    term: 'To age 65',
+    premium: 78,
+  },
+  'synthetic-harbour-essential-ci': {
+    type: 'Critical illness',
+    direction: 'Serious-illness cash cover',
+    description: 'A lump-sum critical-illness structure to explore alongside hospital and income protection.',
+    benefit: 'S$150,000',
+    term: '30 years',
+    premium: 64,
+  },
+  'synthetic-orchid-income-shield': {
+    type: 'Disability income',
+    direction: 'Monthly income protection',
+    description: 'A monthly-benefit structure to explore if being unable to work is your main concern.',
+    benefit: 'S$2,000 / month',
+    term: 'To age 60',
+    premium: 92,
+  },
+}
 
-const ocrField = (label, value, confidence, unresolved = false) => `
-  <label class="ocr-field ${unresolved ? 'is-unresolved' : ''}">
-    <span><b>${label}</b><i class="confidence ${confidence >= 90 ? 'high' : confidence >= 75 ? 'medium' : 'low'}">${confidence}%</i></span>
-    <input type="text" value="${escapeHtml(value)}" ${unresolved ? 'placeholder="Review required"' : ''} />
-    <small class="mono">${unresolved ? 'TO CHECK · PAGE 6' : 'MATCHED ON PAGE 1'}</small>
-  </label>
-`
-
-const ocrView = () => `
-  <main class="ocr-screen" data-screen="ocr">
-    ${appHeader({ step: 'EXTRACTION REVIEW', back: true })}
-    <div class="ocr-layout">
-      <section class="document-panel view-enter" aria-label="Synthetic policy document preview">
-        <div class="document-toolbar">
-          <span class="mono">${escapeHtml(state.fileName || 'Inherited_Policy_Sample.pdf')}</span>
-          <span class="mono">PAGE 1 / 8</span>
-        </div>
-        <article class="document-page">
-          <div class="document-brand">MERLION MUTUAL</div>
-          <p class="mono">POLICY SCHEDULE · SYNTHETIC DEMO</p>
-          <h2>Foundation Term Protect</h2>
-          <div class="document-rule"></div>
+const optionDirectionsView = (evaluations) => `
+  <div class="direction-grid">
+    ${evaluations.map((evaluation) => {
+      const option = illustrativeOptions[evaluation.plan_id]
+      if (!option) return ''
+      return `
+        <article class="direction-card ${evaluation.rank === 1 ? 'is-primary' : ''}">
+          <div class="direction-card-heading">
+            <span class="mono">${evaluation.rank === 1 ? 'START HERE' : `ALTERNATIVE ${evaluation.rank - 1}`}</span>
+            <span>${escapeHtml(option.type)}</span>
+          </div>
+          <h3>${escapeHtml(option.direction)}</h3>
+          <p>${escapeHtml(option.description)}</p>
           <dl>
-            <div><dt>Policy owner</dt><dd>Tan Mei</dd></div>
-            <div><dt>Life assured</dt><dd>Ari Tan</dd></div>
-            <div class="document-highlight"><dt>Death / permanent disability</dt><dd>S$100,000</dd></div>
-            <div><dt>Policy term</dt><dd>To age 65</dd></div>
-            <div><dt>Annual premium</dt><dd>S$684.00</dd></div>
+            <div><dt>Example benefit</dt><dd>${escapeHtml(option.benefit)}</dd></div>
+            <div><dt>Example term</dt><dd>${escapeHtml(option.term)}</dd></div>
+            <div><dt>Illustrative premium</dt><dd>${formatCurrency(option.premium)} / month</dd></div>
           </dl>
-          <p class="document-fineprint">This synthetic document is created for the CoverCheck SG hackathon prototype. It is not an issued insurance contract.</p>
         </article>
-      </section>
-      <section class="extraction-panel">
-        <div class="extraction-heading ocr-reveal">
-          <p class="eyebrow">6 details found · 1 to check</p>
-          <h1 class="ocr-title screen-title" tabindex="-1">Check the details before using them.</h1>
-          <p>Confidence shows how clearly the text was read. It does not rate the plan.</p>
-        </div>
-        <form class="ocr-fields">
-          ${ocrField('Insurance company', 'Merlion Mutual', 99)}
-          ${ocrField('Plan name', 'Foundation Term Protect', 98)}
-          ${ocrField('Death / permanent disability', 'S$100,000', 96)}
-          ${ocrField('Monthly cost', 'S$57', 93)}
-          ${ocrField('Cover ends', 'At age 65', 88)}
-          ${ocrField('Critical illness add-on', '', 42, true)}
-        </form>
-        <div class="ocr-actions ocr-reveal">
-          <p><span class="status-dot"></span> Five values match visible page evidence.</p>
-          <button class="primary-button" type="button" data-action="confirm-extraction" ${state.runtime.status === 'planning' ? 'disabled' : ''}>${state.runtime.status === 'planning' ? 'Running checks…' : 'Confirm and compare <span aria-hidden="true">→</span>'}</button>
-          ${state.runtime.error ? `<p class="form-error" role="alert">${escapeHtml(state.runtime.error)}</p>` : ''}
-        </div>
-      </section>
-    </div>
-  </main>
+      `
+    }).join('')}
+  </div>
+  <p class="illustration-note"><b>Illustrative examples only.</b> These are not insurer products or quotes. Use them to understand which cover structure to investigate in the brochure library or with a licensed adviser.</p>
 `
 
-const planPresentation = {
-  'synthetic-lioncity-term-flex': ['LionCity Term Flex', 'Term life', 'S$400,000', 'To age 65', 78],
-  'synthetic-harbour-essential-ci': ['Harbour Essential CI', 'Critical illness', 'S$150,000', '30 years', 64],
-  'synthetic-orchid-income-shield': ['Orchid Income Shield', 'Disability income', 'S$2,000 / month', 'To age 60', 92],
-  'synthetic-meridian-whole-life-plus': ['Meridian Whole Life Plus', 'Whole life', 'S$350,000', 'Whole life', 286],
-}
-
-const comparisonTable = (evaluations) => {
-  const visible = evaluations.map((evaluation) => ({
-    evaluation,
-    details: planPresentation[evaluation.plan_id] || [evaluation.plan_id, 'Unknown', 'Unknown', 'Unknown', 0],
-  }))
-  const row = (label, value) => `<tr><th scope="row">${label}</th>${visible.map(value).join('')}</tr>`
-
-  return `
-    <table class="plan-table">
-      <thead><tr><th scope="col">Compare</th>${visible.map(({ evaluation, details }) => `
-        <th scope="col" class="${evaluation.rank === 1 ? 'recommended' : ''}">
-          ${evaluation.rank === 1 ? '<span>Closest fit</span>' : ''}${escapeHtml(details[0])}
-        </th>
-      `).join('')}</tr></thead>
-      <tbody>
-        ${row('What it covers', ({ details }) => `<td>${escapeHtml(details[1])}</td>`)}
-        ${row('Monthly premium', ({ details }) => `<td><strong>${formatCurrency(details[4])}</strong></td>`)}
-        ${row('Benefit amount', ({ details }) => `<td>${escapeHtml(details[2])}</td>`)}
-        ${row('How long', ({ details }) => `<td>${escapeHtml(details[3])}</td>`)}
-        ${row('Fit score', ({ evaluation }) => `<td>${evaluation.score === null ? 'Not scored' : `${Math.round(evaluation.score * 100)} / 100`}</td>`)}
-        ${row('Trade-offs', ({ evaluation }) => `<td>${escapeHtml(evaluation.trade_offs.join(', ') || 'None recorded')}</td>`)}
-        ${row('Evidence', ({ evaluation }) => `<td><small class="mono">${escapeHtml(evaluation.evidence_ids.join(' · '))}</small></td>`)}
-      </tbody>
-    </table>
-  `
-}
-
-const neutralEvidenceView = () => {
-  if (!state.evidenceComparison.products.length) {
-    return `<p class="comparison-empty">${escapeHtml(state.evidenceComparison.error || 'No eligible evidence comparison is available.')}</p>`
+const declaredCoverageView = (insuranceStatus) => {
+  if (insuranceStatus === 'Unsure') {
+    return '<p class="comparison-empty">Your current private cover is not yet confirmed, so it was not deducted. Check your policy schedule before using these amounts as a planning reference.</p>'
   }
-  const fieldValue = (product, key) => product.fields.find((field) => field.key === key)?.value || 'Unknown'
-
+  if (insuranceStatus === 'No') {
+    return '<p class="comparison-empty">You said you do not have a current private policy, so the calculation starts from zero declared private cover.</p>'
+  }
+  const coverage = [
+    ['Death', state.profile.deathCover],
+    ['Total permanent disability', state.profile.tpdCover],
+    ['Advanced critical illness', state.profile.advancedCiCover],
+  ]
   return `
-    <div class="evidence-comparison-grid">
-      ${state.evidenceComparison.products.map((product) => `
-        <article>
-          <span class="mono">${product.synthetic ? 'SYNTHETIC FIXTURE' : 'REAL CACHED EVIDENCE'} · ${escapeHtml(product.eligibility)}</span>
-          <h3>${escapeHtml(product.product)}</h3>
-          <p>${escapeHtml(product.provider)}</p>
-          <dl>
-            <div><dt>Benefit</dt><dd>${escapeHtml(fieldValue(product, 'benefit'))}</dd></div>
-            <div><dt>Premium</dt><dd>${escapeHtml(fieldValue(product, 'premium'))}</dd></div>
-          </dl>
-          <details>
-            <summary>Inspect evidence lineage</summary>
-            <p class="mono">${escapeHtml(product.fields.flatMap((field) => field.evidence_ids).join(' · '))}</p>
-          </details>
-        </article>
-      `).join('')}
+    <div class="declared-cover-heading">
+      <div><span class="mono">YOU CONFIRMED</span><h3>Current private cover used in the calculation</h3></div>
+      <div><b>${formatCurrency(state.profile.currentPremium)} / month</b><small>Confirm these figures against your latest policy schedule.</small></div>
     </div>
-    <p class="comparison-warning">${escapeHtml(state.evidenceComparison.warnings.join(' '))}</p>
+    <div class="declared-cover-grid">
+      ${coverage.map(([label, amount]) => `<article><span>${label}</span><strong class="mono">${formatCurrency(amount)}</strong></article>`).join('')}
+    </div>
+    <p class="comparison-warning">Benefits stay separate because one payout may overlap with or reduce another. Confirm how your policy treats accelerated and overlapping benefits.</p>
   `
 }
 
 const comparisonView = () => {
   const recommendation = state.runtime.recommendation
+  const explanation = state.runtime.explanation
   const gapByType = Object.fromEntries((recommendation?.gaps || []).map((gap) => [gap.gap_type, gap]))
   const deathGap = gapByType.death?.gap_amount || 0
   const ciGap = gapByType.critical_illness?.gap_amount || 0
+  const tpdGap = gapByType.total_permanent_disability?.gap_amount
+  const affordability = recommendation?.affordability
+  const budgetIncomeShare = affordability?.budget_income_share == null
+    ? null
+    : affordability.budget_income_share * 100
   const criticalIllnessOnly = state.agent.comparisonFilter === 'critical-illness'
-  const eligible = (recommendation?.evaluations || [])
+  const allEligible = (recommendation?.evaluations || [])
     .filter((evaluation) => evaluation.eligible)
     .sort((left, right) => left.rank - right.rank)
+  const eligible = allEligible
     .filter((evaluation) => (
-      !criticalIllnessOnly || planPresentation[evaluation.plan_id]?.[1] === 'Critical illness'
+      !criticalIllnessOnly || illustrativeOptions[evaluation.plan_id]?.type === 'Critical illness'
     ))
-  const excluded = (recommendation?.evaluations || []).find((evaluation) => !evaluation.eligible)
-  const closest = eligible[0]
-  const closestName = planPresentation[closest?.plan_id]?.[0] || 'No eligible plan'
-  const closestScore = closest?.score === null || closest?.score === undefined
-    ? 'Not scored'
-    : `${Math.round(closest.score * 100)} / 100`
-  const hasCurrentPolicy = state.runtime.profile?.data.has_current_policy.value
-  const personalizationNote = recommendation?.assumptions?.length
-    ? '<p class="personalization-note">Personalised using your stated goal and available profile information.</p>'
-    : ''
+  const closest = allEligible[0]
+  const closestDirection = illustrativeOptions[closest?.plan_id]?.direction || 'No direction fits the stated monthly ceiling'
+  const assumptions = (recommendation?.assumptions || [])
+    .filter((assumption) => !assumption.startsWith('The explanation was tailored to:'))
+  const policyField = state.runtime.profile?.data.has_current_policy
+  const insuranceStatus = policyField?.state !== 'present'
+    ? 'Unsure'
+    : policyField.value ? 'Yes' : 'No'
 
   return `
     <main class="comparison-screen" data-screen="comparison">
       ${appHeader()}
       <section class="comparison-lead view-enter">
         <div>
-          <p class="eyebrow">Comparison ready for ${escapeHtml(state.profile.name || 'you')}</p>
-          <h1 class="comparison-title screen-title" tabindex="-1">${hasCurrentPolicy ? 'Your current plan covers part of the basics.' : 'Start with the largest known protection gaps.'}</h1>
+          <p class="eyebrow">Your protection starting point</p>
+          <h1 class="comparison-title screen-title" tabindex="-1">${insuranceStatus === 'Yes' ? 'See what your declared cover may still leave open.' : insuranceStatus === 'Unsure' ? 'See the starting point, then verify the cover you have.' : 'Start with the largest protection gaps.'}</h1>
+          <p class="comparison-lead-deck">Calculated from the income, loans, budget, goal, and cover amounts you provided.</p>
         </div>
         <div class="comparison-meta">
-          <span class="synthetic-badge">Synthetic plan data</span>
-          <span class="mono">PROFILE V${state.runtime.profile?.version || 1} · RULESET ${escapeHtml(recommendation?.ruleset_version || 'UNAVAILABLE')}</span>
+          <span class="result-ready"><i aria-hidden="true"></i> Calculation complete</span>
+          <span class="mono">UPDATED ${escapeHtml(state.runtime.profile?.as_of_date || new Date().toISOString().slice(0, 10))}</span>
         </div>
         ${personalizationNote}
       </section>
 
       <section class="gap-strip" aria-labelledby="gap-title">
         <div class="gap-intro">
-          <span class="section-index mono">01 · CALCULATED GAPS</span>
-          <h2 id="gap-title">What may still be missing</h2>
-          <p>Draft deterministic formulation; independent policy review is still pending.</p>
+          <span class="section-index mono">01 · YOUR COVERAGE GAPS</span>
+          <h2 id="gap-title">Amounts to investigate</h2>
+          <p>A planning baseline—not a quote. Open the assumptions below to see what is and is not included.</p>
         </div>
         <div class="gap-stat">
-          <span>Death or permanent disability</span>
+          <span>Death</span>
           <strong class="mono">${formatCurrency(deathGap)}</strong>
-          <small>${escapeHtml(gapByType.death?.reason_code || 'No calculation available')}</small>
+          <small>9× annual income + loans − declared death cover</small>
+        </div>
+        <div class="gap-stat">
+          <span>Total permanent disability</span>
+          <strong class="mono">${tpdGap === undefined ? 'Unknown' : formatCurrency(tpdGap)}</strong>
+          <small>${tpdGap === undefined ? 'Add your current TPD benefit to calculate this gap' : '9× annual income + loans − declared TPD cover'}</small>
         </div>
         <div class="gap-stat">
           <span>Critical illness</span>
           <strong class="mono">${formatCurrency(ciGap)}</strong>
-          <small>${escapeHtml(gapByType.critical_illness?.reason_code || 'No calculation available')}</small>
+          <small>4× annual income − declared critical-illness cover</small>
         </div>
-        <div class="gap-stat is-unknown">
-          <span>Assumptions still active</span>
-          <strong>Unknown</strong>
-          <small>${escapeHtml(recommendation?.assumptions.join(', ') || 'none')}</small>
+        <div class="gap-stat premium-gap">
+          <span>Your monthly ceiling</span>
+          <strong class="mono">${formatCurrency(state.profile.budget)}</strong>
+          <small>${budgetIncomeShare === null ? 'Income share unavailable' : `${budgetIncomeShare.toFixed(1)}% of monthly income`}</small>
         </div>
+      </section>
+
+      <section class="declared-cover-section" aria-labelledby="declared-cover-title">
+        <div class="comparison-section-heading">
+          <div><span class="section-index mono">02 · WHAT WE USED</span><h2 id="declared-cover-title">Your declared private cover</h2></div>
+          <p>Each benefit is kept separate so overlapping policy payouts are not added together.</p>
+        </div>
+        ${declaredCoverageView(insuranceStatus)}
       </section>
 
       <section class="comparison-section" id="plan-comparison" aria-labelledby="compare-title" tabindex="-1">
         <div class="comparison-section-heading">
           <div>
-            <span class="section-index mono">02 · ELIGIBLE OPTIONS</span>
-            <h2 id="compare-title">Compare what you pay and get.</h2>
+            <span class="section-index mono">03 · WHAT TO EXPLORE</span>
+            <h2 id="compare-title">Cover directions within your ceiling</h2>
           </div>
           <div class="comparison-context">
-            <p>Budget checked against your ${formatCurrency(state.profile.budget)} monthly comfort limit.</p>
-            ${criticalIllnessOnly ? '<button class="text-button" type="button" data-action="clear-agent-filter">Show all options</button>' : ''}
+            <p><b>${escapeHtml(closestDirection)}</b> is the first structure to investigate based on your stated priority, preference, and ${formatCurrency(state.profile.budget)} monthly ceiling.</p>
+            ${criticalIllnessOnly ? '<button class="text-button" type="button" data-action="clear-agent-filter">Show every direction</button>' : ''}
           </div>
         </div>
-        <div class="table-wrap" tabindex="0" aria-label="Scrollable plan comparison table">
-          ${comparisonTable(eligible)}
-        </div>
+        ${eligible.length ? optionDirectionsView(eligible) : '<p class="comparison-empty">No example fits the monthly ceiling you entered. Ask CoverCheck to change your budget, or discuss a staged approach with a licensed adviser.</p>'}
 
         <div class="reasoning-drawers">
-          <details id="ranking-reason" tabindex="-1" open>
-            <summary><span><b>Why ${escapeHtml(closestName)} ranks first</b><small>Fit score ${closestScore} · synthetic</small></span><i aria-hidden="true">+</i></summary>
-            <div class="drawer-content"><p>${escapeHtml(closest?.reason_codes.join(', ') || 'No eligible plan was returned.')}</p></div>
+          <details id="ranking-reason" tabindex="-1">
+            <summary><span><b>Plain-language explanation</b><small>${explanation ? 'Generated with Amazon Bedrock' : 'Recalculate to refresh'}</small></span><i aria-hidden="true">+</i></summary>
+            <div class="drawer-content">
+              <p>${escapeHtml(explanation?.summary || 'Your result has changed. The displayed amounts remain calculated from your confirmed inputs.')}</p>
+            </div>
           </details>
           <details id="ranking-assumptions" tabindex="-1">
-            <summary><span><b>What the ranking does not know</b><small>${recommendation?.assumptions.length || 0} assumptions remain</small></span><i aria-hidden="true">+</i></summary>
-            <div class="drawer-content"><p>${escapeHtml(recommendation?.assumptions.join(' ') || 'No assumptions recorded.')}</p></div>
-          </details>
-          <details>
-            <summary><span><b>Excluded synthetic option</b><small>${escapeHtml(planPresentation[excluded?.plan_id]?.[0] || 'None')} · deterministic gate</small></span><i aria-hidden="true">+</i></summary>
-            <div class="drawer-content"><p>${escapeHtml(excluded?.exclusions.join(', ') || 'No plan was excluded.')}</p></div>
+            <summary><span><b>Assumptions to verify</b><small>${assumptions.length} item${assumptions.length === 1 ? '' : 's'}</small></span><i aria-hidden="true">+</i></summary>
+            <div class="drawer-content assumption-list">${assumptions.length ? `<ul>${assumptions.map((assumption) => `<li>${escapeHtml(assumption)}</li>`).join('')}</ul>` : '<p>No additional assumptions were recorded.</p>'}</div>
           </details>
         </div>
-      </section>
-
-      <section class="evidence-comparison-section" aria-labelledby="evidence-comparison-title">
-        <div class="comparison-section-heading">
-          <div>
-            <span class="section-index mono">03 · NEUTRAL EVIDENCE VIEW</span>
-            <h2 id="evidence-comparison-title">Compare product facts without a winner.</h2>
-          </div>
-          <p>This separate Phase 3B view uses labelled synthetic evidence. It cannot alter the ranked recommendation.</p>
-        </div>
-        ${neutralEvidenceView()}
       </section>
 
       ${agentView()}
@@ -1078,15 +1008,15 @@ const comparisonView = () => {
       <section class="decision-footer">
         <div>
           <span class="section-index mono">BEFORE YOU ACT</span>
-          <h2>Check the policy. Check the adviser.</h2>
-          <p>Do not cancel existing cover based on this demo. A new plan may have different terms or cost more.</p>
+          <h2>Verify before you decide.</h2>
+          <p>Check current policy wording, premiums, exclusions, and replacement risks with a licensed adviser. Do not cancel existing cover from this calculation alone.</p>
         </div>
         <a class="primary-button" href="https://eservices.mas.gov.sg/rr" target="_blank" rel="noreferrer">Check an adviser on MAS <span aria-hidden="true">↗</span></a>
       </section>
       <footer class="comparison-footer">
         ${brand()}
         ${trustNote()}
-        <button class="text-button" type="button" data-action="restart">Restart prototype</button>
+        <button class="text-button" type="button" data-action="restart">Start over</button>
       </footer>
     </main>
   `
@@ -1098,8 +1028,6 @@ const views = {
   result: resultView,
   signup: signupView,
   onboarding: onboardingView,
-  upload: uploadView,
-  ocr: ocrView,
   comparison: comparisonView,
 }
 
@@ -1151,6 +1079,28 @@ const applyAgentActions = (actions) => {
     .forEach((action) => actionMap[`${action.tool}:${action.target}`]?.())
 }
 
+const syncProfileFromVersioned = (versionedProfile) => {
+  const data = versionedProfile?.data
+  if (!data) return
+  const presentValue = (field, fallback) => field?.state === 'present' ? field.value : fallback
+  const status = data.has_current_policy?.state === 'present'
+    ? data.has_current_policy.value ? 'Yes' : 'No'
+    : 'Unsure'
+
+  state.profile.insuranceStatus = status
+  state.profile.goal = presentValue(data.goal, state.profile.goal)
+  state.profile.income = Number(presentValue(data.monthly_income, state.profile.income))
+  state.profile.debt = Number(presentValue(data.liabilities, state.profile.debt))
+  state.profile.budget = Number(presentValue(data.monthly_budget, state.profile.budget))
+  state.profile.productPreference = presentValue(data.product_preference, 'protection-only') === 'protection-only'
+    ? 'Protection only'
+    : 'Open to savings features'
+  state.profile.currentPremium = Number(presentValue(data.current_monthly_premium, status === 'Yes' ? state.profile.currentPremium : 0))
+  state.profile.deathCover = Number(presentValue(data.existing_death_cover, status === 'Yes' ? state.profile.deathCover : 0))
+  state.profile.tpdCover = Number(presentValue(data.existing_tpd_cover, status === 'Yes' ? state.profile.tpdCover : 0))
+  state.profile.advancedCiCover = Number(presentValue(data.existing_advanced_ci_cover, status === 'Yes' ? state.profile.advancedCiCover : 0))
+}
+
 async function askAgent(message) {
   const content = String(message || '').trim()
   if (!content || state.agent.status === 'planning') return
@@ -1200,7 +1150,7 @@ async function askAgent(message) {
       state.agent.status = 'failed'
       state.agent.error = error instanceof ApiError
         ? error.message
-        : 'The local backend is unavailable. Start the CoverCheck API and try again.'
+        : 'CoverCheck is temporarily unavailable. Please try again.'
     }
   } finally {
     state.agent.abortController = null
@@ -1232,7 +1182,8 @@ async function decideAgentProposal(proposalId, decision) {
       state.agent.canUndo = true
       state.runtime.profile = response.revision.profile
       state.runtime.recommendation = response.revision.recommendation
-      state.profile.budget = response.revision.profile.data.monthly_budget.value
+      state.runtime.explanation = null
+      syncProfileFromVersioned(response.revision.profile)
     }
   } catch (error) {
     state.agent.status = 'failed'
@@ -1266,7 +1217,8 @@ async function undoAgentRevision() {
     state.agent.status = 'completed'
     state.runtime.profile = response.restored_revision.profile
     state.runtime.recommendation = response.restored_revision.recommendation
-    state.profile.budget = response.restored_revision.profile.data.monthly_budget.value
+    state.runtime.explanation = null
+    syncProfileFromVersioned(response.restored_revision.profile)
   } catch (error) {
     state.agent.status = 'failed'
     state.agent.error = error instanceof ApiError ? error.message : 'The revision could not be undone.'
@@ -1292,7 +1244,7 @@ function goBack(keyboard = false) {
     }
     return
   }
-  if (state.view === 'signup') navigate('result', 'back', keyboard)
+  if (state.view === 'signup') navigate(state.entrySource === 'quiz' ? 'result' : 'intro', 'back', keyboard)
   else if (state.view === 'onboarding') {
     if (state.onboardingStep === 0) navigate('signup', 'back', keyboard)
     else {
@@ -1301,10 +1253,7 @@ function goBack(keyboard = false) {
       state.keyboard = keyboard
       render()
     }
-  } else if (state.view === 'upload') {
-    state.onboardingStep = onboardingSteps.length - 1
-    navigate('onboarding', 'back', keyboard)
-  } else if (state.view === 'ocr') navigate('upload', 'back', keyboard)
+  }
 }
 
 function chooseAnswer(index, keyboard = false) {
@@ -1337,20 +1286,36 @@ function updateProfileField(target) {
   if (!key) return
   const isBoolean = target.type === 'checkbox'
   const isNumber = target.type === 'number' || target.type === 'range'
-  state.profile[key] = isBoolean ? target.checked : isNumber ? Number(target.value) : target.value
+  state.profile[key] = isBoolean
+    ? target.checked
+    : isNumber && target.value !== '' ? Number(target.value) : target.value
 
   if (target.type === 'range') {
     const output = target.closest('.range-field')?.querySelector('output')
-    if (output) output.textContent = key === 'budget' ? formatCurrency(target.value) : `${target.value} months`
+    if (output) output.textContent = key === 'budget'
+      ? formatCurrency(target.value)
+      : `${target.value} / 100`
+  }
+
+  if (key === 'currentPremium' || key === 'income') {
+    const premiumShare = state.profile.income > 0
+      ? (state.profile.currentPremium / state.profile.income) * 100
+      : 0
+    const preview = app.querySelector('.premium-preview')
+    const output = preview?.querySelector('strong')
+    if (output) output.textContent = `${premiumShare.toFixed(1)}%`
+    if (preview) {
+      preview.classList.remove('is-comfort', 'is-watch', 'is-high')
+      preview.classList.add(premiumShare > 15 ? 'is-high' : premiumShare > 5 ? 'is-watch' : 'is-comfort')
+    }
   }
 }
 
 app.addEventListener('input', (event) => updateProfileField(event.target))
 app.addEventListener('change', (event) => {
   updateProfileField(event.target)
-  if (event.target.id === 'policy-file' && event.target.files?.[0]) {
-    state.fileName = event.target.files[0].name
-    navigate('ocr')
+  if (event.target.dataset.field === 'insuranceStatus') {
+    render({ focus: false, preserveScroll: true })
   }
 })
 
@@ -1365,7 +1330,7 @@ app.addEventListener('submit', (event) => {
   if (event.target.id === 'account-form') {
     const error = app.querySelector('#account-error')
     if (!event.target.checkValidity()) {
-      if (error) error.textContent = 'Add a valid email and confirm consent to continue.'
+      if (error) error.textContent = 'Confirm consent to continue.'
       event.target.reportValidity()
       return
     }
@@ -1374,7 +1339,13 @@ app.addEventListener('submit', (event) => {
   }
 
   if (event.target.id === 'onboarding-form') {
-    if (state.onboardingStep === onboardingSteps.length - 1) navigate('upload', 'forward', true)
+    if (!event.target.checkValidity()) {
+      event.target.reportValidity()
+      return
+    }
+    if (state.onboardingStep === activeOnboardingSteps().length - 1) {
+      void prepareComparison(state.profile.insuranceStatus)
+    }
     else {
       state.onboardingStep += 1
       navigate('onboarding', 'forward', true)
@@ -1407,18 +1378,23 @@ app.addEventListener('click', (event) => {
     state.answers = []
     navigate('quiz')
   }
+  if (action === 'start-no-policy') {
+    state.entrySource = state.view === 'result' ? 'quiz' : 'intro'
+    state.profile.insuranceStatus = 'No'
+    state.onboardingStep = 0
+    navigate('signup')
+  }
+  if (action === 'review-policy') {
+    state.entrySource = state.view === 'result' ? 'quiz' : 'intro'
+    state.profile.insuranceStatus = 'Yes'
+    state.onboardingStep = 0
+    navigate('signup')
+  }
   if (action === 'back') goBack()
-  if (action === 'create-account') navigate('signup')
   if (action === 'previous-onboarding') {
     state.onboardingStep -= 1
     navigate('onboarding', 'back')
   }
-  if (action === 'use-sample') {
-    state.fileName = 'Inherited_Policy_Sample.pdf'
-    navigate('ocr')
-  }
-  if (action === 'no-policy') void prepareComparison(false)
-  if (action === 'confirm-extraction') void prepareComparison(true)
   if (action === 'confirm-proposal') void decideAgentProposal(control.dataset.proposalId, 'confirm')
   if (action === 'cancel-proposal') void decideAgentProposal(control.dataset.proposalId, 'cancel')
   if (action === 'show-replay') void showReplay()
@@ -1430,6 +1406,9 @@ app.addEventListener('click', (event) => {
   }
   if (action === 'stop-agent') state.agent.abortController?.abort()
   if (action === 'restart') {
+    state.profileId = `browser-${createClientId()}`
+    state.profile = createEmptyProfile()
+    state.entrySource = 'intro'
     state.questionIndex = 0
     state.answers = []
     state.onboardingStep = 0
@@ -1447,7 +1426,7 @@ app.addEventListener('click', (event) => {
     state.runtime.profile = null
     state.runtime.extraction = null
     state.runtime.recommendation = null
-    state.evidenceComparison = { status: 'idle', error: '', products: [], warnings: [] }
+    state.runtime.explanation = null
     navigate('intro')
   }
 })

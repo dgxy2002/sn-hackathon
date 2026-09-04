@@ -31,8 +31,14 @@ services:
       PROFILE_MODE: synthetic
       EXTRACTION_MODE: simulated
       RECOMMENDATION_MODE: simulated
-      ORCHESTRATION_MODE: simulated
+      ORCHESTRATION_MODE: ${ORCHESTRATION_MODE:-simulated}
       CONVERSATION_MODE: simulated
+      LLM_PROVIDER: bedrock
+      AWS_REGION: ${AWS_REGION:-us-east-1}
+      BEDROCK_MODEL_ID: ${BEDROCK_MODEL_ID:-us.anthropic.claude-haiku-4-5-20251001-v1:0}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
+      AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN:-}
       DATABASE_URL: postgresql://covercheck:${POSTGRES_PASSWORD:-covercheck-local-only}@postgres:5432/covercheck
     depends_on:
       postgres:

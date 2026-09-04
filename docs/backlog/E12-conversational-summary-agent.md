@@ -23,7 +23,7 @@
 - [x] Supported summary regions and typed tool targets are allowlisted.
 
 **Current evidence:** [`backend/app/contracts.py`](../../backend/app/contracts.py), [`backend/app/conversations.py`](../../backend/app/conversations.py), and the frontend action map in [`frontend/src/main.js`](../../frontend/src/main.js). Cross-owner acceptance remains pending.
-- [ ] Idle, planning, acting, waiting-for-confirmation, completed, unsupported, cancelled, and failed states are defined.
+- [x] Idle, planning, waiting-for-confirmation, completed, unsupported, cancelled, and failed states are defined and rendered; tool actions expose their own running/completed/stopped status.
 - [ ] E03, E04, E06, E07, E10, and E11 owners accept their contract boundaries.
 
 ## E12-T02 - Integrate the final-page agent and action trace
@@ -89,7 +89,8 @@
 
 **Acceptance criteria:**
 
-- [ ] Profile, canonical comparison, and extracted-field proposals identify old, proposed, unknown, and unchanged values.
+- [x] The supported monthly-budget proposal identifies old and proposed values.
+- [ ] Goal, dependant, preference, declared-cover, canonical-comparison, and extracted-field proposals identify old, proposed, unknown, and unchanged values.
 - [x] The user can confirm or cancel before any canonical input version changes.
 - [x] Confirmation creates versioned inputs and invokes E07 rather than accepting model-authored calculations or rankings.
 - [x] The page updates all affected summary regions from one validated revision and highlights before/after deltas.
@@ -112,7 +113,8 @@
 
 - [x] Applied summary revisions expose a clear undo action and revision lineage.
 - [x] Undo restores or deterministically recalculates the prior coherent profile, extraction, recommendation, and summary state.
-- [ ] A replay view shows ordered intents, tools, evidence, confirmations, reruns, revisions, metrics, and terminal outcome.
+- [x] The current replay view shows ordered conversation, proposal, message, confirmation, recommendation-rerun, and revision events.
+- [ ] Replay is expanded to show the complete intent, tool, evidence, metrics, and terminal-outcome matrix for all planned action classes.
 - [ ] Predeclared scenarios cover Q&A, plan exploration, presentation change, confirmed and cancelled changes, extraction correction, undo, stale evidence, invalid action, dependency failure, and loop cap.
 - [ ] Conversation and revision state is removed with the POC session unless retained as a named synthetic fixture.
 

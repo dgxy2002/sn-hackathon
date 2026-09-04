@@ -1,5 +1,6 @@
 from app.config import Settings
 from app.main import create_app
+from app.model_gateway import ModelInvocationError
 from tests.factories import make_profile
 from tests.support import request
 
@@ -54,6 +55,8 @@ def test_no_policy_invocation_skips_extraction_and_is_replayable() -> None:
     assert payload["state"] == "completed"
     assert payload["extraction"] is None
     assert payload["recommendation"]["status"] == "ranked"
+    assert payload["explanation"]["provider"] == "fixture"
+    assert payload["explanation"]["recommendation_id"] == payload["recommendation"]["recommendation_id"]
     skipped = [event for event in payload["events"] if event["capability"] == "extraction"]
     assert skipped == [
         {
@@ -112,3 +115,38 @@ def test_policy_invocation_stops_for_review_and_missing_data_is_terminal() -> No
     assert missing.status_code == 200
     assert missing.json()["state"] == "insufficient_data"
     assert missing.json()["recommendation"]["missing_fields"] == ["monthly_income"]
+    assert missing.json()["explanation"] is None
+
+
+class FailingExplanationService:
+    provider = "bedrock"
+
+    def explain(self, profile, recommendation):
+        raise ModelInvocationError("BEDROCK_UNAVAILABLE")
+
+
+def test_model_failure_preserves_decision_and_returns_typed_failed_run() -> None:
+    app = create_app(
+        Settings.from_env({"APP_ENV": "test"}),
+        explanation_service=FailingExplanationService(),
+    )
+
+    invoked = request(
+        app,
+        "POST",
+        "/v1/invocations",
+        json={
+            "invocation_id": "invocation-bedrock-failure",
+            "profile": make_profile().model_dump(mode="json"),
+        },
+    )
+
+    assert invoked.status_code == 200
+    payload = invoked.json()
+    assert payload["state"] == "failed"
+    assert payload["recommendation"]["status"] == "ranked"
+    assert payload["explanation"] is None
+    assert payload["metrics"]["terminal_status"] == "failed"
+    assert payload["events"][-1]["safe_details"] == {
+        "error_code": "BEDROCK_UNAVAILABLE"
+    }

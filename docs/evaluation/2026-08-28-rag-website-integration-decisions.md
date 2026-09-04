@@ -45,7 +45,7 @@ The Supabase service-role key remains backend-only and must never reach the brow
 
 ### Providers
 
-OpenAI remains responsible for Darren's offline brochure extraction and `text-embedding-3-small` embeddings. OpenRouter remains the configured provider for E04 user-document extraction and E11 explanation/orchestration work. Provider IDs, model IDs, prompt versions, and usage must remain separately attributable.
+OpenAI remains responsible for Darren's offline brochure extraction and `text-embedding-3-small` embeddings. OpenRouter remains the configured provider for E04 user-document extraction. On 3 September 2026, the E11 provider portion of this decision was superseded: Amazon Bedrock is required for grounded explanation and receives only the immutable E07 result plus compact E03 context. Provider IDs, model or inference-profile IDs, prompt versions, and usage must remain separately attributable.
 
 ### Orchestration order
 

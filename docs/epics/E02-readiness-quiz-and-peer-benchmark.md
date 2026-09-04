@@ -9,7 +9,7 @@
 
 ## Scope
 
-- Fast public insurance-readiness quiz.
+- Optional four-question public insurance-readiness check.
 - Deterministic readiness score and dimension-level coverage map.
 - Constructive peer benchmark with sample size, age range, and collection dates.
 - Result copy that encourages curiosity without presenting suitability advice.
@@ -28,7 +28,7 @@
 
 ## Definition of done
 
-- [x] Five readiness questions can be completed with pointer or keyboard input.
+- [x] Four readiness questions can be completed with pointer or keyboard input, or skipped from the landing page.
 - [x] The same answers always produce the same score.
 - [x] Results distinguish known and unclear coverage dimensions.
 - [x] Peer data is labelled as a hackathon pilot and displays cohort context.
@@ -39,4 +39,4 @@
 
 ## POC boundary
 
-The current implementation remains usable as a POC slice, but the epic is not complete until the planned transparent IRS and minimum observed-user validation are delivered. Larger-sample population calibration remains future work.
+The current screen shows coverage visibility at 50%, protection basics at 25%, and terms awareness at 25%. It remains usable as a conversation-starter POC slice, but it is not the planned full IRS. The epic is not complete until the transparent IRS and minimum observed-user validation are delivered. Larger-sample population calibration remains future work.

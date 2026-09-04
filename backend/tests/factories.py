@@ -28,8 +28,6 @@ def make_profile(
     existing_ci_cover: float | None = None,
     goal: str | None = "protect dependants",
     goal_state: str = "present",
-    dependant_count: int = 0,
-    dependant_support_years: int = 0,
 ) -> VersionedProfile:
     cover_state = "present" if has_current_policy else "unknown"
     return VersionedProfile(

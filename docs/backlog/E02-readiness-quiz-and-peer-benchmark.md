@@ -18,8 +18,9 @@
 
 **Acceptance criteria:**
 
-- [x] Five questions cover policy, benefit, cost, employer, and exclusion visibility.
+- [x] Four questions cover current-cover visibility, total cost, benefit response, and limits/end dates.
 - [x] No sign-in is required.
+- [x] The check is optional and can be skipped for a direct protection route.
 - [x] Progress and selected answers are preserved during the quiz.
 
 **Evidence:** [`frontend/src/main.js`](../../frontend/src/main.js).
@@ -40,7 +41,7 @@
 **Acceptance criteria:**
 
 - [x] Identical answers produce an identical score.
-- [x] The result separates five readiness dimensions.
+- [x] The result separates coverage visibility, protection basics, and terms awareness using displayed weights of 50%, 25%, and 25%.
 - [x] Copy describes information gaps rather than personal worth or suitability.
 
 **Evidence:** `getScore` and `resultView` in [`frontend/src/main.js`](../../frontend/src/main.js).

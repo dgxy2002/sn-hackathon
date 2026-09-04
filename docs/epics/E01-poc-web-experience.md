@@ -10,7 +10,8 @@
 ## Scope
 
 - Vite application shell and visual system.
-- Landing page, quiz, result, mock sign-up, onboarding, upload, extraction review, and comparison views.
+- Neutral Singapore landing page with direct no-plan and existing-plan routes plus an optional readiness check.
+- Consent without account creation, minimum onboarding, synthetic upload/extraction review, and comparison views.
 - Back navigation, form handling, keyboard quiz controls, and reduced-motion support.
 - Clear educational-not-advice and synthetic-data messaging.
 - Typed final-page conversation, action, confirmation, delta, replay, and undo rendering without model-authored markup.
@@ -33,8 +34,8 @@
 
 ## Definition of done
 
-- [x] The journey renders from landing through comparison without a backend.
-- [x] Quiz, forms, navigation, and synthetic upload actions are interactive.
+- [x] Landing, quiz, consent, and form views render without a backend; API failure stops visibly rather than inventing a comparison.
+- [x] Direct no-plan and existing-plan routes, the optional four-question check, forms, navigation, and synthetic upload actions are interactive.
 - [x] The interface adapts to desktop and mobile layouts.
 - [x] Synthetic recommendations and the educational boundary are visible.
 - [x] `npm --prefix frontend run build` completes successfully.
@@ -43,7 +44,7 @@
 - [ ] Phase 3B evidence mode compares two to four eligible real products with neutral ordering, cited cells, explicit unknowns, and no recommendation signals or canonical-state changes.
 - [x] Dynamic summary states remain responsive, keyboard operable, visibly focused, and compatible with reduced motion.
 
-**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md). The neutral browser surface currently proves the contract with explicitly labelled synthetic fixtures; no real product has passed the Phase 3B gate.
+**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md) and [Gen-Z journey review](../evaluation/2026-09-03-gen-z-journey-and-project-truth.md). The neutral browser surface currently proves the contract with explicitly labelled synthetic fixtures; no real product has passed the Phase 3B gate.
 
 ## POC boundary
 

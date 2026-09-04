@@ -19,6 +19,7 @@ from .contracts import (
     ChangeProposal,
     EvidenceSearchRequest,
     GapDelta,
+    PatchField,
     ProfilePatch,
     ProposalDecisionRequest,
     ProposalDecisionResponse,
@@ -116,24 +117,24 @@ class ConversationService:
             active_revision_id=active_revision_id,
             suggested_prompts=[
                 SuggestedPrompt(
-                    id="why-ranked-first",
-                    label="Why this ranks first",
-                    message="Why does LionCity Term Flex rank first?",
-                ),
-                SuggestedPrompt(
-                    id="show-critical-illness",
-                    label="Show critical illness",
-                    message="Show only the critical illness option.",
+                    id="how-gaps-work",
+                    label="How are my gaps calculated?",
+                    message="How were my protection gaps calculated?",
                 ),
                 SuggestedPrompt(
                     id="show-unknowns",
                     label="Show assumptions",
-                    message="What does the ranking still not know?",
+                    message="What assumptions should I verify?",
                 ),
                 SuggestedPrompt(
-                    id="explore-cached-critical-illness",
-                    label="Explore cached CI plans",
-                    message="Which cached plans mention critical illness protection?",
+                    id="explore-term-life",
+                    label="Explore life cover",
+                    message="Which brochures mention term life protection?",
+                ),
+                SuggestedPrompt(
+                    id="explore-integrated-shield",
+                    label="Explore hospital cover",
+                    message="Which plans mention Integrated Shield hospital cover?",
                 ),
             ],
             profile_id=profile.profile_id if profile else None,
@@ -293,41 +294,56 @@ class ConversationService:
         action_id = f"action-{uuid4()}"
         message_id = f"message-{uuid4()}"
 
-        if record.profile is not None:
-            question = next_question(record.profile)
-
-            if question is not None and not (
-                "change" in text and "goal" in text
-            ) and (
-                "what" in text
-                or "help" in text
-                or "goal" in text
-                or "recommend" in text
-            ):
-                return ConversationMessageResponse(
-                    conversation_id=record.conversation_id,
-                    client_message_id=request.client_message_id,
-                    run_id=run_id,
-                    state="completed",
-                    active_revision_id=record.active_revision_id,
-                    assistant_message=AssistantMessage(
-                        message_id=message_id,
-                        content=f"{question.question} {question.reason}",
-                        citations=[],
-                    ),
-                    actions=[
-                        ActionEvent(
-                            action_id=action_id,
-                            intent="ANSWER_QUESTION",
-                            tool="ANSWER_QUESTION",
-                            target="profile:missing-information",
-                            status="completed",
-                            evidence_count=0,
-                            confirmation_required=False,
-                            affected_regions=["agent"],
-                        )
-                    ],
+        if any(term in text for term in ("gap calculated", "gaps calculated", "calculation", "formula")):
+            if record.recommendation is None or not record.recommendation.gaps:
+                return self._unsupported_answer(
+                    record,
+                    request,
+                    run_id,
+                    action_id,
+                    message_id,
+                    "There is no completed gap calculation to explain yet.",
+                    "RECOMMENDATION_UNAVAILABLE",
                 )
+            gap_labels = {
+                "death": "death",
+                "total_permanent_disability": "total permanent disability",
+                "critical_illness": "critical illness",
+            }
+            amounts = ", ".join(
+                f"{gap_labels[gap.gap_type]} S${gap.gap_amount:,.0f}"
+                for gap in record.recommendation.gaps
+            )
+            return ConversationMessageResponse(
+                conversation_id=record.conversation_id,
+                client_message_id=request.client_message_id,
+                run_id=run_id,
+                state="completed",
+                active_revision_id=record.active_revision_id,
+                assistant_message=AssistantMessage(
+                    message_id=message_id,
+                    content=(
+                        f"Your calculated gaps are {amounts}. Death and total permanent "
+                        "disability use nine times annual income plus outstanding loans, "
+                        "less the matching cover you declared. Critical illness uses four "
+                        "times annual income, less declared critical-illness cover. These "
+                        "are educational planning references, not personalised advice."
+                    ),
+                    citations=[],
+                ),
+                actions=[
+                    ActionEvent(
+                        action_id=action_id,
+                        intent="FOCUS_SECTION",
+                        tool="FOCUS_SECTION",
+                        target="reasoning:ranking",
+                        status="completed",
+                        evidence_count=0,
+                        confirmation_required=False,
+                        affected_regions=["ranking_reason", "agent"],
+                    )
+                ],
+            )
 
         if (
             "critical illness" in text or "critical-illness" in text
@@ -341,13 +357,13 @@ class ConversationService:
                 assistant_message=AssistantMessage(
                     message_id=message_id,
                     content=(
-                        "I filtered the table to the synthetic critical-illness option. "
-                        "This changes presentation only; it does not change the ranking."
+                        "I focused the page on the critical-illness cover direction. "
+                        "Your calculated gaps and profile remain unchanged."
                     ),
                     citations=[
                         Citation(
                             evidence_id="SYN-HEC-02",
-                            label="Harbour Essential CI synthetic fixture",
+                            label="Illustrative critical-illness structure",
                             synthetic=True,
                         )
                     ],
@@ -376,8 +392,9 @@ class ConversationService:
                 assistant_message=AssistantMessage(
                     message_id=message_id,
                     content=(
-                        "The comparison still lacks your full work cover, existing illness "
-                        "add-on terms, and insurer underwriting outcome. I opened that section."
+                        "This result cannot verify whether declared benefits overlap, "
+                        "the exact rider terms, or any insurer underwriting outcome. I opened "
+                        "the assumptions section."
                     ),
                     citations=[],
                 ),
@@ -395,9 +412,19 @@ class ConversationService:
                 ],
             )
 
-        if "budget" in text or "dependant" in text or "goal" in text:
+        if any(
+            term in text
+            for term in ("budget", "dependant", "dependent", "goal", "premium")
+        ):
             proposal = self._profile_proposal(record, text)
             if proposal is not None:
+                field_label = proposal.patch.field_name.replace("_", " ")
+                old_value = self._display_patch_value(
+                    proposal.patch.field_name, proposal.patch.old_value
+                )
+                proposed_value = self._display_patch_value(
+                    proposal.patch.field_name, proposal.patch.proposed_value
+                )
                 record.proposals[proposal.proposal_id] = proposal
                 self._event(record, "proposal_created", proposal_id=proposal.proposal_id)
                 return ConversationMessageResponse(
@@ -409,10 +436,9 @@ class ConversationService:
                     assistant_message=AssistantMessage(
                         message_id=message_id,
                         content=(
-                            f"I can change your {proposal.patch.field_name.replace('_', ' ')} "
-                            f"from {proposal.patch.old_value} to "
-                            f"{proposal.patch.proposed_value}. Confirm before I create "
-                            "a new profile version and rerun the deterministic comparison."
+                            f"I can change your {field_label} from {old_value} "
+                            f"to {proposed_value}. Confirm before I create "
+                            "a new profile version and recalculate your result."
                         ),
                         citations=[],
                     ),
@@ -440,8 +466,8 @@ class ConversationService:
                     message_id=message_id,
                     content=(
                         "That would change a decision input and requires confirmation plus a "
-                        "fresh deterministic recommendation. Those dependencies are not ready, "
-                        "so I left your summary unchanged."
+                        "fresh calculation. I could not prepare that change, so your result "
+                        "remains unchanged."
                     ),
                     citations=[],
                 ),
@@ -460,7 +486,35 @@ class ConversationService:
                 ],
             )
 
-        if "why" in text or "rank" in text or "lioncity" in text:
+        if "why" in text or "rank" in text:
+            top_plan_id = (
+                self._top_plan(record.recommendation) if record.recommendation else None
+            )
+            top_evaluation = next(
+                (
+                    item
+                    for item in (
+                        record.recommendation.evaluations if record.recommendation else []
+                    )
+                    if item.plan_id == top_plan_id
+                ),
+                None,
+            )
+            if top_evaluation is None:
+                return self._unsupported_answer(
+                    record,
+                    request,
+                    run_id,
+                    action_id,
+                    message_id,
+                    "No cover direction currently fits the limits you entered.",
+                    "NO_ELIGIBLE_PLAN",
+                )
+            plan_name = self._plan_label(top_evaluation.plan_id)
+            component_summary = ", ".join(
+                f"{item.component} {item.score:.2f}"
+                for item in top_evaluation.fit_components
+            )
             return ConversationMessageResponse(
                 conversation_id=record.conversation_id,
                 client_message_id=request.client_message_id,
@@ -470,23 +524,19 @@ class ConversationService:
                 assistant_message=AssistantMessage(
                     message_id=message_id,
                     content=(
-                        "LionCity Term Flex ranks first in this synthetic result because it "
-                        "addresses the largest known gap, stays inside the stated monthly "
-                        "budget, and matches the protection-only preference. It does not fill "
-                        "the whole illustrative gap."
+                        f"The {plan_name} example is shown first because its calculated fit "
+                        f"is highest among the examples within your limits ({component_summary}). "
+                        "The ordering uses your protection priorities, monthly ceiling, and "
+                        "cover preference. It is an illustrative structure—not an insurer "
+                        "product, quote, or suitability assessment."
                     ),
                     citations=[
                         Citation(
-                            evidence_id="SYN-LTF-01",
-                            label="LionCity Term Flex synthetic fixture",
+                            evidence_id=evidence_id,
+                            label=f"{plan_name} illustrative structure",
                             synthetic=True,
-                        ),
-                        Citation(
-                            evidence_id="MONEYSENSE-LIFE-INSURANCE",
-                            label="MoneySense life insurance guidance",
-                            url="https://www.moneysense.gov.sg/life-insurance/",
-                            synthetic=False,
-                        ),
+                        )
+                        for evidence_id in top_evaluation.evidence_ids
                     ],
                 ),
                 actions=[
@@ -496,7 +546,7 @@ class ConversationService:
                         tool="FOCUS_SECTION",
                         target="reasoning:ranking",
                         status="completed",
-                        evidence_count=2,
+                        evidence_count=len(top_evaluation.evidence_ids),
                         confirmation_required=False,
                         affected_regions=["ranking_reason", "agent"],
                     )
@@ -537,7 +587,7 @@ class ConversationService:
                 action_id,
                 message_id,
                 (
-                    "I could not find supporting brochure evidence in the cached catalogue. "
+                    "I could not find supporting evidence in the brochure library. "
                     "I have not inferred an answer or changed your summary."
                 ),
                 "NO_EVIDENCE",
@@ -580,9 +630,9 @@ class ConversationService:
             assistant_message=AssistantMessage(
                 message_id=message_id,
                 content=(
-                    f"I found {len(citations)} read-only brochure excerpts across "
-                    f"{product_summary}. They are cached evidence, not recommendations; "
-                    "approval, freshness, and unknown dates remain visible below."
+                    f"I found {len(citations)} brochure excerpts across {product_summary}. "
+                    "Use the source details and dates below to verify current terms directly "
+                    "with the provider. These excerpts are information, not recommendations."
                 ),
                 citations=citations,
             ),
@@ -605,39 +655,49 @@ class ConversationService:
     ) -> ChangeProposal | None:
         if record.profile is None or record.recommendation is None or self._decisions is None:
             return None
-        goal_match = re.search(
-            r"(?:change\s+my\s+)?(?:goal|priority)\s+(?:to|is)\s+(.+)",
+
+        field_name: PatchField | None = None
+        proposed_value: str | float | int | None = None
+        reason = ""
+        affected_calculations: list[str] = []
+        budget_match = re.search(
+            r"budget\s+(?:to\s+|is\s+)?(?:s\$|sgd|\$)?\s*(\d+(?:\.\d+)?)",
             text,
         )
-        if goal_match:
-            current = record.profile.data.goal
-            return ChangeProposal(
-                proposal_id=f"proposal-{uuid4()}",
-                conversation_id=record.conversation_id,
-                base_revision_id=record.active_revision_id,
-                status="pending",
-                patch=ProfilePatch(
-                    base_profile_version=record.profile.version,
-                    field_name="goal",
-                    old_state=current.state,
-                    old_value=current.value,
-                    proposed_state="present",
-                    proposed_value=goal_match.group(1).strip(),
-                    reason="User requested a different financial priority.",
-                    affected_calculations=[
-                        "personalized_explanation",
-                        "weighted_fit",
-                        "ranking",
-                    ],
-                ),
-            )
-        match = re.search(
-            r"budget\s+(?:to\s+)?(?:s\$|sgd|\$)?\s*(\d+(?:\.\d+)?)", text
+        premium_match = re.search(
+            r"(?:current\s+)?(?:monthly\s+)?premium\s+(?:to\s+|is\s+)?"
+            r"(?:s\$|sgd|\$)?\s*(\d+(?:\.\d+)?)",
+            text,
         )
-        if match is None:
+        dependant_match = re.search(
+            r"(?:dependants?|dependents?)\s+(?:to\s+|is\s+)?(\d+)", text
+        )
+        goal_match = re.search(r"goal\s+(?:to\s+|is\s+)(.+?)(?:[.!]|$)", text)
+        if budget_match:
+            field_name = "monthly_budget"
+            proposed_value = float(budget_match.group(1))
+            reason = "User requested a different sustainable monthly premium budget."
+            affected_calculations = ["affordability", "eligibility", "weighted_fit", "ranking"]
+        elif premium_match:
+            field_name = "current_monthly_premium"
+            proposed_value = float(premium_match.group(1))
+            reason = "User corrected the total current monthly insurance premium."
+            affected_calculations = ["affordability", "eligibility", "ranking"]
+        elif dependant_match:
+            field_name = "dependant_count"
+            proposed_value = int(dependant_match.group(1))
+            reason = "User corrected the number of people who depend on their income."
+            affected_calculations = ["profile_context", "explanation"]
+        elif goal_match:
+            field_name = "goal"
+            proposed_value = goal_match.group(1).strip()
+            reason = "User clarified their primary protection goal."
+            affected_calculations = ["personalization", "explanation"]
+        if field_name is None or proposed_value is None:
             return None
-        proposed_value = float(match.group(1))
-        current = record.profile.data.monthly_budget
+        current = getattr(record.profile.data, field_name)
+        if current is None:
+            return None
         proposal_id = f"proposal-{uuid4()}"
         return ChangeProposal(
             proposal_id=proposal_id,
@@ -646,15 +706,23 @@ class ConversationService:
             status="pending",
             patch=ProfilePatch(
                 base_profile_version=record.profile.version,
-                field_name="monthly_budget",
+                field_name=field_name,
                 old_state=current.state,
                 old_value=current.value,
                 proposed_state="present",
                 proposed_value=proposed_value,
-                reason="User requested a different sustainable monthly premium budget.",
-                affected_calculations=["affordability", "eligibility", "weighted_fit", "ranking"],
+                reason=reason,
+                affected_calculations=affected_calculations,
             ),
         )
+
+    @staticmethod
+    def _display_patch_value(field_name: str, value: str | float | int | bool | None) -> str:
+        if field_name in {"monthly_budget", "current_monthly_premium"} and isinstance(
+            value, (int, float)
+        ):
+            return f"S${value:g}"
+        return str(value)
 
     @staticmethod
     def _apply_patch(profile: VersionedProfile, patch: ProfilePatch) -> VersionedProfile:
@@ -716,6 +784,15 @@ class ConversationService:
     @staticmethod
     def _top_plan(result: RecommendationResult) -> str | None:
         return next((item.plan_id for item in result.evaluations if item.rank == 1), None)
+
+    @staticmethod
+    def _plan_label(plan_id: str) -> str:
+        return {
+            "synthetic-lioncity-term-flex": "family and debt protection",
+            "synthetic-harbour-essential-ci": "serious-illness cash cover",
+            "synthetic-orchid-income-shield": "monthly income protection",
+            "synthetic-meridian-whole-life-plus": "whole-life cover",
+        }.get(plan_id, plan_id)
 
     def _get_record(self, conversation_id: str) -> ConversationRecord:
         record = self._records.get(conversation_id)

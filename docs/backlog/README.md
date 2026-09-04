@@ -34,14 +34,14 @@ This folder contains the executable backlog for the CoverCheck SG POC. Each tick
 
 ## Execution order
 
-Current checkpoint: direct E10/E06 retrieval, local PostgreSQL, the bounded fixture coordinator, the singleton scraper lease, and the budget proposal/revision path are implemented. The numbered sequence remains the dependency plan; source governance, real Phase 3B acceptance, live OpenRouter work, full evaluation, AWS, and E09 remain open.
+Current checkpoint: direct E10/E06 retrieval, local PostgreSQL, compact Gen-Z routes, deterministic personalization context, the bounded coordinator, credentialed Bedrock explanation, the singleton scraper lease, and the budget proposal/revision path are implemented. The numbered sequence remains the dependency plan; source governance, real Phase 3B acceptance, priced-cost reporting, OpenRouter extraction, full evaluation, AWS deployment, and E09 remain open.
 
 1. Freeze E03 profile semantics, the no-policy state, and E10 shared contracts.
 2. Approve the E07 grounded formulation before implementing deterministic ranking.
 3. Build E10 Docker Compose, `.env`, PostgreSQL/pgvector, and object-store foundations.
 4. Deliver E04 OpenRouter extraction, E05 continuous scraping, and E06 local retrieval behind E10 contracts.
 5. Deliver Phase 3B through E06-T09, E10-T09, E01-T06, E12-T06, and E08-T10 as a read-only comparison slice that does not depend on E11.
-6. Complete E11 runtime-neutral orchestration, scraper operations, and bounded run events.
+6. Complete E11 priced-cost reporting, scraper operations, and bounded run events; credentialed Bedrock acceptance is already complete.
 7. Accept the local stack, verify AWS migration mappings, measure, rehearse, and record E08.
 8. Deliver the remaining consequential E12 revision flow after profile, extraction, decision, API, and orchestration contracts support it.
 9. Begin the internal Phase 6 ranked pilot only after E07-T08's dependencies and DEC-004/compliance approval pass; evaluate it through E08-T11.

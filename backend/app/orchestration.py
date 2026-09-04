@@ -13,6 +13,11 @@ from .contracts import (
 )
 from .decision_support import DecisionService, InMemoryProfileRepository
 from .extraction import FixtureExtractionService
+from .model_gateway import (
+    ExplanationService,
+    ModelInvocationError,
+    ModelUsage,
+)
 
 
 class RunNotFoundError(LookupError):
@@ -20,19 +25,21 @@ class RunNotFoundError(LookupError):
 
 
 class CoordinatorService:
-    MAX_TOOL_CALLS = 3
+    MAX_TOOL_CALLS = 4
 
     def __init__(
         self,
         profiles: InMemoryProfileRepository,
         extraction: FixtureExtractionService,
         decisions: DecisionService,
+        explanations: ExplanationService,
         mode: CapabilityMode = "simulated",
     ) -> None:
         self.mode = mode
         self._profiles = profiles
         self._extraction = extraction
         self._decisions = decisions
+        self._explanations = explanations
         self._runs: dict[str, InvocationResponse] = {}
 
     def invoke(self, request: InvocationRequest) -> InvocationResponse:
@@ -53,7 +60,16 @@ class CoordinatorService:
                 self._append(events, run_id, "extracting", "extraction", "started")
                 extraction = self._extraction.submit(request.fixture_id)
                 self._append(events, run_id, "extracting", "extraction", "completed")
-            if extraction is None or extraction.review_required:
+            else:
+                self._append(
+                    events,
+                    run_id,
+                    "extracting",
+                    "extraction",
+                    "skipped",
+                    {"reason": "user_confirmed_policy_values"},
+                )
+            if extraction is not None and extraction.review_required:
                 self._append(
                     events,
                     run_id,
@@ -87,11 +103,79 @@ class CoordinatorService:
         if recommendation.status == "insufficient_data":
             state = "insufficient_data"
             terminal_status = "blocked"
-        elif recommendation.status == "no_eligible_plan":
-            state = "no_eligible_plan"
-            terminal_status = "completed"
+            self._append(
+                events,
+                run_id,
+                "explaining",
+                "grounded_explanation",
+                "skipped",
+                {"reason": "insufficient_data"},
+            )
+            explanation = None
+            model_usage = ModelUsage()
         else:
-            state = "completed"
+            self._append(
+                events,
+                run_id,
+                "explaining",
+                "grounded_explanation",
+                "started",
+            )
+            try:
+                explanation_outcome = self._explanations.explain(
+                    request.profile,
+                    recommendation,
+                )
+            except ModelInvocationError as error:
+                self._append(
+                    events,
+                    run_id,
+                    "explaining",
+                    "grounded_explanation",
+                    "failed",
+                    {
+                        "error_code": error.code,
+                        "provider": self._explanations.provider,
+                    },
+                )
+                self._append(
+                    events,
+                    run_id,
+                    "failed",
+                    "coordinator",
+                    "failed",
+                    {"error_code": error.code},
+                )
+                return self._finish(
+                    request,
+                    run_id,
+                    started,
+                    started_at,
+                    events,
+                    "failed",
+                    extraction=extraction,
+                    recommendation=recommendation,
+                    terminal_status="failed",
+                )
+            explanation = explanation_outcome.explanation
+            model_usage = explanation_outcome.usage
+            self._append(
+                events,
+                run_id,
+                "explaining",
+                "grounded_explanation",
+                "completed",
+                {
+                    "provider": explanation.provider,
+                    "model_id": explanation.model_id,
+                    "prompt_version": explanation.prompt_version,
+                },
+            )
+            state = (
+                "no_eligible_plan"
+                if recommendation.status == "no_eligible_plan"
+                else "completed"
+            )
             terminal_status = "completed"
         self._append(events, run_id, state if state != "no_eligible_plan" else "completed", "coordinator", "completed")
         return self._finish(
@@ -103,6 +187,8 @@ class CoordinatorService:
             state,
             extraction=extraction,
             recommendation=recommendation,
+            explanation=explanation,
+            model_usage=model_usage,
             terminal_status=terminal_status,
         )
 
@@ -123,6 +209,8 @@ class CoordinatorService:
         *,
         extraction=None,
         recommendation=None,
+        explanation=None,
+        model_usage: ModelUsage | None = None,
         terminal_status: str,
     ) -> InvocationResponse:
         response = InvocationResponse(
@@ -133,6 +221,7 @@ class CoordinatorService:
             profile=request.profile,
             extraction=extraction,
             recommendation=recommendation,
+            explanation=explanation,
             events=events,
             metrics=RunMetrics(
                 run_id=run_id,
@@ -141,6 +230,8 @@ class CoordinatorService:
                 duration_ms=max(0, round((monotonic() - started) * 1000)),
                 tool_calls=sum(event.outcome == "started" for event in events),
                 retries=0,
+                input_tokens=model_usage.input_tokens if model_usage else None,
+                output_tokens=model_usage.output_tokens if model_usage else None,
                 terminal_status=terminal_status,
             ),
         )

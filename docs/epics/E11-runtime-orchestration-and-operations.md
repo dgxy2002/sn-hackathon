@@ -5,12 +5,12 @@
 | Primary owner | Jana |
 | Priority | P0 |
 | Status | In progress |
-| Outcome | A bounded local-first runtime coordinates typed capability calls, OpenRouter model work, and one continuously running scraper while remaining deployable to AWS through configuration. |
+| Outcome | A bounded local-first runtime coordinates typed capability calls, required Bedrock grounded explanation, and one continuously running scraper while remaining deployable to AWS through configuration. |
 
 ## Scope
 
 - Run the coordinator with the backend container and expose `POST /invocations`.
-- Select OpenRouter `5.6 Luna` through configuration for policy extraction and grounded explanation; keep the exact model slug explicit and auditable.
+- Select Amazon Bedrock through `LLM_PROVIDER`, `BEDROCK_MODEL_ID`, and `AWS_REGION` for grounded explanation; keep OpenRouter independently configured for E04 policy extraction.
 - Define coordinator states, terminal outcomes, tool allowlists, retry policy, and loop counters.
 - Invoke E03, E04, E06, and E07 through E10 contracts and validate every transition.
 - Resolve conversational intents and sequence only allowlisted typed read, presentation, proposal, deterministic-rerun, revision, and undo tools.
@@ -19,7 +19,13 @@
 - Coordinate one continuous scraper lifecycle: identify due source, acquire singleton lease, fetch, parse, normalize, hash/version, upsert, optionally chunk/index, log, update `next_scrape_due`, retry with bounded backoff, and publish health/freshness metrics.
 - Run one scraper container in Docker Compose; later run one ECS Fargate service task with desired count one and retain the database lease.
 - Use local `.env` values now and the same environment names from AWS Secrets Manager or task configuration later.
-- Treat Amazon Bedrock and AgentCore as optional future adapters rather than local runtime dependencies.
+- Require Amazon Bedrock for live E11 explanation while retaining a credential-free fixture adapter; keep AgentCore deferred.
+
+## Repository evidence
+
+- [`backend/app/model_gateway.py`](../../backend/app/model_gateway.py) calls the Bedrock Converse API with the immutable E07 recommendation and compact E03 personalization context, validates the response, and rejects unknown plan IDs.
+- [`backend/app/orchestration.py`](../../backend/app/orchestration.py) records explanation events and token usage and returns a typed failed run when Bedrock is unavailable without changing the deterministic result.
+- [`backend/tests/test_model_gateway.py`](../../backend/tests/test_model_gateway.py) verifies immutable ranking, model-output rejection, prompt context, and token telemetry with a mocked Bedrock client.
 
 ## Requirements traceability
 
@@ -52,20 +58,22 @@ stateDiagram-v2
 
 ## Definition of done
 
-- [ ] Docker Compose starts healthy backend, scraper, database, and configured local object-store services without AWS access.
+- [x] Docker Compose starts healthy web, backend, singleton scraper, and PostgreSQL/pgvector services; optional object storage is unconfigured.
 - [x] The invocation contract accepts a versioned request and returns final state, result, ordered events, and run metrics.
 - [x] Only declared tools execute, every result validates before transition, and raw documents remain outside explanation prompts.
 - [x] Conversational tool policy validates action schema, target, base version, preconditions, idempotency, confirmation, allowed summary regions, and terminal state.
 - [x] Model output never executes as page code, selectors, coordinates, SQL, arbitrary URLs, or direct canonical decision values.
 - [ ] Every loop and retry path has a tested cap with `LOOP_LIMIT_REACHED` as a terminal failure.
-- [ ] OpenRouter calls record provider, exact model slug, prompt version, tokens, latency, estimated cost, and outcome.
+- [x] Credentialed Bedrock calls record provider, exact model or inference-profile ID, prompt version, tokens, latency, and outcome.
+- [ ] Estimated priced cost is calculated and recorded; token counts alone do not satisfy this gate.
 - [x] Explanation uses the immutable E07 decision contract and cannot mutate rank, eligibility, evidence, or numbers.
 - [x] Live, cached, synthetic, and simulated adapters emit the same contracts and visible mode labels.
-- [ ] Exactly one scraper loop runs, retains a database lease, records source freshness, and recovers from bounded failures.
+- [x] Exactly one scraper loop runs under a database-backed singleton lease in the accepted Compose topology.
+- [ ] Approved-source freshness cycles and bounded failure recovery are independently accepted.
 - [ ] The AWS topology maps images to ECR/ECS, PostgreSQL to RDS, snapshots to S3, secrets to Secrets Manager, and logs/metrics/alarms to CloudWatch.
 - [ ] Normal, no-policy, missing-information, no-evidence, dependency-failure, changed-goal, and stale-source scenarios reach their expected terminal states.
 
-**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md). OpenRouter telemetry, loop-limit acceptance, full scraper freshness cycles, changed-goal coverage, and AWS topology acceptance remain open.
+**Acceptance evidence:** [Integrated runtime and browser acceptance](../evaluation/2026-08-28-integrated-runtime-browser-acceptance.md), [Bedrock and personalization integration](../evaluation/2026-09-03-bedrock-personalization-integration.md), and [Gen-Z journey review](../evaluation/2026-09-03-gen-z-journey-and-project-truth.md). Priced cost evaluation, full loop-limit acceptance, scraper freshness cycles, changed-goal coverage, and AWS deployment remain open.
 
 ## POC boundary
 

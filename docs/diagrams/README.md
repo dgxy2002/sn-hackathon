@@ -4,11 +4,11 @@ These diagrams describe the CoverCheck SG POC and its smallest intended integrat
 
 | Document | Purpose |
 |---|---|
-| [Architecture diagram](architecture.md) | Accepted repository/runtime state plus optional and pending capability paths |
+| [Architecture diagram](architecture.md) | Accepted repository/runtime state plus provider and pending capability paths |
 | [Local topology](local-topology.md) | Accepted Docker Compose services, health boundaries, local `.env`, volumes, and pending configured services |
 | [AWS topology](aws-topology.md) | AWS target topology and service mapping for each epic/module |
 | [Workflow diagram](workflow.md) | User and system workflow from readiness quiz through conversational exploration and dynamic revision |
-| [Sequence diagram](sequence.md) | Dated initial flows, Phase 3B evidence comparison, accepted local fixture flow, and pending OpenRouter paths |
+| [Sequence diagram](sequence.md) | Dated initial flows, Phase 3B evidence comparison, accepted fixture flow, Bedrock explanation, and pending OpenRouter extraction |
 | [ER diagram](er-diagram.md) | Supabase and local POC SQL models plus proposed durable workflow, conversation, action, and summary-revision persistence |
 
 ## Notation

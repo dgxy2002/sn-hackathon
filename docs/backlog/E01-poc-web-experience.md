@@ -39,7 +39,8 @@
 
 **Acceptance criteria:**
 
-- [x] Landing, quiz, result, account, onboarding, upload, extraction, and comparison views are reachable.
+- [x] Landing, optional quiz, result, consent, minimum onboarding, synthetic extraction, and comparison views are reachable.
+- [x] Direct no-plan and existing-plan routes bypass the readiness check.
 - [x] Back and forward actions preserve browser-session state.
 - [x] The result journey links to the MAS representatives register.
 

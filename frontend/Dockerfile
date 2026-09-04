@@ -1,9 +1,14 @@
+# syntax=docker/dockerfile:1
 FROM node:22-alpine AS build
 
 WORKDIR /app
 
 COPY frontend/package.json frontend/package-lock.json ./
-RUN npm ci
+RUN --mount=type=secret,id=corporate_ca,required=false \
+	if [ -s /run/secrets/corporate_ca ]; then \
+		export NODE_EXTRA_CA_CERTS=/run/secrets/corporate_ca; \
+	fi; \
+	npm ci --no-audit --no-fund
 
 COPY frontend/index.html ./index.html
 COPY frontend/public ./public
