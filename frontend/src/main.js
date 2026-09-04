@@ -298,6 +298,8 @@ async function prepareComparison(insuranceStatus = state.profile.insuranceStatus
 
     navigate('comparison')
   } catch (error) {
+    console.error('Failed to prepare comparison', error)
+    state.view = 'onboarding'
     state.runtime.status = 'failed'
     state.runtime.error = error instanceof ApiError
       ? error.message
@@ -923,6 +925,9 @@ const comparisonView = () => {
   const insuranceStatus = policyField?.state !== 'present'
     ? 'Unsure'
     : policyField.value ? 'Yes' : 'No'
+  const personalizationNote = recommendation?.assumptions?.length
+    ? '<p class="personalization-note">Personalised using your stated goal and available profile information.</p>'
+    : ''
 
   return `
     <main class="comparison-screen" data-screen="comparison">
