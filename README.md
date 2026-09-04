@@ -138,9 +138,10 @@ bash scripts/verify-poc.sh
 
 The extraction, Supabase ingestion, retrieval, and evaluation workflow is
 documented in the [RAG operator guide](backend/scraper/RAG_README.md). It uses
-OpenAI for offline brochure extraction and embeddings; this is separate from
-the configured OpenRouter boundary for user-document extraction and the Amazon
-Bedrock boundary for E11 grounded explanation.
+OpenAI for offline brochure extraction and Amazon Titan Text Embeddings V2 on
+Bedrock for vector ingestion and retrieval. This is separate from the configured
+OpenRouter boundary for user-document extraction and the Bedrock boundary for
+E11 grounded explanation.
 
 Supabase remains the optional live adapter. Local PostgreSQL/pgvector retrieval
 is the accepted local POC path; source permission and real-product Phase 3B

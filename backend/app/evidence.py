@@ -38,8 +38,8 @@ DEFAULT_EMBEDDING_CACHE = (
     / "extracted_openai"
     / "rag_embedding_cache.sqlite3"
 )
-DEFAULT_EMBEDDING_MODEL = "text-embedding-3-small"
-DEFAULT_EMBEDDING_DIMENSIONS = 1536
+DEFAULT_EMBEDDING_MODEL = "amazon.titan-embed-text-v2:0"
+DEFAULT_EMBEDDING_DIMENSIONS = 1024
 STOP_WORDS = {
     "a",
     "about",
@@ -770,20 +770,24 @@ class SupabaseEvidenceAdapter:
         *,
         supabase_url: str,
         service_key: str,
-        openai_key: str,
+        bedrock_region: str,
+        embedding_model_id: str = DEFAULT_EMBEDDING_MODEL,
+        embedding_dimensions: int = DEFAULT_EMBEDDING_DIMENSIONS,
         cache_path: Path = DEFAULT_EMBEDDING_CACHE,
         timeout_seconds: int = 20,
         max_age_days: int = 365,
     ) -> None:
         self._supabase_url = supabase_url
         self._service_key = service_key
-        self._openai_key = openai_key
+        self._bedrock_region = bedrock_region
+        self._embedding_model_id = embedding_model_id
+        self._embedding_dimensions = embedding_dimensions
         self._cache_path = cache_path
         self._timeout_seconds = timeout_seconds
         self._max_age_days = max_age_days
 
     def search(self, request: EvidenceSearchRequest) -> list[EvidenceRecord]:
-        from scraper.rag_common import EmbeddingCache, OpenAIEmbeddings, SupabaseREST
+        from scraper.rag_common import BedrockEmbeddings, EmbeddingCache, SupabaseREST
 
         metadata_filter = {
             key: value
@@ -796,10 +800,10 @@ class SupabaseEvidenceAdapter:
         }
         cache = EmbeddingCache(self._cache_path)
         try:
-            embedder = OpenAIEmbeddings(
-                self._openai_key,
-                model=DEFAULT_EMBEDDING_MODEL,
-                dimensions=DEFAULT_EMBEDDING_DIMENSIONS,
+            embedder = BedrockEmbeddings(
+                model=self._embedding_model_id,
+                dimensions=self._embedding_dimensions,
+                region_name=self._bedrock_region,
                 timeout=self._timeout_seconds,
                 max_attempts=2,
             )
@@ -1044,16 +1048,20 @@ def create_evidence_service(
     timeout_seconds: int = 20,
     supabase_url: str | None = None,
     service_key: str | None = None,
-    openai_key: str | None = None,
+    bedrock_region: str | None = None,
+    bedrock_embedding_model_id: str = DEFAULT_EMBEDDING_MODEL,
+    embedding_dimensions: int = DEFAULT_EMBEDDING_DIMENSIONS,
     database_url: str | None = None,
 ) -> EvidenceService:
     if mode == "live":
-        if not (supabase_url and service_key and openai_key):
+        if not (supabase_url and service_key and bedrock_region):
             raise EvidenceDependencyError("Live evidence dependencies are not configured")
         adapter: EvidenceAdapter = SupabaseEvidenceAdapter(
             supabase_url=supabase_url,
             service_key=service_key,
-            openai_key=openai_key,
+            bedrock_region=bedrock_region,
+            embedding_model_id=bedrock_embedding_model_id,
+            embedding_dimensions=embedding_dimensions,
             timeout_seconds=timeout_seconds,
             max_age_days=max_age_days,
         )

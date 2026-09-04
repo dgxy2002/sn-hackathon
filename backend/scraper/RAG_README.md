@@ -19,7 +19,7 @@ The approved scope, date research, delivery sequence, and remaining controls are
 - All 71 cached policy records may be searched. Every result must expose an evidence state such as approved, unverified, stale, or unknown; inclusion in the cache is not source approval or proof of suitability.
 - Local PostgreSQL/pgvector is the accepted credential-free POC adapter. Supabase/PostgREST remains an optional adapter for the existing hosted RAG store.
 - PostgreSQL, Supabase, cached-corpus, and fixture paths return the same evidence contract. Metadata and full-text retrieval remain available when embeddings or external providers are unavailable.
-- OpenAI remains the offline brochure-extraction and embedding provider. OpenRouter remains the configured E04 user-document extraction provider. Amazon Bedrock is the required E11 grounded-explanation provider; no model output may alter deterministic ranking.
+- OpenAI remains the offline brochure-extraction provider. Amazon Titan Text Embeddings V2 on Bedrock provides ingestion and query embeddings. OpenRouter remains the configured E04 user-document extraction provider. Amazon Bedrock is also the required E11 grounded-explanation provider; no model output may alter deterministic ranking.
 - Consequential profile or extraction changes remain behind typed orchestration, confirmation, and E07 rerun controls. The accepted fixture path currently supports confirmed budget changes; other profile fields and extraction corrections remain open.
 
 The evidence contract must distinguish three dates: `document_as_of_date` from brochure wording, `product_effective_date` from an authoritative product or policy source, and `retrieved_at` from capture or ingestion. A recent retrieval timestamp must not be presented as a product effective date.
@@ -29,7 +29,7 @@ The evidence contract must distinguish three dates: `document_as_of_date` from b
 | Component | File | Purpose |
 |---|---|---|
 | Extraction | `extract_insurance_openai.py` | Converts brochure Markdown into strict structured JSON. |
-| Shared clients | `rag_common.py` | Supabase PostgREST, OpenAI embeddings, retries, and local embedding cache. |
+| Shared clients | `rag_common.py` | Supabase PostgREST, Bedrock Titan embeddings, retries, and local embedding cache. |
 | Database ingestion | `ingest_insurance_supabase.py` | Upserts normalized policy facts, builds chunks, embeds them, and replaces each policy's RAG chunk set. |
 | Retrieval | `query_insurance_rag.py` | Embeds a query and returns typed cited evidence from `match_documents_by_type`. |
 | Database | `supabase_schema.sql` | Relational policy tables, `document_chunks`, pgvector HNSW index, and retrieval functions. |
@@ -50,16 +50,20 @@ These credentials are required only for the optional Supabase ingestion and retr
 ```dotenv
 SUPABASE_URL=https://YOUR_PROJECT.supabase.co
 SUPABASE_SERVICE_ROLE_KEY=YOUR_SERVICE_ROLE_KEY
-OPENAI_KEY=YOUR_OPENAI_API_KEY
+AWS_REGION=us-east-1
+BEDROCK_EMBEDDING_MODEL_ID=amazon.titan-embed-text-v2:0
+BEDROCK_EMBEDDING_DIMENSIONS=1024
 ```
 
 Never expose `SUPABASE_SERVICE_ROLE_KEY` in the browser. Run ingestion and retrieval through a trusted backend or agent runtime.
 
-The schema uses `VECTOR(1536)`. The scripts therefore default to `text-embedding-3-small` with 1,536 dimensions. The same embedding model and dimension must be used for ingestion and querying.
+Bedrock authentication uses boto3's standard credential chain: environment variables, a local AWS profile, or an IAM role. The AWS identity needs `bedrock:InvokeModel` permission for `amazon.titan-embed-text-v2:0`. The schema and scripts use that model with 1,024 normalized dimensions. Ingestion and querying must use the same model and dimension.
+
+For an existing database created with the previous 1,536-dimensional OpenAI schema, run `migrate_embeddings_to_bedrock.sql` once in the Supabase SQL editor before re-ingesting. It clears incompatible vectors while retaining product records and chunk text.
 
 ## Prepare the extraction artifacts
 
-This performs no database or OpenAI calls. It marks every document quality as `good` in the individual JSON files, `documents.jsonl`, `manifest.csv`, and `extraction_report.json`, then reports the number of candidate chunks.
+This performs no database or embedding-provider calls. It marks every document quality as `good` in the individual JSON files, `documents.jsonl`, `manifest.csv`, and `extraction_report.json`, then reports the number of candidate chunks.
 
 ```powershell
 & .\.venv\Scripts\python.exe .\backend\scraper\ingest_insurance_supabase.py --prepare-only
@@ -73,16 +77,15 @@ From the repository root:
 & .\.venv\Scripts\python.exe .\backend\scraper\ingest_insurance_supabase.py
 ```
 
-The importer performs the following work:
+The importer performs the following work one policy at a time:
 
 1. Reads `insurance/extracted_openai/policies.jsonl` and `documents.jsonl`.
 2. Enriches source records with product-page and brochure URLs from each insurer's `manifest.csv` where available.
-3. Upserts insurers and policies.
-4. Creates or updates policy documents using the content hash.
-5. Replaces facts from the same document and inserts plans, benefits, plan-specific claim amounts, riders, and exclusions.
-6. Generates purpose-specific chunks.
-7. Creates and locally caches embeddings.
-8. Replaces the complete `document_chunks` set for every touched policy.
+3. Upserts the insurer, policy, and source document.
+4. Replaces facts from the same document and inserts plans, benefits, plan-specific claim amounts, riders, and exclusions.
+5. Generates purpose-specific chunks and creates any uncached Bedrock embeddings.
+6. Replaces that policy's complete `document_chunks` set using deterministic chunk IDs.
+7. Saves a checkpoint only after the policy's facts and chunks are complete.
 
 The local embedding cache is:
 
@@ -90,7 +93,23 @@ The local embedding cache is:
 backend/scraper/insurance/extracted_openai/rag_embedding_cache.sqlite3
 ```
 
-It prevents unchanged chunk text from being embedded again when ingestion is rerun. Database operations are idempotent by policy slug, document hash, plan identity, and policy-level chunk replacement. If a run is interrupted, rerun the same command.
+Each successful vector is committed to this cache immediately. It prevents unchanged chunk text from being embedded again, including vectors generated before a later network failure.
+
+The in-progress checkpoint is:
+
+```text
+backend/scraper/insurance/extracted_openai/.ingest_checkpoint.json
+```
+
+Transient Supabase and Bedrock failures are retried with backoff. If retries are exhausted or the process is interrupted, rerun the same command. Completed policies print as `RESUME_SKIP`; an incomplete policy is safely reprocessed, reusing its cached embeddings. The checkpoint is removed after the entire selected job succeeds. Database writes are idempotent by policy slug, document hash, plan identity, and deterministic chunk ID.
+
+To deliberately discard the checkpoint and start the selected job again:
+
+```powershell
+& .\.venv\Scripts\python.exe .\backend\scraper\ingest_insurance_supabase.py --reset-checkpoint
+```
+
+Use `--max-attempts N` to change the default of five attempts for transient remote-service failures.
 
 Useful scoped commands:
 
@@ -260,6 +279,6 @@ The integrated evidence service is usable, but the following evidence, evaluatio
 5. **Comparison-eligible real-product subset:** the API and rejection gates are implemented, but no real product has approved reuse, complete comparison evidence, and the other Phase 3B gates required to enter the comparison projection.
 6. **Durable decision-support persistence:** versioned profile, recommendation, conversation, proposal, revision, replay, and undo services exist for synthetic current-session use. Durable SQL repositories, session expiry cleanup, and real-customer data controls remain outside the accepted POC path.
 7. **Retrieval evaluation set:** the plan requires expected-source-in-top-5 performance of at least 90%. A labelled query set and evaluation script have not yet been created.
-8. **AWS and production migration:** the accepted POC runs on local PostgreSQL/pgvector. Bedrock explanation is implemented locally through boto3, but credentialed acceptance and the RDS, S3, IAM, Secrets Manager, CloudWatch, production identity, security, privacy, and compliance controls remain open. AgentCore remains optional.
+8. **AWS and production migration:** the accepted POC runs on local PostgreSQL/pgvector. Bedrock embeddings and explanation are implemented locally through boto3, but credentialed acceptance and the RDS, S3, IAM, Secrets Manager, CloudWatch, production identity, security, privacy, and compliance controls remain open. AgentCore remains optional.
 
 For the hackathon MVP, the evidence service supports cited real-product retrieval now. Real records remain search-only until their next eligibility gate passes. The synthetic recommendation path must continue treating missing premium, eligibility, effective-date, or exclusion data as uncertainty and return `insufficient information` rather than manufacture a fit.

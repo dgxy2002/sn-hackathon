@@ -8,14 +8,21 @@ import os
 from pathlib import Path
 from typing import Any
 
-from rag_common import EmbeddingCache, OpenAIEmbeddings, SupabaseREST, load_env
+from rag_common import (
+    DEFAULT_BEDROCK_EMBEDDING_DIMENSIONS,
+    DEFAULT_BEDROCK_EMBEDDING_MODEL,
+    BedrockEmbeddings,
+    EmbeddingCache,
+    SupabaseREST,
+    load_env,
+)
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 DEFAULT_ENV = SCRIPT_DIR.parent / ".env"
 DEFAULT_CACHE = SCRIPT_DIR / "insurance" / "extracted_openai" / "rag_embedding_cache.sqlite3"
-DEFAULT_EMBEDDING_MODEL = "text-embedding-3-small"
-DEFAULT_EMBEDDING_DIMENSIONS = 1536
+DEFAULT_EMBEDDING_MODEL = DEFAULT_BEDROCK_EMBEDDING_MODEL
+DEFAULT_EMBEDDING_DIMENSIONS = DEFAULT_BEDROCK_EMBEDDING_DIMENSIONS
 
 
 def typed_value(value: str) -> Any:
@@ -101,8 +108,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("query", help="Natural-language product evidence query")
     parser.add_argument("--env", type=Path, default=DEFAULT_ENV)
     parser.add_argument("--cache", type=Path, default=DEFAULT_CACHE)
-    parser.add_argument("--embedding-model", default=DEFAULT_EMBEDDING_MODEL)
-    parser.add_argument("--embedding-dimensions", type=int, default=DEFAULT_EMBEDDING_DIMENSIONS)
+    parser.add_argument("--embedding-model")
+    parser.add_argument("--embedding-dimensions", type=int)
     parser.add_argument("--threshold", type=float, default=0.55)
     parser.add_argument("--count", type=int, default=8)
     parser.add_argument("--filter", action="append", help="Exact flat metadata filter as key=value; may be repeated")
@@ -113,15 +120,34 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     env = {**load_env(args.env.resolve()), **os.environ}
-    if not env.get("SUPABASE_URL") or not env.get("SUPABASE_SERVICE_ROLE_KEY") or not env.get("OPENAI_KEY"):
-        raise RuntimeError("SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, and OPENAI_KEY are required")
+    aws_region = env.get("AWS_REGION") or env.get("AWS_DEFAULT_REGION")
+    if not env.get("SUPABASE_URL") or not env.get("SUPABASE_SERVICE_ROLE_KEY") or not aws_region:
+        raise RuntimeError(
+            "SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, and AWS_REGION are required"
+        )
+    embedding_model = (
+        args.embedding_model
+        or env.get("BEDROCK_EMBEDDING_MODEL_ID")
+        or DEFAULT_EMBEDDING_MODEL
+    )
+    try:
+        embedding_dimensions = int(
+            args.embedding_dimensions
+            or env.get("BEDROCK_EMBEDDING_DIMENSIONS")
+            or DEFAULT_EMBEDDING_DIMENSIONS
+        )
+    except ValueError as error:
+        raise RuntimeError("BEDROCK_EMBEDDING_DIMENSIONS must be an integer") from error
     filters = metadata_filters(args.filter)
     cache = EmbeddingCache(args.cache.resolve())
     try:
-        embedder = OpenAIEmbeddings(
-            env["OPENAI_KEY"],
-            model=args.embedding_model,
-            dimensions=args.embedding_dimensions,
+        embedder = BedrockEmbeddings(
+            model=embedding_model,
+            dimensions=embedding_dimensions,
+            region_name=aws_region,
+            aws_access_key_id=env.get("AWS_ACCESS_KEY_ID"),
+            aws_secret_access_key=env.get("AWS_SECRET_ACCESS_KEY"),
+            aws_session_token=env.get("AWS_SESSION_TOKEN"),
         )
         query_embedding = embedder.embed_with_cache([args.query], cache, batch_size=1)[0]
     finally:

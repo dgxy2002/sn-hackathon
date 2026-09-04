@@ -14,7 +14,49 @@ from pathlib import Path
 from typing import Any, Iterable
 
 
-OPENAI_EMBEDDINGS_URL = "https://api.openai.com/v1/embeddings"
+DEFAULT_BEDROCK_EMBEDDING_MODEL = "amazon.titan-embed-text-v2:0"
+DEFAULT_BEDROCK_EMBEDDING_DIMENSIONS = 1024
+TRANSIENT_HTTP_STATUSES = {408, 409, 425, 429, 500, 502, 503, 504}
+BEDROCK_TRANSIENT_ERROR_CODES = {
+    "InternalServerException",
+    "ModelNotReadyException",
+    "ModelTimeoutException",
+    "RequestTimeout",
+    "RequestTimeoutException",
+    "ServiceUnavailable",
+    "ServiceUnavailableException",
+    "Throttling",
+    "ThrottlingException",
+}
+BEDROCK_TRANSIENT_EXCEPTION_NAMES = {
+    "ConnectTimeoutError",
+    "ConnectionClosedError",
+    "EndpointConnectionError",
+    "HTTPClientError",
+    "ReadTimeoutError",
+}
+
+
+class TransientNetworkError(RuntimeError):
+    """A retryable remote-service failure safe for a higher-level resume loop."""
+
+
+def retry_delay(attempt: int) -> float:
+    return min(30.0, 2 ** max(0, attempt - 1) + random.random())
+
+
+def is_transient_bedrock_error(error: Exception) -> bool:
+    response = getattr(error, "response", None)
+    error_code = None
+    if isinstance(response, dict):
+        details = response.get("Error")
+        if isinstance(details, dict):
+            error_code = details.get("Code")
+    return (
+        isinstance(error, (ConnectionError, TimeoutError, OSError))
+        or error.__class__.__name__ in BEDROCK_TRANSIENT_EXCEPTION_NAMES
+        or error_code in BEDROCK_TRANSIENT_ERROR_CODES
+    )
 
 
 def load_env(path: Path) -> dict[str, str]:
@@ -53,10 +95,18 @@ def error_message(payload: bytes, status: int, service: str) -> str:
 class SupabaseREST:
     """Small PostgREST client using the Supabase service role."""
 
-    def __init__(self, url: str, service_key: str, *, timeout: int = 120) -> None:
+    def __init__(
+        self,
+        url: str,
+        service_key: str,
+        *,
+        timeout: int = 120,
+        max_attempts: int = 5,
+    ) -> None:
         self.rest_url = url.rstrip("/") + "/rest/v1"
         self.service_key = service_key
         self.timeout = timeout
+        self.max_attempts = max(1, max_attempts)
 
     def request(
         self,
@@ -66,6 +116,7 @@ class SupabaseREST:
         query: dict[str, str] | None = None,
         body: Any = None,
         prefer: str | None = None,
+        retry_transient: bool = True,
     ) -> Any:
         url = self.rest_url + "/" + path.lstrip("/")
         if query:
@@ -80,18 +131,40 @@ class SupabaseREST:
         }
         if prefer:
             headers["Prefer"] = prefer
-        request = urllib.request.Request(url, data=encoded, method=method, headers=headers)
-        try:
-            with urllib.request.urlopen(request, timeout=self.timeout) as response:
-                payload = response.read()
-        except urllib.error.HTTPError as exc:
-            payload = exc.read()
-            raise RuntimeError(error_message(payload, exc.code, "Supabase")) from exc
-        except (urllib.error.URLError, TimeoutError) as exc:
-            raise RuntimeError(f"Supabase request failed: {exc}") from exc
-        if not payload:
-            return None
-        return json.loads(payload.decode("utf-8"))
+        attempts = self.max_attempts if retry_transient else 1
+        for attempt in range(1, attempts + 1):
+            request = urllib.request.Request(
+                url,
+                data=encoded,
+                method=method,
+                headers=headers,
+            )
+            try:
+                with urllib.request.urlopen(request, timeout=self.timeout) as response:
+                    payload = response.read()
+                if not payload:
+                    return None
+                return json.loads(payload.decode("utf-8"))
+            except urllib.error.HTTPError as exc:
+                payload = exc.read()
+                failure = RuntimeError(error_message(payload, exc.code, "Supabase"))
+                if exc.code not in TRANSIENT_HTTP_STATUSES:
+                    raise failure from exc
+                if attempt == attempts:
+                    raise TransientNetworkError(str(failure)) from exc
+            except (urllib.error.URLError, TimeoutError, ConnectionError, OSError) as exc:
+                if attempt == attempts:
+                    raise TransientNetworkError(
+                        f"Supabase request failed after {attempt} attempt(s): {exc}"
+                    ) from exc
+            delay = retry_delay(attempt)
+            print(
+                f"RETRY supabase method={method} path={path} "
+                f"attempt={attempt + 1}/{attempts} delay={delay:.1f}s",
+                flush=True,
+            )
+            time.sleep(delay)
+        raise TransientNetworkError("Supabase request failed")
 
     def select(
         self,
@@ -108,7 +181,13 @@ class SupabaseREST:
         return result or []
 
     def insert(self, table: str, rows: dict[str, Any] | list[dict[str, Any]]) -> list[dict[str, Any]]:
-        result = self.request("POST", table, body=rows, prefer="return=representation")
+        result = self.request(
+            "POST",
+            table,
+            body=rows,
+            prefer="return=representation",
+            retry_transient=False,
+        )
         return result or []
 
     def upsert(
@@ -186,64 +265,96 @@ class EmbeddingCache:
         self.connection.close()
 
 
-class OpenAIEmbeddings:
+class BedrockEmbeddings:
+    """Amazon Titan Text Embeddings V2 client with local result caching."""
+
+    SUPPORTED_DIMENSIONS = {256, 512, 1024}
+
     def __init__(
         self,
-        api_key: str,
         *,
-        model: str = "text-embedding-3-small",
-        dimensions: int = 1536,
+        model: str = DEFAULT_BEDROCK_EMBEDDING_MODEL,
+        dimensions: int = DEFAULT_BEDROCK_EMBEDDING_DIMENSIONS,
+        region_name: str,
         timeout: int = 120,
         max_attempts: int = 5,
+        aws_access_key_id: str | None = None,
+        aws_secret_access_key: str | None = None,
+        aws_session_token: str | None = None,
+        client: Any | None = None,
     ) -> None:
-        self.api_key = api_key
+        if dimensions not in self.SUPPORTED_DIMENSIONS:
+            supported = ", ".join(str(value) for value in sorted(self.SUPPORTED_DIMENSIONS))
+            raise ValueError(f"Titan Text Embeddings V2 dimensions must be one of: {supported}")
+        if not region_name:
+            raise ValueError("AWS region is required for Bedrock embeddings")
         self.model = model
         self.dimensions = dimensions
+        self.region_name = region_name
         self.timeout = timeout
         self.max_attempts = max_attempts
+        self._aws_access_key_id = aws_access_key_id
+        self._aws_secret_access_key = aws_secret_access_key
+        self._aws_session_token = aws_session_token
+        self._client = client
+
+    def _bedrock_client(self) -> Any:
+        if self._client is None:
+            import boto3
+            from botocore.config import Config
+
+            options: dict[str, Any] = {
+                "region_name": self.region_name,
+                "config": Config(
+                    connect_timeout=self.timeout,
+                    read_timeout=self.timeout,
+                    retries={"max_attempts": self.max_attempts, "mode": "standard"},
+                ),
+            }
+            if self._aws_access_key_id and self._aws_secret_access_key:
+                options.update(
+                    {
+                        "aws_access_key_id": self._aws_access_key_id,
+                        "aws_secret_access_key": self._aws_secret_access_key,
+                        "aws_session_token": self._aws_session_token,
+                    }
+                )
+            self._client = boto3.client("bedrock-runtime", **options)
+        return self._client
 
     def embed_batch(self, texts: list[str]) -> list[list[float]]:
-        body = {
-            "model": self.model,
-            "input": texts,
-            "encoding_format": "float",
-            "dimensions": self.dimensions,
-        }
-        encoded = json.dumps(body, ensure_ascii=False).encode("utf-8")
-        retryable = {408, 409, 429, 500, 502, 503, 504}
-        last_error: Exception | None = None
-        for attempt in range(1, self.max_attempts + 1):
-            request = urllib.request.Request(
-                OPENAI_EMBEDDINGS_URL,
-                data=encoded,
-                method="POST",
-                headers={
-                    "Authorization": f"Bearer {self.api_key}",
-                    "Content-Type": "application/json",
-                    "User-Agent": "sn-hackathon-insurance-rag/1.0",
-                },
-            )
+        embeddings: list[list[float]] = []
+        for text in texts:
             try:
-                with urllib.request.urlopen(request, timeout=self.timeout) as response:
-                    result = json.loads(response.read().decode("utf-8"))
-                ordered = sorted(result["data"], key=lambda item: item["index"])
-                embeddings = [item["embedding"] for item in ordered]
-                if len(embeddings) != len(texts):
-                    raise RuntimeError("OpenAI returned a different number of embeddings than inputs")
-                if any(len(vector) != self.dimensions for vector in embeddings):
-                    raise RuntimeError(f"OpenAI embedding dimension did not match {self.dimensions}")
-                return embeddings
-            except urllib.error.HTTPError as exc:
-                payload = exc.read()
-                last_error = RuntimeError(error_message(payload, exc.code, "OpenAI"))
-                if exc.code not in retryable or attempt == self.max_attempts:
-                    raise last_error
-            except (urllib.error.URLError, TimeoutError, KeyError, json.JSONDecodeError, RuntimeError) as exc:
-                last_error = exc
-                if attempt == self.max_attempts:
-                    raise
-            time.sleep(min(30.0, 2 ** (attempt - 1) + random.random()))
-        raise RuntimeError(str(last_error or "OpenAI embedding request failed"))
+                response = self._bedrock_client().invoke_model(
+                    modelId=self.model,
+                    body=json.dumps(
+                        {
+                            "inputText": text,
+                            "dimensions": self.dimensions,
+                            "normalize": True,
+                        }
+                    ),
+                    accept="application/json",
+                    contentType="application/json",
+                )
+                payload = json.loads(response["body"].read())
+                raw_embedding = payload["embedding"]
+                if not isinstance(raw_embedding, list):
+                    raise RuntimeError("Bedrock returned an invalid embedding")
+                embedding = [float(value) for value in raw_embedding]
+                if len(embedding) != self.dimensions:
+                    raise RuntimeError(
+                        f"Bedrock embedding dimension did not match {self.dimensions}"
+                    )
+                embeddings.append(embedding)
+            except Exception as error:
+                if is_transient_bedrock_error(error):
+                    raise TransientNetworkError(
+                        "Bedrock embedding request failed after SDK retries"
+                    ) from error
+                raise RuntimeError("Bedrock embedding request failed") from error
+        return embeddings
 
     def embed_with_cache(
         self,
@@ -263,12 +374,12 @@ class OpenAIEmbeddings:
 
         missing_texts = list(missing_by_text)
         for batch in chunks(missing_texts, batch_size):
-            vectors = self.embed_batch(batch)
-            for text, vector in zip(batch, vectors):
+            for text in batch:
+                vector = self.embed_batch([text])[0]
                 cache.put(self.model, self.dimensions, text, vector)
                 for index in missing_by_text[text]:
                     results[index] = vector
-            cache.commit()
+                cache.commit()
 
         if any(vector is None for vector in results):
             raise RuntimeError("Embedding cache resolution was incomplete")

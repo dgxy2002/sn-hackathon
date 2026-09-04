@@ -163,8 +163,8 @@ def test_supabase_adapter_maps_live_results_to_the_shared_contract(
             captured["cache_closed"] = True
 
     class FakeEmbeddings:
-        def __init__(self, key, **kwargs) -> None:
-            captured["embedding_key"] = key
+        def __init__(self, **kwargs) -> None:
+            captured["embedding_configuration"] = kwargs
 
         def embed_with_cache(self, texts, cache, batch_size):
             return [[0.25, 0.75]]
@@ -201,13 +201,13 @@ def test_supabase_adapter_maps_live_results_to_the_shared_contract(
             ]
 
     monkeypatch.setattr(rag_common, "EmbeddingCache", FakeEmbeddingCache)
-    monkeypatch.setattr(rag_common, "OpenAIEmbeddings", FakeEmbeddings)
+    monkeypatch.setattr(rag_common, "BedrockEmbeddings", FakeEmbeddings)
     monkeypatch.setattr(rag_common, "SupabaseREST", FakeSupabase)
     service = EvidenceService(
         SupabaseEvidenceAdapter(
             supabase_url="https://database.example",
             service_key="test-service-key",
-            openai_key="test-openai-key",
+            bedrock_region="us-east-1",
             cache_path=tmp_path / "embeddings.sqlite3",
         )
     )
@@ -262,6 +262,13 @@ def test_supabase_adapter_maps_live_results_to_the_shared_contract(
         },
     }
     assert captured["cache_closed"] is True
+    assert captured["embedding_configuration"] == {
+        "model": "amazon.titan-embed-text-v2:0",
+        "dimensions": 1024,
+        "region_name": "us-east-1",
+        "timeout": 20,
+        "max_attempts": 2,
+    }
     assert captured["rpc"] == (
         "match_documents_by_type",
         {
@@ -293,6 +300,18 @@ def test_evidence_request_rejects_unknown_fields() -> None:
 def test_live_evidence_mode_requires_all_dependencies() -> None:
     with pytest.raises(ConfigurationError, match="Live evidence"):
         Settings.from_env({"APP_ENV": "test", "EVIDENCE_MODE": "live"})
+
+    settings = Settings.from_env(
+        {
+            "APP_ENV": "test",
+            "EVIDENCE_MODE": "live",
+            "SUPABASE_URL": "https://database.example",
+            "SUPABASE_SERVICE_ROLE_KEY": "test-service-key",
+            "AWS_REGION": "us-east-1",
+        }
+    )
+    assert settings.bedrock_embedding_model_id == "amazon.titan-embed-text-v2:0"
+    assert settings.bedrock_embedding_dimensions == 1024
 
 
 def test_evidence_dependency_failure_uses_safe_typed_error() -> None:
