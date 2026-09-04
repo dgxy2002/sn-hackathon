@@ -5,48 +5,35 @@ from app.main import create_app
 from tests.support import request
 
 
-def test_health_reports_fixture_dependencies_without_secrets() -> None:
+def test_health_reports_local_dependencies_without_secrets() -> None:
     app = create_app(Settings.from_env({"APP_ENV": "test"}))
     response = request(app, "GET", "/health")
 
     assert response.status_code == 200
     assert response.json() == {
-        "service": "covercheck-api",
+        "service": "before-you-commit-api",
         "version": "0.1.0",
         "status": "healthy",
         "environment": "test",
         "dependencies": {
-            "database": {"status": "not_configured", "mode": "synthetic"},
-            "object_store": {"status": "not_configured", "mode": "simulated"},
-            "openrouter": {"status": "not_configured", "mode": "simulated"},
-            "bedrock": {"status": "not_configured", "mode": "simulated"},
+            "database": {"status": "not_configured", "mode": "off"},
+            "document_processing": {"status": "ready", "mode": "local"},
+            "bedrock": {"status": "not_configured", "mode": "off"},
         },
     }
     assert "key" not in response.text.lower()
 
 
-def test_capabilities_publish_modes_and_contract_versions() -> None:
+def test_app_exposes_health_and_v2_product_routes_only() -> None:
     app = create_app(Settings.from_env({"APP_ENV": "test"}))
-    response = request(app, "GET", "/v1/capabilities")
+    paths = set(app.openapi()["paths"])
 
-    assert response.status_code == 200
-    payload = response.json()
-    assert payload["service_version"] == "0.1.0"
-    assert payload["api_version"] == "v1"
-    assert set(payload["capabilities"]) == {
-        "profile",
-        "extraction",
-        "evidence",
-        "recommendation",
-        "orchestration",
-        "conversation",
-    }
-    assert payload["capabilities"]["profile"] == {
-        "mode": "synthetic",
-        "contract_version": "1.0.0",
-        "available": True,
-    }
-    assert payload["capabilities"]["extraction"]["mode"] == "simulated"
+    assert not any(path.startswith("/v1") for path in paths)
+    assert "/health" in paths
+    assert "/api/v2/analyses" in paths
+    assert "/api/v2/analyses/{analysis_id}/documents" in paths
+    assert "/api/v2/analyses/{analysis_id}/privacy-scan" in paths
+    assert "/api/v2/analyses/{analysis_id}/extract" in paths
 
 
 def test_configuration_rejects_wildcard_origins() -> None:
@@ -54,33 +41,14 @@ def test_configuration_rejects_wildcard_origins() -> None:
         Settings.from_env({"ALLOWED_ORIGINS": "*"})
 
 
-def test_live_extraction_requires_explicit_openrouter_configuration() -> None:
-    with pytest.raises(ConfigurationError, match="OPENROUTER"):
-        Settings.from_env({"EXTRACTION_MODE": "live"})
+def test_bedrock_remains_optional_and_requires_complete_configuration() -> None:
+    assert Settings.from_env({"BEDROCK_MODEL_ID": "model-only"}).bedrock_configured is False
+    assert Settings.from_env({"AWS_REGION": "us-east-1"}).bedrock_configured is False
 
     settings = Settings.from_env(
         {
-            "EXTRACTION_MODE": "live",
-            "DOCUMENT_AI_PROVIDER": "openrouter",
-            "OPENROUTER_API_KEY": "test-only-key",
-            "OPENROUTER_MODEL": "configured/model-slug",
-        }
-    )
-    assert settings.openrouter_configured is True
-
-
-def test_live_orchestration_requires_bedrock_model_and_region() -> None:
-    with pytest.raises(ConfigurationError, match="BEDROCK_MODEL_ID"):
-        Settings.from_env({"ORCHESTRATION_MODE": "live"})
-
-    settings = Settings.from_env(
-        {
-            "ORCHESTRATION_MODE": "live",
-            "LLM_PROVIDER": "bedrock",
             "BEDROCK_MODEL_ID": "test.inference-profile",
             "AWS_REGION": "us-east-1",
         }
     )
     assert settings.bedrock_configured is True
-    assert settings.llm_provider == "bedrock"
-    assert settings.bedrock_model_id == "test.inference-profile"

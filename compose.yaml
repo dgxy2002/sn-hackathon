@@ -1,4 +1,4 @@
-name: covercheck
+name: before-you-commit
 
 services:
   web:
@@ -25,21 +25,17 @@ services:
       dockerfile: backend/Dockerfile
     environment:
       APP_ENV: local-compose
-      EVIDENCE_MODE: cached
-      EVIDENCE_MAX_AGE_DAYS: "365"
-      DEPENDENCY_TIMEOUT_SECONDS: "20"
-      PROFILE_MODE: synthetic
-      EXTRACTION_MODE: simulated
-      RECOMMENDATION_MODE: simulated
-      ORCHESTRATION_MODE: ${ORCHESTRATION_MODE:-simulated}
-      CONVERSATION_MODE: simulated
-      LLM_PROVIDER: bedrock
+      ANALYSIS_TTL_HOURS: ${ANALYSIS_TTL_HOURS:-24}
+      DOCUMENT_MAX_SIZE_BYTES: ${DOCUMENT_MAX_SIZE_BYTES:-20971520}
+      DOCUMENT_MAX_PAGE_COUNT: ${DOCUMENT_MAX_PAGE_COUNT:-100}
+      DOCUMENT_ORPHAN_TTL_MINUTES: ${DOCUMENT_ORPHAN_TTL_MINUTES:-30}
+      DOCUMENT_WORKSPACE_ROOT: /tmp/before-you-commit
       AWS_REGION: ${AWS_REGION:-us-east-1}
       BEDROCK_MODEL_ID: ${BEDROCK_MODEL_ID:-us.anthropic.claude-haiku-4-5-20251001-v1:0}
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
       AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN:-}
-      DATABASE_URL: postgresql://covercheck:${POSTGRES_PASSWORD:-covercheck-local-only}@postgres:5432/covercheck
+      DATABASE_URL: postgresql://${POSTGRES_USER:-before_you_commit}:${POSTGRES_PASSWORD:-local-only}@postgres:5432/${POSTGRES_DB:-before_you_commit}
     depends_on:
       postgres:
         condition: service_healthy
@@ -61,7 +57,7 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      DATABASE_URL: postgresql://covercheck:${POSTGRES_PASSWORD:-covercheck-local-only}@postgres:5432/covercheck
+      DATABASE_URL: postgresql://${POSTGRES_USER:-before_you_commit}:${POSTGRES_PASSWORD:-local-only}@postgres:5432/${POSTGRES_DB:-before_you_commit}
       SCRAPE_INTERVAL_SECONDS: ${SCRAPE_INTERVAL_SECONDS:-86400}
       SCRAPE_LEASE_TTL_SECONDS: ${SCRAPE_LEASE_TTL_SECONDS:-900}
       SCRAPE_SOURCE_ALLOWLIST: ${SCRAPE_SOURCE_ALLOWLIST:-}
@@ -78,9 +74,9 @@ services:
   postgres:
     image: pgvector/pgvector:pg16
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-covercheck}
-      POSTGRES_USER: ${POSTGRES_USER:-covercheck}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-covercheck-local-only}
+      POSTGRES_DB: ${POSTGRES_DB:-before_you_commit}
+      POSTGRES_USER: ${POSTGRES_USER:-before_you_commit}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-local-only}
     volumes:
       - postgres-data:/var/lib/postgresql/data
       - ./backend/docker/postgres-init.sql:/docker-entrypoint-initdb.d/001-pgvector.sql:ro

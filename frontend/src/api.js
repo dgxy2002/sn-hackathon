@@ -1,4 +1,4 @@
-const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '')
+const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://localhost:8000/api').replace(/\/$/, '')
 
 export class ApiError extends Error {
   code
@@ -10,103 +10,94 @@ export class ApiError extends Error {
   }
 }
 
-/**
- * @param {string} path
- * @param {RequestInit} [options]
- */
-const request = async (path, options = /** @type {RequestInit} */ ({})) => {
-  const headers = new Headers(Reflect.get(options, 'headers'))
-  headers.set('Content-Type', 'application/json')
+const request = async (path, options = {}) => {
+  const headers = new Headers(options.headers)
+  if (options.body && !(options.body instanceof FormData)) {
+    headers.set('Content-Type', 'application/json')
+  }
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...options,
     headers,
   })
-  const payload = await response.json().catch(() => null)
+  if (response.status === 204) return null
 
+  const payload = await response.json().catch(() => null)
   if (!response.ok) {
     throw new ApiError(
-      payload?.error?.message || 'CoverCheck could not complete that request.',
+      payload?.error?.message || 'We couldn’t finish that step. Please try again.',
       payload?.error?.code,
     )
   }
-
   return payload
 }
 
-export const createClientId = () => {
-  if (globalThis.crypto?.randomUUID) return globalThis.crypto.randomUUID()
-  if (globalThis.crypto?.getRandomValues) {
-    const bytes = globalThis.crypto.getRandomValues(new Uint8Array(16))
-    return `client-${Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('')}`
-  }
-  return `client-${Date.now()}-${Math.random().toString(16).slice(2)}`
+export const createIdempotencyKey = (prefix) => {
+  const id = globalThis.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(16).slice(2)}`
+  return `${prefix}-${id}`
 }
 
-export const submitExtraction = (fixtureId, signal) => request('/v1/extractions', {
-  method: 'POST',
-  body: JSON.stringify({ fixture_id: fixtureId }),
-  signal,
-})
-
-export const reviewExtraction = (extractionId, body, signal) => request(
-  `/v1/extractions/${encodeURIComponent(extractionId)}/review`,
-  {
-    method: 'POST',
-    body: JSON.stringify(body),
-    signal,
-  },
-)
-
-export const invokeCoverCheck = (body, signal) => request('/v1/invocations', {
-  method: 'POST',
-  body: JSON.stringify(body),
-  signal,
-})
-
-export const compareEvidence = (body, signal) => request('/v1/evidence/compare', {
-  method: 'POST',
-  body: JSON.stringify(body),
-  signal,
-})
-
-export const createConversation = (activeRevisionId, profile, recommendation, signal) => request('/v1/conversations', {
+export const createAnalysis = (purpose, decisionDate, signal) => request('/v2/analyses', {
   method: 'POST',
   body: JSON.stringify({
-    active_revision_id: activeRevisionId,
-    profile,
-    recommendation,
+    purpose,
+    decision_date: decisionDate || null,
   }),
   signal,
 })
 
-export const sendConversationMessage = (conversationId, body, signal) => request(
-  `/v1/conversations/${encodeURIComponent(conversationId)}/messages`,
+export const uploadDocument = (analysisId, file, idempotencyKey, signal) => {
+  const body = new FormData()
+  body.append('document', file)
+  return request(`/v2/analyses/${encodeURIComponent(analysisId)}/documents`, {
+    method: 'POST',
+    body,
+    headers: { 'Idempotency-Key': idempotencyKey },
+    signal,
+  })
+}
+
+export const scanPrivacy = (analysisId, idempotencyKey, signal) => request(
+  `/v2/analyses/${encodeURIComponent(analysisId)}/privacy-scan`,
   {
     method: 'POST',
-    body: JSON.stringify(body),
+    headers: { 'Idempotency-Key': idempotencyKey },
     signal,
   },
 )
 
-export const decideProposal = (conversationId, proposalId, decision, body, signal) => request(
-  `/v1/conversations/${encodeURIComponent(conversationId)}/proposals/${encodeURIComponent(proposalId)}/${decision}`,
+export const reviewPrivacy = (analysisId, decisions, idempotencyKey, signal) => request(
+  `/v2/analyses/${encodeURIComponent(analysisId)}/privacy-findings`,
   {
-    method: 'POST',
-    body: JSON.stringify(body),
+    method: 'PATCH',
+    body: JSON.stringify({ decisions }),
+    headers: { 'Idempotency-Key': idempotencyKey },
     signal,
   },
 )
 
-export const fetchReplay = (conversationId, signal) => request(
-  `/v1/conversations/${encodeURIComponent(conversationId)}/replay`,
-  { signal },
-)
-
-export const undoRevision = (conversationId, body, signal) => request(
-  `/v1/conversations/${encodeURIComponent(conversationId)}/undo`,
+export const extractTerms = (analysisId, idempotencyKey, signal) => request(
+  `/v2/analyses/${encodeURIComponent(analysisId)}/extract`,
   {
     method: 'POST',
-    body: JSON.stringify(body),
+    headers: { 'Idempotency-Key': idempotencyKey },
+    signal,
+  },
+)
+
+export const reviewTerms = (analysisId, decisions, idempotencyKey, signal) => request(
+  `/v2/analyses/${encodeURIComponent(analysisId)}/terms`,
+  {
+    method: 'PATCH',
+    body: JSON.stringify({ decisions }),
+    headers: { 'Idempotency-Key': idempotencyKey },
+    signal,
+  },
+)
+
+export const deleteAnalysis = (analysisId, signal) => request(
+  `/v2/analyses/${encodeURIComponent(analysisId)}`,
+  {
+    method: 'DELETE',
     signal,
   },
 )

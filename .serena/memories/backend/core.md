@@ -1,9 +1,8 @@
-# Backend Scraper/Data
+# Backend
 
-- Location: `backend/scraper/`.
-- `card_scraper.py` scrapes SingSaver credit-card data and writes via Supabase REST; this is current implemented data ingestion, while insurance/RAG agents remain planned.
-- Dependencies in `backend/scraper/requirements.txt`: BeautifulSoup 4, python-dotenv, requests.
-- Default env file: `backend/.env`; accepted URL vars: `SUPABASE_URL` or `NEXT_PUBLIC_SUPABASE_URL`; service-key vars: `SUPABASE_SERVICE_ROLE_KEY` or `SUPABASE_KEY`. Never expose or commit service-role keys.
-- CLI flags: `--env-file`, `--limit`, `--only`, `--delay`, `--timeout`, `--dry-run`, `--skip-details`, `--verbose`.
-- Apply `backend/scraper/credit_card_schema.sql` before DB writes; `supabase_schema.sql` contains broader insurance, policy, document chunk, and scrape-log schema.
-- Prefer `--dry-run --limit N` for cheap validation before any write-enabled run.
+- Active package: `backend/app/` with `main.py`, `api_v2.py`, `contracts_v2.py`, `analysis_service.py`, `document_service.py`, `material_extraction.py`, and `scraper_worker.py`.
+- `main.py` exposes health and `/api/v2` only. Product behavior belongs behind strict v2 contracts.
+- Keep raw PDFs, extracted text, and page images inside opaque per-analysis local workspaces. Preserve size/page limits, TTL, idempotency, and cleanup behavior.
+- `material_extraction.py` owns deterministic source-bound candidates and explicit unknown/conflict states; no LLM is required.
+- PostgreSQL schema is `backend/docker/postgres-init.sql`; Compose database URLs derive from the configured PostgreSQL role/database.
+- `scraper_worker.py` is reserved for allowlisted official guidance and must use normalized evidence records.

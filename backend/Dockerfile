@@ -9,8 +9,11 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-RUN groupadd --system covercheck \
-    && useradd --system --gid covercheck --home-dir /app covercheck
+RUN apt-get update \
+    && apt-get install --yes --no-install-recommends tesseract-ocr \
+    && rm -rf /var/lib/apt/lists/* \
+    && groupadd --system beforecommit \
+    && useradd --system --gid beforecommit --home-dir /app beforecommit
 
 COPY backend/requirements.txt ./requirements.txt
 RUN --mount=type=secret,id=corporate_ca,required=false \
@@ -22,11 +25,9 @@ RUN --mount=type=secret,id=corporate_ca,required=false \
     && python -m pip install -r requirements.txt
 
 COPY backend/app ./app
-COPY backend/fixtures ./fixtures
-COPY backend/scraper/insurance ./scraper/insurance
 
-RUN chown -R covercheck:covercheck /app
-USER covercheck
+RUN chown -R beforecommit:beforecommit /app
+USER beforecommit
 
 EXPOSE 8000
 

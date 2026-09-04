@@ -1,8 +1,10 @@
 # Frontend
 
-- Location: `frontend/`; current state is Vite starter-style vanilla JS, not React.
-- Entry: `frontend/src/main.js`; global styles: `frontend/src/style.css`; static icons/assets under `frontend/public/` and `frontend/src/assets/`.
+- Location: `frontend/`; Vite 8 with vanilla JavaScript, CSS, and individually imported Lucide icons.
+- Entry: `frontend/src/main.js`; transport: `frontend/src/api.js`; global styles: `frontend/src/style.css`.
+- Active journey: upload -> privacy review -> source-bound term review -> reviewed summary -> deletion.
+- Browser transport uses canonical `/api/v2` URLs through the NGINX `/api` proxy.
 - Uses ES modules, single quotes, no semicolons, two-space indentation in JS; CSS uses custom properties and nested CSS syntax accepted by current Vite toolchain.
 - `package.json` scripts: `dev`, `build`, `preview`; no lint/test/typecheck script exists.
-- Design work should select relevant repository-local VibeCurb protocols from `.agents/skills/`; do not apply all skills indiscriminately.
-- User journey and UX/trust constraints are defined in `PLAN.md`; preserve educational-not-advice boundary and synthetic/real labels.
+- Keep stage-change scroll reset, desktop/mobile layouts, explicit unknown copy, privacy metadata-only responses, and the non-advice boundary.
+- User journey and UX/trust constraints are defined in `PLAN.md`.
