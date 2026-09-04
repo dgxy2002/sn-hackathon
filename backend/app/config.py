@@ -69,10 +69,11 @@ class Settings:
     llm_provider: ModelProvider
     document_ai_provider: ModelProvider
     bedrock_model_id: str | None
+    bedrock_embedding_model_id: str
+    bedrock_embedding_dimensions: int
     aws_region: str | None
     supabase_url: str | None = field(repr=False)
     supabase_service_role_key: str | None = field(repr=False)
-    openai_key: str | None = field(repr=False)
     evidence_corpus_path: str | None
     evidence_max_age_days: int
     dependency_timeout_seconds: int
@@ -83,6 +84,9 @@ class Settings:
         openrouter_key = values.get("OPENROUTER_API_KEY", "").strip()
         openrouter_model = values.get("OPENROUTER_MODEL", "").strip()
         bedrock_model_id = values.get("BEDROCK_MODEL_ID", "").strip()
+        bedrock_embedding_model_id = values.get(
+            "BEDROCK_EMBEDDING_MODEL_ID", "amazon.titan-embed-text-v2:0"
+        ).strip()
         aws_region = (
             values.get("AWS_REGION", "").strip()
             or values.get("AWS_DEFAULT_REGION", "").strip()
@@ -91,10 +95,6 @@ class Settings:
         supabase_service_role_key = values.get(
             "SUPABASE_SERVICE_ROLE_KEY", ""
         ).strip()
-        openai_key = (
-            values.get("OPENAI_KEY", "").strip()
-            or values.get("OPENAI_API_KEY", "").strip()
-        )
         database_url = values.get("DATABASE_URL", "").strip()
 
         settings = cls(
@@ -132,10 +132,14 @@ class Settings:
                 "DOCUMENT_AI_PROVIDER",
             ),
             bedrock_model_id=bedrock_model_id or None,
+            bedrock_embedding_model_id=bedrock_embedding_model_id,
+            bedrock_embedding_dimensions=_positive_int(
+                values.get("BEDROCK_EMBEDDING_DIMENSIONS", "1024"),
+                "BEDROCK_EMBEDDING_DIMENSIONS",
+            ),
             aws_region=aws_region or None,
             supabase_url=supabase_url or None,
             supabase_service_role_key=supabase_service_role_key or None,
-            openai_key=openai_key or None,
             evidence_corpus_path=values.get("EVIDENCE_CORPUS_PATH", "").strip() or None,
             evidence_max_age_days=_positive_int(
                 values.get("EVIDENCE_MAX_AGE_DAYS", "365"),
@@ -170,8 +174,16 @@ class Settings:
                 "BEDROCK_MODEL_ID, and AWS_REGION"
             )
         if self.evidence_mode == "live" and not (
-            self.supabase_url and self.supabase_service_role_key and self.openai_key
+            self.supabase_url
+            and self.supabase_service_role_key
+            and self.aws_region
+            and self.bedrock_embedding_model_id
         ):
             raise ConfigurationError(
-                "Live evidence requires SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, and OPENAI_KEY"
+                "Live evidence requires SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, "
+                "AWS_REGION, and BEDROCK_EMBEDDING_MODEL_ID"
+            )
+        if self.bedrock_embedding_dimensions not in {256, 512, 1024}:
+            raise ConfigurationError(
+                "BEDROCK_EMBEDDING_DIMENSIONS must be one of: 256, 512, 1024"
             )

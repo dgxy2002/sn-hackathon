@@ -13,20 +13,34 @@ import hashlib
 import json
 import os
 import re
+import time
 from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path, PureWindowsPath
 from typing import Any
+from uuid import NAMESPACE_URL, uuid5
 
-from rag_common import EmbeddingCache, OpenAIEmbeddings, SupabaseREST, chunks, load_env
+from rag_common import (
+    DEFAULT_BEDROCK_EMBEDDING_DIMENSIONS,
+    DEFAULT_BEDROCK_EMBEDDING_MODEL,
+    BedrockEmbeddings,
+    EmbeddingCache,
+    SupabaseREST,
+    TransientNetworkError,
+    chunks,
+    load_env,
+    retry_delay,
+)
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parents[1]
 DEFAULT_INPUT = SCRIPT_DIR / "insurance" / "extracted_openai"
 DEFAULT_ENV = SCRIPT_DIR.parent / ".env"
-DEFAULT_EMBEDDING_MODEL = "text-embedding-3-small"
-DEFAULT_EMBEDDING_DIMENSIONS = 1536
+DEFAULT_EMBEDDING_MODEL = DEFAULT_BEDROCK_EMBEDDING_MODEL
+DEFAULT_EMBEDDING_DIMENSIONS = DEFAULT_BEDROCK_EMBEDDING_DIMENSIONS
+CHECKPOINT_VERSION = 1
+DEFAULT_CHECKPOINT_NAME = ".ingest_checkpoint.json"
 
 INSURER_SHORT_NAMES = {
     "AIA": "AIA",
@@ -857,6 +871,12 @@ def deduplicate_chunks(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
         ).hexdigest()
         if key not in seen:
             seen.add(key)
+            row["id"] = str(
+                uuid5(
+                    NAMESPACE_URL,
+                    f"covercheck:{row['source_type']}:{row['source_id']}:{key}",
+                )
+            )
             result.append(row)
     for index, row in enumerate(result):
         row["chunk_index"] = index
@@ -904,14 +924,208 @@ def import_policy(
     return policy_id, document_id, build_policy_chunks(policy, source, policy_id, document_id), counts
 
 
+def checkpoint_item_id(item: dict[str, Any]) -> str:
+    source = item["source_document"]
+    identity = {
+        "policy_slug": item["policy"]["slug"],
+        "source": source.get("content_sha256") or source["source_file"],
+    }
+    return hashlib.sha256(
+        json.dumps(identity, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+
+
+def unique_policy_items(
+    items: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[str]]:
+    unique: list[dict[str, Any]] = []
+    duplicates: list[str] = []
+    seen: set[str] = set()
+    for item in items:
+        identity = checkpoint_item_id(item)
+        if identity in seen:
+            duplicates.append(item["source_document"]["source_file"])
+            continue
+        seen.add(identity)
+        unique.append(item)
+    return unique, duplicates
+
+
+def checkpoint_fingerprint(
+    items: list[dict[str, Any]],
+    *,
+    supabase_url: str,
+    embedding_model: str,
+    embedding_dimensions: int,
+    structured_only: bool,
+    skip_embeddings: bool,
+) -> str:
+    job = {
+        "target": supabase_url.rstrip("/").casefold(),
+        "items": [checkpoint_item_id(item) for item in items],
+        "embedding_model": embedding_model,
+        "embedding_dimensions": embedding_dimensions,
+        "structured_only": structured_only,
+        "skip_embeddings": skip_embeddings,
+    }
+    return hashlib.sha256(
+        json.dumps(job, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+
+
+def load_checkpoint(
+    path: Path,
+    fingerprint: str,
+    *,
+    reset: bool,
+) -> set[str]:
+    if reset and path.exists():
+        path.unlink()
+    if not path.exists():
+        return set()
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise RuntimeError(
+            f"Cannot read checkpoint {path}; rerun with --reset-checkpoint"
+        ) from error
+    if (
+        payload.get("version") != CHECKPOINT_VERSION
+        or payload.get("fingerprint") != fingerprint
+    ):
+        print("CHECKPOINT_RESET reason=job_configuration_changed", flush=True)
+        path.unlink()
+        return set()
+    completed = payload.get("completed")
+    if not isinstance(completed, list) or not all(
+        isinstance(value, str) for value in completed
+    ):
+        raise RuntimeError(
+            f"Invalid checkpoint {path}; rerun with --reset-checkpoint"
+        )
+    return set(completed)
+
+
+def save_checkpoint(path: Path, fingerprint: str, completed: set[str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_name(f"{path.name}.tmp")
+    temporary.write_text(
+        json.dumps(
+            {
+                "version": CHECKPOINT_VERSION,
+                "fingerprint": fingerprint,
+                "completed": sorted(completed),
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    temporary.replace(path)
+
+
+def upload_policy_chunks(
+    db: SupabaseREST,
+    policy_id: str,
+    raw_rows: list[dict[str, Any]],
+    *,
+    embedder: BedrockEmbeddings | None,
+    cache: EmbeddingCache,
+    embedding_model: str,
+    embedding_dimensions: int,
+    embedding_batch_size: int,
+    db_batch_size: int,
+) -> int:
+    rows = deduplicate_chunks(raw_rows)
+    if embedder:
+        vectors = embedder.embed_with_cache(
+            [row["chunk_text"] for row in rows],
+            cache,
+            batch_size=embedding_batch_size,
+        )
+        for row, vector in zip(rows, vectors):
+            row["embedding"] = vector
+            row["metadata"] = {
+                **row["metadata"],
+                "embedding_provider": "bedrock",
+                "embedding_model": embedding_model,
+                "embedding_dimensions": embedding_dimensions,
+            }
+    ensure_uuid(policy_id, "policy_id")
+    db.delete(
+        "document_chunks",
+        {"source_type": "eq.policy", "source_id": f"eq.{policy_id}"},
+    )
+    for batch in chunks(rows, db_batch_size):
+        db.upsert("document_chunks", batch, on_conflict="id")
+    return len(rows)
+
+
+def ingest_policy_with_retries(
+    db: SupabaseREST,
+    item: dict[str, Any],
+    document_meta: dict[str, Any] | None,
+    *,
+    embedder: BedrockEmbeddings | None,
+    cache: EmbeddingCache | None,
+    embedding_model: str,
+    embedding_dimensions: int,
+    embedding_batch_size: int,
+    db_batch_size: int,
+    structured_only: bool,
+    max_attempts: int,
+) -> tuple[dict[str, int], int]:
+    for attempt in range(1, max_attempts + 1):
+        try:
+            policy_id, _, rows, counts = import_policy(db, item, document_meta)
+            chunk_count = 0
+            if not structured_only:
+                if cache is None:
+                    raise RuntimeError("Embedding cache is unavailable")
+                chunk_count = upload_policy_chunks(
+                    db,
+                    policy_id,
+                    rows,
+                    embedder=embedder,
+                    cache=cache,
+                    embedding_model=embedding_model,
+                    embedding_dimensions=embedding_dimensions,
+                    embedding_batch_size=embedding_batch_size,
+                    db_batch_size=db_batch_size,
+                )
+            return counts, chunk_count
+        except TransientNetworkError:
+            if attempt == max_attempts:
+                raise
+            delay = retry_delay(attempt)
+            print(
+                f"RETRY policy={item['policy']['slug']} "
+                f"attempt={attempt + 1}/{max_attempts} delay={delay:.1f}s",
+                flush=True,
+            )
+            time.sleep(delay)
+    raise RuntimeError("Policy ingestion retry loop ended unexpectedly")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--env", type=Path, default=DEFAULT_ENV)
-    parser.add_argument("--embedding-model", default=DEFAULT_EMBEDDING_MODEL)
-    parser.add_argument("--embedding-dimensions", type=int, default=DEFAULT_EMBEDDING_DIMENSIONS)
+    parser.add_argument("--embedding-model")
+    parser.add_argument("--embedding-dimensions", type=int)
     parser.add_argument("--embedding-batch-size", type=int, default=64)
     parser.add_argument("--db-batch-size", type=int, default=25)
+    parser.add_argument("--max-attempts", type=int, default=5)
+    parser.add_argument(
+        "--checkpoint",
+        type=Path,
+        help=f"Resume checkpoint path (default: INPUT/{DEFAULT_CHECKPOINT_NAME})",
+    )
+    parser.add_argument(
+        "--reset-checkpoint",
+        action="store_true",
+        help="Discard a saved resume checkpoint before starting",
+    )
     parser.add_argument("--match", action="append", help="Only include source paths or policy names containing this text")
     parser.add_argument("--limit", type=int)
     parser.add_argument("--structured-only", action="store_true", help="Load relational tables without document chunks")
@@ -953,17 +1167,14 @@ def main() -> int:
         items = items[:args.limit]
     if not items:
         raise RuntimeError("No extracted policies matched the requested selection")
+    selected_rows = len(items)
+    items, duplicate_sources = unique_policy_items(items)
+    for source_file in duplicate_sources:
+        print(f"SKIP_DUPLICATE {source_file}", flush=True)
     if args.prepare_only:
-        seen: set[tuple[str, str]] = set()
         chunk_count = 0
-        unique_policies = 0
         for item in items:
             source = item["source_document"]
-            key = (item["policy"]["slug"], source.get("content_sha256") or source["source_file"])
-            if key in seen:
-                continue
-            seen.add(key)
-            unique_policies += 1
             chunk_count += len(build_policy_chunks(
                 item["policy"],
                 source,
@@ -971,7 +1182,7 @@ def main() -> int:
                 "00000000-0000-4000-8000-000000000001",
             ))
         print(
-            f"READY extracted_policy_rows={len(items)} unique_policies={unique_policies} "
+            f"READY extracted_policy_rows={selected_rows} unique_policies={len(items)} "
             f"candidate_chunks={chunk_count} quality_files_changed={changed}"
         )
         return 0
@@ -979,60 +1190,124 @@ def main() -> int:
     env = {**load_env(args.env.resolve()), **os.environ}
     supabase_url = env.get("SUPABASE_URL")
     service_key = env.get("SUPABASE_SERVICE_ROLE_KEY")
+    aws_region = env.get("AWS_REGION") or env.get("AWS_DEFAULT_REGION")
+    embedding_model = (
+        args.embedding_model
+        or env.get("BEDROCK_EMBEDDING_MODEL_ID")
+        or DEFAULT_EMBEDDING_MODEL
+    )
+    try:
+        embedding_dimensions = int(
+            args.embedding_dimensions
+            or env.get("BEDROCK_EMBEDDING_DIMENSIONS")
+            or DEFAULT_EMBEDDING_DIMENSIONS
+        )
+    except ValueError as error:
+        raise RuntimeError("BEDROCK_EMBEDDING_DIMENSIONS must be an integer") from error
     if not supabase_url or not service_key:
         raise RuntimeError("SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are required")
-    if not args.structured_only and not args.skip_embeddings and not env.get("OPENAI_KEY"):
-        raise RuntimeError("OPENAI_KEY is required unless --structured-only or --skip-embeddings is used")
+    if not args.structured_only and not args.skip_embeddings and not aws_region:
+        raise RuntimeError(
+            "AWS_REGION or AWS_DEFAULT_REGION is required unless "
+            "--structured-only or --skip-embeddings is used"
+        )
+    if args.max_attempts < 1:
+        raise RuntimeError("--max-attempts must be at least 1")
+    if args.embedding_batch_size < 1 or args.db_batch_size < 1:
+        raise RuntimeError("Batch sizes must be at least 1")
 
-    db = SupabaseREST(supabase_url, service_key)
-    policy_chunks: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    seen_source: set[tuple[str, str]] = set()
+    checkpoint_path = (
+        args.checkpoint.resolve()
+        if args.checkpoint
+        else input_root / DEFAULT_CHECKPOINT_NAME
+    )
+    fingerprint = checkpoint_fingerprint(
+        items,
+        supabase_url=supabase_url,
+        embedding_model=embedding_model,
+        embedding_dimensions=embedding_dimensions,
+        structured_only=args.structured_only,
+        skip_embeddings=args.skip_embeddings,
+    )
+    completed = load_checkpoint(
+        checkpoint_path,
+        fingerprint,
+        reset=args.reset_checkpoint,
+    )
+
+    db = SupabaseREST(
+        supabase_url,
+        service_key,
+        max_attempts=args.max_attempts,
+    )
     totals = defaultdict(int)
-    print(f"START policies={len(items)} input={input_root}", flush=True)
-    for index, item in enumerate(items, start=1):
-        source = item["source_document"]
-        source_key = (item["policy"]["slug"], source.get("content_sha256") or source["source_file"])
-        if source_key in seen_source:
-            print(f"SKIP_DUPLICATE {index}/{len(items)} {source['source_file']}", flush=True)
-            continue
-        seen_source.add(source_key)
-        policy_id, _, rows, counts = import_policy(db, item, docs.get(source["source_file"]))
-        policy_chunks[policy_id].extend(rows)
-        totals["policies"] += 1
-        for key, value in counts.items():
-            totals[key] += value
-        print(
-            f"INGESTED {index}/{len(items)} plans={counts['plans']} benefits={counts['benefits']} "
-            f"amounts={counts['plan_benefits']} {item['policy']['company']} — {item['policy']['policy_name']}",
-            flush=True,
+    cache = (
+        None
+        if args.structured_only
+        else EmbeddingCache(input_root / "rag_embedding_cache.sqlite3")
+    )
+    embedder = (
+        None
+        if args.structured_only or args.skip_embeddings
+        else BedrockEmbeddings(
+            model=embedding_model,
+            dimensions=embedding_dimensions,
+            region_name=aws_region or "",
+            aws_access_key_id=env.get("AWS_ACCESS_KEY_ID"),
+            aws_secret_access_key=env.get("AWS_SECRET_ACCESS_KEY"),
+            aws_session_token=env.get("AWS_SESSION_TOKEN"),
+            max_attempts=args.max_attempts,
         )
+    )
 
-    if not args.structured_only:
-        cache = EmbeddingCache(input_root / "rag_embedding_cache.sqlite3")
-        embedder = None if args.skip_embeddings else OpenAIEmbeddings(
-            env["OPENAI_KEY"],
-            model=args.embedding_model,
-            dimensions=args.embedding_dimensions,
-        )
-        try:
-            for index, (policy_id, raw_rows) in enumerate(policy_chunks.items(), start=1):
-                rows = deduplicate_chunks(raw_rows)
-                if embedder:
-                    vectors = embedder.embed_with_cache(
-                        [row["chunk_text"] for row in rows],
-                        cache,
-                        batch_size=args.embedding_batch_size,
-                    )
-                    for row, vector in zip(rows, vectors):
-                        row["embedding"] = vector
-                ensure_uuid(policy_id, "policy_id")
-                db.delete("document_chunks", {"source_type": "eq.policy", "source_id": f"eq.{policy_id}"})
-                for batch in chunks(rows, args.db_batch_size):
-                    db.insert("document_chunks", batch)
-                totals["chunks"] += len(rows)
-                print(f"CHUNKS {index}/{len(policy_chunks)} count={len(rows)} policy_id={policy_id}", flush=True)
-        finally:
+    print(
+        f"START policies={len(items)} resumed={len(completed)} input={input_root}",
+        flush=True,
+    )
+    try:
+        for index, item in enumerate(items, start=1):
+            item_id = checkpoint_item_id(item)
+            if item_id in completed:
+                totals["resumed"] += 1
+                print(
+                    f"RESUME_SKIP {index}/{len(items)} "
+                    f"{item['policy']['company']} - {item['policy']['policy_name']}",
+                    flush=True,
+                )
+                continue
+
+            source = item["source_document"]
+            counts, chunk_count = ingest_policy_with_retries(
+                db,
+                item,
+                docs.get(source["source_file"]),
+                embedder=embedder,
+                cache=cache,
+                embedding_model=embedding_model,
+                embedding_dimensions=embedding_dimensions,
+                embedding_batch_size=args.embedding_batch_size,
+                db_batch_size=args.db_batch_size,
+                structured_only=args.structured_only,
+                max_attempts=args.max_attempts,
+            )
+            totals["policies"] += 1
+            totals["chunks"] += chunk_count
+            for key, value in counts.items():
+                totals[key] += value
+            completed.add(item_id)
+            save_checkpoint(checkpoint_path, fingerprint, completed)
+            print(
+                f"COMPLETED {index}/{len(items)} plans={counts['plans']} "
+                f"benefits={counts['benefits']} amounts={counts['plan_benefits']} "
+                f"chunks={chunk_count} {item['policy']['company']} - "
+                f"{item['policy']['policy_name']}",
+                flush=True,
+            )
+    finally:
+        if cache is not None:
             cache.close()
+
+    checkpoint_path.unlink(missing_ok=True)
 
     print(
         "DONE " + " ".join(f"{key}={value}" for key, value in sorted(totals.items())),

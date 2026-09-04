@@ -98,7 +98,9 @@ def create_app(
         timeout_seconds=runtime.dependency_timeout_seconds,
         supabase_url=runtime.supabase_url,
         service_key=runtime.supabase_service_role_key,
-        openai_key=runtime.openai_key,
+        bedrock_region=runtime.aws_region,
+        bedrock_embedding_model_id=runtime.bedrock_embedding_model_id,
+        embedding_dimensions=runtime.bedrock_embedding_dimensions,
         database_url=runtime.database_url,
     )
     profiles = InMemoryProfileRepository()

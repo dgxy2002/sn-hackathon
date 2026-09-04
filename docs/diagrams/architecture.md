@@ -24,9 +24,9 @@ flowchart LR
 
     subgraph Providers[Provider and offline adapters]
         Supabase[Hosted Supabase and pgvector]
-        OpenAI[Offline extraction and embeddings]
+        OpenAI[Offline brochure extraction]
         OpenRouter[OpenRouter extraction<br/>model slug unresolved]
-        Bedrock[Amazon Bedrock Converse<br/>grounded explanation adapter]
+        Bedrock[Amazon Bedrock<br/>Titan embeddings and grounded explanation]
         Store[Optional S3-compatible object store]
         Sources[Approved live insurance sources pending]
     end
@@ -50,6 +50,7 @@ flowchart LR
     Corpus --> DB
     Scraper -->|lease and heartbeat; idle without approved source| DB
     Corpus --> OpenAI
+    Corpus --> Bedrock
     Evidence -. optional adapter .-> Supabase
     Sources -. approval required .-> Scraper
     API -. live extraction pending .-> OpenRouter
@@ -72,7 +73,7 @@ flowchart LR
 - Runtime migrations load the committed corpus into local PostgreSQL through the typed E10/E06 boundary. Supabase remains an optional adapter.
 - All cached records may be searched for read-only questions and exploration, but every result carries approval/evidence state and cannot enter E07's synthetic ranking.
 - Phase 3B adds a comparison projector for a small comparison-eligible subset. It returns neutrally ordered cited fields and cannot invoke E07 or mutate canonical state.
-- OpenAI owns current offline brochure extraction and embeddings. OpenRouter remains the configured E04 user-document extraction provider. Amazon Bedrock is the required live E11 grounded-explanation provider.
+- OpenAI owns offline brochure extraction. Amazon Bedrock Titan V2 owns Supabase ingestion and query embeddings and is also the required live E11 grounded-explanation provider. OpenRouter remains the configured E04 user-document extraction provider.
 - [E10](../epics/E10-backend-api-and-poc-persistence.md) owns transport, shared schema validation, typed errors, and disposable synthetic state; it does not own capability business rules.
 - Direct read-only E10/E06 retrieval does not require E11. [E11](../epics/E11-runtime-orchestration-and-operations.md) owns consequential proposals, confirmed changes, deterministic reruns, revisions, replay, undo, Bedrock explanation integration, and operational coordination.
 - [E12](../epics/E12-conversational-summary-agent.md) owns the final-page agent experience and integration. E11 executes its allowlisted typed tools; E03/E04/E06/E07 retain profile, extraction, retrieval, and deterministic decision authority.

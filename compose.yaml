@@ -25,7 +25,11 @@ services:
       dockerfile: backend/Dockerfile
     environment:
       APP_ENV: local-compose
-      EVIDENCE_MODE: cached
+      EVIDENCE_MODE: ${EVIDENCE_MODE:-cached}
+      SUPABASE_URL: ${SUPABASE_URL:-}
+      SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY:-}
+      BEDROCK_EMBEDDING_MODEL_ID: ${BEDROCK_EMBEDDING_MODEL_ID:-amazon.titan-embed-text-v2:0}
+      BEDROCK_EMBEDDING_DIMENSIONS: ${BEDROCK_EMBEDDING_DIMENSIONS:-1024}
       EVIDENCE_MAX_AGE_DAYS: "365"
       DEPENDENCY_TIMEOUT_SECONDS: "20"
       PROFILE_MODE: synthetic

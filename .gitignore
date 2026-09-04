@@ -12,6 +12,12 @@
 **/__pycache__/
 **/.pytest_cache/
 *.py[cod]
+**/.ingest_checkpoint.json
+**/.ingest_checkpoint.json.tmp
+**/rag_embedding_cache.sqlite3
+**/rag_embedding_cache.sqlite3-journal
+**/rag_embedding_cache.sqlite3-shm
+**/rag_embedding_cache.sqlite3-wal
 
 # Frontend
 **/node_modules/

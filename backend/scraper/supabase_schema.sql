@@ -728,11 +728,9 @@ CREATE TABLE document_chunks (
   --    "min_income": 30000, "has_lounge": true, "card_id": "...uuid..."}
 
   -- ── Embedding vector ──────────────────────────────────────────────────────
-  -- 1536 dims  → OpenAI text-embedding-3-small / ada-002
-  -- 1024 dims  → Voyage AI (Anthropic's recommended partner), Cohere embed-v3
-  -- 3072 dims  → OpenAI text-embedding-3-large
-  -- Change the dimension to match whichever model you deploy.
-  embedding       VECTOR(1536),
+  -- 1024 dims → Amazon Titan Text Embeddings V2 through Bedrock.
+  -- Ingestion and queries must use the same model and dimensions.
+  embedding       VECTOR(1024),
 
   -- ── Data quality ──────────────────────────────────────────────────────────
   token_count     INT,             -- number of tokens in chunk_text (for cost tracking)
@@ -873,7 +871,7 @@ CREATE POLICY "public_read_chunks"      ON document_chunks FOR SELECT USING (tru
 --   '{"policy_type": "integrated_shield_plan", "ward_class": "A"}');
 -- -----------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION match_documents(
-  query_embedding   VECTOR(1536),
+  query_embedding   VECTOR(1024),
   match_threshold   FLOAT    DEFAULT 0.72,
   match_count       INT      DEFAULT 8,
   filter_metadata   JSONB    DEFAULT NULL    -- pass NULL to skip metadata filter
@@ -915,7 +913,7 @@ $$;
 -- Convenience wrapper for when you only want policy chunks or only card chunks.
 -- -----------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION match_documents_by_type(
-  query_embedding   VECTOR(1536),
+  query_embedding   VECTOR(1024),
   p_source_type     TEXT,                    -- 'policy' | 'card' | 'guide'
   match_threshold   FLOAT    DEFAULT 0.72,
   match_count       INT      DEFAULT 8,
@@ -1028,7 +1026,7 @@ CREATE TRIGGER trg_chunks_updated_at
 --   credit_cards                    (one row per card; JSONB for variable details)
 --
 -- VECTOR / RAG
---   document_chunks                 (text + VECTOR(1536) + JSONB metadata)
+--   document_chunks                 (text + VECTOR(1024) + JSONB metadata)
 --   scrape_logs                     (freshness & cost tracking)
 --
 -- FUNCTIONS
