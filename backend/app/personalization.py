@@ -35,6 +35,14 @@ GOAL_PATTERNS: dict[str, tuple[str, ...]] = {
     "wealth_building": ("start investing", "grow my wealth", "invest"),
 }
 
+TIMEFRAME_WORDS = {
+    "one": 1,
+    "two": 2,
+    "three": 3,
+    "four": 4,
+    "five": 5,
+}
+
 
 def classify_goal(text: str) -> GoalContext:
     normalized = " ".join(text.casefold().split())
@@ -45,12 +53,13 @@ def classify_goal(text: str) -> GoalContext:
     ]
 
     timeframe_match = re.search(
-        r"\b(?:in|within|over)\s+(\d+)\s+years?\b",
+        r"\b(?:in|within|over)\s+(\d+|one|two|three|four|five)\s+years?\b",
         normalized,
     )
-    timeframe_years = (
-        int(timeframe_match.group(1)) if timeframe_match else None
-    )
+    timeframe_years = None
+    if timeframe_match:
+        value = timeframe_match.group(1)
+        timeframe_years = int(value) if value.isdigit() else TIMEFRAME_WORDS[value]
 
     if "family_protection" in categories:
         priorities = ("family_protection", "affordability")

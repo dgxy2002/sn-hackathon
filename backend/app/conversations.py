@@ -8,6 +8,7 @@ from uuid import uuid4
 
 from .decision_support import DecisionService, InMemoryProfileRepository
 from .evidence import EvidenceDependencyError, EvidenceService
+from .personalization import next_question
 from .contracts import (
     ActionEvent,
     AssistantMessage,
@@ -33,6 +34,7 @@ from .contracts import (
     RecommendationResult,
     FieldProvenance,
 )
+from .personalization import classify_goal, next_question
 
 
 class ConversationNotFoundError(LookupError):
@@ -291,6 +293,42 @@ class ConversationService:
         action_id = f"action-{uuid4()}"
         message_id = f"message-{uuid4()}"
 
+        if record.profile is not None:
+            question = next_question(record.profile)
+
+            if question is not None and not (
+                "change" in text and "goal" in text
+            ) and (
+                "what" in text
+                or "help" in text
+                or "goal" in text
+                or "recommend" in text
+            ):
+                return ConversationMessageResponse(
+                    conversation_id=record.conversation_id,
+                    client_message_id=request.client_message_id,
+                    run_id=run_id,
+                    state="completed",
+                    active_revision_id=record.active_revision_id,
+                    assistant_message=AssistantMessage(
+                        message_id=message_id,
+                        content=f"{question.question} {question.reason}",
+                        citations=[],
+                    ),
+                    actions=[
+                        ActionEvent(
+                            action_id=action_id,
+                            intent="ANSWER_QUESTION",
+                            tool="ANSWER_QUESTION",
+                            target="profile:missing-information",
+                            status="completed",
+                            evidence_count=0,
+                            confirmation_required=False,
+                            affected_regions=["agent"],
+                        )
+                    ],
+                )
+
         if (
             "critical illness" in text or "critical-illness" in text
         ) and ("show only" in text or "filter" in text):
@@ -371,8 +409,9 @@ class ConversationService:
                     assistant_message=AssistantMessage(
                         message_id=message_id,
                         content=(
-                            f"I can change your monthly budget from S${proposal.patch.old_value:g} "
-                            f"to S${proposal.patch.proposed_value:g}. Confirm before I create "
+                            f"I can change your {proposal.patch.field_name.replace('_', ' ')} "
+                            f"from {proposal.patch.old_value} to "
+                            f"{proposal.patch.proposed_value}. Confirm before I create "
                             "a new profile version and rerun the deterministic comparison."
                         ),
                         citations=[],
@@ -566,6 +605,32 @@ class ConversationService:
     ) -> ChangeProposal | None:
         if record.profile is None or record.recommendation is None or self._decisions is None:
             return None
+        goal_match = re.search(
+            r"(?:change\s+my\s+)?(?:goal|priority)\s+(?:to|is)\s+(.+)",
+            text,
+        )
+        if goal_match:
+            current = record.profile.data.goal
+            return ChangeProposal(
+                proposal_id=f"proposal-{uuid4()}",
+                conversation_id=record.conversation_id,
+                base_revision_id=record.active_revision_id,
+                status="pending",
+                patch=ProfilePatch(
+                    base_profile_version=record.profile.version,
+                    field_name="goal",
+                    old_state=current.state,
+                    old_value=current.value,
+                    proposed_state="present",
+                    proposed_value=goal_match.group(1).strip(),
+                    reason="User requested a different financial priority.",
+                    affected_calculations=[
+                        "personalized_explanation",
+                        "weighted_fit",
+                        "ranking",
+                    ],
+                ),
+            )
         match = re.search(
             r"budget\s+(?:to\s+)?(?:s\$|sgd|\$)?\s*(\d+(?:\.\d+)?)", text
         )

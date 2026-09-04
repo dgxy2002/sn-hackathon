@@ -1,6 +1,8 @@
 from app.config import Settings
 from app.main import create_app
 from tests.support import request
+from app.decision_support import DecisionService
+from tests.factories import make_profile
 
 
 def create_conversation(app) -> dict:
@@ -174,3 +176,37 @@ def test_conversation_returns_explicit_no_evidence_without_guessing() -> None:
     assert payload["assistant_message"]["citations"] == []
     assert payload["actions"][0]["status"] == "blocked"
     assert payload["actions"][0]["error_code"] == "NO_EVIDENCE"
+
+def test_goal_change_creates_confirmable_proposal() -> None:
+    app = create_app(Settings.from_env({"APP_ENV": "test"}))
+    profile = make_profile(goal="protect dependants")
+
+    recommendation = DecisionService().evaluate(profile)
+
+    response = request(
+        app,
+        "POST",
+        "/v1/conversations",
+        json={
+            "active_revision_id": "summary-v1",
+            "profile": profile.model_dump(mode="json"),
+            "recommendation": recommendation.model_dump(mode="json"),
+        },
+    )
+
+    conversation_id = response.json()["conversation_id"]
+
+    response = request(
+        app,
+        "POST",
+        f"/v1/conversations/{conversation_id}/messages",
+        json={
+            "client_message_id": "goal-change-1",
+            "active_revision_id": "summary-v1",
+            "message": "Change my goal to buy a home in three years",
+        },
+    )
+
+    assert response.status_code == 200
+    assert response.json()["state"] == "waiting_for_confirmation"
+    assert response.json()["proposal"]["patch"]["field_name"] == "goal"

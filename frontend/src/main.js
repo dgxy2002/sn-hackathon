@@ -119,6 +119,7 @@ const state = {
     careshield: true,
     employer: true,
     goal: 'Protect my income and avoid duplicate cover',
+    goalCategory: 'family_protection',
     budget: 180,
     preference: 'Protection-only',
   },
@@ -217,7 +218,7 @@ const buildVersionedProfile = (hasCurrentPolicy) => {
     data: {
       life_stage: profileField(state.profile.ageBand),
       employment_status: profileField(state.profile.employment),
-      goal: profileField(state.profile.goal),
+      goal: profileField(`${state.profile.goalCategory}: ${state.profile.goal}`),
       target_amount: unknown(),
       target_date: unknown(),
       monthly_income: profileField(Number(state.profile.income)),
@@ -763,6 +764,17 @@ const onboardingFields = () => {
     default:
       return `
         <label class="field">
+          <span>Main financial priority</span>
+          <select data-field="goalCategory" name="goalCategory">
+            <option value="family_protection" ${profile.goalCategory === 'family_protection' ? 'selected' : ''}>Protect my family</option>
+            <option value="home_purchase" ${profile.goalCategory === 'home_purchase' ? 'selected' : ''}>Save for a home</option>
+            <option value="emergency_fund" ${profile.goalCategory === 'emergency_fund' ? 'selected' : ''}>Build emergency savings</option>
+            <option value="debt_reduction" ${profile.goalCategory === 'debt_reduction' ? 'selected' : ''}>Reduce debt</option>
+            <option value="cashflow_control" ${profile.goalCategory === 'cashflow_control' ? 'selected' : ''}>Manage spending</option>
+          </select>
+        </label>
+
+        <label class="field">
           <span>Main goal</span>
           <textarea rows="3" data-field="goal">${escapeHtml(profile.goal)}</textarea>
         </label>
@@ -977,6 +989,9 @@ const comparisonView = () => {
     ? 'Not scored'
     : `${Math.round(closest.score * 100)} / 100`
   const hasCurrentPolicy = state.runtime.profile?.data.has_current_policy.value
+  const personalizationNote = recommendation?.assumptions?.length
+    ? '<p class="personalization-note">Personalised using your stated goal and available profile information.</p>'
+    : ''
 
   return `
     <main class="comparison-screen" data-screen="comparison">
@@ -990,6 +1005,7 @@ const comparisonView = () => {
           <span class="synthetic-badge">Synthetic plan data</span>
           <span class="mono">PROFILE V${state.runtime.profile?.version || 1} · RULESET ${escapeHtml(recommendation?.ruleset_version || 'UNAVAILABLE')}</span>
         </div>
+        ${personalizationNote}
       </section>
 
       <section class="gap-strip" aria-labelledby="gap-title">

@@ -28,6 +28,8 @@ def make_profile(
     existing_ci_cover: float | None = None,
     goal: str | None = "protect dependants",
     goal_state: str = "present",
+    dependant_count: int = 0,
+    dependant_support_years: int = 0,
 ) -> VersionedProfile:
     cover_state = "present" if has_current_policy else "unknown"
     return VersionedProfile(
@@ -44,8 +46,8 @@ def make_profile(
             monthly_income=field(monthly_income, state=monthly_income_state),
             monthly_expenses=field(2_400.0),
             emergency_savings_months=field(6.0),
-            dependant_count=field(0),
-            dependant_support_years=field(0),
+            dependant_count=field(dependant_count),
+            dependant_support_years=field(dependant_support_years),
             liabilities=field(0.0),
             has_current_policy=field(has_current_policy, state=policy_state),
             existing_death_cover=field(existing_death_cover, state=cover_state),
