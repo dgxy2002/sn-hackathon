@@ -1,14 +1,16 @@
 from __future__ import annotations
 
+from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import date, datetime, timezone
+import logging
 import re
 from threading import Lock
 from uuid import uuid4
 
 from .decision_support import DecisionService, InMemoryProfileRepository
 from .evidence import EvidenceDependencyError, EvidenceService
-from .personalization import next_question
+from .model_gateway import ConversationAnswerService, ModelInvocationError
 from .contracts import (
     ActionEvent,
     AssistantMessage,
@@ -17,6 +19,8 @@ from .contracts import (
     ConversationMessageResponse,
     ConversationResponse,
     ChangeProposal,
+    EvidenceRecord,
+    EvidenceSearchFilters,
     EvidenceSearchRequest,
     GapDelta,
     PatchField,
@@ -35,7 +39,9 @@ from .contracts import (
     RecommendationResult,
     FieldProvenance,
 )
-from .personalization import classify_goal, next_question
+
+
+logger = logging.getLogger(__name__)
 
 
 class ConversationNotFoundError(LookupError):
@@ -58,6 +64,13 @@ class UndoNotAvailableError(ValueError):
     pass
 
 
+@dataclass(frozen=True)
+class RetrievalPlan:
+    queries: tuple[str, ...]
+    requested_facts: tuple[str, ...]
+    category: str | None = None
+
+
 @dataclass
 class ConversationRecord:
     conversation_id: str
@@ -78,12 +91,14 @@ class ConversationService:
         evidence_service: EvidenceService | None = None,
         profile_repository: InMemoryProfileRepository | None = None,
         decision_service: DecisionService | None = None,
+        answer_service: ConversationAnswerService | None = None,
     ) -> None:
         self._records: dict[str, ConversationRecord] = {}
         self._lock = Lock()
         self._evidence_service = evidence_service
         self._profiles = profile_repository
         self._decisions = decision_service
+        self._answers = answer_service
 
     def create(
         self,
@@ -412,10 +427,7 @@ class ConversationService:
                 ],
             )
 
-        if any(
-            term in text
-            for term in ("budget", "dependant", "dependent", "goal", "premium")
-        ):
+        if self._is_profile_update_request(text):
             proposal = self._profile_proposal(record, text)
             if proposal is not None:
                 field_label = proposal.patch.field_name.replace("_", " ")
@@ -564,10 +576,9 @@ class ConversationService:
                 "DEPENDENCY_UNAVAILABLE",
             )
 
+        retrieval_plan = self._plan_evidence_search(request.message)
         try:
-            evidence_response = self._evidence_service.search(
-                EvidenceSearchRequest(query=request.message, max_results=5)
-            )
+            evidence = self._search_evidence(retrieval_plan)
         except EvidenceDependencyError:
             return self._unsupported_answer(
                 record,
@@ -579,7 +590,7 @@ class ConversationService:
                 "DEPENDENCY_UNAVAILABLE",
             )
 
-        if not evidence_response.evidence:
+        if not evidence:
             return self._unsupported_answer(
                 record,
                 request,
@@ -593,15 +604,209 @@ class ConversationService:
                 "NO_EVIDENCE",
             )
 
-        products = list(
-            dict.fromkeys(
-                f"{item.provider} {item.product}" for item in evidence_response.evidence
+        cited_evidence = evidence
+        content = self._fallback_evidence_answer(evidence)
+        if self._answers is not None:
+            try:
+                answer = self._answers.answer_evidence_question(
+                    request.message,
+                    evidence,
+                    retrieval_queries=retrieval_plan.queries,
+                    requested_facts=retrieval_plan.requested_facts,
+                )
+                cited_ids = set(answer.cited_evidence_ids)
+                cited_evidence = [
+                    item for item in evidence if item.evidence_id in cited_ids
+                ]
+                content = answer.content
+            except ModelInvocationError as error:
+                logger.warning(
+                    "Conversation answer generation fell back error_code=%s",
+                    error.code,
+                )
+        citations = self._citations(cited_evidence)
+        return ConversationMessageResponse(
+            conversation_id=record.conversation_id,
+            client_message_id=request.client_message_id,
+            run_id=run_id,
+            state="completed",
+            active_revision_id=record.active_revision_id,
+            assistant_message=AssistantMessage(
+                message_id=message_id,
+                content=content,
+                citations=citations,
+            ),
+            actions=[
+                ActionEvent(
+                    action_id=action_id,
+                    intent="ANSWER_QUESTION",
+                    tool="ANSWER_QUESTION",
+                    target="evidence:cached-catalogue",
+                    status="completed",
+                    evidence_count=len(citations),
+                    confirmation_required=False,
+                    affected_regions=["agent"],
+                )
+            ],
+        )
+
+    @staticmethod
+    def _is_profile_update_request(text: str) -> bool:
+        has_update_verb = bool(
+            re.search(
+                r"\b(change|set|update|correct|increase|decrease|raise|lower|reduce)\b",
+                text,
             )
+        )
+        has_profile_field = bool(
+            re.search(
+                r"\b(budget|premium|dependants?|dependents?|goal)\b",
+                text,
+            )
+        )
+        return has_update_verb and has_profile_field
+
+    @staticmethod
+    def _plan_evidence_search(message: str) -> RetrievalPlan:
+        normalized = " ".join(message.casefold().split())
+        tokens = set(re.findall(r"[a-z0-9]+", normalized))
+        sports_terms = {
+            "sport",
+            "sports",
+            "athlete",
+            "athletic",
+            "running",
+            "cycling",
+            "football",
+            "climbing",
+            "gym",
+            "marathon",
+        }
+        pricing_terms = {
+            "premium",
+            "premiums",
+            "price",
+            "prices",
+            "pricing",
+            "cost",
+            "costs",
+            "rate",
+            "rates",
+            "afford",
+        }
+        exclusion_terms = {
+            "exclude",
+            "excluded",
+            "exclusion",
+            "exclusions",
+            "restriction",
+            "restrictions",
+            "hazardous",
+        }
+        sports = bool(tokens & sports_terms)
+        pricing = bool(tokens & pricing_terms)
+        exclusions = sports or bool(tokens & exclusion_terms)
+
+        category = None
+        if sports or "personal accident" in normalized:
+            category = "personal_accident"
+        elif "critical illness" in normalized or "critical-illness" in normalized:
+            category = "critical_illness"
+
+        requested_facts: list[str] = []
+        if pricing:
+            requested_facts.append("pricing")
+        if sports:
+            requested_facts.append("sports_coverage")
+        if exclusions:
+            requested_facts.append("exclusions")
+        if tokens & {"eligible", "eligibility", "qualify", "requirements"}:
+            requested_facts.append("eligibility")
+        if tokens & {"benefit", "benefits", "cover", "coverage", "payout"}:
+            requested_facts.append("benefits")
+        if not requested_facts:
+            requested_facts.append("product_information")
+
+        queries = [message.strip()[:500]]
+        category_phrase = (category or "insurance").replace("_", " ")
+        if sports:
+            queries.extend(
+                [
+                    f"{category_phrase} recreational sports injuries coverage benefits",
+                    f"{category_phrase} recreational sports hazardous activities exclusions conditions",
+                ]
+            )
+        if pricing:
+            activity = " recreational sports" if sports else ""
+            queries.append(
+                f"{category_phrase}{activity} indicative premium pricing rates cost"
+            )
+        elif exclusions and not sports:
+            queries.append(f"{category_phrase} exclusions restrictions conditions")
+
+        return RetrievalPlan(
+            queries=tuple(dict.fromkeys(query for query in queries if query))[:4],
+            requested_facts=tuple(dict.fromkeys(requested_facts)),
+            category=category,
+        )
+
+    def _search_evidence(self, plan: RetrievalPlan) -> list[EvidenceRecord]:
+        if self._evidence_service is None:
+            return []
+        records: dict[str, EvidenceRecord] = {}
+        scores: dict[str, float] = defaultdict(float)
+        successful_queries = 0
+        last_error: EvidenceDependencyError | None = None
+        filters = EvidenceSearchFilters(category=plan.category) if plan.category else None
+
+        for query in plan.queries:
+            try:
+                response = self._evidence_service.search(
+                    EvidenceSearchRequest(
+                        query=query,
+                        max_results=5,
+                        filters=filters or EvidenceSearchFilters(),
+                    )
+                )
+            except EvidenceDependencyError as error:
+                last_error = error
+                continue
+            successful_queries += 1
+            for rank, item in enumerate(response.evidence, start=1):
+                current = records.get(item.evidence_id)
+                if current is None or item.similarity > current.similarity:
+                    records[item.evidence_id] = item
+                scores[item.evidence_id] += 1 / (60 + rank)
+                if "pricing" in plan.requested_facts and item.field == "premium":
+                    scores[item.evidence_id] += 0.05
+                if "exclusions" in plan.requested_facts and item.field == "exclusion":
+                    scores[item.evidence_id] += 0.03
+
+        if successful_queries == 0 and last_error is not None:
+            raise last_error
+        return sorted(
+            records.values(),
+            key=lambda item: (scores[item.evidence_id], item.similarity),
+            reverse=True,
+        )[:5]
+
+    @staticmethod
+    def _fallback_evidence_answer(evidence: list[EvidenceRecord]) -> str:
+        products = list(
+            dict.fromkeys(f"{item.provider} {item.product}" for item in evidence)
         )
         product_summary = ", ".join(products[:3])
         if len(products) > 3:
             product_summary += f", and {len(products) - 3} more"
-        citations = [
+        return (
+            f"I found {len(evidence)} brochure excerpts across {product_summary}. "
+            "Use the source details and dates below to verify current terms directly "
+            "with the provider. These excerpts are information, not recommendations."
+        )
+
+    @staticmethod
+    def _citations(evidence: list[EvidenceRecord]) -> list[Citation]:
+        return [
             Citation(
                 evidence_id=item.evidence_id,
                 label=f"{item.provider} · {item.product} · {item.section_title}",
@@ -619,36 +824,8 @@ class ConversationService:
                 document_version=item.document_version,
                 similarity=item.similarity,
             )
-            for item in evidence_response.evidence
+            for item in evidence
         ]
-        return ConversationMessageResponse(
-            conversation_id=record.conversation_id,
-            client_message_id=request.client_message_id,
-            run_id=run_id,
-            state="completed",
-            active_revision_id=record.active_revision_id,
-            assistant_message=AssistantMessage(
-                message_id=message_id,
-                content=(
-                    f"I found {len(citations)} brochure excerpts across {product_summary}. "
-                    "Use the source details and dates below to verify current terms directly "
-                    "with the provider. These excerpts are information, not recommendations."
-                ),
-                citations=citations,
-            ),
-            actions=[
-                ActionEvent(
-                    action_id=action_id,
-                    intent="ANSWER_QUESTION",
-                    tool="ANSWER_QUESTION",
-                    target="evidence:cached-catalogue",
-                    status="completed",
-                    evidence_count=len(citations),
-                    confirmation_required=False,
-                    affected_regions=["agent"],
-                )
-            ],
-        )
 
     def _profile_proposal(
         self, record: ConversationRecord, text: str

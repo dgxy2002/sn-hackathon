@@ -1,8 +1,76 @@
 from app.config import Settings
+from app.contracts import EvidenceRecord, EvidenceSearchResponse
 from app.main import create_app
+from app.model_gateway import EvidenceAnswerOutcome, ModelUsage
 from tests.support import request
 from app.decision_support import DecisionService
 from tests.factories import make_profile
+
+
+class RecordingEvidenceService:
+    mode = "cached"
+
+    def __init__(self) -> None:
+        self.requests = []
+        self.evidence = EvidenceRecord(
+            evidence_id="sports-evidence-1",
+            policy_id="policy-1",
+            provider="Example Insurer",
+            product="Active Protect",
+            category="personal_accident",
+            field="benefit",
+            section_title="Sports coverage",
+            value="Recreational sports injuries are covered subject to exclusions.",
+            source_file="active-protect.md",
+            source_approval="unverified",
+            evidence_state="unverified",
+            freshness_status="unknown",
+            synthetic=False,
+            similarity=0.8,
+        )
+
+    def search(self, evidence_request):
+        self.requests.append(evidence_request)
+        return EvidenceSearchResponse(
+            run_id=f"evidence-{len(self.requests)}",
+            mode="cached",
+            query=evidence_request.query,
+            status="matched",
+            match_count=1,
+            evidence=[self.evidence],
+        )
+
+    def records_for_products(self, product_ids):
+        return []
+
+
+class RecordingAnswerService:
+    provider = "bedrock"
+
+    def __init__(self) -> None:
+        self.calls = []
+
+    def answer_evidence_question(
+        self,
+        question,
+        evidence,
+        *,
+        retrieval_queries,
+        requested_facts,
+    ):
+        self.calls.append(
+            {
+                "question": question,
+                "evidence": evidence,
+                "retrieval_queries": retrieval_queries,
+                "requested_facts": requested_facts,
+            }
+        )
+        return EvidenceAnswerOutcome(
+            content="The retrieved brochure mentions recreational sports coverage.",
+            cited_evidence_ids=("sports-evidence-1",),
+            usage=ModelUsage(),
+        )
 
 
 def create_conversation(app) -> dict:
@@ -176,6 +244,48 @@ def test_conversation_returns_explicit_no_evidence_without_guessing() -> None:
     assert payload["assistant_message"]["citations"] == []
     assert payload["actions"][0]["status"] == "blocked"
     assert payload["actions"][0]["error_code"] == "NO_EVIDENCE"
+
+
+def test_premium_sports_question_uses_planned_rag_queries_and_grounded_answer() -> None:
+    evidence = RecordingEvidenceService()
+    answers = RecordingAnswerService()
+    app = create_app(
+        Settings.from_env({"APP_ENV": "test"}),
+        evidence_service=evidence,
+        conversation_answer_service=answers,
+    )
+    conversation = create_conversation(app)
+
+    response = request(
+        app,
+        "POST",
+        f"/v1/conversations/{conversation['conversation_id']}/messages",
+        json={
+            "client_message_id": "client-message-sports-premium",
+            "active_revision_id": "summary-v1",
+            "message": "What premiums can I explore if I do a lot of sports?",
+        },
+    )
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["state"] == "completed"
+    assert payload["actions"][0]["intent"] == "ANSWER_QUESTION"
+    assert payload["assistant_message"]["content"].startswith(
+        "The retrieved brochure"
+    )
+    assert payload["assistant_message"]["citations"][0]["evidence_id"] == (
+        "sports-evidence-1"
+    )
+    assert len(evidence.requests) == 4
+    assert all(
+        item.filters.category == "personal_accident" for item in evidence.requests
+    )
+    assert answers.calls[0]["requested_facts"] == (
+        "pricing",
+        "sports_coverage",
+        "exclusions",
+    )
 
 def test_goal_change_creates_confirmable_proposal() -> None:
     app = create_app(Settings.from_env({"APP_ENV": "test"}))

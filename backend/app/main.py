@@ -22,6 +22,7 @@ from .extraction import (
 from .orchestration import CoordinatorService, RunNotFoundError
 from .model_gateway import (
     BedrockExplanationService,
+    ConversationAnswerService,
     ExplanationService,
     FixtureExplanationService,
 )
@@ -89,6 +90,7 @@ def create_app(
     settings: Settings | None = None,
     evidence_service: EvidenceService | None = None,
     explanation_service: ExplanationService | None = None,
+    conversation_answer_service: ConversationAnswerService | None = None,
 ) -> FastAPI:
     runtime = settings or Settings.from_env()
     evidence = evidence_service or create_evidence_service(
@@ -106,14 +108,27 @@ def create_app(
     profiles = InMemoryProfileRepository()
     decisions = DecisionService(runtime.recommendation_mode)
     extractions = FixtureExtractionService(runtime.extraction_mode)
-    explanations = explanation_service or (
-        BedrockExplanationService(
+    fixture_models = FixtureExplanationService()
+    bedrock_models = None
+    if (
+        runtime.orchestration_mode == "live" and explanation_service is None
+    ) or (
+        runtime.conversation_mode == "live" and conversation_answer_service is None
+    ):
+        bedrock_models = BedrockExplanationService(
             model_id=runtime.bedrock_model_id or "",
             region_name=runtime.aws_region or "",
             timeout_seconds=runtime.dependency_timeout_seconds,
         )
+    explanations = explanation_service or (
+        bedrock_models
         if runtime.orchestration_mode == "live"
-        else FixtureExplanationService()
+        else fixture_models
+    )
+    conversation_answers = conversation_answer_service or (
+        bedrock_models
+        if runtime.conversation_mode == "live"
+        else fixture_models
     )
     coordinator = CoordinatorService(
         profiles,
@@ -122,7 +137,12 @@ def create_app(
         explanations,
         runtime.orchestration_mode,
     )
-    conversations = ConversationService(evidence, profiles, decisions)
+    conversations = ConversationService(
+        evidence,
+        profiles,
+        decisions,
+        conversation_answers,
+    )
     comparisons = EvidenceComparisonService(
         evidence,
         EvidenceService(FixtureEvidenceAdapter("synthetic")),

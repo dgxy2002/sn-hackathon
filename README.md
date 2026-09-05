@@ -67,14 +67,16 @@ The frontend reads `VITE_API_URL` at build or development-server startup. When
 using a non-default frontend port, add its exact origin to `ALLOWED_ORIGINS` in
 `backend/.env`; wildcard origins are rejected.
 
-Amazon Bedrock is the required live E11 explanation provider. Set
-`ORCHESTRATION_MODE=live`, `LLM_PROVIDER=bedrock`, `AWS_REGION`, and
-`BEDROCK_MODEL_ID`; boto3 uses its standard local credential chain and ECS uses
-a task role. The model receives the immutable recommendation plus compact
-personalization context and can return explanation text only. Invalid output or
-provider failure produces a typed failed run without changing the deterministic
-recommendation. Simulated mode uses the same explanation contract without AWS
-credentials.
+Amazon Bedrock provides the live E11 initial explanation and evidence-grounded
+conversation answers. Set `ORCHESTRATION_MODE=live` for the initial explanation,
+`CONVERSATION_MODE=live` for generated chat answers, plus
+`LLM_PROVIDER=bedrock`, `AWS_REGION`, and `BEDROCK_MODEL_ID`; boto3 uses its
+standard local credential chain and ECS uses a task role. Conversation questions
+are expanded into focused retrieval queries, fused by evidence ID, and sent to
+Bedrock with only the retrieved brochure excerpts. Profile changes still require
+explicit change language and confirmation. Invalid chat output or provider
+failure falls back to a deterministic evidence summary without changing the
+profile or recommendation.
 
 The credentialed Compose path, including corporate TLS interception, has been
 validated end to end. The dated evidence and remaining non-production gates are

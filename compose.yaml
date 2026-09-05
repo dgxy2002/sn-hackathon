@@ -36,7 +36,7 @@ services:
       EXTRACTION_MODE: simulated
       RECOMMENDATION_MODE: simulated
       ORCHESTRATION_MODE: ${ORCHESTRATION_MODE:-simulated}
-      CONVERSATION_MODE: simulated
+      CONVERSATION_MODE: ${CONVERSATION_MODE:-simulated}
       LLM_PROVIDER: bedrock
       AWS_REGION: ${AWS_REGION:-us-east-1}
       BEDROCK_MODEL_ID: ${BEDROCK_MODEL_ID:-us.anthropic.claude-haiku-4-5-20251001-v1:0}
