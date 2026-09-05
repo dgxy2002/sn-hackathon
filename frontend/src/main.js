@@ -1036,11 +1036,29 @@ const views = {
   comparison: comparisonView,
 }
 
-function render({ focus = true, preserveScroll = false } = {}) {
+function render({ focus = true, preserveScroll = false, agentScroll = '' } = {}) {
   const scrollTop = window.scrollY
   app.innerHTML = views[state.view]()
   document.body.dataset.view = state.view
-  window.scrollTo({ top: preserveScroll ? scrollTop : 0, behavior: 'instant' })
+  if (!preserveScroll) window.scrollTo({ top: 0, behavior: 'auto' })
+
+  requestAnimationFrame(() => {
+    if (preserveScroll) {
+      window.scrollTo({ top: scrollTop, behavior: 'auto' })
+    }
+
+    const messages = app.querySelector('.agent-messages')
+    if (!messages || !agentScroll) return
+
+    const behavior = reduceMotion.matches ? 'auto' : 'smooth'
+    if (agentScroll === 'response') {
+      const target = app.querySelector('.agent-error') || messages.lastElementChild
+      target?.scrollIntoView({ behavior, block: 'start', inline: 'nearest' })
+      return
+    }
+
+    messages.scrollTo({ top: messages.scrollHeight, behavior })
+  })
 
   if (focus) {
     requestAnimationFrame(() => {
@@ -1115,7 +1133,7 @@ async function askAgent(message) {
   state.agent.status = 'planning'
   state.agent.error = ''
   state.agent.messages.push({ role: 'user', content, citations: [] })
-  render({ focus: false, preserveScroll: true })
+  render({ focus: false, preserveScroll: true, agentScroll: 'bottom' })
 
   try {
     if (!state.agent.conversationId) {
@@ -1159,7 +1177,7 @@ async function askAgent(message) {
     }
   } finally {
     state.agent.abortController = null
-    render({ focus: false, preserveScroll: true })
+    render({ focus: false, preserveScroll: true, agentScroll: 'response' })
   }
 }
 
