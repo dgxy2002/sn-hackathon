@@ -10,9 +10,5 @@
 **/.env.*
 !**/.env.example
 
-# The cached adapter needs brochure Markdown and the normalized policy corpus,
-# not the downloaded PDFs or per-policy extraction artifacts.
+# Scraped and generated insurance artifacts are local-only.
 backend/scraper/insurance/**
-!backend/scraper/insurance/**/
-!backend/scraper/insurance/**/*.md
-!backend/scraper/insurance/extracted_openai/policies.jsonl

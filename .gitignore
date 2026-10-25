@@ -19,6 +19,10 @@
 **/rag_embedding_cache.sqlite3-shm
 **/rag_embedding_cache.sqlite3-wal
 
+# Generated or third-party source material is intentionally kept out of Git.
+backend/scraper/insurance/
+*.pdf
+
 # Frontend
 **/node_modules/
 **/dist/

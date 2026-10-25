@@ -7,11 +7,15 @@ This folder contains the product-information RAG implementation for the `Darren`
 - retrieve small, typed evidence records for another system to consume;
 - preserve policy, plan, benefit, rider, exclusion, source, and confidence metadata.
 
+Downloaded brochures, extracted corpora, manifests, and embedding caches are
+local-only artifacts under `backend/scraper/insurance/`. They are intentionally
+excluded from Git and must not contain personal customer documents.
+
 It does **not** calculate a user's protection gap, decide eligibility, rank suitable products, or tell a user to replace an existing policy. Those belong to the deterministic decision-support system described in the project plan.
 
 ## Application integration boundary
 
-The offline extraction, Supabase ingestion, and retrieval CLIs remain available in this folder. The website now consumes the same evidence boundary through E10's typed `POST /v1/evidence/search` API. Local PostgreSQL is the demonstrated cached adapter, Supabase is optional, and deterministic fixtures preserve the contract when external services are unavailable.
+The offline extraction, Supabase ingestion, and retrieval CLIs remain available in this folder. The website now consumes the same evidence boundary through E10's typed `POST /v1/evidence/search` API. Supabase and local PostgreSQL are optional adapters, and deterministic fixtures preserve the contract when external services are unavailable.
 
 The approved scope, date research, delivery sequence, and remaining controls are recorded in the [RAG and website integration decisions](../../docs/evaluation/2026-08-28-rag-website-integration-decisions.md).
 

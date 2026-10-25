@@ -2,13 +2,11 @@
 
 CoverCheck SG is a local-first insurance-readiness POC. The browser journey and
 comparison remain visibly synthetic. Its final-page panel calls a typed FastAPI
-agent that can search read-only evidence from 79 cached brochure documents,
-representing 71 normalized policy products after deduplication,
-propose a budget change, rerun the deterministic result after confirmation, and
-replay or undo the revision. The invocation coordinator supports grounded
-explanation through Amazon Bedrock while E07 retains sole ownership of plan
-eligibility, scores, and ranking. Local PostgreSQL is the default cached adapter;
-an optional Supabase adapter uses the same response contract.
+agent that can search synthetic evidence, propose a budget change, rerun the
+deterministic result after confirmation, and replay or undo the revision. The
+invocation coordinator supports grounded explanation through Amazon Bedrock
+while E07 retains sole ownership of plan eligibility, scores, and ranking.
+Optional external evidence adapters use the same response contract.
 
 Real-product evidence remains read-only and cannot alter the synthetic plan
 ranking. The approved bridge, evidence-state rules, provider split, date
@@ -32,9 +30,9 @@ fields; selected personal-file contents are not processed by this POC.
 The deterministic formulation uses annual income x 9 plus liabilities for
 death and TPD targets, and annual income x 4 for the critical-illness target.
 Monthly expenses are not a critical input because the current calculation does
-not use them. Four labelled synthetic plans are eligible for ranking. The 71
-normalized cached real products remain read-only evidence and cannot enter the
-ranking; no real product has passed the separate comparison or ranking gates.
+not use them. Four labelled synthetic plans are eligible for ranking. Real
+product corpora are deliberately excluded from this public repository and no
+real product enters the comparison or ranking flow.
 
 ## Frontend
 
@@ -59,7 +57,7 @@ PYTHONPATH=backend backend/.venv/bin/uvicorn app.main:app \
 	--env-file backend/.env --reload --port 8000
 ```
 
-Cached and fixture modes need no production credential. Verify the service at
+Synthetic and fixture modes need no production credential. Verify the service at
 `http://localhost:8000/health` and discover capability modes at
 `http://localhost:8000/v1/capabilities`.
 
@@ -85,8 +83,9 @@ recorded in the
 
 ## Docker Compose demo
 
-Docker Compose starts the built web app, cached-evidence API, singleton scraper
-worker, and PostgreSQL 16 with pgvector enabled. No cloud credential is required.
+Docker Compose starts the built web app, synthetic-evidence API, singleton
+scraper worker, and PostgreSQL 16 with pgvector enabled. No cloud credential is
+required.
 
 ```bash
 cp .env.example .env
@@ -118,10 +117,10 @@ docker compose down
 Use `docker compose down --volumes` only when the local PostgreSQL volume should
 also be removed.
 
-The backend queries the Compose database for cached evidence. Runtime migrations
-load the committed corpus idempotently, and the database-backed singleton scraper
-waits when no approved source is due. Optional object storage remains unconfigured.
-No cached source is approved for live fetching or real-product comparison.
+The public demo uses synthetic evidence. The database-backed singleton scraper
+waits when no approved source is due. Optional object storage remains
+unconfigured, and no source is approved for live fetching or real-product
+comparison.
 
 Run the focused backend checks with:
 
@@ -139,7 +138,9 @@ bash scripts/verify-poc.sh
 ## Insurance RAG CLI
 
 The extraction, Supabase ingestion, retrieval, and evaluation workflow is
-documented in the [RAG operator guide](backend/scraper/RAG_README.md). It uses
+documented in the [RAG operator guide](backend/scraper/RAG_README.md). Generated
+corpora, downloaded brochures, and embedding caches are local-only and ignored
+by Git. The workflow uses
 OpenAI for offline brochure extraction and Amazon Titan Text Embeddings V2 on
 Bedrock for vector ingestion and retrieval. This is separate from the configured
 OpenRouter boundary for user-document extraction and the Bedrock boundary for

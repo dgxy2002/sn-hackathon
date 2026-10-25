@@ -24,7 +24,6 @@ RUN --mount=type=secret,id=corporate_ca,required=false \
 COPY backend/app ./app
 COPY backend/fixtures ./fixtures
 COPY backend/scraper/rag_common.py ./scraper/rag_common.py
-COPY backend/scraper/insurance ./scraper/insurance
 
 RUN chown -R covercheck:covercheck /app
 USER covercheck

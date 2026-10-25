@@ -104,7 +104,7 @@ class Settings:
             extraction_mode=_mode(
                 values.get("EXTRACTION_MODE", "simulated"), "EXTRACTION_MODE"
             ),
-            evidence_mode=_mode(values.get("EVIDENCE_MODE", "cached"), "EVIDENCE_MODE"),
+            evidence_mode=_mode(values.get("EVIDENCE_MODE", "synthetic"), "EVIDENCE_MODE"),
             recommendation_mode=_mode(
                 values.get("RECOMMENDATION_MODE", "simulated"), "RECOMMENDATION_MODE"
             ),
